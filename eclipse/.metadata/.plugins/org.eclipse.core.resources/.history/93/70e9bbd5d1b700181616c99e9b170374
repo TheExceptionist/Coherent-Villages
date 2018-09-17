@@ -1,0 +1,43 @@
+package net.theexceptionist.coherentvillages.entity.ai;
+
+import net.minecraft.entity.ai.EntityAIBase;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+import net.theexceptionist.coherentvillages.entity.EntityVillagerSoldier;
+
+public class EntityAIGuardPost extends EntityAIBase {
+	private EntityVillagerSoldier soldier;
+	private World world;
+	private BlockPos post;
+	private boolean stationed;
+	private int timer = 0;
+	
+	public EntityAIGuardPost(EntityVillagerSoldier creature, World worldin) {
+		setMutexBits(1);
+		soldier = creature;
+		world = worldin;
+		stationed = false;
+	}
+
+	@Override
+	public boolean shouldExecute() {
+		if(world.getWorldTime() > 0 && world.getWorldTime() < 12300)
+		{
+			post = new BlockPos(this.soldier.posX + this.soldier.getWorld().rand.nextInt(this.soldier.getVillage().getVillageRadius()) - this.soldier.getVillage().getVillageRadius()/2, this.soldier.posY, this.soldier.posZ + this.soldier.getWorld().rand.nextInt(this.soldier.getVillage().getVillageRadius()) - this.soldier.getVillage().getVillageRadius()/2);
+        	this.timer = 1000 + soldier.world.rand.nextInt(500);
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
+	public void startExecuting()
+	{
+		if(!stationed)
+		{
+			post = new BlockPos(soldier.posX, soldier.getEntityWorld().getHeight((int)soldier.posX,(int)soldier.posZ), soldier.posZ);
+			//soldier.
+		}
+	}
+
+}

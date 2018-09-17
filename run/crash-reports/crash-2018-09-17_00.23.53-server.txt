@@ -1,0 +1,118 @@
+---- Minecraft Crash Report ----
+// Everything's going to plan. No, really, that was supposed to happen.
+
+Time: 9/17/18 12:23 AM
+Description: Ticking entity
+
+java.lang.RuntimeException: Attempted to set villager profession to unregistered profession: -1 null
+	at net.minecraftforge.fml.common.registry.VillagerRegistry.onSetProfession(VillagerRegistry.java:334)
+	at net.minecraft.entity.passive.EntityVillager.notifyDataManagerChange(EntityVillager.java:476)
+	at net.minecraft.network.datasync.EntityDataManager.set(EntityDataManager.java:159)
+	at net.minecraft.entity.passive.EntityVillager.setProfession(EntityVillager.java:442)
+	at net.minecraft.entity.passive.EntityVillager.setProfession(EntityVillager.java:456)
+	at net.theexceptionist.coherentvillages.entity.EntityVillagerMage.attackEntityWithRangedAttack(EntityVillagerMage.java:130)
+	at net.theexceptionist.coherentvillages.entity.ai.EntityAIAttackWithMagic.updateTask(EntityAIAttackWithMagic.java:146)
+	at net.minecraft.entity.ai.EntityAITasks.onUpdateTasks(EntityAITasks.java:114)
+	at net.minecraft.entity.EntityLiving.updateEntityActionState(EntityLiving.java:843)
+	at net.minecraft.entity.EntityLivingBase.onLivingUpdate(EntityLivingBase.java:2582)
+	at net.minecraft.entity.EntityLiving.onLivingUpdate(EntityLiving.java:647)
+	at net.minecraft.entity.EntityAgeable.onLivingUpdate(EntityAgeable.java:212)
+	at net.minecraft.entity.EntityLivingBase.onUpdate(EntityLivingBase.java:2398)
+	at net.minecraft.entity.EntityLiving.onUpdate(EntityLiving.java:346)
+	at net.minecraft.world.World.updateEntityWithOptionalForce(World.java:2168)
+	at net.minecraft.world.WorldServer.updateEntityWithOptionalForce(WorldServer.java:871)
+	at net.minecraft.world.World.updateEntity(World.java:2127)
+	at net.minecraft.world.World.updateEntities(World.java:1928)
+	at net.minecraft.world.WorldServer.updateEntities(WorldServer.java:643)
+	at net.minecraft.server.MinecraftServer.updateTimeLightAndEntities(MinecraftServer.java:842)
+	at net.minecraft.server.MinecraftServer.tick(MinecraftServer.java:743)
+	at net.minecraft.server.integrated.IntegratedServer.tick(IntegratedServer.java:192)
+	at net.minecraft.server.MinecraftServer.run(MinecraftServer.java:592)
+	at java.lang.Thread.run(Thread.java:748)
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Thread: Server thread
+Stacktrace:
+	at net.minecraftforge.fml.common.registry.VillagerRegistry.onSetProfession(VillagerRegistry.java:334)
+	at net.minecraft.entity.passive.EntityVillager.notifyDataManagerChange(EntityVillager.java:476)
+	at net.minecraft.network.datasync.EntityDataManager.set(EntityDataManager.java:159)
+	at net.minecraft.entity.passive.EntityVillager.setProfession(EntityVillager.java:442)
+	at net.minecraft.entity.passive.EntityVillager.setProfession(EntityVillager.java:456)
+	at net.theexceptionist.coherentvillages.entity.EntityVillagerMage.attackEntityWithRangedAttack(EntityVillagerMage.java:130)
+	at net.theexceptionist.coherentvillages.entity.ai.EntityAIAttackWithMagic.updateTask(EntityAIAttackWithMagic.java:146)
+	at net.minecraft.entity.ai.EntityAITasks.onUpdateTasks(EntityAITasks.java:114)
+	at net.minecraft.entity.EntityLiving.updateEntityActionState(EntityLiving.java:843)
+	at net.minecraft.entity.EntityLivingBase.onLivingUpdate(EntityLivingBase.java:2582)
+	at net.minecraft.entity.EntityLiving.onLivingUpdate(EntityLiving.java:647)
+	at net.minecraft.entity.EntityAgeable.onLivingUpdate(EntityAgeable.java:212)
+	at net.minecraft.entity.EntityLivingBase.onUpdate(EntityLivingBase.java:2398)
+	at net.minecraft.entity.EntityLiving.onUpdate(EntityLiving.java:346)
+	at net.minecraft.world.World.updateEntityWithOptionalForce(World.java:2168)
+	at net.minecraft.world.WorldServer.updateEntityWithOptionalForce(WorldServer.java:871)
+	at net.minecraft.world.World.updateEntity(World.java:2127)
+
+-- Entity being ticked --
+Details:
+	Entity Type: coherentvillages:villager_mage (net.theexceptionist.coherentvillages.entity.EntityVillagerMage)
+	Entity ID: 19669
+	Entity Name: entity.villager_mage.name
+	Entity's Exact location: 293.50, 66.00, 184.50
+	Entity's Block location: World: (293,66,184), Chunk: (at 5,4,8 in 18,11; contains blocks 288,0,176 to 303,255,191), Region: (0,0; contains chunks 0,0 to 31,31, blocks 0,0,0 to 511,255,511)
+	Entity's Momentum: 0.00, -0.08, 0.00
+	Entity's Passengers: []
+	Entity's Vehicle: ~~ERROR~~ NullPointerException: null
+Stacktrace:
+	at net.minecraft.world.World.updateEntities(World.java:1928)
+	at net.minecraft.world.WorldServer.updateEntities(WorldServer.java:643)
+
+-- Affected level --
+Details:
+	Level name: New World
+	All players: 1 total; [EntityPlayerMP['Player768'/15556, l='New World', x=296.20, y=67.87, z=179.69]]
+	Chunk stats: ServerChunkCache: 642 Drop: 0
+	Level seed: -3927668058226727811
+	Level generator: ID 00 - default, ver 1. Features enabled: true
+	Level generator options: 
+	Level spawn location: World: (248,64,276), Chunk: (at 8,4,4 in 15,17; contains blocks 240,0,272 to 255,255,287), Region: (0,0; contains chunks 0,0 to 31,31, blocks 0,0,0 to 511,255,511)
+	Level time: 10563 game time, 3555 day time
+	Level dimension: 0
+	Level storage version: 0x04ABD - Anvil
+	Level weather: Rain time: 65229 (now: false), thunder time: 101069 (now: false)
+	Level game mode: Game mode: creative (ID 1). Hardcore: false. Cheats: true
+Stacktrace:
+	at net.minecraft.server.MinecraftServer.updateTimeLightAndEntities(MinecraftServer.java:842)
+	at net.minecraft.server.MinecraftServer.tick(MinecraftServer.java:743)
+	at net.minecraft.server.integrated.IntegratedServer.tick(IntegratedServer.java:192)
+	at net.minecraft.server.MinecraftServer.run(MinecraftServer.java:592)
+	at java.lang.Thread.run(Thread.java:748)
+
+-- System Details --
+Details:
+	Minecraft Version: 1.12.2
+	Operating System: Mac OS X (x86_64) version 10.13.6
+	Java Version: 1.8.0_144, Oracle Corporation
+	Java VM Version: Java HotSpot(TM) 64-Bit Server VM (mixed mode), Oracle Corporation
+	Memory: 647272312 bytes (617 MB) / 1093664768 bytes (1043 MB) up to 1908932608 bytes (1820 MB)
+	JVM Flags: 0 total; 
+	IntCache: cache: 1, tcache: 1, allocated: 12, tallocated: 94
+	FML: MCP 9.42 Powered by Forge 14.23.4.2757 5 mods loaded, 5 mods active
+	States: 'U' = Unloaded 'L' = Loaded 'C' = Constructed 'H' = Pre-initialized 'I' = Initialized 'J' = Post-initialized 'A' = Available 'D' = Disabled 'E' = Errored
+
+	| State          | ID               | Version      | Source                           | Signature |
+	|:-------------- |:---------------- |:------------ |:-------------------------------- |:--------- |
+	| UCHIJAAAAAAAAA | minecraft        | 1.12.2       | minecraft.jar                    | None      |
+	| UCHIJAAAAAAAAA | mcp              | 9.42         | minecraft.jar                    | None      |
+	| UCHIJAAAAAAAAA | FML              | 8.0.99.99    | forgeSrc-1.12.2-14.23.4.2757.jar | None      |
+	| UCHIJAAAAAAAAA | forge            | 14.23.4.2757 | forgeSrc-1.12.2-14.23.4.2757.jar | None      |
+	| UCHIJAAAAAAAAA | coherentvillages | 0.0.0.1      | modid-1.0.jar                    | None      |
+
+	Loaded coremods (and transformers): 
+	GL info: ~~ERROR~~ RuntimeException: No OpenGL context found in the current thread.
+	Profiler Position: N/A (disabled)
+	Player Count: 1 / 8; [EntityPlayerMP['Player768'/15556, l='New World', x=296.20, y=67.87, z=179.69]]
+	Type: Integrated Server (map_client.txt)
+	Is Modded: Definitely; Client brand changed to 'fml,forge'

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="net.minecraftforge.fml.common.eventhandler.SubscribeEvent"/>
+<fullyQualifiedTypeName name="net.minecraftforge.event.terraingen.InitMapGenEvent"/>
+<fullyQualifiedTypeName name="java.util.Random"/>
+<fullyQualifiedTypeName name="net.minecraftforge.fml.relauncher.ReflectionHelper"/>
+<fullyQualifiedTypeName name="net.minecraft.world.gen.structure.MapGenVillage"/>
+<fullyQualifiedTypeName name="net.minecraftforge.event.terraingen.BiomeEvent"/>
+<fullyQualifiedTypeName name="net.minecraft.init.Biomes"/>
+<fullyQualifiedTypeName name="net.minecraft.init.Blocks"/>
+<fullyQualifiedTypeName name="net.minecraft.network.play.server.SPacketCombatEvent.Event"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="java.util.Arrays"/>
+<fullyQualifiedTypeName name="net.minecraftforge.fml.common.registry.EntityRegistry"/>
+<fullyQualifiedTypeName name="net.minecraft.util.ResourceLocation"/>
+<fullyQualifiedTypeName name="net.theexceptionist.coherentvillages.entity.EntityVillagerSoldier"/>
+<fullyQualifiedTypeName name="net.minecraft.village.Village"/>
+<fullyQualifiedTypeName name="net.theexceptionist.main.entity.EntityVillagerGuardian"/>
+<fullyQualifiedTypeName name="net.theexceptionist.coherentvillages.entity.ai.EntityAIFollowMerchant"/>
+<fullyQualifiedTypeName name="net.theexceptionist.coherentvillages.entity.ai.EntityAIAttackWithBow"/>
+<fullyQualifiedTypeName name="net.theexceptionist.coherentvillages.entity.ai.EntityAIAttackBackExclude"/>
+<fullyQualifiedTypeName name="net.theexceptionist.coherentvillages.entity.EntityVillagerAlchemist"/>
+<fullyQualifiedTypeName name="net.minecraft.entity.monster.EntitySpider"/>
+<fullyQualifiedTypeName name="net.theexceptionist.coherentvillages.Resources"/>
+</qualifiedTypeNameHistroy>
