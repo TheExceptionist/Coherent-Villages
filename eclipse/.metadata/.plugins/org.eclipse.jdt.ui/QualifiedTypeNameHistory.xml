@@ -22,4 +22,11 @@
 <fullyQualifiedTypeName name="net.theexceptionist.coherentvillages.entity.EntityVillagerAlchemist"/>
 <fullyQualifiedTypeName name="net.minecraft.entity.monster.EntitySpider"/>
 <fullyQualifiedTypeName name="net.theexceptionist.coherentvillages.Resources"/>
+<fullyQualifiedTypeName name="net.minecraft.block.BlockBed"/>
+<fullyQualifiedTypeName name="java.nio.file.Paths"/>
+<fullyQualifiedTypeName name="java.nio.file.Path"/>
+<fullyQualifiedTypeName name="java.nio.file.Files"/>
+<fullyQualifiedTypeName name="java.nio.file.LinkOption"/>
+<fullyQualifiedTypeName name="java.io.File"/>
+<fullyQualifiedTypeName name="net.theexceptionist.coherentvillages.Main"/>
 </qualifiedTypeNameHistroy>

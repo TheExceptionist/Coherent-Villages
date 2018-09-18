@@ -18,6 +18,7 @@ import net.minecraftforge.event.terraingen.InitMapGenEvent;
 import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
+import net.theexceptionist.coherentvillages.Main;
 
 public class EventOverrideVillages {
 		@SubscribeEvent
@@ -26,8 +27,8 @@ public class EventOverrideVillages {
 			Random rand = new Random();
 			if(event.getType().VILLAGE == event.getType()){
 				MapGenVillage instance = (MapGenVillage) event.getOriginalGen();
-				ReflectionHelper.setPrivateValue(MapGenVillage.class, instance, 9 + rand.nextInt(6), 2);
-				ReflectionHelper.setPrivateValue(MapGenVillage.class, instance, 3 + rand.nextInt(5), 3);
+				ReflectionHelper.setPrivateValue(MapGenVillage.class, instance, Main.max_distance, 2);
+				ReflectionHelper.setPrivateValue(MapGenVillage.class, instance, Main.min_distance, 3);
 				//System.out.println("Values Set");
 		    	//event.setResult(value);
 				

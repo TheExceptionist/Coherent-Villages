@@ -36,6 +36,7 @@ public class EntityVillagerMerchant extends EntityVillager{
 	private boolean traveling = false;
 	private int rich;
 	private boolean wasInit = false;
+	private EntityMerchantGuard[] guards;
 	
 	public EntityVillagerMerchant(World worldIn) {
 		super(worldIn);
@@ -83,6 +84,7 @@ public class EntityVillagerMerchant extends EntityVillager{
 	
 	protected void init(){
 		this.rich = 1 + world.rand.nextInt(5);
+		guards = new EntityMerchantGuard[rich];
 		//this.setCustomNameTag(title);
 		this.setHeldItem(EnumHand.MAIN_HAND, new ItemStack(Items.IRON_SWORD));
 		this.spawnGuards();
@@ -99,7 +101,8 @@ public class EntityVillagerMerchant extends EntityVillager{
             
          //   entityvillager.finalizeMobSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityvillager)), (IEntityLivingData)null, false);
             world.spawnEntity(entityvillager);
-            System.out.println(entityvillager);
+            guards[i] = entityvillager;
+            //System.out.println(entityvillager);
 		}
 	}
 
@@ -157,9 +160,21 @@ public class EntityVillagerMerchant extends EntityVillager{
 		this.destination = destination;
 	}
 	
+	public void despawnGuards()
+	{
+		for(int i = 0; i < guards.length; i++)
+		{
+			guards[i].setDead();
+		}
+	}
+	
     protected boolean canDespawn()
     {
         return true;
     }
 
+    public int getMaxSpawnedInChunk()
+    {
+        return 4;
+    }
 }

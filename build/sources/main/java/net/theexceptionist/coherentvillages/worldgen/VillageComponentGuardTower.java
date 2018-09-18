@@ -36,7 +36,7 @@ public class VillageComponentGuardTower extends StructureVillagePieces.Village
 
         public static VillageComponentGuardTower createPiece(StructureVillagePieces.Start start, List<StructureComponent> p_175858_1_, Random rand, int p_175858_3_, int p_175858_4_, int p_175858_5_, EnumFacing facing, int p_175858_7_)
         {
-            StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(p_175858_3_, p_175858_4_, p_175858_5_, 0, 0, 0, 6, 7, 6, facing);
+            StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(p_175858_3_, p_175858_4_, p_175858_5_, 0, 0, 0, 7, 7, 7, facing);
             return StructureComponent.findIntersecting(p_175858_1_, structureboundingbox) != null ? null : new VillageComponentGuardTower(start, p_175858_7_, rand, structureboundingbox, facing);
         }
 
@@ -253,9 +253,9 @@ public class VillageComponentGuardTower extends StructureVillagePieces.Village
 
           //  this.placeTorch(worldIn, EnumFacing.NORTH, 2, 3, 1, structureBoundingBoxIn);
 
-            for (int j = 0; j < 7; ++j)
+            for (int j = 0; j < 8; ++j)
             {
-                for (int i = 0; i < 7; ++i)
+                for (int i = 0; i < 8; ++i)
                 {
                     this.clearCurrentPositionBlocksUpwards(worldIn, i, 10, j, structureBoundingBoxIn);
                     this.replaceAirAndLiquidDownwards(worldIn, Blocks.PLANKS.getDefaultState(), i, -1, j, structureBoundingBoxIn);

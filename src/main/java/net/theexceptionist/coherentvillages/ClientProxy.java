@@ -19,6 +19,7 @@ import net.theexceptionist.coherentvillages.entity.RenderVillagerGuardian;
 import net.theexceptionist.coherentvillages.entity.RenderVillagerMage;
 import net.theexceptionist.coherentvillages.entity.RenderVillagerMerchant;
 import net.theexceptionist.coherentvillages.entity.RenderVillagerSoldier;
+import net.theexceptionist.coherentvillages.events.EventOverrideMerchantSpawn;
 import net.theexceptionist.coherentvillages.events.EventOverrideVillages;
 
 public class ClientProxy extends CommonProxy {
@@ -40,7 +41,7 @@ public class ClientProxy extends CommonProxy {
 }
 	
 	public void initEvents(){
-		//MinecraftForge.EVENT_BUS.register(new EventHandler());	
+		MinecraftForge.EVENT_BUS.register(new EventOverrideMerchantSpawn());	
 		MinecraftForge.TERRAIN_GEN_BUS.register(new EventOverrideVillages());	
 	}
 }

@@ -1,0 +1,5 @@
+#distance between villages
+#do not set below 9!
+max_distance=10
+#do not set above max_distance or below 3!
+min_distance=4

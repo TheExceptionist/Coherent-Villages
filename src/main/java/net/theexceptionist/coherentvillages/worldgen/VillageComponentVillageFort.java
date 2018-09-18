@@ -93,6 +93,7 @@ public class VillageComponentVillageFort extends StructureVillagePieces.Village
             this.fillWithBlocks(worldIn, structureBoundingBoxIn, 4, 0, 5, 4, 8, 5, iblockstate, iblockstate, false);
             this.fillWithBlocks(worldIn, structureBoundingBoxIn, 4, 0, 0, 4, 8, 0, iblockstate, iblockstate, false);
             this.fillWithBlocks(worldIn, structureBoundingBoxIn, 4, 0, 1, 4, 6, 4, iblockstate1, iblockstate1, false);
+            //5 8 0-5
             
             this.setBlockState(worldIn, Blocks.AIR.getDefaultState(), 4, 1, 2, structureBoundingBoxIn);
             this.setBlockState(worldIn, Blocks.AIR.getDefaultState(), 4, 2, 2, structureBoundingBoxIn);
@@ -115,11 +116,10 @@ public class VillageComponentVillageFort extends StructureVillagePieces.Village
        //   this.setBlockState(worldIn, iblockstate, 4, 9, 2, structureBoundingBoxIn);
           
           this.fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 6, 1, 9, 6, 4, iblockstate6, iblockstate6, false);
-//          
           this.fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 1, 4, 1, 6, 4, Blocks.LADDER.getDefaultState(), Blocks.LADDER.getDefaultState(), false);
+          this.fillWithBlocks(worldIn, structureBoundingBoxIn, 4, 7, 1, 4, 7, 4, iblockstate, iblockstate, false);
           
           this.createVillageDoor(worldIn, structureBoundingBoxIn, randomIn, 2, 1, 0, EnumFacing.NORTH);
-          
             if (this.getBlockStateFromPos(worldIn, 2, 0, -1, structureBoundingBoxIn).getMaterial() == Material.AIR && this.getBlockStateFromPos(worldIn, 2, -1, -1, structureBoundingBoxIn).getMaterial() != Material.AIR)
             {
                 this.setBlockState(worldIn, iblockstate2, 2, 0, -1, structureBoundingBoxIn);
@@ -227,7 +227,7 @@ public class VillageComponentVillageFort extends StructureVillagePieces.Village
                     else
                     {
                     	 EntityVillagerAlchemist entityvillager = new EntityVillagerAlchemist(worldIn);
-                     	entityvillager.setLocationAndAngles((double)j + 0.5D, (double)k, (double)l + 0.5D, 0.0F, 0.0F);
+                     	 entityvillager.setLocationAndAngles((double)j + 0.5D, (double)k, (double)l + 0.5D, 0.0F, 0.0F);
                          entityvillager.setSpawnPoint((double)j + 0.5D, (double)k, (double)l + 0.5D);
                          //entityvillager.setProfession(null);
                          

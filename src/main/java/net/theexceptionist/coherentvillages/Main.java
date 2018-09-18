@@ -1,5 +1,12 @@
 package net.theexceptionist.coherentvillages;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -48,17 +55,110 @@ import net.theexceptionist.coherentvillages.worldgen.VillageHandlerWall;
 @Mod(modid = Resources.MODID, name = Resources.NAME, version = Resources.VERSION)
 public class Main
 {
-    private static Logger logger;
+	private static Logger logger;
     
     @SidedProxy(serverSide = "net.theexceptionist.coherentvillages.CommonProxy", clientSide = "net.theexceptionist.coherentvillages.ClientProxy")
     public static CommonProxy proxy;
 
     @Mod.Instance(Resources.MODID)
 	public static Main instance;
+    //"/config/"
+    //private static final String config_path = "./config/coherent_config.txt";
+    private static BufferedWriter writer;
+    private static BufferedReader reader;
+    private static File config_file;
+    private static String[] config_text =
+    	{
+    			"#distance between villages\n",
+    			"#do not set below 9!\n",
+    			"max_distance=9\n",
+    			"#do not set above max_distance or below 3!\n",
+    			"min_distance=3\n",
+    			"#Spawnrate for the villagers outside the villages\n",
+    			"merchant_spawn_rate=5\n"
+    	};
+    
+    public static int max_distance = 9;
+    public static int min_distance = 3;
+    public static int merchant_spawn = 10;
+    
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		System.out.println(Resources.NAME + " is loading!");
+		System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
+		System.out.println("Working Directory = " +
+	              System.getProperty("user.dir"));
+		System.out.println(Resources.MODID+"| Checking for config file\n"+event.getModConfigurationDirectory().getAbsolutePath());//+"\n"+event.getSuggestedConfigurationFile());
+		//List<String> config_text = Arrays.asList("#distance between villages", "#do not set below 9!", "max_distance=9", "#do not set above max_distance or below 3!", "min_distance=3");
+		//List<String> config_output = null;
+		config_file = new File(event.getSuggestedConfigurationFile().getAbsolutePath());
+		
+		try {
+			if(config_file.createNewFile())
+			{
+				System.out.println(Resources.MODID+"| Config file not found! \nCreating...");	
+				try {
+					System.out.println("Writing to config file....");
+					writer = new BufferedWriter(new FileWriter(config_file));
+					
+					//writer.
+					for(int i = 0; i < config_text.length; i++)
+					{
+						writer.write(config_text[i]);
+					}
+					
+					System.out.println("Wrote to config file!");
+				} catch (IOException e2) {
+					// TODO Auto-generated catch block
+					e2.printStackTrace();
+				} finally {
+					writer.close();
+				}
+
+			}
+			else
+			{
+				System.out.println(Resources.MODID+"| Config file found! \nLoading...");
+				
+				try {
+					String line;
+					
+					System.out.print("Reading from config file.....");
+					reader = new BufferedReader(new FileReader(config_file));
+					
+					while((line = reader.readLine()) != null)
+					{
+						if(line.substring(0, 1).compareTo("#") == 0) continue;
+						
+						String[] parts = line.split("=");
+						
+						if(parts[0].contains("max"))
+						{
+							max_distance = Integer.parseInt(parts[1]);
+						}
+						else if(parts[0].contains("min"))
+						{
+							min_distance = Integer.parseInt(parts[1]);
+						}
+						else
+						{
+							merchant_spawn = Integer.parseInt(parts[1]);
+						}
+					}
+					
+					
+					System.out.println("Read the config file! New Max: "+max_distance+" New Min: "+min_distance+" New Merchant: "+merchant_spawn);
+				} catch (FileNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		} catch (IOException e) {
+			//config_file.mkdirs();
+			e.printStackTrace();
+		}
+		System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
 	}
 
 	@EventHandler
@@ -136,7 +236,7 @@ public class Main
 	    MapGenStructureIO.registerStructureComponent(c, s);
 	    } 
 	    catch (Exception localException) {} 
-	    } 
+	} 
 	
 	    public static void addVillageCreationHandler(IVillageCreationHandler v) 
 	    { 

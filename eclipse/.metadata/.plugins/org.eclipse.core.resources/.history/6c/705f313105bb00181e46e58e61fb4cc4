@@ -1,0 +1,5 @@
+package net.theexceptionist.coherentvillages.events;
+
+public class EventOverrideMerchantSpawn {
+
+}

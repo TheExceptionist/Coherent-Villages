@@ -4,6 +4,7 @@ package net.theexceptionist.coherentvillages.worldgen;
 import java.util.List;
 import java.util.Random;
 
+import net.minecraft.block.BlockBed;
 import net.minecraft.block.BlockStairs;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -81,8 +82,8 @@ public class VillageComponentBarrackSmall extends StructureVillagePieces.Village
             this.setBlockState(worldIn, iblockstate6, 1, 1, 0, structureBoundingBoxIn);
             this.setBlockState(worldIn, iblockstate6, 1, 2, 0, structureBoundingBoxIn);
             
-            this.setBlockState(worldIn, Blocks.BED.getDefaultState(), 1, 1, 1, structureBoundingBoxIn);
-            this.setBlockState(worldIn, Blocks.BED.getDefaultState(), 1, 1, 2, structureBoundingBoxIn);
+            this.setBlockState(worldIn, Blocks.BED.getDefaultState().withProperty(BlockBed.PART, BlockBed.EnumPartType.FOOT), 1, 1, 1, structureBoundingBoxIn);
+            this.setBlockState(worldIn, Blocks.BED.getDefaultState().withProperty(BlockBed.PART, BlockBed.EnumPartType.HEAD), 1, 1, 2, structureBoundingBoxIn);
             
             //this.setBlockState(worldIn, Blocks.CHEST.getDefaultState(), 1, 1, 3, structureBoundingBoxIn);
             this.generateChest(worldIn, structureBoundingBoxIn, randomIn, 1, 1, 3, LootTableList.CHESTS_SIMPLE_DUNGEON);

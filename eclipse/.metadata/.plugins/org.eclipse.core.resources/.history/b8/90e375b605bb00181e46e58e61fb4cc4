@@ -1,0 +1,36 @@
+package net.theexceptionist.coherentvillages.events;
+
+import java.util.Random;
+
+import net.minecraftforge.event.entity.living.LivingSpawnEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.theexceptionist.coherentvillages.entity.EntityVillagerMerchant;
+
+public class EventOverrideMerchantSpawn {
+	@SubscribeEvent
+	public void initSpawnEvent(LivingSpawnEvent.CheckSpawn event)
+	{
+		Random rand = new Random();
+		
+		if(event.getEntityLiving() instanceof EntityVillagerMerchant)
+		{
+			EntityVillagerMerchant merchant = new EntityVillagerMerchant(event.getWorld());
+			
+			if(rand.nextInt(5) <= 0)
+			{
+				merchant.setDead();
+			}
+		}
+		//event.
+		/*if(event.getType().VILLAGE == event.getType()){
+			MapGenVillage instance = (MapGenVillage) event.getOriginalGen();
+			ReflectionHelper.setPrivateValue(MapGenVillage.class, instance, Main.max_distance, 2);
+			ReflectionHelper.setPrivateValue(MapGenVillage.class, instance, Main.min_distance, 3);
+			//System.out.println("Values Set");
+	    	//event.setResult(value);
+			
+		}*/
+		
+	}
+	
+}

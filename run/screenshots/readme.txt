@@ -22,6 +22,17 @@ Changelog:
 **Added Guard Tower
 *Fixed various bugs and quality of life issues
 
+-Alpha v1.3
+*Fixed a bug with bed spawning
+*Fixed a clipping bug with the guard tower spawning
+*Added a config file for the village spawning (in the standard forge config folder)
+*Added a config option for merchant spawning
+*Added a pumpkin/melon farm
+
+-Alpha v1.3.1 hot fix
+*Fixed a bug with the fort spawning
+
+
 Planned Features:
 Improve Villager AI
 Add more Village Structures
