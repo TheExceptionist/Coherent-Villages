@@ -5,3 +5,6 @@ entity.villager_alchemist.name=Villager Alchemist
 entity.villager_mage.name=Villager Mage
 entity.villager_merchant.name=Villager Merchant
 entity.villager_guard.name=Villager Merchant Guard
+entity.villager_knight.name=Villager Knight
+entity.villager_horse.name=Villager Horse
+entity.villager_hunter.name=Villager Hunter

@@ -35,7 +35,7 @@ public class VillageComponentBarracks extends StructureVillagePieces.Village
 
         public static VillageComponentBarracks createPiece(StructureVillagePieces.Start start, List<StructureComponent> p_175858_1_, Random rand, int p_175858_3_, int p_175858_4_, int p_175858_5_, EnumFacing facing, int p_175858_7_)
         {
-            StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(p_175858_3_, p_175858_4_, p_175858_5_, 0, 0, 0, 6, 6, 7, facing);
+            StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(p_175858_3_, p_175858_4_, p_175858_5_, 0, 0, 0, 7, 6, 7, facing);
             return StructureComponent.findIntersecting(p_175858_1_, structureboundingbox) != null ? null : new VillageComponentBarracks(start, p_175858_7_, rand, structureboundingbox, facing);
         }
 
@@ -163,14 +163,6 @@ public class VillageComponentBarracks extends StructureVillagePieces.Village
             this.setBlockState(worldIn, iblockstate5, 6, 2, 0, structureBoundingBoxIn);
             this.setBlockState(worldIn, iblockstate5, 6, 3, 0, structureBoundingBoxIn);
             
-            this.setBlockState(worldIn, iblockstate5, 6, 1, 6, structureBoundingBoxIn);
-            this.setBlockState(worldIn, iblockstate5, 6, 2, 6, structureBoundingBoxIn);
-            this.setBlockState(worldIn, iblockstate5, 6, 3, 6, structureBoundingBoxIn);
-            
-            this.setBlockState(worldIn, iblockstate5, 0, 1, 6, structureBoundingBoxIn);
-            this.setBlockState(worldIn, iblockstate5, 0, 2, 6, structureBoundingBoxIn);
-            this.setBlockState(worldIn, iblockstate5, 0, 3, 6, structureBoundingBoxIn);
-            
             this.setBlockState(worldIn, iblockstate5, 1, 4, 6, structureBoundingBoxIn);
             this.setBlockState(worldIn, iblockstate5, 2, 5, 6, structureBoundingBoxIn);
             this.setBlockState(worldIn, iblockstate5, 3, 6, 6, structureBoundingBoxIn);
@@ -212,6 +204,14 @@ public class VillageComponentBarracks extends StructureVillagePieces.Village
             this.setBlockState(worldIn, iblockstate5, 3, 5, 2, structureBoundingBoxIn);
             this.setBlockState(worldIn, iblockstate5, 3, 5, 1, structureBoundingBoxIn);
             this.setBlockState(worldIn, iblockstate5, 3, 5, 0, structureBoundingBoxIn);
+            
+            this.setBlockState(worldIn, iblockstate5, 6, 1, 6, structureBoundingBoxIn);
+            this.setBlockState(worldIn, iblockstate5, 6, 2, 6, structureBoundingBoxIn);
+            this.setBlockState(worldIn, iblockstate5, 6, 3, 6, structureBoundingBoxIn);
+            
+            this.setBlockState(worldIn, iblockstate5, 0, 1, 6, structureBoundingBoxIn);
+            this.setBlockState(worldIn, iblockstate5, 0, 2, 6, structureBoundingBoxIn);
+            this.setBlockState(worldIn, iblockstate5, 0, 3, 6, structureBoundingBoxIn);
            
          /* //Stair Stab Piece
             //x, y , z
@@ -693,7 +693,7 @@ public class VillageComponentBarracks extends StructureVillagePieces.Village
 
             this.placeTorch(worldIn, EnumFacing.NORTH, 2, 3, 1, structureBoundingBoxIn);
 
-            for (int j = 0; j < 8; ++j)
+            for (int j = 0; j < 7; ++j)
             {
                 for (int i = 0; i < 7; ++i)
                 {

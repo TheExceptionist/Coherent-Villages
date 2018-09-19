@@ -38,7 +38,7 @@ public class VillageComponentVillageFort extends StructureVillagePieces.Village
 
         public static VillageComponentVillageFort createPiece(StructureVillagePieces.Start start, List<StructureComponent> p_175858_1_, Random rand, int p_175858_3_, int p_175858_4_, int p_175858_5_, EnumFacing facing, int p_175858_7_)
         {
-            StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(p_175858_3_, p_175858_4_, p_175858_5_, 0, 0, 0, 10, 7, 5, facing);
+            StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(p_175858_3_, p_175858_4_, p_175858_5_, 0, 0, 0, 10, 7, 6, facing);
             return StructureComponent.findIntersecting(p_175858_1_, structureboundingbox) != null ? null : new VillageComponentVillageFort(start, p_175858_7_, rand, structureboundingbox, facing);
         }
 
@@ -117,10 +117,12 @@ public class VillageComponentVillageFort extends StructureVillagePieces.Village
           
           this.fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 6, 1, 9, 6, 4, iblockstate6, iblockstate6, false);
           this.fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 1, 4, 1, 6, 4, Blocks.LADDER.getDefaultState(), Blocks.LADDER.getDefaultState(), false);
-          this.fillWithBlocks(worldIn, structureBoundingBoxIn, 4, 7, 1, 4, 7, 4, iblockstate1, iblockstate1, false);
+          this.fillWithBlocks(worldIn, structureBoundingBoxIn, 4, 7, 1, 4, 7, 4, iblockstate6, iblockstate6, false);
           
+          this.fillWithBlocks(worldIn, structureBoundingBoxIn, 2, 1, 0, 2, 2, 0, Blocks.AIR.getDefaultState(), Blocks.AIR.getDefaultState(), false);
           this.createVillageDoor(worldIn, structureBoundingBoxIn, randomIn, 2, 1, 0, EnumFacing.NORTH);
-            if (this.getBlockStateFromPos(worldIn, 2, 0, -1, structureBoundingBoxIn).getMaterial() == Material.AIR && this.getBlockStateFromPos(worldIn, 2, -1, -1, structureBoundingBoxIn).getMaterial() != Material.AIR)
+            
+          if (this.getBlockStateFromPos(worldIn, 2, 0, -1, structureBoundingBoxIn).getMaterial() == Material.AIR && this.getBlockStateFromPos(worldIn, 2, -1, -1, structureBoundingBoxIn).getMaterial() != Material.AIR)
             {
                 this.setBlockState(worldIn, iblockstate2, 2, 0, -1, structureBoundingBoxIn);
 
@@ -163,7 +165,7 @@ public class VillageComponentVillageFort extends StructureVillagePieces.Village
 
             this.placeTorch(worldIn, EnumFacing.NORTH, 2, 3, 1, structureBoundingBoxIn);
            // 10, 7, 5
-            for (int j = 0; j < 5; ++j)
+            for (int j = 0; j < 6; ++j)
             {
                 for (int i = 0; i < 10; ++i)
                 {
@@ -172,7 +174,7 @@ public class VillageComponentVillageFort extends StructureVillagePieces.Village
                 }
             }
             if(!worldIn.isRemote){
-            this.spawnVillagers(worldIn, structureBoundingBoxIn, 1, 1, 2, 1 + randomIn.nextInt(1));
+            this.spawnVillagers(worldIn, structureBoundingBoxIn, 1, 1, 2, 3 + randomIn.nextInt(3));
             }
             return true;
         }
@@ -193,16 +195,15 @@ public class VillageComponentVillageFort extends StructureVillagePieces.Village
                     }
 
                     ++this.villagersSpawned;
-                    
-               /*     EntityVillagerCaptain entityvillager = new EntityVillagerCaptain(worldIn, worldIn.rand.nextInt(3));
-                	entityvillager.setLocationAndAngles((double)j + 0.5D, (double)k, (double)l + 0.5D, 0.0F, 0.0F);
-                    entityvillager.setSpawnPoint((double)j + 0.5D, (double)k, (double)l + 0.5D);
-                    entityvillager.setProfession(null);
-                    
-                    entityvillager.finalizeMobSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityvillager)), (IEntityLivingData)null, false);
-                    worldIn.spawnEntity(entityvillager);*/
-                    
-                   
+                    {    
+	                    EntityVillagerSoldier entityvillager1 = new EntityVillagerSoldier(worldIn, worldIn.rand.nextInt(3));
+	                	entityvillager1.setLocationAndAngles((double)j + 0.5D, (double)k, (double)l + 0.5D, 0.0F, 0.0F);
+	                    entityvillager1.setSpawnPoint((double)j + 0.5D, (double)k, (double)l + 0.5D);
+	               //     entityvillager1.setProfession(null);
+	                    
+	                    entityvillager1.finalizeMobSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityvillager1)), (IEntityLivingData)null, false);
+	                    worldIn.spawnEntity(entityvillager1);
+                    }
                     
                     
                     if(worldIn.rand.nextInt(100) <= 50){

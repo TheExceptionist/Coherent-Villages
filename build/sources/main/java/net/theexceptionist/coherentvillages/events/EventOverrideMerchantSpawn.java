@@ -22,7 +22,7 @@ public class EventOverrideMerchantSpawn {
 				//merchant.
 				//merchant.despawnGuards();
 				merchant.setDead();
-				System.out.println("Working");
+				//System.out.println("Working");
 			}
 		}
 	}

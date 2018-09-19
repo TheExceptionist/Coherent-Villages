@@ -73,7 +73,7 @@ public class EntityVillagerMerchant extends EntityVillager{
         
         
         this.targetTasks.addTask(1, new EntityAIAttackBackExclude(this, false, new Class[0]));
-        this.targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityLiving.class, 10, false, true, new Predicate<EntityLiving>()
+        this.targetTasks.addTask(0, new EntityAINearestAttackableTarget(this, EntityLiving.class, 3, false, true, new Predicate<EntityLiving>()
         {
             public boolean apply(@Nullable EntityLiving p_apply_1_)
             {
@@ -126,22 +126,6 @@ public class EntityVillagerMerchant extends EntityVillager{
 				 //System.out.println("Removed");
 			}
 		 
-		 if( this.world.getVillageCollection().getVillageList().size() > 0 && this.home == null){
-				this.home = this.world.getVillageCollection().getNearestVillage(new BlockPos(this), 32);
-			}
-		 
-		 if (!isTraveling())
-	        {
-	          //  this.homeCheckTimer = 70 + this.rand.nextInt(50);
-			 if(this.world.getVillageCollection().getVillageList().size() > 1){
-	            this.setDestination(this.world.getVillageCollection().getVillageList().get(this.world.rand.nextInt(this.world.getVillageCollection().getVillageList().size())));
-
-	            //    BlockPos blockpos = this.home.getCenter();
-	             //   this.setHomePosAndDistance(blockpos, (int)((float)this.home.getVillageRadius() * 0.6F));
-	            System.out.println(this.getDestination().getCenter().getX()+" "+this.getDestination().getCenter().getY()+" "+this.getDestination().getCenter().getZ()+" - Dest - From: "+this.posX+" "+this.posY+" "+this.posZ);
-	            setTraveling(true);
-			 }
-	        }
 	    }
 
 	public boolean isTraveling() {

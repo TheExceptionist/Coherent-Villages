@@ -14,6 +14,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraft.world.gen.structure.StructureVillagePieces;
+import net.theexceptionist.coherentvillages.entity.EntityVillagerMage;
 
 public class VillageComponentWizardTower extends StructureVillagePieces.Village
     {
@@ -104,6 +105,7 @@ public class VillageComponentWizardTower extends StructureVillagePieces.Village
             
             
             this.setBlockState(worldIn, Blocks.ENCHANTING_TABLE.getDefaultState(), 2, 0, 3, structureBoundingBoxIn);
+           // this.setBlockState(worldIn, iblockstate2, 2, 0, -1, structureBoundingBoxIn);
             
             this.createVillageDoor(worldIn, structureBoundingBoxIn, randomIn, 2, 0, 0, EnumFacing.NORTH);
             /*this.fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 0, 0, 6, 0, 6, Blocks.DOUBLE_STONE_SLAB.getDefaultState(), Blocks.DOUBLE_STONE_SLAB.getDefaultState(), false);
@@ -761,15 +763,15 @@ public class VillageComponentWizardTower extends StructureVillagePieces.Village
 
                     ++this.villagersSpawned;
                     
-               //     if(worldIn.rand.nextInt(100) <= 20){
-                    /*	EntityVillagerMage entityvillager = new EntityVillagerMage(worldIn);
+                    if(worldIn.rand.nextInt(100) <= 20){
+                    	EntityVillagerMage entityvillager = new EntityVillagerMage(worldIn);
                     	entityvillager.setLocationAndAngles((double)j + 0.5D, (double)k, (double)l + 0.5D, 0.0F, 0.0F);
                         entityvillager.setSpawnPoint((double)j + 0.5D, (double)k, (double)l + 0.5D);
-                        entityvillager.setProfession(null);
+                       // entityvillager.setProfession(null);
                         
                         entityvillager.finalizeMobSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityvillager)), (IEntityLivingData)null, false);
-                        worldIn.spawnEntity(entityvillager);*/
-                 //   }
+                        worldIn.spawnEntity(entityvillager);
+                    }
                     
                 }
             }

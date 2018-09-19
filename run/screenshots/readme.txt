@@ -32,6 +32,22 @@ Changelog:
 -Alpha v1.3.1 hot fix
 *Fixed a bug with the fort spawning
 
+-Alpha v1.4
+*Fixed various structure alignment issues
+*Added Knights
+*Improved Alchemists
+*Added Stables
+*Added Alchemist hut
+
+-Alpha v1.4.3
+*Added a config option for biome spawns (delete previous config file if present without the change)
+*Changed merchant spawn rate
+
+-Alpha v1.5
+*Improved AI of all new Villager mobs
+*Added the hunter
+*Added the hunter's hut
+
 
 Planned Features:
 Improve Villager AI

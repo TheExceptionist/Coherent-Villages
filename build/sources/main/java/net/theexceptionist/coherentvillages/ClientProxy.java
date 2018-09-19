@@ -8,6 +8,9 @@ import net.theexceptionist.coherentvillages.entity.EntityVillagerAlchemist;
 import net.theexceptionist.coherentvillages.entity.EntityVillagerArcher;
 import net.theexceptionist.coherentvillages.entity.EntityVillagerArrow;
 import net.theexceptionist.coherentvillages.entity.EntityVillagerGuardian;
+import net.theexceptionist.coherentvillages.entity.EntityVillagerHorse;
+import net.theexceptionist.coherentvillages.entity.EntityVillagerHunter;
+import net.theexceptionist.coherentvillages.entity.EntityVillagerKnight;
 import net.theexceptionist.coherentvillages.entity.EntityVillagerMage;
 import net.theexceptionist.coherentvillages.entity.EntityVillagerMerchant;
 import net.theexceptionist.coherentvillages.entity.EntityVillagerSoldier;
@@ -16,6 +19,9 @@ import net.theexceptionist.coherentvillages.entity.RenderVillagerAlchemist;
 import net.theexceptionist.coherentvillages.entity.RenderVillagerArcher;
 import net.theexceptionist.coherentvillages.entity.RenderVillagerArrow;
 import net.theexceptionist.coherentvillages.entity.RenderVillagerGuardian;
+import net.theexceptionist.coherentvillages.entity.RenderVillagerHorse;
+import net.theexceptionist.coherentvillages.entity.RenderVillagerHunter;
+import net.theexceptionist.coherentvillages.entity.RenderVillagerKnight;
 import net.theexceptionist.coherentvillages.entity.RenderVillagerMage;
 import net.theexceptionist.coherentvillages.entity.RenderVillagerMerchant;
 import net.theexceptionist.coherentvillages.entity.RenderVillagerSoldier;
@@ -37,6 +43,10 @@ public class ClientProxy extends CommonProxy {
         renderManager.entityRenderMap.put(EntityVillagerAlchemist.class, new RenderVillagerAlchemist(renderManager));
         renderManager.entityRenderMap.put(EntityVillagerMerchant.class, new RenderVillagerMerchant(renderManager));
         renderManager.entityRenderMap.put(EntityMerchantGuard.class, new RenderMerchantGuard(renderManager));
+        renderManager.entityRenderMap.put(EntityVillagerKnight.class, new RenderVillagerKnight(renderManager));
+        renderManager.entityRenderMap.put(EntityVillagerHorse.class, new RenderVillagerHorse(renderManager));
+        renderManager.entityRenderMap.put(EntityVillagerHunter.class, new RenderVillagerHunter(renderManager));
+        
         renderManager.entityRenderMap.put(EntityVillagerArrow.class, new RenderVillagerArrow(renderManager));
 }
 	

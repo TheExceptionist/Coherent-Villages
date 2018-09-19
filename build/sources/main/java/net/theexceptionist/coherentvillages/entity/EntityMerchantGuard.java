@@ -59,7 +59,7 @@ public class EntityMerchantGuard extends EntityVillagerSoldier{
 	public void setMaster(EntityVillagerMerchant master){
 		//System.out.println(this+" : "+this.master);
 		this.master = master;
-		this.tasks.addTask(2, new EntityAIFollowMerchant(this, master));
+		this.tasks.addTask(3, new EntityAIFollowMerchant(this, master));
 		this.targetTasks.addTask(0, new EntityAIShareTarget(this, master, false));
 		
 	}
@@ -91,29 +91,30 @@ public class EntityMerchantGuard extends EntityVillagerSoldier{
        // this.tasks.addTask(5, new EntityAIHangAroundFence(this, this.world));
         
         //this.tasks.addTask(2, new EntityAIMoveIndoors(this));
-        this.tasks.addTask(3, new EntityAIRestrictOpenDoor(this));
-        this.tasks.addTask(4, new EntityAIOpenDoor(this, true));
-        this.tasks.addTask(2, new EntityAIMoveTowardsTarget(this, 0.9D, 32.0F));
+        this.tasks.addTask(2, new EntityAIRestrictOpenDoor(this));
+        this.tasks.addTask(3, new EntityAIOpenDoor(this, true));
+        this.tasks.addTask(4, new EntityAIMoveTowardsTarget(this, 0.9D, 32.0F));
        // this.tasks.addTask(3, new EntityAIMoveThroughVillage(this, 0.6D, true));
        //this.tasks.addTask(3, new EntityAIRoutedPatrol(this));
         //this.tasks.addTask(4, new EntityAIMoveTowardsRestriction(this, 1.0D));
         //this.tasks.addTask(5, new EntityAILookAtVillager(this));
-        this.tasks.addTask(6, new EntityAIWanderAvoidWater(this, 0.6D));
-        this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
-        this.tasks.addTask(8, new EntityAILookIdle(this));
+        this.tasks.addTask(5, new EntityAIWanderAvoidWater(this, 0.6D));
+        this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
+        this.tasks.addTask(7, new EntityAILookIdle(this));
        // this.tasks.addTask(6, new EntityAIHarvestFarmland(this, 0.6D));
         //this.areAdditionalTasksSet = true;
         
         
         
-        this.targetTasks.addTask(3, new EntityAIAttackBackExclude(this, false, new Class[0]));
-        this.targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityLiving.class, 10, false, true, new Predicate<EntityLiving>()
+       
+        this.targetTasks.addTask(0, new EntityAINearestAttackableTarget(this, EntityLiving.class, 0, false, true, new Predicate<EntityLiving>()
         {
             public boolean apply(@Nullable EntityLiving p_apply_1_)
             {
                 return p_apply_1_ != null && IMob.VISIBLE_MOB_SELECTOR.apply(p_apply_1_) && !(p_apply_1_ instanceof EntityCreeper);
             }
         }));
+        this.targetTasks.addTask(1, new EntityAIAttackBackExclude(this, true, new Class[0]));
     }
 	//this.title = this.getRandomName()+" - "+master.title+"'s Guard";
 	//this.setCustomNameTag(this.title);

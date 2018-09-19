@@ -1,0 +1,5 @@
+package net.theexceptionist.coherentvillages.entity.ai;
+
+public class EntityAISearchHouse {
+
+}

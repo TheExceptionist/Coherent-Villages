@@ -1,0 +1,68 @@
+#distance between villages
+#do not set below 9!
+max_distance=9
+#do not set above max_distance or below 3!
+min_distance=3
+#Spawnrate for the villagers outside the villages, 0 or -1 turns them off!
+merchant_spawn_rate=1
+#
+#mark each biome name with either a 0 or 1 to turn them on/off
+#Ex: Ocean=1 turns on the village in the ocean biome
+#Ex: Ocean=0 turns off the village in the ocean biome
+Ocean=0
+Plains=0
+Desert=0
+Extreme Hills=0
+Forest=0
+Taiga=0
+Swampland=0
+River=0
+FrozenOcean=0
+FrozenRiver=0
+Ice Plains=0
+Ice Mountains=0
+MushroomIsland=0
+MushroomIslandShore=0
+Beach=0
+DesertHills=0
+ForestHills=0
+TaigaHills=0
+Extreme Hills Edge=0
+Jungle=0
+JungleHills=0
+JungleEdge=0
+DeepOcean=0
+Stone Beach=0
+Cold Beach=0
+Birch Forest=0
+Birch Forest Hills=0
+Roofed Forest=0
+Cold Taiga=0
+Cold Taiga Hills=0
+Mega Taiga=0
+Mega Taiga Hills=0
+Extreme Hills+=0
+Savanna=0
+Savanna Plateau=0
+Mesa=0
+Mesa Plateau F=0
+Mesa Plateau=0
+Sunflower Plains=0
+Desert M=0
+Taiga M=0
+Swampland M=0
+Ice Plains Spikes=0
+Jungle M=0
+JungleEdge M=0
+Birch Forest M=0
+Birch Forest Hills M=0
+Roofed Forst M=0
+Cold Taiga M=0
+Mega Spruce Taiga=0
+Redwood Taiga Hills M=0
+Extreme Hills+ M=0
+Savanna M=0
+Savanna Plateau M=0
+Mesa (Bryce)=0
+Mesa Plateau F M=0
+Mesa Plateau M=0

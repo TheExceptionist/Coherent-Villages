@@ -33,6 +33,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.theexceptionist.coherentvillages.entity.ai.EntityAIAttackBackExclude;
 import net.theexceptionist.coherentvillages.entity.ai.EntityAIAttackWithBow;
+import net.theexceptionist.coherentvillages.entity.ai.EntityAIGuardArea;
 
 import com.google.common.base.Predicate;
 
@@ -79,31 +80,32 @@ public class EntityVillagerArcher extends EntityVillagerSoldier implements IRang
 		//if(this.world.rand.nextInt(2) == 0){
 		// this.tasks.addTask(2, new EntityAIAttackRanged(this, 1.0D, 60, 10.0F));
 		//}else{
-			this.tasks.addTask(2, new EntityAIAttackWithBow(this, 1.0D, 60, 10.0F));
+			this.tasks.addTask(1, new EntityAIAttackWithBow(this, 1.0D, 60, 10.0F));
 		//}
 	        //this.tasks.addTask(2, new EntityAIMoveIndoors(this));
-        this.tasks.addTask(3, new EntityAIRestrictOpenDoor(this));
-        this.tasks.addTask(4, new EntityAIOpenDoor(this, true));
+        this.tasks.addTask(2, new EntityAIRestrictOpenDoor(this));
+        this.tasks.addTask(3, new EntityAIOpenDoor(this, true));
       //  this.tasks.addTask(2, new EntityAIMoveTowardsTarget(this, 0.9D, 32.0F));
-        this.tasks.addTask(3, new EntityAIMoveThroughVillage(this, 0.6D, true));
-        this.tasks.addTask(4, new EntityAIMoveTowardsRestriction(this, 1.0D));
+        this.tasks.addTask(4, new EntityAIMoveThroughVillage(this, 0.6D, true));
+        this.tasks.addTask(5, new EntityAIMoveTowardsRestriction(this, 1.0D));
+        this.tasks.addTask(6, new EntityAIGuardArea(this));
         //this.tasks.addTask(5, new EntityAILookAtVillager(this));
-        this.tasks.addTask(6, new EntityAIWanderAvoidWater(this, 0.6D));
-        this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
-        this.tasks.addTask(8, new EntityAILookIdle(this));
+        this.tasks.addTask(7, new EntityAIWanderAvoidWater(this, 0.6D));
+        this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
+        this.tasks.addTask(9, new EntityAILookIdle(this));
        // this.tasks.addTask(6, new EntityAIHarvestFarmland(this, 0.6D));
         //this.areAdditionalTasksSet = true;
         
         
        // this.targetTasks.addTask(3, new EntityAIGuardPost(this, true));
-        this.targetTasks.addTask(3, new EntityAIAttackBackExclude(this, false, new Class[0]));
-         this.targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityLiving.class, 10, false, true, new Predicate<EntityLiving>()
+         this.targetTasks.addTask(0, new EntityAINearestAttackableTarget(this, EntityLiving.class, 1, false, true, new Predicate<EntityLiving>()
                 {
                     public boolean apply(@Nullable EntityLiving p_apply_1_)
                     {
                         return p_apply_1_ != null && IMob.VISIBLE_MOB_SELECTOR.apply(p_apply_1_) && !(p_apply_1_ instanceof EntityCreeper);
                     }
-                }));
+         }));
+         this.targetTasks.addTask(1, new EntityAIAttackBackExclude(this, true, new Class[0]));
     }
 	
 	protected void applyEntityAttributes()

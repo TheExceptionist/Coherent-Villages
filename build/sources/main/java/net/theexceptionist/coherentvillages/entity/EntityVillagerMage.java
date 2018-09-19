@@ -69,14 +69,14 @@ public class EntityVillagerMage extends EntityVillagerSoldier implements IRanged
         
         
        // this.targetTasks.addTask(1, new EntityAIGuardPost(this, true));
-        this.targetTasks.addTask(3, new EntityAIAttackBackExclude(this, false, new Class[0]));
-        this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityLiving.class, 10, false, true, new Predicate<EntityLiving>()
+        this.targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityLiving.class, 2, false, true, new Predicate<EntityLiving>()
         {
             public boolean apply(@Nullable EntityLiving p_apply_1_)
             {
                 return p_apply_1_ != null && IMob.VISIBLE_MOB_SELECTOR.apply(p_apply_1_) && !(p_apply_1_ instanceof EntityCreeper);
             }
         }));
+        this.targetTasks.addTask(0, new EntityAIAttackBackExclude(this, false, new Class[0]));
     }
 	
 	protected void applyEntityAttributes()

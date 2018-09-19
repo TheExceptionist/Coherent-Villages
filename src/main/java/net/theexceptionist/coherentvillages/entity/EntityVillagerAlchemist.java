@@ -124,14 +124,14 @@ public class EntityVillagerAlchemist extends EntityVillagerSoldier implements IR
         
         
         
-        this.targetTasks.addTask(3, new EntityAIAttackBackExclude(this, false, new Class[0]));
-        this.targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityLiving.class, 10, false, true, new Predicate<EntityLiving>()
+        this.targetTasks.addTask(0, new EntityAINearestAttackableTarget(this, EntityLiving.class, 1, false, true, new Predicate<EntityLiving>()
         {
             public boolean apply(@Nullable EntityLiving p_apply_1_)
             {
                 return p_apply_1_ != null && IMob.VISIBLE_MOB_SELECTOR.apply(p_apply_1_) && !(p_apply_1_ instanceof EntityCreeper);
             }
         }));
+        this.targetTasks.addTask(1, new EntityAIAttackBackExclude(this, false, new Class[0]));
     }
     
 	 @Override
@@ -166,7 +166,7 @@ public class EntityVillagerAlchemist extends EntityVillagerSoldier implements IR
     {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(26.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
+        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.35D);
     }
 
     /**
@@ -306,11 +306,11 @@ public class EntityVillagerAlchemist extends EntityVillagerSoldier implements IR
             }/*else if(target instanceof EntityPigZombie){
             	 potiontype = PotionTypes.HARMING;
             }*/
-            else if ((target instanceof EntityZombie || target instanceof EntitySkeleton ) && target.getHealth() >= 8.0F && !target.isPotionActive(MobEffects.POISON))
+          /*  else if (target. >= 8.0F && !target.isPotionActive(MobEffects.POISON))
             {
                 potiontype = PotionTypes.REGENERATION;
-            }
-            else if ((target instanceof EntityZombie || target instanceof EntitySkeleton )  && f <= 3.0F && !target.isPotionActive(MobEffects.WEAKNESS))
+            }*/
+            else if ((target instanceof EntityZombie || target instanceof EntitySkeleton ))
             {
                 potiontype = PotionTypes.HEALING;
             }else if (target.getHealth() >= 8.0F && !target.isPotionActive(MobEffects.POISON) && !(target instanceof EntitySpider))
@@ -347,14 +347,14 @@ public class EntityVillagerAlchemist extends EntityVillagerSoldier implements IR
 	            {
 	                potiontype = PotionTypes.SLOWNESS;
 	            }
-	            else*/ if (target.getHealth() >= 8.0F && !target.isPotionActive(MobEffects.POISON))
-	            {
-	                potiontype = PotionTypes.REGENERATION;
-	            }
-	            else if (f <= 3.0F && !target.isPotionActive(MobEffects.WEAKNESS) && this.rand.nextFloat() < 0.25F)
+	            else*/ if (target.getHealth() <= 8.0F && !target.isPotionActive(MobEffects.POISON))
 	            {
 	                potiontype = PotionTypes.HEALING;
 	            }
+	         /*   else if (f <= 3.0F && this.rand.nextFloat() < 0.25F)
+	            {
+	                potiontype = PotionTypes.HEALING;
+	            }*/
 
 	            EntityPotion entitypotion = new EntityPotion(this.world, this, PotionUtils.addPotionToItemStack(new ItemStack(Items.SPLASH_POTION), potiontype));
 	            entitypotion.rotationPitch -= -20.0F;
