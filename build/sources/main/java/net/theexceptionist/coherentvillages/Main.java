@@ -13,7 +13,6 @@ import java.util.List;
 
 import org.apache.logging.log4j.Logger;
 
-import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Biomes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.Biome;
@@ -34,6 +33,7 @@ import net.theexceptionist.coherentvillages.entity.EntityMerchantGuard;
 import net.theexceptionist.coherentvillages.entity.EntityVillagerAlchemist;
 import net.theexceptionist.coherentvillages.entity.EntityVillagerArcher;
 import net.theexceptionist.coherentvillages.entity.EntityVillagerArrow;
+import net.theexceptionist.coherentvillages.entity.EntityVillagerCreeperHunter;
 import net.theexceptionist.coherentvillages.entity.EntityVillagerGuardian;
 import net.theexceptionist.coherentvillages.entity.EntityVillagerHorse;
 import net.theexceptionist.coherentvillages.entity.EntityVillagerHunter;
@@ -354,12 +354,12 @@ public class Main
     	createEntity(EntityVillagerKnight.class, 1525, "villager_knight", 885895, 3985111);
     	createEntity(EntityVillagerHorse.class, 1526, "villager_horse", 325895, 5005567);
     	createEntity(EntityVillagerHunter.class, 1527, "villager_hunter", 225395, 8015567);
-    	
+    	createEntity(EntityVillagerCreeperHunter.class, 1528, "villager_creeper_hunter", 926395, 1015567);
     	//if(biomes != null)
     	//{
     		//System.out.println(biomes[0]);
     	if(merchant_spawn > 0){
-    		EntityRegistry.addSpawn(EntityVillagerMerchant.class, 1, 1, 2, EnumCreatureType.MONSTER, villageBiomes.toArray(biomes));//weightedProb, min, max, typeOfCreature, biomes);
+    		//EntityRegistry.addSpawn(EntityVillagerMerchant.class, 1, 1, 2, EnumCreatureType.MONSTER, villageBiomes.toArray(biomes));//weightedProb, min, max, typeOfCreature, biomes);
     	}
     	//}
     	EntityRegistry.registerModEntity(new ResourceLocation(Resources.MODID, "villager_arrow"), EntityVillagerArrow.class, "entity_villager_arrow", 1, instance,1, 1, false);

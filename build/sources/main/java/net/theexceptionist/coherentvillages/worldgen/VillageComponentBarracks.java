@@ -16,6 +16,7 @@ import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraft.world.gen.structure.StructureVillagePieces;
 import net.theexceptionist.coherentvillages.entity.EntityVillagerAlchemist;
+import net.theexceptionist.coherentvillages.entity.EntityVillagerCreeperHunter;
 import net.theexceptionist.coherentvillages.entity.EntityVillagerSoldier;
 
 public class VillageComponentBarracks extends StructureVillagePieces.Village
@@ -655,11 +656,11 @@ public class VillageComponentBarracks extends StructureVillagePieces.Village
             this.setBlockState(worldIn, iblockstate1, 3, 2, 0, structureBoundingBoxIn);
             this.setBlockState(worldIn, iblockstate1, 3, 1, 0, structureBoundingBoxIn);
 
-            */if (this.getBlockStateFromPos(worldIn, 2, 0, -1, structureBoundingBoxIn).getMaterial() == Material.AIR && this.getBlockStateFromPos(worldIn, 2, -1, -1, structureBoundingBoxIn).getMaterial() != Material.AIR)
+            */if (this.getBlockStateFromPos(worldIn, 3, 0, -1, structureBoundingBoxIn).getMaterial() == Material.AIR && this.getBlockStateFromPos(worldIn, 3, -1, -1, structureBoundingBoxIn).getMaterial() != Material.AIR)
             {
-                this.setBlockState(worldIn, iblockstate2, 2, 0, -1, structureBoundingBoxIn);
+                this.setBlockState(worldIn, iblockstate2, 3, 0, -1, structureBoundingBoxIn);
 
-                if (this.getBlockStateFromPos(worldIn, 2, -1, -1, structureBoundingBoxIn).getBlock() == Blocks.GRASS_PATH)
+                if (this.getBlockStateFromPos(worldIn, 3, -1, -1, structureBoundingBoxIn).getBlock() == Blocks.GRASS_PATH)
                 {
                     this.setBlockState(worldIn, Blocks.GRASS.getDefaultState(), 2, -1, -1, structureBoundingBoxIn);
                 }
@@ -707,7 +708,7 @@ public class VillageComponentBarracks extends StructureVillagePieces.Village
                 }
             }
             if(!worldIn.isRemote){
-            this.spawnVillagers(worldIn, structureBoundingBoxIn, 1, 1, 2, 3 + randomIn.nextInt(5));
+            this.spawnVillagers(worldIn, structureBoundingBoxIn, 1, 1, 2, 3 + randomIn.nextInt(3));
             }
             return true;
         }
@@ -752,6 +753,15 @@ public class VillageComponentBarracks extends StructureVillagePieces.Village
                     
                     if(worldIn.rand.nextInt(100) <= 5){
                     	EntityVillagerAlchemist entityvillager = new EntityVillagerAlchemist(worldIn);
+                    	entityvillager.setLocationAndAngles((double)j + 0.5D, (double)k, (double)l + 0.5D, 0.0F, 0.0F);
+                        entityvillager.setSpawnPoint((double)j + 0.5D, (double)k, (double)l + 0.5D);
+                        //entityvillager.setProfession(null);
+                        
+                        entityvillager.finalizeMobSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityvillager)), (IEntityLivingData)null, false);
+                        worldIn.spawnEntity(entityvillager);
+                    }else if(worldIn.rand.nextInt(100) <= 50)
+                    {
+                    	EntityVillagerCreeperHunter entityvillager = new EntityVillagerCreeperHunter(worldIn);
                     	entityvillager.setLocationAndAngles((double)j + 0.5D, (double)k, (double)l + 0.5D, 0.0F, 0.0F);
                         entityvillager.setSpawnPoint((double)j + 0.5D, (double)k, (double)l + 0.5D);
                         //entityvillager.setProfession(null);

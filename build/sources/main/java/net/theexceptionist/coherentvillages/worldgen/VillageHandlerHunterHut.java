@@ -16,7 +16,7 @@ public class VillageHandlerHunterHut implements IVillageCreationHandler
 	public StructureVillagePieces.PieceWeight getVillagePieceWeight(Random random, int i) 
 	{ 
 		//System.out.println("Registered");
-	return new StructureVillagePieces.PieceWeight(VillageComponentHunterHut.class, 4, MathHelper.getInt(random, 2 + i, 5 + i * 3)); //Play around with these numbers! 
+	return new StructureVillagePieces.PieceWeight(VillageComponentHunterHut.class, 20, MathHelper.getInt(random, 0 + i, 1 + i)); //Play around with these numbers! 
 	} 
 
 	public Class getComponentClass() 

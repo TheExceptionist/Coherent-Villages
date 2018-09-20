@@ -115,28 +115,17 @@ public class EntityAIGuardArea extends EntityAIBase
         else
         {
         	int radius = 30;
-        	double x = this.entity.posX - radius;
-        	double y = this.entity.posY - radius;
-        	double z = this.entity.posY - radius;
+        	double x = this.entity.posX + this.entity.world.rand.nextInt((int) (radius) - radius/2);
+        	double y = this.entity.posY + this.entity.world.rand.nextInt((int) (3) - 1);
+        	double z = this.entity.posZ + this.entity.world.rand.nextInt((int) (radius) - radius/2);
         	
-        	for(int n = 0; n < radius * 2; n++)
-        	{
-        		for(int o = 0; o < radius * 2; o++)
-        		{
-        			for(int g = 0; g < radius * 2; g++)
-        			{
-        				IBlockState block = this.entity.world.getBlockState(new BlockPos(x, y, z));
-        				
-        				if(block == Blocks.OAK_FENCE.getDefaultState() || block == Blocks.ACACIA_FENCE.getDefaultState() || block == Blocks.BIRCH_FENCE.getDefaultState() || block == Blocks.JUNGLE_FENCE.getDefaultState() || block == Blocks.SPRUCE_FENCE.getDefaultState() || block == Blocks.DARK_OAK_FENCE.getDefaultState())
-        				{
-        					z++;
-        					
-        					this.entity.getNavigator().tryMoveToXYZ(x, y, z, 1.0D);
-        					return;
-        				}
-        			}
-        		}
-        	}
+        	IBlockState block = this.entity.world.getBlockState(new BlockPos(x, y, z));
+			
+			if(block == Blocks.OAK_FENCE.getDefaultState() || block == Blocks.ACACIA_FENCE.getDefaultState() || block == Blocks.BIRCH_FENCE.getDefaultState() || block == Blocks.JUNGLE_FENCE.getDefaultState() || block == Blocks.SPRUCE_FENCE.getDefaultState() || block == Blocks.DARK_OAK_FENCE.getDefaultState())
+			{
+				this.entity.getNavigator().tryMoveToXYZ(x, y, z, 1.0D);
+				return;
+			}
         }
     }
 

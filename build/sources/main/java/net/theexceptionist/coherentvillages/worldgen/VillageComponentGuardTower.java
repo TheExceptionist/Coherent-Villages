@@ -267,7 +267,7 @@ public class VillageComponentGuardTower extends StructureVillagePieces.Village
             }
             
             if(!worldIn.isRemote){
-            	this.spawnVillagers(worldIn, structureBoundingBoxIn, 1, 10, 2, 3 + randomIn.nextInt(2));
+            	this.spawnVillagers(worldIn, structureBoundingBoxIn, 1, 10, 2, 2 + randomIn.nextInt(4));
             }
             return true;
         }

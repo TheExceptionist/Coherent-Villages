@@ -237,7 +237,7 @@ public class VillageComponentBarrackSmall extends StructureVillagePieces.Village
             }
 
             if(!worldIn.isRemote){
-            this.spawnVillagers(worldIn, structureBoundingBoxIn, 1, 1, 2, 1 + randomIn.nextInt(2));
+            this.spawnVillagers(worldIn, structureBoundingBoxIn, 1, 1, 2, 1 + randomIn.nextInt(3));
             }
             
             return true;

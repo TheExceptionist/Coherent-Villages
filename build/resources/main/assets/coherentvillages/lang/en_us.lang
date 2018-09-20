@@ -8,3 +8,4 @@ entity.villager_guard.name=Villager Merchant Guard
 entity.villager_knight.name=Villager Knight
 entity.villager_horse.name=Villager Horse
 entity.villager_hunter.name=Villager Hunter
+entity.villager_creeper_hunter.name=Creeper Hunter

@@ -97,7 +97,7 @@ public class VillageComponentFence extends StructureVillagePieces.Village
             }
         }
         
-        this.spawnVillagers(worldIn, structureBoundingBoxIn, 1, 1, 2, 1 + randomIn.nextInt(2));
+        this.spawnVillagers(worldIn, structureBoundingBoxIn, 1, 1, 2, 1);
         return true;
     }
     protected void spawnVillagers(World worldIn, StructureBoundingBox structurebb, int x, int y, int z, int count)

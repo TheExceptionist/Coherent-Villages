@@ -40,10 +40,17 @@ import com.google.common.base.Predicate;
 public class EntityVillagerArcher extends EntityVillagerSoldier implements IRangedAttackMob{
 	private int armour = 2, attack = 8;
 	protected int arrowType = 0;
+	//protected boolean creeperHunter = false;
 	
 	public EntityVillagerArcher(World worldIn) {
 		super(worldIn);
 		this.arrowType = this.rand.nextInt(100) < 90 ? 0 : 1;
+		//this.creeperHunter = worldIn.rand.nextInt(100) < 25;
+	}
+	
+	public EntityVillagerArcher(World worldIn, boolean hunter) {
+		this(worldIn);
+		//this.creeperHunter = hunter;
 	}
 	
 	protected void setEnchantment(){
@@ -102,7 +109,13 @@ public class EntityVillagerArcher extends EntityVillagerSoldier implements IRang
                 {
                     public boolean apply(@Nullable EntityLiving p_apply_1_)
                     {
-                        return p_apply_1_ != null && IMob.VISIBLE_MOB_SELECTOR.apply(p_apply_1_) && !(p_apply_1_ instanceof EntityCreeper);
+                    //	if(!creeperHunter){
+                    		return p_apply_1_ != null && IMob.VISIBLE_MOB_SELECTOR.apply(p_apply_1_) && !(p_apply_1_ instanceof EntityCreeper);
+                   // 	}
+                 //   	else
+                    //	{
+                    	//	return (p_apply_1_ instanceof EntityCreeper);
+                    	//}
                     }
          }));
          this.targetTasks.addTask(1, new EntityAIAttackBackExclude(this, true, new Class[0]));
@@ -127,6 +140,10 @@ public class EntityVillagerArcher extends EntityVillagerSoldier implements IRang
 		//if(!this.world.isRemote){
 		//System.out.println("Attacking");
 		EntityArrow entityarrow = this.getArrow(distanceFactor);
+		
+		//if(creeperHunter)
+			//entityarrow.setDamage(40D);
+		
         double d0 = target.posX - this.posX;
         double d1 = target.getEntityBoundingBox().minY + (double)(target.height / 3.0F) - entityarrow.posY;
         double d2 = target.posZ - this.posZ;

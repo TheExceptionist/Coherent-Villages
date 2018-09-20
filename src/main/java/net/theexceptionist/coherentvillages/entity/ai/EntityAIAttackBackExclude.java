@@ -30,11 +30,11 @@ public class EntityAIAttackBackExclude extends EntityAITarget
         int i = this.taskOwner.getRevengeTimer();
         EntityLivingBase entitylivingbase = this.taskOwner.getAttackTarget();
         
-        //if(!(this.taskOwner.getAttackTarget() instanceof EntityVillager)){
+        if(!(this.taskOwner.getAttackTarget() instanceof EntityVillager)){
         	return i != this.revengeTimerOld && entitylivingbase != null && this.isSuitableTarget(entitylivingbase, false);
-        //}else{
-        	//return false;
-        //}
+        }else{
+        	return false;
+        }
     }
 
     /**

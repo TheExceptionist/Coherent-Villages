@@ -117,6 +117,7 @@ public class VillageComponentVillageFort extends StructureVillagePieces.Village
           
           this.fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 6, 1, 9, 6, 4, iblockstate6, iblockstate6, false);
           this.fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 1, 4, 1, 6, 4, Blocks.LADDER.getDefaultState(), Blocks.LADDER.getDefaultState(), false);
+          this.setBlockState(worldIn, Blocks.TRAPDOOR.getDefaultState(), 1, 7, 4, structureBoundingBoxIn);//this.fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 1, 4, 1, 7, 4, Blocks.LADDER.getDefaultState(), Blocks.LADDER.getDefaultState(), false);
           this.fillWithBlocks(worldIn, structureBoundingBoxIn, 4, 7, 1, 4, 7, 4, iblockstate6, iblockstate6, false);
           
           this.fillWithBlocks(worldIn, structureBoundingBoxIn, 2, 1, 0, 2, 2, 0, Blocks.AIR.getDefaultState(), Blocks.AIR.getDefaultState(), false);

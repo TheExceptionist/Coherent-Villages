@@ -7,6 +7,7 @@ import net.theexceptionist.coherentvillages.entity.EntityMerchantGuard;
 import net.theexceptionist.coherentvillages.entity.EntityVillagerAlchemist;
 import net.theexceptionist.coherentvillages.entity.EntityVillagerArcher;
 import net.theexceptionist.coherentvillages.entity.EntityVillagerArrow;
+import net.theexceptionist.coherentvillages.entity.EntityVillagerCreeperHunter;
 import net.theexceptionist.coherentvillages.entity.EntityVillagerGuardian;
 import net.theexceptionist.coherentvillages.entity.EntityVillagerHorse;
 import net.theexceptionist.coherentvillages.entity.EntityVillagerHunter;
@@ -18,6 +19,7 @@ import net.theexceptionist.coherentvillages.entity.RenderMerchantGuard;
 import net.theexceptionist.coherentvillages.entity.RenderVillagerAlchemist;
 import net.theexceptionist.coherentvillages.entity.RenderVillagerArcher;
 import net.theexceptionist.coherentvillages.entity.RenderVillagerArrow;
+import net.theexceptionist.coherentvillages.entity.RenderVillagerCreeperHunter;
 import net.theexceptionist.coherentvillages.entity.RenderVillagerGuardian;
 import net.theexceptionist.coherentvillages.entity.RenderVillagerHorse;
 import net.theexceptionist.coherentvillages.entity.RenderVillagerHunter;
@@ -46,6 +48,7 @@ public class ClientProxy extends CommonProxy {
         renderManager.entityRenderMap.put(EntityVillagerKnight.class, new RenderVillagerKnight(renderManager));
         renderManager.entityRenderMap.put(EntityVillagerHorse.class, new RenderVillagerHorse(renderManager));
         renderManager.entityRenderMap.put(EntityVillagerHunter.class, new RenderVillagerHunter(renderManager));
+        renderManager.entityRenderMap.put(EntityVillagerCreeperHunter.class, new RenderVillagerCreeperHunter(renderManager));
         
         renderManager.entityRenderMap.put(EntityVillagerArrow.class, new RenderVillagerArrow(renderManager));
 }

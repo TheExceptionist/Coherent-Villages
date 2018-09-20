@@ -110,7 +110,7 @@ public class VillageComponentStable extends StructureVillagePieces.Village
                 }
             }
 
-            this.spawnVillagers(worldIn, structureBoundingBoxIn, 1, 1, 2, 1 + randomIn.nextInt(3));
+            this.spawnVillagers(worldIn, structureBoundingBoxIn, 1, 1, 2, 1 + randomIn.nextInt(2));
             return true;
         }
         

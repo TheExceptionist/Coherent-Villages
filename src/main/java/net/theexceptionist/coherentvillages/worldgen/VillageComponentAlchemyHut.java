@@ -73,19 +73,27 @@ public class VillageComponentAlchemyHut extends StructureVillagePieces.Village
             
             //this.fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 0, 0, 6, 0, 6, Blocks.DOUBLE_STONE_SLAB.getDefaultState(), Blocks.DOUBLE_STONE_SLAB.getDefaultState(), false);
            // this.fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 0, 1, 5, 0, 5,iblockstate1, iblockstate1, false);
+            this.setBlockState(worldIn,iblockstate2, 0, 0, 0, structureBoundingBoxIn);
             this.setBlockState(worldIn,iblockstate2, 1, 0, 0, structureBoundingBoxIn);
             this.setBlockState(worldIn,iblockstate2, 2, 0, 0, structureBoundingBoxIn);
        
+            this.setBlockState(worldIn,iblockstate, 0, 0, 1, structureBoundingBoxIn);
             this.setBlockState(worldIn,iblockstate, 1, 0, 1, structureBoundingBoxIn);
             this.setBlockState(worldIn,iblockstate, 2, 0, 1, structureBoundingBoxIn);
             
+            this.setBlockState(worldIn,iblockstate2, 0, 1, 1, structureBoundingBoxIn);
             this.setBlockState(worldIn,iblockstate2, 1, 1, 1, structureBoundingBoxIn);
             this.setBlockState(worldIn,iblockstate2, 2, 1, 1, structureBoundingBoxIn);
        
+            this.setBlockState(worldIn,iblockstate, 0, 0, 2, structureBoundingBoxIn);
             this.setBlockState(worldIn,iblockstate, 1, 0, 2, structureBoundingBoxIn);
             this.setBlockState(worldIn,iblockstate, 2, 0, 2, structureBoundingBoxIn);
+            
+            this.setBlockState(worldIn,iblockstate, 0, 1, 2, structureBoundingBoxIn);
             this.setBlockState(worldIn,iblockstate, 1, 1, 2, structureBoundingBoxIn);
             this.setBlockState(worldIn,iblockstate, 2, 1, 2, structureBoundingBoxIn);
+            
+            this.setBlockState(worldIn,iblockstate2, 0, 2, 2, structureBoundingBoxIn);
             this.setBlockState(worldIn,iblockstate2, 1, 2, 2, structureBoundingBoxIn);
             this.setBlockState(worldIn,iblockstate2, 2, 2, 2, structureBoundingBoxIn);
        

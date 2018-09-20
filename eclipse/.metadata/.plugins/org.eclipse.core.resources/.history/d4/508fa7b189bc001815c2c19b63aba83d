@@ -1,0 +1,58 @@
+package net.theexceptionist.coherentvillages.entity.ai;
+
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.EntityCreature;
+import net.minecraft.entity.ai.EntityAITarget;
+import net.minecraft.init.Blocks;
+import net.minecraft.util.math.BlockPos;
+
+public class EntityAIPatrol extends EntityAITarget {
+	private boolean patrolDuty;
+	private boolean set;
+	
+	public EntityAIPatrol(EntityCreature creature, boolean checkSight) {
+		super(creature, checkSight);
+		patrolDuty = false;
+		set = false;
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public boolean shouldExecute() {
+		int random = this.taskOwner.world.rand.nextInt(100);
+		if(this.taskOwner.world.isDaytime())
+		{
+			if(patrolDuty && !set)
+			{
+				patrolDuty = false;
+			}else
+			if(!patrolDuty && random < 10 && !set)
+			{
+				patrolDuty = true;
+			}
+			
+			set = true;
+		}
+		else
+		{
+			if(patrolDuty && set)
+			{
+				patrolDuty = false;
+			}
+			else if(!patrolDuty && random < 10 && set)
+			{
+				patrolDuty = true;
+			}
+			
+			set = false;
+		}
+		return patrolDuty;
+	}
+	
+    public void startExecuting()
+    {
+
+    }
+
+
+}

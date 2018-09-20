@@ -60,9 +60,12 @@ Changelog:
 -Alpha v1.5.9
 *Fixed another door issue
 
-//Patrol AI
-//Attack Back AI
-//Decrease Soldier spawn rate
+-Alpha v1.6.1
+*More AI improvements
+*Adjusted spawnrate if hunter's huts
+*Adjusted Guard garrison
+*Added creeper hunter
+*Some Villages are REALLY safe now, GOAL ACHIEVED!
 
 Planned Features:
 Improve Villager AI

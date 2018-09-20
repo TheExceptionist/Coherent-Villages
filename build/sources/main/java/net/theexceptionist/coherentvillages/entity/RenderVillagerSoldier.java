@@ -32,6 +32,7 @@ public class RenderVillagerSoldier extends RenderLiving<EntityVillager>
 	private static final ResourceLocation VILLAGER_SOLDIER_TEXTUREC = new ResourceLocation(Resources.MODID,"textures/entity/villager/soldier_c.png");
 	private static final ResourceLocation VILLAGER_SOLDIER_TEXTURED = new ResourceLocation(Resources.MODID,"textures/entity/villager/soldier_d.png");
 	private static final ResourceLocation VILLAGER_KNIGHT_TEXTURE = new ResourceLocation(Resources.MODID,"textures/entity/villager/captain_a.png");
+	private static final ResourceLocation VILLAGER_SOLDIER_TEXTUREX = new ResourceLocation(Resources.MODID,"textures/entity/villager/captain_a.png");
 	
 	//private int type = 0;
 	
@@ -78,6 +79,9 @@ public class RenderVillagerSoldier extends RenderLiving<EntityVillager>
 	    		return VILLAGER_SOLDIER_TEXTURED;
 	    	case 5:
 	    		return VILLAGER_KNIGHT_TEXTURE;
+	    	case 6:
+	    		return VILLAGER_SOLDIER_TEXTUREX;// = new ResourceLocation(Resources.MODID,"textures/entity/villager/captain_a.png");
+	    		
     	}
 		return VILLAGER_SOLDIER_TEXTURE;
     	

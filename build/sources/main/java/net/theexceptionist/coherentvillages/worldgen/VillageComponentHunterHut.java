@@ -279,7 +279,7 @@ public class VillageComponentHunterHut extends StructureVillagePieces.Village
             }
 
             if(!worldIn.isRemote){
-            this.spawnVillagers(worldIn, structureBoundingBoxIn, 1, 1, 2, 1 + randomIn.nextInt(3));
+            this.spawnVillagers(worldIn, structureBoundingBoxIn, 1, 1, 2, 1 + randomIn.nextInt(2));
             }
             
             return true;
@@ -291,7 +291,7 @@ public class VillageComponentHunterHut extends StructureVillagePieces.Village
             {
                 for (int i = villagersSpawned; i < count; ++i)
                 {
-                    int j = this.getXWithOffset(x + i, z);
+                    int j = this.getXWithOffset(x, z);
                     int k = this.getYWithOffset(y);
                     int l = this.getZWithOffset(x + i, z);
 

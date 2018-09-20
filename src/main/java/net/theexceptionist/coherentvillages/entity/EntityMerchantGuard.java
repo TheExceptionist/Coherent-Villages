@@ -7,6 +7,7 @@ import com.google.common.base.Predicate;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIMoveThroughVillage;
 import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
@@ -60,7 +61,7 @@ public class EntityMerchantGuard extends EntityVillagerSoldier{
 		//System.out.println(this+" : "+this.master);
 		this.master = master;
 		this.tasks.addTask(3, new EntityAIFollowMerchant(this, master));
-		this.targetTasks.addTask(0, new EntityAIShareTarget(this, master, false));
+		this.targetTasks.addTask(2, new EntityAIShareTarget(this, master, false));
 		
 	}
 
@@ -114,6 +115,7 @@ public class EntityMerchantGuard extends EntityVillagerSoldier{
                 return p_apply_1_ != null && IMob.VISIBLE_MOB_SELECTOR.apply(p_apply_1_) && !(p_apply_1_ instanceof EntityCreeper);
             }
         }));
+        //this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false, new Class[0]));
         this.targetTasks.addTask(1, new EntityAIAttackBackExclude(this, true, new Class[0]));
     }
 	//this.title = this.getRandomName()+" - "+master.title+"'s Guard";

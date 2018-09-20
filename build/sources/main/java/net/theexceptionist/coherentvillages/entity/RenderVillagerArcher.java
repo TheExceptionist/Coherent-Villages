@@ -29,7 +29,7 @@ import net.theexceptionist.coherentvillages.Resources;
 	{
 		private static final ResourceLocation VILLAGER_SOLDIER_TEXTURE = new ResourceLocation(Resources.MODID,"textures/entity/villager/archer.png");
 		private static final ResourceLocation VILLAGER_SOLDIER_TEXTUREA = new ResourceLocation(Resources.MODID,"textures/entity/villager/archer_a.png");
-		
+	
 		public RenderVillagerArcher(RenderManager renderManagerIn)
 	    {
 	        super(renderManagerIn, new ModelVillagerSoldier(0.0F), 0.5F);
@@ -80,7 +80,11 @@ import net.theexceptionist.coherentvillages.Resources;
 		    	if(en.arrowType == 0){
 		    		return VILLAGER_SOLDIER_TEXTURE;
 		    	}
-		    	else
+		    /*	else if(en.creeperHunter)
+		    	{
+		    		return VILLAGER_SOLDIER_TEXTUREB;
+		    	}*/
+		    	else 
 		    	{
 		    		return VILLAGER_SOLDIER_TEXTUREA;
 		    	}

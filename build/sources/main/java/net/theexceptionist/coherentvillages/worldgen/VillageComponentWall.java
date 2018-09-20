@@ -108,8 +108,8 @@ public class VillageComponentWall extends StructureVillagePieces.Village
             for (int i = villagersSpawned; i < count; ++i)
             {
                 int j = this.getXWithOffset(x + i, z);
-                int k = this.getYWithOffset(y);
                 int l = this.getZWithOffset(x + i, z);
+                int k = worldIn.getTopSolidOrLiquidBlock(new BlockPos(j, 80, l)).getY();
 
                 if (!structurebb.isVecInside(new BlockPos(j, k, l)))
                 {
