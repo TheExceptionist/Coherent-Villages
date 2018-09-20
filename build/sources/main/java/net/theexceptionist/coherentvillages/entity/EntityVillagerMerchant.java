@@ -22,6 +22,7 @@ import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
@@ -88,8 +89,10 @@ public class EntityVillagerMerchant extends EntityVillager{
 		//this.setCustomNameTag(title);
 		this.setHeldItem(EnumHand.MAIN_HAND, new ItemStack(Items.IRON_SWORD));
 		this.spawnGuards();
+		//this.
 		wasInit  = true;
 	}
+	
 	 private void spawnGuards() {
 		// System.out.println(rich);
 		// TODO Auto-generated method stub
@@ -126,6 +129,12 @@ public class EntityVillagerMerchant extends EntityVillager{
 				 //System.out.println("Removed");
 			}
 		 
+		 if(this.getHealth() <= 4 && this.rich > 0)
+		 {
+			 this.dropItem(this.getDropItem(), this.rich);
+			 this.rich = -1;
+		 }
+		 
 	    }
 
 	public boolean isTraveling() {
@@ -160,5 +169,10 @@ public class EntityVillagerMerchant extends EntityVillager{
     public int getMaxSpawnedInChunk()
     {
         return 4;
+    }
+    
+    protected Item getDropItem()
+    {
+        return Item.getItemById(388);
     }
 }

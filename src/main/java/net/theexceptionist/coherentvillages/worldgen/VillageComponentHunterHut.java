@@ -36,7 +36,7 @@ public class VillageComponentHunterHut extends StructureVillagePieces.Village
 
         public static VillageComponentHunterHut createPiece(StructureVillagePieces.Start start, List<StructureComponent> p_175858_1_, Random rand, int p_175858_3_, int p_175858_4_, int p_175858_5_, EnumFacing facing, int p_175858_7_)
         {
-            StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(p_175858_3_, p_175858_4_, p_175858_5_, 0, 0, 0, 6, 4, 6, facing);
+            StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(p_175858_3_, p_175858_4_, p_175858_5_, 0, 0, 0, 7, 4, 7, facing);
             return StructureComponent.findIntersecting(p_175858_1_, structureboundingbox) != null ? null : new VillageComponentHunterHut(start, p_175858_7_, rand, structureboundingbox, facing);
         }
 
@@ -95,6 +95,21 @@ public class VillageComponentHunterHut extends StructureVillagePieces.Village
             this.fillWithBlocks(worldIn, structureBoundingBoxIn, 5, 2, 1, 5, 2, 5, iblockstate3, iblockstate3, false);
             
             this.createVillageDoor(worldIn, structureBoundingBoxIn, randomIn, 3, 1, 0, EnumFacing.NORTH);
+            
+            this.setBlockState(worldIn, Blocks.AIR.getDefaultState(), 3, 1, -1, structureBoundingBoxIn);
+            this.setBlockState(worldIn, Blocks.AIR.getDefaultState(), 3, 2, -1, structureBoundingBoxIn);
+            
+            
+            this.setBlockState(worldIn, iblockstate1, 1, 1, 0, structureBoundingBoxIn);
+            this.setBlockState(worldIn, iblockstate1, 2, 1, 0, structureBoundingBoxIn);
+            this.setBlockState(worldIn, iblockstate1, 2, 2, 0, structureBoundingBoxIn);
+            
+            this.setBlockState(worldIn, iblockstate1, 5, 1, 0, structureBoundingBoxIn);
+            this.setBlockState(worldIn, iblockstate1, 4, 1, 0, structureBoundingBoxIn);
+            this.setBlockState(worldIn, iblockstate1, 4, 2, 0, structureBoundingBoxIn);
+            
+            this.fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 1, 6, 5, 1, 6, iblockstate1, iblockstate1, false);
+            this.fillWithBlocks(worldIn, structureBoundingBoxIn, 2, 2, 6, 4, 2, 6, iblockstate1, iblockstate1, false);
             
            /* this.fillWithBlocks(worldIn, structureBoundingBoxIn, 0, -1, 0, 0, -1, 6, iblockstate3, iblockstate3, false);
             this.fillWithBlocks(worldIn, structureBoundingBoxIn, 7, -1, 0, 7, -1, 6, iblockstate3, iblockstate3, false);
@@ -207,6 +222,10 @@ public class VillageComponentHunterHut extends StructureVillagePieces.Village
                 {
                     this.setBlockState(worldIn, Blocks.GRASS.getDefaultState(), 3, -1, -1, structureBoundingBoxIn);
                 }
+            }
+            else
+            {
+                this.replaceAirAndLiquidDownwards(worldIn, iblockstate, 3, 0, -1, structureBoundingBoxIn);
             }
 
             

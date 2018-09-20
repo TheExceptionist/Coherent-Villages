@@ -7,6 +7,7 @@ import net.minecraft.block.BlockStairs;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.IEntityLivingData;
+import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
@@ -382,22 +383,30 @@ public class VillageComponentAlchemyHut extends StructureVillagePieces.Village
                     ++this.villagersSpawned;
                     
                    // if(worldIn.rand.nextInt(100) <= 20){
-                    	EntityVillagerAlchemist entityvillager = new EntityVillagerAlchemist(worldIn);
-                    	entityvillager.setLocationAndAngles((double)j + 0.5D, (double)k + 5D, (double)l + 0.5D, 0.0F, 0.0F);
-                        entityvillager.setSpawnPoint((double)j + 0.5D, (double)k + 5D, (double)l + 0.5D);
+                    	EntityVillagerAlchemist entityvillager3 = new EntityVillagerAlchemist(worldIn);
+                    	entityvillager3.setLocationAndAngles((double)j + 0.5D, (double)k + 5D, (double)l + 0.5D, 0.0F, 0.0F);
+                        entityvillager3.setSpawnPoint((double)j + 0.5D, (double)k + 5D, (double)l + 0.5D);
                         //entityvillager.setProfession(null);
                         
-                        entityvillager.finalizeMobSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityvillager)), (IEntityLivingData)null, false);
-                        worldIn.spawnEntity(entityvillager);
+                        entityvillager3.finalizeMobSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityvillager3)), (IEntityLivingData)null, false);
+                        worldIn.spawnEntity(entityvillager3);
                    // }
                         if(worldIn.rand.nextInt(100) <= 20){
                         	EntityVillagerMage entityvillager1 = new EntityVillagerMage(worldIn);
                         	entityvillager1.setLocationAndAngles((double)j + 0.5D, (double)k + 5D, (double)l + 0.5D, 0.0F, 0.0F);
-                            entityvillager.setSpawnPoint((double)j + 0.5D, (double)k + 5D, (double)l + 0.5D);
+                            entityvillager1.setSpawnPoint((double)j + 0.5D, (double)k + 5D, (double)l + 0.5D);
                           //  entityvillager1.setProfession(null);
                             
-                            entityvillager1.finalizeMobSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityvillager)), (IEntityLivingData)null, false);
+                            entityvillager1.finalizeMobSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityvillager1)), (IEntityLivingData)null, false);
                             worldIn.spawnEntity(entityvillager1);
+                        } 
+                        	else
+                        {
+                        		EntityVillager entityvillager = new EntityVillager(worldIn);
+                                entityvillager.setLocationAndAngles((double)j + 1.5D, (double)k + 5D, (double)l + 0.5D, 0.0F, 0.0F);
+                                entityvillager.setProfession(5);                               
+                                entityvillager.finalizeMobSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityvillager)), (IEntityLivingData)null, false);
+                                worldIn.spawnEntity(entityvillager);
                         }
                        
                 }

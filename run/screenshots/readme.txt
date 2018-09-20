@@ -48,6 +48,21 @@ Changelog:
 *Added the hunter
 *Added the hunter's hut
 
+-Alpha v1.5.7
+*Fixed door issue
+*Fixed a Server bug
+*Fixed spawning for the soldiers
+*Redid some structures 
+*Added vanilla villagers to some of the structures
+*Merchants drop emeralds
+*improved Alchemist AI and made them immune to poison w
+
+-Alpha v1.5.9
+*Fixed another door issue
+
+//Patrol AI
+//Attack Back AI
+//Decrease Soldier spawn rate
 
 Planned Features:
 Improve Villager AI

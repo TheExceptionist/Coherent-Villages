@@ -43,7 +43,7 @@ public class EntityVillagerArcher extends EntityVillagerSoldier implements IRang
 	
 	public EntityVillagerArcher(World worldIn) {
 		super(worldIn);
-		this.arrowType = this.rand.nextInt(2);
+		this.arrowType = this.rand.nextInt(100) < 90 ? 0 : 1;
 	}
 	
 	protected void setEnchantment(){

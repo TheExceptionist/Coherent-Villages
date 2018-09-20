@@ -208,7 +208,7 @@ public class VillageComponentVillageFort extends StructureVillagePieces.Village
                     
                     if(worldIn.rand.nextInt(100) <= 50){
                     	EntityVillagerMage entityvillager = new EntityVillagerMage(worldIn);
-                    	entityvillager.setLocationAndAngles((double)j + 0.5D, (double)k - 8D, (double)l + 0.5D, 0.0F, 0.0F);
+                    	entityvillager.setLocationAndAngles((double)j + 0.5D, (double)k, (double)l + 0.5D, 0.0F, 0.0F);
                         entityvillager.setSpawnPoint((double)j + 0.5D, (double)k - 8, (double)l + 0.5D);
                         //entityvillager.setProfession(null);
                         
@@ -218,7 +218,7 @@ public class VillageComponentVillageFort extends StructureVillagePieces.Village
 
                     if(worldIn.rand.nextInt(100) <= 95){
                     	EntityVillagerArcher entityvillager = new EntityVillagerArcher(worldIn);
-                    	entityvillager.setLocationAndAngles((double)j + 0.5D, (double)k - 8D, (double)l + 0.5D, 0.0F, 0.0F);
+                    	entityvillager.setLocationAndAngles((double)j + 0.5D, (double)k, (double)l + 0.5D, 0.0F, 0.0F);
                         entityvillager.setSpawnPoint((double)j + 0.5D, (double)k - 8, (double)l + 0.5D);
                         //entityvillager.setProfession(null);
                         

@@ -19,6 +19,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.structure.MapGenStructureIO;
 import net.minecraftforge.common.BiomeManager;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -28,6 +29,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.VillagerRegistry;
 import net.minecraftforge.fml.common.registry.VillagerRegistry.IVillageCreationHandler;
+import net.minecraftforge.fml.relauncher.Side;
 import net.theexceptionist.coherentvillages.entity.EntityMerchantGuard;
 import net.theexceptionist.coherentvillages.entity.EntityVillagerAlchemist;
 import net.theexceptionist.coherentvillages.entity.EntityVillagerArcher;
@@ -299,30 +301,37 @@ public class Main
     	addVillagePiece(VillageComponentHunterHut.class, "ViHH"); 
     	addVillageCreationHandler(new VillageHandlerHunterHut()); 
  
+    	
 
     	int i = 0;
     	for(Biome b : villageBiomes)
     	{
     		for(BiomeSpawn s : biomes_spawn)
     		{
-    			//System.out.println(b.getBiomeName()+" "+s.name + " " + s.spawn);
-    			if(b.getBiomeName().compareTo(s.name) == 0 && s.spawn)
+    			if(FMLCommonHandler.instance().getSide() == Side.CLIENT){
+	    			if(b.getBiomeName().compareTo(s.name) == 0 && s.spawn)
+	    			{
+	    	    		BiomeManager.addVillageBiome(b, true);
+	    	    		
+	    	    		/*if(b != Biomes.MUSHROOM_ISLAND || b != Biomes.MUSHROOM_ISLAND_SHORE)
+	    	    		{
+	        	    		
+	    	    			biomes[i] = b;
+	    	    			//System.out.println(biomes[i]);
+	    	    		}*/
+	    	    		break;
+	    			}
+	    			else if(b.getBiomeName().compareTo(s.name) == 0 && !s.spawn)
+	    			{
+	    				BiomeManager.removeSpawnBiome(b);
+	    				System.out.println("Preventing: "+s.name+" from spawning.");
+	    				break;
+	    			}
+    			} 
+    			else
     			{
-    	    		BiomeManager.addVillageBiome(b, true);
-    	    		
-    	    		/*if(b != Biomes.MUSHROOM_ISLAND || b != Biomes.MUSHROOM_ISLAND_SHORE)
-    	    		{
-        	    		
-    	    			biomes[i] = b;
-    	    			//System.out.println(biomes[i]);
-    	    		}*/
-    	    		break;
-    			}
-    			else if(b.getBiomeName().compareTo(s.name) == 0 && !s.spawn)
-    			{
-    				BiomeManager.removeSpawnBiome(b);
-    				System.out.println("Preventing: "+s.name+" from spawning.");
-    				break;
+    				//Must ignore config
+    				BiomeManager.addVillageBiome(b, true);
     			}
     		}
 
@@ -349,7 +358,9 @@ public class Main
     	//if(biomes != null)
     	//{
     		//System.out.println(biomes[0]);
-    	EntityRegistry.addSpawn(EntityVillagerMerchant.class, 1, 1, 2, EnumCreatureType.MONSTER, villageBiomes.toArray(biomes));//weightedProb, min, max, typeOfCreature, biomes);
+    	if(merchant_spawn > 0){
+    		EntityRegistry.addSpawn(EntityVillagerMerchant.class, 1, 1, 2, EnumCreatureType.MONSTER, villageBiomes.toArray(biomes));//weightedProb, min, max, typeOfCreature, biomes);
+    	}
     	//}
     	EntityRegistry.registerModEntity(new ResourceLocation(Resources.MODID, "villager_arrow"), EntityVillagerArrow.class, "entity_villager_arrow", 1, instance,1, 1, false);
 	}

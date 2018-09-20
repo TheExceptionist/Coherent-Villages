@@ -221,6 +221,7 @@ public class EntityVillagerAlchemist extends EntityVillagerSoldier implements IR
                 else if (this.rand.nextFloat() < 0.5F && this.getAttackTarget() != null && !this.isPotionActive(MobEffects.SPEED) && this.getAttackTarget().getDistanceSq(this) > 121.0D)
                 {
                     potiontype = PotionTypes.SWIFTNESS;
+                    //PotionTypes.
                 }
 
                 if (potiontype != null)
@@ -299,6 +300,9 @@ public class EntityVillagerAlchemist extends EntityVillagerSoldier implements IR
             double d3 = target.posZ + target.motionZ - this.posZ;
             float f = MathHelper.sqrt(d1 * d1 + d3 * d3);
             PotionType potiontype = PotionTypes.HARMING;
+            
+            if(world.rand.nextInt(100) < 10)
+            	potiontype = PotionTypes.STRONG_HARMING;
 
            if (f >= 8.0F && !target.isPotionActive(MobEffects.SLOWNESS))
             {
@@ -310,12 +314,16 @@ public class EntityVillagerAlchemist extends EntityVillagerSoldier implements IR
             {
                 potiontype = PotionTypes.REGENERATION;
             }*/
-            else if ((target instanceof EntityZombie || target instanceof EntitySkeleton ))
+            else if (target.isEntityUndead())
             {
                 potiontype = PotionTypes.HEALING;
+                if(world.rand.nextInt(100) < 10)
+                	potiontype = PotionTypes.STRONG_HEALING;
             }else if (target.getHealth() >= 8.0F && !target.isPotionActive(MobEffects.POISON) && !(target instanceof EntitySpider))
             {
                 potiontype = PotionTypes.POISON;
+                if(world.rand.nextInt(100) < 10)
+                	potiontype = PotionTypes.STRONG_POISON;
             }
            
 
@@ -325,6 +333,11 @@ public class EntityVillagerAlchemist extends EntityVillagerSoldier implements IR
             this.world.playSound((EntityPlayer)null, this.posX, this.posY, this.posZ, SoundEvents.ENTITY_WITCH_THROW, this.getSoundCategory(), 1.0F, 0.8F + this.rand.nextFloat() * 0.4F);
             this.world.spawnEntity(entitypotion);
         }
+    }
+    
+    public boolean isPotionApplicable(PotionEffect potioneffectIn)
+    {
+        return potioneffectIn.getPotion() == MobEffects.POISON ? false : super.isPotionApplicable(potioneffectIn);
     }
 
     public float getEyeHeight()
@@ -342,6 +355,9 @@ public class EntityVillagerAlchemist extends EntityVillagerSoldier implements IR
 	            double d3 = target.posZ + target.motionZ - this.posZ;
 	            float f = MathHelper.sqrt(d1 * d1 + d3 * d3);
 	            PotionType potiontype = PotionTypes.REGENERATION;
+	            
+	            if(world.rand.nextInt(100) < 10)
+                	potiontype = PotionTypes.STRONG_REGENERATION;
 
 	           /* if (f >= 8.0F && !target.isPotionActive(MobEffects.SLOWNESS))
 	            {
@@ -350,6 +366,9 @@ public class EntityVillagerAlchemist extends EntityVillagerSoldier implements IR
 	            else*/ if (target.getHealth() <= 8.0F && !target.isPotionActive(MobEffects.POISON))
 	            {
 	                potiontype = PotionTypes.HEALING;
+	                if(world.rand.nextInt(100) < 10)
+	                	potiontype = PotionTypes.STRONG_HEALING;
+	               
 	            }
 	         /*   else if (f <= 3.0F && this.rand.nextFloat() < 0.25F)
 	            {

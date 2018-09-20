@@ -7,6 +7,7 @@ import net.minecraft.block.BlockStairs;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.IEntityLivingData;
+import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
@@ -14,6 +15,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraft.world.gen.structure.StructureVillagePieces;
+import net.theexceptionist.coherentvillages.entity.EntityVillagerAlchemist;
 import net.theexceptionist.coherentvillages.entity.EntityVillagerSoldier;
 
 public class VillageComponentBarracks extends StructureVillagePieces.Village
@@ -97,6 +99,9 @@ public class VillageComponentBarracks extends StructureVillagePieces.Village
             
             
             this.createVillageDoor(worldIn, structureBoundingBoxIn,randomIn, 3, 1, 0, EnumFacing.NORTH);
+            this.setBlockState(worldIn, Blocks.AIR.getDefaultState(), 3, 1, -1, structureBoundingBoxIn);
+            this.setBlockState(worldIn, Blocks.AIR.getDefaultState(), 3, 2, -1, structureBoundingBoxIn);
+            
             this.placeTorch(worldIn, EnumFacing.NORTH, 3, 3, 2, structureBoundingBoxIn);
 	        this.placeTorch(worldIn, EnumFacing.SOUTH, 3, 3, 5, structureBoundingBoxIn);
             this.setBlockState(worldIn, iblockstate6, 3, 3, 0, structureBoundingBoxIn);
@@ -702,7 +707,7 @@ public class VillageComponentBarracks extends StructureVillagePieces.Village
                 }
             }
             if(!worldIn.isRemote){
-            this.spawnVillagers(worldIn, structureBoundingBoxIn, 1, 1, 2, 3 + randomIn.nextInt(7));
+            this.spawnVillagers(worldIn, structureBoundingBoxIn, 1, 1, 2, 3 + randomIn.nextInt(5));
             }
             return true;
         }
@@ -724,7 +729,8 @@ public class VillageComponentBarracks extends StructureVillagePieces.Village
 
                     ++this.villagersSpawned;
 
-                    if(worldIn.rand.nextInt(100) <= 95){
+                   // if(worldIn.rand.nextInt(100) <= 95){
+                    {
                     	EntityVillagerSoldier entityvillager = new EntityVillagerSoldier(worldIn);
                     	entityvillager.setLocationAndAngles((double)j + 0.5D, (double)k, (double)l + 0.5D, 0.0F, 0.0F);
                         entityvillager.setSpawnPoint((double)j + 0.5D, (double)k, (double)l + 0.5D);
@@ -732,26 +738,36 @@ public class VillageComponentBarracks extends StructureVillagePieces.Village
                         
                         entityvillager.finalizeMobSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityvillager)), (IEntityLivingData)null, false);
                         worldIn.spawnEntity(entityvillager);
-                    }/*else{
+                    }
+                   // }
+                   /* }
                     	EntityVillagerCaptain entityvillager = new EntityVillagerCaptain(worldIn, worldIn.rand.nextInt(3));
                     	entityvillager.setLocationAndAngles((double)j + 0.5D, (double)k, (double)l + 0.5D, 0.0F, 0.0F);
                         entityvillager.setSpawnPoint((double)j + 0.5D, (double)k, (double)l + 0.5D);
                         entityvillager.setProfession(null);
                         
                         entityvillager.finalizeMobSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityvillager)), (IEntityLivingData)null, false);
-                        worldIn.spawnEntity(entityvillager);
-                    }
+                        worldIn.spawnEntity(entityvillager);*/
+                    
                     
                     if(worldIn.rand.nextInt(100) <= 5){
                     	EntityVillagerAlchemist entityvillager = new EntityVillagerAlchemist(worldIn);
                     	entityvillager.setLocationAndAngles((double)j + 0.5D, (double)k, (double)l + 0.5D, 0.0F, 0.0F);
                         entityvillager.setSpawnPoint((double)j + 0.5D, (double)k, (double)l + 0.5D);
-                        entityvillager.setProfession(null);
+                        //entityvillager.setProfession(null);
                         
                         entityvillager.finalizeMobSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityvillager)), (IEntityLivingData)null, false);
                         worldIn.spawnEntity(entityvillager);
-                    }*/
+                    }
+                    else
+                    {
+                    	EntityVillager entityvillager = new EntityVillager(worldIn);
+                        entityvillager.setLocationAndAngles((double)j + 0.5D, (double)k, (double)l + 0.5D, 0.0F, 0.0F);
+                        entityvillager.setProfession(5);
+                        entityvillager.finalizeMobSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityvillager)), (IEntityLivingData)null, false);
+                        worldIn.spawnEntity(entityvillager);
                     
+                    }
                 }
             }
         }

@@ -93,6 +93,10 @@ public class VillageComponentGuardTower extends StructureVillagePieces.Village
             this.fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 7, 1, 5, 7, 5,iblockstate1, iblockstate1, false);
             
             this.createVillageDoor(worldIn, structureBoundingBoxIn,randomIn, 3, 1, 0, EnumFacing.NORTH);
+            
+            this.setBlockState(worldIn, Blocks.AIR.getDefaultState(), 3, 1, -1, structureBoundingBoxIn);
+            this.setBlockState(worldIn, Blocks.AIR.getDefaultState(), 3, 2, -1, structureBoundingBoxIn);
+            
             this.placeTorch(worldIn, EnumFacing.SOUTH, 3, 2, 1, structureBoundingBoxIn);
 	        this.placeTorch(worldIn, EnumFacing.SOUTH, 1, 2, 1, structureBoundingBoxIn);
 	        
@@ -263,7 +267,7 @@ public class VillageComponentGuardTower extends StructureVillagePieces.Village
             }
             
             if(!worldIn.isRemote){
-            	this.spawnVillagers(worldIn, structureBoundingBoxIn, 1, 10, 2, 3 + randomIn.nextInt(7));
+            	this.spawnVillagers(worldIn, structureBoundingBoxIn, 1, 10, 2, 3 + randomIn.nextInt(2));
             }
             return true;
         }

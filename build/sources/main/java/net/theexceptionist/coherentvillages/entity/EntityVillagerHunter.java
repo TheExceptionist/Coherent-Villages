@@ -10,6 +10,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IRangedAttackMob;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAILookIdle;
+import net.minecraft.entity.ai.EntityAIMoveIndoors;
 import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAIOpenDoor;
@@ -79,7 +80,7 @@ public class EntityVillagerHunter extends EntityVillagerSoldier implements IRang
 		//}else{
 			this.tasks.addTask(1, new EntityAIAttackWithBow(this, 1.0D, 60, 10.0F));
 		//}
-	    //this.tasks.addTask(2, new EntityAIMoveIndoors(this));
+	    this.tasks.addTask(2, new EntityAIMoveIndoors(this));
         this.tasks.addTask(2, new EntityAIRestrictOpenDoor(this));
         this.tasks.addTask(3, new EntityAIOpenDoor(this, true));
       //  this.tasks.addTask(2, new EntityAIMoveTowardsTarget(this, 0.9D, 32.0F));
@@ -95,7 +96,7 @@ public class EntityVillagerHunter extends EntityVillagerSoldier implements IRang
         
         
        // this.targetTasks.addTask(3, new EntityAIGuardPost(this, true));
-         this.targetTasks.addTask(0, new EntityAINearestAttackableTarget(this, EntityLiving.class, 1, false, true, new Predicate<EntityLiving>()
+         this.targetTasks.addTask(0, new EntityAINearestAttackableTarget(this, EntityLiving.class, 4, false, true, new Predicate<EntityLiving>()
                 {
                     public boolean apply(@Nullable EntityLiving p_apply_1_)
                     {
@@ -103,6 +104,8 @@ public class EntityVillagerHunter extends EntityVillagerSoldier implements IRang
                     }
          }));
          this.targetTasks.addTask(1, new EntityAIAttackBackExclude(this, true, new Class[0]));
+         
+         this.setCanPickUpLoot(true);
     }
 	
 	protected void applyEntityAttributes()

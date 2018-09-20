@@ -6,6 +6,7 @@ import java.util.Random;
 import net.minecraft.block.BlockStairs;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.IEntityLivingData;
+import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
@@ -129,14 +130,22 @@ public class VillageComponentStable extends StructureVillagePieces.Village
                     }
 
                     ++this.villagersSpawned;
-
-                    EntityVillagerKnight entityvillager = new EntityVillagerKnight(worldIn);
-                    entityvillager.setLocationAndAngles((double)j + 0.5D, (double)k, (double)l + 0.5D, 0.0F, 0.0F);
-                    entityvillager.setSpawnPoint((double)j + 0.5D, (double)k, (double)l + 0.5D);
-                   // entityvillager.setProfession(null);
-                    
-                    entityvillager.finalizeMobSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityvillager)), (IEntityLivingData)null, false);
-                    worldIn.spawnEntity(entityvillager);
+                    {
+	                    EntityVillagerKnight entityvillager = new EntityVillagerKnight(worldIn);
+	                    entityvillager.setLocationAndAngles((double)j + 0.5D, (double)k, (double)l + 0.5D, 0.0F, 0.0F);
+	                    entityvillager.setSpawnPoint((double)j + 0.5D, (double)k, (double)l + 0.5D);
+	                   // entityvillager.setProfession(null);
+	                    
+	                    entityvillager.finalizeMobSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityvillager)), (IEntityLivingData)null, false);
+	                    worldIn.spawnEntity(entityvillager);
+                    }
+                    {
+	                    EntityVillager entityvillager = new EntityVillager(worldIn);
+	                    entityvillager.setLocationAndAngles((double)j + 0.5D, (double)k, (double)l + 0.5D, 0.0F, 0.0F);
+	                    entityvillager.setProfession(5);
+	                    entityvillager.finalizeMobSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityvillager)), (IEntityLivingData)null, false);
+	                    worldIn.spawnEntity(entityvillager);
+                    }
                 }
             }
         }

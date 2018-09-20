@@ -171,16 +171,7 @@ public class VillageComponentBarrackSmall extends StructureVillagePieces.Village
             this.setBlockState(worldIn, iblockstate1, 3, 3, 0, structureBoundingBoxIn);
             this.setBlockState(worldIn, iblockstate1, 3, 2, 0, structureBoundingBoxIn);
             this.setBlockState(worldIn, iblockstate1, 3, 1, 0, structureBoundingBoxIn);
-           */ if (this.getBlockStateFromPos(worldIn, 2, 0, -1, structureBoundingBoxIn).getMaterial() == Material.AIR && this.getBlockStateFromPos(worldIn, 2, -1, -1, structureBoundingBoxIn).getMaterial() != Material.AIR)
-            {
-                this.setBlockState(worldIn, iblockstate2, 2, 0, -1, structureBoundingBoxIn);
-
-                if (this.getBlockStateFromPos(worldIn, 2, -1, -1, structureBoundingBoxIn).getBlock() == Blocks.GRASS_PATH)
-                {
-                    this.setBlockState(worldIn, Blocks.GRASS.getDefaultState(), 2, -1, -1, structureBoundingBoxIn);
-                }
-            }
-
+           */
             
             /*if (this.isRoofAccessible)
             {
@@ -212,6 +203,9 @@ public class VillageComponentBarrackSmall extends StructureVillagePieces.Village
 
            // this.placeTorch(worldIn, EnumFacing.NORTH, 2, 3, 1, structureBoundingBoxIn);
            this.createVillageDoor(worldIn, structureBoundingBoxIn, randomIn, 2, 1, 0, EnumFacing.NORTH);
+           this.setBlockState(worldIn, Blocks.AIR.getDefaultState(), 2, 1, -1, structureBoundingBoxIn);
+           this.setBlockState(worldIn, Blocks.AIR.getDefaultState(), 2, 2, -1, structureBoundingBoxIn);
+           
            this.placeTorch(worldIn, EnumFacing.UP, 4, 4, 2, structureBoundingBoxIn);
 
          //  this.setBlockState(worldIn, Blocks.OAK_DOOR.getDefaultState(), 2, 1, 0, structureBoundingBoxIn);
@@ -220,6 +214,17 @@ public class VillageComponentBarrackSmall extends StructureVillagePieces.Village
            
            this.setBlockState(worldIn, iblockstate6, 3, 1, 0, structureBoundingBoxIn);
            this.setBlockState(worldIn, iblockstate6, 3, 2, 0, structureBoundingBoxIn);
+           
+           if (this.getBlockStateFromPos(worldIn, 2, 0, -1, structureBoundingBoxIn).getMaterial() == Material.AIR && this.getBlockStateFromPos(worldIn, 2, -1, -1, structureBoundingBoxIn).getMaterial() != Material.AIR)
+           {
+               this.setBlockState(worldIn, iblockstate2, 2, 0, -1, structureBoundingBoxIn);
+
+               if (this.getBlockStateFromPos(worldIn, 2, -1, -1, structureBoundingBoxIn).getBlock() == Blocks.GRASS_PATH)
+               {
+                   this.setBlockState(worldIn, Blocks.GRASS.getDefaultState(), 2, -1, -1, structureBoundingBoxIn);
+               }
+           }
+
            
 
             for (int j = 0; j < 5; ++j)
@@ -232,7 +237,7 @@ public class VillageComponentBarrackSmall extends StructureVillagePieces.Village
             }
 
             if(!worldIn.isRemote){
-            this.spawnVillagers(worldIn, structureBoundingBoxIn, 1, 1, 2, 1 + randomIn.nextInt(3));
+            this.spawnVillagers(worldIn, structureBoundingBoxIn, 1, 1, 2, 1 + randomIn.nextInt(2));
             }
             
             return true;

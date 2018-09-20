@@ -5,6 +5,7 @@ import java.util.Random;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.IEntityLivingData;
+import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
@@ -12,7 +13,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraft.world.gen.structure.StructureVillagePieces;
-import net.theexceptionist.coherentvillages.entity.EntityVillagerAlchemist;
+import net.theexceptionist.coherentvillages.entity.EntityVillagerArcher;
 import net.theexceptionist.coherentvillages.entity.EntityVillagerSoldier;
 
 public class VillageComponentFence extends StructureVillagePieces.Village
@@ -106,8 +107,8 @@ public class VillageComponentFence extends StructureVillagePieces.Village
             for (int i = villagersSpawned; i < count; ++i)
             {
                 int j = this.getXWithOffset(x + i, z);
-                int k = this.getYWithOffset(y);
                 int l = this.getZWithOffset(x + i, z);
+                int k = worldIn.getTopSolidOrLiquidBlock(new BlockPos(j, 80, l)).getY();
 
                 if (!structurebb.isVecInside(new BlockPos(j, k, l)))
                 {
@@ -125,14 +126,23 @@ public class VillageComponentFence extends StructureVillagePieces.Village
                     entityvillager.finalizeMobSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityvillager)), (IEntityLivingData)null, false);
                     worldIn.spawnEntity(entityvillager);
                 }else if(worldIn.rand.nextInt(100) <= 50){
-               	 	EntityVillagerAlchemist entityvillager = new EntityVillagerAlchemist(worldIn);
+               	 	EntityVillagerArcher entityvillager = new EntityVillagerArcher(worldIn);
                 	entityvillager.setLocationAndAngles((double)j + 0.5D, (double)k, (double)l + 0.5D, 0.0F, 0.0F);
                     entityvillager.setSpawnPoint((double)j + 0.5D, (double)k, (double)l + 0.5D);
                     //entityvillager.setProfession(null);
                     
                     entityvillager.finalizeMobSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityvillager)), (IEntityLivingData)null, false);
                     worldIn.spawnEntity(entityvillager);
-                }/*else{
+                }
+                else
+                {
+                    	EntityVillager entityvillager = new EntityVillager(worldIn);
+                        entityvillager.setLocationAndAngles((double)j + 0.5D, (double)k, (double)l + 0.5D, 0.0F, 0.0F);
+                        entityvillager.setProfession(5);
+                        entityvillager.finalizeMobSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityvillager)), (IEntityLivingData)null, false);
+                        worldIn.spawnEntity(entityvillager);
+                }
+                /*else{
                 	EntityVillagerKnight entityvillager = new EntityVillagerKnight(worldIn);
                 	entityvillager.setLocationAndAngles((double)j + 0.5D, (double)k, (double)l + 0.5D, 0.0F, 0.0F);
                     entityvillager.setSpawnPoint((double)j + 0.5D, (double)k, (double)l + 0.5D);
