@@ -4,8 +4,8 @@ import java.util.Random;
 
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.theexceptionist.coherentvillages.Main;
 import net.theexceptionist.coherentvillages.entity.EntityVillagerMerchant;
+import net.theexceptionist.coherentvillages.main.Main;
 
 public class EventOverrideMerchantSpawn {
 	@SubscribeEvent

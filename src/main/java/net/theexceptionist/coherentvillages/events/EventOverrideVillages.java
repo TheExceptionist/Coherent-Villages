@@ -18,7 +18,7 @@ import net.minecraftforge.event.terraingen.InitMapGenEvent;
 import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
-import net.theexceptionist.coherentvillages.Main;
+import net.theexceptionist.coherentvillages.main.Main;
 
 public class EventOverrideVillages {
 		@SubscribeEvent

@@ -1,133 +1,132 @@
-[10:18:43] [main/INFO] [GradleStart]: Extra: []
-[10:18:43] [main/INFO] [GradleStart]: Running with arguments: [--userProperties, {}, --assetsDir, /Users/kennethstepney/.gradle/caches/minecraft/assets, --assetIndex, 1.12, --accessToken{REDACTED}, --version, 1.12.2, --tweakClass, net.minecraftforge.fml.common.launcher.FMLTweaker, --tweakClass, net.minecraftforge.gradle.tweakers.CoremodTweaker]
-[10:18:43] [main/INFO] [LaunchWrapper]: Loading tweak class name net.minecraftforge.fml.common.launcher.FMLTweaker
-[10:18:43] [main/INFO] [LaunchWrapper]: Using primary tweak class name net.minecraftforge.fml.common.launcher.FMLTweaker
-[10:18:43] [main/INFO] [LaunchWrapper]: Loading tweak class name net.minecraftforge.gradle.tweakers.CoremodTweaker
-[10:18:43] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.fml.common.launcher.FMLTweaker
-[10:18:43] [main/INFO] [FML]: Forge Mod Loader version 14.23.4.2757 for Minecraft 1.12.2 loading
-[10:18:43] [main/INFO] [FML]: Java is Java HotSpot(TM) 64-Bit Server VM, version 1.8.0_144, running on Mac OS X:x86_64:10.13.6, installed at /Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home/jre
-[10:18:43] [main/ERROR] [FML]: Apache Maven library folder was not in the format expected. Using default libraries directory.
-[10:18:43] [main/ERROR] [FML]: Full: /Users/kennethstepney/.gradle/caches/modules-2/files-2.1/org.apache.maven/maven-artifact/3.5.3/7dc72b6d6d8a6dced3d294ed54c2cc3515ade9f4/maven-artifact-3.5.3.jar
-[10:18:43] [main/ERROR] [FML]: Trimmed: /users/kennethstepney/.gradle/caches/modules-2/files-2.1/org.apache.maven/maven-artifact/3.5.3/
-[10:18:43] [main/INFO] [FML]: Managed to load a deobfuscated Minecraft name- we are in a deobfuscated environment. Skipping runtime deobfuscation
-[10:18:43] [main/INFO] [FML]: Detected deobfuscated environment, loading log configs for colored console logs.
-[10:18:43] [main/INFO] [FML]: Ignoring missing certificate for coremod FMLCorePlugin (net.minecraftforge.fml.relauncher.FMLCorePlugin), we are in deobf and it's a forge core plugin
-[10:18:43] [main/INFO] [FML]: Ignoring missing certificate for coremod FMLForgePlugin (net.minecraftforge.classloading.FMLForgePlugin), we are in deobf and it's a forge core plugin
-[10:18:43] [main/INFO] [FML]: Searching /Users/kennethstepney/Documents/GitHub/Coherent-Villages/run/./mods for mods
-[10:18:43] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.gradle.tweakers.CoremodTweaker
-[10:18:43] [main/INFO] [GradleStart]: Injecting location in coremod net.minecraftforge.fml.relauncher.FMLCorePlugin
-[10:18:43] [main/INFO] [GradleStart]: Injecting location in coremod net.minecraftforge.classloading.FMLForgePlugin
-[10:18:43] [main/INFO] [LaunchWrapper]: Loading tweak class name net.minecraftforge.fml.common.launcher.FMLInjectionAndSortingTweaker
-[10:18:43] [main/INFO] [LaunchWrapper]: Loading tweak class name net.minecraftforge.fml.common.launcher.FMLDeobfTweaker
-[10:18:43] [main/INFO] [LaunchWrapper]: Loading tweak class name net.minecraftforge.gradle.tweakers.AccessTransformerTweaker
-[10:18:43] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.fml.common.launcher.FMLInjectionAndSortingTweaker
-[10:18:43] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.fml.common.launcher.FMLInjectionAndSortingTweaker
-[10:18:43] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.fml.relauncher.CoreModManager$FMLPluginWrapper
-[10:18:44] [main/ERROR] [FML]: FML appears to be missing any signature data. This is not a good thing
-[10:18:44] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.fml.relauncher.CoreModManager$FMLPluginWrapper
-[10:18:44] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.fml.common.launcher.FMLDeobfTweaker
-[10:18:44] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.gradle.tweakers.AccessTransformerTweaker
-[10:18:44] [main/INFO] [LaunchWrapper]: Loading tweak class name net.minecraftforge.fml.common.launcher.TerminalTweaker
-[10:18:44] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.fml.common.launcher.TerminalTweaker
-[10:18:44] [main/INFO] [LaunchWrapper]: Launching wrapped minecraft {net.minecraft.client.main.Main}
-[10:18:45] [main/INFO] [net.minecraft.client.Minecraft]: Setting user: Player249
-[10:18:49] [main/WARN] [net.minecraft.client.settings.GameSettings]: Skipping bad option: lastServer:
-[10:18:49] [main/INFO] [net.minecraft.client.Minecraft]: LWJGL Version: 2.9.2
-[10:18:50] [main/INFO] [FML]: -- System Details --
+[19:17:02] [main/INFO] [GradleStart]: Extra: []
+[19:17:02] [main/INFO] [GradleStart]: Running with arguments: [--userProperties, {}, --assetsDir, /Users/kennethstepney/.gradle/caches/minecraft/assets, --assetIndex, 1.12, --accessToken{REDACTED}, --version, 1.12.2, --tweakClass, net.minecraftforge.fml.common.launcher.FMLTweaker, --tweakClass, net.minecraftforge.gradle.tweakers.CoremodTweaker]
+[19:17:02] [main/INFO] [LaunchWrapper]: Loading tweak class name net.minecraftforge.fml.common.launcher.FMLTweaker
+[19:17:02] [main/INFO] [LaunchWrapper]: Using primary tweak class name net.minecraftforge.fml.common.launcher.FMLTweaker
+[19:17:02] [main/INFO] [LaunchWrapper]: Loading tweak class name net.minecraftforge.gradle.tweakers.CoremodTweaker
+[19:17:02] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.fml.common.launcher.FMLTweaker
+[19:17:02] [main/INFO] [FML]: Forge Mod Loader version 14.23.4.2757 for Minecraft 1.12.2 loading
+[19:17:02] [main/INFO] [FML]: Java is Java HotSpot(TM) 64-Bit Server VM, version 1.8.0_144, running on Mac OS X:x86_64:10.13.6, installed at /Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home/jre
+[19:17:02] [main/ERROR] [FML]: Apache Maven library folder was not in the format expected. Using default libraries directory.
+[19:17:02] [main/ERROR] [FML]: Full: /Users/kennethstepney/.gradle/caches/modules-2/files-2.1/org.apache.maven/maven-artifact/3.5.3/7dc72b6d6d8a6dced3d294ed54c2cc3515ade9f4/maven-artifact-3.5.3.jar
+[19:17:02] [main/ERROR] [FML]: Trimmed: /users/kennethstepney/.gradle/caches/modules-2/files-2.1/org.apache.maven/maven-artifact/3.5.3/
+[19:17:02] [main/INFO] [FML]: Managed to load a deobfuscated Minecraft name- we are in a deobfuscated environment. Skipping runtime deobfuscation
+[19:17:02] [main/INFO] [FML]: Detected deobfuscated environment, loading log configs for colored console logs.
+[19:17:03] [main/INFO] [FML]: Ignoring missing certificate for coremod FMLCorePlugin (net.minecraftforge.fml.relauncher.FMLCorePlugin), we are in deobf and it's a forge core plugin
+[19:17:03] [main/INFO] [FML]: Ignoring missing certificate for coremod FMLForgePlugin (net.minecraftforge.classloading.FMLForgePlugin), we are in deobf and it's a forge core plugin
+[19:17:03] [main/INFO] [FML]: Searching /Users/kennethstepney/Documents/GitHub/Coherent-Villages/run/./mods for mods
+[19:17:03] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.gradle.tweakers.CoremodTweaker
+[19:17:03] [main/INFO] [GradleStart]: Injecting location in coremod net.minecraftforge.fml.relauncher.FMLCorePlugin
+[19:17:03] [main/INFO] [GradleStart]: Injecting location in coremod net.minecraftforge.classloading.FMLForgePlugin
+[19:17:03] [main/INFO] [LaunchWrapper]: Loading tweak class name net.minecraftforge.fml.common.launcher.FMLInjectionAndSortingTweaker
+[19:17:03] [main/INFO] [LaunchWrapper]: Loading tweak class name net.minecraftforge.fml.common.launcher.FMLDeobfTweaker
+[19:17:03] [main/INFO] [LaunchWrapper]: Loading tweak class name net.minecraftforge.gradle.tweakers.AccessTransformerTweaker
+[19:17:03] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.fml.common.launcher.FMLInjectionAndSortingTweaker
+[19:17:03] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.fml.common.launcher.FMLInjectionAndSortingTweaker
+[19:17:03] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.fml.relauncher.CoreModManager$FMLPluginWrapper
+[19:17:04] [main/ERROR] [FML]: FML appears to be missing any signature data. This is not a good thing
+[19:17:04] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.fml.relauncher.CoreModManager$FMLPluginWrapper
+[19:17:04] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.fml.common.launcher.FMLDeobfTweaker
+[19:17:04] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.gradle.tweakers.AccessTransformerTweaker
+[19:17:04] [main/INFO] [LaunchWrapper]: Loading tweak class name net.minecraftforge.fml.common.launcher.TerminalTweaker
+[19:17:04] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.fml.common.launcher.TerminalTweaker
+[19:17:04] [main/INFO] [LaunchWrapper]: Launching wrapped minecraft {net.minecraft.client.main.Main}
+[19:17:05] [main/INFO] [net.minecraft.client.Minecraft]: Setting user: Player451
+[19:17:12] [main/WARN] [net.minecraft.client.settings.GameSettings]: Skipping bad option: lastServer:
+[19:17:12] [main/INFO] [net.minecraft.client.Minecraft]: LWJGL Version: 2.9.2
+[19:17:12] [main/INFO] [FML]: -- System Details --
 Details:
 	Minecraft Version: 1.12.2
 	Operating System: Mac OS X (x86_64) version 10.13.6
 	Java Version: 1.8.0_144, Oracle Corporation
 	Java VM Version: Java HotSpot(TM) 64-Bit Server VM (mixed mode), Oracle Corporation
-	Memory: 334595912 bytes (319 MB) / 508035072 bytes (484 MB) up to 1908932608 bytes (1820 MB)
+	Memory: 463503176 bytes (442 MB) / 673710080 bytes (642 MB) up to 1908932608 bytes (1820 MB)
 	JVM Flags: 0 total; 
 	IntCache: cache: 0, tcache: 0, allocated: 0, tallocated: 0
 	FML: 
 	Loaded coremods (and transformers): 
 	GL info: ' Vendor: 'Intel Inc.' Version: '2.1 INTEL-10.36.19' Renderer: 'Intel(R) Iris(TM) Plus Graphics 640'
-[10:18:50] [main/INFO] [FML]: MinecraftForge v14.23.4.2757 Initialized
-[10:18:50] [main/INFO] [FML]: Starts to replace vanilla recipe ingredients with ore ingredients.
-[10:18:50] [main/INFO] [FML]: Replaced 1036 ore ingredients
-[10:18:50] [main/INFO] [FML]: Searching /Users/kennethstepney/Documents/GitHub/Coherent-Villages/run/./mods for mods
-[10:18:51] [main/INFO] [FML]: Forge Mod Loader has identified 5 mods to load
-[10:18:52] [main/INFO] [FML]: Attempting connection with missing mods [minecraft, mcp, FML, forge, coherentvillages] at CLIENT
-[10:18:52] [main/INFO] [FML]: Attempting connection with missing mods [minecraft, mcp, FML, forge, coherentvillages] at SERVER
-[10:18:52] [main/INFO] [net.minecraft.client.resources.SimpleReloadableResourceManager]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Coherent Villages Mod
-[10:18:52] [main/INFO] [FML]: Processing ObjectHolder annotations
-[10:18:52] [main/INFO] [FML]: Found 1168 ObjectHolder annotations
-[10:18:52] [main/INFO] [FML]: Identifying ItemStackHolder annotations
-[10:18:52] [main/INFO] [FML]: Found 0 ItemStackHolder annotations
-[10:18:52] [main/INFO] [FML]: Configured a dormant chunk cache size of 0
-[10:18:52] [main/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.Main:preInit:178]: Coherent Villages is loading!
-[10:18:52] [Forge Version Check/INFO] [forge.VersionCheck]: [forge] Starting version check at http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions_slim.json
-[10:18:52] [main/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.Main:preInit:179]: &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-[10:18:52] [main/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.Main:preInit:180]: Working Directory = /Users/kennethstepney/Documents/GitHub/Coherent-Villages/run
-[10:18:52] [main/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.Main:preInit:182]: coherentvillages| Checking for config file
+[19:17:12] [main/INFO] [FML]: MinecraftForge v14.23.4.2757 Initialized
+[19:17:12] [main/INFO] [FML]: Starts to replace vanilla recipe ingredients with ore ingredients.
+[19:17:12] [main/INFO] [FML]: Replaced 1036 ore ingredients
+[19:17:13] [main/INFO] [FML]: Searching /Users/kennethstepney/Documents/GitHub/Coherent-Villages/run/./mods for mods
+[19:17:14] [main/INFO] [FML]: Forge Mod Loader has identified 5 mods to load
+[19:17:14] [Thread-3/INFO] [FML]: Using sync timing. 200 frames of Display.update took 162597811 nanos
+[19:17:15] [main/INFO] [FML]: Attempting connection with missing mods [minecraft, mcp, FML, forge, coherentvillages] at CLIENT
+[19:17:15] [main/INFO] [FML]: Attempting connection with missing mods [minecraft, mcp, FML, forge, coherentvillages] at SERVER
+[19:17:15] [main/INFO] [net.minecraft.client.resources.SimpleReloadableResourceManager]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Coherent Villages Mod
+[19:17:16] [main/INFO] [FML]: Processing ObjectHolder annotations
+[19:17:16] [main/INFO] [FML]: Found 1168 ObjectHolder annotations
+[19:17:16] [main/INFO] [FML]: Identifying ItemStackHolder annotations
+[19:17:16] [main/INFO] [FML]: Found 0 ItemStackHolder annotations
+[19:17:16] [main/INFO] [FML]: Configured a dormant chunk cache size of 0
+[19:17:16] [Forge Version Check/INFO] [forge.VersionCheck]: [forge] Starting version check at http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions_slim.json
+[19:17:16] [main/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.main.Main:preInit:179]: Coherent Villages is loading!
+[19:17:16] [main/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.main.Main:preInit:180]: &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+[19:17:16] [main/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.main.Main:preInit:181]: Working Directory = /Users/kennethstepney/Documents/GitHub/Coherent-Villages/run
+[19:17:16] [main/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.main.Main:preInit:183]: coherentvillages| Checking for config file
 /Users/kennethstepney/Documents/GitHub/Coherent-Villages/run/config
-[10:18:52] [main/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.Main:readConfig:224]: coherentvillages| Config file found! 
+[19:17:16] [main/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.main.Main:readConfig:225]: coherentvillages| Config file found! 
 Loading...
-[10:18:52] [main/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.Main:readConfig:258]: Read the config file! New Max: 9 New Min: 3 New Merchant: 1
-[10:18:52] [main/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.Main:preInit:219]: &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-[10:18:52] [main/INFO] [FML]: Applying holder lookups
-[10:18:52] [main/INFO] [FML]: Holder lookups applied
-[10:18:52] [main/INFO] [FML]: Applying holder lookups
-[10:18:52] [main/INFO] [FML]: Holder lookups applied
-[10:18:52] [main/INFO] [FML]: Applying holder lookups
-[10:18:52] [main/INFO] [FML]: Holder lookups applied
-[10:18:52] [main/INFO] [FML]: Applying holder lookups
-[10:18:52] [main/INFO] [FML]: Holder lookups applied
-[10:18:52] [main/INFO] [FML]: Injecting itemstacks
-[10:18:52] [main/INFO] [FML]: Itemstack injection complete
-[10:18:53] [Thread-3/INFO] [FML]: Using alternative sync timing : 200 frames of Display.update took 1582550233 nanos
-[10:18:53] [Forge Version Check/INFO] [forge.VersionCheck]: [forge] Found status: OUTDATED Target: 14.23.4.2759
-[10:18:54] [Sound Library Loader/INFO] [net.minecraft.client.audio.SoundManager]: Starting up SoundSystem...
-[10:18:54] [Thread-4/INFO] [net.minecraft.client.audio.SoundManager]: Initializing LWJGL OpenAL
-[10:18:54] [Thread-4/INFO] [net.minecraft.client.audio.SoundManager]: (The LWJGL binding of OpenAL.  For more information, see http://www.lwjgl.org)
-[10:18:54] [Thread-4/INFO] [net.minecraft.client.audio.SoundManager]: OpenAL initialized.
-[10:18:54] [Sound Library Loader/INFO] [net.minecraft.client.audio.SoundManager]: Sound engine started
-[10:18:57] [main/INFO] [FML]: Max texture size: 16384
-[10:18:57] [main/INFO] [net.minecraft.client.renderer.texture.TextureMap]: Created: 512x512 textures-atlas
-[10:18:59] [main/INFO] [FML]: Applying holder lookups
-[10:18:59] [main/INFO] [FML]: Holder lookups applied
-[10:18:59] [main/INFO] [FML]: Injecting itemstacks
-[10:18:59] [main/INFO] [FML]: Itemstack injection complete
-[10:19:00] [main/INFO] [FML]: Forge Mod Loader has successfully loaded 5 mods
-[10:19:00] [main/WARN] [net.minecraft.client.settings.GameSettings]: Skipping bad option: lastServer:
-[10:19:02] [Realms Notification Availability checker #1/INFO] [com.mojang.realmsclient.client.RealmsClient]: Could not authorize you against Realms server: Invalid session id
-[10:19:05] [main/INFO] [net.minecraft.world.storage.SaveFormatOld]: Deleting level New World-
-[10:19:05] [main/INFO] [net.minecraft.world.storage.SaveFormatOld]: Attempt 1...
-[10:19:08] [Server thread/INFO] [net.minecraft.server.integrated.IntegratedServer]: Starting integrated minecraft server version 1.12.2
-[10:19:08] [Server thread/INFO] [net.minecraft.server.integrated.IntegratedServer]: Generating keypair
-[10:19:08] [Server thread/INFO] [FML]: Injecting existing registry data into this server instance
-[10:19:08] [Server thread/INFO] [FML]: Applying holder lookups
-[10:19:08] [Server thread/INFO] [FML]: Holder lookups applied
-[10:19:08] [Server thread/INFO] [FML]: Loading dimension 0 (New World) (net.minecraft.server.integrated.IntegratedServer@60a86387)
-[10:19:08] [Server thread/INFO] [net.minecraft.advancements.AdvancementList]: Loaded 488 advancements
-[10:19:09] [Server thread/INFO] [FML]: Loading dimension -1 (New World) (net.minecraft.server.integrated.IntegratedServer@60a86387)
-[10:19:09] [Server thread/INFO] [FML]: Loading dimension 1 (New World) (net.minecraft.server.integrated.IntegratedServer@60a86387)
-[10:19:09] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Preparing start region for level 0
-[10:19:10] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Preparing spawn area: 7%
-[10:19:11] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Preparing spawn area: 11%
-[10:19:12] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Preparing spawn area: 19%
-[10:19:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Preparing spawn area: 28%
-[10:19:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Preparing spawn area: 36%
-[10:19:15] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Preparing spawn area: 46%
-[10:19:16] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Preparing spawn area: 56%
-[10:19:17] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Preparing spawn area: 65%
-[10:19:18] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Preparing spawn area: 76%
-[10:19:19] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Preparing spawn area: 84%
-[10:19:20] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Preparing spawn area: 93%
-[10:19:21] [Server thread/INFO] [FML]: Unloading dimension -1
-[10:19:21] [Server thread/INFO] [FML]: Unloading dimension 1
-[10:19:21] [Server thread/INFO] [net.minecraft.server.integrated.IntegratedServer]: Changing view distance to 12, from 10
-[10:19:22] [Netty Local Client IO #0/INFO] [FML]: Server protocol version 2
-[10:19:22] [Netty Server IO #1/INFO] [FML]: Client protocol version 2
-[10:19:22] [Netty Server IO #1/INFO] [FML]: Client attempting to join with 5 mods : minecraft@1.12.2,FML@8.0.99.99,forge@14.23.4.2757,mcp@9.42,coherentvillages@1.5.3.0
-[10:19:22] [Netty Local Client IO #0/INFO] [FML]: [Netty Local Client IO #0] Client side modded connection established
-[10:19:23] [Server thread/INFO] [FML]: [Server thread] Server side modded connection established
-[10:19:23] [Server thread/INFO] [net.minecraft.server.management.PlayerList]: Player249[local:E:bf11e81d] logged in with entity id 2625 at (218.5, 84.0, 203.5)
-[10:19:23] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Player249 joined the game
-[10:19:24] [pool-2-thread-1/WARN] [com.mojang.authlib.yggdrasil.YggdrasilMinecraftSessionService]: Couldn't look up profile properties for com.mojang.authlib.GameProfile@226b43a2[id=77058a27-9ed9-3577-ba3a-f426b243548e,name=Player249,properties={},legacy=false]
+[19:17:16] [main/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.main.Main:readConfig:259]: Read the config file! New Max: 9 New Min: 3 New Merchant: 1
+[19:17:16] [main/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.main.Main:preInit:220]: &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+[19:17:16] [main/INFO] [FML]: Applying holder lookups
+[19:17:16] [main/INFO] [FML]: Holder lookups applied
+[19:17:16] [main/INFO] [FML]: Applying holder lookups
+[19:17:16] [main/INFO] [FML]: Holder lookups applied
+[19:17:16] [main/INFO] [FML]: Applying holder lookups
+[19:17:16] [main/INFO] [FML]: Holder lookups applied
+[19:17:16] [main/INFO] [FML]: Applying holder lookups
+[19:17:16] [main/INFO] [FML]: Holder lookups applied
+[19:17:16] [main/INFO] [FML]: Injecting itemstacks
+[19:17:16] [main/INFO] [FML]: Itemstack injection complete
+[19:17:16] [Forge Version Check/INFO] [forge.VersionCheck]: [forge] Found status: OUTDATED Target: 14.23.4.2759
+[19:17:19] [Sound Library Loader/INFO] [net.minecraft.client.audio.SoundManager]: Starting up SoundSystem...
+[19:17:19] [Thread-4/INFO] [net.minecraft.client.audio.SoundManager]: Initializing LWJGL OpenAL
+[19:17:19] [Thread-4/INFO] [net.minecraft.client.audio.SoundManager]: (The LWJGL binding of OpenAL.  For more information, see http://www.lwjgl.org)
+[19:17:19] [Thread-4/INFO] [net.minecraft.client.audio.SoundManager]: OpenAL initialized.
+[19:17:19] [Sound Library Loader/INFO] [net.minecraft.client.audio.SoundManager]: Sound engine started
+[19:17:23] [main/INFO] [FML]: Max texture size: 16384
+[19:17:24] [main/INFO] [net.minecraft.client.renderer.texture.TextureMap]: Created: 512x512 textures-atlas
+[19:17:27] [main/INFO] [FML]: Applying holder lookups
+[19:17:27] [main/INFO] [FML]: Holder lookups applied
+[19:17:27] [main/INFO] [FML]: Injecting itemstacks
+[19:17:27] [main/INFO] [FML]: Itemstack injection complete
+[19:17:27] [main/INFO] [FML]: Forge Mod Loader has successfully loaded 5 mods
+[19:17:27] [main/WARN] [net.minecraft.client.settings.GameSettings]: Skipping bad option: lastServer:
+[19:17:28] [Realms Notification Availability checker #1/INFO] [com.mojang.realmsclient.client.RealmsClient]: Could not authorize you against Realms server: Invalid session id
+[19:17:57] [main/INFO] [net.minecraft.world.storage.SaveFormatOld]: Deleting level New World-
+[19:17:57] [main/INFO] [net.minecraft.world.storage.SaveFormatOld]: Attempt 1...
+[19:18:00] [Server thread/INFO] [net.minecraft.server.integrated.IntegratedServer]: Starting integrated minecraft server version 1.12.2
+[19:18:00] [Server thread/INFO] [net.minecraft.server.integrated.IntegratedServer]: Generating keypair
+[19:18:00] [Server thread/INFO] [FML]: Injecting existing registry data into this server instance
+[19:18:01] [Server thread/INFO] [FML]: Applying holder lookups
+[19:18:01] [Server thread/INFO] [FML]: Holder lookups applied
+[19:18:01] [Server thread/INFO] [FML]: Loading dimension 0 (New World) (net.minecraft.server.integrated.IntegratedServer@5fbba6f8)
+[19:18:01] [Server thread/INFO] [net.minecraft.advancements.AdvancementList]: Loaded 488 advancements
+[19:18:02] [Server thread/INFO] [FML]: Loading dimension -1 (New World) (net.minecraft.server.integrated.IntegratedServer@5fbba6f8)
+[19:18:02] [Server thread/INFO] [FML]: Loading dimension 1 (New World) (net.minecraft.server.integrated.IntegratedServer@5fbba6f8)
+[19:18:02] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Preparing start region for level 0
+[19:18:03] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Preparing spawn area: 6%
+[19:18:04] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Preparing spawn area: 14%
+[19:18:05] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Preparing spawn area: 26%
+[19:18:06] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Preparing spawn area: 40%
+[19:18:07] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Preparing spawn area: 49%
+[19:18:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Preparing spawn area: 60%
+[19:18:09] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Preparing spawn area: 73%
+[19:18:10] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Preparing spawn area: 86%
+[19:18:11] [Server thread/INFO] [FML]: Unloading dimension -1
+[19:18:11] [Server thread/INFO] [FML]: Unloading dimension 1
+[19:18:11] [Server thread/INFO] [net.minecraft.server.integrated.IntegratedServer]: Changing view distance to 12, from 10
+[19:18:11] [Netty Local Client IO #0/INFO] [FML]: Server protocol version 2
+[19:18:11] [Netty Server IO #1/INFO] [FML]: Client protocol version 2
+[19:18:11] [Netty Server IO #1/INFO] [FML]: Client attempting to join with 5 mods : minecraft@1.12.2,FML@8.0.99.99,forge@14.23.4.2757,mcp@9.42,coherentvillages@1.6.4.0
+[19:18:11] [Netty Local Client IO #0/INFO] [FML]: [Netty Local Client IO #0] Client side modded connection established
+[19:18:12] [Server thread/INFO] [FML]: [Server thread] Server side modded connection established
+[19:18:12] [Server thread/INFO] [net.minecraft.server.management.PlayerList]: Player451[local:E:6663dff4] logged in with entity id 697 at (215.5, 61.0, 149.5)
+[19:18:12] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Player451 joined the game
+[19:18:12] [Server thread/INFO] [net.minecraft.server.integrated.IntegratedServer]: Saving and pausing game...
+[19:18:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Saving chunks for level 'New World'/overworld
+[19:18:13] [pool-2-thread-1/WARN] [com.mojang.authlib.yggdrasil.YggdrasilMinecraftSessionService]: Couldn't look up profile properties for com.mojang.authlib.GameProfile@743fcd09[id=efe2ab2d-072a-337a-9d65-10da4f48c969,name=Player451,properties={},legacy=false]
 com.mojang.authlib.exceptions.AuthenticationException: The client has sent too many requests within a certain amount of time
 	at com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService.makeRequest(YggdrasilAuthenticationService.java:79) ~[YggdrasilAuthenticationService.class:?]
 	at com.mojang.authlib.yggdrasil.YggdrasilMinecraftSessionService.fillGameProfile(YggdrasilMinecraftSessionService.java:180) [YggdrasilMinecraftSessionService.class:?]
@@ -149,107 +148,27 @@ com.mojang.authlib.exceptions.AuthenticationException: The client has sent too m
 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) [?:1.8.0_144]
 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) [?:1.8.0_144]
 	at java.lang.Thread.run(Thread.java:748) [?:1.8.0_144]
-[10:19:25] [main/WARN] [net.minecraft.client.network.NetHandlerPlayClient]: Received passengers for unknown entity
-[10:19:25] [main/WARN] [net.minecraft.client.network.NetHandlerPlayClient]: Received passengers for unknown entity
-[10:19:25] [main/WARN] [net.minecraft.client.network.NetHandlerPlayClient]: Received passengers for unknown entity
-[10:19:25] [Server thread/WARN] [net.minecraft.server.MinecraftServer]: Can't keep up! Did the system time change, or is the server overloaded? Running 3273ms behind, skipping 65 tick(s)
-[10:19:46] [main/WARN] [net.minecraft.client.network.NetHandlerPlayClient]: Received passengers for unknown entity
-[10:19:46] [main/WARN] [net.minecraft.client.network.NetHandlerPlayClient]: Received passengers for unknown entity
-[10:19:54] [main/WARN] [net.minecraft.client.network.NetHandlerPlayClient]: Received passengers for unknown entity
-[10:20:02] [main/WARN] [net.minecraft.client.network.NetHandlerPlayClient]: Received passengers for unknown entity
-[10:20:04] [Server thread/WARN] [net.minecraft.server.MinecraftServer]: Can't keep up! Did the system time change, or is the server overloaded? Running 16213ms behind, skipping 324 tick(s)
-[10:20:08] [Server thread/WARN] [net.minecraft.server.MinecraftServer]: Can't keep up! Did the system time change, or is the server overloaded? Running 3980ms behind, skipping 79 tick(s)
-[10:20:08] [main/WARN] [net.minecraft.client.network.NetHandlerPlayClient]: Received passengers for unknown entity
-[10:20:08] [main/WARN] [net.minecraft.client.network.NetHandlerPlayClient]: Received passengers for unknown entity
-[10:20:30] [main/WARN] [net.minecraft.client.network.NetHandlerPlayClient]: Received passengers for unknown entity
-[10:20:34] [main/WARN] [net.minecraft.client.network.NetHandlerPlayClient]: Received passengers for unknown entity
-[10:20:34] [main/WARN] [net.minecraft.client.network.NetHandlerPlayClient]: Received passengers for unknown entity
-[10:20:41] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAIHealAllies:updateTask:149]: Healing: EntityVillager['Villager'/12109, l='New World', x=-170.70, y=85.00, z=305.70]
-[10:21:05] [main/WARN] [net.minecraft.client.network.NetHandlerPlayClient]: Received passengers for unknown entity
-[10:21:21] [main/WARN] [net.minecraft.client.network.NetHandlerPlayClient]: Received passengers for unknown entity
-[10:21:23] [main/WARN] [net.minecraft.client.network.NetHandlerPlayClient]: Received passengers for unknown entity
-[10:21:23] [main/WARN] [net.minecraft.client.network.NetHandlerPlayClient]: Received passengers for unknown entity
-[10:21:30] [Server thread/WARN] [net.minecraft.server.MinecraftServer]: Can't keep up! Did the system time change, or is the server overloaded? Running 2039ms behind, skipping 40 tick(s)
-[10:21:30] [main/WARN] [net.minecraft.client.network.NetHandlerPlayClient]: Received passengers for unknown entity
-[10:21:32] [main/WARN] [net.minecraft.client.network.NetHandlerPlayClient]: Received passengers for unknown entity
-[10:21:37] [main/WARN] [net.minecraft.client.network.NetHandlerPlayClient]: Received passengers for unknown entity
-[10:21:47] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAIHealAllies:updateTask:149]: Healing: EntityVillager['Villager'/19680, l='New World', x=8.23, y=63.94, z=737.25]
-[10:21:49] [main/WARN] [net.minecraft.client.network.NetHandlerPlayClient]: Received passengers for unknown entity
-[10:21:49] [main/WARN] [net.minecraft.client.network.NetHandlerPlayClient]: Received passengers for unknown entity
-[10:21:50] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAIHealAllies:updateTask:149]: Healing: EntityVillager['Villager'/19680, l='New World', x=8.23, y=63.94, z=737.25]
-[10:21:52] [main/WARN] [net.minecraft.client.network.NetHandlerPlayClient]: Received passengers for unknown entity
-[10:21:58] [Server thread/WARN] [net.minecraft.server.MinecraftServer]: Can't keep up! Did the system time change, or is the server overloaded? Running 2089ms behind, skipping 41 tick(s)
-[10:22:20] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Unknown command. Try /help for a list of commands
-[10:22:25] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player249: Set Player249's spawn point to (-10, 77, 722)]
-[10:22:25] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Set Player249's spawn point to (-10, 77, 722)
-[10:22:25] [Server thread/INFO] [net.minecraft.server.integrated.IntegratedServer]: Saving and pausing game...
-[10:22:25] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Saving chunks for level 'New World'/overworld
-[10:22:39] [main/WARN] [net.minecraft.client.network.NetHandlerPlayClient]: Received passengers for unknown entity
-[10:22:39] [main/WARN] [net.minecraft.client.network.NetHandlerPlayClient]: Received passengers for unknown entity
-[10:22:45] [Server thread/WARN] [net.minecraft.server.MinecraftServer]: Can't keep up! Did the system time change, or is the server overloaded? Running 4388ms behind, skipping 87 tick(s)
-[10:23:00] [Server thread/INFO] [net.minecraft.server.integrated.IntegratedServer]: Saving and pausing game...
-[10:23:00] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Saving chunks for level 'New World'/overworld
-[10:23:05] [main/WARN] [net.minecraft.client.network.NetHandlerPlayClient]: Received passengers for unknown entity
-[10:23:05] [main/WARN] [net.minecraft.client.network.NetHandlerPlayClient]: Received passengers for unknown entity
-[10:23:12] [main/WARN] [net.minecraft.client.network.NetHandlerPlayClient]: Received passengers for unknown entity
-[10:23:12] [main/WARN] [net.minecraft.client.network.NetHandlerPlayClient]: Received passengers for unknown entity
-[10:23:17] [main/WARN] [net.minecraft.client.network.NetHandlerPlayClient]: Received passengers for unknown entity
-[10:23:24] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAIHealAllies:updateTask:149]: Healing: EntityVillager['Villager'/27212, l='New World', x=-430.07, y=94.50, z=875.50]
-[10:23:24] [main/WARN] [net.minecraft.client.network.NetHandlerPlayClient]: Received passengers for unknown entity
-[10:23:24] [main/WARN] [net.minecraft.client.network.NetHandlerPlayClient]: Received passengers for unknown entity
-[10:23:31] [Server thread/WARN] [net.minecraft.server.MinecraftServer]: Can't keep up! Did the system time change, or is the server overloaded? Running 3182ms behind, skipping 63 tick(s)
-[10:23:32] [main/WARN] [net.minecraft.client.network.NetHandlerPlayClient]: Received passengers for unknown entity
-[10:23:50] [Server thread/WARN] [net.minecraft.server.MinecraftServer]: Can't keep up! Did the system time change, or is the server overloaded? Running 6745ms behind, skipping 134 tick(s)
-[10:23:52] [main/WARN] [net.minecraft.client.network.NetHandlerPlayClient]: Received passengers for unknown entity
-[10:24:00] [Server thread/INFO] [net.minecraft.server.integrated.IntegratedServer]: Saving and pausing game...
-[10:24:00] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Saving chunks for level 'New World'/overworld
-[10:24:04] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Player249 fell out of the world
-[10:24:04] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player249: Killed Player249]
-[10:24:04] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Player249 fell out of the world
-[10:24:04] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Killed Player249
-[10:24:05] [main/WARN] [net.minecraft.client.network.NetHandlerPlayClient]: Received passengers for unknown entity
-[10:24:05] [main/WARN] [net.minecraft.client.network.NetHandlerPlayClient]: Received passengers for unknown entity
-[10:24:06] [main/WARN] [net.minecraft.client.network.NetHandlerPlayClient]: Received passengers for unknown entity
-[10:24:06] [main/WARN] [net.minecraft.client.network.NetHandlerPlayClient]: Received passengers for unknown entity
-[10:24:06] [main/WARN] [net.minecraft.client.network.NetHandlerPlayClient]: Received passengers for unknown entity
-[10:24:06] [main/WARN] [net.minecraft.client.network.NetHandlerPlayClient]: Received passengers for unknown entity
-[10:24:07] [main/INFO] [net.minecraft.advancements.AdvancementList]: Loaded 7 advancements
-[10:24:11] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player249: Set the time to 14500]
-[10:24:11] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Set the time to 14500
-[10:24:18] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAIHealAllies:updateTask:149]: Healing: EntityVillager['Villager'/21515, l='New World', x=-139.93, y=67.00, z=842.10]
-[10:24:19] [main/INFO] [net.minecraft.advancements.AdvancementList]: Loaded 14 advancements
-[10:24:40] [main/WARN] [net.minecraft.client.network.NetHandlerPlayClient]: Received passengers for unknown entity
-[10:24:41] [main/WARN] [net.minecraft.client.network.NetHandlerPlayClient]: Received passengers for unknown entity
-[10:24:51] [main/WARN] [net.minecraft.client.network.NetHandlerPlayClient]: Received passengers for unknown entity
-[10:25:06] [main/WARN] [net.minecraft.client.network.NetHandlerPlayClient]: Received passengers for unknown entity
-[10:25:10] [main/WARN] [net.minecraft.client.network.NetHandlerPlayClient]: Received passengers for unknown entity
-[10:25:44] [main/WARN] [net.minecraft.client.network.NetHandlerPlayClient]: Received passengers for unknown entity
-[10:25:48] [main/WARN] [net.minecraft.client.network.NetHandlerPlayClient]: Received passengers for unknown entity
-[10:25:48] [main/WARN] [net.minecraft.client.network.NetHandlerPlayClient]: Received passengers for unknown entity
-[10:25:59] [main/WARN] [net.minecraft.client.network.NetHandlerPlayClient]: Received passengers for unknown entity
-[10:26:04] [main/WARN] [net.minecraft.client.network.NetHandlerPlayClient]: Received passengers for unknown entity
-[10:26:05] [main/WARN] [net.minecraft.client.network.NetHandlerPlayClient]: Received passengers for unknown entity
-[10:26:10] [main/WARN] [net.minecraft.client.network.NetHandlerPlayClient]: Received passengers for unknown entity
-[10:26:16] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAIHealAllies:updateTask:149]: Healing: EntityVillagerAlchemist['Villager Alchemist'/34721, l='New World', x=-95.70, y=68.00, z=727.40]
-[10:26:19] [main/WARN] [net.minecraft.client.network.NetHandlerPlayClient]: Received passengers for unknown entity
-[10:26:27] [main/WARN] [net.minecraft.client.network.NetHandlerPlayClient]: Received passengers for unknown entity
-[10:26:40] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAIHealAllies:updateTask:149]: Healing: EntityVillagerAlchemist['Villager Alchemist'/34721, l='New World', x=-91.69, y=65.00, z=728.70]
-[10:27:11] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAIHealAllies:updateTask:149]: Healing: EntityVillagerAlchemist['Villager Alchemist'/34735, l='New World', x=-104.66, y=69.00, z=719.53]
-[10:27:22] [Server thread/INFO] [net.minecraft.server.integrated.IntegratedServer]: Saving and pausing game...
-[10:27:22] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Saving chunks for level 'New World'/overworld
-[10:27:58] [main/WARN] [net.minecraft.client.network.NetHandlerPlayClient]: Received passengers for unknown entity
-[10:28:08] [Server thread/INFO] [net.minecraft.server.integrated.IntegratedServer]: Saving and pausing game...
-[10:28:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Saving chunks for level 'New World'/overworld
-[10:28:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Stopping server
-[10:28:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Saving players
-[10:28:08] [Server thread/INFO] [net.minecraft.network.NetHandlerPlayServer]: Player249 lost connection: Disconnected
-[10:28:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Player249 left the game
-[10:28:08] [Server thread/INFO] [net.minecraft.network.NetHandlerPlayServer]: Stopping singleplayer server as player logged out
-[10:28:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Saving worlds
-[10:28:08] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Saving chunks for level 'New World'/overworld
-[10:28:09] [Server thread/INFO] [FML]: Unloading dimension 0
-[10:28:09] [Server thread/INFO] [FML]: Applying holder lookups
-[10:28:09] [Server thread/INFO] [FML]: Holder lookups applied
-[10:28:10] [main/INFO] [net.minecraft.client.Minecraft]: Stopping!
-[10:28:10] [main/INFO] [net.minecraft.client.audio.SoundManager]: SoundSystem shutting down...
-[10:28:10] [main/WARN] [net.minecraft.client.audio.SoundManager]: Author: Paul Lamb, www.paulscode.com
+[19:18:13] [main/INFO] [net.minecraft.advancements.AdvancementList]: Loaded 7 advancements
+[19:18:14] [Server thread/WARN] [net.minecraft.server.MinecraftServer]: Can't keep up! Did the system time change, or is the server overloaded? Running 2911ms behind, skipping 58 tick(s)
+[19:18:14] [main/WARN] [net.minecraft.client.network.NetHandlerPlayClient]: Received passengers for unknown entity
+[19:18:14] [main/WARN] [net.minecraft.client.network.NetHandlerPlayClient]: Received passengers for unknown entity
+[19:18:36] [Server thread/WARN] [net.minecraft.server.MinecraftServer]: Can't keep up! Did the system time change, or is the server overloaded? Running 9106ms behind, skipping 182 tick(s)
+[19:19:18] [Server thread/INFO] [net.minecraft.server.integrated.IntegratedServer]: Saving and pausing game...
+[19:19:18] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Saving chunks for level 'New World'/overworld
+[19:19:47] [Server thread/INFO] [net.minecraft.server.integrated.IntegratedServer]: Saving and pausing game...
+[19:19:47] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Saving chunks for level 'New World'/overworld
+[19:20:15] [Server thread/INFO] [net.minecraft.server.integrated.IntegratedServer]: Saving and pausing game...
+[19:20:15] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Saving chunks for level 'New World'/overworld
+[19:20:15] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Stopping server
+[19:20:15] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Saving players
+[19:20:15] [Server thread/INFO] [net.minecraft.network.NetHandlerPlayServer]: Player451 lost connection: Disconnected
+[19:20:15] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Player451 left the game
+[19:20:15] [Server thread/INFO] [net.minecraft.network.NetHandlerPlayServer]: Stopping singleplayer server as player logged out
+[19:20:15] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Saving worlds
+[19:20:15] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Saving chunks for level 'New World'/overworld
+[19:20:16] [Server thread/INFO] [FML]: Unloading dimension 0
+[19:20:16] [Server thread/INFO] [FML]: Applying holder lookups
+[19:20:16] [Server thread/INFO] [FML]: Holder lookups applied
+[19:20:17] [main/INFO] [net.minecraft.client.Minecraft]: Stopping!
+[19:20:17] [main/INFO] [net.minecraft.client.audio.SoundManager]: SoundSystem shutting down...
+[19:20:17] [main/WARN] [net.minecraft.client.audio.SoundManager]: Author: Paul Lamb, www.paulscode.com

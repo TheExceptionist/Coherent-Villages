@@ -88,12 +88,12 @@ public class EntityAISearchHouse extends EntityAIBase
 
             if (vec3d != null)
             {
-                this.entity.getNavigator().tryMoveToXYZ(vec3d.x, vec3d.y, vec3d.z, 1.0D);
+                this.entity.getNavigator().tryMoveToXYZ(vec3d.x, vec3d.y, vec3d.z, 0.4D);
             }
         }
         else
         {
-            this.entity.getNavigator().tryMoveToXYZ((double)i + 0.5D, (double)j, (double)k + 0.5D, 1.0D);
+            this.entity.getNavigator().tryMoveToXYZ((double)i + 0.5D, (double)j, (double)k + 0.5D, 0.4D);
         }
     }
 

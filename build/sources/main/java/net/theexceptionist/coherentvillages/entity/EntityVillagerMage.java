@@ -40,7 +40,6 @@ import net.theexceptionist.coherentvillages.entity.ai.EntityAIAttackWithMagic;
 
 public class EntityVillagerMage extends EntityVillagerSoldier implements IRangedAttackMob{
 	private int armour = 2, attack = 8;
-	
 	public EntityVillagerMage(World worldIn) {
 		super(worldIn);
 	}

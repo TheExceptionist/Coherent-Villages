@@ -67,6 +67,11 @@ Changelog:
 *Added creeper hunter
 *Some Villages are REALLY safe now, GOAL ACHIEVED!
 
+-Alpha v1.6.4
+*More AI improvements
+*Adjusted more spawn rates 
+*Fixed more bugs
+
 Planned Features:
 Improve Villager AI
 Add more Village Structures

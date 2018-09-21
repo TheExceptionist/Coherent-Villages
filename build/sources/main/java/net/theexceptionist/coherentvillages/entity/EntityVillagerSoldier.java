@@ -72,7 +72,7 @@ public class EntityVillagerSoldier extends EntityVillager{
 
 	public void onStruckByLightning(EntityLightningBolt lightningBolt)
     {
-        
+
     }
 	
 	@Override
@@ -138,6 +138,7 @@ public class EntityVillagerSoldier extends EntityVillager{
 	        super.applyEntityAttributes();
         	
 			type = this.world.rand.nextInt(5);
+			 this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(60.0D);
 			
         	if(type == 0){
 	        	this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.35D);

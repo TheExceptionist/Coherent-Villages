@@ -22,7 +22,7 @@ import net.minecraft.util.EnumHandSide;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import net.theexceptionist.coherentvillages.Resources;
+import net.theexceptionist.coherentvillages.main.Resources;
 
 	@SideOnly(Side.CLIENT)
 	public class RenderVillagerMage  extends  RenderLiving<EntityVillager>

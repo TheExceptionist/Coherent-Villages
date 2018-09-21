@@ -12,13 +12,13 @@ public class EntityAIAttackBackExclude extends EntityAITarget
     private final boolean entityCallsForHelp;
     /** Store the previous revengeTimer value */
     private int revengeTimerOld;
-    private final Class<?>[] targetClasses;
+    private final Class<?>[] excludedReinforcementTypes;
 
-    public EntityAIAttackBackExclude(EntityCreature creatureIn, boolean entityCallsForHelpIn, Class<?>... targetClassesIn)
+    public EntityAIAttackBackExclude(EntityCreature creatureIn, boolean entityCallsForHelpIn, Class<?>... excludedReinforcementTypes)
     {
         super(creatureIn, true);
         this.entityCallsForHelp = entityCallsForHelpIn;
-        this.targetClasses = targetClassesIn;
+        this.excludedReinforcementTypes = excludedReinforcementTypes;
         this.setMutexBits(1);
     }
 
@@ -28,13 +28,9 @@ public class EntityAIAttackBackExclude extends EntityAITarget
     public boolean shouldExecute()
     {
         int i = this.taskOwner.getRevengeTimer();
-        EntityLivingBase entitylivingbase = this.taskOwner.getAttackTarget();
-        
-        if(!(this.taskOwner.getAttackTarget() instanceof EntityVillager)){
-        	return i != this.revengeTimerOld && entitylivingbase != null && this.isSuitableTarget(entitylivingbase, false);
-        }else{
-        	return false;
-        }
+        EntityLivingBase entitylivingbase = this.taskOwner.getRevengeTarget();
+        //return entitylivingbase != null;
+        return i != this.revengeTimerOld && entitylivingbase != null && this.isSuitableTarget(entitylivingbase, false) && !(entitylivingbase instanceof EntityVillager);
     }
 
     /**
@@ -42,17 +38,18 @@ public class EntityAIAttackBackExclude extends EntityAITarget
      */
     public void startExecuting()
     {
-        this.taskOwner.setAttackTarget(this.taskOwner.getAttackTarget());
-        this.target = this.taskOwner.getAttackTarget();
-        this.revengeTimerOld = this.taskOwner.getRevengeTimer();
-        this.unseenMemoryTicks = 300;
+    	 this.taskOwner.setAttackTarget(this.taskOwner.getRevengeTarget());
+    	// System.out.println(taskOwner.getName()+" "+this.taskOwner.getAttackTarget().getName()+" "+this.taskOwner.getRevengeTarget().getName());
+         this.target = this.taskOwner.getAttackTarget();
+         this.revengeTimerOld = this.taskOwner.getRevengeTimer();
+         this.unseenMemoryTicks = 300;
 
-        if (this.entityCallsForHelp)
-        {
-            this.alertOthers();
-        }
+         if (this.entityCallsForHelp)
+         {
+             this.alertOthers();
+         }
 
-        super.startExecuting();
+         super.startExecuting();
     }
 
     protected void alertOthers()
@@ -65,7 +62,7 @@ public class EntityAIAttackBackExclude extends EntityAITarget
             {
                 boolean flag = false;
 
-                for (Class<?> oclass : this.targetClasses)
+                for (Class<?> oclass : this.excludedReinforcementTypes)
                 {
                     if (entitycreature.getClass() == oclass)
                     {

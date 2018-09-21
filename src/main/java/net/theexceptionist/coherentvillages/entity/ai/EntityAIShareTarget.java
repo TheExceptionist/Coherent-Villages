@@ -37,7 +37,5 @@ public class EntityAIShareTarget extends EntityAITarget {
 		}
 
     }
-	
-	
 
 }

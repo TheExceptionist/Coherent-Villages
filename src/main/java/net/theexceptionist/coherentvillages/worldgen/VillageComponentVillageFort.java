@@ -38,7 +38,7 @@ public class VillageComponentVillageFort extends StructureVillagePieces.Village
 
         public static VillageComponentVillageFort createPiece(StructureVillagePieces.Start start, List<StructureComponent> p_175858_1_, Random rand, int p_175858_3_, int p_175858_4_, int p_175858_5_, EnumFacing facing, int p_175858_7_)
         {
-            StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(p_175858_3_, p_175858_4_, p_175858_5_, 0, 0, 0, 10, 7, 6, facing);
+            StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(p_175858_3_, p_175858_4_, p_175858_5_, 0, 0, 0, 11, 7, 6, facing);
             return StructureComponent.findIntersecting(p_175858_1_, structureboundingbox) != null ? null : new VillageComponentVillageFort(start, p_175858_7_, rand, structureboundingbox, facing);
         }
 
@@ -168,7 +168,7 @@ public class VillageComponentVillageFort extends StructureVillagePieces.Village
            // 10, 7, 5
             for (int j = 0; j < 6; ++j)
             {
-                for (int i = 0; i < 10; ++i)
+                for (int i = 0; i < 11; ++i)
                 {
                     this.clearCurrentPositionBlocksUpwards(worldIn, i, 10, j, structureBoundingBoxIn);
                     this.replaceAirAndLiquidDownwards(worldIn, Blocks.PLANKS.getDefaultState(), i, -1, j, structureBoundingBoxIn);

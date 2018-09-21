@@ -7,7 +7,7 @@ import net.minecraft.client.renderer.entity.layers.LayerCustomHead;
 import net.minecraft.client.renderer.entity.layers.LayerHeldItem;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.util.ResourceLocation;
-import net.theexceptionist.coherentvillages.Resources;
+import net.theexceptionist.coherentvillages.main.Resources;
 
 public class RenderVillagerMerchant extends RenderLiving<EntityVillager>
 {
