@@ -6,8 +6,6 @@
   },
   "promos": {
     "<mcversion>-latest": "1.2.1.0",
-    // Declare the latest "bleeding-edge" version of your mod for the given Minecraft version
     "<mcversion>-recommended": "1.2.1.0",
-    // Declare the latest "stable" version of your mod for the given Minecraft version
   }
 }
