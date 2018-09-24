@@ -1,1 +1,13 @@
 
+{
+  "homepage": "https://minecraft.curseforge.com/projects/coherent-villages",
+  "1.12.2": {
+    "1.2.1.0": "*Fixed some bugs\n*Fixed a major bug that prevented soldiers from attacking\n*Revamped some of the alchemist types\n*Connected it to my GitHub json file - users are told when updates are available ", 
+  },
+  "promos": {
+    "<mcversion>-latest": "1.2.1.0",
+    // Declare the latest "bleeding-edge" version of your mod for the given Minecraft version
+    "<mcversion>-recommended": "1.2.1.0",
+    // Declare the latest "stable" version of your mod for the given Minecraft version
+  }
+}
