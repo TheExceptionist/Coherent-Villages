@@ -1,82 +1,47 @@
 package net.theexceptionist.coherentvillages.entity.ai;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockDoor;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.EntityLivingBase;
+import java.util.List;
+
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.ai.EntityAITarget;
-import net.minecraft.entity.monster.EntityCreeper;
-import net.minecraft.pathfinding.Path;
-import net.minecraft.pathfinding.PathNavigateGround;
-import net.minecraft.pathfinding.PathPoint;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.village.Village;
-import net.theexceptionist.coherentvillages.entity.EntityVillagerSoldier;
+import net.minecraft.village.VillageDoorInfo;
+import net.minecraft.world.World;
+import net.theexceptionist.coherentvillages.entity.soldier.AbstractVillagerSoldier;
+import net.theexceptionist.coherentvillages.main.Main;
 
-public class EntityAIGuardPost extends EntityAITarget {
-	EntityVillagerSoldier soldier;
-    /** The aggressor of the iron golem's village which is now the golem's attack target. */
-    BlockPos post;
-    
-    EntityLivingBase targetEntity;
-	private EntityLivingBase villageAgressorTarget;
-	private int timer;
-    protected BlockDoor doorBlock;
-    protected BlockPos doorPosition = BlockPos.ORIGIN;
-	private boolean dayTime;
+public class EntityAIGuardPost  extends EntityAIBase {
+	private IVillagerGuard soldier;
+	private World worldin;
+	private boolean travelSucceed, arrived;
 
-    public EntityAIGuardPost(EntityVillagerSoldier soldier, boolean dayTime)
+    public EntityAIGuardPost(IVillagerGuard soldier, World worldin)
     {
-        super(soldier, false, true);
         this.soldier = soldier;
-        this.dayTime = dayTime;
-        this.timer = 1000 + soldier.world.rand.nextInt(500);
+        this.worldin = worldin;
+        this.arrived = false;
         this.setMutexBits(1);
     }
 
-    /**
-     * Returns whether the EntityAIBase should begin execution.
-     */
+    
     public boolean shouldExecute()
     {
-        Village village = this.soldier.getVillage();
-//
-        if(this.dayTime == this.soldier.world.isDaytime()){
-	        if (village == null)
-	        {
-	            return false;
-	        }
-	        else
-	        {
-	            this.villageAgressorTarget = village.findNearestVillageAggressor(this.soldier);
-	            
-	            if (this.villageAgressorTarget instanceof EntityCreeper)
-	            {
-	                return false;
-	            }
-	            else if (this.isSuitableTarget(this.villageAgressorTarget, false))
-	            {
-	                return true;
-	            }else if(this.timer >= 0){
-	            	//post = new BlockPos(this.soldier.posX + this.soldier.getWorld().rand.nextInt(20) - 10, this.soldier.posY, this.soldier.posZ + this.soldier.getWorld().rand.nextInt(20) - 10);
-	            	return true;
-	            }
-	            else if (this.taskOwner.getRNG().nextInt(20) == 0)
-	            {
-	                this.villageAgressorTarget = village.getNearestTargetPlayer(this.soldier);
-	                return this.isSuitableTarget(this.villageAgressorTarget, false);
-	            }
-	            else if(this.soldier.getWorld().rand.nextInt(100) < 50){
-	            	//post = new BlockPos(this.soldier.posX + this.soldier.getWorld().rand.nextInt(this.soldier.getVillage().getVillageRadius()) - this.soldier.getVillage().getVillageRadius()/2, this.soldier.posY, this.soldier.posZ + this.soldier.getWorld().rand.nextInt(this.soldier.getVillage().getVillageRadius()) - this.soldier.getVillage().getVillageRadius()/2);
-	            	this.timer = 1000 + soldier.world.rand.nextInt(500);
-	            	return true;
-	            }else
-	            {
-	                return false;
-	            }
-	        }
-        }else{
+        Village village = this.soldier.getSoldier().getVillage();
+        
+        if(village == null || this.soldier.getSoldier().getAttackTarget() != null || this.soldier.getSoldier().getAttackingEntity() != null)
+        {
+        	return false;
+        }
+        else if(this.soldier.getPost() != null)
+        {
+        	//System.out.println("Starting guard post");
+        	return true;
+        }
+        else
+        {
         	return false;
         }
     }
@@ -86,68 +51,56 @@ public class EntityAIGuardPost extends EntityAITarget {
      */
     public void startExecuting()
     {
-             PathNavigateGround pathnavigateground = (PathNavigateGround)this.soldier.getNavigator();
-             Path path = pathnavigateground.getPath();
-
-             if (path != null && !path.isFinished() && pathnavigateground.getEnterDoors())
-             {
-                 for (int i = 0; i < Math.min(path.getCurrentPathIndex() + 2, path.getCurrentPathLength()); ++i)
-                 {
-                     PathPoint pathpoint = path.getPathPointFromIndex(i);
-                     this.doorPosition = new BlockPos(pathpoint.x + 1, pathpoint.y + 1, pathpoint.z + 1);
-
-                     if (this.soldier.getDistanceSq((double)this.doorPosition.getX(), this.soldier.posY, (double)this.doorPosition.getZ()) <= 2.25D)
-                     {
-                         this.doorBlock = this.getBlockDoor(this.doorPosition);
-
-                         if (this.doorBlock != null)
-                         {
-                             return;
-                         }
-                     }
-                 }
-
-                 this.doorPosition = (new BlockPos(this.soldier)).up();
-                 this.doorBlock = this.getBlockDoor(this.doorPosition);
-             }
-
-         
+    	BlockPos post =  this.soldier.getPost();
+    	
+    	if(post != null)
+    	{
+    		travelToPost(post);
+        	//System.out.println("Post- X: "+post.getX()+" Y: "+post.getY()+" Z: "+post.getZ());
+    	} 
     }
-    
-             private BlockDoor getBlockDoor(BlockPos pos)
-             {
-                 IBlockState iblockstate = this.soldier.world.getBlockState(pos);
-                 Block block = iblockstate.getBlock();
-                 return block instanceof BlockDoor && iblockstate.getMaterial() == Material.WOOD ? (BlockDoor)block : null;
-             }
              
-    public boolean continueExecuting()
+    private void travelToPost(BlockPos post) {
+    	if(post != null){
+			double speed = (double)this.soldier.getSoldier().getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue() * 3;
+			travelSucceed = this.soldier.getSoldier().getNavigator().tryMoveToXYZ(post.getX(), post.getY(), post.getZ(), speed);
+    	}
+    }
+
+	public boolean shouldContinueExecuting()
     {
-        if (this.soldier.getNavigator().noPath())
+    	Village village = this.soldier.getSoldier().getVillage();  
+   
+    	//
+    	if(village == null || this.soldier.getSoldier().getAttackTarget() != null || this.soldier.getSoldier().getAttackingEntity() != null)
+    	{
+    		//System.out.println("Stopping execute..."+village+" | attacking: "+this.soldier.getAttackTarget()+" | attacker: "+this.soldier.getAttackingEntity());
+    	   return false;
+    	}
+    	else if(this.soldier.getPost() == null)
         {
-            return false;
-        }
-        else if (this.soldier.getRevengeTarget() != null)
-        {	
-        	this.soldier.setAttackTarget(this.soldier.getRevengeTarget());
         	return false;
         }
-        else
-        {
-            timer--;
-            
-            //System.out.println(timer);
-            
-            if(timer <= 0)
-            {
-            	return false;
-            }
-            else
-            {
-            	return true;
-            }
-            //return this.entity.getDistanceSq(this.doorInfo.getDoorBlockPos()) > (double)(f * f);
+    	else if(this.soldier.getSoldier().getNavigator().noPath())
+    	{
+    		travelToPost(this.soldier.getPost());
+    		//System.out.println("Continue execute... X:"+this.soldier.getSoldier().getNavigator();// "+post.getX()+" Y: "+post.getY()+" Z: "+post.getZ()+" Travel: "+travelSucceed);
+    		
+    		/*if(this.soldier.getPos() == this.post)
+    		{
+    			arrived = true;
+    		}
+    		else if(!arrived)
+    		{
+    			travelToPost();
+    		}*/
+    		
+    	   return true;
         }
-    }
+    	else
+    	{
+    		return false;
+    	}
+     }
 
 }

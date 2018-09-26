@@ -17,7 +17,7 @@ public class VillageHandlerInn implements IVillageCreationHandler
 	public StructureVillagePieces.PieceWeight getVillagePieceWeight(Random random, int i) 
 	{ 
 		//System.out.println("Registered");
-	return new StructureVillagePieces.PieceWeight(VillageComponentInn.class, 20, MathHelper.getInt(random, 0 + i, 1 + i)); //Play around with these numbers! 
+	return new StructureVillagePieces.PieceWeight(VillageComponentInn.class, 30, MathHelper.getInt(random, 0 + i, 1 + i)); //Play around with these numbers! 
 	} 
 
 	public Class getComponentClass() 

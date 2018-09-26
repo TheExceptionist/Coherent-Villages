@@ -2,20 +2,20 @@ package net.theexceptionist.coherentvillages.entity.ai;
 
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.passive.EntityVillager;
-import net.theexceptionist.coherentvillages.entity.EntityMerchantGuard;
-import net.theexceptionist.coherentvillages.entity.EntityVillagerMage;
 import net.theexceptionist.coherentvillages.entity.EntityVillagerMerchant;
-import net.theexceptionist.coherentvillages.entity.EntityVillagerSoldier;
+import net.theexceptionist.coherentvillages.entity.followers.EntityMerchantGuard;
+import net.theexceptionist.coherentvillages.entity.mage.AbstractVillagerMage;
+import net.theexceptionist.coherentvillages.entity.soldier.AbstractVillagerSoldier;
 
 public class EntityAIFollowMerchant extends EntityAIBase
 {
-    private final EntityVillagerSoldier theVillager;
+    private final AbstractVillagerSoldier theVillager;
     private EntityVillager merchant;
     private int takeGolemRoseTick;
     private boolean tookGolemRose;
     private int waitTime;
 
-    public EntityAIFollowMerchant(EntityVillagerSoldier theVillagerIn, EntityVillagerMage merchant)
+    public EntityAIFollowMerchant(AbstractVillagerSoldier theVillagerIn, AbstractVillagerMage merchant)
     {
         this.theVillager = theVillagerIn;
         this.merchant = merchant;
@@ -83,7 +83,7 @@ public class EntityAIFollowMerchant extends EntityAIBase
     		//waitTime--;
     	//System.out.println("Following");
     	//}else
-    		if(	this.theVillager.getNavigator().noPath()){
+    	if(	this.theVillager.getNavigator().noPath()){
     	//	System.out.println("Following New Path");
     		this.theVillager.getNavigator().tryMoveToXYZ(merchant.posX + this.theVillager.world.rand.nextInt(20) - 10, merchant.posY, merchant.posZ + this.theVillager.world.rand.nextInt(20) - 10, 0.5D);//(merchant, 0.5D);
     		//this.waitTime = 100 + this.theVillager.world.rand.nextInt(100);

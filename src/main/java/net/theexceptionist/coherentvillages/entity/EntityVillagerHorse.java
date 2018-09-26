@@ -2,6 +2,8 @@ package net.theexceptionist.coherentvillages.entity;
 
 import javax.annotation.Nullable;
 
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.passive.AbstractHorse;
@@ -17,8 +19,10 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.datafix.DataFixer;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.storage.loot.LootTableList;
+import net.theexceptionist.coherentvillages.entity.soldier.AbstractVillagerSoldier;
 
 public class EntityVillagerHorse extends EntityHorse
 {
@@ -38,6 +42,12 @@ public class EntityVillagerHorse extends EntityHorse
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25000000298023224D);
         this.getEntityAttribute(JUMP_STRENGTH).setBaseValue(this.getModifiedJumpStrength());
     }
+    
+    public void updatePassenger(Entity passenger)
+    {
+        super.updatePassenger(passenger);
+    }
+
     
     
 
@@ -189,7 +199,7 @@ public class EntityVillagerHorse extends EntityHorse
         }
     }
     
-    public void mountTo(EntityVillagerSoldier player)
+    public void mountTo(AbstractVillagerSoldier player)
     {
         player.rotationYaw = this.rotationYaw;
         player.rotationPitch = this.rotationPitch;
@@ -201,4 +211,5 @@ public class EntityVillagerHorse extends EntityHorse
             player.startRiding(this);
         }
     }
+
 }

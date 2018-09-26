@@ -29,6 +29,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.village.Village;
 import net.minecraft.world.World;
 import net.theexceptionist.coherentvillages.entity.ai.EntityAIAttackBackExclude;
+import net.theexceptionist.coherentvillages.entity.followers.EntityMerchantGuard;
 
 public class EntityVillagerMerchant extends EntityVillager{
 	protected String title;
@@ -163,7 +164,7 @@ public class EntityVillagerMerchant extends EntityVillager{
 	
     protected boolean canDespawn()
     {
-        return true;
+        return false;
     }
 
     public int getMaxSpawnedInChunk()

@@ -10,6 +10,7 @@ import net.minecraft.block.BlockSandStone;
 import net.minecraft.block.BlockStairs;
 import net.minecraft.block.BlockStone;
 import net.minecraft.block.BlockStoneBrick;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Biomes;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.gen.structure.MapGenVillage;
@@ -19,6 +20,7 @@ import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import net.theexceptionist.coherentvillages.main.Main;
+import net.theexceptionist.coherentvillages.worldgen.ModMapVillageGen;
 
 public class EventOverrideVillages {
 		@SubscribeEvent
@@ -26,9 +28,11 @@ public class EventOverrideVillages {
 		{
 			Random rand = new Random();
 			if(event.getType().VILLAGE == event.getType()){
-				MapGenVillage instance = (MapGenVillage) event.getOriginalGen();
+				ModMapVillageGen newVillage = new ModMapVillageGen();
+				event.setNewGen(newVillage);
+				/*MapGenVillage instance = (MapGenVillage) event.getOriginalGen();
 				ReflectionHelper.setPrivateValue(MapGenVillage.class, instance, Main.max_distance, 2);
-				ReflectionHelper.setPrivateValue(MapGenVillage.class, instance, Main.min_distance, 3);
+				ReflectionHelper.setPrivateValue(MapGenVillage.class, instance, Main.min_distance, 3);*/
 				//System.out.println("Values Set");
 		    	//event.setResult(value);
 				
@@ -448,14 +452,15 @@ public class EventOverrideVillages {
 			  event.setReplacement( Blocks.SANDSTONE.getDefaultState());
 			  event.setResult(Event.Result.DENY);
 	      }
-
-	      if (event.getOriginal().getBlock() == Blocks.COBBLESTONE)
+	      if (event.getOriginal().getBlock() == Blocks.COBBLESTONE || event.getOriginal().getBlock() == Blocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, BlockStone.EnumType.DIORITE_SMOOTH))
 	      {
 	    	  event.setReplacement( Blocks.SANDSTONE.getStateFromMeta(BlockSandStone.EnumType.DEFAULT.getMetadata()));
 	    	  event.setResult(Event.Result.DENY);
 	      }
 
-	      if (event.getOriginal().getBlock() == Blocks.PLANKS)
+	      if (event.getOriginal().getBlock() == Blocks.PLANKS || event.getOriginal().getBlock() == Blocks.STONEBRICK 
+	    		  || event.getOriginal().getBlock() == Blocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, BlockStone.EnumType.ANDESITE_SMOOTH)
+	    		  || event.getOriginal().getBlock() == Blocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, BlockStone.EnumType.GRANITE_SMOOTH))
 	      {
 	    	  event.setReplacement(  Blocks.SANDSTONE.getStateFromMeta(BlockSandStone.EnumType.SMOOTH.getMetadata()));
 	    	  event.setResult(Event.Result.DENY);

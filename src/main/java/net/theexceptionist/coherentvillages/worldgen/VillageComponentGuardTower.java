@@ -14,8 +14,10 @@ import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraft.world.gen.structure.StructureVillagePieces;
-import net.theexceptionist.coherentvillages.entity.EntityVillagerArcher;
-import net.theexceptionist.coherentvillages.entity.EntityVillagerMage;
+import net.theexceptionist.coherentvillages.entity.archer.AbstractVillagerArcher;
+import net.theexceptionist.coherentvillages.entity.archer.EntityVillagerArcher;
+import net.theexceptionist.coherentvillages.entity.archer.EntityVillagerMageArcher;
+import net.theexceptionist.coherentvillages.entity.archer.EntityVillagerMarksman;
 
 public class VillageComponentGuardTower extends StructureVillagePieces.Village
     {
@@ -116,7 +118,8 @@ public class VillageComponentGuardTower extends StructureVillagePieces.Village
 	        this.fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 7, 1, 5, 7, 5, iblockstate6, iblockstate6, false);
 	        
 	        this.fillWithBlocks(worldIn, structureBoundingBoxIn, 3, 1, 5, 3, 7, 5, Blocks.LADDER.getDefaultState(), Blocks.LADDER.getDefaultState(), false);
-	        
+	        this.setBlockState(worldIn, Blocks.TRAPDOOR.getDefaultState(), 3, 8, 5, structureBoundingBoxIn);
+            
 	        
 	        
 	        
@@ -289,25 +292,19 @@ public class VillageComponentGuardTower extends StructureVillagePieces.Village
 
                     ++this.villagersSpawned;
 
-                    if(worldIn.rand.nextInt(100) <= 95){
-                    	EntityVillagerArcher entityvillager = new EntityVillagerArcher(worldIn);
-                    	entityvillager.setLocationAndAngles((double)j + 0.5D, (double)k - 8D, (double)l + 0.5D, 0.0F, 0.0F);
-                        entityvillager.setSpawnPoint((double)j + 0.5D, (double)k - 8, (double)l + 0.5D);
-                        //entityvillager.setProfession(null);
-                        
-                        entityvillager.finalizeMobSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityvillager)), (IEntityLivingData)null, false);
-                        worldIn.spawnEntity(entityvillager);
-                    }
+                   
+                    AbstractVillagerArcher entityvillager = new EntityVillagerArcher(worldIn);
+
+                   if(worldIn.rand.nextInt(100) <= 50) entityvillager = new EntityVillagerMarksman(worldIn);
+                   else if(worldIn.rand.nextInt(100) <= 5) entityvillager = new EntityVillagerMageArcher(worldIn);
+                   
+                   entityvillager.onInitialSpawn(worldIn.getDifficultyForLocation(new BlockPos(j, k, l)), null);
+                	entityvillager.setLocationAndAngles((double)j + 0.5D, (double)k - 8D, (double)l + 0.5D, 0.0F, 0.0F);
+                    entityvillager.setSpawnPoint((double)j + 0.5D, (double)k - 8, (double)l + 0.5D);
+                    //entityvillager.setProfession(null);
                     
-                    if(worldIn.rand.nextInt(100) <= 5){
-                    	EntityVillagerMage entityvillager = new EntityVillagerMage(worldIn);
-                    	entityvillager.setLocationAndAngles((double)j + 0.5D, (double)k - 8D, (double)l + 0.5D, 0.0F, 0.0F);
-                        entityvillager.setSpawnPoint((double)j + 0.5D, (double)k - 8, (double)l + 0.5D);
-                        //entityvillager.setProfession(null);
-                        
-                        entityvillager.finalizeMobSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityvillager)), (IEntityLivingData)null, false);
-                        worldIn.spawnEntity(entityvillager);
-                    }
+                    entityvillager.finalizeMobSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityvillager)), (IEntityLivingData)null, false);
+                    worldIn.spawnEntity(entityvillager);
                     
                 }
             }

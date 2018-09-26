@@ -13,8 +13,12 @@ import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraft.world.gen.structure.StructureVillagePieces;
-import net.theexceptionist.coherentvillages.entity.EntityVillagerArcher;
-import net.theexceptionist.coherentvillages.entity.EntityVillagerSoldier;
+import net.theexceptionist.coherentvillages.entity.archer.AbstractVillagerArcher;
+import net.theexceptionist.coherentvillages.entity.soldier.AbstractVillagerSoldier;
+import net.theexceptionist.coherentvillages.entity.soldier.EntityVillagerManAtArms;
+import net.theexceptionist.coherentvillages.entity.soldier.EntityVillagerMilitia;
+import net.theexceptionist.coherentvillages.entity.soldier.EntityVillagerSergeant;
+import net.theexceptionist.coherentvillages.entity.soldier.EntityVillagerWarrior;
 
 public class VillageComponentFence extends StructureVillagePieces.Village
 {
@@ -117,8 +121,8 @@ public class VillageComponentFence extends StructureVillagePieces.Village
 
                 ++this.villagersSpawned;
 
-                if(worldIn.rand.nextInt(100) <= 50){
-                	EntityVillagerSoldier entityvillager = new EntityVillagerSoldier(worldIn);
+                /*if(worldIn.rand.nextInt(100) <= 50){
+                	AbstractVillagerSoldier entityvillager = new AbstractVillagerSoldier(worldIn);
                 	entityvillager.setLocationAndAngles((double)j + 0.5D, (double)k, (double)l + 0.5D, 0.0F, 0.0F);
                     entityvillager.setSpawnPoint((double)j + 0.5D, (double)k, (double)l + 0.5D);
                     //entityvillager.setProfession(null);
@@ -141,7 +145,7 @@ public class VillageComponentFence extends StructureVillagePieces.Village
                         entityvillager.setProfession(5);
                         entityvillager.finalizeMobSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityvillager)), (IEntityLivingData)null, false);
                         worldIn.spawnEntity(entityvillager);
-                }
+                }*/
                 /*else{
                 	EntityVillagerKnight entityvillager = new EntityVillagerKnight(worldIn);
                 	entityvillager.setLocationAndAngles((double)j + 0.5D, (double)k, (double)l + 0.5D, 0.0F, 0.0F);
@@ -151,7 +155,6 @@ public class VillageComponentFence extends StructureVillagePieces.Village
                     entityvillager.finalizeMobSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityvillager)), (IEntityLivingData)null, false);
                     worldIn.spawnEntity(entityvillager);
                 }*/
-                
             }
         }
     }

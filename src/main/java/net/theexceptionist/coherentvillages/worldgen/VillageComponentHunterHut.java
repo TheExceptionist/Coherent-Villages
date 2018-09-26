@@ -15,7 +15,8 @@ import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraft.world.gen.structure.StructureVillagePieces;
-import net.theexceptionist.coherentvillages.entity.EntityVillagerHunter;
+import net.theexceptionist.coherentvillages.entity.archer.AbstractVillagerArcher;
+import net.theexceptionist.coherentvillages.entity.archer.EntityVillagerHunter;
 
 public class VillageComponentHunterHut extends StructureVillagePieces.Village
     {
@@ -302,7 +303,9 @@ public class VillageComponentHunterHut extends StructureVillagePieces.Village
 
                     ++this.villagersSpawned;
 
-                    EntityVillagerHunter entityvillager = new EntityVillagerHunter(worldIn);
+                    AbstractVillagerArcher entityvillager = new EntityVillagerHunter(worldIn, true);
+                    
+                    entityvillager.onInitialSpawn(worldIn.getDifficultyForLocation(new BlockPos(j, k, l)), null);
                     entityvillager.setLocationAndAngles((double)j + 0.5D, (double)k, (double)l + 0.5D, 0.0F, 0.0F);
                     entityvillager.setSpawnPoint((double)j + 0.5D, (double)k, (double)l + 0.5D);
                     //entityvillager.setProfession(null);

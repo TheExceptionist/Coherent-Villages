@@ -108,7 +108,7 @@ public class EntityVillagerCreeperHunter extends EntityVillager{
         this.tasks.addTask(3, new EntityAIOpenDoor(this, true));
         this.tasks.addTask(4, new EntityAIMoveTowardsTarget(this, 0.9D, 32.0F));
         this.tasks.addTask(5, new EntityAIMoveThroughVillage(this, 0.6D, true));
-        this.tasks.addTask(6, new EntityAISearchHouse(this, 50));
+       // this.tasks.addTask(6, new EntityAISearchHouse(this, 50));
         this.tasks.addTask(7, new EntityAIMoveTowardsRestriction(this, 1.0D));
         // this.tasks.addTask(8, new EntityAIGuardPost(this, true));
         //this.Stasks.addTask(5, new EntityAILookAtVillager(this));

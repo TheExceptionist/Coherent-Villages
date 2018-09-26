@@ -17,7 +17,10 @@ import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraft.world.gen.structure.StructureVillagePieces;
 import net.minecraft.world.storage.loot.LootTableList;
-import net.theexceptionist.coherentvillages.entity.EntityVillagerSoldier;
+import net.theexceptionist.coherentvillages.entity.soldier.AbstractVillagerSoldier;
+import net.theexceptionist.coherentvillages.entity.soldier.EntityVillagerGuard;
+import net.theexceptionist.coherentvillages.entity.soldier.EntityVillagerMilitia;
+import net.theexceptionist.coherentvillages.entity.soldier.EntityVillagerPeasant;
 
 public class VillageComponentBarrackSmall extends StructureVillagePieces.Village
     {
@@ -260,7 +263,12 @@ public class VillageComponentBarrackSmall extends StructureVillagePieces.Village
 
                     ++this.villagersSpawned;
 
-                    EntityVillagerSoldier entityvillager = new EntityVillagerSoldier(worldIn);
+                    AbstractVillagerSoldier entityvillager = null;
+                    if(worldIn.rand.nextInt(100) < 50) entityvillager = new EntityVillagerMilitia(worldIn);
+                    else if (worldIn.rand.nextInt(100) < 50) entityvillager = new EntityVillagerGuard(worldIn);
+                    else entityvillager = new EntityVillagerPeasant(worldIn);
+                   
+                    entityvillager.onInitialSpawn(worldIn.getDifficultyForLocation(new BlockPos(j, k, l)), null);
                     entityvillager.setLocationAndAngles((double)j + 0.5D, (double)k, (double)l + 0.5D, 0.0F, 0.0F);
                     entityvillager.setSpawnPoint((double)j + 0.5D, (double)k, (double)l + 0.5D);
                     //entityvillager.setProfession(null);
