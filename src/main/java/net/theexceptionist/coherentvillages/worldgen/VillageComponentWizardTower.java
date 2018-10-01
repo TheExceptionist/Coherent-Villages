@@ -257,12 +257,16 @@ public class VillageComponentWizardTower extends StructureVillagePieces.Village
                 	else if(worldIn.rand.nextInt(100) <= 20) entityvillager3 = new EntityVillagerNecromancer(worldIn);
                 	else if(worldIn.rand.nextInt(100) <= 20) entityvillager3 = new EntityVillagerGrandMage(worldIn);
                 	
-                	entityvillager3.setLocationAndAngles((double)j + 0.5D, (double)k, (double)l + 0.5D, 0.0F, 0.0F);
-                    entityvillager3.setSpawnPoint((double)j + 0.5D, (double)k, (double)l + 0.5D);
-                    //entityvillager.setProfession(null);
-                    
-                    entityvillager3.finalizeMobSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityvillager3)), (IEntityLivingData)null, false);
-                    worldIn.spawnEntity(entityvillager3);
+                	 if(entityvillager3.isCanSpawn())
+                	 {
+                		 entityvillager3.onInitialSpawn(worldIn.getDifficultyForLocation(new BlockPos(j, k, l)), null);
+	                	entityvillager3.setLocationAndAngles((double)j + 0.5D, (double)k, (double)l + 0.5D, 0.0F, 0.0F);
+	                    entityvillager3.setSpawnPoint((double)j + 0.5D, (double)k, (double)l + 0.5D);
+	                    //entityvillager.setProfession(null);
+	                    
+	                    entityvillager3.finalizeMobSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityvillager3)), (IEntityLivingData)null, false);
+	                    worldIn.spawnEntity(entityvillager3);
+                	 }
                // }
                     /*if(worldIn.rand.nextInt(100) <= 20){
                     	EntityVillagerMage entityvillager1 = new EntityVillagerMage(worldIn);

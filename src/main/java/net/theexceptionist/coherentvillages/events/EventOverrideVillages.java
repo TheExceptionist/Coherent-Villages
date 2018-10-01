@@ -452,15 +452,15 @@ public class EventOverrideVillages {
 			  event.setReplacement( Blocks.SANDSTONE.getDefaultState());
 			  event.setResult(Event.Result.DENY);
 	      }
-	      if (event.getOriginal().getBlock() == Blocks.COBBLESTONE || event.getOriginal().getBlock() == Blocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, BlockStone.EnumType.DIORITE_SMOOTH))
+	      if (event.getOriginal().getBlock() == Blocks.COBBLESTONE || event.getOriginal().getBlock() == Blocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, BlockStone.EnumType.DIORITE_SMOOTH).getBlock())
 	      {
 	    	  event.setReplacement( Blocks.SANDSTONE.getStateFromMeta(BlockSandStone.EnumType.DEFAULT.getMetadata()));
 	    	  event.setResult(Event.Result.DENY);
 	      }
 
 	      if (event.getOriginal().getBlock() == Blocks.PLANKS || event.getOriginal().getBlock() == Blocks.STONEBRICK 
-	    		  || event.getOriginal().getBlock() == Blocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, BlockStone.EnumType.ANDESITE_SMOOTH)
-	    		  || event.getOriginal().getBlock() == Blocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, BlockStone.EnumType.GRANITE_SMOOTH))
+	    		  || event.getOriginal().getBlock() == Blocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, BlockStone.EnumType.ANDESITE_SMOOTH).getBlock()
+	    		  || event.getOriginal().getBlock() == Blocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, BlockStone.EnumType.GRANITE_SMOOTH).getBlock())
 	      {
 	    	  event.setReplacement(  Blocks.SANDSTONE.getStateFromMeta(BlockSandStone.EnumType.SMOOTH.getMetadata()));
 	    	  event.setResult(Event.Result.DENY);

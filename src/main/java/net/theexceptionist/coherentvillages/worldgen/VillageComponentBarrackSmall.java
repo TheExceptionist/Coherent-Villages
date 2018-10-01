@@ -268,13 +268,16 @@ public class VillageComponentBarrackSmall extends StructureVillagePieces.Village
                     else if (worldIn.rand.nextInt(100) < 50) entityvillager = new EntityVillagerGuard(worldIn);
                     else entityvillager = new EntityVillagerPeasant(worldIn);
                    
-                    entityvillager.onInitialSpawn(worldIn.getDifficultyForLocation(new BlockPos(j, k, l)), null);
-                    entityvillager.setLocationAndAngles((double)j + 0.5D, (double)k, (double)l + 0.5D, 0.0F, 0.0F);
-                    entityvillager.setSpawnPoint((double)j + 0.5D, (double)k, (double)l + 0.5D);
-                    //entityvillager.setProfession(null);
-                    
-                    entityvillager.finalizeMobSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityvillager)), (IEntityLivingData)null, false);
-                    worldIn.spawnEntity(entityvillager);
+                  	if(entityvillager.isCanSpawn())
+                  	{
+	                    entityvillager.onInitialSpawn(worldIn.getDifficultyForLocation(new BlockPos(j, k, l)), null);
+	                    entityvillager.setLocationAndAngles((double)j + 0.5D, (double)k, (double)l + 0.5D, 0.0F, 0.0F);
+	                    entityvillager.setSpawnPoint((double)j + 0.5D, (double)k, (double)l + 0.5D);
+	                    //entityvillager.setProfession(null);
+	                    
+	                    entityvillager.finalizeMobSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityvillager)), (IEntityLivingData)null, false);
+	                    worldIn.spawnEntity(entityvillager);
+                  	}
                 }
             }
         }

@@ -3,6 +3,7 @@ package net.theexceptionist.coherentvillages.entity.ai;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.ai.EntityAITarget;
 import net.minecraft.entity.passive.EntityVillager;
+import net.theexceptionist.coherentvillages.entity.followers.IEntityFollower;
 
 public class EntityAIShareTarget extends EntityAITarget {
 	IEntityFollower host;
@@ -18,6 +19,7 @@ public class EntityAIShareTarget extends EntityAITarget {
 	@Override
 	public boolean shouldExecute() {
 		// TODO Auto-generated method stub
+		if(host == null || master == null) return false;
 		
 		if(host.getLiving().getAttackTarget() != this.master.getAttackTarget()){
 			return true;

@@ -67,10 +67,90 @@ Changelog:
 *Added creeper hunter
 *Some Villages are REALLY safe now, GOAL ACHIEVED!
 
+-Beta v1.0.0.0
+*Revamped the previous system
+*Added Guards (Stay in a single place per day)
+*Added Militia (Stays in garrison unless need)
+*Added Man At Arms (Patrols Inside Village) (Night)
+*Added Warrior (Patrols Outside Village) (Night)
+*Added Peasant (Patrols Inside and Outside Village) (Day)
+*Added Sergeant (Wanders village)
+*Improved Alchemy Hut
+*Fixed Bugs
+*Improved AI
+*Added Inn
+*Added Wizard Tower
+
+-Beta v1.1.0.0
+*Revamped Archers
+*Added Marksman (Better range, accuracy, and arrow speed than archer)
+*Added Mage Archers (Uses spectral arrows)
+*Readded Hunters
+*Gave back merchant spawn in inns.
+*Revamped Alchemist (Effective against the living)
+*Added Potion Master (Old version of alchemist)
+*Added Healer (Heals allies)
+*Added UndeadHunter (Specializes in hunting undead)
+*Revamped Mage (Uses only fireballs)
+*Added Conjurer (Summons only guardians)
+*Added Necromancer (Summons skeletons to aid it! But some villagers typically dislike them and will attack the skeletons)
+*Added Grand Mage (The old version of the mage)
+*Improved ally healing AI
+
+-Beta v1.1.3.0
+*Fixed a crash
+*Fixed a bug where soldiers attack tameable entities
+
+-Beta v1.1.5
+*Improved Marksman texture
+*Improved Man-At-Arms texture
+*Fixed knight not attacking bug
+*Redid some AI
+*Add a pseudo faction system, soldiers of the same faction can't attack each other
+*Added Nametags (Config option to turn off - delete previous config to get)
+
+
+-Beta v1.1.8
+*Improved config reading
+*Added a config for soldier spawning (due to popular request)
+
+-Beta v1.1.9
+*Fixed a name tag bug
+***Taking A Break*** (Won't update again in a while)
+
+-Beta v1.2.10
+*Fixed a name tag bug
+*Fixed a config related crash, configs now update automatically - no need to delete
+
+-Beta v1.2.11
+*Made Villages less common
+*Fixed another crash
+*Fixed villagers are immortal
+
+-Beta v1.2.12
+*Made desert wizard towers variant
+*Allowed Soldiers to save gear
+*Config pass check (prevent a config crash)
+
+-Beta v1.3.0
+*Fixed Knight AI
+*Fixed Guard AI
+*Forced Soldiers out of houses (when patrolling)
+
+
+
+
+
+Phase 1:
+Polish everything
+Optimize
+Mod Compatibility 
+
+
 Planned Features:
+Improve Knight AI ****Replace Update Navigation 
 Improve Villager AI
 Add more Village Structures
-Add more Villager Types
-Revamp Village spawning system
+Wizard tower section generation
 Quest System?
-Village Naming System?
+Fixed Villages wandering from village (Archived)

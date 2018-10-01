@@ -15,8 +15,11 @@ import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraft.world.gen.structure.StructureVillagePieces;
-import net.theexceptionist.coherentvillages.entity.EntityVillagerAlchemist;
-import net.theexceptionist.coherentvillages.entity.EntityVillagerMage;
+import net.theexceptionist.coherentvillages.entity.alchemist.AbstractVillagerAlchemist;
+import net.theexceptionist.coherentvillages.entity.alchemist.EntityVillagerAlchemist;
+import net.theexceptionist.coherentvillages.entity.alchemist.EntityVillagerHealer;
+import net.theexceptionist.coherentvillages.entity.alchemist.EntityVillagerPotionMaster;
+import net.theexceptionist.coherentvillages.entity.alchemist.EntityVillagerUndeadHunter;
 
 public class VillageComponentAlchemyHut extends StructureVillagePieces.Village
     {
@@ -73,7 +76,15 @@ public class VillageComponentAlchemyHut extends StructureVillagePieces.Village
             
             //this.fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 0, 0, 6, 0, 6, Blocks.DOUBLE_STONE_SLAB.getDefaultState(), Blocks.DOUBLE_STONE_SLAB.getDefaultState(), false);
            // this.fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 0, 1, 5, 0, 5,iblockstate1, iblockstate1, false);
-            this.setBlockState(worldIn,iblockstate2, 0, 0, 0, structureBoundingBoxIn);
+            this.setBlockState(worldIn,iblockstate4, 0, 1, 0, structureBoundingBoxIn);
+            this.setBlockState(worldIn,iblockstate4, 0, 1, 1, structureBoundingBoxIn);
+            this.setBlockState(worldIn,iblockstate4, 0, 2, 2, structureBoundingBoxIn);
+            
+            this.placeTorch(worldIn, EnumFacing.UP, 0, 2, 0, structureBoundingBoxIn);
+            this.placeTorch(worldIn, EnumFacing.UP, 0, 3, 1, structureBoundingBoxIn);
+            this.placeTorch(worldIn, EnumFacing.UP, 0, 4, 2, structureBoundingBoxIn);
+            
+            this.setBlockState(worldIn,iblockstate, 0, 0, 0, structureBoundingBoxIn);
             this.setBlockState(worldIn,iblockstate2, 1, 0, 0, structureBoundingBoxIn);
             this.setBlockState(worldIn,iblockstate2, 2, 0, 0, structureBoundingBoxIn);
        
@@ -81,7 +92,7 @@ public class VillageComponentAlchemyHut extends StructureVillagePieces.Village
             this.setBlockState(worldIn,iblockstate, 1, 0, 1, structureBoundingBoxIn);
             this.setBlockState(worldIn,iblockstate, 2, 0, 1, structureBoundingBoxIn);
             
-            this.setBlockState(worldIn,iblockstate2, 0, 1, 1, structureBoundingBoxIn);
+            this.setBlockState(worldIn,iblockstate, 0, 1, 1, structureBoundingBoxIn);
             this.setBlockState(worldIn,iblockstate2, 1, 1, 1, structureBoundingBoxIn);
             this.setBlockState(worldIn,iblockstate2, 2, 1, 1, structureBoundingBoxIn);
        
@@ -93,7 +104,7 @@ public class VillageComponentAlchemyHut extends StructureVillagePieces.Village
             this.setBlockState(worldIn,iblockstate, 1, 1, 2, structureBoundingBoxIn);
             this.setBlockState(worldIn,iblockstate, 2, 1, 2, structureBoundingBoxIn);
             
-            this.setBlockState(worldIn,iblockstate2, 0, 2, 2, structureBoundingBoxIn);
+            this.setBlockState(worldIn,iblockstate, 0, 2, 2, structureBoundingBoxIn);
             this.setBlockState(worldIn,iblockstate2, 1, 2, 2, structureBoundingBoxIn);
             this.setBlockState(worldIn,iblockstate2, 2, 2, 2, structureBoundingBoxIn);
        
@@ -131,6 +142,7 @@ public class VillageComponentAlchemyHut extends StructureVillagePieces.Village
             this.fillWithBlocks(worldIn, structureBoundingBoxIn, 4, 3, 5, 6, 6, 6,Blocks.AIR.getDefaultState(), Blocks.AIR.getDefaultState(), false);
             
             this.fillWithBlocks(worldIn, structureBoundingBoxIn, 4, 6, 5, 6, 6, 6,iblockstate1, iblockstate1, false);
+            this.fillWithBlocks(worldIn, structureBoundingBoxIn, 4, 7, 5, 6, 7, 6,iblockstate6, iblockstate6, false);
             this.fillWithBlocks(worldIn, structureBoundingBoxIn, 3, 3, 5, 3, 4, 5,Blocks.AIR.getDefaultState(), Blocks.AIR.getDefaultState(), false);
             this.fillWithBlocks(worldIn, structureBoundingBoxIn, 4, 3, 4, 4, 4, 4,Blocks.AIR.getDefaultState(), Blocks.AIR.getDefaultState(), false);
 	        
@@ -151,6 +163,14 @@ public class VillageComponentAlchemyHut extends StructureVillagePieces.Village
             this.fillWithBlocks(worldIn, structureBoundingBoxIn, 3, 3, 0, 7, 3, 0,iblockstate4, iblockstate4, false);
             
             this.fillWithBlocks(worldIn, structureBoundingBoxIn, 7, 3, 0, 7, 3, 3,iblockstate4, iblockstate4, false);
+            
+            this.setBlockState(worldIn,iblockstate1, 1, 2, 3, structureBoundingBoxIn);
+            this.setBlockState(worldIn,iblockstate1, 2, 2, 3, structureBoundingBoxIn);
+            this.setBlockState(worldIn,iblockstate1, 3, 2, 3, structureBoundingBoxIn);
+            
+            this.setBlockState(worldIn,iblockstate1, 3, 2, 2, structureBoundingBoxIn);
+            this.setBlockState(worldIn,iblockstate1, 3, 2, 1, structureBoundingBoxIn);
+            
 	        //6, 3, 5,/* //Stair Stab Piece
             //x, y , z
            /* this.setBlockState(worldIn, Blocks.DOUBLE_STONE_SLAB.getDefaultState(), 0, 0, 0, structureBoundingBoxIn);
@@ -391,24 +411,25 @@ public class VillageComponentAlchemyHut extends StructureVillagePieces.Village
                     ++this.villagersSpawned;
                     
                    // if(worldIn.rand.nextInt(100) <= 20){
-                    	EntityVillagerAlchemist entityvillager3 = new EntityVillagerAlchemist(worldIn);
-                    	entityvillager3.setLocationAndAngles((double)j + 0.5D, (double)k + 5D, (double)l + 0.5D, 0.0F, 0.0F);
-                        entityvillager3.setSpawnPoint((double)j + 0.5D, (double)k + 5D, (double)l + 0.5D);
-                        //entityvillager.setProfession(null);
-                        
-                        entityvillager3.finalizeMobSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityvillager3)), (IEntityLivingData)null, false);
-                        worldIn.spawnEntity(entityvillager3);
-                   // }
-                        if(worldIn.rand.nextInt(100) <= 20){
-                        	EntityVillagerMage entityvillager1 = new EntityVillagerMage(worldIn);
-                        	entityvillager1.setLocationAndAngles((double)j + 0.5D, (double)k + 5D, (double)l + 0.5D, 0.0F, 0.0F);
-                            entityvillager1.setSpawnPoint((double)j + 0.5D, (double)k + 5D, (double)l + 0.5D);
-                          //  entityvillager1.setProfession(null);
-                            
-                            entityvillager1.finalizeMobSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityvillager1)), (IEntityLivingData)null, false);
-                            worldIn.spawnEntity(entityvillager1);
-                        } 
-                        	else
+                    	AbstractVillagerAlchemist entityvillager3 = new EntityVillagerAlchemist(worldIn);
+                    	
+                    	if(worldIn.rand.nextInt(100) < 50) entityvillager3 = new EntityVillagerUndeadHunter(worldIn);
+                    	else if(worldIn.rand.nextInt(100) < 50) entityvillager3 = new EntityVillagerHealer(worldIn);
+                    	else if(worldIn.rand.nextInt(100) < 25) entityvillager3 = new EntityVillagerPotionMaster(worldIn);
+                    		
+                    	if(entityvillager3.isCanSpawn())
+                    	{
+                    		 entityvillager3.onInitialSpawn(worldIn.getDifficultyForLocation(new BlockPos(j, k, l)), null);
+	                    	entityvillager3.setLocationAndAngles((double)j + 0.5D, (double)k + 5D, (double)l + 0.5D, 0.0F, 0.0F);
+	                        entityvillager3.setSpawnPoint((double)j + 0.5D, (double)k + 5D, (double)l + 0.5D);
+	                       
+	                        //entityvillager.setProfession(null);
+	                        
+	                        entityvillager3.finalizeMobSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityvillager3)), (IEntityLivingData)null, false);
+	                        worldIn.spawnEntity(entityvillager3);
+                    	}
+     
+                        if(worldIn.rand.nextInt(100) <= 80)
                         {
                         		EntityVillager entityvillager = new EntityVillager(worldIn);
                                 entityvillager.setLocationAndAngles((double)j + 1.5D, (double)k + 5D, (double)l + 0.5D, 0.0F, 0.0F);

@@ -7,6 +7,8 @@ import net.minecraft.client.renderer.entity.layers.LayerCustomHead;
 import net.minecraft.client.renderer.entity.layers.LayerHeldItem;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.util.ResourceLocation;
+import net.theexceptionist.coherentvillages.entity.soldier.AbstractVillagerSoldier;
+import net.theexceptionist.coherentvillages.entity.soldier.ModelVillagerSoldier;
 import net.theexceptionist.coherentvillages.main.Resources;
 
 public class RenderVillagerMerchant extends RenderLiving<EntityVillager>
@@ -37,13 +39,6 @@ public class RenderVillagerMerchant extends RenderLiving<EntityVillager>
      */
     protected ResourceLocation getEntityTexture(EntityVillager entity)
     {
-    	int type = 0;
-    	String name = "";
-    	EntityVillagerSoldier soldier;
-    	if(entity instanceof EntityVillagerSoldier){
-    		soldier = ((EntityVillagerSoldier)entity);
-    		//System.out.println(entity+" 2 "+name+" : "+type);
-    	}
     	return VILLAGER_SOLDIER_TEXTURE;
     	//String n =
         

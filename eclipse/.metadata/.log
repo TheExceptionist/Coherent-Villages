@@ -693,3 +693,54 @@ java.lang.Exception: Illegal ASTNode positions: previousEnd=271, childStart=270,
 	at org.eclipse.jdt.internal.ui.text.java.AbstractJavaCompletionProposal.getAdditionalProposalInfo(AbstractJavaCompletionProposal.java:602)
 	at org.eclipse.jface.text.contentassist.AdditionalInfoController$Timer$2$1.run(AdditionalInfoController.java:113)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+!SESSION 2018-09-28 12:05:01.771 -----------------------------------------------
+eclipse.buildId=4.6.3.M20170301-0400
+java.version=1.8.0_144
+java.vendor=Oracle Corporation
+BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.jee.product -keyring /Users/kennethstepney/.eclipse_keyring
+Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -product org.eclipse.epp.package.jee.product -keyring /Users/kennethstepney/.eclipse_keyring
+
+!ENTRY org.eclipse.core.resources 2 10035 2018-09-28 12:06:04.883
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY org.eclipse.core.net 1 0 2018-09-28 12:06:06.052
+!MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences
+!SESSION 2018-09-29 11:25:24.324 -----------------------------------------------
+eclipse.buildId=4.6.3.M20170301-0400
+java.version=1.8.0_144
+java.vendor=Oracle Corporation
+BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.jee.product -keyring /Users/kennethstepney/.eclipse_keyring
+Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -product org.eclipse.epp.package.jee.product -keyring /Users/kennethstepney/.eclipse_keyring
+
+!ENTRY org.eclipse.core.net 1 0 2018-09-29 11:26:21.248
+!MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences
+
+!ENTRY org.eclipse.jface.text 2 0 2018-09-29 11:31:16.716
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.number'
+
+!ENTRY org.eclipse.jface.text 2 0 2018-09-29 11:31:16.721
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.round'
+
+!ENTRY org.eclipse.core.resources 4 566 2018-09-29 15:23:49.724
+!MESSAGE Workspace was not properly initialized or has already shutdown.
+
+!ENTRY org.eclipse.core.jobs 4 1 2018-09-29 15:23:49.726
+!MESSAGE Worker thread ended job: Refreshing workspace(12), but still holds rule: ThreadJob(Refreshing workspace(12),[F/Coherent Villages/build/tmp/recompileMc/compiled/net/minecraftforge/client])
+!SESSION 2018-09-30 15:39:49.815 -----------------------------------------------
+eclipse.buildId=4.6.3.M20170301-0400
+java.version=1.8.0_144
+java.vendor=Oracle Corporation
+BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.jee.product -keyring /Users/kennethstepney/.eclipse_keyring
+Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -product org.eclipse.epp.package.jee.product -keyring /Users/kennethstepney/.eclipse_keyring
+
+!ENTRY org.eclipse.core.net 1 0 2018-09-30 15:40:20.524
+!MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences
+
+!ENTRY org.eclipse.jface.text 2 0 2018-09-30 15:43:56.870
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.number'
+
+!ENTRY org.eclipse.jface.text 2 0 2018-09-30 15:43:56.875
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.round'

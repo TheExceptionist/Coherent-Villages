@@ -14,7 +14,13 @@ import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraft.world.gen.structure.StructureVillagePieces;
-import net.theexceptionist.coherentvillages.entity.EntityVillagerKnight;
+import net.theexceptionist.coherentvillages.entity.knight.AbstractEntityKnight;
+import net.theexceptionist.coherentvillages.entity.knight.EntityVillagerApothecary;
+import net.theexceptionist.coherentvillages.entity.knight.EntityVillagerCavalier;
+import net.theexceptionist.coherentvillages.entity.knight.EntityVillagerHorseArcher;
+import net.theexceptionist.coherentvillages.entity.knight.EntityVillagerKnight;
+import net.theexceptionist.coherentvillages.entity.knight.EntityVillagerMageKnight;
+import net.theexceptionist.coherentvillages.entity.knight.EntityVillagerPaladin;
 
 public class VillageComponentStable extends StructureVillagePieces.Village
     {
@@ -59,7 +65,7 @@ public class VillageComponentStable extends StructureVillagePieces.Village
             }
             
             
-            this.fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 0, 0, 12, 5, 8, Blocks.AIR.getDefaultState(), Blocks.AIR.getDefaultState(), false);
+            this.fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 0, 0, 12, 5, 7, Blocks.AIR.getDefaultState(), Blocks.AIR.getDefaultState(), false);
 
 
             IBlockState iblockstate = this.getBiomeSpecificBlockState(Blocks.COBBLESTONE.getDefaultState());
@@ -101,9 +107,9 @@ public class VillageComponentStable extends StructureVillagePieces.Village
             
            
 
-            for (int j = 0; j < 8; ++j)
+            for (int j = 0; j < 7; ++j)
             {
-                for (int i = 0; i < 8; ++i)
+                for (int i = 0; i < 12; ++i)
                 {
                     this.clearCurrentPositionBlocksUpwards(worldIn, i, 6, j, structureBoundingBoxIn);
                     this.replaceAirAndLiquidDownwards(worldIn, iblockstate, i, -1, j, structureBoundingBoxIn);
@@ -130,15 +136,26 @@ public class VillageComponentStable extends StructureVillagePieces.Village
                     }
 
                     ++this.villagersSpawned;
-                    {
-	                    EntityVillagerKnight entityvillager = new EntityVillagerKnight(worldIn);
-	                    entityvillager.setLocationAndAngles((double)j + 0.5D, (double)k, (double)l + 0.5D, 0.0F, 0.0F);
-	                    entityvillager.setSpawnPoint((double)j + 0.5D, (double)k, (double)l + 0.5D);
-	                   // entityvillager.setProfession(null);
+                    
+	                    AbstractEntityKnight entityknight = new EntityVillagerCavalier(worldIn);
 	                    
-	                    entityvillager.finalizeMobSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityvillager)), (IEntityLivingData)null, false);
-	                    worldIn.spawnEntity(entityvillager);
-                    }
+	                    if(worldIn.rand.nextInt(100) < 75) entityknight = new EntityVillagerKnight(worldIn);
+	                    else if(worldIn.rand.nextInt(100) < 50) entityknight = new EntityVillagerHorseArcher(worldIn); 
+	                    else if(worldIn.rand.nextInt(100) < 25) entityknight = new EntityVillagerApothecary(worldIn);
+	                    else if(worldIn.rand.nextInt(100) < 10) entityknight = new EntityVillagerMageKnight(worldIn);
+	                    else if(worldIn.rand.nextInt(100) < 5) entityknight = new EntityVillagerPaladin(worldIn);
+	                    
+	                    if(entityknight.isCanSpawn()){
+		                    entityknight.onInitialSpawn(worldIn.getDifficultyForLocation(new BlockPos(j, k, l)), null);
+		                    //entityknight.setRidingHorse();
+		                	entityknight.setLocationAndAngles((double)j + 0.5D, (double)k, (double)l + 0.5D, 0.0F, 0.0F);
+		                    entityknight.setSpawnPoint((double)j + 0.5D, (double)k, (double)l + 0.5D);
+		                   // entityvillager.setProfession(null);
+		                    
+		                    entityknight.finalizeMobSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityknight)), (IEntityLivingData)null, false);
+		                    worldIn.spawnEntity(entityknight);
+	                    }
+                    
                     {
 	                    EntityVillager entityvillager = new EntityVillager(worldIn);
 	                    entityvillager.setLocationAndAngles((double)j + 0.5D, (double)k, (double)l + 0.5D, 0.0F, 0.0F);

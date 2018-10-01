@@ -7,53 +7,50 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.util.math.MathHelper;
-import net.theexceptionist.coherentvillages.entity.EntityVillagerAlchemist;
+import net.theexceptionist.coherentvillages.entity.alchemist.AbstractVillagerAlchemist;
 
 public class EntityAIHealAllies extends EntityAIBase{
 	/** The entity the AI instance has been applied to */
     private final EntityLiving entityHost;
     /** The entity (as a RangedAttackMob) the AI instance has been applied to. */
-    private final EntityVillagerAlchemist rangedAttackEntityHost;
+    private final AbstractVillagerAlchemist rangedAttackEntityHost;
     private Class <? extends EntityVillager >  attackTarget;
     /**
      * A decrementing tick that spawns a ranged attack once this value reaches 0. It is then set back to the
      * maxRangedAttackTime.
      */
-    private int rangedAttackTime;
+    private int range;
     private final double entityMoveSpeed;
     private int seeTime;
-    private final int attackIntervalMin;
     /** The maximum time the AI has to wait before peforming another ranged attack. */
-    private final int maxRangedAttackTime;
     private final float attackRadius;
     private final float maxAttackDistance;
 	private EntityLivingBase target;
+	//private int coolDown = 0;
 
-    public EntityAIHealAllies(EntityVillagerAlchemist attacker, double movespeed, int maxAttackTime, float maxAttackDistanceIn, Class <? extends EntityVillager > villager)
+    public EntityAIHealAllies(AbstractVillagerAlchemist entityVillagerPotionMaster, double movespeed, int range, float maxAttackDistanceIn, Class <? extends EntityVillager > villager)
     {
-        this(attacker, movespeed, maxAttackTime, maxAttackTime, maxAttackDistanceIn);
+        this(entityVillagerPotionMaster, movespeed, range, maxAttackDistanceIn);
         this.attackTarget = villager;
         
     }
 
-    public EntityAIHealAllies(EntityVillagerAlchemist attacker, double movespeed, int p_i1650_4_, int maxAttackTime, float maxAttackDistanceIn)
+    public EntityAIHealAllies(AbstractVillagerAlchemist entityVillagerHealer, double movespeed, int range, float maxAttackDistanceIn)
     {
-        this.rangedAttackTime = -1;
-
-        if (!(attacker instanceof EntityLivingBase))
+        if (!(entityVillagerHealer instanceof EntityLivingBase))
         {
             throw new IllegalArgumentException("ArrowAttackGoal requires Mob implements RangedAttackMob");
         }
         else
         {
-            this.rangedAttackEntityHost = attacker;
-            this.entityHost = (EntityLiving)attacker;
+            this.rangedAttackEntityHost = entityVillagerHealer;
+            this.entityHost = (EntityLiving)entityVillagerHealer;
             this.entityMoveSpeed = movespeed;
-            this.attackIntervalMin = p_i1650_4_;
-            this.maxRangedAttackTime = maxAttackTime;
+          //  this.attackIntervalMin = p_i1650_4_;
+            this.range = range;
             this.attackRadius = maxAttackDistanceIn;
             this.maxAttackDistance = maxAttackDistanceIn * maxAttackDistanceIn;
-            this.setMutexBits(3);
+            this.setMutexBits(1);
         }
     }
 
@@ -78,10 +75,8 @@ public class EntityAIHealAllies extends EntityAIBase{
 	            this.target = (EntityLivingBase)list.get(i);
 	           // System.out.println("Searching: "+target+" "+target.getHealth()+"/"+target.getMaxHealth()+" "+this.entityHost);
 	            if(this.target.getHealth() < this.target.getMaxHealth()){
-	            //	 System.out.println("Searching: "+target.getHealth()+"/"+target.getMaxHealth());
+	            	 //System.out.println("Searching: "+target.getName()+" Health: "+target.getHealth()+"/"+target.getMaxHealth());
 	            	return true;
-	            }else{
-	            	return false;
 	            }
         	}
         }
@@ -103,7 +98,6 @@ public class EntityAIHealAllies extends EntityAIBase{
     {
         this.attackTarget = null;
         this.seeTime = 0;
-        this.rangedAttackTime = -1;
     }
 
     /**
@@ -114,7 +108,10 @@ public class EntityAIHealAllies extends EntityAIBase{
     	if(this.target != null){
 	        double d0 = this.entityHost.getDistanceSq(this.target.posX, this.target.getEntityBoundingBox().minY, this.target.posZ);
 	        boolean flag = true;//this.entityHost.getEntitySenses().canSee(this.attackTarget);
-	
+	       //Unused for now
+	       // System.out.println("healing start");
+	        this.rangedAttackEntityHost.setClient(target);
+	        
 	        if (flag)
 	        {
 	            ++this.seeTime;
@@ -131,29 +128,20 @@ public class EntityAIHealAllies extends EntityAIBase{
 	        else
 	        {
 	            this.entityHost.getNavigator().tryMoveToEntityLiving(this.target, this.entityMoveSpeed);
+	          //  System.out.println("moving start");
 	        }
 	
 	        this.entityHost.getLookHelper().setLookPositionWithEntity(this.target, 30.0F, 30.0F);
 	
-	        if (--this.rangedAttackTime == 0)
+	        if (d0 < this.range)
 	        {
-	            if (!flag)
-	            {
-	                return;
-	            }
 	
 	            float f = MathHelper.sqrt(d0) / this.attackRadius;
 	            float lvt_5_1_ = MathHelper.clamp(f, 0.1F, 1.0F);
 	            this.entityHost.getNavigator().tryMoveToEntityLiving(this.target, 0.5D);
 	            this.rangedAttackEntityHost.healEntityWithRangedAttack(this.target, lvt_5_1_);
-	            System.out.println("Healing: "+this.target);
-	            this.rangedAttackTime = MathHelper.floor(f * (float)(this.maxRangedAttackTime - this.attackIntervalMin) + (float)this.attackIntervalMin);
-	            
-	        }
-	        else if (this.rangedAttackTime < 0)
-	        {
-	            float f2 = MathHelper.sqrt(d0) / this.attackRadius;
-	            this.rangedAttackTime = MathHelper.floor(f2 * (float)(this.maxRangedAttackTime - this.attackIntervalMin) + (float)this.attackIntervalMin);
+	            //System.out.println("Healing: "+this.target);
+	           // this.rangedAttackTime = MathHelper.floor(f * (float)(this.maxRangedAttackTime - this.attackIntervalMin) + (float)this.attackIntervalMin);
 	        }
 	    	}
     }

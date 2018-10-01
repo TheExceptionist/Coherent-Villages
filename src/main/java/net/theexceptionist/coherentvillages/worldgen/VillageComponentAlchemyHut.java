@@ -417,22 +417,18 @@ public class VillageComponentAlchemyHut extends StructureVillagePieces.Village
                     	else if(worldIn.rand.nextInt(100) < 50) entityvillager3 = new EntityVillagerHealer(worldIn);
                     	else if(worldIn.rand.nextInt(100) < 25) entityvillager3 = new EntityVillagerPotionMaster(worldIn);
                     		
-                    	entityvillager3.setLocationAndAngles((double)j + 0.5D, (double)k + 5D, (double)l + 0.5D, 0.0F, 0.0F);
-                        entityvillager3.setSpawnPoint((double)j + 0.5D, (double)k + 5D, (double)l + 0.5D);
-                        //entityvillager.setProfession(null);
-                        
-                        entityvillager3.finalizeMobSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityvillager3)), (IEntityLivingData)null, false);
-                        worldIn.spawnEntity(entityvillager3);
-                   // }
-                  /*      if(worldIn.rand.nextInt(100) <= 20){
-                        	AbstractVillagerMage entityvillager1 = new AbstractVillagerMage(worldIn);
-                        	entityvillager1.setLocationAndAngles((double)j + 0.5D, (double)k + 5D, (double)l + 0.5D, 0.0F, 0.0F);
-                            entityvillager1.setSpawnPoint((double)j + 0.5D, (double)k + 5D, (double)l + 0.5D);
-                          //  entityvillager1.setProfession(null);
-                            
-                            entityvillager1.finalizeMobSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityvillager1)), (IEntityLivingData)null, false);
-                            worldIn.spawnEntity(entityvillager1);
-                        } */
+                    	if(entityvillager3.isCanSpawn())
+                    	{
+                    		 entityvillager3.onInitialSpawn(worldIn.getDifficultyForLocation(new BlockPos(j, k, l)), null);
+	                    	entityvillager3.setLocationAndAngles((double)j + 0.5D, (double)k + 5D, (double)l + 0.5D, 0.0F, 0.0F);
+	                        entityvillager3.setSpawnPoint((double)j + 0.5D, (double)k + 5D, (double)l + 0.5D);
+	                       
+	                        //entityvillager.setProfession(null);
+	                        
+	                        entityvillager3.finalizeMobSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityvillager3)), (IEntityLivingData)null, false);
+	                        worldIn.spawnEntity(entityvillager3);
+                    	}
+     
                         if(worldIn.rand.nextInt(100) <= 80)
                         {
                         		EntityVillager entityvillager = new EntityVillager(worldIn);

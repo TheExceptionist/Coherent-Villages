@@ -17,11 +17,13 @@ public class EntityAISearchHouse extends EntityAIBase
     private int insidePosX = -1;
     private int insidePosZ = -1;
     private int rate;
+    private boolean garrisoned;
 
-    public EntityAISearchHouse(EntityCreature entityIn, int rate)
+    public EntityAISearchHouse(EntityCreature entityIn, int rate, boolean garrisoned)
     {
         this.entity = entityIn;
         this.rate = rate;
+        this.garrisoned = garrisoned;
         this.setMutexBits(1);
     }
 
@@ -32,18 +34,18 @@ public class EntityAISearchHouse extends EntityAIBase
     {
         BlockPos blockpos = new BlockPos(this.entity);
 
-        if (entity.world.rand.nextInt(100) < rate && this.entity.world.isDaytime())
+        if ((entity.world.rand.nextInt(100) < rate && this.entity.world.isDaytime()) || !this.garrisoned)
         {
-            if (this.entity.getRNG().nextInt(50) != 0)
+           /* if (this.entity.getRNG().nextInt(50) != 0 || !this.garrisoned)
             {
                 return false;
-            }
-            else if (this.insidePosX != -1 && this.entity.getDistanceSq((double)this.insidePosX, this.entity.posY, (double)this.insidePosZ) < 4.0D)
+            }*/
+            /*else if (this.insidePosX != -1 && this.entity.getDistanceSq((double)this.insidePosX, this.entity.posY, (double)this.insidePosZ) < 4.0D)
             {
                 return false;
-            }
-            else
-            {
+            }*/
+            /*else
+            {*/
                 Village village = this.entity.world.getVillageCollection().getNearestVillage(blockpos, 14);
 
                 if (village == null)
@@ -55,7 +57,7 @@ public class EntityAISearchHouse extends EntityAIBase
                     this.doorInfo = village.getDoorInfo(blockpos);
                     return this.doorInfo != null;
                 }
-            }
+           // }
         }
         else
         {

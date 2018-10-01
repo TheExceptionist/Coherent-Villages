@@ -648,10 +648,14 @@ public class VillageComponentInn extends StructureVillagePieces.Village
                     if(worldIn.rand.nextInt(100) < 25 && merchantsSpawned == 0)
                     {
                     	EntityVillagerMerchant merchant = new EntityVillagerMerchant(worldIn);
-                    	merchant.setLocationAndAngles((double)j + 1.5D, (double)k + 5D, (double)l + 0.5D, 0.0F, 0.0F);
-                        merchant.setProfession(worldIn.rand.nextInt(6));                               
-                        merchant.finalizeMobSpawn(worldIn.getDifficultyForLocation(new BlockPos(merchant)), (IEntityLivingData)null, false);
-                        worldIn.spawnEntity(merchant);
+                    	
+                    	if(merchant.getSpawn())
+                    	{
+	                    	merchant.setLocationAndAngles((double)j + 1.5D, (double)k + 5D, (double)l + 0.5D, 0.0F, 0.0F);
+	                        merchant.setProfession(worldIn.rand.nextInt(6));                               
+	                        merchant.finalizeMobSpawn(worldIn.getDifficultyForLocation(new BlockPos(merchant)), (IEntityLivingData)null, false);
+	                        worldIn.spawnEntity(merchant);
+                    	}
                         
                     	merchantsSpawned++;
                     }

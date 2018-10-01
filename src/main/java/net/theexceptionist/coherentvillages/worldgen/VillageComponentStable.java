@@ -145,14 +145,16 @@ public class VillageComponentStable extends StructureVillagePieces.Village
 	                    else if(worldIn.rand.nextInt(100) < 10) entityknight = new EntityVillagerMageKnight(worldIn);
 	                    else if(worldIn.rand.nextInt(100) < 5) entityknight = new EntityVillagerPaladin(worldIn);
 	                    
-	                    entityknight.onInitialSpawn(worldIn.getDifficultyForLocation(new BlockPos(j, k, l)), null);
-	                    //entityknight.setRidingHorse();
-	                	entityknight.setLocationAndAngles((double)j + 0.5D, (double)k, (double)l + 0.5D, 0.0F, 0.0F);
-	                    entityknight.setSpawnPoint((double)j + 0.5D, (double)k, (double)l + 0.5D);
-	                   // entityvillager.setProfession(null);
-	                    
-	                    entityknight.finalizeMobSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityknight)), (IEntityLivingData)null, false);
-	                    worldIn.spawnEntity(entityknight);
+	                    if(entityknight.isCanSpawn()){
+		                    entityknight.onInitialSpawn(worldIn.getDifficultyForLocation(new BlockPos(j, k, l)), null);
+		                    //entityknight.setRidingHorse();
+		                	entityknight.setLocationAndAngles((double)j + 0.5D, (double)k, (double)l + 0.5D, 0.0F, 0.0F);
+		                    entityknight.setSpawnPoint((double)j + 0.5D, (double)k, (double)l + 0.5D);
+		                   // entityvillager.setProfession(null);
+		                    
+		                    entityknight.finalizeMobSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityknight)), (IEntityLivingData)null, false);
+		                    worldIn.spawnEntity(entityknight);
+	                    }
                     
                     {
 	                    EntityVillager entityvillager = new EntityVillager(worldIn);

@@ -25,11 +25,12 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.village.Village;
 import net.minecraft.world.World;
 import net.theexceptionist.coherentvillages.entity.ai.EntityAIAttackBackExclude;
 import net.theexceptionist.coherentvillages.entity.followers.EntityMerchantGuard;
+import net.theexceptionist.coherentvillages.main.Main;
+import net.theexceptionist.coherentvillages.main.NameGenerator;
 
 public class EntityVillagerMerchant extends EntityVillager{
 	protected String title;
@@ -39,13 +40,28 @@ public class EntityVillagerMerchant extends EntityVillager{
 	private int rich;
 	private boolean wasInit = false;
 	private EntityMerchantGuard[] guards;
+	protected boolean canSpawn;
 	
 	public EntityVillagerMerchant(World worldIn) {
 		super(worldIn);
+		this.title = NameGenerator.generateRandomName(world.rand);
+		this.setAlwaysRenderNameTag(Main.useNametags);
+		this.canSpawn = Main.villager_spawn.get(Main.Soldier.Merchant.ordinal()).spawn;
+
 		/*if( worldIn.getVillageCollection().getVillageList().size() > 0){
 			this.home = worldIn.getVillageCollection().getNearestVillage(new BlockPos(this), 32);
 		}*/
 		
+	}
+	
+	public boolean getSpawn()
+	{
+		return canSpawn;
+	}
+	
+	public String getClassName()
+	{
+		return title;
 	}
 	
 	protected void initEntityAI()

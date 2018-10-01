@@ -90,6 +90,8 @@ import net.theexceptionist.coherentvillages.worldgen.VillageHandlerWizardTower;
 @Mod(modid = Resources.MODID, name = Resources.NAME, version = Resources.VERSION, updateJSON="https://github.com/TheExceptionist/Coherent-Villages/blob/master/UpdateChecker/update.json")
 public class Main
 {
+	public static boolean useNametags = true;
+
 	public static Logger logger;
     
     @SidedProxy(serverSide = "net.theexceptionist.coherentvillages.main.CommonProxy", clientSide = "net.theexceptionist.coherentvillages.main.ClientProxy")
@@ -105,15 +107,44 @@ public class Main
     private static File config_file;
     private static String[] config_text =
     	{
+    			"version "+Resources.VERSION+"\n",
     			"#distance between villages\n",
     			"#do not set below 9!\n",
-    			"max_distance=9\n",
+    			"max_distance=20\n",
     			"#do not set above max_distance or below 3!\n",
-    			"min_distance=3\n",
+    			"min_distance=10\n",
     			"#Tested with values 0, 1... change default size of villages\n",
     			"size=1\n",
     			"#Spawnrate for the villagers outside the villages, 0 or -1 turns them off!\n",
     			"merchant_spawn_rate=1\n",
+    			"#Turn nametags off and on. (1 = on, 0 = off)\n",
+    			"nametags_on=1\n",
+    			"#Turn soldiers off and on. (1 = on, 0 = off)\n",
+    			"guard=1\n",
+    			"man-at-arms=1\n",
+    			"sergeant=1\n",
+    			"warrior=1\n",
+    			"militia=1\n",
+    			"peasant=1\n",
+     			"archer=1\n",
+    			"hunter=1\n",
+    			"mage_archer=1\n",
+    			"marksman=1\n",
+    			"merchant=1\n",
+    			"mage=1\n",
+     			"conjurer=1\n",
+    			"necromancer=1\n",
+    			"grand_mage=1\n",
+    			"alchemist=1\n",
+    			"healer=1\n",
+    			"undead_hunter=1\n",
+     			"potion_master=1\n",
+    			"cavalier=1\n",
+    			"knight=1\n",
+    			"apothecary=1\n",
+    			"horse_archer=1\n",
+    			"mage_knight=1\n",
+    			"paladin=1\n",
     			"#\n",
     			"#mark each biome name with either a 0 or 1 to turn them on/off\n",
     			"#Ex: Ocean=1 turns on the village in the ocean biome\n",
@@ -179,12 +210,44 @@ public class Main
     			"Mesa Plateau M=1\n"
     	};
     
+    public static enum Soldier
+    {
+    	Guard, 
+    	Man_At_Arms,
+		Sergeant,
+		Warrior,
+		Militia,
+		Peasant,
+		Archer,
+		Hunter,
+		Mage_Archer,
+		Marksman,
+		Merchant,
+		Mage,
+		Conjurer,
+		Necromancer,
+		Grand_Mage,
+		Alchemist,
+		Healer,
+		Undead_Healer,
+		Potion_Master,
+		Cavalier,
+		Knight,
+		Apothecary,
+		Horse_Archer,
+		Mage_Knight,
+		Paladin,
+		NUM_SOLDIERS;
+    }
+    
     public static int max_distance = 9;
     public static int min_distance = 3;
     public static int merchant_spawn = 10;
     public static int village_size = 0;
+    private static int passes = 0;
     
     public static ArrayList<BiomeSpawn> biomes_spawn = new ArrayList<BiomeSpawn>();
+    public static ArrayList<VillagerSpawn> villager_spawn = new ArrayList<VillagerSpawn>();
     
     class BiomeSpawn
     {
@@ -197,6 +260,20 @@ public class Main
     		this.spawn = (num == 1) ? true : false;
     		//System.out.println(name+" "+spawn);
     		Main.biomes_spawn.add(this);
+    	}
+    }
+    
+    public class VillagerSpawn
+    {
+    	public String name;
+    	public boolean spawn;
+    	
+    	public VillagerSpawn(final String name, final int spawn)
+    	{
+    		this.name = name;
+    		this.spawn = (spawn == 1) ? true : false;
+    		
+    		Main.villager_spawn.add(this);
     	}
     }
 
@@ -212,38 +289,44 @@ public class Main
 		config_file = new File(event.getSuggestedConfigurationFile().getAbsolutePath());
 		
 		try {
-			if(config_file.createNewFile())
-			{
-				System.out.println(Resources.MODID+"| Config file not found! \nCreating...");	
-				try {
-					System.out.println("Writing to config file....");
-					writer = new BufferedWriter(new FileWriter(config_file));
-					
-					//writer.
-					for(int i = 0; i < config_text.length; i++)
-					{
-						writer.write(config_text[i]);
-					}
-					
-					System.out.println("Wrote to config file!");
-				} catch (IOException e2) {
-					// TODO Auto-generated catch block
-					e2.printStackTrace();
-				} finally {
-					writer.close();
-				}
-				
-				readConfig();
-			}
-			else
-			{
-				readConfig();
-			}
+			writeConfig();
 		} catch (IOException e) {
 			//config_file.mkdirs();
 			e.printStackTrace();
 		}
 		System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
+	}
+	
+	private void writeConfig() throws IOException
+	{
+		passes++;
+		if(config_file.createNewFile())
+		{
+			System.out.println(Resources.MODID+"| Config file not found! \nCreating...");	
+			try {
+				System.out.println("Writing to config file....");
+				writer = new BufferedWriter(new FileWriter(config_file));
+				
+				//writer.
+				for(int i = 0; i < config_text.length; i++)
+				{
+					writer.write(config_text[i]);
+				}
+				
+				System.out.println("Wrote to config file!");
+			} catch (IOException e2) {
+				// TODO Auto-generated catch block
+				e2.printStackTrace();
+			} finally {
+				writer.close();
+			}
+			
+			readConfig();
+		}
+		else
+		{
+			readConfig();
+		}
 	}
 
 	private void readConfig() throws NumberFormatException, IOException {
@@ -256,37 +339,97 @@ public class Main
 			System.out.print("Reading from config file.....");
 			reader = new BufferedReader(new FileReader(config_file));
 			
+			boolean readingBiomes = false;
+			boolean checkedVersion = false;
 			while((line = reader.readLine()) != null)
 			{
 				if(line.substring(0, 1).compareTo("#") == 0) continue;
+				if(!checkedVersion) 
+				{
+					String[] parts = line.split(" ");
+
+					if((parts[0].contains("version") && !parts[1].contains(Resources.VERSION)) || !parts[0].contains("version")) 
+					{
+						//Past version delete this
+						System.out.println("Past config - deleting");
+						config_file.delete();
+						break;
+					}
+					
+					checkedVersion = true;
+					continue;
+				}
 				
 				String[] parts = line.split("=");
 				
+				int value = 0;
+				try
+				{
+					value = Integer.parseInt(parts[1]);;
+				}
+				catch(NumberFormatException e)
+				{
+					System.out.println("ERROR: Reading value from config - "+parts[0]);
+					//e.printStackTrace();
+					continue;
+				}
+				
 				if(parts[0].contains("max"))
 				{
-					max_distance = Integer.parseInt(parts[1]);
+					max_distance = value;
 				}
 				else if(parts[0].contains("min"))
 				{
-					min_distance = Integer.parseInt(parts[1]);
+					min_distance = value;
 				}
 				else if(parts[0].contains("mer"))
 				{
-					merchant_spawn = Integer.parseInt(parts[1]);
+					merchant_spawn = value;
 				}
 				else if(parts[0].contains("size"))
 				{
-					village_size = Integer.parseInt(parts[1]);
+					village_size = value;
+				}
+				else if(parts[0].contains("name"))
+				{
+					useNametags = value == 1 ? true : false;
 				}
 				else
 				{
-					//System.out.println(parts[0]+" "+parts[1]);
-					new BiomeSpawn(parts[0], Integer.parseInt(parts[1]));
+					if(parts[0].contains("Ocean")) readingBiomes = true;
+						
+					if(!readingBiomes)
+					{
+						new VillagerSpawn(parts[0], value);
+					}
+					else
+					{
+						new BiomeSpawn(parts[0], value);
+					}
 				}
 			}
 			
+			if(!checkedVersion && passes < 10)
+			{
+				writeConfig();
+				return;
+			}
+			else if(passes > 10)
+			{
+				System.out.println("Config couldn't load! Please check to make sure your config file includes a version at the top.");
+			}
 			
-			System.out.println("Read the config file! New Max: "+max_distance+" New Min: "+min_distance+" New Merchant: "+merchant_spawn);
+			while(villager_spawn.size() < Soldier.NUM_SOLDIERS.ordinal())
+			{
+				new VillagerSpawn("Placeholder", 1);
+			}
+			
+			for(VillagerSpawn v : villager_spawn)
+			{
+				System.out.println("Spawns: "+v.name+" "+v.spawn);
+			}
+			
+			System.out.println("Read the config file! New Max: "+max_distance+" New Min: "+min_distance+" New Merchant: "+merchant_spawn+" Guard Spawn: "+Main.villager_spawn.get(0).spawn);
 		} catch (FileNotFoundException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
