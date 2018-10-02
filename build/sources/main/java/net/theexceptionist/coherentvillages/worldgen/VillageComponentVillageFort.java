@@ -14,12 +14,10 @@ import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraft.world.gen.structure.StructureVillagePieces;
-import net.theexceptionist.coherentvillages.entity.archer.AbstractVillagerArcher;
-import net.theexceptionist.coherentvillages.entity.mage.AbstractVillagerMage;
+import net.theexceptionist.coherentvillages.entity.bandit.EntityVillagerBandit;
 import net.theexceptionist.coherentvillages.entity.soldier.AbstractVillagerSoldier;
 import net.theexceptionist.coherentvillages.entity.soldier.EntityVillagerGuard;
 import net.theexceptionist.coherentvillages.entity.soldier.EntityVillagerManAtArms;
-import net.theexceptionist.coherentvillages.entity.soldier.EntityVillagerMilitia;
 import net.theexceptionist.coherentvillages.entity.soldier.EntityVillagerSergeant;
 import net.theexceptionist.coherentvillages.entity.soldier.EntityVillagerWarrior;
 
@@ -209,16 +207,20 @@ public class VillageComponentVillageFort extends StructureVillagePieces.Village
                     
                     AbstractVillagerSoldier entityvillager = new EntityVillagerSergeant(worldIn);
              
-                    
-                    if(worldIn.rand.nextInt(100) <= 5 && i != villagersSpawned){
-                    	entityvillager = new EntityVillagerManAtArms(worldIn);
-                     }
-                    else if(worldIn.rand.nextInt(100) <= 50  && i != villagersSpawned)
+             
+                    if(!this.isZombieInfested)
                     {
-                    	entityvillager = new EntityVillagerWarrior(worldIn);
-                    }else if(worldIn.rand.nextInt(100) <= 75 && i != villagersSpawned)
+	                    if(worldIn.rand.nextInt(100) <= 50  && i != villagersSpawned)
+	                    {
+	                    	entityvillager = new EntityVillagerWarrior(worldIn);
+	                    }else if(worldIn.rand.nextInt(100) <= 75 && i != villagersSpawned)
+	                    {
+	                    	entityvillager = new EntityVillagerManAtArms(worldIn);
+	                    }
+                    }
+                    else
                     {
-                    	entityvillager = new EntityVillagerGuard(worldIn);
+                    	entityvillager = new EntityVillagerBandit(worldIn);
                     }
                     
                     

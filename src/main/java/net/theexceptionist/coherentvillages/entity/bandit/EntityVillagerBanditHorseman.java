@@ -1,21 +1,7 @@
 package net.theexceptionist.coherentvillages.entity.bandit;
 
-import javax.annotation.Nullable;
-
-import com.google.common.base.Predicate;
-
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAIMoveThroughVillage;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
-import net.minecraft.entity.monster.EntityCreeper;
-import net.minecraft.entity.monster.IMob;
-import net.minecraft.entity.passive.EntityTameable;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
@@ -24,11 +10,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 import net.theexceptionist.coherentvillages.entity.EntityVillagerHorse;
-import net.theexceptionist.coherentvillages.entity.ai.EntityAIAttackBackExclude;
-import net.theexceptionist.coherentvillages.entity.ai.EntityAIStayInBorders;
-import net.theexceptionist.coherentvillages.entity.followers.EntitySkeletonMinion;
-import net.theexceptionist.coherentvillages.entity.knight.ai.EntityAIKnightMoveToTarget;
-import net.theexceptionist.coherentvillages.entity.soldier.EntityVillagerManAtArms;
 import net.theexceptionist.coherentvillages.main.Main;
 
 public class EntityVillagerBanditHorseman extends AbstractVillagerBandit {
@@ -57,7 +38,7 @@ public class EntityVillagerBanditHorseman extends AbstractVillagerBandit {
 		 if(this.horse == null || this.horse.isDead || this.inWater){
 			 this.isRiding = false;
 			 
-			 EntityVillagerManAtArms entityvillager = new EntityVillagerManAtArms(this.world);
+			 AbstractVillagerBandit entityvillager = new EntityVillagerBandit(this.world);
 			  entityvillager.onInitialSpawn(this.world.getDifficultyForLocation(new BlockPos(this.posX, this.posY, this.posZ)), null);
     	
 			  entityvillager.setLocationAndAngles(this.posX + 0.5D, this.posY, this.posZ + 0.5D, 0.0F, 0.0F);

@@ -29,6 +29,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 import net.theexceptionist.coherentvillages.entity.EntityVillagerHorse;
+import net.theexceptionist.coherentvillages.entity.alchemist.EntityVillagerAlchemist;
 import net.theexceptionist.coherentvillages.main.Main;
 
 public class EntityVillagerApothecary extends AbstractEntityKnight implements IRangedAttackMob{
@@ -38,7 +39,7 @@ public class EntityVillagerApothecary extends AbstractEntityKnight implements IR
 		this.undeadHunter = true;
 		this.className = "Apothecary";
 		this.canSpawn = Main.villager_spawn.get(Main.Soldier.Apothecary.ordinal()).spawn;
-
+		this.setDismountSoldier(new EntityVillagerAlchemist(worldIn));
 		// TODO Auto-generated constructor stub
 	}
 

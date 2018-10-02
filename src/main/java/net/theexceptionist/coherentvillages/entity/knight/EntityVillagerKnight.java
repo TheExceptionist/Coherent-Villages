@@ -8,6 +8,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 import net.theexceptionist.coherentvillages.entity.knight.ai.EntityAIAttackKnight;
+import net.theexceptionist.coherentvillages.entity.soldier.EntityVillagerWarrior;
 import net.theexceptionist.coherentvillages.main.Main;
 
 public class EntityVillagerKnight extends AbstractEntityKnight{
@@ -16,7 +17,7 @@ public class EntityVillagerKnight extends AbstractEntityKnight{
 		super(worldIn);
 		this.className = "Knight";
 		this.canSpawn = Main.villager_spawn.get(Main.Soldier.Knight.ordinal()).spawn;
-
+		this.setDismountSoldier(new EntityVillagerWarrior(worldIn));
 		// TODO Auto-generated constructor stub
 	}
 	

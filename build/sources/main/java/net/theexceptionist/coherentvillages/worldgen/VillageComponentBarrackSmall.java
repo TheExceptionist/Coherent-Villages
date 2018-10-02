@@ -17,6 +17,7 @@ import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraft.world.gen.structure.StructureVillagePieces;
 import net.minecraft.world.storage.loot.LootTableList;
+import net.theexceptionist.coherentvillages.entity.bandit.EntityVillagerBandit;
 import net.theexceptionist.coherentvillages.entity.soldier.AbstractVillagerSoldier;
 import net.theexceptionist.coherentvillages.entity.soldier.EntityVillagerGuard;
 import net.theexceptionist.coherentvillages.entity.soldier.EntityVillagerMilitia;
@@ -263,21 +264,40 @@ public class VillageComponentBarrackSmall extends StructureVillagePieces.Village
 
                     ++this.villagersSpawned;
 
-                    AbstractVillagerSoldier entityvillager = null;
-                    if(worldIn.rand.nextInt(100) < 50) entityvillager = new EntityVillagerMilitia(worldIn);
-                    else if (worldIn.rand.nextInt(100) < 50) entityvillager = new EntityVillagerGuard(worldIn);
-                    else entityvillager = new EntityVillagerPeasant(worldIn);
-                   
-                  	if(entityvillager.isCanSpawn())
-                  	{
-	                    entityvillager.onInitialSpawn(worldIn.getDifficultyForLocation(new BlockPos(j, k, l)), null);
-	                    entityvillager.setLocationAndAngles((double)j + 0.5D, (double)k, (double)l + 0.5D, 0.0F, 0.0F);
-	                    entityvillager.setSpawnPoint((double)j + 0.5D, (double)k, (double)l + 0.5D);
-	                    //entityvillager.setProfession(null);
-	                    
-	                    entityvillager.finalizeMobSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityvillager)), (IEntityLivingData)null, false);
-	                    worldIn.spawnEntity(entityvillager);
-                  	}
+                    AbstractVillagerSoldier entityvillager = new EntityVillagerPeasant(worldIn);
+                    
+                    if(!this.isZombieInfested)
+                    {
+	                    if(worldIn.rand.nextInt(100) < 50) entityvillager = new EntityVillagerMilitia(worldIn);
+                    }
+                    else
+                    {
+	                    entityvillager = new EntityVillagerBandit(worldIn);
+		                   
+                    }
+                    
+	                   
+	                  	if(entityvillager.isCanSpawn() && !(entityvillager instanceof EntityVillagerPeasant))
+	                  	{
+		                    entityvillager.onInitialSpawn(worldIn.getDifficultyForLocation(new BlockPos(j, k, l)), null);
+		                    entityvillager.setLocationAndAngles((double)j + 0.5D, (double)k, (double)l + 0.5D, 0.0F, 0.0F);
+		                    entityvillager.setSpawnPoint((double)j + 0.5D, (double)k, (double)l + 0.5D);
+		                    //entityvillager.setProfession(null);
+		                    
+		                    entityvillager.finalizeMobSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityvillager)), (IEntityLivingData)null, false);
+		                    worldIn.spawnEntity(entityvillager);
+	                  	}
+	                  	else
+	                  	{
+	                  		entityvillager.onInitialSpawn(worldIn.getDifficultyForLocation(new BlockPos(j, k, l)), null);
+		                    entityvillager.setLocationAndAngles((double)j + 0.5D, (double)k, (double)l - 1.5D, 0.0F, 0.0F);
+		                    entityvillager.setSpawnPoint((double)j + 0.5D, (double)k, (double)l + 0.5D);
+		                    //entityvillager.setProfession(null);
+		                    
+		                    entityvillager.finalizeMobSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityvillager)), (IEntityLivingData)null, false);
+		                    worldIn.spawnEntity(entityvillager);
+	                  	}
+	                  	
                 }
             }
         }

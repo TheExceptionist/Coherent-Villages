@@ -72,7 +72,7 @@ public abstract class AbstractVillagerMage extends AbstractVillagerSoldier imple
 	
 	 protected void setEquipmentBasedOnDifficulty(DifficultyInstance difficulty)
 	    {
-	        super.setEquipmentBasedOnDifficulty(difficulty);
+	        //super.setEquipmentBasedOnDifficulty(difficulty);
 	    }
 
 

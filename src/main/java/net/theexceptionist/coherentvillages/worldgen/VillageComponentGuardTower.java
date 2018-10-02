@@ -14,10 +14,11 @@ import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraft.world.gen.structure.StructureVillagePieces;
-import net.theexceptionist.coherentvillages.entity.archer.AbstractVillagerArcher;
 import net.theexceptionist.coherentvillages.entity.archer.EntityVillagerArcher;
 import net.theexceptionist.coherentvillages.entity.archer.EntityVillagerMageArcher;
 import net.theexceptionist.coherentvillages.entity.archer.EntityVillagerMarksman;
+import net.theexceptionist.coherentvillages.entity.bandit.EntityVillagerBanditArcher;
+import net.theexceptionist.coherentvillages.entity.soldier.AbstractVillagerSoldier;
 
 public class VillageComponentGuardTower extends StructureVillagePieces.Village
     {
@@ -293,11 +294,18 @@ public class VillageComponentGuardTower extends StructureVillagePieces.Village
                     ++this.villagersSpawned;
 
                    
-                    AbstractVillagerArcher entityvillager = new EntityVillagerArcher(worldIn);
-
-                   if(worldIn.rand.nextInt(100) <= 50) entityvillager = new EntityVillagerMarksman(worldIn);
-                   else if(worldIn.rand.nextInt(100) <= 5) entityvillager = new EntityVillagerMageArcher(worldIn);
-                   
+                    AbstractVillagerSoldier entityvillager = new EntityVillagerArcher(worldIn);
+                	
+                    if(!this.isZombieInfested)
+                    {
+	                   if(worldIn.rand.nextInt(100) <= 50) entityvillager = new EntityVillagerMarksman(worldIn);
+	                   else if(worldIn.rand.nextInt(100) <= 5) entityvillager = new EntityVillagerMageArcher(worldIn);
+                    }
+                    else
+                    {
+                    	entityvillager = new EntityVillagerBanditArcher(worldIn);	
+                    }
+                    
 	               	if(entityvillager.isCanSpawn())
 	               	{
 	                   entityvillager.onInitialSpawn(worldIn.getDifficultyForLocation(new BlockPos(j, k, l)), null);
@@ -308,7 +316,6 @@ public class VillageComponentGuardTower extends StructureVillagePieces.Village
 	                    entityvillager.finalizeMobSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityvillager)), (IEntityLivingData)null, false);
 	                    worldIn.spawnEntity(entityvillager);
 	               	}
-                    
                 }
             }
         }

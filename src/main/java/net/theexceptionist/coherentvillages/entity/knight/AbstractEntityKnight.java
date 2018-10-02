@@ -28,6 +28,7 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 import net.theexceptionist.coherentvillages.entity.EntityVillagerHorse;
 import net.theexceptionist.coherentvillages.entity.ai.EntityAIAttackBackExclude;
+import net.theexceptionist.coherentvillages.entity.ai.EntityAIRest;
 import net.theexceptionist.coherentvillages.entity.ai.EntityAIStayInBorders;
 import net.theexceptionist.coherentvillages.entity.followers.EntitySkeletonMinion;
 import net.theexceptionist.coherentvillages.entity.knight.ai.EntityAIKnightMoveToTarget;
@@ -36,6 +37,7 @@ import net.theexceptionist.coherentvillages.entity.soldier.EntityVillagerManAtAr
 
 public abstract class AbstractEntityKnight extends AbstractVillagerSoldier{
 	protected EntityVillagerHorse horse;
+	protected AbstractVillagerSoldier dismountSoldier;
 	protected boolean isRiding = false;
 	public static final double TROT = 0.8;
 	public static final double RUNNING = 1.6;
@@ -88,6 +90,7 @@ public abstract class AbstractEntityKnight extends AbstractVillagerSoldier{
         //this.tasks.addTask(0, new EntityAIAttackCharge(this, 1.0D, true));
         this.tasks.addTask(2, new EntityAIStayInBorders(this, RUNNING));
         this.tasks.addTask(3, new EntityAIMoveThroughVillage(this, 0.6D, true));
+		this.tasks.addTask(4, new EntityAIRest(this, true));
         this.tasks.addTask(5, new EntityAIKnightMoveToTarget(this, SPRINT, 32.0F));
         this.tasks.addTask(6, new EntityAIWanderAvoidWater(this, TROT));
         this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
@@ -145,7 +148,7 @@ public abstract class AbstractEntityKnight extends AbstractVillagerSoldier{
 	
 	 protected void setEquipmentBasedOnDifficulty(DifficultyInstance difficulty)
 	    {
-	        super.setEquipmentBasedOnDifficulty(difficulty);
+	        //super.setEquipmentBasedOnDifficulty(difficulty);
 	    }
 	 
 	 /*public void onLivingUpdate()
@@ -183,6 +186,7 @@ public abstract class AbstractEntityKnight extends AbstractVillagerSoldier{
 	        }
 	    }*/
 
+	 
 	 protected void updateAITasks()
 	    {
 		 super.updateAITasks();
@@ -193,21 +197,32 @@ public abstract class AbstractEntityKnight extends AbstractVillagerSoldier{
 		 if(this.horse == null || this.horse.isDead || this.inWater){
 			 this.isRiding = false;
 			 
-			 EntityVillagerManAtArms entityvillager = new EntityVillagerManAtArms(this.world);
-			  entityvillager.onInitialSpawn(this.world.getDifficultyForLocation(new BlockPos(this.posX, this.posY, this.posZ)), null);
-       	
-			  entityvillager.setLocationAndAngles(this.posX + 0.5D, this.posY, this.posZ + 0.5D, 0.0F, 0.0F);
-          entityvillager.setSpawnPoint(this.posX + 0.5D, this.posY, this.posZ + 0.5D);
-          //entityvillager.setProfession(null);
-          
-          entityvillager.finalizeMobSpawn(this.world.getDifficultyForLocation(new BlockPos(entityvillager)), (IEntityLivingData)null, false);
-          this.world.spawnEntity(entityvillager);
+			 AbstractVillagerSoldier entityvillager = this.dismountSoldier;
+
+			 if(entityvillager != null){
+				 entityvillager.onInitialSpawn(this.world.getDifficultyForLocation(new BlockPos(this.posX, this.posY, this.posZ)), null);
+	       	
+				 entityvillager.setLocationAndAngles(this.posX + 0.5D, this.posY, this.posZ + 0.5D, 0.0F, 0.0F);
+				 entityvillager.setSpawnPoint(this.posX + 0.5D, this.posY, this.posZ + 0.5D);
+	          //entityvillager.setProfession(null);
+	          
+				 entityvillager.finalizeMobSpawn(this.world.getDifficultyForLocation(new BlockPos(entityvillager)), (IEntityLivingData)null, false);
+				 this.world.spawnEntity(entityvillager);
+			}
           this.setDead();
 			 
 		 }
 	  }
 	 
-	   public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, @Nullable IEntityLivingData livingdata)
+	   public AbstractVillagerSoldier getDismountSoldier() {
+		return dismountSoldier;
+	}
+
+	public void setDismountSoldier(AbstractVillagerSoldier dismountSoldier) {
+		this.dismountSoldier = dismountSoldier;
+	}
+
+	public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, @Nullable IEntityLivingData livingdata)
 	    {
 	        livingdata = super.onInitialSpawn(difficulty, livingdata);
 	        this.setEquipmentBasedOnDifficulty(difficulty);

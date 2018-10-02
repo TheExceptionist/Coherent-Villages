@@ -6,6 +6,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAIBase;
+import net.minecraft.entity.ai.EntityAIMoveThroughVillage;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAITasks.EntityAITaskEntry;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
@@ -57,14 +58,6 @@ public class EntityVillagerHealer extends AbstractVillagerAlchemist{
 		 if(this.getAttackTarget() instanceof EntityVillager){
 			 this.setAttackTarget(null);
 		 }
-		 
-		 for(Object task : this.tasks.taskEntries.toArray())
-			{
-				 EntityAIBase ai = ((EntityAITaskEntry) task).action;
-				 if(ai instanceof EntityAIAttackMelee || ai instanceof EntityAINearestAttackableTarget)
-					 this.tasks.removeTask(ai);	
-				 //System.out.println("Removed");
-			}
 	    }
 	
 	public void onLivingUpdate()
@@ -143,6 +136,16 @@ public class EntityVillagerHealer extends AbstractVillagerAlchemist{
     {
 		super.initEntityAI();
         this.tasks.addTask(1, new EntityAIHealAllies(this, 1.0D, 60, 60.0F, EntityVillager.class));
+        this.tasks.addTask(5, new EntityAIMoveThroughVillage(this, 0.6D, false));
+        
+		 
+		 for(Object task : this.tasks.taskEntries.toArray())
+			{
+				 EntityAIBase ai = ((EntityAITaskEntry) task).action;
+				 if(ai instanceof EntityAIAttackMelee || ai instanceof EntityAINearestAttackableTarget)
+					 this.tasks.removeTask(ai);	
+				 //System.out.println("Removed");
+			}
 		//this.areAdditionalTasksSet = true;
        // this.tasks.addTask(6, new EntityAIHarvestFarmland(this, 0.6D));
     }

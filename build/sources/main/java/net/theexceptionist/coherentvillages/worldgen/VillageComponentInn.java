@@ -17,6 +17,8 @@ import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraft.world.gen.structure.StructureVillagePieces;
 import net.minecraft.world.gen.structure.template.Template;
 import net.theexceptionist.coherentvillages.entity.EntityVillagerMerchant;
+import net.theexceptionist.coherentvillages.entity.bandit.EntityVillagerBandit;
+import net.theexceptionist.coherentvillages.entity.soldier.AbstractVillagerSoldier;
 
 public class VillageComponentInn extends StructureVillagePieces.Village
     {
@@ -638,28 +640,39 @@ public class VillageComponentInn extends StructureVillagePieces.Village
 
                     ++this.villagersSpawned;
                     
-                   // if(worldIn.rand.nextInt(100) <= 20){
-                    EntityVillager entityvillager = new EntityVillager(worldIn);
-                    entityvillager.setLocationAndAngles((double)j + 1.5D, (double)k + 5D, (double)l + 0.5D, 0.0F, 0.0F);
-                    entityvillager.setProfession(worldIn.rand.nextInt(6));                               
-                    entityvillager.finalizeMobSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityvillager)), (IEntityLivingData)null, false);
-                    worldIn.spawnEntity(entityvillager);
-                
-                    if(worldIn.rand.nextInt(100) < 25 && merchantsSpawned == 0)
+                    if(!this.isZombieInfested)
                     {
-                    	EntityVillagerMerchant merchant = new EntityVillagerMerchant(worldIn);
-                    	
-                    	if(merchant.getSpawn())
-                    	{
-	                    	merchant.setLocationAndAngles((double)j + 1.5D, (double)k + 5D, (double)l + 0.5D, 0.0F, 0.0F);
-	                        merchant.setProfession(worldIn.rand.nextInt(6));                               
-	                        merchant.finalizeMobSpawn(worldIn.getDifficultyForLocation(new BlockPos(merchant)), (IEntityLivingData)null, false);
-	                        worldIn.spawnEntity(merchant);
-                    	}
-                        
-                    	merchantsSpawned++;
+	                   // if(worldIn.rand.nextInt(100) <= 20){
+	                    EntityVillager entityvillager = new EntityVillager(worldIn);
+	                    entityvillager.setLocationAndAngles((double)j + 1.5D, (double)k + 5D, (double)l + 0.5D, 0.0F, 0.0F);
+	                    entityvillager.setProfession(worldIn.rand.nextInt(6));                               
+	                    entityvillager.finalizeMobSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityvillager)), (IEntityLivingData)null, false);
+	                    worldIn.spawnEntity(entityvillager);
+	                
+	                    if(worldIn.rand.nextInt(100) < 25 && merchantsSpawned == 0)
+	                    {
+	                    	EntityVillagerMerchant merchant = new EntityVillagerMerchant(worldIn);
+	                    	
+	                    	if(merchant.getSpawn())
+	                    	{
+		                    	merchant.setLocationAndAngles((double)j + 1.5D, (double)k + 5D, (double)l + 0.5D, 0.0F, 0.0F);
+		                        merchant.setProfession(worldIn.rand.nextInt(6));                               
+		                        merchant.finalizeMobSpawn(worldIn.getDifficultyForLocation(new BlockPos(merchant)), (IEntityLivingData)null, false);
+		                        worldIn.spawnEntity(merchant);
+	                    	}
+	                        
+	                    	merchantsSpawned++;
+	                    }
                     }
-                       
+                    else
+                    {
+                    	AbstractVillagerSoldier soldier = new EntityVillagerBandit(worldIn);  
+                    	
+                        soldier.setLocationAndAngles((double)j + 1.5D, (double)k + 5D, (double)l + 0.5D, 0.0F, 0.0F);
+	                    soldier.setProfession(worldIn.rand.nextInt(6));                               
+	                    soldier.finalizeMobSpawn(worldIn.getDifficultyForLocation(new BlockPos(soldier)), (IEntityLivingData)null, false);
+	                    worldIn.spawnEntity(soldier);
+                    }
                 }
             }
         }

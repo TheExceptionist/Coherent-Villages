@@ -83,7 +83,7 @@ public class EntityAIKnightMoveToTarget extends EntityAIBase
      */
     public void startExecuting()
     {
-    	System.out.println("Creature Pos: "+this.creature.posX+" "+this.creature.posY+" "+this.creature.posZ+" | Target Pos: "+this.movePosX+" "+this.movePosY+" "+this.movePosZ);
+    	//System.out.println("Creature Pos: "+this.creature.posX+" "+this.creature.posY+" "+this.creature.posZ+" | Target Pos: "+this.movePosX+" "+this.movePosY+" "+this.movePosZ);
         boolean success = this.creature.getNavigator().tryMoveToXYZ(this.movePosX, this.movePosY, this.movePosZ, this.speed);
     }
 }

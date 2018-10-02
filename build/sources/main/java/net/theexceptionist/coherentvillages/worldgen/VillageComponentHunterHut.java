@@ -15,8 +15,9 @@ import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraft.world.gen.structure.StructureVillagePieces;
-import net.theexceptionist.coherentvillages.entity.archer.AbstractVillagerArcher;
 import net.theexceptionist.coherentvillages.entity.archer.EntityVillagerHunter;
+import net.theexceptionist.coherentvillages.entity.bandit.EntityVillagerBanditArcher;
+import net.theexceptionist.coherentvillages.entity.soldier.AbstractVillagerSoldier;
 
 public class VillageComponentHunterHut extends StructureVillagePieces.Village
     {
@@ -303,7 +304,12 @@ public class VillageComponentHunterHut extends StructureVillagePieces.Village
 
                     ++this.villagersSpawned;
 
-                    AbstractVillagerArcher entityvillager = new EntityVillagerHunter(worldIn, true);
+                    AbstractVillagerSoldier entityvillager = new EntityVillagerHunter(worldIn, true);
+                    
+                    if(this.isZombieInfested)
+                    {
+                    	entityvillager = new EntityVillagerBanditArcher(worldIn);
+                    }
                     
                 	if(entityvillager.isCanSpawn())
                 	{

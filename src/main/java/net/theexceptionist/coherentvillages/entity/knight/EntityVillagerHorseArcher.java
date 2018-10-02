@@ -14,6 +14,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 import net.theexceptionist.coherentvillages.entity.ai.EntityAIAttackWithBow;
+import net.theexceptionist.coherentvillages.entity.archer.EntityVillagerArcher;
 import net.theexceptionist.coherentvillages.main.Main;
 
 public class EntityVillagerHorseArcher extends AbstractEntityKnight implements IRangedAttackMob{
@@ -22,7 +23,7 @@ public class EntityVillagerHorseArcher extends AbstractEntityKnight implements I
 		super(worldIn);
 		this.className = "Horse Archer";
 		this.canSpawn = Main.villager_spawn.get(Main.Soldier.Horse_Archer.ordinal()).spawn;
-
+		this.setDismountSoldier(new EntityVillagerArcher(worldIn));
 		// TODO Auto-generated constructor stub
 	}
 

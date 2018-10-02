@@ -14,18 +14,20 @@ import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraft.world.gen.structure.StructureVillagePieces;
-import net.theexceptionist.coherentvillages.entity.knight.AbstractEntityKnight;
+import net.theexceptionist.coherentvillages.entity.bandit.EntityVillagerBanditHorseman;
 import net.theexceptionist.coherentvillages.entity.knight.EntityVillagerApothecary;
 import net.theexceptionist.coherentvillages.entity.knight.EntityVillagerCavalier;
 import net.theexceptionist.coherentvillages.entity.knight.EntityVillagerHorseArcher;
 import net.theexceptionist.coherentvillages.entity.knight.EntityVillagerKnight;
 import net.theexceptionist.coherentvillages.entity.knight.EntityVillagerMageKnight;
 import net.theexceptionist.coherentvillages.entity.knight.EntityVillagerPaladin;
+import net.theexceptionist.coherentvillages.entity.soldier.AbstractVillagerSoldier;
 
 public class VillageComponentStable extends StructureVillagePieces.Village
     {
         private boolean isRoofAccessible;
 		private int villagersSpawned;
+		private int level = 0;
 
         public VillageComponentStable()
         {
@@ -63,6 +65,8 @@ public class VillageComponentStable extends StructureVillagePieces.Village
 
                 this.boundingBox.offset(0, this.averageGroundLvl - this.boundingBox.maxY + 3 , 0);
             }
+            
+            this.level = worldIn.rand.nextInt(3);
             
             
             this.fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 0, 0, 12, 5, 7, Blocks.AIR.getDefaultState(), Blocks.AIR.getDefaultState(), false);
@@ -137,13 +141,29 @@ public class VillageComponentStable extends StructureVillagePieces.Village
 
                     ++this.villagersSpawned;
                     
-	                    AbstractEntityKnight entityknight = new EntityVillagerCavalier(worldIn);
+	                    AbstractVillagerSoldier entityknight = new EntityVillagerCavalier(worldIn);
 	                    
-	                    if(worldIn.rand.nextInt(100) < 75) entityknight = new EntityVillagerKnight(worldIn);
-	                    else if(worldIn.rand.nextInt(100) < 50) entityknight = new EntityVillagerHorseArcher(worldIn); 
-	                    else if(worldIn.rand.nextInt(100) < 25) entityknight = new EntityVillagerApothecary(worldIn);
-	                    else if(worldIn.rand.nextInt(100) < 10) entityknight = new EntityVillagerMageKnight(worldIn);
-	                    else if(worldIn.rand.nextInt(100) < 5) entityknight = new EntityVillagerPaladin(worldIn);
+	                    if(!this.isZombieInfested)
+	                    {
+		                    if(worldIn.rand.nextInt(100) < 50 && level == 0) entityknight = new EntityVillagerKnight(worldIn);
+		                    else if(worldIn.rand.nextInt(100) < 25 && level == 0) entityknight = new EntityVillagerHorseArcher(worldIn); 
+		                    else if(worldIn.rand.nextInt(100) < 50 && level == 1) entityknight = new EntityVillagerApothecary(worldIn);
+		                    else if(worldIn.rand.nextInt(100) < 25 && level == 1) entityknight = new EntityVillagerMageKnight(worldIn);
+		                    else if(worldIn.rand.nextInt(100) < 25 && level == 2) entityknight = new EntityVillagerPaladin(worldIn);
+	                    
+		                    {
+			                    EntityVillager entityvillager = new EntityVillager(worldIn);
+			                    entityvillager.setLocationAndAngles((double)j + 0.5D, (double)k, (double)l + 0.5D, 0.0F, 0.0F);
+			                    entityvillager.setProfession(5);
+			                    entityvillager.finalizeMobSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityvillager)), (IEntityLivingData)null, false);
+			                    worldIn.spawnEntity(entityvillager);
+		                    }
+	                    }
+	                    else
+	                    {
+	                    	entityknight = new EntityVillagerBanditHorseman(worldIn);
+	                    }
+	                    
 	                    
 	                    if(entityknight.isCanSpawn()){
 		                    entityknight.onInitialSpawn(worldIn.getDifficultyForLocation(new BlockPos(j, k, l)), null);
@@ -155,14 +175,6 @@ public class VillageComponentStable extends StructureVillagePieces.Village
 		                    entityknight.finalizeMobSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityknight)), (IEntityLivingData)null, false);
 		                    worldIn.spawnEntity(entityknight);
 	                    }
-                    
-                    {
-	                    EntityVillager entityvillager = new EntityVillager(worldIn);
-	                    entityvillager.setLocationAndAngles((double)j + 0.5D, (double)k, (double)l + 0.5D, 0.0F, 0.0F);
-	                    entityvillager.setProfession(5);
-	                    entityvillager.finalizeMobSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityvillager)), (IEntityLivingData)null, false);
-	                    worldIn.spawnEntity(entityvillager);
-                    }
                 }
             }
         }

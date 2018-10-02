@@ -218,7 +218,7 @@ public abstract class AbstractVillagerAlchemist extends AbstractVillagerSoldier 
     @Override
 	 protected void setEquipmentBasedOnDifficulty(DifficultyInstance difficulty)
 	    {
-	        super.setEquipmentBasedOnDifficulty(difficulty);
+	        //super.setEquipmentBasedOnDifficulty(difficulty);
 	        
 	        //Main.logger.info("Gave Equipment");//, message, p0, p1, p2, p3, p4, p5, p6, p7);
 

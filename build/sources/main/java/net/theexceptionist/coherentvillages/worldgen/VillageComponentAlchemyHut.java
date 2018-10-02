@@ -20,6 +20,8 @@ import net.theexceptionist.coherentvillages.entity.alchemist.EntityVillagerAlche
 import net.theexceptionist.coherentvillages.entity.alchemist.EntityVillagerHealer;
 import net.theexceptionist.coherentvillages.entity.alchemist.EntityVillagerPotionMaster;
 import net.theexceptionist.coherentvillages.entity.alchemist.EntityVillagerUndeadHunter;
+import net.theexceptionist.coherentvillages.entity.bandit.EntityVillagerBanditAlchemist;
+import net.theexceptionist.coherentvillages.entity.soldier.AbstractVillagerSoldier;
 
 public class VillageComponentAlchemyHut extends StructureVillagePieces.Village
     {
@@ -395,6 +397,7 @@ public class VillageComponentAlchemyHut extends StructureVillagePieces.Village
         
         protected void spawnVillagers(World worldIn, StructureBoundingBox structurebb, int x, int y, int z, int count)
         {
+        	int healerCount = 0;
             if (this.villagersSpawned < count)
             {
                 for (int i = villagersSpawned; i < count; ++i)
@@ -411,12 +414,39 @@ public class VillageComponentAlchemyHut extends StructureVillagePieces.Village
                     ++this.villagersSpawned;
                     
                    // if(worldIn.rand.nextInt(100) <= 20){
-                    	AbstractVillagerAlchemist entityvillager3 = new EntityVillagerAlchemist(worldIn);
+                    	AbstractVillagerSoldier entityvillager3 = new EntityVillagerAlchemist(worldIn);
                     	
-                    	if(worldIn.rand.nextInt(100) < 50) entityvillager3 = new EntityVillagerUndeadHunter(worldIn);
-                    	else if(worldIn.rand.nextInt(100) < 50) entityvillager3 = new EntityVillagerHealer(worldIn);
-                    	else if(worldIn.rand.nextInt(100) < 25) entityvillager3 = new EntityVillagerPotionMaster(worldIn);
-                    		
+                    	if(!this.isZombieInfested)
+                    	{
+	                    	if(worldIn.rand.nextInt(100) < 50) entityvillager3 = new EntityVillagerUndeadHunter(worldIn);
+	                    	else if(worldIn.rand.nextInt(100) < 25) entityvillager3 = new EntityVillagerPotionMaster(worldIn);
+	                    	
+		                    if(healerCount == 0)
+		                    {
+		                    	AbstractVillagerAlchemist entityvillager2 = new EntityVillagerHealer(worldIn);
+		                    	entityvillager2.onInitialSpawn(worldIn.getDifficultyForLocation(new BlockPos(j, k, l)), null);
+		                    	entityvillager2.setLocationAndAngles((double)j + 0.5D, (double)k + 5D, (double)l + 0.5D, 0.0F, 0.0F);
+		                        entityvillager2.setSpawnPoint((double)j + 0.5D, (double)k + 5D, (double)l + 0.5D);
+		                        entityvillager2.finalizeMobSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityvillager3)), (IEntityLivingData)null, false);
+		                        worldIn.spawnEntity(entityvillager2);
+		                        healerCount++;
+	                    	}
+	     
+	                        if(worldIn.rand.nextInt(100) <= 80)
+	                        {
+	                        		EntityVillager entityvillager = new EntityVillager(worldIn);
+	                                entityvillager.setLocationAndAngles((double)j + 1.5D, (double)k + 5D, (double)l + 0.5D, 0.0F, 0.0F);
+	                                entityvillager.setProfession(5);                               
+	                                entityvillager.finalizeMobSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityvillager)), (IEntityLivingData)null, false);
+	                                worldIn.spawnEntity(entityvillager);
+	                        }
+                    	}
+                    	else
+                    	{
+                    		entityvillager3 = new EntityVillagerBanditAlchemist(worldIn);
+                    	}
+                    	
+                    	
                     	if(entityvillager3.isCanSpawn())
                     	{
                     		 entityvillager3.onInitialSpawn(worldIn.getDifficultyForLocation(new BlockPos(j, k, l)), null);
@@ -428,15 +458,6 @@ public class VillageComponentAlchemyHut extends StructureVillagePieces.Village
 	                        entityvillager3.finalizeMobSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityvillager3)), (IEntityLivingData)null, false);
 	                        worldIn.spawnEntity(entityvillager3);
                     	}
-     
-                        if(worldIn.rand.nextInt(100) <= 80)
-                        {
-                        		EntityVillager entityvillager = new EntityVillager(worldIn);
-                                entityvillager.setLocationAndAngles((double)j + 1.5D, (double)k + 5D, (double)l + 0.5D, 0.0F, 0.0F);
-                                entityvillager.setProfession(5);                               
-                                entityvillager.finalizeMobSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityvillager)), (IEntityLivingData)null, false);
-                                worldIn.spawnEntity(entityvillager);
-                        }
                        
                 }
             }

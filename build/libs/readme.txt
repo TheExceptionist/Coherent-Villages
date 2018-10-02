@@ -156,6 +156,15 @@ Changelog:
 *Added config for creepers
 *Bandits Drop emeralds
 
+-Beta v1.3.9
+*Improved the AI even more
+*Soldiers now heal themselves with potions during the day
+*Added option to show kills of soldiers
+*Stat and spawn Tinkering 
+*Fixed knight spawn
+*Fixed Knight dismount
+*Added Bandit Villages
+
 To Be done later
 *Added University
 *Added Castle

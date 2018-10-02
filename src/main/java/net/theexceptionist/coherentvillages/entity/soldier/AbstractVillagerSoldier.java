@@ -12,6 +12,7 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
@@ -34,6 +35,7 @@ import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.init.MobEffects;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemHoe;
@@ -42,6 +44,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
@@ -51,8 +55,8 @@ import net.minecraft.village.Village;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 import net.theexceptionist.coherentvillages.entity.ai.EntityAIAttackBackExclude;
+import net.theexceptionist.coherentvillages.entity.ai.EntityAIRest;
 import net.theexceptionist.coherentvillages.entity.ai.EntityAIStayInBorders;
-import net.theexceptionist.coherentvillages.entity.bandit.AbstractVillagerBandit;
 import net.theexceptionist.coherentvillages.entity.followers.EntitySkeletonMinion;
 import net.theexceptionist.coherentvillages.entity.followers.IEntityFollower;
 import net.theexceptionist.coherentvillages.main.Main;
@@ -68,6 +72,8 @@ public abstract class AbstractVillagerSoldier extends EntityVillager implements 
 	protected Object buyingList;
 	protected boolean isHostile, canSpawn;
 	protected boolean creeperHunter, undeadHunter, livingHunter;
+	protected boolean showKills;
+	protected int kills;
 	
 	public AbstractVillagerSoldier(World worldIn) {
 		super(worldIn);
@@ -152,7 +158,7 @@ public abstract class AbstractVillagerSoldier extends EntityVillager implements 
                 this.inventoryArmorDropChances[EntityEquipmentSlot.HEAD.getIndex()] = 0.0F;
             }*/
         }
-        
+        this.showKills = true;
 		this.setCustomNameTag(getTrueName(world.rand));
 		this.setAlwaysRenderNameTag(Main.useNametags);
 
@@ -174,12 +180,13 @@ public abstract class AbstractVillagerSoldier extends EntityVillager implements 
 		this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(1, new EntityAIAttackMelee(this, 1.0D, true));
         this.tasks.addTask(2, new EntityAIStayInBorders(this, 1.0D));
-        this.tasks.addTask(3, new EntityAIRestrictOpenDoor(this));
-        this.tasks.addTask(4, new EntityAIOpenDoor(this, true));
-        this.tasks.addTask(5, new EntityAIMoveTowardsTarget(this, 0.9D, 32.0F));
-        this.tasks.addTask(6, new EntityAIWanderAvoidWater(this, 0.6D));
-        this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
-        this.tasks.addTask(8, new EntityAILookIdle(this));
+        this.tasks.addTask(3, new EntityAIRest(this, true));
+        this.tasks.addTask(4, new EntityAIRestrictOpenDoor(this));
+        this.tasks.addTask(5, new EntityAIOpenDoor(this, true));
+        this.tasks.addTask(6, new EntityAIMoveTowardsTarget(this, 0.9D, 32.0F));
+        this.tasks.addTask(7, new EntityAIWanderAvoidWater(this, 0.6D));
+        this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
+        this.tasks.addTask(9, new EntityAILookIdle(this));
         
         this.targetTasks.addTask(0, new EntityAINearestAttackableTarget(this, EntityLiving.class, 1, true, true, new Predicate<EntityLiving>()
         {
@@ -270,6 +277,18 @@ public abstract class AbstractVillagerSoldier extends EntityVillager implements 
 	 public void onLivingUpdate()
 	    {
 	        super.onLivingUpdate();
+	        
+	        /*if(this.getAlwaysRenderNameTag())
+	        {
+		        if(showKills)
+		        {
+		        	this.setCustomNameTag(getTrueName(world.rand)+" | kills: "+kills);
+		        }
+		        else
+		        {
+		        	this.setCustomNameTag(getTrueName(world.rand));
+		        }
+	        }*/
 	    }
 	 
 	 protected void damageEntity(DamageSource damageSrc, float damageAmount)
@@ -366,6 +385,11 @@ public abstract class AbstractVillagerSoldier extends EntityVillager implements 
 	                ((EntityLivingBase)entityIn).knockBack(this, (float)i * 0.5F, (double)MathHelper.sin(this.rotationYaw * 0.017453292F), (double)(-MathHelper.cos(this.rotationYaw * 0.017453292F)));
 	                this.motionX *= 0.6D;
 	                this.motionZ *= 0.6D;
+	                
+	                if(((EntityLivingBase)entityIn).getHealth() <= 0)
+	                {
+	                	kills++;
+	                }
 	            }
 
 	            int j = EnchantmentHelper.getFireAspectModifier(this);

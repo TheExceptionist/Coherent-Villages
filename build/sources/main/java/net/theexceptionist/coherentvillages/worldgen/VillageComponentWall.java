@@ -14,6 +14,7 @@ import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraft.world.gen.structure.StructureVillagePieces;
 import net.theexceptionist.coherentvillages.entity.soldier.AbstractVillagerSoldier;
+import net.theexceptionist.coherentvillages.entity.soldier.EntityVillagerGuard;
 
 public class VillageComponentWall extends StructureVillagePieces.Village
 {
@@ -117,6 +118,19 @@ public class VillageComponentWall extends StructureVillagePieces.Village
                 }
 
                 ++this.villagersSpawned;
+                
+                AbstractVillagerSoldier entityvillager = new EntityVillagerGuard(worldIn);
+                
+                if(!this.isZombieInfested)
+                {
+	                entityvillager.onInitialSpawn(worldIn.getDifficultyForLocation(new BlockPos(j, k, l)), null);
+	                entityvillager.setLocationAndAngles((double)j + 0.5D, (double)k, (double)l + 0.5D, 0.0F, 0.0F);
+	                entityvillager.setSpawnPoint((double)j + 0.5D, (double)k, (double)l + 0.5D);
+	                //entityvillager.setProfession(null);
+	                
+	                entityvillager.finalizeMobSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityvillager)), (IEntityLivingData)null, false);
+	                worldIn.spawnEntity(entityvillager);
+                }
 
                /* if(worldIn.rand.nextInt(100) <= 50){
                 	AbstractVillagerSoldier entityvillager = new AbstractVillagerSoldier(worldIn);

@@ -129,7 +129,6 @@ public class ModMapVillageGen extends MapGenVillage
                 structurevillagepieces$start.buildComponent(structurevillagepieces$start, this.components, rand);
                 List<StructureComponent> list1 = structurevillagepieces$start.pendingRoads;
                 List<StructureComponent> list2 = structurevillagepieces$start.pendingHouses;
-       
                 //list2.add(new VillageComponentVillageWall(structurevillagepieces$start, rand, structurevillagepieces$start.getComponentType(), EnumFacing.DOWN, new BlockPos(x, 80, z), list.size() * 10, worldIn));
                 
                 while (!list1.isEmpty() || !list2.isEmpty())

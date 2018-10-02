@@ -14,6 +14,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraft.world.gen.structure.StructureVillagePieces;
+import net.theexceptionist.coherentvillages.entity.bandit.EntityVillagerBandit;
 import net.theexceptionist.coherentvillages.entity.soldier.AbstractVillagerSoldier;
 import net.theexceptionist.coherentvillages.entity.soldier.EntityVillagerGuard;
 import net.theexceptionist.coherentvillages.entity.soldier.EntityVillagerManAtArms;
@@ -268,21 +269,27 @@ public class VillageComponentBarracks extends StructureVillagePieces.Village
                     ++this.villagersSpawned;
 
                     AbstractVillagerSoldier entityvillager = new EntityVillagerMilitia(worldIn);
-             
-                    
-                    if(worldIn.rand.nextInt(100) <= 5){
-                    	entityvillager = new EntityVillagerSergeant(worldIn);
-                     }
-                    else if(worldIn.rand.nextInt(100) <= 50)
+   	             
+                    if(!this.isZombieInfested)
                     {
-                    	entityvillager = new EntityVillagerManAtArms(worldIn);
+	                    if(worldIn.rand.nextInt(100) <= 5){
+	                    	entityvillager = new EntityVillagerSergeant(worldIn);
+	                     }
+	                    else if(worldIn.rand.nextInt(100) <= 50)
+	                    {
+	                    	entityvillager = new EntityVillagerManAtArms(worldIn);
+	                    }
+	                    else if(worldIn.rand.nextInt(100) <= 60)
+	                    {
+	                    	entityvillager = new EntityVillagerWarrior(worldIn);
+	                    }else if(worldIn.rand.nextInt(100) <= 75)
+	                    {
+	                    	entityvillager = new EntityVillagerGuard(worldIn);
+	                    }
                     }
-                    else if(worldIn.rand.nextInt(100) <= 60)
+                    else
                     {
-                    	entityvillager = new EntityVillagerWarrior(worldIn);
-                    }else if(worldIn.rand.nextInt(100) <= 75)
-                    {
-                    	entityvillager = new EntityVillagerGuard(worldIn);
+                    	  entityvillager = new EntityVillagerBandit(worldIn);  
                     }
                     
                   	if(entityvillager.isCanSpawn())

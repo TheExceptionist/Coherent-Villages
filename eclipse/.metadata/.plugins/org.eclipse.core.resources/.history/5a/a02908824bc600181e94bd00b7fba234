@@ -1,0 +1,69 @@
+package net.theexceptionist.coherentvillages.entity.ai;
+
+import net.minecraft.entity.ai.EntityAIBase;
+import net.minecraft.entity.ai.RandomPositionGenerator;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.village.Village;
+import net.theexceptionist.coherentvillages.entity.soldier.AbstractVillagerSoldier;
+
+public class EntityAIRest extends EntityAIBase
+{
+    private final AbstractVillagerSoldier creature;
+    private double movePosX;
+    private double movePosY;
+    private double movePosZ;
+    private final boolean restTime;
+
+    public EntityAIRest(AbstractVillagerSoldier creatureIn, boolean restInDay)
+    {
+        this.creature = creatureIn;
+        this.restTime = restInDay;
+        this.setMutexBits(1);
+    }
+
+    /**
+     * Returns whether the EntityAIBase should begin execution.
+     */
+    public boolean shouldExecute()
+    {
+    	Village village = this.creature.getVillage();
+    	
+    	if(village != null)
+    	{
+    		BlockPos pos = village.getCenter();
+    		int dist = (int) Math.floor(Math.sqrt(pos.distanceSq(this.creature.getPos())));
+    		int radius = village.getVillageRadius();
+    		
+    		if(dist > radius && this.creature.world.isDaytime() == restTime && this.creature.getHealth() < this.creature.getMaxHealth())
+    		{
+    			//Must be within a village
+    			
+    		}
+    		else
+    		{
+    			return false;
+    		}
+    	}
+    	else
+    	{
+    		return false;
+    	}
+    }
+
+    /**
+     * Returns whether an in-progress EntityAIBase should continue executing
+     */
+    public boolean shouldContinueExecuting()
+    {
+    	return !this.creature.getNavigator().noPath();
+    }
+
+    /**
+     * Execute a one shot task or start executing a continuous task
+     */
+    public void startExecuting()
+    {
+        this.creature.getNavigator().tryMoveToXYZ(this.movePosX, this.movePosY, this.movePosZ, this.movementSpeed);
+    }
+}

@@ -1,7 +1,6 @@
 package net.theexceptionist.coherentvillages.entity.knight;
 
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
@@ -9,6 +8,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 import net.theexceptionist.coherentvillages.entity.knight.ai.EntityAIAttackKnight;
+import net.theexceptionist.coherentvillages.entity.soldier.EntityVillagerSergeant;
 import net.theexceptionist.coherentvillages.main.Main;
 
 public class EntityVillagerPaladin extends AbstractEntityKnight{
@@ -17,7 +17,7 @@ public class EntityVillagerPaladin extends AbstractEntityKnight{
 		super(worldIn);
 		this.className = "Paladin";
 		this.canSpawn = Main.villager_spawn.get(Main.Soldier.Paladin.ordinal()).spawn;
-
+		this.setDismountSoldier(new EntityVillagerSergeant(worldIn));
 		// TODO Auto-generated constructor stub
 	}
 	

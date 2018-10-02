@@ -13,11 +13,12 @@ import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraft.world.gen.structure.StructureVillagePieces;
-import net.theexceptionist.coherentvillages.entity.mage.AbstractVillagerMage;
+import net.theexceptionist.coherentvillages.entity.bandit.EntityVillagerBanditMage;
 import net.theexceptionist.coherentvillages.entity.mage.EntityVillagerConjurer;
 import net.theexceptionist.coherentvillages.entity.mage.EntityVillagerGrandMage;
 import net.theexceptionist.coherentvillages.entity.mage.EntityVillagerMage;
 import net.theexceptionist.coherentvillages.entity.mage.EntityVillagerNecromancer;
+import net.theexceptionist.coherentvillages.entity.soldier.AbstractVillagerSoldier;
 
 public class VillageComponentWizardTower extends StructureVillagePieces.Village
     {
@@ -272,23 +273,31 @@ public class VillageComponentWizardTower extends StructureVillagePieces.Village
 
                 ++this.villagersSpawned;
                 
+            	AbstractVillagerSoldier entityvillager3 = new EntityVillagerMage(worldIn);
+                if(!this.isZombieInfested)
+                {
                // if(worldIn.rand.nextInt(100) <= 20){
-                	AbstractVillagerMage entityvillager3 = new EntityVillagerMage(worldIn);
                 	
                 	if(worldIn.rand.nextInt(100) <= 50) entityvillager3 = new EntityVillagerConjurer(worldIn);
                 	else if(worldIn.rand.nextInt(100) <= 20) entityvillager3 = new EntityVillagerNecromancer(worldIn);
                 	else if(worldIn.rand.nextInt(100) <= 20) entityvillager3 = new EntityVillagerGrandMage(worldIn);
-                	
-                	 if(entityvillager3.isCanSpawn())
-                	 {
-                		 entityvillager3.onInitialSpawn(worldIn.getDifficultyForLocation(new BlockPos(j, k, l)), null);
-	                	entityvillager3.setLocationAndAngles((double)j + 0.5D, (double)k, (double)l + 0.5D, 0.0F, 0.0F);
-	                    entityvillager3.setSpawnPoint((double)j + 0.5D, (double)k, (double)l + 0.5D);
-	                    //entityvillager.setProfession(null);
-	                    
-	                    entityvillager3.finalizeMobSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityvillager3)), (IEntityLivingData)null, false);
-	                    worldIn.spawnEntity(entityvillager3);
-                	 }
+                }
+                else
+                {
+                	entityvillager3 = new EntityVillagerBanditMage(worldIn);
+                }
+                
+            	
+           	 if(entityvillager3.isCanSpawn())
+           	 {
+           		 entityvillager3.onInitialSpawn(worldIn.getDifficultyForLocation(new BlockPos(j, k, l)), null);
+               	entityvillager3.setLocationAndAngles((double)j + 0.5D, (double)k, (double)l + 0.5D, 0.0F, 0.0F);
+                   entityvillager3.setSpawnPoint((double)j + 0.5D, (double)k, (double)l + 0.5D);
+                   //entityvillager.setProfession(null);
+                   
+                   entityvillager3.finalizeMobSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityvillager3)), (IEntityLivingData)null, false);
+                   worldIn.spawnEntity(entityvillager3);
+           	 }
                // }
                     /*if(worldIn.rand.nextInt(100) <= 20){
                     	EntityVillagerMage entityvillager1 = new EntityVillagerMage(worldIn);

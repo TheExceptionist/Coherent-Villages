@@ -17,6 +17,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 import net.theexceptionist.coherentvillages.entity.ai.EntityAIAttackWithMagic;
+import net.theexceptionist.coherentvillages.entity.mage.EntityVillagerMage;
 import net.theexceptionist.coherentvillages.main.Main;
 
 public class EntityVillagerMageKnight extends AbstractEntityKnight implements IRangedAttackMob {
@@ -27,7 +28,7 @@ public class EntityVillagerMageKnight extends AbstractEntityKnight implements IR
 		super(worldIn);
 		this.className = "Mage Knight";
 		this.canSpawn = Main.villager_spawn.get(Main.Soldier.Mage_Knight.ordinal()).spawn;
-
+		this.setDismountSoldier(new EntityVillagerMage(worldIn));
 		// TODO Auto-generated constructor stub
 	}
 	
