@@ -32,6 +32,7 @@ import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemAxe;
@@ -51,6 +52,7 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 import net.theexceptionist.coherentvillages.entity.ai.EntityAIAttackBackExclude;
 import net.theexceptionist.coherentvillages.entity.ai.EntityAIStayInBorders;
+import net.theexceptionist.coherentvillages.entity.bandit.AbstractVillagerBandit;
 import net.theexceptionist.coherentvillages.entity.followers.EntitySkeletonMinion;
 import net.theexceptionist.coherentvillages.entity.followers.IEntityFollower;
 import net.theexceptionist.coherentvillages.main.Main;
@@ -58,7 +60,7 @@ import net.theexceptionist.coherentvillages.main.NameGenerator;
 
 public abstract class AbstractVillagerSoldier extends EntityVillager implements IEntityFollower{
 	protected String className = "Soldier";
-	private int faction = 0;
+	protected int faction = 0;
 	public boolean wasSpawned = false, attacking = false;
 	public BlockPos spawnPos;
 	protected int homeCheckTimer; 
@@ -71,7 +73,7 @@ public abstract class AbstractVillagerSoldier extends EntityVillager implements 
 		super(worldIn);
 		
 		//Friendly by default
-		this.faction = 0;
+		this.faction = Main.SOLDIER_FACTION;
 	}
 	
 	public AbstractVillagerSoldier(World worldIn, boolean hostile) {
@@ -88,9 +90,9 @@ public abstract class AbstractVillagerSoldier extends EntityVillager implements 
 	public AbstractVillagerSoldier(World worldIn, boolean hostile, boolean creeperHunter, boolean undeadHunter, boolean livingHunter) {
 		super(worldIn);
 		this.isHostile = hostile;
-		this.creeperHunter = creeperHunter;
+		/*this.creeperHunter = creeperHunter;
 		this.creeperHunter = undeadHunter;
-		this.creeperHunter = livingHunter;
+		this.creeperHunter = livingHunter;*/
 	}
 	
 
@@ -179,33 +181,38 @@ public abstract class AbstractVillagerSoldier extends EntityVillager implements 
         this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
         this.tasks.addTask(8, new EntityAILookIdle(this));
         
-        if(this.isHostile) this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
-        
         this.targetTasks.addTask(0, new EntityAINearestAttackableTarget(this, EntityLiving.class, 1, true, true, new Predicate<EntityLiving>()
         {
             public boolean apply(@Nullable EntityLiving p_apply_1_)
             {
-            	/*if(creeperHunter)
+            	int faction = getFaction();
+            	
+            	if(p_apply_1_ instanceof AbstractVillagerSoldier)
             	{
-            		return p_apply_1_ != null && (p_apply_1_ instanceof EntityCreeper);
+            		AbstractVillagerSoldier soldier = (AbstractVillagerSoldier) p_apply_1_;
+            		int soldierFaction = soldier.getFaction();
+            		
+            		//System.out.println(getCustomNameTag()+" - "+faction+" | "+soldier.getCustomNameTag()+" - "+soldierFaction);
+            		
+            		if(faction != soldierFaction)
+            		{
+            			//System.out.println("True");
+            			return true;
+            		}
+            		else if(faction == soldierFaction)
+            		{
+            			//System.out.println("False");
+            			return false;
+            		}
             	}
-            	else if(undeadHunter)
-            	{
-            		return p_apply_1_ != null && p_apply_1_.getCreatureAttribute() ==  EnumCreatureAttribute.UNDEAD && !(p_apply_1_ instanceof EntityVillagerHorse);
-                }
-            	else if(livingHunter)
-            	{
-            		return p_apply_1_ != null && (IMob.VISIBLE_MOB_SELECTOR.apply(p_apply_1_)) && !(p_apply_1_ instanceof EntityCreeper) && 
-            				p_apply_1_.getCreatureAttribute() !=  EnumCreatureAttribute.UNDEAD;
-            	}
-            	else
-            	{
-            		return p_apply_1_ != null && (IMob.VISIBLE_MOB_SELECTOR.apply(p_apply_1_) && !(p_apply_1_ instanceof EntityCreeper) && !(p_apply_1_ instanceof EntitySkeletonMinion));
-            	}*/
+            	//ystem.out.println(getCustomNameTag()+" - "+getFaction());
         		return p_apply_1_ != null && (IMob.VISIBLE_MOB_SELECTOR.apply(p_apply_1_) && !(p_apply_1_ instanceof EntityCreeper) && !(p_apply_1_ instanceof EntityTameable) && !(p_apply_1_ instanceof EntitySkeletonMinion));
             }
         }));
         this.targetTasks.addTask(1, new EntityAIAttackBackExclude(this, true, new Class[0]));  
+		//this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
+        //if(this.isHostile) this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
+        
 		/*this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(1, new EntityAIAttackMelee(this, 1.0D, true));
        // this.tasks.addTask(5, new EntityAIHangAroundFence(this, this.world));
@@ -241,7 +248,18 @@ public abstract class AbstractVillagerSoldier extends EntityVillager implements 
 		//this.getName();
     }
 	
-	 protected void applyEntityAttributes()
+	public boolean isValidSpawn(World world, BlockPos pos)
+	{
+		BlockPos posNew = pos.add(0, 1, 0);
+		return world.getBlockState(posNew).getBlock() == Blocks.AIR;
+	}
+	
+	
+	 public void setFaction(int faction) {
+		this.faction = faction;
+	}
+
+	protected void applyEntityAttributes()
 	    {
 	        super.applyEntityAttributes();
 	        
@@ -291,7 +309,21 @@ public abstract class AbstractVillagerSoldier extends EntityVillager implements 
 		 
 		 //Make sure a villager isn't the target
 		 if(this.getAttackTarget() instanceof EntityVillager){
-			 this.setAttackTarget(null);
+			 if(this.getAttackTarget() instanceof AbstractVillagerSoldier)
+			 {
+				 AbstractVillagerSoldier soldier = (AbstractVillagerSoldier) this.getAttackTarget();
+				 if(soldier.getFaction() == this.getFaction())
+				 {
+					 this.setAttackTarget(null);
+				 }
+			 }
+			 else
+			 {
+				 if(this.faction == Main.BANDIT_FACTION)
+				 {
+					 this.setAttackTarget(null); 
+				 }
+			 }
 		 }
 		 
 		 if (--this.homeCheckTimer <= 0)

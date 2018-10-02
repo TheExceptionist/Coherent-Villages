@@ -13,6 +13,8 @@ import java.util.List;
 
 import org.apache.logging.log4j.Logger;
 
+import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.init.Biomes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.Biome;
@@ -40,6 +42,11 @@ import net.theexceptionist.coherentvillages.entity.archer.EntityVillagerArcher;
 import net.theexceptionist.coherentvillages.entity.archer.EntityVillagerHunter;
 import net.theexceptionist.coherentvillages.entity.archer.EntityVillagerMageArcher;
 import net.theexceptionist.coherentvillages.entity.archer.EntityVillagerMarksman;
+import net.theexceptionist.coherentvillages.entity.bandit.EntityVillagerBandit;
+import net.theexceptionist.coherentvillages.entity.bandit.EntityVillagerBanditAlchemist;
+import net.theexceptionist.coherentvillages.entity.bandit.EntityVillagerBanditArcher;
+import net.theexceptionist.coherentvillages.entity.bandit.EntityVillagerBanditHorseman;
+import net.theexceptionist.coherentvillages.entity.bandit.EntityVillagerBanditMage;
 import net.theexceptionist.coherentvillages.entity.followers.EntityMerchantGuard;
 import net.theexceptionist.coherentvillages.entity.followers.EntitySkeletonMinion;
 import net.theexceptionist.coherentvillages.entity.followers.EntityVillagerGuardian;
@@ -64,6 +71,7 @@ import net.theexceptionist.coherentvillages.worldgen.VillageComponentAlchemyHut;
 import net.theexceptionist.coherentvillages.worldgen.VillageComponentBarrackSmall;
 import net.theexceptionist.coherentvillages.worldgen.VillageComponentBarracks;
 import net.theexceptionist.coherentvillages.worldgen.VillageComponentBigFarm;
+import net.theexceptionist.coherentvillages.worldgen.VillageComponentCaneFarm;
 import net.theexceptionist.coherentvillages.worldgen.VillageComponentFence;
 import net.theexceptionist.coherentvillages.worldgen.VillageComponentGuardTower;
 import net.theexceptionist.coherentvillages.worldgen.VillageComponentHunterHut;
@@ -77,6 +85,7 @@ import net.theexceptionist.coherentvillages.worldgen.VillageHandlerAlchemyHut;
 import net.theexceptionist.coherentvillages.worldgen.VillageHandlerBarracks;
 import net.theexceptionist.coherentvillages.worldgen.VillageHandlerBarracksSmall;
 import net.theexceptionist.coherentvillages.worldgen.VillageHandlerBigFarm;
+import net.theexceptionist.coherentvillages.worldgen.VillageHandlerCaneFarm;
 import net.theexceptionist.coherentvillages.worldgen.VillageHandlerFence;
 import net.theexceptionist.coherentvillages.worldgen.VillageHandlerFort;
 import net.theexceptionist.coherentvillages.worldgen.VillageHandlerGuardTower;
@@ -99,6 +108,9 @@ public class Main
 
     @Mod.Instance(Resources.MODID)
 	public static Main instance;
+   
+    public static final int SOLDIER_FACTION = 0;
+    public static final int BANDIT_FACTION = 1;
     
     //"/config/"
     //private static final String config_path = "./config/coherent_config.txt";
@@ -115,8 +127,8 @@ public class Main
     			"min_distance=10\n",
     			"#Tested with values 0, 1... change default size of villages\n",
     			"size=1\n",
-    			"#Spawnrate for the villagers outside the villages, 0 or -1 turns them off!\n",
-    			"merchant_spawn_rate=1\n",
+    			"#Spawnrate for the bandits outside the villages, 0 or -1 turns them off!\n",
+    			"bandit_spawn_rate=5\n",
     			"#Turn nametags off and on. (1 = on, 0 = off)\n",
     			"nametags_on=1\n",
     			"#Turn soldiers off and on. (1 = on, 0 = off)\n",
@@ -145,7 +157,13 @@ public class Main
     			"horse_archer=1\n",
     			"mage_knight=1\n",
     			"paladin=1\n",
-    			"#\n",
+    			"bandit=1\n",
+    			"bandit_archer=1\n",
+    			"bandit_mage=1\n",
+    			"bandit_alchemist=1\n",
+    			"bandit_horseman=1\n",
+    			"#Turn off Creepers\n",
+    			"spawn_creepers=1\n",
     			"#mark each biome name with either a 0 or 1 to turn them on/off\n",
     			"#Ex: Ocean=1 turns on the village in the ocean biome\n",
     			"#Ex: Ocean=0 turns off the village in the ocean biome\n",
@@ -237,12 +255,17 @@ public class Main
 		Horse_Archer,
 		Mage_Knight,
 		Paladin,
+		Bandit,
+		Bandit_Archer,
+		Bandit_Mage,
+		Bandit_Alchemist,
+		Bandit_Horseman,
 		NUM_SOLDIERS;
     }
     
     public static int max_distance = 9;
     public static int min_distance = 3;
-    public static int merchant_spawn = 10;
+    public static int bandit_spawn = 5;
     public static int village_size = 0;
     private static int passes = 0;
     
@@ -276,6 +299,8 @@ public class Main
     		Main.villager_spawn.add(this);
     	}
     }
+
+	private static boolean spawnCreepers = true;
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
@@ -382,9 +407,13 @@ public class Main
 				{
 					min_distance = value;
 				}
-				else if(parts[0].contains("mer"))
+				else if(parts[0].contains("spawn_rate"))
 				{
-					merchant_spawn = value;
+					bandit_spawn = value;
+				}
+				else if(parts[0].contains("creep"))
+				{
+					spawnCreepers = value == 1;
 				}
 				else if(parts[0].contains("size"))
 				{
@@ -429,7 +458,7 @@ public class Main
 				System.out.println("Spawns: "+v.name+" "+v.spawn);
 			}
 			
-			System.out.println("Read the config file! New Max: "+max_distance+" New Min: "+min_distance+" New Merchant: "+merchant_spawn+" Guard Spawn: "+Main.villager_spawn.get(0).spawn);
+			System.out.println("Read the config file! New Max: "+max_distance+" New Min: "+min_distance+" New Merchant: "+bandit_spawn+" Guard Spawn: "+Main.villager_spawn.get(0).spawn);
 		} catch (FileNotFoundException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -476,9 +505,11 @@ public class Main
     	addVillageCreationHandler(new VillageHandlerBigFarm());
     	addVillagePiece(VillageComponentHunterHut.class, "ViHH"); 
     	addVillageCreationHandler(new VillageHandlerHunterHut()); 
- 
+    	addVillagePiece(VillageComponentCaneFarm.class, "ViSC"); 
+    	addVillageCreationHandler(new VillageHandlerCaneFarm()); 
+    	//addVillagePiece(ModMapVillageGen.Start.class, "ViS");
+    	MapGenStructureIO.registerStructure(ModMapVillageGen.Start.class, "Mod Village");
     	
-
     	int i = 0;
     	for(Biome b : villageBiomes)
     	{
@@ -555,7 +586,15 @@ public class Main
     	createEntity(EntityMerchantGuard.class, 1553, "villager_merchant_guard", 525895, 4785000);
     	createEntity(EntityVillagerHorse.class, 1554, "villager_horse", 345895, 5505567);
 
-    	createEntity(EntitySkeletonMinion.class, 1555, "skeleton_minion", 926395, 1015567);
+    	//Bandit
+    	createEntity(EntityVillagerBandit.class, 1555, "villager_bandit", 155895, 5505567);
+    	createEntity(EntityVillagerBanditArcher.class, 1556, "villager_bandit_archer", 246895, 5505567);
+    	createEntity(EntityVillagerBanditMage.class, 1557, "villager_bandit_mage", 245995, 5505567);
+    	createEntity(EntityVillagerBanditHorseman.class, 1558, "villager_bandit_horseman", 346895, 5505567);
+    	createEntity(EntityVillagerBanditAlchemist.class, 1559, "villager_bandit_alchemist", 455895, 5505567);
+
+
+    	createEntity(EntitySkeletonMinion.class, 1560, "skeleton_minion", 926395, 1015567);
 
     	//if(biomes != null)
     	//{
@@ -564,6 +603,17 @@ public class Main
     		EntityRegistry.addSpawn(EntityVillagerMerchant.class, 1, 1, 2, EnumCreatureType.MONSTER, villageBiomes.toArray(biomes));//weightedProb, min, max, typeOfCreature, biomes);
     	}*/
     	//}
+    	if(!spawnCreepers)
+    	{
+    		EntityRegistry.removeSpawn(EntityCreeper.class, EnumCreatureType.MONSTER, villageBiomes.toArray(biomes));
+    	}
+    	
+    	EntityRegistry.addSpawn(EntityVillagerBandit.class, bandit_spawn, 1, 2, EnumCreatureType.MONSTER, villageBiomes.toArray(biomes));//weightedProb, min, max, typeOfCreature, biomes);
+    	EntityRegistry.addSpawn(EntityVillagerBanditArcher.class, bandit_spawn, 1, 2, EnumCreatureType.MONSTER, villageBiomes.toArray(biomes));//weightedProb, min, max, typeOfCreature, biomes);
+    	EntityRegistry.addSpawn(EntityVillagerBanditMage.class, bandit_spawn/2, 1, 2, EnumCreatureType.MONSTER, villageBiomes.toArray(biomes));//weightedProb, min, max, typeOfCreature, biomes);
+    	EntityRegistry.addSpawn(EntityVillagerBanditHorseman.class, bandit_spawn, 1, 2, EnumCreatureType.MONSTER, villageBiomes.toArray(biomes));//weightedProb, min, max, typeOfCreature, biomes);
+    	EntityRegistry.addSpawn(EntityVillagerBanditAlchemist.class, bandit_spawn, 1, 2, EnumCreatureType.MONSTER, villageBiomes.toArray(biomes));//weightedProb, min, max, typeOfCreature, biomes);
+    	
     	EntityRegistry.registerModEntity(new ResourceLocation(Resources.MODID, "villager_arrow"), EntityVillagerArrow.class, "entity_villager_arrow", 1, instance,1, 1, false);
 	}
 

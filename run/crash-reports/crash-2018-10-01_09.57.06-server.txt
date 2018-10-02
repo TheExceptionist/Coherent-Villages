@@ -1,0 +1,80 @@
+---- Minecraft Crash Report ----
+// Why is it breaking :(
+
+Time: 10/1/18 9:57 AM
+Description: Exception preparing structure feature
+
+java.lang.RuntimeException: StructureStart "net.theexceptionist.coherentvillages.worldgen.ModMapVillageGen$Start" missing ID Mapping, Modder see MapGenStructureIO
+	at net.minecraft.world.gen.structure.StructureStart.writeStructureComponentsToNBT(StructureStart.java:75)
+	at net.minecraft.world.gen.structure.MapGenStructure.setStructureStart(MapGenStructure.java:224)
+	at net.minecraft.world.gen.structure.MapGenStructure.recursiveGenerate(MapGenStructure.java:53)
+	at net.minecraft.world.gen.MapGenBase.generate(MapGenBase.java:31)
+	at net.minecraft.world.gen.ChunkGeneratorOverworld.generateChunk(ChunkGeneratorOverworld.java:231)
+	at net.minecraft.world.gen.ChunkProviderServer.provideChunk(ChunkProviderServer.java:155)
+	at net.minecraft.server.MinecraftServer.initialWorldChunkLoad(MinecraftServer.java:383)
+	at net.minecraft.server.integrated.IntegratedServer.loadAllWorlds(IntegratedServer.java:143)
+	at net.minecraft.server.integrated.IntegratedServer.init(IntegratedServer.java:160)
+	at net.minecraft.server.MinecraftServer.run(MinecraftServer.java:552)
+	at java.lang.Thread.run(Thread.java:748)
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Thread: Server thread
+Stacktrace:
+	at net.minecraft.world.gen.structure.StructureStart.writeStructureComponentsToNBT(StructureStart.java:75)
+	at net.minecraft.world.gen.structure.MapGenStructure.setStructureStart(MapGenStructure.java:224)
+
+-- Feature being prepared --
+Details:
+	Is feature chunk: True
+	Chunk location: -30,3
+	Chunk pos hash: 17179869154
+	Structure type: net.theexceptionist.coherentvillages.worldgen.ModMapVillageGen
+Stacktrace:
+	at net.minecraft.world.gen.structure.MapGenStructure.recursiveGenerate(MapGenStructure.java:53)
+	at net.minecraft.world.gen.MapGenBase.generate(MapGenBase.java:31)
+	at net.minecraft.world.gen.ChunkGeneratorOverworld.generateChunk(ChunkGeneratorOverworld.java:231)
+
+-- Chunk to be generated --
+Details:
+	Location: -27,3
+	Position hash: 17179869157
+	Generator: net.minecraft.world.gen.ChunkGeneratorOverworld@346152e3
+Stacktrace:
+	at net.minecraft.world.gen.ChunkProviderServer.provideChunk(ChunkProviderServer.java:155)
+	at net.minecraft.server.MinecraftServer.initialWorldChunkLoad(MinecraftServer.java:383)
+	at net.minecraft.server.integrated.IntegratedServer.loadAllWorlds(IntegratedServer.java:143)
+	at net.minecraft.server.integrated.IntegratedServer.init(IntegratedServer.java:160)
+	at net.minecraft.server.MinecraftServer.run(MinecraftServer.java:552)
+	at java.lang.Thread.run(Thread.java:748)
+
+-- System Details --
+Details:
+	Minecraft Version: 1.12.2
+	Operating System: Mac OS X (x86_64) version 10.13.6
+	Java Version: 1.8.0_144, Oracle Corporation
+	Java VM Version: Java HotSpot(TM) 64-Bit Server VM (mixed mode), Oracle Corporation
+	Memory: 233838024 bytes (223 MB) / 795344896 bytes (758 MB) up to 1908932608 bytes (1820 MB)
+	JVM Flags: 0 total; 
+	IntCache: cache: 11, tcache: 0, allocated: 13, tallocated: 95
+	FML: MCP 9.42 Powered by Forge 14.23.4.2757 6 mods loaded, 6 mods active
+	States: 'U' = Unloaded 'L' = Loaded 'C' = Constructed 'H' = Pre-initialized 'I' = Initialized 'J' = Post-initialized 'A' = Available 'D' = Disabled 'E' = Errored
+
+	| State   | ID               | Version      | Source                           | Signature |
+	|:------- |:---------------- |:------------ |:-------------------------------- |:--------- |
+	| UCHIJAA | minecraft        | 1.12.2       | minecraft.jar                    | None      |
+	| UCHIJAA | mcp              | 9.42         | minecraft.jar                    | None      |
+	| UCHIJAA | FML              | 8.0.99.99    | forgeSrc-1.12.2-14.23.4.2757.jar | None      |
+	| UCHIJAA | forge            | 14.23.4.2757 | forgeSrc-1.12.2-14.23.4.2757.jar | None      |
+	| UCHIJAA | coherentvillages | v1.2.12.0    | modid-1.0.jar                    | None      |
+	| UCHIJAA | torohealthmod    | 1.12.2-11    | torohealth-1.12.2-11.jar         | None      |
+
+	Loaded coremods (and transformers): 
+	GL info: ~~ERROR~~ RuntimeException: No OpenGL context found in the current thread.
+	Profiler Position: N/A (disabled)
+	Player Count: 0 / 8; []
+	Type: Integrated Server (map_client.txt)
+	Is Modded: Definitely; Client brand changed to 'fml,forge'

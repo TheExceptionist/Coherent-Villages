@@ -1,18 +1,19 @@
 package net.theexceptionist.coherentvillages.worldgen;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
 
-import net.minecraft.init.Biomes;
+import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.village.Village;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.structure.MapGenVillage;
@@ -31,17 +32,11 @@ public class ModMapVillageGen extends MapGenVillage
     private int size;
     private int distance;
     private final int minTownSeparation;
-    
-    public static final ResourceLocation INN_RESOURCE = new ResourceLocation(Resources.MODID+":inn");
-    public static final ResourceLocation ALCHEMY_HUT_RESOURCE = new ResourceLocation(Resources.MODID+":alchemy_hut");
-    public static final ResourceLocation TOWER_RESOURCE = new ResourceLocation(Resources.MODID+":wizard_tower");
-    public static final PlacementSettings DEFAULT_SETTINGS = new PlacementSettings().setRotation(Rotation.NONE);
-
+ 
     public ModMapVillageGen()
     {
         this.distance = Main.max_distance;
         this.minTownSeparation = Main.min_distance;
-        DEFAULT_SETTINGS.setIntegrity(1f);
         this.size = Main.village_size;
     }
 
@@ -111,7 +106,8 @@ public class ModMapVillageGen extends MapGenVillage
 
     protected StructureStart getStructureStart(int chunkX, int chunkZ)
     {
-        return new MapGenVillage.Start(this.world, this.rand, chunkX, chunkZ, this.size);
+    	//System.out.println("Starting");
+        return new ModMapVillageGen.Start(this.world, this.rand, chunkX, chunkZ, this.size);
     }
 
     public static class Start extends StructureStart
@@ -126,13 +122,16 @@ public class ModMapVillageGen extends MapGenVillage
             public Start(World worldIn, Random rand, int x, int z, int size)
             {
                 super(x, z);
+               // System.out.println("Generating: "+x+" "+z);
                 List<StructureVillagePieces.PieceWeight> list = StructureVillagePieces.getStructureVillageWeightedPieceList(rand, size);
                 StructureVillagePieces.Start structurevillagepieces$start = new StructureVillagePieces.Start(worldIn.getBiomeProvider(), 0, rand, (x << 4) + 2, (z << 4) + 2, list, size);
                 this.components.add(structurevillagepieces$start);
                 structurevillagepieces$start.buildComponent(structurevillagepieces$start, this.components, rand);
                 List<StructureComponent> list1 = structurevillagepieces$start.pendingRoads;
                 List<StructureComponent> list2 = structurevillagepieces$start.pendingHouses;
-
+       
+                //list2.add(new VillageComponentVillageWall(structurevillagepieces$start, rand, structurevillagepieces$start.getComponentType(), EnumFacing.DOWN, new BlockPos(x, 80, z), list.size() * 10, worldIn));
+                
                 while (!list1.isEmpty() || !list2.isEmpty())
                 {
                     if (list1.isEmpty())
@@ -161,6 +160,30 @@ public class ModMapVillageGen extends MapGenVillage
                 }
 
                 this.hasMoreThanTwoComponents = k > 2;
+                
+                
+                //Village village = worldIn.getVillageCollection().getNearestVillage(new BlockPos(x, worldIn.getTopSolidOrLiquidBlock(new BlockPos(x, 80, z)).getY(), z), 30);
+                //int y = worldIn.getTopSolidOrLiquidBlock(new BlockPos(x, 80, z)).getY();
+
+               /* BlockPos center = new BlockPos(x, 80, z);
+                int radius = numHouses * 10;
+                System.out.println("Radius: "+radius);
+                BlockPos nWall = new BlockPos(x, worldIn.getTopSolidOrLiquidBlock(new BlockPos(x, 80, z)).getY(), z + radius);
+                BlockPos sWall = new BlockPos(x, worldIn.getTopSolidOrLiquidBlock(new BlockPos(x, 80, z)).getY(), z - radius);
+                BlockPos eWall = new BlockPos(x + radius, worldIn.getTopSolidOrLiquidBlock(new BlockPos(x, 80, z)).getY(), z);
+                BlockPos wWall = new BlockPos(x - radius, worldIn.getTopSolidOrLiquidBlock(new BlockPos(x, 80, z)).getY(), z);
+                
+                for(int i = x - radius; i < x + radius; i++)
+                {
+                	worldIn.setBlockState(new BlockPos(i, worldIn.getTopSolidOrLiquidBlock(new BlockPos(i, 80, z + radius)).getY(), z+ radius), Blocks.STONEBRICK.getDefaultState()); 
+                	worldIn.setBlockState(new BlockPos(i, worldIn.getTopSolidOrLiquidBlock(new BlockPos(i, 80, z - radius)).getY(), z - radius), Blocks.STONEBRICK.getDefaultState()); 
+                }
+                
+                for(int i = z - radius; i < z + radius; i++)
+                {
+                	worldIn.setBlockState(new BlockPos(x + radius, worldIn.getTopSolidOrLiquidBlock(new BlockPos(x + radius, 80, i)).getY(), i), Blocks.STONEBRICK.getDefaultState()); 
+                	worldIn.setBlockState(new BlockPos(x - radius, worldIn.getTopSolidOrLiquidBlock(new BlockPos(x - radius, 80, i)).getY(), i), Blocks.STONEBRICK.getDefaultState()); 
+                }*/
             }
 
             /**

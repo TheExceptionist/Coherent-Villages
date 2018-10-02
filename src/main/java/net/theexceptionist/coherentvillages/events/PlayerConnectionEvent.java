@@ -26,7 +26,7 @@ public class PlayerConnectionEvent{
 		
 		ITextComponent itextcomponent1 = new TextComponentString(
 				"Welcome to Cohorent Villages\n By: TheExceptionist (Or majesticmerlin)\n Your current version is: "+Resources.VERSION
-				+"\n Thank you for downloading this mod! Check for updates on Curseforge and post issues on Github!");
+				+"\n Thank you for downloading this mod! Check for updates on Curseforge and post issues on Github! \nDon't forget to change the config file to suit your needs!");
 		
 		
 		itextcomponent1.setStyle(style);

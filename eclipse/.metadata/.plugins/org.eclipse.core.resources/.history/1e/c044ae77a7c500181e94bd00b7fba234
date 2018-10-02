@@ -1,0 +1,10 @@
+package net.theexceptionist.coherentvillages.entity.bandit;
+
+import net.minecraft.world.World;
+
+public class EntityVillagerBandit extends AbstractVillagerBandit{
+	public EntityVillagerBandit(World worldIn)
+	{
+		super(worldIn);
+	}
+}

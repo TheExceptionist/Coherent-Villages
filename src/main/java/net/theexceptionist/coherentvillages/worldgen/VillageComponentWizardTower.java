@@ -72,6 +72,16 @@ public class VillageComponentWizardTower extends StructureVillagePieces.Village
         IBlockState iblockstate2 = this.getBiomeSpecificBlockState(Blocks.OAK_STAIRS.getDefaultState().withProperty(BlockStairs.FACING, EnumFacing.NORTH));
         IBlockState iblockstate3 = this.getBiomeSpecificBlockState(Blocks.LOG.getDefaultState());*/
         IBlockState iblockstate4 = this.getBiomeSpecificBlockState(Blocks.OAK_FENCE.getDefaultState());
+        
+        if(worldIn.rand.nextInt(100) < 50)
+        {
+        	iblockstate4 = this.getBiomeSpecificBlockState(Blocks.AIR.getDefaultState());
+        }
+        else if(worldIn.rand.nextInt(100) < 25)
+        {
+          	iblockstate4 = this.getBiomeSpecificBlockState(Blocks.IRON_BARS.getDefaultState());
+        }
+        
         IBlockState iblockstate5 = this.getBiomeSpecificBlockState(Blocks.DOUBLE_STONE_SLAB.getDefaultState());
         IBlockState iblockstate6 = this.getBiomeSpecificBlockState(Blocks.STONEBRICK.getDefaultState());
         
@@ -112,6 +122,18 @@ public class VillageComponentWizardTower extends StructureVillagePieces.Village
        
         this.createVillageDoor(worldIn, structureBoundingBoxIn, randomIn, 3, 0, 0, EnumFacing.NORTH);
         this.placeTorch(worldIn, EnumFacing.SOUTH, 3, 2, -1, structureBoundingBoxIn);
+              
+        this.setBlockState(worldIn, Blocks.IRON_BLOCK.getDefaultState(), 2, 11, 2, structureBoundingBoxIn);
+        this.setBlockState(worldIn, Blocks.IRON_BLOCK.getDefaultState(), 2, 11, 3, structureBoundingBoxIn);
+        this.setBlockState(worldIn, Blocks.IRON_BLOCK.getDefaultState(), 2, 11, 4, structureBoundingBoxIn);
+        this.setBlockState(worldIn, Blocks.IRON_BLOCK.getDefaultState(), 3, 11, 2, structureBoundingBoxIn);
+        this.setBlockState(worldIn, Blocks.IRON_BLOCK.getDefaultState(), 3, 11, 3, structureBoundingBoxIn);
+        this.setBlockState(worldIn, Blocks.IRON_BLOCK.getDefaultState(), 3, 11, 4, structureBoundingBoxIn);
+        this.setBlockState(worldIn, Blocks.IRON_BLOCK.getDefaultState(), 4, 11, 2, structureBoundingBoxIn);
+        this.setBlockState(worldIn, Blocks.IRON_BLOCK.getDefaultState(), 4, 11, 3, structureBoundingBoxIn);
+        this.setBlockState(worldIn, Blocks.IRON_BLOCK.getDefaultState(), 4, 11, 4, structureBoundingBoxIn);
+        
+        this.setBlockState(worldIn, Blocks.BEACON.getDefaultState(), 3, 12, 3, structureBoundingBoxIn);
         
         /*
         this.fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 0, 0, 6, 0, 6, iblockstate6, iblockstate6, false);

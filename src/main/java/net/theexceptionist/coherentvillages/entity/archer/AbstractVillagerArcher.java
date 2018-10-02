@@ -11,6 +11,7 @@ import net.minecraft.entity.IRangedAttackMob;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAIBase;
+import net.minecraft.entity.ai.EntityAIMoveThroughVillage;
 import net.minecraft.entity.ai.EntityAITasks.EntityAITaskEntry;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.Items;
@@ -68,6 +69,7 @@ public abstract class AbstractVillagerArcher extends AbstractVillagerSoldier imp
 	protected void initEntityAI()
     {
 		super.initEntityAI();
+        this.tasks.addTask(3, new EntityAIMoveThroughVillage(this, 0.6D, true));
 		
 		 for(Object task : this.tasks.taskEntries.toArray())
 			{

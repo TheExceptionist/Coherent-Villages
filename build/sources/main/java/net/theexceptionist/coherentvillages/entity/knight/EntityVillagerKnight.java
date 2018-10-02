@@ -1,14 +1,13 @@
 package net.theexceptionist.coherentvillages.entity.knight;
 
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
+import net.theexceptionist.coherentvillages.entity.knight.ai.EntityAIAttackKnight;
 import net.theexceptionist.coherentvillages.main.Main;
 
 public class EntityVillagerKnight extends AbstractEntityKnight{
@@ -38,7 +37,7 @@ public class EntityVillagerKnight extends AbstractEntityKnight{
 	protected void initEntityAI()
    {
 		super.initEntityAI();
-		this.tasks.addTask(1, new EntityAIAttackMelee(this, SPRINT, true));
+		this.tasks.addTask(1, new EntityAIAttackKnight(this, SPRINT, true));
 		
 		//super.initEntityAI();
        //this.tasks.addTask(5, new EntityAIMoveThroughVillage(this, 0.6D, true));

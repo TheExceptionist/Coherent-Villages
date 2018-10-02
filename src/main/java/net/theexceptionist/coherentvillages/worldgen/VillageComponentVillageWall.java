@@ -1,11 +1,10 @@
 package net.theexceptionist.coherentvillages.worldgen;
 
+
 import java.util.List;
 import java.util.Random;
 
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.IEntityLivingData;
-import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
@@ -15,167 +14,117 @@ import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraft.world.gen.structure.StructureVillagePieces;
 import net.theexceptionist.coherentvillages.entity.soldier.AbstractVillagerSoldier;
+import net.theexceptionist.coherentvillages.entity.soldier.EntityVillagerGuard;
+import net.theexceptionist.coherentvillages.entity.soldier.EntityVillagerMilitia;
+import net.theexceptionist.coherentvillages.entity.soldier.EntityVillagerPeasant;
 
 public class VillageComponentVillageWall extends StructureVillagePieces.Village
-{
-	static int numBlocks = 0;
-	static int numBlocksY = 0; 
-	static boolean up = false;
-	private int villagersSpawned = 0;
-    public VillageComponentVillageWall()
     {
-    }
+		private BlockPos center;
+		private int radius;
+		private World worldIn;
 
-    public VillageComponentVillageWall(StructureVillagePieces.Start start, int p_i45568_2_, Random rand, StructureBoundingBox p_i45568_4_, EnumFacing facing)
-    {
-        super(start, p_i45568_2_);
-        this.setCoordBaseMode(facing);
-        this.boundingBox = p_i45568_4_;
-    }
-
-    public static StructureBoundingBox findPieceBox(StructureVillagePieces.Start start, List<StructureComponent> p_175856_1_, Random rand, int p_175856_3_, int p_175856_4_, int p_175856_5_, EnumFacing facing, int p5)
-    {
-    	numBlocks = 2  + rand.nextInt(3);
-    	numBlocksY = 5 + rand.nextInt(6);
-    	//start.
-    	
-    	for(StructureComponent s : p_175856_1_)
-    	{
-    		if(s instanceof VillageComponentVillageWall)
-    		{
-    			return null;
-    		}
-    	}
-    	
-    	up = (rand.nextInt(2) == 0);
-    	if(up){
-    		StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(p_175856_3_, p_175856_4_, p_175856_5_, 0, 0, 0, numBlocks, 4, 1, facing);
-    		return StructureComponent.findIntersecting(p_175856_1_, structureboundingbox) != null ? null : structureboundingbox;
-    	}else{
-    		StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(p_175856_3_, p_175856_4_, p_175856_5_, 0, 0, 0, 1, 4, numBlocks, facing);
-    		return StructureComponent.findIntersecting(p_175856_1_, structureboundingbox) != null ? null : structureboundingbox;
-    	}
-        
-    }
-
-    /**
-     * second Part of Structure generating, this for example places Spiderwebs, Mob Spawners, it closes
-     * Mineshafts at the end, it adds Fences...
-     */
-    @Override
-    public boolean addComponentParts(World worldIn, Random randomIn, StructureBoundingBox structureBoundingBoxIn)
-    {
-        if (this.averageGroundLvl < 0)
+        public VillageComponentVillageWall()
         {
-            this.averageGroundLvl = this.getAverageGroundLevel(worldIn, structureBoundingBoxIn);
-
-            if (this.averageGroundLvl < 0)
-            {
-                return true;
-            }
-
-            this.boundingBox.offset(0, this.averageGroundLvl - this.boundingBox.maxY + 4 - 1, 0);
         }
-        
-        Village village = worldIn.getVillageCollection().getNearestVillage(new BlockPos(structureBoundingBoxIn.minX, structureBoundingBoxIn.minY, structureBoundingBoxIn.minZ), 30);
-        BlockPos center = village.getCenter();
-        int rad = village.getVillageRadius();
 
-        int posX = center.getX() - (rad * 2);
+        public VillageComponentVillageWall(StructureVillagePieces.Start start, Random rand, int p_i45566_2_, EnumFacing facing, BlockPos center, int radius, World worldIn)
+        {
+            super(start, p_i45566_2_);
+            this.center = center;
+            this.radius = radius;
+            this.worldIn = worldIn;
+        }
+
+        /**
+         * second Part of Structure generating, this for example places Spiderwebs, Mob Spawners, it closes
+         * Mineshafts at the end, it adds Fences...
+         */
         
-       // IBlockState iblockstate = this.getBiomeSpecificBlockState(Blocks.OAK_FENCE.getDefaultState());
-        IBlockState iblockstate = this.getBiomeSpecificBlockState(Blocks.COBBLESTONE.getDefaultState());
-       // this.setBlockState(worldIn, blockstateIn, x, y, z, null);
-        
-        /*if(up){
+        public void buildComponent(StructureComponent componentIn, List<StructureComponent> listIn, Random rand)
+        {
+        	//System.out.println("Generating"+this.getXWithOffset(0, 0)+" "+this.getZWithOffset(0, 0));
+        	int x = center.getX();
+        	int z = center.getZ();
         	
-	        this.fillWithBlocks(worldIn, structureBoundingBoxIn, 0, -1, 0, numBlocks, numBlocksY, 0, Blocks.AIR.getDefaultState(), Blocks.AIR.getDefaultState(), false);
-	        this.fillWithBlocks(worldIn, structureBoundingBoxIn, 0, -1, 0, numBlocks, numBlocksY, 0, iblockstate, iblockstate, false);
-	        this.placeTorch(worldIn, EnumFacing.UP, numBlocks, numBlocksY + 1, 0, structureBoundingBoxIn);
-	        this.placeTorch(worldIn, EnumFacing.UP, 0, numBlocksY + 1, 0, structureBoundingBoxIn);
-	        for (int j = 0; j < numBlocks + 1; ++j)
+        	BlockPos nWall = new BlockPos(x, worldIn.getTopSolidOrLiquidBlock(new BlockPos(x, 80, z)).getY(), z + radius);
+            BlockPos sWall = new BlockPos(x, worldIn.getTopSolidOrLiquidBlock(new BlockPos(x, 80, z)).getY(), z - radius);
+            BlockPos eWall = new BlockPos(x + radius, worldIn.getTopSolidOrLiquidBlock(new BlockPos(x, 80, z)).getY(), z);
+            BlockPos wWall = new BlockPos(x - radius, worldIn.getTopSolidOrLiquidBlock(new BlockPos(x, 80, z)).getY(), z);
+            
+            for(int i = x - radius; i < x + radius; i++)
             {
-                /*for (int i = 0; i < numBlocksY; ++i)
-                {
-                    //this.clearCurrentPositionBlocksUpwards(worldIn, j, -2, 0, structureBoundingBoxIn);
-                    this.replaceAirAndLiquidDownwards(worldIn, iblockstate, j, -2, 0, structureBoundingBoxIn);
-                //}
+            	worldIn.setBlockState(new BlockPos(i, worldIn.getTopSolidOrLiquidBlock(new BlockPos(i, 80, z + radius)).getY(), z+ radius), Blocks.STONEBRICK.getDefaultState()); 
+            	worldIn.setBlockState(new BlockPos(i, worldIn.getTopSolidOrLiquidBlock(new BlockPos(i, 80, z - radius)).getY(), z - radius), Blocks.STONEBRICK.getDefaultState()); 
             }
-	        //this.setBlockState(worldIn, iblockstate, 1, 0, 0, structureBoundingBoxIn);
-        }else{
-        	this.fillWithBlocks(worldIn, structureBoundingBoxIn, 0, -1, 0, 0, numBlocksY, numBlocks, Blocks.AIR.getDefaultState(), Blocks.AIR.getDefaultState(), false);
-	        this.fillWithBlocks(worldIn, structureBoundingBoxIn, 0, -1, 0, 0, numBlocksY, numBlocks, iblockstate, iblockstate, false);
-	        this.placeTorch(worldIn, EnumFacing.UP, 0, numBlocksY + 1, numBlocks, structureBoundingBoxIn);
-	        this.placeTorch(worldIn, EnumFacing.UP, 0, numBlocksY + 1, 0, structureBoundingBoxIn);
-	        for (int j = 0; j < numBlocks + 1; ++j)
+            
+            for(int i = z - radius; i < z + radius; i++)
             {
-                /*for (int i = 0; i > -10; ++i)
-                {
-                    //this.clearCurrentPositionBlocksUpwards(worldIn, 0, -2, j, structureBoundingBoxIn);
-                    this.replaceAirAndLiquidDownwards(worldIn, iblockstate, 0, -2, j, structureBoundingBoxIn);
-                //}
+            	worldIn.setBlockState(new BlockPos(x + radius, worldIn.getTopSolidOrLiquidBlock(new BlockPos(x + radius, 80, i)).getY(), i), Blocks.STONEBRICK.getDefaultState()); 
+            	worldIn.setBlockState(new BlockPos(x - radius, worldIn.getTopSolidOrLiquidBlock(new BlockPos(x - radius, 80, i)).getY(), i), Blocks.STONEBRICK.getDefaultState()); 
             }
         }
         
-        this.spawnVillagers(worldIn, structureBoundingBoxIn, 1, 1, 2, 1 + randomIn.nextInt(2));*/
-        return true;
-    }
-    protected void spawnVillagers(World worldIn, StructureBoundingBox structurebb, int x, int y, int z, int count)
-    {
-        if (this.villagersSpawned  < count)
+        public boolean addComponentParts(World worldIn, Random randomIn, StructureBoundingBox structureBoundingBoxIn)
         {
-            for (int i = villagersSpawned; i < count; ++i)
+        	//this.getXWithOffset(x, z)
+        	//System.out.println("Generating"+this.getXWithOffset(0, 0)+" "+this.getZWithOffset(0, 0));
+        	/*Village village = worldIn.getVillageCollection().getNearestVillage(new BlockPos(x, worldIn.getTopSolidOrLiquidBlock(new BlockPos(x, 80, z)).getY(), z), 30);
+            int radius = village.getVillageRadius() * 2;
+            System.out.println("Radius: "+radius);
+            BlockPos nWall = new BlockPos(x, worldIn.getTopSolidOrLiquidBlock(new BlockPos(x, 80, z)).getY(), z + radius);
+            BlockPos sWall = new BlockPos(x, worldIn.getTopSolidOrLiquidBlock(new BlockPos(x, 80, z)).getY(), z - radius);
+            BlockPos eWall = new BlockPos(x + radius, worldIn.getTopSolidOrLiquidBlock(new BlockPos(x, 80, z)).getY(), z);
+            BlockPos wWall = new BlockPos(x - radius, worldIn.getTopSolidOrLiquidBlock(new BlockPos(x, 80, z)).getY(), z);
+            
+            for(int i = x - radius; i < x + radius; i++)
             {
-                int j = this.getXWithOffset(x + i, z);
-                int l = this.getZWithOffset(x + i, z);
-                int k = worldIn.getTopSolidOrLiquidBlock(new BlockPos(j, 80, l)).getY();
-
-                if (!structurebb.isVecInside(new BlockPos(j, k, l)))
-                {
-                    break;
-                }
-
-                ++this.villagersSpawned;
-
-               /* if(worldIn.rand.nextInt(100) <= 50){
-                	AbstractVillagerSoldier entityvillager = new AbstractVillagerSoldier(worldIn);
-                	entityvillager.setLocationAndAngles((double)j + 0.5D, (double)k, (double)l + 0.5D, 0.0F, 0.0F);
-                    entityvillager.setSpawnPoint((double)j + 0.5D, (double)k, (double)l + 0.5D);
-                    //entityvillager.setProfession(null);
-                    
-                    entityvillager.finalizeMobSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityvillager)), (IEntityLivingData)null, false);
-                    worldIn.spawnEntity(entityvillager);
-                }
-                else
-                {
-                	EntityVillager entityvillager = new EntityVillager(worldIn);
-                    entityvillager.setLocationAndAngles((double)j + 0.5D, (double)k, (double)l + 0.5D, 0.0F, 0.0F);
-                    entityvillager.setProfession(5);
-                    entityvillager.finalizeMobSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityvillager)), (IEntityLivingData)null, false);
-                    worldIn.spawnEntity(entityvillager);
-                }*/
-                    /*else if(worldIn.rand.nextInt(100) <= 50){
-                }
-                	EntityVillagerArcher entityvillager = new EntityVillagerArcher(worldIn);
-                	entityvillager.setLocationAndAngles((double)j + 0.5D, (double)k, (double)l + 0.5D, 0.0F, 0.0F);
-                    entityvillager.setSpawnPoint((double)j + 0.5D, (double)k, (double)l + 0.5D);
-                    entityvillager.setProfession(null);
-                    
-                    entityvillager.finalizeMobSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityvillager)), (IEntityLivingData)null, false);
-                    worldIn.spawnEntity(entityvillager);
-                }else{
-                	EntityVillagerKnight entityvillager = new EntityVillagerKnight(worldIn);
-                	entityvillager.setLocationAndAngles((double)j + 0.5D, (double)k, (double)l + 0.5D, 0.0F, 0.0F);
-                    entityvillager.setSpawnPoint((double)j + 0.5D, (double)k, (double)l + 0.5D);
-                    entityvillager.setProfession(null);
-                    
-                    entityvillager.finalizeMobSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityvillager)), (IEntityLivingData)null, false);
-                    worldIn.spawnEntity(entityvillager);
-                }*/
-                
+            	worldIn.setBlockState(new BlockPos(i, worldIn.getTopSolidOrLiquidBlock(new BlockPos(i, 80, z + radius)).getY(), z+ radius), Blocks.STONEBRICK.getDefaultState()); 
+            	worldIn.setBlockState(new BlockPos(i, worldIn.getTopSolidOrLiquidBlock(new BlockPos(i, 80, z - radius)).getY(), z - radius), Blocks.STONEBRICK.getDefaultState()); 
             }
+            
+            for(int i = z - radius; i < z + radius; i++)
+            {
+            	worldIn.setBlockState(new BlockPos(x + radius, worldIn.getTopSolidOrLiquidBlock(new BlockPos(x + radius, 80, i)).getY(), i), Blocks.STONEBRICK.getDefaultState()); 
+            	worldIn.setBlockState(new BlockPos(x - radius, worldIn.getTopSolidOrLiquidBlock(new BlockPos(x - radius, 80, i)).getY(), i), Blocks.STONEBRICK.getDefaultState()); 
+            }*/
+            return true;
         }
-    }
-    
+        
+       /* protected void spawnVillagers(World worldIn, StructureBoundingBox structurebb, int x, int y, int z, int count)
+        {
+            if (this.villagersSpawned < count)
+            {
+                for (int i = villagersSpawned; i < count; ++i)
+                {
+                    int j = this.getXWithOffset(x + i, z);
+                    int k = this.getYWithOffset(y);
+                    int l = this.getZWithOffset(x + i, z);
 
+                    if (!structurebb.isVecInside(new BlockPos(j, k, l)))
+                    {
+                        break;
+                    }
+
+                    ++this.villagersSpawned;
+
+                    AbstractVillagerSoldier entityvillager = null;
+                    if(worldIn.rand.nextInt(100) < 50) entityvillager = new EntityVillagerMilitia(worldIn);
+                    else if (worldIn.rand.nextInt(100) < 50) entityvillager = new EntityVillagerGuard(worldIn);
+                    else entityvillager = new EntityVillagerPeasant(worldIn);
+                   
+                  	if(entityvillager.isCanSpawn())
+                  	{
+	                    entityvillager.onInitialSpawn(worldIn.getDifficultyForLocation(new BlockPos(j, k, l)), null);
+	                    entityvillager.setLocationAndAngles((double)j + 0.5D, (double)k, (double)l + 0.5D, 0.0F, 0.0F);
+	                    entityvillager.setSpawnPoint((double)j + 0.5D, (double)k, (double)l + 0.5D);
+	                    //entityvillager.setProfession(null);
+	                    
+	                    entityvillager.finalizeMobSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityvillager)), (IEntityLivingData)null, false);
+	                    worldIn.spawnEntity(entityvillager);
+                  	}
+                }
+            }
+        }*/
+ 
 }

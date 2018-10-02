@@ -133,7 +133,41 @@ Changelog:
 *Config pass check (prevent a config crash)
 
 -Beta v1.3.0
-*Fixed Knight AI
+*Finally fixed knight bug
+*Added bandit soldier
+*Added bandit archer
+*Added bandit mage
+*Added bandit alchemist 
+*Added bandit knight
+*Revamped alchemist types
+*Added Bandit Raids
+*Added Recruiting Drives for villages
+*Bandits spawn in dark
+
+-Beta v1.3.7
+*Fixed Bandit Raid bug
+*Tweak village spawn setting
+*Fixed some targeting bugs
+*Added Sand Cane farm
+*Fixed healing Potion Spam
+*Fixed the hunter
+*added beacon to wizard tower
+*Added config for bandits
+*Added config for creepers
+*Bandits Drop emeralds
+
+To Be done later
+*Added University
+*Added Castle
+
+
+
+*Added Wall
+*Added Sewers
+*Add more biome specific blocks
+
+
+*New Bandit AI
 *Fixed Guard AI
 *Forced Soldiers out of houses (when patrolling)
 

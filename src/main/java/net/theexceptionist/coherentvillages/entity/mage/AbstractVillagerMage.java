@@ -67,9 +67,6 @@ public abstract class AbstractVillagerMage extends AbstractVillagerSoldier imple
 	    {
 		
 		 super.updateAITasks();
-		 if(this.getAttackTarget() instanceof EntityVillager){
-			 this.setAttackTarget(null);
-		 }
 		 
 	    }
 	

@@ -15,12 +15,16 @@ import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
 import net.minecraft.entity.ai.EntityAITasks.EntityAITaskEntry;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.passive.EntityVillager;
+import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
+import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.ItemStack;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.DifficultyInstance;
@@ -86,17 +90,8 @@ public abstract class AbstractVillagerAlchemist extends AbstractVillagerSoldier 
 	    {
 		
 		 super.updateAITasks();
-		 if(this.getAttackTarget() instanceof EntityVillager){
-			 this.setAttackTarget(null);
-		 }
 		 
 	    }
-	
-	 protected void setEquipmentBasedOnDifficulty(DifficultyInstance difficulty)
-	    {
-	        super.setEquipmentBasedOnDifficulty(difficulty);
-	    }
-
 
 	@Override
 	public abstract void attackEntityWithRangedAttack(EntityLivingBase target,
@@ -219,6 +214,20 @@ public abstract class AbstractVillagerAlchemist extends AbstractVillagerSoldier 
             this.world.spawnEntity(entitypotion);
         }
     }*/
+    
+    @Override
+	 protected void setEquipmentBasedOnDifficulty(DifficultyInstance difficulty)
+	    {
+	        super.setEquipmentBasedOnDifficulty(difficulty);
+	        
+	        //Main.logger.info("Gave Equipment");//, message, p0, p1, p2, p3, p4, p5, p6, p7);
+
+			this.setHeldItem(EnumHand.MAIN_HAND, new ItemStack(Items.STONE_SWORD));
+			this.setItemStackToSlot(EntityEquipmentSlot.HEAD, new ItemStack(Items.LEATHER_HELMET));
+			this.setItemStackToSlot(EntityEquipmentSlot.CHEST, new ItemStack(Items.LEATHER_CHESTPLATE));
+			this.setItemStackToSlot(EntityEquipmentSlot.LEGS, new ItemStack(Items.LEATHER_LEGGINGS));
+			this.setItemStackToSlot(EntityEquipmentSlot.FEET, new ItemStack(Items.LEATHER_BOOTS));
+	    }
     
     public boolean isPotionApplicable(PotionEffect potioneffectIn)
     {

@@ -176,7 +176,11 @@ public class EntityVillagerPotionMaster extends AbstractVillagerAlchemist {
 
 	public void healEntityWithRangedAttack(EntityLivingBase target,
 			float lvt_5_1_) {
-		 if (!this.isDrinkingPotion())
+		if(coolDown > 0)
+		{
+			coolDown--;
+		}
+		 if (!this.isDrinkingPotion() && coolDown <= 0)
 	        {
 	            double d0 = target.posY + (double)target.getEyeHeight() - 1.100000023841858D;
 	            double d1 = target.posX + target.motionX - this.posX;
@@ -209,6 +213,8 @@ public class EntityVillagerPotionMaster extends AbstractVillagerAlchemist {
 	            entitypotion.shoot(d1, d2 + (double)(f * 0.2F), d3, 0.75F, 8.0F);
 	            this.world.playSound((EntityPlayer)null, this.posX, this.posY, this.posZ, SoundEvents.ENTITY_WITCH_THROW, this.getSoundCategory(), 1.0F, 0.8F + this.rand.nextFloat() * 0.4F);
 	            this.world.spawnEntity(entitypotion);
+	            
+                coolDown = 10;
 	        }
 		
 	}
@@ -241,9 +247,18 @@ public class EntityVillagerPotionMaster extends AbstractVillagerAlchemist {
 //        this.startRiding(horse);
     }
 	
+	 @Override
 	 protected void setEquipmentBasedOnDifficulty(DifficultyInstance difficulty)
 	    {
 	        super.setEquipmentBasedOnDifficulty(difficulty);
+	        
+	        //Main.logger.info("Gave Equipment");//, message, p0, p1, p2, p3, p4, p5, p6, p7);
+
+			this.setHeldItem(EnumHand.MAIN_HAND, new ItemStack(Items.IRON_SWORD));
+			this.setItemStackToSlot(EntityEquipmentSlot.HEAD, new ItemStack(Items.IRON_HELMET));
+			this.setItemStackToSlot(EntityEquipmentSlot.CHEST, new ItemStack(Items.IRON_CHESTPLATE));
+			this.setItemStackToSlot(EntityEquipmentSlot.LEGS, new ItemStack(Items.LEATHER_LEGGINGS));
+			this.setItemStackToSlot(EntityEquipmentSlot.FEET, new ItemStack(Items.LEATHER_BOOTS));
 	    }
 
 }

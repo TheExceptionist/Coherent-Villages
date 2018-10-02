@@ -8,6 +8,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
+import net.theexceptionist.coherentvillages.entity.knight.ai.EntityAIAttackKnight;
 import net.theexceptionist.coherentvillages.main.Main;
 
 public class EntityVillagerPaladin extends AbstractEntityKnight{
@@ -38,7 +39,7 @@ public class EntityVillagerPaladin extends AbstractEntityKnight{
 	protected void initEntityAI()
    {
 		super.initEntityAI();
-		this.tasks.addTask(1, new EntityAIAttackMelee(this, SPRINT, true));
+		this.tasks.addTask(1, new EntityAIAttackKnight(this, SPRINT, true));
 		
 		//super.initEntityAI();
        //this.tasks.addTask(5, new EntityAIMoveThroughVillage(this, 0.6D, true));

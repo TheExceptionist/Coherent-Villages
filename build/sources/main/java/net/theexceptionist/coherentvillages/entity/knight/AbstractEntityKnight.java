@@ -12,7 +12,7 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAIMoveTowardsTarget;
+import net.minecraft.entity.ai.EntityAIMoveThroughVillage;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAITasks.EntityAITaskEntry;
 import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
@@ -30,7 +30,7 @@ import net.theexceptionist.coherentvillages.entity.EntityVillagerHorse;
 import net.theexceptionist.coherentvillages.entity.ai.EntityAIAttackBackExclude;
 import net.theexceptionist.coherentvillages.entity.ai.EntityAIStayInBorders;
 import net.theexceptionist.coherentvillages.entity.followers.EntitySkeletonMinion;
-import net.theexceptionist.coherentvillages.entity.knight.ai.EntityKnightNavigate;
+import net.theexceptionist.coherentvillages.entity.knight.ai.EntityAIKnightMoveToTarget;
 import net.theexceptionist.coherentvillages.entity.soldier.AbstractVillagerSoldier;
 import net.theexceptionist.coherentvillages.entity.soldier.EntityVillagerManAtArms;
 
@@ -40,20 +40,25 @@ public abstract class AbstractEntityKnight extends AbstractVillagerSoldier{
 	public static final double TROT = 0.8;
 	public static final double RUNNING = 1.6;
 	public static final double SPRINT = 2.4;
+	
+	protected float horseWidth;
+	protected float horseHeight;
 	//0.8 trot
 	//1.6 sprint
 	//2.4 Running
 	
 	public AbstractEntityKnight(World worldIn) {
 		super(worldIn);
-		this.navigator = new EntityKnightNavigate(this, worldIn);
-
 	}
 	
 	public void setRidingHorse(){
 		this.horse = new EntityVillagerHorse(this.world);
         horse.setPosition((double)this.posX, (double)this.posY, (double)this.posZ);
         horse.setHorseTamed(true);
+    	this.horseHeight = this.horse.height;
+    	this.horseWidth  = this.horse.width; 
+    	this.height += this.horseHeight;
+    	this.width += this.horseWidth;
         
        /* if(world.rand.nextInt(100) < 50){
         	
@@ -78,15 +83,17 @@ public abstract class AbstractEntityKnight extends AbstractVillagerSoldier{
 
 	protected void initEntityAI()
     {
+		//super.initEntityAI();
 		/**Need To replace these***/
         //this.tasks.addTask(0, new EntityAIAttackCharge(this, 1.0D, true));
         this.tasks.addTask(2, new EntityAIStayInBorders(this, RUNNING));
-        this.tasks.addTask(5, new EntityAIMoveTowardsTarget(this, SPRINT, 32.0F));
+        this.tasks.addTask(3, new EntityAIMoveThroughVillage(this, 0.6D, true));
+        this.tasks.addTask(5, new EntityAIKnightMoveToTarget(this, SPRINT, 32.0F));
         this.tasks.addTask(6, new EntityAIWanderAvoidWater(this, TROT));
         this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
         this.tasks.addTask(8, new EntityAILookIdle(this));
-  
-        if(this.isHostile) this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
+        
+      //  if(this.isHostile) this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
         
         this.targetTasks.addTask(0, new EntityAINearestAttackableTarget(this, EntityLiving.class, 1, true, true, new Predicate<EntityLiving>()
         {
@@ -112,11 +119,11 @@ public abstract class AbstractEntityKnight extends AbstractVillagerSoldier{
             }
         }));
         this.targetTasks.addTask(1, new EntityAIAttackBackExclude(this, true, new Class[0])); 
+        //System.out.println("Init AI");
 		//super.initEntityAI();
 		//this.areAdditionalTasksSet = true;
-        //this.tasks.addTask(3, new EntityAIMoveThroughVillage(this, 0.6D, true));
        // this.tasks.addTask(6, new EntityAIHarvestFarmland(this, 0.6D));
-        this.getNavigator();
+        //this.getNavigator();
     }
 	
 	protected void applyEntityAttributes()
@@ -179,9 +186,6 @@ public abstract class AbstractEntityKnight extends AbstractVillagerSoldier{
 	 protected void updateAITasks()
 	    {
 		 super.updateAITasks();
-		 if(this.getAttackTarget() instanceof EntityVillager){
-			 this.setAttackTarget(null);
-		 }
 		 
 		 if(!isRiding){
 			 this.setRidingHorse();
@@ -192,7 +196,7 @@ public abstract class AbstractEntityKnight extends AbstractVillagerSoldier{
 			 EntityVillagerManAtArms entityvillager = new EntityVillagerManAtArms(this.world);
 			  entityvillager.onInitialSpawn(this.world.getDifficultyForLocation(new BlockPos(this.posX, this.posY, this.posZ)), null);
        	
-      	entityvillager.setLocationAndAngles(this.posX + 0.5D, this.posY, this.posZ + 0.5D, 0.0F, 0.0F);
+			  entityvillager.setLocationAndAngles(this.posX + 0.5D, this.posY, this.posZ + 0.5D, 0.0F, 0.0F);
           entityvillager.setSpawnPoint(this.posX + 0.5D, this.posY, this.posZ + 0.5D);
           //entityvillager.setProfession(null);
           
@@ -209,15 +213,6 @@ public abstract class AbstractEntityKnight extends AbstractVillagerSoldier{
 	        this.setEquipmentBasedOnDifficulty(difficulty);
 	        this.setEnchantmentBasedOnDifficulty(difficulty);
 	        this.setCanPickUpLoot(this.rand.nextFloat() < 0.55F * difficulty.getClampedAdditionalDifficulty());
-	        
-	        
-	   	 for(Object task : this.tasks.taskEntries.toArray())
-			{
-				 EntityAIBase ai = ((EntityAITaskEntry) task).action;
-				 if(ai instanceof EntityAIAttackMelee)
-					 this.tasks.removeTask(ai);	
-				 //System.out.println("Removed");
-			}
 	    
 
 /*

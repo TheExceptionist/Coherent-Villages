@@ -105,8 +105,12 @@ public class VillageComponentBigFarm extends StructureVillagePieces.Village
 
         IBlockState iblockstate = this.getBiomeSpecificBlockState(Blocks.LOG.getDefaultState());
         this.fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 1, 0, 6, 4, 8, Blocks.AIR.getDefaultState(), Blocks.AIR.getDefaultState(), false);
-        this.fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 0, 1, 2, 0, 7, Blocks.FARMLAND.getDefaultState(), Blocks.FARMLAND.getDefaultState(), false);
-        this.fillWithBlocks(worldIn, structureBoundingBoxIn, 4, 0, 1, 5, 0, 7, Blocks.FARMLAND.getDefaultState(), Blocks.FARMLAND.getDefaultState(), false);
+        this.fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 0, 1, 1, 0, 7, Blocks.FARMLAND.getDefaultState(), Blocks.FARMLAND.getDefaultState(), false);
+        this.fillWithBlocks(worldIn, structureBoundingBoxIn, 5, 0, 1, 5, 0, 7, Blocks.FARMLAND.getDefaultState(), Blocks.FARMLAND.getDefaultState(), false);
+       
+        this.fillWithBlocks(worldIn, structureBoundingBoxIn, 2, 0, 1, 2, 0, 7, Blocks.DIRT.getDefaultState(), Blocks.DIRT.getDefaultState(), false);
+        this.fillWithBlocks(worldIn, structureBoundingBoxIn, 4, 0, 1, 4, 0, 7, Blocks.DIRT.getDefaultState(), Blocks.DIRT.getDefaultState(), false);
+        
         this.fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 0, 0, 0, 0, 8, iblockstate, iblockstate, false);
         this.fillWithBlocks(worldIn, structureBoundingBoxIn, 6, 0, 0, 6, 0, 8, iblockstate, iblockstate, false);
         this.fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 0, 0, 5, 0, 0, iblockstate, iblockstate, false);

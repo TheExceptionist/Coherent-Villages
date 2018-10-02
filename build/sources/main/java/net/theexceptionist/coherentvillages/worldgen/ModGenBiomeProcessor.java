@@ -12,6 +12,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Biomes;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.village.Village;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.structure.template.ITemplateProcessor;
@@ -19,6 +20,7 @@ import net.minecraft.world.gen.structure.template.Template.BlockInfo;
 
 public class ModGenBiomeProcessor implements ITemplateProcessor {
 	private Biome biomeIn;
+	Village village;
 	
 	public ModGenBiomeProcessor(final Biome biomeIn)
 	{
