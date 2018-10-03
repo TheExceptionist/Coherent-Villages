@@ -4,46 +4,22 @@ import java.util.Calendar;
 
 import javax.annotation.Nullable;
 
-import com.google.common.base.Predicate;
-
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IEntityLivingData;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackMelee;
-import net.minecraft.entity.ai.EntityAIBase;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAIMoveThroughVillage;
-import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
-import net.minecraft.entity.ai.EntityAIMoveTowardsTarget;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAIOpenDoor;
-import net.minecraft.entity.ai.EntityAIRestrictOpenDoor;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
-import net.minecraft.entity.ai.EntityAITasks.EntityAITaskEntry;
-import net.minecraft.entity.monster.EntityCreeper;
-import net.minecraft.entity.monster.EntitySkeleton;
-import net.minecraft.entity.monster.IMob;
-import net.minecraft.entity.passive.EntityTameable;
+import net.minecraft.entity.monster.EntityGolem;
+import net.minecraft.entity.monster.EntityIronGolem;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
-import net.theexceptionist.coherentvillages.entity.ai.EntityAIAttackBackExclude;
 import net.theexceptionist.coherentvillages.entity.ai.EntityAISearchHouse;
-import net.theexceptionist.coherentvillages.entity.ai.EntityAIStayInBorders;
-import net.theexceptionist.coherentvillages.entity.followers.EntitySkeletonMinion;
 import net.theexceptionist.coherentvillages.entity.soldier.AbstractVillagerSoldier;
 import net.theexceptionist.coherentvillages.main.Main;
 
@@ -60,8 +36,11 @@ public  abstract class AbstractVillagerBandit extends AbstractVillagerSoldier {
 	    {
 	        super.onDeath(cause);
 
-	        if(world.rand.nextInt(100) < 25) this.dropEquipment(true, 0);
-	        this.dropItem(Items.EMERALD, world.rand.nextInt(3) + 1);
+	        if(!this.world.isRemote)
+	        {
+		        if(world.rand.nextInt(100) < 25) this.dropEquipment(true, 0);
+		        this.dropItem(Items.EMERALD, world.rand.nextInt(3) + 1);
+	        }
 	    }
 	
 	 protected boolean canDropLoot()
@@ -104,7 +83,9 @@ public  abstract class AbstractVillagerBandit extends AbstractVillagerSoldier {
 		super.initEntityAI();
 		this.tasks.addTask(5, new EntityAISearchHouse(this, 90, false));
 	       
-		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
+		this.targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
+		//this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityVillager.class, true));
+		this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityGolem.class, true));
     }
 	
 	 public void setRevengeTarget(@Nullable EntityLivingBase livingBase)
@@ -153,7 +134,7 @@ public  abstract class AbstractVillagerBandit extends AbstractVillagerSoldier {
             }*/
         }
         
-		this.setAlwaysRenderNameTag(false);
+		this.setAlwaysRenderNameTag(true);
 		this.setDropItemsWhenDead(true);
 
         return livingdata;

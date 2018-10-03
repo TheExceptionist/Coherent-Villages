@@ -49,7 +49,16 @@ public class EntityVillagerBanditAlchemist extends AbstractVillagerBandit implem
 	{
 		super(worldIn);
 		this.canSpawn = Main.villager_spawn.get(Main.Soldier.Bandit_Alchemist.ordinal()).spawn;
+		this.className = "Bandit Alchemist";
+		
 	}
+	
+	
+	@Override
+	protected void setUpgrade() {
+		this.upgrade = null;
+	}
+	
 	
     public boolean isDrinkingPotion()
     {

@@ -19,6 +19,24 @@ public class EntityAIShareTarget extends EntityAITarget {
 	@Override
 	public boolean shouldExecute() {
 		// TODO Auto-generated method stub
+
+		//System.out.println(host.getLiving().getName()+" Not Working");
+		if(host == null || master == null) return false;
+		
+		//System.out.println(host.getLiving().getName()+" Working");
+		
+		if(host.getLiving().getAttackTarget() != this.master.getAttackTarget()){
+			return true;
+		}else if(host.getLiving().getAttackTarget() != this.master.getAttackingEntity()){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
+	@Override
+	public boolean shouldContinueExecuting() {
+		// TODO Auto-generated method stub
 		if(host == null || master == null) return false;
 		
 		if(host.getLiving().getAttackTarget() != this.master.getAttackTarget()){
@@ -34,7 +52,7 @@ public class EntityAIShareTarget extends EntityAITarget {
     {
 		if(this.master.getAttackingEntity() != null){
 			this.host.getLiving().setAttackTarget(this.master.getAttackingEntity());
-		}else{
+		}else if(this.master.getAttackTarget() != null){
 			this.host.getLiving().setAttackTarget(this.master.getAttackTarget());
 		}
 

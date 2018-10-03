@@ -38,6 +38,7 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 import net.theexceptionist.coherentvillages.entity.ai.EntityAIFollowEntity;
 import net.theexceptionist.coherentvillages.entity.ai.EntityAIShareTarget;
+import net.theexceptionist.coherentvillages.entity.bandit.AbstractVillagerBandit;
 import net.theexceptionist.coherentvillages.entity.mage.AbstractVillagerMage;
 import net.theexceptionist.coherentvillages.entity.soldier.AbstractVillagerSoldier;
 
@@ -62,6 +63,13 @@ public class EntityVillagerGuardian extends AbstractVillagerSoldier {
 		this.className = "Ancient Villager Guardian";
 
 	}
+	
+	
+	@Override
+	protected void setUpgrade() {
+		this.upgrade = null;
+	}
+	
 	
 	public boolean processInteract(EntityPlayer player, EnumHand hand)
     {
@@ -93,11 +101,6 @@ public class EntityVillagerGuardian extends AbstractVillagerSoldier {
         this.tasks.addTask(2, new EntityAIMoveTowardsTarget(this, 0.9D, 32.0F));
         this.tasks.addTask(3, new EntityAIMoveThroughVillage(this, 0.6D, true));
         
-        if(this.master != null){
-        	this.tasks.addTask(3, new EntityAIFollowEntity(this, master));
-        	this.targetTasks.addTask(0, new EntityAIShareTarget(this, master, false));
-        }
-        
         this.tasks.addTask(4, new EntityAIMoveTowardsRestriction(this, 1.0D));
         //this.tasks.addTask(5, new EntityAILookAtVillager(this));
         this.tasks.addTask(6, new EntityAIWanderAvoidWater(this, 0.6D));
@@ -112,7 +115,7 @@ public class EntityVillagerGuardian extends AbstractVillagerSoldier {
         {
             public boolean apply(@Nullable EntityLiving p_apply_1_)
             {
-                return p_apply_1_ != null && IMob.VISIBLE_MOB_SELECTOR.apply(p_apply_1_) && !(p_apply_1_ instanceof EntityCreeper);
+                return p_apply_1_ != null && (IMob.VISIBLE_MOB_SELECTOR.apply(p_apply_1_) && !(p_apply_1_ instanceof EntityCreeper)) || (p_apply_1_ instanceof AbstractVillagerBandit);
             }
         }));
         this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true, new Class[0]));
@@ -186,6 +189,11 @@ public class EntityVillagerGuardian extends AbstractVillagerSoldier {
 	        super.setEquipmentBasedOnDifficulty(difficulty);
 	        
 	        //Main.logger.info("Gave Equipment");//, message, p0, p1, p2, p3, p4, p5, p6, p7);
+	        
+	        if(this.master != null){
+	         	//this.tasks.addTask(3, new EntityAIFollowMerchant(this, master));
+	         	this.targetTasks.addTask(0, new EntityAIShareTarget(this, master, false));
+	         }
 
 			this.setHeldItem(EnumHand.MAIN_HAND, new ItemStack(Items.IRON_SWORD));
 			this.setItemStackToSlot(EntityEquipmentSlot.HEAD, new ItemStack(Items.CHAINMAIL_HELMET));

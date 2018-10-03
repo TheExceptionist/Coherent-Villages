@@ -20,6 +20,7 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 import net.theexceptionist.coherentvillages.entity.EntityVillagerLighting;
 import net.theexceptionist.coherentvillages.entity.followers.EntityVillagerGuardian;
+import net.theexceptionist.coherentvillages.entity.soldier.EntityVillagerSergeant;
 import net.theexceptionist.coherentvillages.main.Main;
 
 public class EntityVillagerGrandMage extends AbstractVillagerMage{
@@ -42,6 +43,11 @@ public class EntityVillagerGrandMage extends AbstractVillagerMage{
 		super.initEntityAI();
        // this.tasks.addTask(6, new EntityAIHarvestFarmland(this, 0.6D));
     }
+	
+	@Override
+	protected void setUpgrade() {
+		this.upgrade = null;
+	}
 	
 	 protected void setEquipmentBasedOnDifficulty(DifficultyInstance difficulty)
 	    {

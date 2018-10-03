@@ -4,9 +4,8 @@ import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.ai.RandomPositionGenerator;
-import net.minecraft.entity.passive.EntityVillager;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
-import net.theexceptionist.coherentvillages.entity.followers.IEntityFollower;
 
 public class EntityAIKnightMoveToTarget extends EntityAIBase
 {
@@ -16,6 +15,7 @@ public class EntityAIKnightMoveToTarget extends EntityAIBase
     private double movePosY;
     private double movePosZ;
     private final double speed;
+    private boolean movedToPos = false;
     /** If the distance to the target entity is further than this, this AI task will not run. */
     private final float maxTargetDistance;
 
@@ -52,7 +52,7 @@ public class EntityAIKnightMoveToTarget extends EntityAIBase
             }
             else
             {
-            	System.out.println("Execute");
+            	//System.out.println("Execute");
                 this.movePosX = vec3d.x;
                 this.movePosY = vec3d.y;
                 this.movePosZ = vec3d.z;
@@ -76,6 +76,7 @@ public class EntityAIKnightMoveToTarget extends EntityAIBase
     public void resetTask()
     {
         this.targetEntity = null;
+        movedToPos = false;
     }
 
     /**
@@ -83,7 +84,6 @@ public class EntityAIKnightMoveToTarget extends EntityAIBase
      */
     public void startExecuting()
     {
-    	//System.out.println("Creature Pos: "+this.creature.posX+" "+this.creature.posY+" "+this.creature.posZ+" | Target Pos: "+this.movePosX+" "+this.movePosY+" "+this.movePosZ);
-        boolean success = this.creature.getNavigator().tryMoveToXYZ(this.movePosX, this.movePosY, this.movePosZ, this.speed);
+    	boolean success = this.creature.getNavigator().tryMoveToXYZ(this.movePosX, this.movePosY, this.movePosZ, this.speed);
     }
 }

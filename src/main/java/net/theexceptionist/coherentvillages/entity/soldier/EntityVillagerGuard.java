@@ -55,6 +55,8 @@ public class EntityVillagerGuard extends AbstractVillagerSoldier implements IVil
 		// TODO Auto-generated constructor stub
 	}
 	
+	
+	
 	@Override
 	 protected void setEquipmentBasedOnDifficulty(DifficultyInstance difficulty)
 	    {
@@ -197,5 +199,12 @@ public class EntityVillagerGuard extends AbstractVillagerSoldier implements IVil
 	public boolean getArrived() {
 		// TODO Auto-generated method stub
 		return this.atPost;
+	}
+
+
+
+	@Override
+	protected void setUpgrade() {
+		this.upgrade = null;
 	}
 }

@@ -15,6 +15,7 @@ import net.minecraft.world.World;
 import net.theexceptionist.coherentvillages.entity.EntityVillagerLighting;
 import net.theexceptionist.coherentvillages.entity.followers.EntitySkeletonMinion;
 import net.theexceptionist.coherentvillages.entity.followers.EntityVillagerGuardian;
+import net.theexceptionist.coherentvillages.entity.soldier.EntityVillagerSergeant;
 import net.theexceptionist.coherentvillages.main.Main;
 
 public class EntityVillagerNecromancer extends AbstractVillagerMage{
@@ -31,6 +32,11 @@ public class EntityVillagerNecromancer extends AbstractVillagerMage{
 
 		//this.isHostile = true;
 		// TODO Auto-generated constructor stub
+	}
+	
+	@Override
+	protected void setUpgrade() {
+		this.upgrade = null;//new EntityVillagerSergeant(world);
 	}
 	
 	 protected void setEquipmentBasedOnDifficulty(DifficultyInstance difficulty)

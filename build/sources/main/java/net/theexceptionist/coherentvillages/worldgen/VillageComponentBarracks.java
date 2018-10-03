@@ -270,6 +270,8 @@ public class VillageComponentBarracks extends StructureVillagePieces.Village
 
                     AbstractVillagerSoldier entityvillager = new EntityVillagerMilitia(worldIn);
    	             
+                    entityvillager.setFreshRecruit(worldIn.rand.nextInt(100) < 10);
+                    
                     if(!this.isZombieInfested)
                     {
 	                    if(worldIn.rand.nextInt(100) <= 5){
@@ -290,6 +292,7 @@ public class VillageComponentBarracks extends StructureVillagePieces.Village
                     else
                     {
                     	  entityvillager = new EntityVillagerBandit(worldIn);  
+                    	  entityvillager.setAlwaysRenderNameTag(true);
                     }
                     
                   	if(entityvillager.isCanSpawn())

@@ -22,6 +22,13 @@ public class EntityVillagerMageArcher extends AbstractVillagerArcher{
 		// TODO Auto-generated constructor stub
 	}
 	
+	
+	@Override
+	protected void setUpgrade() {
+		this.upgrade = null;
+	}
+	
+	
 	@Override
 	protected EntityArrow getArrow(float p_190726_1_) {
 		EntitySpectralArrow entitytippedarrow = new EntitySpectralArrow(this.world, this);

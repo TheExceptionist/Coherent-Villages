@@ -1,10 +1,13 @@
 package net.theexceptionist.coherentvillages.entity.followers;
 
+import java.util.Calendar;
+
 import javax.annotation.Nullable;
 
 import com.google.common.base.Predicate;
 
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.ai.EntityAIAvoidEntity;
 import net.minecraft.entity.ai.EntityAIFleeSun;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
@@ -32,6 +35,7 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.datafix.DataFixer;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 import net.minecraft.world.storage.loot.LootTableList;
 import net.theexceptionist.coherentvillages.entity.ai.EntityAIShareTarget;
@@ -40,20 +44,20 @@ import net.theexceptionist.coherentvillages.entity.soldier.AbstractVillagerSoldi
 
 public class EntitySkeletonMinion extends AbstractSkeleton implements IEntityFollower
 {
-	protected AbstractVillagerMage master;
+	protected AbstractVillagerSoldier master;
 	public EntitySkeletonMinion(World worldIn)
     {
         super(worldIn);
         this.master = null;
     }
 	
-    public EntitySkeletonMinion(World worldIn, AbstractVillagerMage master)
+    public EntitySkeletonMinion(World worldIn, AbstractVillagerSoldier master)
     {
         super(worldIn);
         this.master = master;
     }
 
-    public static void registerFixesSkeleton(DataFixer fixer)
+	public static void registerFixesSkeleton(DataFixer fixer)
     {
         EntityLiving.registerFixesMob(fixer, EntitySkeleton.class);
     }
@@ -68,11 +72,6 @@ public class EntitySkeletonMinion extends AbstractSkeleton implements IEntityFol
         this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(6, new EntityAILookIdle(this));
         this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false, new Class[0]));
-        
-        if(this.master != null){
-        	//this.tasks.addTask(3, new EntityAIFollowMerchant(this, master));
-        	this.targetTasks.addTask(0, new EntityAIShareTarget(this, master, false));
-        }
         
         this.targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityLiving.class, 0, false, true, new Predicate<EntityLiving>()
         {
@@ -164,7 +163,38 @@ public class EntitySkeletonMinion extends AbstractSkeleton implements IEntityFol
 		            this.world.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, this.posX + (double)(this.rand.nextFloat() * this.width * 2.0F) - (double)this.width, this.posY + (double)(this.rand.nextFloat() * this.height), this.posZ + (double)(this.rand.nextFloat() * this.width * 2.0F) - (double)this.width, d2, d0, d1, new int[0]);
 		        }
 		 }
+		 
 	    }
+	 
+	 public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, @Nullable IEntityLivingData livingdata)
+	    {
+	        livingdata = super.onInitialSpawn(difficulty, livingdata);
+	        this.setEquipmentBasedOnDifficulty(difficulty);
+	        this.setEnchantmentBasedOnDifficulty(difficulty);
+	        this.setCanPickUpLoot(this.rand.nextFloat() < 0.55F * difficulty.getClampedAdditionalDifficulty());
+	        
+	        if (this.getItemStackFromSlot(EntityEquipmentSlot.HEAD).isEmpty())
+	        {
+	            Calendar calendar = this.world.getCurrentDate();
+
+	            /*if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && this.rand.nextFloat() < 0.25F)
+	            {
+	                this.setItemStackToSlot(EntityEquipmentSlot.HEAD, new ItemStack(this.rand.nextFloat() < 0.1F ? Blocks.LIT_PUMPKIN : Blocks.PUMPKIN));
+	                this.inventoryArmorDropChances[EntityEquipmentSlot.HEAD.getIndex()] = 0.0F;
+	            }*/
+	        }
+	        
+	        if(this.master != null){
+	         	//this.tasks.addTask(3, new EntityAIFollowMerchant(this, master));
+	         	this.targetTasks.addTask(0, new EntityAIShareTarget(this, master, false));
+	         }
+	        
+			this.setAlwaysRenderNameTag(true);
+			this.setDropItemsWhenDead(true);
+
+	        return livingdata;
+	    }
+     
 
 	@Override
 	public void setMaster(AbstractVillagerSoldier villager) {

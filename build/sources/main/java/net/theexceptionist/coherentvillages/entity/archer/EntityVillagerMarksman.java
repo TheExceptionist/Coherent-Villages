@@ -27,6 +27,13 @@ public class EntityVillagerMarksman extends AbstractVillagerArcher{
 		// TODO Auto-generated constructor stub
 	}
 	
+	
+	@Override
+	protected void setUpgrade() {
+		this.upgrade = null;
+	}
+	
+	
 	protected EntityArrow getArrow(float p_190726_1_) {
 		EntityTippedArrow entitytippedarrow = new EntityTippedArrow(this.world, this);
         entitytippedarrow.setEnchantmentEffectsFromEntity(this, p_190726_1_);

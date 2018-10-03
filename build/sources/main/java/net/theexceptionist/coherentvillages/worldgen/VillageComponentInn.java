@@ -135,7 +135,12 @@ public class VillageComponentInn extends StructureVillagePieces.Village
             
             this.fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 8, 7, 13, 8, 14, iblockstate1, iblockstate1, false);
             
+            this.setBlockState(worldIn, Blocks.AIR.getDefaultState(), 2, 1, 6, structureBoundingBoxIn);
+            this.setBlockState(worldIn, Blocks.AIR.getDefaultState(), 2, 2, 6, structureBoundingBoxIn);
             this.createVillageDoor(worldIn, structureBoundingBoxIn, randomIn, 2, 1, 6, EnumFacing.NORTH);
+            
+            this.setBlockState(worldIn, Blocks.AIR.getDefaultState(), 2, 5, 6, structureBoundingBoxIn);
+            this.setBlockState(worldIn, Blocks.AIR.getDefaultState(), 2, 6, 6, structureBoundingBoxIn);
 	        this.createVillageDoor(worldIn, structureBoundingBoxIn, randomIn, 2, 5, 6, EnumFacing.NORTH);
 	        this.placeTorch(worldIn, EnumFacing.SOUTH, 2, 3, 5, structureBoundingBoxIn);
 	        this.placeTorch(worldIn, EnumFacing.SOUTH, 2, 7, 5, structureBoundingBoxIn);
@@ -159,6 +164,15 @@ public class VillageComponentInn extends StructureVillagePieces.Village
             this.fillWithBlocks(worldIn, structureBoundingBoxIn, 4, 3, 9, 4, 3, 15, iblockstate1, iblockstate1, false);
             this.fillWithBlocks(worldIn, structureBoundingBoxIn, 7, 3, 9, 7, 3, 15, iblockstate1, iblockstate1, false);
             this.fillWithBlocks(worldIn, structureBoundingBoxIn, 10, 3, 9, 10, 3, 15, iblockstate1, iblockstate1, false);
+            
+            this.setBlockState(worldIn, Blocks.AIR.getDefaultState(), 3, 1, 9, structureBoundingBoxIn);
+            this.setBlockState(worldIn, Blocks.AIR.getDefaultState(), 3, 2, 9, structureBoundingBoxIn);
+            this.setBlockState(worldIn, Blocks.AIR.getDefaultState(), 6, 1, 9, structureBoundingBoxIn);
+            this.setBlockState(worldIn, Blocks.AIR.getDefaultState(), 6, 2, 9, structureBoundingBoxIn);
+            this.setBlockState(worldIn, Blocks.AIR.getDefaultState(), 9, 1, 9, structureBoundingBoxIn);
+            this.setBlockState(worldIn, Blocks.AIR.getDefaultState(), 9, 2, 9, structureBoundingBoxIn);
+            this.setBlockState(worldIn, Blocks.AIR.getDefaultState(), 12, 1, 9, structureBoundingBoxIn);
+            this.setBlockState(worldIn, Blocks.AIR.getDefaultState(), 12, 2, 9, structureBoundingBoxIn);
             
             this.createVillageDoor(worldIn, structureBoundingBoxIn, randomIn, 3, 1, 9, EnumFacing.NORTH);
 	        this.createVillageDoor(worldIn, structureBoundingBoxIn, randomIn, 6, 1, 9, EnumFacing.NORTH);
@@ -206,6 +220,15 @@ public class VillageComponentInn extends StructureVillagePieces.Village
             this.fillWithBlocks(worldIn, structureBoundingBoxIn, 4, 7, 9, 4, 7, 15, iblockstate1, iblockstate1, false);
             this.fillWithBlocks(worldIn, structureBoundingBoxIn, 7, 7, 9, 7, 7, 15, iblockstate1, iblockstate1, false);
             this.fillWithBlocks(worldIn, structureBoundingBoxIn, 10, 7, 9, 10, 7, 15, iblockstate1, iblockstate1, false);
+            
+            this.setBlockState(worldIn, Blocks.AIR.getDefaultState(), 3, 5, 9, structureBoundingBoxIn);
+            this.setBlockState(worldIn, Blocks.AIR.getDefaultState(), 3, 6, 9, structureBoundingBoxIn);
+            this.setBlockState(worldIn, Blocks.AIR.getDefaultState(), 6, 5, 9, structureBoundingBoxIn);
+            this.setBlockState(worldIn, Blocks.AIR.getDefaultState(), 6, 6, 9, structureBoundingBoxIn);
+            this.setBlockState(worldIn, Blocks.AIR.getDefaultState(), 9, 5, 9, structureBoundingBoxIn);
+            this.setBlockState(worldIn, Blocks.AIR.getDefaultState(), 9, 6, 9, structureBoundingBoxIn);
+            this.setBlockState(worldIn, Blocks.AIR.getDefaultState(), 11, 5, 9, structureBoundingBoxIn);
+            this.setBlockState(worldIn, Blocks.AIR.getDefaultState(), 11, 6, 9, structureBoundingBoxIn);
             
             this.createVillageDoor(worldIn, structureBoundingBoxIn, randomIn, 3, 5, 9, EnumFacing.NORTH);
 	        this.createVillageDoor(worldIn, structureBoundingBoxIn, randomIn, 6, 5, 9, EnumFacing.NORTH);
@@ -668,6 +691,8 @@ public class VillageComponentInn extends StructureVillagePieces.Village
                     {
                     	AbstractVillagerSoldier soldier = new EntityVillagerBandit(worldIn);  
                     	
+                    	soldier.onInitialSpawn(worldIn.getDifficultyForLocation(new BlockPos(j, k, l)), null);  
+                    	soldier.setAlwaysRenderNameTag(true);
                         soldier.setLocationAndAngles((double)j + 1.5D, (double)k + 5D, (double)l + 0.5D, 0.0F, 0.0F);
 	                    soldier.setProfession(worldIn.rand.nextInt(6));                               
 	                    soldier.finalizeMobSpawn(worldIn.getDifficultyForLocation(new BlockPos(soldier)), (IEntityLivingData)null, false);

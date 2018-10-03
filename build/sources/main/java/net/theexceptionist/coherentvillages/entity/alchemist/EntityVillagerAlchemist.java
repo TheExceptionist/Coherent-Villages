@@ -33,6 +33,8 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 import net.theexceptionist.coherentvillages.entity.EntityVillagerHorse;
+import net.theexceptionist.coherentvillages.entity.archer.EntityVillagerMageArcher;
+import net.theexceptionist.coherentvillages.entity.archer.EntityVillagerMarksman;
 import net.theexceptionist.coherentvillages.main.Main;
 
 public class EntityVillagerAlchemist extends AbstractVillagerAlchemist {
@@ -44,6 +46,11 @@ public class EntityVillagerAlchemist extends AbstractVillagerAlchemist {
 		this.canSpawn = Main.villager_spawn.get(Main.Soldier.Alchemist.ordinal()).spawn;
 
 		// TODO Auto-generated constructor stub
+	}
+	
+	@Override
+	protected void setUpgrade() {
+		this.upgrade = new EntityVillagerPotionMaster(world);
 	}
 	
 	public EntityVillagerAlchemist(World worldIn, boolean hostile, boolean creeperHunter, boolean undeadHunter, boolean livingHunter) {

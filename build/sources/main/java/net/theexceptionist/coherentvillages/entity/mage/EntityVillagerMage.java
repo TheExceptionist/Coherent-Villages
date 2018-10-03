@@ -16,6 +16,7 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
+import net.theexceptionist.coherentvillages.entity.soldier.EntityVillagerSergeant;
 import net.theexceptionist.coherentvillages.main.Main;
 
 public class EntityVillagerMage extends AbstractVillagerMage {
@@ -35,6 +36,18 @@ public class EntityVillagerMage extends AbstractVillagerMage {
 		//this.areAdditionalTasksSet = true;
        // this.tasks.addTask(6, new EntityAIHarvestFarmland(this, 0.6D));
     }
+	
+	@Override
+	protected void setUpgrade() {
+		if(world.rand.nextBoolean())
+		{
+			this.upgrade = new EntityVillagerConjurer(world);
+		}
+		else
+		{
+			this.upgrade = new EntityVillagerGrandMage(world);
+		}
+	}
 	
 	 protected void setEquipmentBasedOnDifficulty(DifficultyInstance difficulty)
 	    {

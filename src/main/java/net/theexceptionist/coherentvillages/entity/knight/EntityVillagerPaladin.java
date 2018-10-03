@@ -23,6 +23,12 @@ public class EntityVillagerPaladin extends AbstractEntityKnight{
 	
 	
 	@Override
+	protected void setUpgrade() {
+		this.upgrade = null;
+	}
+	
+	
+	@Override
 	 protected void setEquipmentBasedOnDifficulty(DifficultyInstance difficulty)
 	    {
 	        super.setEquipmentBasedOnDifficulty(difficulty);

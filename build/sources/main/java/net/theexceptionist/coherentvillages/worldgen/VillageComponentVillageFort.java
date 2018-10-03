@@ -15,8 +15,8 @@ import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraft.world.gen.structure.StructureVillagePieces;
 import net.theexceptionist.coherentvillages.entity.bandit.EntityVillagerBandit;
+import net.theexceptionist.coherentvillages.entity.bandit.EntityVillagerDarkKnight;
 import net.theexceptionist.coherentvillages.entity.soldier.AbstractVillagerSoldier;
-import net.theexceptionist.coherentvillages.entity.soldier.EntityVillagerGuard;
 import net.theexceptionist.coherentvillages.entity.soldier.EntityVillagerManAtArms;
 import net.theexceptionist.coherentvillages.entity.soldier.EntityVillagerSergeant;
 import net.theexceptionist.coherentvillages.entity.soldier.EntityVillagerWarrior;
@@ -221,6 +221,7 @@ public class VillageComponentVillageFort extends StructureVillagePieces.Village
                     else
                     {
                     	entityvillager = new EntityVillagerBandit(worldIn);
+                    	if(i == 0) entityvillager = new EntityVillagerDarkKnight(worldIn);
                     }
                     
                     

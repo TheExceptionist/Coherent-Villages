@@ -41,6 +41,18 @@ public class EntityVillagerMilitia extends AbstractVillagerSoldier {
 	}
 	
 	@Override
+	protected void setUpgrade() {
+		if(world.rand.nextBoolean())
+		{
+			this.upgrade = new EntityVillagerManAtArms(world);
+		}
+		else
+		{
+			this.upgrade = new EntityVillagerWarrior(world);
+		}
+	}
+	
+	@Override
 	 protected void setEquipmentBasedOnDifficulty(DifficultyInstance difficulty)
 	    {
 	        super.setEquipmentBasedOnDifficulty(difficulty);

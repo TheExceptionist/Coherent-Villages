@@ -120,22 +120,27 @@ public class VillageComponentWizardTower extends StructureVillagePieces.Village
         this.setBlockState(worldIn, Blocks.AIR.getDefaultState(), 5, 11, 5, structureBoundingBoxIn);
         
         this.fillWithBlocks(worldIn, structureBoundingBoxIn, 5, 0, 5, 5, 11, 5, Blocks.LADDER.getDefaultState(), Blocks.LADDER.getDefaultState(), false);
-       
+        
+        this.setBlockState(worldIn, Blocks.AIR.getDefaultState(), 3, 0, 0, structureBoundingBoxIn);
+        this.setBlockState(worldIn, Blocks.AIR.getDefaultState(), 3, 1, 0, structureBoundingBoxIn);
         this.createVillageDoor(worldIn, structureBoundingBoxIn, randomIn, 3, 0, 0, EnumFacing.NORTH);
         this.placeTorch(worldIn, EnumFacing.SOUTH, 3, 2, -1, structureBoundingBoxIn);
               
-        this.setBlockState(worldIn, Blocks.IRON_BLOCK.getDefaultState(), 2, 11, 2, structureBoundingBoxIn);
-        this.setBlockState(worldIn, Blocks.IRON_BLOCK.getDefaultState(), 2, 11, 3, structureBoundingBoxIn);
-        this.setBlockState(worldIn, Blocks.IRON_BLOCK.getDefaultState(), 2, 11, 4, structureBoundingBoxIn);
-        this.setBlockState(worldIn, Blocks.IRON_BLOCK.getDefaultState(), 3, 11, 2, structureBoundingBoxIn);
-        this.setBlockState(worldIn, Blocks.IRON_BLOCK.getDefaultState(), 3, 11, 3, structureBoundingBoxIn);
-        this.setBlockState(worldIn, Blocks.IRON_BLOCK.getDefaultState(), 3, 11, 4, structureBoundingBoxIn);
-        this.setBlockState(worldIn, Blocks.IRON_BLOCK.getDefaultState(), 4, 11, 2, structureBoundingBoxIn);
-        this.setBlockState(worldIn, Blocks.IRON_BLOCK.getDefaultState(), 4, 11, 3, structureBoundingBoxIn);
-        this.setBlockState(worldIn, Blocks.IRON_BLOCK.getDefaultState(), 4, 11, 4, structureBoundingBoxIn);
         
-        this.setBlockState(worldIn, Blocks.BEACON.getDefaultState(), 3, 12, 3, structureBoundingBoxIn);
-        
+        if(!this.isZombieInfested || worldIn.rand.nextInt(100) < 10)
+        {
+	        this.setBlockState(worldIn, Blocks.IRON_BLOCK.getDefaultState(), 2, 11, 2, structureBoundingBoxIn);
+	        this.setBlockState(worldIn, Blocks.IRON_BLOCK.getDefaultState(), 2, 11, 3, structureBoundingBoxIn);
+	        this.setBlockState(worldIn, Blocks.IRON_BLOCK.getDefaultState(), 2, 11, 4, structureBoundingBoxIn);
+	        this.setBlockState(worldIn, Blocks.IRON_BLOCK.getDefaultState(), 3, 11, 2, structureBoundingBoxIn);
+	        this.setBlockState(worldIn, Blocks.IRON_BLOCK.getDefaultState(), 3, 11, 3, structureBoundingBoxIn);
+	        this.setBlockState(worldIn, Blocks.IRON_BLOCK.getDefaultState(), 3, 11, 4, structureBoundingBoxIn);
+	        this.setBlockState(worldIn, Blocks.IRON_BLOCK.getDefaultState(), 4, 11, 2, structureBoundingBoxIn);
+	        this.setBlockState(worldIn, Blocks.IRON_BLOCK.getDefaultState(), 4, 11, 3, structureBoundingBoxIn);
+	        this.setBlockState(worldIn, Blocks.IRON_BLOCK.getDefaultState(), 4, 11, 4, structureBoundingBoxIn);
+	        
+	        this.setBlockState(worldIn, Blocks.BEACON.getDefaultState(), 3, 12, 3, structureBoundingBoxIn);
+        }
         /*
         this.fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 0, 0, 6, 0, 6, iblockstate6, iblockstate6, false);
         this.fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 4, 1, 6, 4, 6, iblockstate6, iblockstate6, false);

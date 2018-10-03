@@ -39,6 +39,11 @@ public class EntityVillagerWarrior extends AbstractVillagerSoldier{
 	}
 	
 	@Override
+	protected void setUpgrade() {
+		this.upgrade = null;//new EntityVillagerSergeant(world);
+	}
+	
+	@Override
 	 protected void setEquipmentBasedOnDifficulty(DifficultyInstance difficulty)
 	    {
 	        super.setEquipmentBasedOnDifficulty(difficulty);

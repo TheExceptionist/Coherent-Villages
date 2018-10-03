@@ -26,6 +26,13 @@ public class EntityVillagerHorseArcher extends AbstractEntityKnight implements I
 		this.setDismountSoldier(new EntityVillagerArcher(worldIn));
 		// TODO Auto-generated constructor stub
 	}
+	
+	
+	@Override
+	protected void setUpgrade() {
+		this.upgrade = null;
+	}
+	
 
 	
 	@Override

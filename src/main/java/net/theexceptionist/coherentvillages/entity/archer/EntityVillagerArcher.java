@@ -12,6 +12,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 import net.theexceptionist.coherentvillages.entity.ai.EntityAIAttackWithBow;
+import net.theexceptionist.coherentvillages.entity.soldier.EntityVillagerSergeant;
 import net.theexceptionist.coherentvillages.main.Main;
 
 public class EntityVillagerArcher extends AbstractVillagerArcher{
@@ -27,6 +28,13 @@ public class EntityVillagerArcher extends AbstractVillagerArcher{
 	public EntityVillagerArcher(World worldIn, boolean hunter, boolean hostile) {
 		super(worldIn, hunter, hostile);
 		// TODO Auto-generated constructor stub
+	}
+	
+	
+	@Override
+	protected void setUpgrade() {
+		if(world.rand.nextBoolean()) this.upgrade = new EntityVillagerMageArcher(world);
+		else this.upgrade = new EntityVillagerMarksman(world);
 	}
 	
 	

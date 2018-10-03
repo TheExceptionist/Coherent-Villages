@@ -42,6 +42,13 @@ public class EntityVillagerApothecary extends AbstractEntityKnight implements IR
 		this.setDismountSoldier(new EntityVillagerAlchemist(worldIn));
 		// TODO Auto-generated constructor stub
 	}
+	
+	
+	@Override
+	protected void setUpgrade() {
+		this.upgrade = null;
+	}
+	
 
 	
 	@Override

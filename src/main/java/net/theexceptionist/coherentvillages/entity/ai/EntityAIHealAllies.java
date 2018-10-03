@@ -8,6 +8,7 @@ import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.util.math.MathHelper;
 import net.theexceptionist.coherentvillages.entity.alchemist.AbstractVillagerAlchemist;
+import net.theexceptionist.coherentvillages.entity.soldier.AbstractVillagerSoldier;
 
 public class EntityAIHealAllies extends EntityAIBase{
 	/** The entity the AI instance has been applied to */
@@ -73,8 +74,25 @@ public class EntityAIHealAllies extends EntityAIBase{
         	for(int i = 0; i < list.size(); i++){
         		//list = this.rangedAttackEntityHost.world.getEntitiesWithinAABB(EntityVillager.class, this.rangedAttackEntityHost.getEntityBoundingBox().expand(d0, 4.0D, d0));
 	            this.target = (EntityLivingBase)list.get(i);
-	           // System.out.println("Searching: "+target+" "+target.getHealth()+"/"+target.getMaxHealth()+" "+this.entityHost);
-	            if(this.target.getHealth() < this.target.getMaxHealth()){
+	            AbstractVillagerSoldier soldier = null;
+	            AbstractVillagerSoldier host = null;
+	            
+	        	if(this.target instanceof AbstractVillagerSoldier)
+            	{
+            		soldier = (AbstractVillagerSoldier) this.target;
+            		host = (AbstractVillagerSoldier) this.entityHost;
+            		
+            		if(soldier.getFaction() != host.getFaction())
+            		{
+            			return false;
+            		}
+	            	
+		           // System.out.println("Searching: "+target+" "+target.getHealth()+"/"+target.getMaxHealth()+" "+this.entityHost);
+		            
+            	}
+	        	
+	        	if(this.target.getHealth() < this.target.getMaxHealth()){
+		            
 	            	 //System.out.println("Searching: "+target.getName()+" Health: "+target.getHealth()+"/"+target.getMaxHealth());
 	            	return true;
 	            }

@@ -38,6 +38,11 @@ public class EntityVillagerHealer extends AbstractVillagerAlchemist{
 
 		// TODO Auto-generated constructor stub
 	}
+	
+	@Override
+	protected void setUpgrade() {
+		this.upgrade = null;//new EntityVillagerPotionMaster(world);
+	}
 
 	@Override
 	public void setSwingingArms(boolean swingingArms) {

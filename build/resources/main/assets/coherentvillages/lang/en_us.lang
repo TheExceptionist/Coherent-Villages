@@ -38,5 +38,6 @@ entity.villager_bandit_archer.name=Villager Bandit Archer
 entity.villager_bandit_mage.name=Villager Bandit Mage
 entity.villager_bandit_alchemist.name=Villager Bandit Alchemist
 entity.villager_bandit_horseman.name=Villager Bandit Horseman
+entity.villager_dark_knight.name=Villager Dark Knight
 
 entity.skeleton_minion.name=Skeleton Minion

@@ -6,7 +6,6 @@ import com.google.common.base.Predicate;
 
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
 import net.minecraft.entity.ai.EntityAIMoveTowardsTarget;
@@ -16,9 +15,8 @@ import net.minecraft.entity.ai.EntityAIRestrictOpenDoor;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
-import net.minecraft.entity.monster.EntityCreeper;
-import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.passive.EntityTameable;
+import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.passive.IAnimals;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
@@ -31,8 +29,6 @@ import net.minecraft.world.World;
 import net.theexceptionist.coherentvillages.entity.ai.EntityAIAttackBackExclude;
 import net.theexceptionist.coherentvillages.entity.ai.EntityAIAttackWithBow;
 import net.theexceptionist.coherentvillages.entity.ai.EntityAIStayInBorders;
-import net.theexceptionist.coherentvillages.entity.followers.EntitySkeletonMinion;
-import net.theexceptionist.coherentvillages.entity.soldier.AbstractVillagerSoldier;
 import net.theexceptionist.coherentvillages.main.Main;
 
 public class EntityVillagerHunter extends AbstractVillagerArcher{
@@ -49,6 +45,13 @@ public class EntityVillagerHunter extends AbstractVillagerArcher{
 		super(worldIn, hunter);
 		// TODO Auto-generated constructor stub
 	}
+	
+	
+	@Override
+	protected void setUpgrade() {
+		this.upgrade = null;
+	}
+	
 	
 	protected void applyEntityAttributes()
     {
@@ -94,7 +97,7 @@ public class EntityVillagerHunter extends AbstractVillagerArcher{
             public boolean apply(@Nullable EntityLiving p_apply_1_)
             {
             	//ystem.out.println(getCustomNameTag()+" - "+getFaction());
-        		return p_apply_1_ != null && ((p_apply_1_ instanceof IAnimals) && !(p_apply_1_ instanceof EntityTameable));
+        		return p_apply_1_ != null && ((p_apply_1_ instanceof IAnimals) && !(p_apply_1_ instanceof EntityTameable)) && !(p_apply_1_ instanceof EntityVillager);
             }
         }));
         this.targetTasks.addTask(1, new EntityAIAttackBackExclude(this, true, new Class[0]));

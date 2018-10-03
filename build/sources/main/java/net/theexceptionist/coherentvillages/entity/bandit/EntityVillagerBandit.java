@@ -18,6 +18,13 @@ public class EntityVillagerBandit extends AbstractVillagerBandit{
 	}
 	
 	
+	@Override
+	protected void setUpgrade() {
+		this.upgrade = null;
+	}
+	
+	
+	
 	 protected void applyEntityAttributes()
 	    {
 	        super.applyEntityAttributes();
@@ -25,9 +32,9 @@ public class EntityVillagerBandit extends AbstractVillagerBandit{
 	        getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(40.0D);
 	        getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.50D);
 	        getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.8D);
-	        getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(0.8D);
+	        getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(0.6D);
 	        getEntityAttribute(SharedMonsterAttributes.ARMOR_TOUGHNESS).setBaseValue(16.0D);
-	        getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(7.0D);
+	        getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(5.0D);
 	    }
 	 
 		@Override

@@ -26,7 +26,16 @@ public class EntityVillagerBanditHorseman extends AbstractVillagerBandit {
 	{
 		super(worldIn);
 		this.canSpawn = Main.villager_spawn.get(Main.Soldier.Bandit_Horseman.ordinal()).spawn;
+		this.className = "Bandit Horseman";
+		
 	}
+	
+	
+	@Override
+	protected void setUpgrade() {
+		this.upgrade = null;
+	}
+	
 	
 	 protected void updateAITasks()
 	    {
@@ -101,9 +110,9 @@ public class EntityVillagerBanditHorseman extends AbstractVillagerBandit {
 		        //Main.logger.info("Gave Equipment");//, message, p0, p1, p2, p3, p4, p5, p6, p7);
 
 				this.setHeldItem(EnumHand.MAIN_HAND, new ItemStack(Items.STONE_SWORD));
-				this.setItemStackToSlot(EntityEquipmentSlot.HEAD, new ItemStack(Items.LEATHER_HELMET));
-				this.setItemStackToSlot(EntityEquipmentSlot.CHEST, new ItemStack(Items.LEATHER_CHESTPLATE));
-				this.setItemStackToSlot(EntityEquipmentSlot.LEGS, new ItemStack(Items.LEATHER_LEGGINGS));
-				this.setItemStackToSlot(EntityEquipmentSlot.FEET, new ItemStack(Items.LEATHER_BOOTS));
+				this.setItemStackToSlot(EntityEquipmentSlot.HEAD, new ItemStack(Items.IRON_HELMET));
+				this.setItemStackToSlot(EntityEquipmentSlot.CHEST, new ItemStack(Items.IRON_CHESTPLATE));
+				this.setItemStackToSlot(EntityEquipmentSlot.LEGS, new ItemStack(Items.CHAINMAIL_LEGGINGS));
+				this.setItemStackToSlot(EntityEquipmentSlot.FEET, new ItemStack(Items.CHAINMAIL_BOOTS));
 		    }
 }

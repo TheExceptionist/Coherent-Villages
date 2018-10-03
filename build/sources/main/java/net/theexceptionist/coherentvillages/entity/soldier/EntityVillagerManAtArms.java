@@ -1,33 +1,13 @@
 package net.theexceptionist.coherentvillages.entity.soldier;
 
-import javax.annotation.Nullable;
-
-import com.google.common.base.Predicate;
-
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackMelee;
-import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIMoveThroughVillage;
-import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
-import net.minecraft.entity.ai.EntityAIMoveTowardsTarget;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAIOpenDoor;
-import net.minecraft.entity.ai.EntityAIRestrictOpenDoor;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
-import net.minecraft.entity.monster.EntityCreeper;
-import net.minecraft.entity.monster.IMob;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
-import net.theexceptionist.coherentvillages.entity.ai.EntityAIAttackBackExclude;
-import net.theexceptionist.coherentvillages.entity.ai.EntityAISearchHouse;
 import net.theexceptionist.coherentvillages.main.Main;
 
 public class EntityVillagerManAtArms extends AbstractVillagerSoldier{
@@ -37,6 +17,11 @@ public class EntityVillagerManAtArms extends AbstractVillagerSoldier{
 		this.className = "Man-At-Arms";
 		this.canSpawn = Main.villager_spawn.get(Main.Soldier.Man_At_Arms.ordinal()).spawn;
 
+	}
+	
+	@Override
+	protected void setUpgrade() {
+		this.upgrade = new EntityVillagerSergeant(world);
 	}
 	
 	@Override

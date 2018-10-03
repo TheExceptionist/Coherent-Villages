@@ -17,6 +17,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
+import net.theexceptionist.coherentvillages.entity.ai.EntityAIAttackWithBow;
 import net.theexceptionist.coherentvillages.main.Main;
 
 public class EntityVillagerBanditArcher extends AbstractVillagerBandit implements IRangedAttackMob{
@@ -24,7 +25,16 @@ public class EntityVillagerBanditArcher extends AbstractVillagerBandit implement
 	{
 		super(worldIn);
 		this.canSpawn = Main.villager_spawn.get(Main.Soldier.Bandit_Archer.ordinal()).spawn;
+		this.className = "Archer";
+		
 	}
+	
+	
+	@Override
+	protected void setUpgrade() {
+		this.upgrade = null;
+	}
+	
 	
 	
 	 protected void applyEntityAttributes()
@@ -42,8 +52,9 @@ public class EntityVillagerBanditArcher extends AbstractVillagerBandit implement
 	 protected void initEntityAI()
 	    {
 			super.initEntityAI();
+			this.tasks.addTask(1, new EntityAIAttackWithBow(this, 1.0D, 60, 10.0F));
 	        this.tasks.addTask(3, new EntityAIMoveThroughVillage(this, 0.6D, true));
-			
+	        
 			 for(Object task : this.tasks.taskEntries.toArray())
 				{
 					 EntityAIBase ai = ((EntityAITaskEntry) task).action;

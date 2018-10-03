@@ -19,6 +19,11 @@ public class EntityVillagerPeasant extends AbstractVillagerSoldier{
 		this.canSpawn = Main.villager_spawn.get(Main.Soldier.Peasant.ordinal()).spawn;
 		// TODO Auto-generated constructor stub
 	}
+
+	@Override
+	protected void setUpgrade() {
+		this.upgrade = new EntityVillagerSergeant(world);
+	}
 	
 	@Override
 	 protected void setEquipmentBasedOnDifficulty(DifficultyInstance difficulty)

@@ -34,6 +34,7 @@ import net.theexceptionist.coherentvillages.entity.followers.EntitySkeletonMinio
 import net.theexceptionist.coherentvillages.entity.knight.ai.EntityAIKnightMoveToTarget;
 import net.theexceptionist.coherentvillages.entity.soldier.AbstractVillagerSoldier;
 import net.theexceptionist.coherentvillages.entity.soldier.EntityVillagerManAtArms;
+import net.theexceptionist.coherentvillages.main.Main;
 
 public abstract class AbstractEntityKnight extends AbstractVillagerSoldier{
 	protected EntityVillagerHorse horse;
@@ -77,6 +78,7 @@ public abstract class AbstractEntityKnight extends AbstractVillagerSoldier{
 		this.setItemStackToSlot(EntityEquipmentSlot.CHEST, new ItemStack(Items.IRON_CHESTPLATE));
 		this.targetTasks.addTask(2, new EntityAIGuardArea(this));
         }*/
+    	horse.setAIMoveSpeed((float) SPRINT);
         this.world.spawnEntity(horse);
         this.startRiding(horse);
         this.isRiding = true;
@@ -102,22 +104,38 @@ public abstract class AbstractEntityKnight extends AbstractVillagerSoldier{
         {
             public boolean apply(@Nullable EntityLiving p_apply_1_)
             {
-            	/*if(creeperHunter)
+              	int faction = getFaction();
+            	
+            	if(p_apply_1_ instanceof AbstractVillagerSoldier)
             	{
-            		return p_apply_1_ != null && (p_apply_1_ instanceof EntityCreeper);
+            		AbstractVillagerSoldier soldier = (AbstractVillagerSoldier) p_apply_1_;
+            		int soldierFaction = soldier.getFaction();
+            		
+            	//	System.out.println(getCustomNameTag()+" - "+faction+" | "+soldier.getCustomNameTag()+" - "+soldierFaction);
+            		
+            		if(faction != soldierFaction)
+            		{
+            			//System.out.println("True");
+            			return true;
+            		}
+            		else if(faction == soldierFaction)
+            		{
+            			//System.out.println("False");
+            			return false;
+            		}
+            		else
+            		{
+            			//System.out.println("False2");
+            			return false;
+            		}
             	}
-            	else if(undeadHunter)
+            	
+            	if(p_apply_1_ instanceof EntityVillager && !(p_apply_1_ instanceof AbstractVillagerSoldier) && faction == Main.BANDIT_FACTION)
             	{
-            		return p_apply_1_ != null && p_apply_1_.getCreatureAttribute() ==  EnumCreatureAttribute.UNDEAD && !(p_apply_1_ instanceof EntityVillagerHorse);
-                }
-            	else if(livingHunter)
-            	{
-            		return p_apply_1_ != null && (IMob.VISIBLE_MOB_SELECTOR.apply(p_apply_1_)) && !(p_apply_1_ instanceof EntityCreeper) && 
-            				p_apply_1_.getCreatureAttribute() !=  EnumCreatureAttribute.UNDEAD;
+            		return true;
             	}
-            	else
-            	{*/
-            		return p_apply_1_ != null && (IMob.VISIBLE_MOB_SELECTOR.apply(p_apply_1_) && !(p_apply_1_ instanceof EntityCreeper) && !(p_apply_1_ instanceof EntitySkeletonMinion) && !(p_apply_1_ instanceof EntityTameable));
+            	
+            	return p_apply_1_ != null && (IMob.VISIBLE_MOB_SELECTOR.apply(p_apply_1_) && !(p_apply_1_ instanceof EntityCreeper) && !(p_apply_1_ instanceof EntitySkeletonMinion) && !(p_apply_1_ instanceof EntityTameable));
             	//}
             }
         }));
@@ -200,8 +218,11 @@ public abstract class AbstractEntityKnight extends AbstractVillagerSoldier{
 			 AbstractVillagerSoldier entityvillager = this.dismountSoldier;
 
 			 if(entityvillager != null){
+				entityvillager.setFirstName(this.firstName);
+				entityvillager.setLastName(this.lastName);
+				entityvillager.setDismounted(true);
+				entityvillager.addKills(this.kills);
 				 entityvillager.onInitialSpawn(this.world.getDifficultyForLocation(new BlockPos(this.posX, this.posY, this.posZ)), null);
-	       	
 				 entityvillager.setLocationAndAngles(this.posX + 0.5D, this.posY, this.posZ + 0.5D, 0.0F, 0.0F);
 				 entityvillager.setSpawnPoint(this.posX + 0.5D, this.posY, this.posZ + 0.5D);
 	          //entityvillager.setProfession(null);

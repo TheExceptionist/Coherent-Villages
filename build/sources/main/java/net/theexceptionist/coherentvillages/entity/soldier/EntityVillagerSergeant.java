@@ -40,6 +40,11 @@ public class EntityVillagerSergeant extends AbstractVillagerSoldier{
 		// TODO Auto-generated constructor stub
 	}
 	
+	@Override
+	protected void setUpgrade() {
+		this.upgrade = null;//new EntityVillagerSergeant(world);
+	}
+	
 	public EntityVillagerSergeant(World worldIn, boolean isHostile, boolean creeperHunter) {
 		super(worldIn, isHostile, creeperHunter);
 		// TODO Auto-generated constructor stub

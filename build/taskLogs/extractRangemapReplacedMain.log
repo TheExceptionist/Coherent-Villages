@@ -1,5 +1,5 @@
 Symbol range map extraction starting
-Processing 135 files
+Processing 141 files
 startProcessing "net/theexceptionist/coherentvillages/entity/EntityVillagerArrow.java" md5: 65c1c56e9981baad6792a856f7a08142
 Cache Hit!
 endProcessing "net/theexceptionist/coherentvillages/entity/EntityVillagerArrow.java"
@@ -44,7 +44,7 @@ startProcessing "net/theexceptionist/coherentvillages/entity/ai/EntityAIGuardPos
 Cache Hit!
 endProcessing "net/theexceptionist/coherentvillages/entity/ai/EntityAIGuardPost.java"
 
-startProcessing "net/theexceptionist/coherentvillages/entity/ai/EntityAIHealAllies.java" md5: 99a3dcf61a2511cc0fb227d3ab9689ed
+startProcessing "net/theexceptionist/coherentvillages/entity/ai/EntityAIHealAllies.java" md5: 0ba6ac1b6ef7927d88edfd3410abcfce
 Cache Hit!
 endProcessing "net/theexceptionist/coherentvillages/entity/ai/EntityAIHealAllies.java"
 
@@ -57,17 +57,19 @@ Cache Hit!
 endProcessing "net/theexceptionist/coherentvillages/entity/ai/EntityAIPatrol.java"
 
 startProcessing "net/theexceptionist/coherentvillages/entity/ai/EntityAIRest.java" md5: dbc1a4d156eb81e49dc0d1990d0a1398
+Cache Hit!
 endProcessing "net/theexceptionist/coherentvillages/entity/ai/EntityAIRest.java"
 
 startProcessing "net/theexceptionist/coherentvillages/entity/ai/EntityAISearchHouse.java" md5: 21cb00a0919345f86f57236b7ed99212
 Cache Hit!
 endProcessing "net/theexceptionist/coherentvillages/entity/ai/EntityAISearchHouse.java"
 
-startProcessing "net/theexceptionist/coherentvillages/entity/ai/EntityAIShareTarget.java" md5: 1a91c10df2d589e80db599f7c76e9106
+startProcessing "net/theexceptionist/coherentvillages/entity/ai/EntityAIShareTarget.java" md5: 82a74cec071e546f2492fc5badad32cf
 Cache Hit!
 endProcessing "net/theexceptionist/coherentvillages/entity/ai/EntityAIShareTarget.java"
 
 startProcessing "net/theexceptionist/coherentvillages/entity/ai/EntityAIStayInBorders.java" md5: 564e96858dd209bef280c6e2482a32a0
+Cache Hit!
 endProcessing "net/theexceptionist/coherentvillages/entity/ai/EntityAIStayInBorders.java"
 
 startProcessing "net/theexceptionist/coherentvillages/entity/ai/EntityAIUseLadder.java" md5: 3345081ec7b96b6fc7279f2804a5143c
@@ -79,20 +81,22 @@ Cache Hit!
 endProcessing "net/theexceptionist/coherentvillages/entity/ai/IVillagerGuard.java"
 
 startProcessing "net/theexceptionist/coherentvillages/entity/alchemist/AbstractVillagerAlchemist.java" md5: 5f197a1db144991af9850c7beb466d2d
+Cache Hit!
 endProcessing "net/theexceptionist/coherentvillages/entity/alchemist/AbstractVillagerAlchemist.java"
 
-startProcessing "net/theexceptionist/coherentvillages/entity/alchemist/EntityVillagerAlchemist.java" md5: 41724c11cad965a9934dd0e89ff8e967
+startProcessing "net/theexceptionist/coherentvillages/entity/alchemist/EntityVillagerAlchemist.java" md5: 13e65b6a1ff575a9287a4e181a559e31
 Cache Hit!
 endProcessing "net/theexceptionist/coherentvillages/entity/alchemist/EntityVillagerAlchemist.java"
 
-startProcessing "net/theexceptionist/coherentvillages/entity/alchemist/EntityVillagerHealer.java" md5: f9a9037911e1c0eec28f2c04d27aad6a
+startProcessing "net/theexceptionist/coherentvillages/entity/alchemist/EntityVillagerHealer.java" md5: 35a4b3f210884a5a1c79b5bc83c5e106
+Cache Hit!
 endProcessing "net/theexceptionist/coherentvillages/entity/alchemist/EntityVillagerHealer.java"
 
-startProcessing "net/theexceptionist/coherentvillages/entity/alchemist/EntityVillagerPotionMaster.java" md5: 005bbc5db6c13228450701388eaca6ff
+startProcessing "net/theexceptionist/coherentvillages/entity/alchemist/EntityVillagerPotionMaster.java" md5: 6b1ff1218f2429720b9e11e9eb2ca27e
 Cache Hit!
 endProcessing "net/theexceptionist/coherentvillages/entity/alchemist/EntityVillagerPotionMaster.java"
 
-startProcessing "net/theexceptionist/coherentvillages/entity/alchemist/EntityVillagerUndeadHunter.java" md5: faf572dd8ce85e282f75ec0d391826b0
+startProcessing "net/theexceptionist/coherentvillages/entity/alchemist/EntityVillagerUndeadHunter.java" md5: 631de2b717425f5ad9211397890c5dee
 Cache Hit!
 endProcessing "net/theexceptionist/coherentvillages/entity/alchemist/EntityVillagerUndeadHunter.java"
 
@@ -113,18 +117,23 @@ Cache Hit!
 endProcessing "net/theexceptionist/coherentvillages/entity/alchemist/RenderVillagerUndeadHunter.java"
 
 startProcessing "net/theexceptionist/coherentvillages/entity/archer/AbstractVillagerArcher.java" md5: 9a989578f0ea603fbb758813031571e6
+Cache Hit!
 endProcessing "net/theexceptionist/coherentvillages/entity/archer/AbstractVillagerArcher.java"
 
-startProcessing "net/theexceptionist/coherentvillages/entity/archer/EntityVillagerArcher.java" md5: ec2bb1f9e7d431c3ec194d8d9ee31446
+startProcessing "net/theexceptionist/coherentvillages/entity/archer/EntityVillagerArcher.java" md5: 0b5f5e7541fb47939162289bb0d6c07e
+Cache Hit!
 endProcessing "net/theexceptionist/coherentvillages/entity/archer/EntityVillagerArcher.java"
 
-startProcessing "net/theexceptionist/coherentvillages/entity/archer/EntityVillagerHunter.java" md5: 694a9d56a4ef2bb0988025134cbdd88e
+startProcessing "net/theexceptionist/coherentvillages/entity/archer/EntityVillagerHunter.java" md5: 7d24ec89a720fef3e4145d49a317d7ea
+Cache Hit!
 endProcessing "net/theexceptionist/coherentvillages/entity/archer/EntityVillagerHunter.java"
 
-startProcessing "net/theexceptionist/coherentvillages/entity/archer/EntityVillagerMageArcher.java" md5: 4ae8c377190153528d82d44a0ec0911f
+startProcessing "net/theexceptionist/coherentvillages/entity/archer/EntityVillagerMageArcher.java" md5: 1b5a8d62905250deaa290a2e0726b4ed
+Cache Hit!
 endProcessing "net/theexceptionist/coherentvillages/entity/archer/EntityVillagerMageArcher.java"
 
-startProcessing "net/theexceptionist/coherentvillages/entity/archer/EntityVillagerMarksman.java" md5: 2d5aca301c87f445e300ffba2b2604fa
+startProcessing "net/theexceptionist/coherentvillages/entity/archer/EntityVillagerMarksman.java" md5: 761371303d13a991d6ed1049d088a3bd
+Cache Hit!
 endProcessing "net/theexceptionist/coherentvillages/entity/archer/EntityVillagerMarksman.java"
 
 startProcessing "net/theexceptionist/coherentvillages/entity/archer/RenderVillagerArcher.java" md5: a3a371aadde0c984c874bd2f3511f272
@@ -147,28 +156,33 @@ startProcessing "net/theexceptionist/coherentvillages/entity/archer/RenderVillag
 Cache Hit!
 endProcessing "net/theexceptionist/coherentvillages/entity/archer/RenderVillagerMarksman.java"
 
-startProcessing "net/theexceptionist/coherentvillages/entity/bandit/AbstractVillagerBandit.java" md5: 85120e608b54d1e11f85c70cc5a11b8d
+startProcessing "net/theexceptionist/coherentvillages/entity/bandit/AbstractVillagerBandit.java" md5: d1af9fd050b4bd264556537918fefb65
 Cache Hit!
 endProcessing "net/theexceptionist/coherentvillages/entity/bandit/AbstractVillagerBandit.java"
 
-startProcessing "net/theexceptionist/coherentvillages/entity/bandit/EntityVillagerBandit.java" md5: 88bcf627a0ca5ec2b967643cb95a60ad
+startProcessing "net/theexceptionist/coherentvillages/entity/bandit/EntityVillagerBandit.java" md5: 3c1a79e1c0c2c3dbc2c4bab311f845f7
 Cache Hit!
 endProcessing "net/theexceptionist/coherentvillages/entity/bandit/EntityVillagerBandit.java"
 
-startProcessing "net/theexceptionist/coherentvillages/entity/bandit/EntityVillagerBanditAlchemist.java" md5: 3282fd039cfcc5c0cd77054dea8deff3
+startProcessing "net/theexceptionist/coherentvillages/entity/bandit/EntityVillagerBanditAlchemist.java" md5: 84498816f4e84bc4a9293ee856b46805
 Cache Hit!
 endProcessing "net/theexceptionist/coherentvillages/entity/bandit/EntityVillagerBanditAlchemist.java"
 
-startProcessing "net/theexceptionist/coherentvillages/entity/bandit/EntityVillagerBanditArcher.java" md5: f227fd2e7c01e045ea5ef688accc08c6
+startProcessing "net/theexceptionist/coherentvillages/entity/bandit/EntityVillagerBanditArcher.java" md5: 1897d98aa3a63834a1d8d1e88fe09952
 Cache Hit!
 endProcessing "net/theexceptionist/coherentvillages/entity/bandit/EntityVillagerBanditArcher.java"
 
-startProcessing "net/theexceptionist/coherentvillages/entity/bandit/EntityVillagerBanditHorseman.java" md5: 01b9493efd0822336f3a0936eb25677a
+startProcessing "net/theexceptionist/coherentvillages/entity/bandit/EntityVillagerBanditHorseman.java" md5: 6665114afbb2e9c607d6de8216adb8e3
+Cache Hit!
 endProcessing "net/theexceptionist/coherentvillages/entity/bandit/EntityVillagerBanditHorseman.java"
 
-startProcessing "net/theexceptionist/coherentvillages/entity/bandit/EntityVillagerBanditMage.java" md5: 4fedf1b4791f183cc5b49788898a7969
+startProcessing "net/theexceptionist/coherentvillages/entity/bandit/EntityVillagerBanditMage.java" md5: 8989b171442f4cc074a22eb410f51f51
 Cache Hit!
 endProcessing "net/theexceptionist/coherentvillages/entity/bandit/EntityVillagerBanditMage.java"
+
+startProcessing "net/theexceptionist/coherentvillages/entity/bandit/EntityVillagerDarkKnight.java" md5: b79feabda1bebef826c39e7f1db1d871
+Cache Hit!
+endProcessing "net/theexceptionist/coherentvillages/entity/bandit/EntityVillagerDarkKnight.java"
 
 startProcessing "net/theexceptionist/coherentvillages/entity/bandit/RenderVillagerBandit.java" md5: 969a8759605d845e10e9ebeb5cf129ac
 Cache Hit!
@@ -190,15 +204,19 @@ startProcessing "net/theexceptionist/coherentvillages/entity/bandit/RenderVillag
 Cache Hit!
 endProcessing "net/theexceptionist/coherentvillages/entity/bandit/RenderVillagerBanditMage.java"
 
-startProcessing "net/theexceptionist/coherentvillages/entity/followers/EntityMerchantGuard.java" md5: 952fab047da471a3641a07362c366196
+startProcessing "net/theexceptionist/coherentvillages/entity/bandit/RenderVillagerDarkKnight.java" md5: 00499665977065a0d32c7e60dd65954a
+Cache Hit!
+endProcessing "net/theexceptionist/coherentvillages/entity/bandit/RenderVillagerDarkKnight.java"
+
+startProcessing "net/theexceptionist/coherentvillages/entity/followers/EntityMerchantGuard.java" md5: b87c0dc8dca1d66cc8ef62146a70cbd5
 Cache Hit!
 endProcessing "net/theexceptionist/coherentvillages/entity/followers/EntityMerchantGuard.java"
 
-startProcessing "net/theexceptionist/coherentvillages/entity/followers/EntitySkeletonMinion.java" md5: d56ae979a2f26b859a9983c4a7cd0120
+startProcessing "net/theexceptionist/coherentvillages/entity/followers/EntitySkeletonMinion.java" md5: 4963e1d79a011aa6b71bb40f929a6a99
 Cache Hit!
 endProcessing "net/theexceptionist/coherentvillages/entity/followers/EntitySkeletonMinion.java"
 
-startProcessing "net/theexceptionist/coherentvillages/entity/followers/EntityVillagerGuardian.java" md5: f8ab124a107c5c1f16e2b5627b551f86
+startProcessing "net/theexceptionist/coherentvillages/entity/followers/EntityVillagerGuardian.java" md5: f6c789fa87693a196d32aba7e299745b
 Cache Hit!
 endProcessing "net/theexceptionist/coherentvillages/entity/followers/EntityVillagerGuardian.java"
 
@@ -214,25 +232,32 @@ startProcessing "net/theexceptionist/coherentvillages/entity/followers/RenderVil
 Cache Hit!
 endProcessing "net/theexceptionist/coherentvillages/entity/followers/RenderVillagerGuardian.java"
 
-startProcessing "net/theexceptionist/coherentvillages/entity/knight/AbstractEntityKnight.java" md5: 90b3cb7f22a84bd503fc9c1ec36891ee
+startProcessing "net/theexceptionist/coherentvillages/entity/knight/AbstractEntityKnight.java" md5: 99d4c05396c89c2979d9f2a29aacc754
+Cache Hit!
 endProcessing "net/theexceptionist/coherentvillages/entity/knight/AbstractEntityKnight.java"
 
-startProcessing "net/theexceptionist/coherentvillages/entity/knight/EntityVillagerApothecary.java" md5: cd033f6298cc989259b9d29071caf61e
+startProcessing "net/theexceptionist/coherentvillages/entity/knight/EntityVillagerApothecary.java" md5: a18c2cec43cfec3919b0b2fe9fe88ad2
+Cache Hit!
 endProcessing "net/theexceptionist/coherentvillages/entity/knight/EntityVillagerApothecary.java"
 
-startProcessing "net/theexceptionist/coherentvillages/entity/knight/EntityVillagerCavalier.java" md5: 09148ea1d5be3b137eb99fc4d2a25250
+startProcessing "net/theexceptionist/coherentvillages/entity/knight/EntityVillagerCavalier.java" md5: 839d41d65d0c71241a560056a96d57b1
+Cache Hit!
 endProcessing "net/theexceptionist/coherentvillages/entity/knight/EntityVillagerCavalier.java"
 
-startProcessing "net/theexceptionist/coherentvillages/entity/knight/EntityVillagerHorseArcher.java" md5: c083b6e913be2478a5d0c83a2ff2f95c
+startProcessing "net/theexceptionist/coherentvillages/entity/knight/EntityVillagerHorseArcher.java" md5: fd4f9eea052e34e1b96f5df3bc03bf55
+Cache Hit!
 endProcessing "net/theexceptionist/coherentvillages/entity/knight/EntityVillagerHorseArcher.java"
 
-startProcessing "net/theexceptionist/coherentvillages/entity/knight/EntityVillagerKnight.java" md5: 788922e84749cbfb3e2c417af82d94e9
+startProcessing "net/theexceptionist/coherentvillages/entity/knight/EntityVillagerKnight.java" md5: 7fbb54dd240fe5900f50b81f76dc678c
+Cache Hit!
 endProcessing "net/theexceptionist/coherentvillages/entity/knight/EntityVillagerKnight.java"
 
-startProcessing "net/theexceptionist/coherentvillages/entity/knight/EntityVillagerMageKnight.java" md5: e90457c966c196ddc179a4226f18cd18
+startProcessing "net/theexceptionist/coherentvillages/entity/knight/EntityVillagerMageKnight.java" md5: 84df0c378360d65ea6fd766d7719276f
+Cache Hit!
 endProcessing "net/theexceptionist/coherentvillages/entity/knight/EntityVillagerMageKnight.java"
 
-startProcessing "net/theexceptionist/coherentvillages/entity/knight/EntityVillagerPaladin.java" md5: d3a3bd081dcb5442fb8325c0a3534845
+startProcessing "net/theexceptionist/coherentvillages/entity/knight/EntityVillagerPaladin.java" md5: 7f20f8a458aa83e53aaefe4d0efd87c3
+Cache Hit!
 endProcessing "net/theexceptionist/coherentvillages/entity/knight/EntityVillagerPaladin.java"
 
 startProcessing "net/theexceptionist/coherentvillages/entity/knight/RenderVillagerApothecary.java" md5: 4ac9c0cda76a7bae294bea481470c092
@@ -263,25 +288,27 @@ startProcessing "net/theexceptionist/coherentvillages/entity/knight/ai/EntityAIA
 Cache Hit!
 endProcessing "net/theexceptionist/coherentvillages/entity/knight/ai/EntityAIAttackKnight.java"
 
-startProcessing "net/theexceptionist/coherentvillages/entity/knight/ai/EntityAIKnightMoveToTarget.java" md5: 294c14846265a6acba6b653fc86e8a14
+startProcessing "net/theexceptionist/coherentvillages/entity/knight/ai/EntityAIKnightMoveToTarget.java" md5: 688ab262a1c062ca56f579874ff708b1
+Cache Hit!
 endProcessing "net/theexceptionist/coherentvillages/entity/knight/ai/EntityAIKnightMoveToTarget.java"
 
 startProcessing "net/theexceptionist/coherentvillages/entity/mage/AbstractVillagerMage.java" md5: fc26b2eabcd883ff800bfb9aecd82b58
+Cache Hit!
 endProcessing "net/theexceptionist/coherentvillages/entity/mage/AbstractVillagerMage.java"
 
-startProcessing "net/theexceptionist/coherentvillages/entity/mage/EntityVillagerConjurer.java" md5: 5f5526cfc182477e83c96a90c52934e6
+startProcessing "net/theexceptionist/coherentvillages/entity/mage/EntityVillagerConjurer.java" md5: 0e87afd552a174bd24caa775a6f33580
 Cache Hit!
 endProcessing "net/theexceptionist/coherentvillages/entity/mage/EntityVillagerConjurer.java"
 
-startProcessing "net/theexceptionist/coherentvillages/entity/mage/EntityVillagerGrandMage.java" md5: 872b05f3f67d4ae97763631a995f2101
+startProcessing "net/theexceptionist/coherentvillages/entity/mage/EntityVillagerGrandMage.java" md5: a45ae9e4ed4a0211f850b6239aea853e
 Cache Hit!
 endProcessing "net/theexceptionist/coherentvillages/entity/mage/EntityVillagerGrandMage.java"
 
-startProcessing "net/theexceptionist/coherentvillages/entity/mage/EntityVillagerMage.java" md5: f2746427ffe01f8faa16912803258534
+startProcessing "net/theexceptionist/coherentvillages/entity/mage/EntityVillagerMage.java" md5: 89702b7487584693a41d062d45094632
 Cache Hit!
 endProcessing "net/theexceptionist/coherentvillages/entity/mage/EntityVillagerMage.java"
 
-startProcessing "net/theexceptionist/coherentvillages/entity/mage/EntityVillagerNecromancer.java" md5: cd5e67cf8030d4e879478e77a2598ddc
+startProcessing "net/theexceptionist/coherentvillages/entity/mage/EntityVillagerNecromancer.java" md5: eaca0a942c269e933afa4e4985bb4b07
 Cache Hit!
 endProcessing "net/theexceptionist/coherentvillages/entity/mage/EntityVillagerNecromancer.java"
 
@@ -301,30 +328,31 @@ startProcessing "net/theexceptionist/coherentvillages/entity/mage/RenderVillager
 Cache Hit!
 endProcessing "net/theexceptionist/coherentvillages/entity/mage/RenderVillagerNecromancer.java"
 
-startProcessing "net/theexceptionist/coherentvillages/entity/soldier/AbstractVillagerSoldier.java" md5: 4ea4fb7197690ffa7f667ed822215118
+startProcessing "net/theexceptionist/coherentvillages/entity/soldier/AbstractVillagerSoldier.java" md5: 752c860f710c3cc8d52e7fee44f2b9b8
+Cache Hit!
 endProcessing "net/theexceptionist/coherentvillages/entity/soldier/AbstractVillagerSoldier.java"
 
-startProcessing "net/theexceptionist/coherentvillages/entity/soldier/EntityVillagerGuard.java" md5: c0988ce786598c0543153b8b4eb4739f
+startProcessing "net/theexceptionist/coherentvillages/entity/soldier/EntityVillagerGuard.java" md5: 6d4766dfef0b02d17dd66eac5adae2ee
 Cache Hit!
 endProcessing "net/theexceptionist/coherentvillages/entity/soldier/EntityVillagerGuard.java"
 
-startProcessing "net/theexceptionist/coherentvillages/entity/soldier/EntityVillagerManAtArms.java" md5: 5e8fa9ad35fee06c180580dc2c865417
+startProcessing "net/theexceptionist/coherentvillages/entity/soldier/EntityVillagerManAtArms.java" md5: 1d24d8ad47ec6097c3e64cbc0133bf52
 Cache Hit!
 endProcessing "net/theexceptionist/coherentvillages/entity/soldier/EntityVillagerManAtArms.java"
 
-startProcessing "net/theexceptionist/coherentvillages/entity/soldier/EntityVillagerMilitia.java" md5: 76a27eac9ce5c3b92042eb02240509f0
+startProcessing "net/theexceptionist/coherentvillages/entity/soldier/EntityVillagerMilitia.java" md5: f40dfb70381368861c87c418fabc504e
 Cache Hit!
 endProcessing "net/theexceptionist/coherentvillages/entity/soldier/EntityVillagerMilitia.java"
 
-startProcessing "net/theexceptionist/coherentvillages/entity/soldier/EntityVillagerPeasant.java" md5: 067447a3cf982ed8e7efee081255e066
+startProcessing "net/theexceptionist/coherentvillages/entity/soldier/EntityVillagerPeasant.java" md5: 1f73bc216a9296d45cbaace2f9f97e6e
 Cache Hit!
 endProcessing "net/theexceptionist/coherentvillages/entity/soldier/EntityVillagerPeasant.java"
 
-startProcessing "net/theexceptionist/coherentvillages/entity/soldier/EntityVillagerSergeant.java" md5: b7dd3e951b7c923ae8e1cdb9f352d911
+startProcessing "net/theexceptionist/coherentvillages/entity/soldier/EntityVillagerSergeant.java" md5: 8208aa84df914eeef79325fc73b2ebe5
 Cache Hit!
 endProcessing "net/theexceptionist/coherentvillages/entity/soldier/EntityVillagerSergeant.java"
 
-startProcessing "net/theexceptionist/coherentvillages/entity/soldier/EntityVillagerWarrior.java" md5: 67759d5448d13817b8dfca8bfea91506
+startProcessing "net/theexceptionist/coherentvillages/entity/soldier/EntityVillagerWarrior.java" md5: d1afcc508e8fd53b7de7844a0d1ed248
 Cache Hit!
 endProcessing "net/theexceptionist/coherentvillages/entity/soldier/EntityVillagerWarrior.java"
 
@@ -360,7 +388,7 @@ startProcessing "net/theexceptionist/coherentvillages/entity/soldier/RenderVilla
 Cache Hit!
 endProcessing "net/theexceptionist/coherentvillages/entity/soldier/RenderVillagerWarrior.java"
 
-startProcessing "net/theexceptionist/coherentvillages/events/EventOverrideMerchantSpawn.java" md5: 6e83482a77df31b2d941779f4b89e640
+startProcessing "net/theexceptionist/coherentvillages/events/EventOverrideMerchantSpawn.java" md5: aa0690930f88d406a0ce81acfba6a96b
 Cache Hit!
 endProcessing "net/theexceptionist/coherentvillages/events/EventOverrideMerchantSpawn.java"
 
@@ -376,7 +404,7 @@ startProcessing "net/theexceptionist/coherentvillages/gui/GuiConfig.java" md5: 2
 Cache Hit!
 endProcessing "net/theexceptionist/coherentvillages/gui/GuiConfig.java"
 
-startProcessing "net/theexceptionist/coherentvillages/main/ClientProxy.java" md5: c8d336537c58959bc8c5d4c3b13e4016
+startProcessing "net/theexceptionist/coherentvillages/main/ClientProxy.java" md5: e205a7c33ea4f2b6585dbca6c6a979b0
 Cache Hit!
 endProcessing "net/theexceptionist/coherentvillages/main/ClientProxy.java"
 
@@ -384,7 +412,7 @@ startProcessing "net/theexceptionist/coherentvillages/main/CommonProxy.java" md5
 Cache Hit!
 endProcessing "net/theexceptionist/coherentvillages/main/CommonProxy.java"
 
-startProcessing "net/theexceptionist/coherentvillages/main/Main.java" md5: d18e5f3eb871cb66de05bee7ceba15fb
+startProcessing "net/theexceptionist/coherentvillages/main/Main.java" md5: 39978195549fc53b6885885e701b60de
 Cache Hit!
 endProcessing "net/theexceptionist/coherentvillages/main/Main.java"
 
@@ -392,24 +420,28 @@ startProcessing "net/theexceptionist/coherentvillages/main/NameGenerator.java" m
 Cache Hit!
 endProcessing "net/theexceptionist/coherentvillages/main/NameGenerator.java"
 
-startProcessing "net/theexceptionist/coherentvillages/main/Resources.java" md5: de1f93d1ea5ec882759cdd627a559836
+startProcessing "net/theexceptionist/coherentvillages/main/Resources.java" md5: 00390f459055ee18b501ec439c2622ce
+Cache Hit!
 endProcessing "net/theexceptionist/coherentvillages/main/Resources.java"
 
 startProcessing "net/theexceptionist/coherentvillages/worldgen/ModGenBiomeProcessor.java" md5: 74d0ffe30123e091e74a7ae5ae23d052
 Cache Hit!
 endProcessing "net/theexceptionist/coherentvillages/worldgen/ModGenBiomeProcessor.java"
 
-startProcessing "net/theexceptionist/coherentvillages/worldgen/ModMapVillageGen.java" md5: ec3b28d2aebfd165b4ff1706baa5d931
+startProcessing "net/theexceptionist/coherentvillages/worldgen/ModMapVillageGen.java" md5: 12b2c5af9fca5dd2514f51a4b53482af
 Cache Hit!
 endProcessing "net/theexceptionist/coherentvillages/worldgen/ModMapVillageGen.java"
 
-startProcessing "net/theexceptionist/coherentvillages/worldgen/VillageComponentAlchemyHut.java" md5: a6844fcd422883e4e315d766375ec205
+startProcessing "net/theexceptionist/coherentvillages/worldgen/VillageComponentAlchemyHut.java" md5: 7afff2c02073299dd2f2af0bb7ddad3f
+Cache Hit!
 endProcessing "net/theexceptionist/coherentvillages/worldgen/VillageComponentAlchemyHut.java"
 
-startProcessing "net/theexceptionist/coherentvillages/worldgen/VillageComponentBarrackSmall.java" md5: d42441e74bbd09090da961b39221274c
+startProcessing "net/theexceptionist/coherentvillages/worldgen/VillageComponentBarrackSmall.java" md5: 5834f125a8311c43086fb95ef2a43279
+Cache Hit!
 endProcessing "net/theexceptionist/coherentvillages/worldgen/VillageComponentBarrackSmall.java"
 
-startProcessing "net/theexceptionist/coherentvillages/worldgen/VillageComponentBarracks.java" md5: 90bef398303849a91097a5246023e626
+startProcessing "net/theexceptionist/coherentvillages/worldgen/VillageComponentBarracks.java" md5: 7e432e097cf9d39688095a5dc5cd258a
+Cache Hit!
 endProcessing "net/theexceptionist/coherentvillages/worldgen/VillageComponentBarracks.java"
 
 startProcessing "net/theexceptionist/coherentvillages/worldgen/VillageComponentBigFarm.java" md5: a55548371c0a6e5ddbf2028bdc913704
@@ -421,25 +453,36 @@ Cache Hit!
 endProcessing "net/theexceptionist/coherentvillages/worldgen/VillageComponentCaneFarm.java"
 
 startProcessing "net/theexceptionist/coherentvillages/worldgen/VillageComponentFence.java" md5: 45b2735f99ae97dc0f6ecd2f78dcfcd8
+Cache Hit!
 endProcessing "net/theexceptionist/coherentvillages/worldgen/VillageComponentFence.java"
 
-startProcessing "net/theexceptionist/coherentvillages/worldgen/VillageComponentGuardTower.java" md5: 39ab03a5f8acd7e2be0d5645c12037ab
+startProcessing "net/theexceptionist/coherentvillages/worldgen/VillageComponentGuardTower.java" md5: 7a0dc7abc7536f2f0afc0a12daa870bf
 endProcessing "net/theexceptionist/coherentvillages/worldgen/VillageComponentGuardTower.java"
 
 startProcessing "net/theexceptionist/coherentvillages/worldgen/VillageComponentHunterHut.java" md5: 2386ec6f7e1b6a825d85eb15ac736205
+Cache Hit!
 endProcessing "net/theexceptionist/coherentvillages/worldgen/VillageComponentHunterHut.java"
 
-startProcessing "net/theexceptionist/coherentvillages/worldgen/VillageComponentInn.java" md5: 279a7b06a0e3168bafaf437799cc0be3
+startProcessing "net/theexceptionist/coherentvillages/worldgen/VillageComponentInn.java" md5: 4235746db875b5a8f56d3bcbc952262c
 endProcessing "net/theexceptionist/coherentvillages/worldgen/VillageComponentInn.java"
+
+startProcessing "net/theexceptionist/coherentvillages/worldgen/VillageComponentSanctuary.java" md5: 2e25e1c8dc61c732e85aa88d93a33586
+Cache Hit!
+endProcessing "net/theexceptionist/coherentvillages/worldgen/VillageComponentSanctuary.java"
+
+startProcessing "net/theexceptionist/coherentvillages/worldgen/VillageComponentShop.java" md5: ab2941002cba09ea948fb6bb060f264d
+endProcessing "net/theexceptionist/coherentvillages/worldgen/VillageComponentShop.java"
 
 startProcessing "net/theexceptionist/coherentvillages/worldgen/VillageComponentSmallHouseWithDoor.java" md5: 3716750faead2c300542ac746cfc78ef
 Cache Hit!
 endProcessing "net/theexceptionist/coherentvillages/worldgen/VillageComponentSmallHouseWithDoor.java"
 
 startProcessing "net/theexceptionist/coherentvillages/worldgen/VillageComponentStable.java" md5: 70514de97d187928cac120b8204d90ae
+Cache Hit!
 endProcessing "net/theexceptionist/coherentvillages/worldgen/VillageComponentStable.java"
 
-startProcessing "net/theexceptionist/coherentvillages/worldgen/VillageComponentVillageFort.java" md5: cb6f46e6d21f7517c4314f3fae475e68
+startProcessing "net/theexceptionist/coherentvillages/worldgen/VillageComponentVillageFort.java" md5: 8895e445ba4cd8ded1fd28457a065e95
+Cache Hit!
 endProcessing "net/theexceptionist/coherentvillages/worldgen/VillageComponentVillageFort.java"
 
 startProcessing "net/theexceptionist/coherentvillages/worldgen/VillageComponentVillageWall.java" md5: 4dc069c153c0a972377608dcf940380d
@@ -447,9 +490,10 @@ Cache Hit!
 endProcessing "net/theexceptionist/coherentvillages/worldgen/VillageComponentVillageWall.java"
 
 startProcessing "net/theexceptionist/coherentvillages/worldgen/VillageComponentWall.java" md5: 410fada7554253ea27b9a671e05778f5
+Cache Hit!
 endProcessing "net/theexceptionist/coherentvillages/worldgen/VillageComponentWall.java"
 
-startProcessing "net/theexceptionist/coherentvillages/worldgen/VillageComponentWizardTower.java" md5: 4f135d31712693c05a24f4b6240b4c7f
+startProcessing "net/theexceptionist/coherentvillages/worldgen/VillageComponentWizardTower.java" md5: bbd3fa32b85aa505a3a6a9abfd646fb2
 endProcessing "net/theexceptionist/coherentvillages/worldgen/VillageComponentWizardTower.java"
 
 startProcessing "net/theexceptionist/coherentvillages/worldgen/VillageHandlerAlchemyHut.java" md5: dae6836744e2315019ae35725f868003
@@ -491,6 +535,14 @@ endProcessing "net/theexceptionist/coherentvillages/worldgen/VillageHandlerHunte
 startProcessing "net/theexceptionist/coherentvillages/worldgen/VillageHandlerInn.java" md5: 38d442a2894ee66029e5453291b16824
 Cache Hit!
 endProcessing "net/theexceptionist/coherentvillages/worldgen/VillageHandlerInn.java"
+
+startProcessing "net/theexceptionist/coherentvillages/worldgen/VillageHandlerSanctuary.java" md5: 2abfa0955570e66948a5c0efa51fd95f
+Cache Hit!
+endProcessing "net/theexceptionist/coherentvillages/worldgen/VillageHandlerSanctuary.java"
+
+startProcessing "net/theexceptionist/coherentvillages/worldgen/VillageHandlerShop.java" md5: 6e5c23f47f3bac61dff89a3f7f2a2517
+Cache Hit!
+endProcessing "net/theexceptionist/coherentvillages/worldgen/VillageHandlerShop.java"
 
 startProcessing "net/theexceptionist/coherentvillages/worldgen/VillageHandlerSmallHouseWithDoor.java" md5: 4dd8c194ab1e5d7b287a9f7eb61b7562
 Cache Hit!

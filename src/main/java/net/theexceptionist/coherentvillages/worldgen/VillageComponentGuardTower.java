@@ -95,6 +95,8 @@ public class VillageComponentGuardTower extends StructureVillagePieces.Village
             this.fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 7, 0, 6, 7, 6, iblockstate, iblockstate, false);
             this.fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 7, 1, 5, 7, 5,iblockstate1, iblockstate1, false);
             
+            this.setBlockState(worldIn, Blocks.AIR.getDefaultState(), 3, 1, 0, structureBoundingBoxIn);
+            this.setBlockState(worldIn, Blocks.AIR.getDefaultState(), 3, 2, 0, structureBoundingBoxIn);
             this.createVillageDoor(worldIn, structureBoundingBoxIn,randomIn, 3, 1, 0, EnumFacing.NORTH);
             
             this.setBlockState(worldIn, Blocks.AIR.getDefaultState(), 3, 1, -1, structureBoundingBoxIn);

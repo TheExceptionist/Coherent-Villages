@@ -65,7 +65,7 @@ public class VillageComponentAlchemyHut extends StructureVillagePieces.Village
                 this.boundingBox.offset(0, this.averageGroundLvl - this.boundingBox.maxY + 6, 0);
             }
             
-            this.fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 0, 0, 7, 7, 8, Blocks.AIR.getDefaultState(), Blocks.AIR.getDefaultState(), false);
+            this.fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 0, 0, 7, 7, 7, Blocks.AIR.getDefaultState(), Blocks.AIR.getDefaultState(), false);
             
 
             IBlockState iblockstate = this.getBiomeSpecificBlockState(Blocks.COBBLESTONE.getDefaultState());

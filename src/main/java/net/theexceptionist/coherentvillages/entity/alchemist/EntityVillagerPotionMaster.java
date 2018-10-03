@@ -38,6 +38,12 @@ public class EntityVillagerPotionMaster extends AbstractVillagerAlchemist {
 		// TODO Auto-generated constructor stub
 	}
 	
+	@Override
+	protected void setUpgrade() {
+		this.upgrade = null;//new EntityVillagerPotionMaster(world);
+	}
+
+	
 	public EntityVillagerPotionMaster(World worldIn, boolean hostile, boolean creeperHunter, boolean undeadHunter, boolean livingHunter) {
 		super(worldIn, hostile, creeperHunter, undeadHunter, livingHunter);
 	}

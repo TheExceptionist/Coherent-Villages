@@ -1,0 +1,128 @@
+package net.theexceptionist.coherentvillages.entity.knight.ai;
+
+import net.minecraft.entity.EntityCreature;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.ai.EntityAIBase;
+import net.minecraft.entity.ai.RandomPositionGenerator;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
+
+public class EntityAIKnightMoveToTarget extends EntityAIBase
+{
+    private final EntityCreature creature;
+    private EntityLivingBase targetEntity;
+    private double movePosX;
+    private double movePosY;
+    private double movePosZ;
+    private final double speed;
+    private boolean movedToPos = false;
+    /** If the distance to the target entity is further than this, this AI task will not run. */
+    private final float maxTargetDistance;
+
+    public EntityAIKnightMoveToTarget(EntityCreature creature, double speedIn, float targetMaxDistance)
+    {
+        this.creature = creature;
+        this.speed = speedIn;
+        this.maxTargetDistance = targetMaxDistance;
+        this.setMutexBits(1);
+    }
+
+    /**
+     * Returns whether the EntityAIBase should begin execution.
+     */
+    public boolean shouldExecute()
+    {
+        this.targetEntity = this.creature.getAttackTarget();
+
+        if (this.targetEntity == null)
+        {
+            return false;
+        }
+        else if (this.targetEntity.getDistanceSq(this.creature) > (double)(this.maxTargetDistance * this.maxTargetDistance))
+        {
+            return false;
+        }
+        else
+        {
+            Vec3d vec3d = RandomPositionGenerator.findRandomTargetBlockTowards(this.creature, 16, 7, new Vec3d(this.targetEntity.posX, this.targetEntity.posY, this.targetEntity.posZ));
+
+            if (vec3d == null)
+            {
+                return false;
+            }
+            else
+            {
+            	//System.out.println("Execute");
+                this.movePosX = vec3d.x;
+                this.movePosY = vec3d.y;
+                this.movePosZ = vec3d.z;
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Returns whether an in-progress EntityAIBase should continue executing
+     */
+    public boolean shouldContinueExecuting()
+    {
+    	//System.out.println("No path: "+this.creature.getNavigator().noPath());
+        return !this.creature.getNavigator().noPath() && this.targetEntity.isEntityAlive() && this.targetEntity.getDistanceSq(this.creature) < (double)(this.maxTargetDistance * this.maxTargetDistance);
+    }
+
+    /**
+     * Reset the task's internal state. Called when this task is interrupted by another one
+     */
+    public void resetTask()
+    {
+        this.targetEntity = null;
+        movedToPos = false;
+    }
+
+    /**
+     * Execute a one shot task or start executing a continuous task
+     */
+    public void startExecuting()
+    {
+    	Vec3d pos = null;
+    	if(Math.sqrt(this.creature.getDistanceSq(this.targetEntity)) < 5)
+    	{
+    		 pos = RandomPositionGenerator.findRandomTargetBlockTowards(this.creature, 16, 7, new Vec3d(this.targetEntity.posX + 20, this.targetEntity.posY, this.targetEntity.posZ + 20));
+
+    		this.creature.getNavigator().tryMoveToXYZ(pos.x, pos.y, pos.z, this.speed);
+    	}
+    	else if(pos != null || Math.sqrt(this.creature.getDistanceSq(new BlockPos(pos))) < 5){
+	    	if(!this.movedToPos)
+	    	{
+		    	if(this.movePosX < this.movePosZ)
+		    	{
+		    	//System.out.println("Creature Pos: "+this.creature.posX+" "+this.creature.posY+" "+this.creature.posZ+" | Target Pos: "+this.movePosX+" "+this.movePosY+" "+this.movePosZ);
+		    		boolean success = this.creature.getNavigator().tryMoveToXYZ(this.movePosX, this.movePosY, this.creature.posZ, this.speed);
+		        
+		    	}
+		    	else
+		    	{
+		    		boolean success = this.creature.getNavigator().tryMoveToXYZ(this.creature.posX, this.movePosY, this.movePosZ, this.speed);
+		            
+		    	}
+		    	
+		    	this.movedToPos = true;
+	    	}
+	    	else
+	    	{
+	    		if(this.movePosX == this.creature.posX)
+	    		{
+	    			boolean success = this.creature.getNavigator().tryMoveToXYZ(this.movePosX + 10, this.movePosY, this.creature.posZ, this.speed);
+	        		
+	        		this.movedToPos = false;
+	    		}
+	    		else if(this.movePosZ == this.creature.posZ)
+	    		{
+	    			boolean success = this.creature.getNavigator().tryMoveToXYZ(this.creature.posX, this.movePosY, this.movePosZ + 10, this.speed);
+	        		
+	        		this.movedToPos = false;
+	    		}
+	    	}
+    	}
+    }
+}

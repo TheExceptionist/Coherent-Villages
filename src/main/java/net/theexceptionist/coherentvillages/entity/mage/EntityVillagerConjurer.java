@@ -14,6 +14,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 import net.theexceptionist.coherentvillages.entity.followers.EntityVillagerGuardian;
+import net.theexceptionist.coherentvillages.entity.soldier.EntityVillagerSergeant;
 import net.theexceptionist.coherentvillages.main.Main;
 
 public class EntityVillagerConjurer extends AbstractVillagerMage {
@@ -23,6 +24,11 @@ public class EntityVillagerConjurer extends AbstractVillagerMage {
 		this.burstCount = worldIn.rand.nextInt(3) + 3;
 		this.className = "Conjurer";
 		this.canSpawn = Main.villager_spawn.get(Main.Soldier.Conjurer.ordinal()).spawn;
+	}
+	
+	@Override
+	protected void setUpgrade() {
+		this.upgrade = null;
 	}
 	
 	

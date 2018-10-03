@@ -2,6 +2,7 @@ package net.theexceptionist.coherentvillages.events;
 
 import java.util.Random;
 
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
@@ -12,6 +13,7 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.village.Village;
 import net.minecraft.village.VillageDoorInfo;
 import net.minecraft.world.World;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
@@ -24,6 +26,7 @@ import net.theexceptionist.coherentvillages.entity.bandit.EntityVillagerBanditAl
 import net.theexceptionist.coherentvillages.entity.bandit.EntityVillagerBanditArcher;
 import net.theexceptionist.coherentvillages.entity.bandit.EntityVillagerBanditHorseman;
 import net.theexceptionist.coherentvillages.entity.bandit.EntityVillagerBanditMage;
+import net.theexceptionist.coherentvillages.entity.bandit.EntityVillagerDarkKnight;
 import net.theexceptionist.coherentvillages.entity.knight.EntityVillagerCavalier;
 import net.theexceptionist.coherentvillages.entity.mage.EntityVillagerMage;
 import net.theexceptionist.coherentvillages.entity.soldier.AbstractVillagerSoldier;
@@ -69,7 +72,6 @@ public class EventOverrideMerchantSpawn {
 		if(world.villageCollection != null){
 			Village village = world.villageCollection.getNearestVillage(player.getPosition(), 30);
 			
-			
 			if(!world.isRemote && village != null){
 				BlockPos center = village.getCenter();
 				if(!world.isDaytime() && !raidInProgress && Main.bandit_spawn > 0){
@@ -82,7 +84,7 @@ public class EventOverrideMerchantSpawn {
 					BlockPos spawnpoint = door.getDoorBlockPos().add(20, 0, -1);
 					
 					//System.out.println(radius+" - "+offX+" | "+offZ+" Spawn: "+spawnpoint.getX()+" "+spawnpoint.getY()+" "+spawnpoint.getZ());
-					if(world.rand.nextInt(100) < 5)
+					if(world.rand.nextInt(100) < Main.raid_rate)
 					{
 						int numBandits = world.rand.nextInt(5 * ((int)Math.floor(world.getDifficultyForLocation(spawnpoint).getClampedAdditionalDifficulty() + 1))) + 5;
 						AbstractVillagerBandit bandit = null;
@@ -101,6 +103,7 @@ public class EventOverrideMerchantSpawn {
 							else if(world.rand.nextInt(100) < 25) bandit = new EntityVillagerBanditAlchemist(world);
 							else if(world.rand.nextInt(100) < 10) bandit = new EntityVillagerBanditMage(world);
 							
+							if(numBandits == 1) bandit = new EntityVillagerDarkKnight(world);
 							if(!bandit.isCanSpawn()) continue;
 							
 							bandit.onInitialSpawn(world.getDifficultyForLocation(spawnpoint), null);
@@ -115,6 +118,8 @@ public class EventOverrideMerchantSpawn {
 							numBandits--;
 							raidHappened = true;
 						}
+						
+						
 					}
 					raidInProgress = true;
 				}
@@ -130,17 +135,19 @@ public class EventOverrideMerchantSpawn {
 				
 				//recruiting drive
 				System.out.println(daysPassed+" "+raidHappened);*/
-				if(world.isDaytime() && raidHappened && !driveAttempted)
+				if(world.isDaytime() && !driveAttempted)
 				{
 					driveAttempted = true;
-					
-					if(world.rand.nextInt(100) < 75) return;
 					
 					int num = village.getNumVillagers() / 4;
 					BlockPos spawnpoint = village.getNearestDoor(center).getDoorBlockPos();
 					AbstractVillagerSoldier soldier = null;
 					
-					if(village.getNumVillagers() + num > village.getNumVillageDoors() * 2) return;
+					if(world.rand.nextInt(100) > Main.recruit_rate)
+					{
+						if(world.rand.nextInt(100) < 75) return;
+						if(village.getNumVillagers() + num > village.getNumVillageDoors() * 2) return;
+					}
 					
 					ITextComponent itextcomponent1 = new TextComponentString(
 							"A village recruiting drive has begun "+(int)Math.sqrt(player.getPosition().distanceSq(center))+" blocks away!");
@@ -156,6 +163,7 @@ public class EventOverrideMerchantSpawn {
 						else if(world.rand.nextInt(100) < 25) soldier = new EntityVillagerAlchemist(world);
 						else if(world.rand.nextInt(100) < 10) soldier = new EntityVillagerMage(world);
 						
+						soldier.setFreshRecruit(true);
 						if(!soldier.isCanSpawn()) continue;
 						
 						//world.spaw
@@ -180,6 +188,36 @@ public class EventOverrideMerchantSpawn {
 					driveAttempted = false;
 				}
 			}
+		}
+	}
+	
+	@SubscribeEvent
+	public void checkKills(LivingDeathEvent event)
+	{
+		//System.out.println("Working");
+		EntityLivingBase killed = event.getEntityLiving();
+		EntityLivingBase killer = killed.getAttackingEntity();
+		
+		if(killer instanceof EntityPlayer && killed instanceof AbstractVillagerSoldier)
+		{
+			EntityPlayer player = (EntityPlayer) killer;
+			AbstractVillagerSoldier soldier = (AbstractVillagerSoldier) killed;
+			Style style = new Style();
+			style.setColor(TextFormatting.WHITE);
+			
+			ITextComponent itextcomponent1 = new TextComponentString(
+					player.getDisplayNameString()+" has killed "+soldier.getFullName());
+			itextcomponent1.setStyle(style);
+			player.sendMessage(itextcomponent1);
+		}
+		
+		if(killer instanceof AbstractVillagerSoldier)
+		{
+		//	System.out.println(killed.getName()+" "+killer.getName());
+			
+			AbstractVillagerSoldier soldier = (AbstractVillagerSoldier) killer;
+			
+			soldier.addKills(1);
 		}
 	}
 	

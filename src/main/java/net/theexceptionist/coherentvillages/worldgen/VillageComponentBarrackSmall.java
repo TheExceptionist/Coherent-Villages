@@ -265,15 +265,17 @@ public class VillageComponentBarrackSmall extends StructureVillagePieces.Village
                     ++this.villagersSpawned;
 
                     AbstractVillagerSoldier entityvillager = new EntityVillagerPeasant(worldIn);
-                    
+                    entityvillager.setFreshRecruit(worldIn.rand.nextInt(100) < 20);
+
                     if(!this.isZombieInfested)
                     {
 	                    if(worldIn.rand.nextInt(100) < 50) entityvillager = new EntityVillagerMilitia(worldIn);
-	                    System.out.println("Zombie village at: "+j+" "+k+" "+l);
+	                    //System.out.println("Zombie village at: "+j+" "+k+" "+l);
                     }
                     else
                     {
 	                    entityvillager = new EntityVillagerBandit(worldIn);
+	                    entityvillager.setAlwaysRenderNameTag(true);
 		                   
                     }
                     
@@ -291,7 +293,7 @@ public class VillageComponentBarrackSmall extends StructureVillagePieces.Village
 	                  	else
 	                  	{
 	                  		entityvillager.onInitialSpawn(worldIn.getDifficultyForLocation(new BlockPos(j, k, l)), null);
-		                    entityvillager.setLocationAndAngles((double)j + 0.5D, (double)k, (double)l - 1.5D, 0.0F, 0.0F);
+		                    entityvillager.setLocationAndAngles((double)j + 0.5D, (double)k + 4, (double)l + 0.5D, 0.0F, 0.0F);
 		                    entityvillager.setSpawnPoint((double)j + 0.5D, (double)k, (double)l + 0.5D);
 		                    //entityvillager.setProfession(null);
 		                    

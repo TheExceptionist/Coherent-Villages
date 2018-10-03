@@ -39,6 +39,13 @@ public class EntityMerchantGuard extends AbstractVillagerSoldier {
 
 	}
 	
+	
+	@Override
+	protected void setUpgrade() {
+		this.upgrade = null;
+	}
+	
+	
 	public EntityMerchantGuard(World worldIn,  EntityVillagerMerchant master) {
 		super(worldIn);
 		this.setMaster(master);
@@ -115,9 +122,6 @@ public class EntityMerchantGuard extends AbstractVillagerSoldier {
 	 protected void updateAITasks()
 	    {
 		 super.updateAITasks();
-		 if(this.getAttackTarget() instanceof EntityVillager){
-			 this.setAttackTarget(null);
-		 }
 		 
 		 if(this.getAttackingEntity() != null)
 		 {

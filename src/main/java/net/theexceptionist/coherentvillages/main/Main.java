@@ -47,6 +47,7 @@ import net.theexceptionist.coherentvillages.entity.bandit.EntityVillagerBanditAl
 import net.theexceptionist.coherentvillages.entity.bandit.EntityVillagerBanditArcher;
 import net.theexceptionist.coherentvillages.entity.bandit.EntityVillagerBanditHorseman;
 import net.theexceptionist.coherentvillages.entity.bandit.EntityVillagerBanditMage;
+import net.theexceptionist.coherentvillages.entity.bandit.EntityVillagerDarkKnight;
 import net.theexceptionist.coherentvillages.entity.followers.EntityMerchantGuard;
 import net.theexceptionist.coherentvillages.entity.followers.EntitySkeletonMinion;
 import net.theexceptionist.coherentvillages.entity.followers.EntityVillagerGuardian;
@@ -76,6 +77,8 @@ import net.theexceptionist.coherentvillages.worldgen.VillageComponentFence;
 import net.theexceptionist.coherentvillages.worldgen.VillageComponentGuardTower;
 import net.theexceptionist.coherentvillages.worldgen.VillageComponentHunterHut;
 import net.theexceptionist.coherentvillages.worldgen.VillageComponentInn;
+import net.theexceptionist.coherentvillages.worldgen.VillageComponentSanctuary;
+import net.theexceptionist.coherentvillages.worldgen.VillageComponentShop;
 import net.theexceptionist.coherentvillages.worldgen.VillageComponentSmallHouseWithDoor;
 import net.theexceptionist.coherentvillages.worldgen.VillageComponentStable;
 import net.theexceptionist.coherentvillages.worldgen.VillageComponentVillageFort;
@@ -91,6 +94,8 @@ import net.theexceptionist.coherentvillages.worldgen.VillageHandlerFort;
 import net.theexceptionist.coherentvillages.worldgen.VillageHandlerGuardTower;
 import net.theexceptionist.coherentvillages.worldgen.VillageHandlerHunterHut;
 import net.theexceptionist.coherentvillages.worldgen.VillageHandlerInn;
+import net.theexceptionist.coherentvillages.worldgen.VillageHandlerSanctuary;
+import net.theexceptionist.coherentvillages.worldgen.VillageHandlerShop;
 import net.theexceptionist.coherentvillages.worldgen.VillageHandlerSmallHouseWithDoor;
 import net.theexceptionist.coherentvillages.worldgen.VillageHandlerStable;
 import net.theexceptionist.coherentvillages.worldgen.VillageHandlerWall;
@@ -112,8 +117,19 @@ public class Main
     public static final int SOLDIER_FACTION = 0;
     public static final int BANDIT_FACTION = 1;
     
-    //"/config/"
+    public static int player_faction = SOLDIER_FACTION;
+    
+    /*public static final CreativeTabs CV_TAB = new CreativeTabs("Coherent Villages"){
+    	@Override
+    	public ItemStack getTabIconItem(){
+    		return new ItemStack(Items.IRON_AXE);
+    	}
+    };*/
+    
     //private static final String config_path = "./config/coherent_config.txt";
+   public static int raid_rate = 5;
+   public static int recruit_rate = 0;
+   
     private static BufferedWriter writer;
     private static BufferedReader reader;
     private static File config_file;
@@ -131,6 +147,10 @@ public class Main
     			"bandit_spawn_rate=5\n",
     			"#Turn nametags off and on. (1 = on, 0 = off)\n",
     			"nametags_on=1\n",
+    			"#Village soldier recruiting (for the villages) (out of 100)\n",
+    			"recruit_rate=5\n",
+    			"#Village raid chance (for the villages) (out of 100)\n",
+    			"raid_rate=5\n",
     			"#Turn soldiers off and on. (1 = on, 0 = off)\n",
     			"guard=1\n",
     			"man-at-arms=1\n",
@@ -411,6 +431,14 @@ public class Main
 				{
 					bandit_spawn = value;
 				}
+				else if(parts[0].contains("recruit_rate"))
+				{
+					recruit_rate = value;
+				}
+				else if(parts[0].contains("raid_rate"))
+				{
+					raid_rate = value;
+				}
 				else if(parts[0].contains("creep"))
 				{
 					spawnCreepers = value == 1;
@@ -507,6 +535,11 @@ public class Main
     	addVillageCreationHandler(new VillageHandlerHunterHut()); 
     	addVillagePiece(VillageComponentCaneFarm.class, "ViSC"); 
     	addVillageCreationHandler(new VillageHandlerCaneFarm()); 
+    	addVillagePiece(VillageComponentShop.class, "ViSS"); 
+    	addVillageCreationHandler(new VillageHandlerShop()); 
+    	addVillagePiece(VillageComponentSanctuary.class, "ViGS"); 
+    	addVillageCreationHandler(new VillageHandlerSanctuary()); 
+    	
     	//addVillagePiece(ModMapVillageGen.Start.class, "ViS");
     	MapGenStructureIO.registerStructure(ModMapVillageGen.Start.class, "Mod Village");
     	
@@ -592,9 +625,11 @@ public class Main
     	createEntity(EntityVillagerBanditMage.class, 1557, "villager_bandit_mage", 245995, 5505567);
     	createEntity(EntityVillagerBanditHorseman.class, 1558, "villager_bandit_horseman", 346895, 5505567);
     	createEntity(EntityVillagerBanditAlchemist.class, 1559, "villager_bandit_alchemist", 455895, 5505567);
+    	createEntity(EntityVillagerDarkKnight.class, 1560, "villager_dark_knight", 855895, 5505567);
 
 
-    	createEntity(EntitySkeletonMinion.class, 1560, "skeleton_minion", 926395, 1015567);
+
+    	createEntity(EntitySkeletonMinion.class, 1561, "skeleton_minion", 926395, 1015567);
 
     	//if(biomes != null)
     	//{

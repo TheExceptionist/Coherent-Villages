@@ -33,7 +33,16 @@ public class EntityVillagerBanditMage extends AbstractVillagerBandit implements 
 	{
 		super(worldIn);
 		this.canSpawn = Main.villager_spawn.get(Main.Soldier.Bandit_Mage.ordinal()).spawn;
+		this.className = "Bandit Mage";
+		
 	}
+	
+	
+	@Override
+	protected void setUpgrade() {
+		this.upgrade = null;
+	}
+	
 	
 	
 	 protected void applyEntityAttributes()

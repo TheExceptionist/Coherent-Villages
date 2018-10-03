@@ -34,6 +34,13 @@ public class EntityVillagerMageKnight extends AbstractEntityKnight implements IR
 	
 	
 	@Override
+	protected void setUpgrade() {
+		this.upgrade = null;
+	}
+	
+	
+	
+	@Override
 	 protected void setEquipmentBasedOnDifficulty(DifficultyInstance difficulty)
 	    {
 	        super.setEquipmentBasedOnDifficulty(difficulty);

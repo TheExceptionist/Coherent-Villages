@@ -165,6 +165,39 @@ Changelog:
 *Fixed Knight dismount
 *Added Bandit Villages
 
+-Beta v1.3.12
+*Added bandit name tag
+*Added kill messages
+*Removed beacon from Bandit villages, some have a chance to spawn them again though
+*Fixed Peasant Spawn
+*Added very basic Dialogue
+*Added first and last names
+
+-Beta v1.4.1
+*Fixed Hunter kills villagers
+*Added a shop building
+*Fixed Healer bug
+*Bandits Attack villagers and golems now
+*Added golem sanctuary 
+*Recruited soldiers can upgrade
+*REcruited soldier rarely spawn in villages
+*Added Dark Knight
+*Fixed Follower Bug
+*Fixed Bandit Archer Bug
+*Fixed Knight types not attacking Bandits
+*Fixed Knight AI
+*Tweaked when recruitment drives happen
+*Fixed Shop spawn bug
+*Added Config for bandit raid
+*Added Config for recruitment drives
+*Fixed a crash
+
+-Beta v1.4.2
+*Fixed ghost emeralds
+*Fixed shop bounding box
+*Fixed Bandit nametags
+*Fixed bandit village doors missing
+
 To Be done later
 *Added University
 *Added Castle
@@ -174,14 +207,8 @@ To Be done later
 *Added Wall
 *Added Sewers
 *Add more biome specific blocks
-
-
-*New Bandit AI
-*Fixed Guard AI
-*Forced Soldiers out of houses (when patrolling)
-
-
-
+*Added loot table to wizard towers, alchemy huts, barracks and archer towers
+*Player can "join" bandits (By having a low reputation in a village)
 
 
 Phase 1:

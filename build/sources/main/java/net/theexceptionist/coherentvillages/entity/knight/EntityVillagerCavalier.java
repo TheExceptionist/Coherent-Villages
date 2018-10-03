@@ -7,8 +7,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
+import net.theexceptionist.coherentvillages.entity.alchemist.EntityVillagerAlchemist;
 import net.theexceptionist.coherentvillages.entity.knight.ai.EntityAIAttackKnight;
 import net.theexceptionist.coherentvillages.entity.soldier.EntityVillagerManAtArms;
+import net.theexceptionist.coherentvillages.entity.soldier.EntityVillagerSergeant;
 import net.theexceptionist.coherentvillages.main.Main;
 
 public class EntityVillagerCavalier extends AbstractEntityKnight{
@@ -19,6 +21,13 @@ public class EntityVillagerCavalier extends AbstractEntityKnight{
 		this.canSpawn = Main.villager_spawn.get(Main.Soldier.Cavalier.ordinal()).spawn;
 		this.setDismountSoldier(new EntityVillagerManAtArms(worldIn));
 		// TODO Auto-generated constructor stub
+	}
+	
+	@Override
+	protected void setUpgrade() {
+		if(world.rand.nextBoolean()) this.upgrade = new EntityVillagerAlchemist(world);
+		if(world.rand.nextBoolean()) this.upgrade = new EntityVillagerHorseArcher(world);
+		if(world.rand.nextBoolean()) this.upgrade = new EntityVillagerKnight(world);
 	}
 
 	@Override

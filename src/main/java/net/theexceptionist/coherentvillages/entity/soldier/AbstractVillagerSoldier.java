@@ -1,5 +1,6 @@
 package net.theexceptionist.coherentvillages.entity.soldier;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Iterator;
 import java.util.Random;
@@ -12,7 +13,6 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
@@ -35,7 +35,6 @@ import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.init.MobEffects;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemHoe;
@@ -44,12 +43,14 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.Style;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.village.MerchantRecipeList;
 import net.minecraft.village.Village;
 import net.minecraft.world.DifficultyInstance;
@@ -73,10 +74,33 @@ public abstract class AbstractVillagerSoldier extends EntityVillager implements 
 	protected boolean isHostile, canSpawn;
 	protected boolean creeperHunter, undeadHunter, livingHunter;
 	protected boolean showKills;
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
 	protected int kills;
+	protected String firstName;
+	protected String lastName;
+	protected boolean freshRecruit = false;
+	protected boolean dismounted = false;
+	protected AbstractVillagerSoldier upgrade;
+	protected ArrayList<String> previousClasses;
 	
 	public AbstractVillagerSoldier(World worldIn) {
 		super(worldIn);
+		this.previousClasses = new ArrayList<String>();
 		
 		//Friendly by default
 		this.faction = Main.SOLDIER_FACTION;
@@ -101,6 +125,45 @@ public abstract class AbstractVillagerSoldier extends EntityVillager implements 
 		this.creeperHunter = livingHunter;*/
 	}
 	
+	public void addKills(int amount)
+	{
+		kills += amount;
+	}
+	
+	
+	public boolean isFreshRecruit() {
+		return freshRecruit;
+	}
+	
+	
+
+	public boolean isDismounted() {
+		return dismounted;
+	}
+
+	public void setDismounted(boolean dismounted) {
+		this.dismounted = dismounted;
+	}
+
+	public void setFreshRecruit(boolean freshRecruit) {
+		this.freshRecruit = freshRecruit;
+		//System.out.println("Bool: "+freshRecruit);
+		if(freshRecruit)
+		{
+			this.setUpgrade();
+			this.killLim = 5 + world.rand.nextInt(5);
+			this.className += " Recruit";
+			//System.out.println("Name"+className);
+		}
+	}
+
+	
+	protected abstract void setUpgrade();
+	
+	protected boolean canUpgrade()
+	{
+		return this.upgrade != null;
+	}
 
 	public boolean isCanSpawn() {
 		return canSpawn;
@@ -115,9 +178,45 @@ public abstract class AbstractVillagerSoldier extends EntityVillager implements 
 
     }
 	
+	protected int talkDown = 0;
+	private int killLim;
 	@Override
 	public boolean processInteract(EntityPlayer player, EnumHand hand)
     {
+		if(talkDown <= 0 && !world.isRemote)
+		{
+			Style style = new Style();
+			style.setColor(TextFormatting.WHITE);
+			
+			String classString = "";
+			String helloString = "Hello "+player.getDisplayNameString()+"! I'm "+this.getFullName()+" and I've killed "+this.kills+" Mobs.\n";
+			for(String prev : this.previousClasses)
+			{
+				classString += prev + "\n";
+			}
+			
+			ITextComponent itextcomponent1 = null;
+			
+			if(this.previousClasses.size() > 0)itextcomponent1 = new TextComponentString(helloString +"\nI used to be: " +classString);
+			else itextcomponent1 = new TextComponentString(helloString);
+			
+			
+			if(this.getHealth() < this.getMaxHealth() * 0.2) itextcomponent1 = new TextComponentString(
+					"Sorry "+player.getDisplayNameString()+" but I'm too hurt to talk right now.");//+this.getCustomNameTag()+" and I've killed "+this.kills+" Mobs.");
+			
+			if(this.getAttackTarget() != null) itextcomponent1 = new TextComponentString(
+					player.getDisplayNameString()+"! Get to safety! A "+this.getAttackTarget().getCustomNameTag()+" is attacking!");//+this.getCustomNameTag()+" and I've killed "+this.kills+" Mobs.");
+			
+			if(this.getAttackingEntity() != null) itextcomponent1 = new TextComponentString(
+					player.getDisplayNameString()+"! Help! A "+this.getAttackingEntity().getName()+" is attacking me!");//+this.getCustomNameTag()+" and I've killed "+this.kills+" Mobs.");
+			
+			
+			
+			itextcomponent1.setStyle(style);
+			player.sendMessage(itextcomponent1);
+			talkDown = 10;
+		}
+		
 		return false;
     }
 	
@@ -158,16 +257,38 @@ public abstract class AbstractVillagerSoldier extends EntityVillager implements 
                 this.inventoryArmorDropChances[EntityEquipmentSlot.HEAD.getIndex()] = 0.0F;
             }*/
         }
-        this.showKills = true;
-		this.setCustomNameTag(getTrueName(world.rand));
+        
+       // this.showKills = true;
+        
+        if(!this.isDismounted())
+        {
+	        this.generateName(rand);
+			this.setCustomNameTag(getTrueName());
+        }
+        else
+        {
+        	this.setCustomNameTag(getTrueName()+" Dismounted");
+        }
+		
 		this.setAlwaysRenderNameTag(Main.useNametags);
 
         return livingdata;
     }
     
-    protected String getTrueName(Random rand)
+    protected void generateName(Random rand)
     {
-    	return NameGenerator.generateRandomName(rand)+" - "+className;
+    	this.firstName = NameGenerator.generateRandomName(rand);
+    	this.lastName = NameGenerator.generateRandomName(rand);
+    }
+    
+    protected String getTrueName()
+    {
+    	return this.firstName+" - "+className;
+    }
+    
+    public String getFullName()
+    {
+    	return this.firstName+" "+this.lastName;
     }
     
     protected String getClassName()
@@ -177,46 +298,58 @@ public abstract class AbstractVillagerSoldier extends EntityVillager implements 
 	
 	protected void initEntityAI()
     {
-		this.tasks.addTask(0, new EntityAISwimming(this));
-        this.tasks.addTask(1, new EntityAIAttackMelee(this, 1.0D, true));
-        this.tasks.addTask(2, new EntityAIStayInBorders(this, 1.0D));
-        this.tasks.addTask(3, new EntityAIRest(this, true));
-        this.tasks.addTask(4, new EntityAIRestrictOpenDoor(this));
-        this.tasks.addTask(5, new EntityAIOpenDoor(this, true));
-        this.tasks.addTask(6, new EntityAIMoveTowardsTarget(this, 0.9D, 32.0F));
-        this.tasks.addTask(7, new EntityAIWanderAvoidWater(this, 0.6D));
-        this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
-        this.tasks.addTask(9, new EntityAILookIdle(this));
-        
-        this.targetTasks.addTask(0, new EntityAINearestAttackableTarget(this, EntityLiving.class, 1, true, true, new Predicate<EntityLiving>()
-        {
-            public boolean apply(@Nullable EntityLiving p_apply_1_)
-            {
-            	int faction = getFaction();
-            	
-            	if(p_apply_1_ instanceof AbstractVillagerSoldier)
-            	{
-            		AbstractVillagerSoldier soldier = (AbstractVillagerSoldier) p_apply_1_;
-            		int soldierFaction = soldier.getFaction();
-            		
-            		//System.out.println(getCustomNameTag()+" - "+faction+" | "+soldier.getCustomNameTag()+" - "+soldierFaction);
-            		
-            		if(faction != soldierFaction)
-            		{
-            			//System.out.println("True");
-            			return true;
-            		}
-            		else if(faction == soldierFaction)
-            		{
-            			//System.out.println("False");
-            			return false;
-            		}
-            	}
-            	//ystem.out.println(getCustomNameTag()+" - "+getFaction());
-        		return p_apply_1_ != null && (IMob.VISIBLE_MOB_SELECTOR.apply(p_apply_1_) && !(p_apply_1_ instanceof EntityCreeper) && !(p_apply_1_ instanceof EntityTameable) && !(p_apply_1_ instanceof EntitySkeletonMinion));
-            }
-        }));
-        this.targetTasks.addTask(1, new EntityAIAttackBackExclude(this, true, new Class[0]));  
+		if(!world.isRemote){
+			this.tasks.addTask(0, new EntityAISwimming(this));
+	        this.tasks.addTask(1, new EntityAIAttackMelee(this, 1.0D, true));
+	        this.tasks.addTask(2, new EntityAIStayInBorders(this, 1.0D));
+	        this.tasks.addTask(3, new EntityAIRest(this, true));
+	        this.tasks.addTask(4, new EntityAIRestrictOpenDoor(this));
+	        this.tasks.addTask(5, new EntityAIOpenDoor(this, true));
+	        this.tasks.addTask(6, new EntityAIMoveTowardsTarget(this, 0.9D, 32.0F));
+	        this.tasks.addTask(7, new EntityAIWanderAvoidWater(this, 0.6D));
+	        this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
+	        this.tasks.addTask(9, new EntityAILookIdle(this));
+	        
+	        this.targetTasks.addTask(0, new EntityAINearestAttackableTarget(this, EntityLiving.class, 1, true, true, new Predicate<EntityLiving>()
+	        {
+	            public boolean apply(@Nullable EntityLiving p_apply_1_)
+	            {
+	            	int faction = getFaction();
+	            	
+	            	if(p_apply_1_ instanceof AbstractVillagerSoldier)
+	            	{
+	            		AbstractVillagerSoldier soldier = (AbstractVillagerSoldier) p_apply_1_;
+	            		int soldierFaction = soldier.getFaction();
+	            		
+	            	//	System.out.println(getCustomNameTag()+" - "+faction+" | "+soldier.getCustomNameTag()+" - "+soldierFaction);
+	            		
+	            		if(faction != soldierFaction)
+	            		{
+	            			//System.out.println("True");
+	            			return true;
+	            		}
+	            		else if(faction == soldierFaction)
+	            		{
+	            			//System.out.println("False");
+	            			return false;
+	            		}
+	            		else
+	            		{
+	            			//System.out.println("False2");
+	            			return false;
+	            		}
+	            	}
+	            	
+	            	if(p_apply_1_ instanceof EntityVillager && !(p_apply_1_ instanceof AbstractVillagerSoldier) && faction == Main.BANDIT_FACTION)
+	            	{
+	            		return true;
+	            	}
+	            	//ystem.out.println(getCustomNameTag()+" - "+getFaction());
+	        		return p_apply_1_ != null && (IMob.VISIBLE_MOB_SELECTOR.apply(p_apply_1_) && !(p_apply_1_ instanceof EntityCreeper) && !(p_apply_1_ instanceof EntityTameable) && !(p_apply_1_ instanceof EntitySkeletonMinion));
+	            }
+	        }));
+	        this.targetTasks.addTask(1, new EntityAIAttackBackExclude(this, true, new Class[0]));  
+		}
 		//this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
         //if(this.isHostile) this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
         
@@ -278,6 +411,14 @@ public abstract class AbstractVillagerSoldier extends EntityVillager implements 
 	    {
 	        super.onLivingUpdate();
 	        
+	        if(talkDown > 0)
+	        {
+	        	talkDown--;
+	        }
+	        if(this.canUpgrade() && kills > killLim)
+	        {
+	        	this.doUpgrade();
+	        }
 	        /*if(this.getAlwaysRenderNameTag())
 	        {
 		        if(showKills)
@@ -291,7 +432,31 @@ public abstract class AbstractVillagerSoldier extends EntityVillager implements 
 	        }*/
 	    }
 	 
-	 protected void damageEntity(DamageSource damageSrc, float damageAmount)
+	 private void doUpgrade() {
+		AbstractVillagerSoldier entityvillager = this.upgrade;
+		double j = this.posX;
+		double k = this.posY;
+		double l = this.posZ;
+		
+		entityvillager.setFreshRecruit(true);   
+		entityvillager.onInitialSpawn(world.getDifficultyForLocation(new BlockPos(j, k, l)), null);
+    	entityvillager.setLocationAndAngles((double)j + 0.5D, (double)k, (double)l + 0.5D, 0.0F, 0.0F);
+        entityvillager.setSpawnPoint((double)j + 0.5D, (double)k, (double)l + 0.5D);
+        //entityvillager.setProfession(null);
+        
+        entityvillager.finalizeMobSpawn(world.getDifficultyForLocation(new BlockPos(entityvillager)), (IEntityLivingData)null, false);
+        world.spawnEntity(entityvillager);
+        
+       entityvillager.addClass(entityvillager.className);
+        
+        this.setDead();
+	}
+
+	private void addClass(String className2) {
+		this.previousClasses.add(className2);
+	}
+
+	protected void damageEntity(DamageSource damageSrc, float damageAmount)
 	    {
 		 //Maybe have faction idea
 		 if(damageSrc.getTrueSource() instanceof AbstractVillagerSoldier){
@@ -316,7 +481,7 @@ public abstract class AbstractVillagerSoldier extends EntityVillager implements 
 		// System.out.println("Working");
 	    }
 	 
-	 private int getFaction() {
+	 public int getFaction() {
 		// TODO Auto-generated method stub
 		return this.faction;
 	}
