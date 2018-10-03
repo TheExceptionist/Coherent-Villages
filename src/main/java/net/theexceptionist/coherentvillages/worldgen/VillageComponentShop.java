@@ -36,7 +36,7 @@ public class VillageComponentShop extends StructureVillagePieces.Village
 
         public static VillageComponentShop createPiece(StructureVillagePieces.Start start, List<StructureComponent> p_175858_1_, Random rand, int p_175858_3_, int p_175858_4_, int p_175858_5_, EnumFacing facing, int p_175858_7_)
         {
-            StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(p_175858_3_, p_175858_4_, p_175858_5_, 0, 0, 0, 10, 6, 7, facing);
+            StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(p_175858_3_, p_175858_4_, p_175858_5_, 0, 0, 0, 10, 8, 7, facing);
             return StructureComponent.findIntersecting(p_175858_1_, structureboundingbox) != null ? null : new VillageComponentShop(start, p_175858_7_, rand, structureboundingbox, facing);
         }
 
@@ -63,7 +63,7 @@ public class VillageComponentShop extends StructureVillagePieces.Village
             int type = worldIn.rand.nextInt(2);
             int shopType = worldIn.rand.nextInt(5);
             
-            this.fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 0, 0, 9, 6, 6, Blocks.AIR.getDefaultState(), Blocks.AIR.getDefaultState(), false);
+            this.fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 0, 0, 9, 10, 6, Blocks.AIR.getDefaultState(), Blocks.AIR.getDefaultState(), false);
             
 
             IBlockState iblockstate = this.getBiomeSpecificBlockState(Blocks.COBBLESTONE.getDefaultState());
@@ -98,15 +98,6 @@ public class VillageComponentShop extends StructureVillagePieces.Village
             this.placeTorch(worldIn, EnumFacing.NORTH, 2, 3, 1, structureBoundingBoxIn);
             
             this.placeTorch(worldIn, EnumFacing.SOUTH, 6, 3, 5, structureBoundingBoxIn);
-            
-            if(type == 1)
-            {
-            	this.fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 6, 0, 9, 6, 6, iblockstate4, iblockstate4, false);
-                this.fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 6, 1, 8, 6, 5, Blocks.AIR.getDefaultState(), Blocks.AIR.getDefaultState(), false);
-                
-                this.setBlockState(worldIn, Blocks.AIR.getDefaultState(), 1, 5, 5, structureBoundingBoxIn);
-                this.fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 1, 5, 1, 5, 5, Blocks.LADDER.getDefaultState(), Blocks.LADDER.getDefaultState(), false);
-            }
             
             this.fillWithBlocks(worldIn, structureBoundingBoxIn, 6, 1, 2, 6, 1, 5, iblockstate1, iblockstate1, false);
             
@@ -166,11 +157,11 @@ public class VillageComponentShop extends StructureVillagePieces.Village
             this.fillWithBlocks(worldIn, structureBoundingBoxIn, 4, 1, 2, 4, 2, 5, Blocks.BOOKSHELF.getDefaultState(), Blocks.BOOKSHELF.getDefaultState(), false);
             this.fillWithBlocks(worldIn, structureBoundingBoxIn, 8, 1, 1, 8, 4, 5, Blocks.BOOKSHELF.getDefaultState(), Blocks.BOOKSHELF.getDefaultState(), false);
             
-            if (this.getBlockStateFromPos(worldIn, 3, 0, -1, structureBoundingBoxIn).getMaterial() == Material.AIR && this.getBlockStateFromPos(worldIn, 3, -1, -1, structureBoundingBoxIn).getMaterial() != Material.AIR)
+            if (this.getBlockStateFromPos(worldIn, 2, 0, -1, structureBoundingBoxIn).getMaterial() == Material.AIR && this.getBlockStateFromPos(worldIn, 2, -1, -1, structureBoundingBoxIn).getMaterial() != Material.AIR)
             {
-                this.setBlockState(worldIn, iblockstate2, 3, 0, -1, structureBoundingBoxIn);
+                this.setBlockState(worldIn, iblockstate2, 2, 0, -1, structureBoundingBoxIn);
 
-                if (this.getBlockStateFromPos(worldIn, 3, -1, -1, structureBoundingBoxIn).getBlock() == Blocks.GRASS_PATH)
+                if (this.getBlockStateFromPos(worldIn, 2, -1, -1, structureBoundingBoxIn).getBlock() == Blocks.GRASS_PATH)
                 {
                     this.setBlockState(worldIn, Blocks.GRASS.getDefaultState(), 2, -1, -1, structureBoundingBoxIn);
                 }
@@ -180,10 +171,20 @@ public class VillageComponentShop extends StructureVillagePieces.Village
             {
                 for (int i = 0; i < 7; ++i)
                 {
-                    this.clearCurrentPositionBlocksUpwards(worldIn, i, 7, j, structureBoundingBoxIn);
-                    this.replaceAirAndLiquidDownwards(worldIn, Blocks.PLANKS.getDefaultState(), i, -2, j, structureBoundingBoxIn);
+                    //this.clearCurrentPositionBlocksUpwards(worldIn, i, 8, j, structureBoundingBoxIn);
+                    this.replaceAirAndLiquidDownwards(worldIn, Blocks.PLANKS.getDefaultState(), i, -1, j, structureBoundingBoxIn);
                 }
             }
+            
+            if(type == 1)
+            {
+                this.setBlockState(worldIn, Blocks.AIR.getDefaultState(), 1, 5, 5, structureBoundingBoxIn);
+                this.fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 1, 5, 1, 5, 5, Blocks.LADDER.getDefaultState(), Blocks.LADDER.getDefaultState(), false);
+         
+            	this.fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 6, 0, 9, 6, 6, iblockstate4, iblockstate4, false);
+                this.fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 6, 1, 8, 6, 5, Blocks.AIR.getDefaultState(), Blocks.AIR.getDefaultState(), false);
+            }
+            
             if(!worldIn.isRemote){
             	this.spawnVillagers(worldIn, structureBoundingBoxIn, 1, 1, 2, 3 + randomIn.nextInt(3));
             }

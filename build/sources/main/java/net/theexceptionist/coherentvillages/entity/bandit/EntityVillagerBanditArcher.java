@@ -25,7 +25,7 @@ public class EntityVillagerBanditArcher extends AbstractVillagerBandit implement
 	{
 		super(worldIn);
 		this.canSpawn = Main.villager_spawn.get(Main.Soldier.Bandit_Archer.ordinal()).spawn;
-		this.className = "Archer";
+		this.className = "Bandit Archer";
 		
 	}
 	

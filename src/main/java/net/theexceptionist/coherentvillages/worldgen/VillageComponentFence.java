@@ -74,29 +74,44 @@ public class VillageComponentFence extends StructureVillagePieces.Village
         IBlockState iblockstate1 = this.getBiomeSpecificBlockState(Blocks.COBBLESTONE.getDefaultState());
         
         if(up){
-	        this.fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 1, 0, numBlocks, 1, 0, Blocks.AIR.getDefaultState(), Blocks.AIR.getDefaultState(), false);
-	        this.fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 1, 0, numBlocks, 1, 0, iblockstate, iblockstate, false);
+	        //this.fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 1, 0, numBlocks, 1, 0, Blocks.AIR.getDefaultState(), Blocks.AIR.getDefaultState(), false);
+	        //this.fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 1, 0, numBlocks, 1, 0, iblockstate, iblockstate, false);
+        	
+        	for(int i = 0; i < numBlocks; i++)
+	        {
+	        	if((worldIn.isAirBlock(new BlockPos(i, 1, 0)) || worldIn.getBlockState(new BlockPos(i, 1, 0)).getMaterial().isLiquid()) )
+	        	{
+	        		this.setBlockState(worldIn, iblockstate, i, 1, 0, structureBoundingBoxIn);
+	        	}
+	        }
+        	
 	        this.placeTorch(worldIn, EnumFacing.UP, numBlocks, 2, 0, structureBoundingBoxIn);
 	        this.placeTorch(worldIn, EnumFacing.UP, 0, 2, 0, structureBoundingBoxIn);
 	        for (int j = 0; j < numBlocks + 1; ++j)
             {
                 //for (int i = 0; i < 1; ++i)
                 //{
-                    this.clearCurrentPositionBlocksUpwards(worldIn, j, 0, 0, structureBoundingBoxIn);
-                    this.replaceAirAndLiquidDownwards(worldIn, iblockstate1, j, 0, 0, structureBoundingBoxIn);
+                   this.replaceAirAndLiquidDownwards(worldIn, iblockstate1, j, 0, 0, structureBoundingBoxIn);
                 //}
             }
 	        //this.setBlockState(worldIn, iblockstate, 1, 0, 0, structureBoundingBoxIn);
         }else{
-        	this.fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 1, 0, 0, 1, numBlocks, Blocks.AIR.getDefaultState(), Blocks.AIR.getDefaultState(), false);
-	        this.fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 1, 0, 0, 1, numBlocks, iblockstate, iblockstate, false);
+        	//this.fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 1, 0, 0, 1, numBlocks, Blocks.AIR.getDefaultState(), Blocks.AIR.getDefaultState(), false);
+	        for(int i = 0; i < numBlocks; i++)
+	        {
+	        	if((worldIn.isAirBlock(new BlockPos(0, 1, i)) || worldIn.getBlockState(new BlockPos(0, 1, i)).getMaterial().isLiquid()) )
+	        	{
+	        		this.setBlockState(worldIn, iblockstate, 0, 1, i, structureBoundingBoxIn);
+	        	}
+	        	//this.fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 1, 0, 0, 1, numBlocks, iblockstate, iblockstate, false);
+	        }
+	        
 	        this.placeTorch(worldIn, EnumFacing.UP, 0, 2, numBlocks, structureBoundingBoxIn);
 	        this.placeTorch(worldIn, EnumFacing.UP, 0, 2, 0, structureBoundingBoxIn);
 	        for (int j = 0; j < numBlocks + 1; ++j)
             {
                 //for (int i = 0; i > -10; ++i)
                 //{
-                    this.clearCurrentPositionBlocksUpwards(worldIn, 0, 0, j, structureBoundingBoxIn);
                     this.replaceAirAndLiquidDownwards(worldIn, iblockstate1, 0, 0, j, structureBoundingBoxIn);
                 //}
             }

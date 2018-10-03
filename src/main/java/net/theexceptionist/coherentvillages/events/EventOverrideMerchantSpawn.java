@@ -1,9 +1,11 @@
 package net.theexceptionist.coherentvillages.events;
 
+import java.util.Iterator;
 import java.util.Random;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IEntityLivingData;
+import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
@@ -13,6 +15,7 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.village.Village;
 import net.minecraft.village.VillageDoorInfo;
 import net.minecraft.world.World;
+import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -32,6 +35,7 @@ import net.theexceptionist.coherentvillages.entity.mage.EntityVillagerMage;
 import net.theexceptionist.coherentvillages.entity.soldier.AbstractVillagerSoldier;
 import net.theexceptionist.coherentvillages.entity.soldier.EntityVillagerMilitia;
 import net.theexceptionist.coherentvillages.main.Main;
+import net.theexceptionist.coherentvillages.main.NameGenerator;
 
 public class EventOverrideMerchantSpawn {
 	public static boolean raidInProgress = false;
@@ -54,6 +58,18 @@ public class EventOverrideMerchantSpawn {
 		}
 	}
 	
+	@SubscribeEvent
+	public void setVillagerNamesEvent(EntityJoinWorldEvent event)
+	{
+		if(event.getEntity() instanceof EntityVillager && !(event.getEntity() instanceof AbstractVillagerSoldier) && Main.useNametags && !event.getWorld().isRemote)
+		{
+			EntityVillager villager = (EntityVillager) event.getEntity();
+
+			villager.setCustomNameTag(NameGenerator.generateRandomName(event.getWorld().rand)+" - "+villager.getDisplayName().getUnformattedText());
+			villager.setAlwaysRenderNameTag(true);
+		}
+	}
+	
 	boolean raidHappened = false;
 	boolean driveAttempted = false;
 	int daysPassed = 0;
@@ -64,10 +80,10 @@ public class EventOverrideMerchantSpawn {
 		World world = event.player.world;
 		
 		Style style = new Style();
-		style.setColor(TextFormatting.DARK_GREEN);
+		style.setColor(TextFormatting.DARK_RED);
 		
 		Style style2 = new Style();
-		style2.setColor(TextFormatting.DARK_BLUE);
+		style2.setColor(TextFormatting.LIGHT_PURPLE);
 		
 		if(world.villageCollection != null){
 			Village village = world.villageCollection.getNearestVillage(player.getPosition(), 30);
@@ -115,6 +131,8 @@ public class EventOverrideMerchantSpawn {
 		                    world.spawnEntity(bandit);
 		                    
 							spawnpoint = spawnpoint.add(1, 0, 0);
+							spawnpoint = new BlockPos(spawnpoint.getX(), world.getTopSolidOrLiquidBlock(spawnpoint).getY(), spawnpoint.getZ());
+							
 							numBandits--;
 							raidHappened = true;
 						}
@@ -175,6 +193,7 @@ public class EventOverrideMerchantSpawn {
 	                    world.spawnEntity(soldier);
 	                    
 						spawnpoint = spawnpoint.add(1, 0, 0);
+						spawnpoint = new BlockPos(spawnpoint.getX(), world.getTopSolidOrLiquidBlock(spawnpoint).getY(), spawnpoint.getZ());
 						
 						num--;
 					}

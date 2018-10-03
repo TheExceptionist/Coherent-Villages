@@ -192,12 +192,16 @@ Changelog:
 *Added Config for recruitment drives
 *Fixed a crash
 
--Beta v1.4.2
+-Beta v1.4.4
 *Fixed ghost emeralds
 *Fixed shop bounding box
 *Fixed Bandit nametags
 *Fixed bandit village doors missing
 *Tweak Fence spawning
+*Tweaked color of some messages
+*Fixed Bandit Archer nametag
+*Added name tags to regular villagers
+*Improved event spawning location
 
 To Be done later
 *Added University
