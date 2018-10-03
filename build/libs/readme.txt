@@ -197,6 +197,7 @@ Changelog:
 *Fixed shop bounding box
 *Fixed Bandit nametags
 *Fixed bandit village doors missing
+*Tweak Fence spawning
 
 To Be done later
 *Added University
