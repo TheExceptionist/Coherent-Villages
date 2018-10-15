@@ -6,23 +6,25 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.village.Village;
 import net.theexceptionist.coherentvillages.entity.soldier.AbstractVillagerSoldier;
+import net.theexceptionist.coherentvillages.main.entity.EntityHumanVillager;
+import net.theexceptionist.coherentvillages.main.entity.IEntityVillager;
 
 public class EntityAIStayInBorders extends EntityAIBase
 {
-    private final AbstractVillagerSoldier creature;
+    private final IEntityVillager creature;
     private double movePosX;
     private double movePosY;
     private double movePosZ;
     private final double movementSpeed;
 
-    public EntityAIStayInBorders(AbstractVillagerSoldier creatureIn, double speedIn)
+    public EntityAIStayInBorders(IEntityVillager creatureIn, double speedIn)
     {
         this.creature = creatureIn;
         this.movementSpeed = speedIn;
         this.setMutexBits(1);
     }
 
-    /**
+	/**
      * Returns whether the EntityAIBase should begin execution.
      */
     public boolean shouldExecute()
@@ -32,13 +34,13 @@ public class EntityAIStayInBorders extends EntityAIBase
     	if(village != null)
     	{
     		BlockPos pos = village.getCenter();
-    		int dist = (int) Math.floor(Math.sqrt(pos.distanceSq(this.creature.getPos())));
+    		int dist = (int) Math.floor(Math.sqrt(pos.distanceSq(this.creature.getLiving().getPos())));
     		int radius = village.getVillageRadius();
     		
     		if(dist > radius)
     		{
     			//System.out.println(this.creature.getCustomNameTag()+" - "+dist+" "+radius);
-    			Vec3d vec3d = RandomPositionGenerator.findRandomTargetBlockTowards(this.creature, 16, 7, new Vec3d((double)pos.getX(), (double)pos.getY(), (double)pos.getZ()));
+    			Vec3d vec3d = RandomPositionGenerator.findRandomTargetBlockTowards(this.creature.getLiving(), 16, 7, new Vec3d((double)pos.getX(), (double)pos.getY(), (double)pos.getZ()));
     		
     			if (vec3d == null)
                 {
@@ -68,7 +70,7 @@ public class EntityAIStayInBorders extends EntityAIBase
      */
     public boolean shouldContinueExecuting()
     {
-    	return !this.creature.getNavigator().noPath();
+    	return !this.creature.getLiving().getNavigator().noPath();
     }
 
     /**
@@ -76,6 +78,6 @@ public class EntityAIStayInBorders extends EntityAIBase
      */
     public void startExecuting()
     {
-        this.creature.getNavigator().tryMoveToXYZ(this.movePosX, this.movePosY, this.movePosZ, this.movementSpeed);
+        this.creature.getLiving().getNavigator().tryMoveToXYZ(this.movePosX, this.movePosY, this.movePosZ, this.movementSpeed);
     }
 }

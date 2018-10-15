@@ -76,14 +76,23 @@ public class ModMapVillageGen extends MapGenVillage
         {
             chunkZ -= this.distance - 1;
         }
+        
+      //  System.out.println("Chunk X:"+chunkX+"Chunk Z: "+chunkZ+" Distance: "+this.distance);
 
         int k = chunkX / this.distance;
         int l = chunkZ / this.distance;
+        
+     //   System.out.println("X1: "+k+" Z1: "+l);
         Random random = this.world.setRandomSeed(k, l, 10387312);
         k = k * this.distance;
         l = l * this.distance;
+        
+      //System.out.println("X2: "+k+" Z2: "+l);
+        
         k = k + random.nextInt(this.distance - 8);
         l = l + random.nextInt(this.distance - 8);
+        
+       // System.out.println("X3: "+k+" Z3: "+l);
 
         if (i == k && j == l)
         {

@@ -6,6 +6,7 @@ import com.google.common.base.Predicate;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
@@ -22,6 +23,7 @@ import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.monster.IMob;
+import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -162,7 +164,7 @@ public class EntityVillagerGuardian extends AbstractVillagerSoldier {
 		            double d1 = this.rand.nextGaussian() * 0.02D;
 		            this.world.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, this.posX + (double)(this.rand.nextFloat() * this.width * 2.0F) - (double)this.width, this.posY + (double)(this.rand.nextFloat() * this.height), this.posZ + (double)(this.rand.nextFloat() * this.width * 2.0F) - (double)this.width, d2, d0, d1, new int[0]);
 		        }
-	        	this.tasks.addTask(3, new EntityAIFollowEntity(this, master));
+	        	this.tasks.addTask(3, new EntityAIFollowEntity(this, master, false));
 	        }
 		 //System.out.println(this.getMaximumHomeDistance());
 	    }
@@ -226,7 +228,7 @@ public class EntityVillagerGuardian extends AbstractVillagerSoldier {
 	}
 
 	@Override
-	public void setMaster(AbstractVillagerSoldier villager) {
+	public void setMaster(EntityLivingBase villager) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -238,8 +240,8 @@ public class EntityVillagerGuardian extends AbstractVillagerSoldier {
 	}
 
 	@Override
-	public EntityLiving getLiving() {
+	public EntityVillager getLiving() {
 		// TODO Auto-generated method stub
-		return this;
+		return (EntityVillager)this;
 	}
 }

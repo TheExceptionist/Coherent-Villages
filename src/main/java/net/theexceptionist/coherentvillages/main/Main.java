@@ -14,13 +14,10 @@ import java.util.List;
 import org.apache.logging.log4j.Logger;
 
 import net.minecraft.entity.EnumCreatureType;
-import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.init.Biomes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.structure.MapGenStructureIO;
-import net.minecraftforge.common.BiomeManager;
-import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -30,76 +27,17 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.VillagerRegistry;
 import net.minecraftforge.fml.common.registry.VillagerRegistry.IVillageCreationHandler;
-import net.minecraftforge.fml.relauncher.Side;
 import net.theexceptionist.coherentvillages.entity.EntityVillagerArrow;
-import net.theexceptionist.coherentvillages.entity.EntityVillagerHorse;
-import net.theexceptionist.coherentvillages.entity.EntityVillagerMerchant;
-import net.theexceptionist.coherentvillages.entity.alchemist.EntityVillagerAlchemist;
-import net.theexceptionist.coherentvillages.entity.alchemist.EntityVillagerHealer;
-import net.theexceptionist.coherentvillages.entity.alchemist.EntityVillagerPotionMaster;
-import net.theexceptionist.coherentvillages.entity.alchemist.EntityVillagerUndeadHunter;
-import net.theexceptionist.coherentvillages.entity.archer.EntityVillagerArcher;
-import net.theexceptionist.coherentvillages.entity.archer.EntityVillagerHunter;
-import net.theexceptionist.coherentvillages.entity.archer.EntityVillagerMageArcher;
-import net.theexceptionist.coherentvillages.entity.archer.EntityVillagerMarksman;
-import net.theexceptionist.coherentvillages.entity.bandit.EntityVillagerBandit;
-import net.theexceptionist.coherentvillages.entity.bandit.EntityVillagerBanditAlchemist;
-import net.theexceptionist.coherentvillages.entity.bandit.EntityVillagerBanditArcher;
-import net.theexceptionist.coherentvillages.entity.bandit.EntityVillagerBanditHorseman;
-import net.theexceptionist.coherentvillages.entity.bandit.EntityVillagerBanditMage;
-import net.theexceptionist.coherentvillages.entity.bandit.EntityVillagerDarkKnight;
-import net.theexceptionist.coherentvillages.entity.followers.EntityMerchantGuard;
-import net.theexceptionist.coherentvillages.entity.followers.EntitySkeletonMinion;
-import net.theexceptionist.coherentvillages.entity.followers.EntityVillagerGuardian;
-import net.theexceptionist.coherentvillages.entity.knight.EntityVillagerApothecary;
-import net.theexceptionist.coherentvillages.entity.knight.EntityVillagerCavalier;
-import net.theexceptionist.coherentvillages.entity.knight.EntityVillagerHorseArcher;
-import net.theexceptionist.coherentvillages.entity.knight.EntityVillagerKnight;
-import net.theexceptionist.coherentvillages.entity.knight.EntityVillagerMageKnight;
-import net.theexceptionist.coherentvillages.entity.knight.EntityVillagerPaladin;
-import net.theexceptionist.coherentvillages.entity.mage.EntityVillagerConjurer;
-import net.theexceptionist.coherentvillages.entity.mage.EntityVillagerGrandMage;
-import net.theexceptionist.coherentvillages.entity.mage.EntityVillagerMage;
-import net.theexceptionist.coherentvillages.entity.mage.EntityVillagerNecromancer;
-import net.theexceptionist.coherentvillages.entity.soldier.EntityVillagerGuard;
-import net.theexceptionist.coherentvillages.entity.soldier.EntityVillagerManAtArms;
-import net.theexceptionist.coherentvillages.entity.soldier.EntityVillagerMilitia;
-import net.theexceptionist.coherentvillages.entity.soldier.EntityVillagerPeasant;
-import net.theexceptionist.coherentvillages.entity.soldier.EntityVillagerSergeant;
-import net.theexceptionist.coherentvillages.entity.soldier.EntityVillagerWarrior;
-import net.theexceptionist.coherentvillages.worldgen.ModMapVillageGen;
-import net.theexceptionist.coherentvillages.worldgen.VillageComponentAlchemyHut;
-import net.theexceptionist.coherentvillages.worldgen.VillageComponentBarrackSmall;
-import net.theexceptionist.coherentvillages.worldgen.VillageComponentBarracks;
-import net.theexceptionist.coherentvillages.worldgen.VillageComponentBigFarm;
-import net.theexceptionist.coherentvillages.worldgen.VillageComponentCaneFarm;
-import net.theexceptionist.coherentvillages.worldgen.VillageComponentFence;
-import net.theexceptionist.coherentvillages.worldgen.VillageComponentGuardTower;
-import net.theexceptionist.coherentvillages.worldgen.VillageComponentHunterHut;
-import net.theexceptionist.coherentvillages.worldgen.VillageComponentInn;
-import net.theexceptionist.coherentvillages.worldgen.VillageComponentSanctuary;
-import net.theexceptionist.coherentvillages.worldgen.VillageComponentShop;
-import net.theexceptionist.coherentvillages.worldgen.VillageComponentSmallHouseWithDoor;
-import net.theexceptionist.coherentvillages.worldgen.VillageComponentStable;
-import net.theexceptionist.coherentvillages.worldgen.VillageComponentVillageFort;
-import net.theexceptionist.coherentvillages.worldgen.VillageComponentWall;
-import net.theexceptionist.coherentvillages.worldgen.VillageComponentWizardTower;
-import net.theexceptionist.coherentvillages.worldgen.VillageHandlerAlchemyHut;
-import net.theexceptionist.coherentvillages.worldgen.VillageHandlerBarracks;
-import net.theexceptionist.coherentvillages.worldgen.VillageHandlerBarracksSmall;
-import net.theexceptionist.coherentvillages.worldgen.VillageHandlerBigFarm;
-import net.theexceptionist.coherentvillages.worldgen.VillageHandlerCaneFarm;
-import net.theexceptionist.coherentvillages.worldgen.VillageHandlerFence;
-import net.theexceptionist.coherentvillages.worldgen.VillageHandlerFort;
-import net.theexceptionist.coherentvillages.worldgen.VillageHandlerGuardTower;
-import net.theexceptionist.coherentvillages.worldgen.VillageHandlerHunterHut;
-import net.theexceptionist.coherentvillages.worldgen.VillageHandlerInn;
-import net.theexceptionist.coherentvillages.worldgen.VillageHandlerSanctuary;
-import net.theexceptionist.coherentvillages.worldgen.VillageHandlerShop;
-import net.theexceptionist.coherentvillages.worldgen.VillageHandlerSmallHouseWithDoor;
-import net.theexceptionist.coherentvillages.worldgen.VillageHandlerStable;
-import net.theexceptionist.coherentvillages.worldgen.VillageHandlerWall;
-import net.theexceptionist.coherentvillages.worldgen.VillageHandlerWizardTower;
+import net.theexceptionist.coherentvillages.main.entity.EntityBjornserker;
+import net.theexceptionist.coherentvillages.main.entity.EntityHumanVillager;
+import net.theexceptionist.coherentvillages.main.entity.EntityWarg;
+import net.theexceptionist.coherentvillages.main.entity.attributes.AttributeRace;
+import net.theexceptionist.coherentvillages.worldgen.villages.ArabStructurePieces;
+import net.theexceptionist.coherentvillages.worldgen.villages.GermanStructurePieces;
+import net.theexceptionist.coherentvillages.worldgen.villages.LatinStructurePieces;
+import net.theexceptionist.coherentvillages.worldgen.villages.NordStructurePieces;
+import net.theexceptionist.coherentvillages.worldgen.villages.SlavStructurePieces;
+import net.theexceptionist.coherentvillages.worldgen.villages.WorldGenVillage;
 
 @Mod(modid = Resources.MODID, name = Resources.NAME, version = Resources.VERSION, updateJSON="https://github.com/TheExceptionist/Coherent-Villages/blob/master/UpdateChecker/update.json")
 public class Main
@@ -118,15 +56,6 @@ public class Main
     public static final int BANDIT_FACTION = 1;
     
     public static int player_faction = SOLDIER_FACTION;
-    
-    /*public static final CreativeTabs CV_TAB = new CreativeTabs("Coherent Villages"){
-    	@Override
-    	public ItemStack getTabIconItem(){
-    		return new ItemStack(Items.IRON_AXE);
-    	}
-    };*/
-    
-    //private static final String config_path = "./config/coherent_config.txt";
    public static int raid_rate = 5;
    public static int recruit_rate = 0;
    
@@ -145,8 +74,8 @@ public class Main
     			"size=1\n",
     			"#Spawnrate for the bandits outside the villages, 0 or -1 turns them off!\n",
     			"bandit_spawn_rate=5\n",
-    			"#Turn nametags off and on. (1 = on, 0 = off)\n",
-    			"nametags_on=1\n",
+    			"#Show nametags of villagers all the time. (Can still see the nametag above the villager)(1 = on, 0 = off)\n",
+    			"show_nametags=0\n",
     			"#Village soldier recruiting (for the villages) (out of 100)\n",
     			"recruit_rate=5\n",
     			"#Village raid chance (for the villages) (out of 100)\n",
@@ -499,14 +428,42 @@ public class Main
     	proxy.registerRenderers();
     	instance = this;
     	
-    	List<Biome> villageBiomes = Arrays.<Biome>asList(new Biome[] {Biomes.PLAINS, Biomes.DESERT, Biomes.SAVANNA, Biomes.TAIGA, Biomes.BEACH, Biomes.BIRCH_FOREST, Biomes.BIRCH_FOREST_HILLS, Biomes.COLD_BEACH, Biomes.COLD_TAIGA, Biomes.COLD_TAIGA_HILLS, Biomes.DEEP_OCEAN,
+    	AttributeRace.init();
+    	
+    	List<Biome> villageBiomes = Arrays.<Biome>asList(new Biome[] {Biomes.JUNGLE, Biomes.JUNGLE_EDGE, Biomes.JUNGLE_HILLS/*Biomes.PLAINS, Biomes.DESERT, Biomes.SAVANNA, Biomes.TAIGA, Biomes.BEACH, Biomes.BIRCH_FOREST, Biomes.BIRCH_FOREST_HILLS, Biomes.COLD_BEACH, Biomes.COLD_TAIGA, Biomes.COLD_TAIGA_HILLS, Biomes.DEEP_OCEAN,
     		Biomes.DESERT, Biomes.DESERT_HILLS, Biomes.EXTREME_HILLS, Biomes.EXTREME_HILLS_EDGE, Biomes.EXTREME_HILLS_WITH_TREES, Biomes.FOREST, Biomes.FOREST_HILLS, Biomes.FROZEN_RIVER, Biomes.FROZEN_OCEAN, Biomes.ICE_MOUNTAINS, Biomes.ICE_PLAINS,
     		Biomes.JUNGLE, Biomes.JUNGLE_EDGE, Biomes.JUNGLE_HILLS, Biomes.MESA, Biomes.MESA_CLEAR_ROCK, Biomes.MESA_ROCK, Biomes.MUSHROOM_ISLAND, Biomes.MUSHROOM_ISLAND_SHORE, Biomes.MUTATED_BIRCH_FOREST, Biomes.PLAINS, Biomes.DESERT, Biomes.SAVANNA, Biomes.TAIGA, Biomes.OCEAN,
     		Biomes.MUTATED_BIRCH_FOREST, Biomes.MUTATED_BIRCH_FOREST_HILLS, Biomes.MUTATED_DESERT, Biomes.MUTATED_EXTREME_HILLS, Biomes.MUTATED_EXTREME_HILLS_WITH_TREES, Biomes.MUTATED_FOREST, Biomes.MUTATED_ICE_FLATS, Biomes.MUTATED_JUNGLE, Biomes.MUTATED_MESA, Biomes.MUTATED_MESA, Biomes.MUTATED_MESA_CLEAR_ROCK,
     		Biomes.MUTATED_MESA_ROCK, Biomes.MUTATED_PLAINS, Biomes.MUTATED_REDWOOD_TAIGA, Biomes.MUTATED_REDWOOD_TAIGA_HILLS, Biomes.MUTATED_ROOFED_FOREST, Biomes.MUTATED_SAVANNA, Biomes.MUTATED_SAVANNA_ROCK, Biomes.MUTATED_SWAMPLAND, Biomes.MUTATED_TAIGA, Biomes.MUTATED_TAIGA_COLD, Biomes.REDWOOD_TAIGA, Biomes.REDWOOD_TAIGA_HILLS, Biomes.RIVER
-    		,Biomes.RIVER, Biomes.ROOFED_FOREST, Biomes.SAVANNA_PLATEAU, Biomes.STONE_BEACH, Biomes.SWAMPLAND, Biomes.TAIGA_HILLS});
+    		,Biomes.RIVER, Biomes.ROOFED_FOREST, Biomes.SAVANNA_PLATEAU, Biomes.STONE_BEACH, Biomes.SWAMPLAND, Biomes.TAIGA_HILLS*/});
     	
-    	addVillagePiece(VillageComponentBarrackSmall.class, "ViGb"); 
+    	List<Biome> villageNordBiomes = Arrays.<Biome>asList(new Biome[] {Biomes.BEACH, Biomes.BIRCH_FOREST, Biomes.BIRCH_FOREST_HILLS, Biomes.COLD_BEACH, Biomes.DEEP_OCEAN,
+        		Biomes.FOREST, Biomes.FOREST_HILLS, Biomes.FROZEN_RIVER, Biomes.FROZEN_OCEAN, Biomes.ICE_MOUNTAINS, Biomes.ICE_PLAINS,
+        		Biomes.MUTATED_BIRCH_FOREST, Biomes.MUTATED_BIRCH_FOREST_HILLS, Biomes.MUTATED_FOREST, Biomes.MUTATED_ICE_FLATS,
+        		Biomes.RIVER, Biomes.STONE_BEACH});
+        	
+    	List<Biome> villageLatinBiomes = Arrays.<Biome>asList(new Biome[] {Biomes.PLAINS, Biomes.SAVANNA, Biomes.MESA, Biomes.MESA_CLEAR_ROCK, Biomes.MESA_ROCK,
+        		Biomes.MUTATED_MESA, Biomes.MUTATED_MESA, Biomes.MUTATED_MESA_CLEAR_ROCK, Biomes.ROOFED_FOREST,
+        		Biomes.MUTATED_MESA_ROCK, Biomes.MUTATED_PLAINS, Biomes.MUTATED_ROOFED_FOREST, Biomes.MUTATED_SAVANNA, Biomes.MUTATED_SAVANNA_ROCK, Biomes.MUTATED_SWAMPLAND, 
+        	});
+        	
+    	List<Biome> villageGermanBiomes = Arrays.<Biome>asList(new Biome[] {Biomes.PLAINS, Biomes.FOREST, 
+        		Biomes.EXTREME_HILLS, Biomes.EXTREME_HILLS_EDGE, Biomes.EXTREME_HILLS_WITH_TREES, 
+        		Biomes.MUTATED_BIRCH_FOREST_HILLS, Biomes.MUTATED_EXTREME_HILLS, Biomes.MUTATED_EXTREME_HILLS_WITH_TREES, Biomes.MUTATED_FOREST, 
+        		Biomes.MUTATED_PLAINS, Biomes.MUTATED_REDWOOD_TAIGA, Biomes.MUTATED_REDWOOD_TAIGA_HILLS, Biomes.MUTATED_ROOFED_FOREST, Biomes.MUTATED_SAVANNA, Biomes.MUTATED_SAVANNA_ROCK, Biomes.REDWOOD_TAIGA, Biomes.REDWOOD_TAIGA_HILLS,
+        		Biomes.RIVER, Biomes.ROOFED_FOREST, Biomes.SAVANNA_PLATEAU});
+        	
+    	List<Biome> villageSlavBiomes = Arrays.<Biome>asList(new Biome[] {Biomes.TAIGA, Biomes.COLD_BEACH, Biomes.COLD_TAIGA, Biomes.COLD_TAIGA_HILLS,
+        		Biomes.ICE_MOUNTAINS,
+        		Biomes.TAIGA,
+        		Biomes.MUTATED_REDWOOD_TAIGA, Biomes.MUTATED_REDWOOD_TAIGA_HILLS, Biomes.MUTATED_TAIGA, Biomes.MUTATED_TAIGA_COLD, Biomes.REDWOOD_TAIGA, Biomes.REDWOOD_TAIGA_HILLS,
+        		Biomes.TAIGA_HILLS});
+        	
+    	List<Biome> villageArabBiomes = Arrays.<Biome>asList(new Biome[] {Biomes.DESERT, 
+        		Biomes.DESERT, Biomes.DESERT_HILLS, 
+        		Biomes.MUTATED_DESERT});
+        	
+    	/*addVillagePiece(VillageComponentBarrackSmall.class, "ViGb"); 
     	addVillageCreationHandler(new VillageHandlerBarracksSmall()); 
     	addVillagePiece(VillageComponentBarracks.class, "ViBR"); 
     	addVillageCreationHandler(new VillageHandlerBarracks()); 
@@ -538,11 +495,52 @@ public class Main
     	addVillagePiece(VillageComponentShop.class, "ViSS"); 
     	addVillageCreationHandler(new VillageHandlerShop()); 
     	addVillagePiece(VillageComponentSanctuary.class, "ViGS"); 
-    	addVillageCreationHandler(new VillageHandlerSanctuary()); 
+    	addVillageCreationHandler(new VillageHandlerSanctuary()); */
     	
     	//addVillagePiece(ModMapVillageGen.Start.class, "ViS");
-    	MapGenStructureIO.registerStructure(ModMapVillageGen.Start.class, "Mod Village");
+    	MapGenStructureIO.registerStructure(WorldGenVillage.Start.class, "Mod Village");
     	
+    	NordStructurePieces.registerVillagePieces();
+    	MapGenStructureIO.registerStructure(WorldGenVillage.NordStart.class, "Nord Village");
+    	
+    	LatinStructurePieces.registerVillagePieces();
+    	MapGenStructureIO.registerStructure(WorldGenVillage.LatinStart.class, "Latin Village");
+    	
+    	GermanStructurePieces.registerVillagePieces();
+    	MapGenStructureIO.registerStructure(WorldGenVillage.GermanStart.class, "German Village");
+    	
+    	SlavStructurePieces.registerVillagePieces();
+    	MapGenStructureIO.registerStructure(WorldGenVillage.SlavStart.class, "Slav Village");
+    	
+    	ArabStructurePieces.registerVillagePieces();
+    	MapGenStructureIO.registerStructure(WorldGenVillage.ArabStart.class, "Arab Village");
+    	
+    	for(Biome b : villageNordBiomes)
+    	{
+    		WorldGenVillage.NORD_VILLAGE_SPAWN_BIOMES.add(b);
+    	}
+    	
+    	for(Biome b : villageLatinBiomes)
+    	{
+    		WorldGenVillage.LATIN_VILLAGE_SPAWN_BIOMES.add(b);
+    	}
+    	
+    	for(Biome b : villageGermanBiomes)
+    	{
+    		WorldGenVillage.GERMAN_VILLAGE_SPAWN_BIOMES.add(b);
+    	}
+    	
+    	for(Biome b : villageSlavBiomes)
+    	{
+    		WorldGenVillage.SLAV_VILLAGE_SPAWN_BIOMES.add(b);
+    	}
+    	
+    	for(Biome b : villageArabBiomes)
+    	{
+    		WorldGenVillage.ARAB_VILLAGE_SPAWN_BIOMES.add(b);
+    	}
+    	
+    	/*
     	int i = 0;
     	for(Biome b : villageBiomes)
     	{
@@ -557,7 +555,7 @@ public class Main
 	        	    		
 	    	    			biomes[i] = b;
 	    	    			//System.out.println(biomes[i]);
-	    	    		}*/
+	    	    		}
 	    	    		break;
 	    			}
 	    			else if(b.getBiomeName().compareTo(s.name) == 0 && !s.spawn)
@@ -581,9 +579,21 @@ public class Main
     	
     	Biome[] biomes = new Biome[villageBiomes.size()];
     	
-    	//System.exit(0);
+    	if(!spawnCreepers)
+    	{
+    		EntityRegistry.removeSpawn(EntityCreeper.class, EnumCreatureType.MONSTER, villageBiomes.toArray(biomes));
+    	}*/
+    	
+
+    	Biome[] nBiomes = new Biome[villageNordBiomes.size()];
+    	
+    	createEntity(EntityHumanVillager.class, 1513, "human_villager", 161425, 1582224, false);
+    	createEntity(EntityWarg.class, 1514, "warg", 261425, 1582224, true);
+    	createEntity(EntityBjornserker.class, 1515, "bjornserker", 361425, 1582224, true);
+    	
+    	
     	//Soldiers
-    	createEntity(EntityVillagerGuard.class, 1513, "villager_guard", 161425, 1582224);
+    	/*createEntity(EntityVillagerGuard.class, 1513, "villager_guard", 161425, 1582224);
     	createEntity(EntityVillagerManAtArms.class, 1514, "villager_man_at_arms", 261425, 1582224);
     	createEntity(EntityVillagerSergeant.class, 1515, "villager_sergeant", 361425, 1582224);
     	createEntity(EntityVillagerWarrior.class, 1516, "villager_warrior", 461425, 1382224);
@@ -629,8 +639,8 @@ public class Main
 
 
 
-    	createEntity(EntitySkeletonMinion.class, 1561, "skeleton_minion", 926395, 1015567);
-
+    	createEntity(EntitySkeletonMinion.class, 1561, "skeleton_minion", 926395, 1015567);*/
+    	//Humans
     	//if(biomes != null)
     	//{
     		//System.out.println(biomes[0]);
@@ -638,16 +648,18 @@ public class Main
     		EntityRegistry.addSpawn(EntityVillagerMerchant.class, 1, 1, 2, EnumCreatureType.MONSTER, villageBiomes.toArray(biomes));//weightedProb, min, max, typeOfCreature, biomes);
     	}*/
     	//}
-    	if(!spawnCreepers)
-    	{
-    		EntityRegistry.removeSpawn(EntityCreeper.class, EnumCreatureType.MONSTER, villageBiomes.toArray(biomes));
-    	}
     	
-    	EntityRegistry.addSpawn(EntityVillagerBandit.class, bandit_spawn, 1, 2, EnumCreatureType.MONSTER, villageBiomes.toArray(biomes));//weightedProb, min, max, typeOfCreature, biomes);
-    	EntityRegistry.addSpawn(EntityVillagerBanditArcher.class, bandit_spawn, 1, 2, EnumCreatureType.MONSTER, villageBiomes.toArray(biomes));//weightedProb, min, max, typeOfCreature, biomes);
-    	EntityRegistry.addSpawn(EntityVillagerBanditMage.class, bandit_spawn/2, 1, 2, EnumCreatureType.MONSTER, villageBiomes.toArray(biomes));//weightedProb, min, max, typeOfCreature, biomes);
-    	EntityRegistry.addSpawn(EntityVillagerBanditHorseman.class, bandit_spawn, 1, 2, EnumCreatureType.MONSTER, villageBiomes.toArray(biomes));//weightedProb, min, max, typeOfCreature, biomes);
-    	EntityRegistry.addSpawn(EntityVillagerBanditAlchemist.class, bandit_spawn, 1, 2, EnumCreatureType.MONSTER, villageBiomes.toArray(biomes));//weightedProb, min, max, typeOfCreature, biomes);
+    	/*
+    	EntityRegistry.addSpawn(EntityVillagerBandit.class, 5, 1, 2, EnumCreatureType.MONSTER, villageBiomes.toArray(biomes));//weightedProb, min, max, typeOfCreature, biomes);
+    	EntityRegistry.addSpawn(EntityVillagerBanditArcher.class, 5, 1, 2, EnumCreatureType.MONSTER, villageBiomes.toArray(biomes));//weightedProb, min, max, typeOfCreature, biomes);
+    	EntityRegistry.addSpawn(EntityVillagerBanditMage.class, 2, 1, 2, EnumCreatureType.MONSTER, villageBiomes.toArray(biomes));//weightedProb, min, max, typeOfCreature, biomes);
+    	EntityRegistry.addSpawn(EntityVillagerBanditHorseman.class, 5, 1, 2, EnumCreatureType.MONSTER, villageBiomes.toArray(biomes));//weightedProb, min, max, typeOfCreature, biomes);
+    	EntityRegistry.addSpawn(EntityVillagerBanditAlchemist.class, 5, 1, 2, EnumCreatureType.MONSTER, villageBiomes.toArray(biomes));//weightedProb, min, max, typeOfCreature, biomes);
+    	*/
+    	
+    	EntityRegistry.addSpawn(EntityWarg.class, 5, 2, 6, EnumCreatureType.MONSTER, villageNordBiomes.toArray(nBiomes));//weightedProb, min, max, typeOfCreature, biomes);
+    	EntityRegistry.addSpawn(EntityBjornserker.class, 1, 1, 2, EnumCreatureType.MONSTER, villageNordBiomes.toArray(nBiomes));//weightedProb, min, max, typeOfCreature, biomes);
+
     	
     	EntityRegistry.registerModEntity(new ResourceLocation(Resources.MODID, "villager_arrow"), EntityVillagerArrow.class, "entity_villager_arrow", 1, instance,1, 1, false);
 	}
@@ -657,10 +669,10 @@ public class Main
 
 	}
 	
-	public static void createEntity(Class entityClass, int ID, String entityName, int solidColor, int spotColor){
+	public static void createEntity(Class entityClass, int ID, String entityName, int solidColor, int spotColor, boolean withEgg){
 
     	EntityRegistry.registerModEntity(new ResourceLocation(Resources.MODID+":"+entityName), entityClass, entityName, ID, instance, 128, 1, true);
-    	EntityRegistry.registerEgg(new ResourceLocation(Resources.MODID+":"+entityName),  solidColor, spotColor);
+    	if(withEgg) EntityRegistry.registerEgg(new ResourceLocation(Resources.MODID+":"+entityName),  solidColor, spotColor);
     }
 	
 	public static void addVillagePiece(Class c, String s) 
@@ -678,6 +690,17 @@ public class Main
 	    //VillagerRegistry.instance().
 	    
     }
+	    
+	    /*public static void registerEgg(ResourceLocation name, int primary, int secondary)
+	    {
+	        EntityVillagerEntry entry = ForgeRegistries.ENTITIES.getValue(name);
+	        if (entry == null)
+	        {
+	            FMLLog.bigWarning("Attempted to registry a entity egg for entity ({}) that is not in the Entity Registry", name);
+	            return;
+	        }
+	        entry.setEgg(new EntityEggInfo(name, primary, secondary));
+	    }*/
 }
 
 

@@ -1,0 +1,12 @@
+package net.theexceptionist.coherentvillages.main.entity;
+
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
+
+public class EntityHumanAttributes {
+	private static final DataParameter<Integer> PROFESSION = EntityDataManager.<Integer>createKey(EntityHumanVillager.class, DataSerializers.VARINT);
+	private static final DataParameter<Integer> RACE = EntityDataManager.<Integer>createKey(EntityHumanVillager.class, DataSerializers.VARINT);
+	private static final DataParameter<Integer> GENDER = EntityDataManager.<Integer>createKey(EntityHumanVillager.class, DataSerializers.VARINT);
+	
+}

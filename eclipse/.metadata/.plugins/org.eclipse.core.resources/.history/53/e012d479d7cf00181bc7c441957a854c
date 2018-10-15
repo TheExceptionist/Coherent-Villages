@@ -1,0 +1,36 @@
+package net.theexceptionist.coherentvillages.main.entity.attributes;
+
+import java.util.ArrayList;
+
+import net.theexceptionist.coherentvillages.main.entity.EntityHumanVillager;
+
+public class FactionManager {
+	public ArrayList<AttributeFaction> factions;
+	public ArrayList<EntityHumanVillager> rulers;
+	
+	public FactionManager()
+	{
+		factions = new ArrayList<AttributeFaction>();
+		rulers = new ArrayList<EntityHumanVillager>();
+	}
+	
+	public void addFaction(AttributeFaction faction)
+	{
+		factions.add(faction);
+	}
+	
+	public void removeFaction(AttributeFaction faction)
+	{
+		factions.remove(faction);
+	}
+	
+	public void addRuler(EntityHumanVillager ruler)
+	{
+		rulers.add(ruler);
+	}
+	
+	public void removeRuler(EntityHumanVillager ruler)
+	{
+		rulers.remove(ruler);
+	}
+}

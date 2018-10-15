@@ -74,7 +74,7 @@ public  abstract class AbstractVillagerBandit extends AbstractVillagerSoldier {
 	 
 	 public boolean getCanSpawnHere()
 	    {
-	        return this.world.getDifficulty() != EnumDifficulty.PEACEFUL && this.isValidLightLevel() && super.getCanSpawnHere() && this.isCanSpawn();
+	        return this.world.getDifficulty() != EnumDifficulty.PEACEFUL && this.isValidLightLevel() && super.getCanSpawnHere() && this.isCanSpawn() && rand.nextInt(100) < Main.bandit_spawn;
 	    }
 	
 	

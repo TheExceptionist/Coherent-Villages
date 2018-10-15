@@ -1,0 +1,95 @@
+package net.theexceptionist.coherentvillages.main.entity;
+
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
+import net.theexceptionist.coherentvillages.main.entity.attributes.AttributeRace;
+
+public class EntityHumanAttributes {
+	private final EntityHumanVillager villager;
+	private final EntityDataManager dataManager;
+	
+	private static final DataParameter<Integer> PROFESSION = EntityDataManager.<Integer>createKey(EntityHumanVillager.class, DataSerializers.VARINT);
+	private static final DataParameter<Integer> RACE = EntityDataManager.<Integer>createKey(EntityHumanVillager.class, DataSerializers.VARINT);
+	private static final DataParameter<Integer> GENDER = EntityDataManager.<Integer>createKey(EntityHumanVillager.class, DataSerializers.VARINT);
+	private static final DataParameter<String> FIRST_NAME = EntityDataManager.<String>createKey(EntityHumanVillager.class, DataSerializers.STRING);
+	private static final DataParameter<String> LAST_NAME = EntityDataManager.<String>createKey(EntityHumanVillager.class, DataSerializers.STRING);
+	
+	public EntityHumanAttributes(EntityHumanVillager villager)
+	{
+		this.villager = villager;
+		this.dataManager = villager.getDataManager();
+	}
+	
+	public void initialize()
+	{
+		dataManager.register(FIRST_NAME, "");
+		dataManager.register(LAST_NAME, "");
+		dataManager.register(RACE, 0);
+		dataManager.register(GENDER, 0);
+		dataManager.register(PROFESSION, 0);
+	}
+
+	public EntityDataManager getDataManager() {
+		return dataManager;
+	}
+	
+	public void setFirstName(String name)
+	{
+		dataManager.set(FIRST_NAME, name);
+	}
+	
+	public void setLastName(String name)
+	{
+		dataManager.set(LAST_NAME, name);
+	}
+
+	public void setRace(int num)
+	{
+		dataManager.set(RACE, num);
+	}
+
+	public void setGender(int num)
+	{
+		dataManager.set(GENDER, num);
+	}
+	
+	public void setProfession(int num)
+	{
+		dataManager.set(PROFESSION, num);
+	}
+	
+	public String getFirstName()
+	{
+		return dataManager.get(FIRST_NAME);
+	}
+	
+	public String getLastName()
+	{
+		return dataManager.get(LAST_NAME);
+	}
+
+	public int getRace()
+	{
+		return dataManager.get(RACE).intValue();
+	}
+
+	public int getGender()
+	{
+		return dataManager.get(GENDER).intValue();
+	}
+	
+	public int getProfession()
+	{
+		return dataManager.get(PROFESSION).intValue();
+	}
+
+	public void initialize(AttributeRace race, int gender, int vocation, String firstName, String lastName) {
+		dataManager.register(FIRST_NAME, firstName);
+		dataManager.register(LAST_NAME, lastName);
+		dataManager.register(RACE, race.getID());
+		dataManager.register(GENDER, gender);
+		dataManager.register(PROFESSION, vocation);
+	}
+
+}

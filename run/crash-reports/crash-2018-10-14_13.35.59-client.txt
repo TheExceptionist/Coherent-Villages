@@ -1,0 +1,146 @@
+---- Minecraft Crash Report ----
+// You should try our sister game, Minceraft!
+
+Time: 10/14/18 1:35 PM
+Description: Ticking entity
+
+java.util.ConcurrentModificationException
+	at java.util.ArrayList$Itr.checkForComodification(ArrayList.java:901)
+	at java.util.ArrayList$Itr.next(ArrayList.java:851)
+	at net.theexceptionist.coherentvillages.main.entity.attributes.FactionManager.getNearestVillage(FactionManager.java:44)
+	at net.theexceptionist.coherentvillages.events.EventModTick.checkRaid(EventModTick.java:38)
+	at net.minecraftforge.fml.common.eventhandler.ASMEventHandler_14_EventModTick_checkRaid_PlayerTickEvent.invoke(.dynamic)
+	at net.minecraftforge.fml.common.eventhandler.ASMEventHandler.invoke(ASMEventHandler.java:90)
+	at net.minecraftforge.fml.common.eventhandler.EventBus.post(EventBus.java:182)
+	at net.minecraftforge.fml.common.FMLCommonHandler.onPlayerPreTick(FMLCommonHandler.java:365)
+	at net.minecraft.entity.player.EntityPlayer.onUpdate(EntityPlayer.java:228)
+	at net.minecraft.client.entity.EntityPlayerSP.onUpdate(EntityPlayerSP.java:230)
+	at net.minecraft.world.World.updateEntityWithOptionalForce(World.java:2168)
+	at net.minecraft.world.World.updateEntity(World.java:2127)
+	at net.minecraft.world.World.updateEntities(World.java:1928)
+	at net.minecraft.client.Minecraft.runTick(Minecraft.java:1973)
+	at net.minecraft.client.Minecraft.runGameLoop(Minecraft.java:1187)
+	at net.minecraft.client.Minecraft.run(Minecraft.java:441)
+	at net.minecraft.client.main.Main.main(Main.java:118)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at net.minecraft.launchwrapper.Launch.launch(Launch.java:135)
+	at net.minecraft.launchwrapper.Launch.main(Launch.java:28)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at net.minecraftforge.gradle.GradleStartCommon.launch(GradleStartCommon.java:97)
+	at GradleStart.main(GradleStart.java:25)
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Thread: Client thread
+Stacktrace:
+	at java.util.ArrayList$Itr.checkForComodification(ArrayList.java:901)
+	at java.util.ArrayList$Itr.next(ArrayList.java:851)
+	at net.theexceptionist.coherentvillages.main.entity.attributes.FactionManager.getNearestVillage(FactionManager.java:44)
+	at net.theexceptionist.coherentvillages.events.EventModTick.checkRaid(EventModTick.java:38)
+	at net.minecraftforge.fml.common.eventhandler.ASMEventHandler_14_EventModTick_checkRaid_PlayerTickEvent.invoke(.dynamic)
+	at net.minecraftforge.fml.common.eventhandler.ASMEventHandler.invoke(ASMEventHandler.java:90)
+	at net.minecraftforge.fml.common.eventhandler.EventBus.post(EventBus.java:182)
+	at net.minecraftforge.fml.common.FMLCommonHandler.onPlayerPreTick(FMLCommonHandler.java:365)
+	at net.minecraft.entity.player.EntityPlayer.onUpdate(EntityPlayer.java:228)
+	at net.minecraft.client.entity.EntityPlayerSP.onUpdate(EntityPlayerSP.java:230)
+	at net.minecraft.world.World.updateEntityWithOptionalForce(World.java:2168)
+	at net.minecraft.world.World.updateEntity(World.java:2127)
+
+-- Entity being ticked --
+Details:
+	Entity Type: null (net.minecraft.client.entity.EntityPlayerSP)
+	Entity ID: 1137
+	Entity Name: Player906
+	Entity's Exact location: -152.17, 126.74, 143.04
+	Entity's Block location: World: (-153,126,143), Chunk: (at 7,7,15 in -10,8; contains blocks -160,0,128 to -145,255,143), Region: (-1,0; contains chunks -32,0 to -1,31, blocks -512,0,0 to -1,255,511)
+	Entity's Momentum: -0.15, -0.99, -0.20
+	Entity's Passengers: []
+	Entity's Vehicle: ~~ERROR~~ NullPointerException: null
+Stacktrace:
+	at net.minecraft.world.World.updateEntities(World.java:1928)
+
+-- Affected level --
+Details:
+	Level name: MpServer
+	All players: 1 total; [EntityPlayerSP['Player906'/1137, l='MpServer', x=-152.17, y=126.74, z=143.04]]
+	Chunk stats: MultiplayerChunkCache: 525, 525
+	Level seed: 0
+	Level generator: ID 04 - customized, ver 0. Features enabled: false
+	Level generator options: 
+	Level spawn location: World: (-100,64,252), Chunk: (at 12,4,12 in -7,15; contains blocks -112,0,240 to -97,255,255), Region: (-1,0; contains chunks -32,0 to -1,31, blocks -512,0,0 to -1,255,511)
+	Level time: 300 game time, 300 day time
+	Level dimension: 0
+	Level storage version: 0x00000 - Unknown?
+	Level weather: Rain time: 0 (now: false), thunder time: 0 (now: false)
+	Level game mode: Game mode: creative (ID 1). Hardcore: false. Cheats: false
+	Forced entities: 84 total; [EntityHumanVillager['Eydis - Nord Farmer'/103, l='MpServer', x=-220.22, y=69.00, z=115.46], EntityHumanVillager['Jarlfrid - Nord Footman'/105, l='MpServer', x=-218.50, y=71.00, z=120.50], EntityHumanVillager['Kjeld - Nord Footman'/106, l='MpServer', x=-217.50, y=70.00, z=120.50], EntityWarg['Warg'/8302, l='MpServer', x=-205.40, y=69.83, z=142.68], EntityHumanVillager['Jorhild - Nord Farmer'/114, l='MpServer', x=-205.64, y=68.00, z=72.93], EntityHumanVillager['Oddrunn - Nord Farmer'/116, l='MpServer', x=-200.07, y=67.00, z=81.39], EntityHumanVillager['Kjell - Nord Footman'/118, l='MpServer', x=-203.50, y=69.00, z=84.50], EntityHumanVillager['Elof - Nord Axeman'/120, l='MpServer', x=-202.00, y=68.00, z=85.00], EntityHumanVillager['Hallgerd - Nord Farmer'/122, l='MpServer', x=-208.22, y=69.00, z=121.18], EntityHumanVillager['Hervor - Nord Farmer'/124, l='MpServer', x=-205.65, y=69.00, z=142.32], EntityHumanVillager['Audrun - Nord Archer'/145, l='MpServer', x=-191.50, y=71.00, z=84.50], EntityItem['item.tile.torch'/146, l='MpServer', x=-182.42, y=73.00, z=86.88], EntityItem['item.tile.torch'/147, l='MpServer', x=-180.75, y=73.00, z=88.10], EntityHumanVillager['Thora - Nord Fisherman'/149, l='MpServer', x=-190.50, y=69.00, z=102.50], EntityHumanVillager['Aagunn - Nord Jarl'/150, l='MpServer', x=-189.74, y=69.00, z=116.81], EntityHumanVillager['Asfrid - Nord Farmer'/152, l='MpServer', x=-181.75, y=69.94, z=125.50], EntityHumanVillager['Carr - Nord Farmer'/154, l='MpServer', x=-181.71, y=69.94, z=127.50], EntityItem['item.tile.torch'/155, l='MpServer', x=-172.13, y=73.00, z=88.65], EntityHumanVillager['Bergthora - Nord Fisherman'/157, l='MpServer', x=-183.50, y=73.00, z=85.50], EntityHumanVillager['Jerrik - Nord Fisherman'/158, l='MpServer', x=-183.50, y=73.00, z=86.50], EntityItem['item.tile.torch'/159, l='MpServer', x=-172.13, y=72.00, z=89.48], EntityItem['item.tile.torch'/160, l='MpServer', x=-168.69, y=69.00, z=123.08], EntityItem['item.tile.torch'/161, l='MpServer', x=-168.19, y=68.00, z=117.13], EntityHumanVillager['Kjell - Nord Footman'/163, l='MpServer', x=-183.50, y=70.00, z=105.50], EntityHumanVillager['Audun - Nord Axeman'/165, l='MpServer', x=-183.00, y=69.00, z=107.00], EntityHumanVillager['Dagmoy - Nord Archer'/167, l='MpServer', x=-181.50, y=69.00, z=120.50], EntityItem['item.tile.torch'/168, l='MpServer', x=-166.71, y=69.00, z=124.68], EntityHumanVillager['Hallveig - Nord Farmer'/170, l='MpServer', x=-183.50, y=72.00, z=138.50], EntityItem['item.tile.torch'/171, l='MpServer', x=-159.00, y=70.00, z=106.64], EntityItem['item.tile.torch'/172, l='MpServer', x=-156.68, y=69.00, z=98.69], EntityItem['item.tile.torch'/173, l='MpServer', x=-160.07, y=70.00, z=114.88], EntityItem['item.tile.torch'/174, l='MpServer', x=-159.15, y=70.00, z=107.90], EntityHumanVillager['Bjarte - Nord Lumberman'/176, l='MpServer', x=-161.50, y=70.00, z=111.50], EntityHumanVillager['Audgunn - Nord Lumberman'/177, l='MpServer', x=-160.50, y=70.00, z=111.50], EntityItem['item.tile.torch'/178, l='MpServer', x=-166.39, y=69.00, z=133.38], EntityHumanVillager['Gunnbjorg - Nord Farmer'/184, l='MpServer', x=-160.25, y=71.94, z=126.46], EntityHumanVillager['Ingemar - Nord Farmer'/186, l='MpServer', x=-160.27, y=71.94, z=123.89], EntityChicken['Chicken'/187, l='MpServer', x=-140.77, y=74.00, z=188.38], EntityChicken['Chicken'/188, l='MpServer', x=-150.41, y=75.00, z=197.11], EntityChicken['Chicken'/189, l='MpServer', x=-142.50, y=75.00, z=191.50], EntityChicken['Chicken'/190, l='MpServer', x=-140.50, y=76.00, z=192.50], EntityCow['Cow'/199, l='MpServer', x=-82.50, y=86.00, z=188.55], EntityCow['Cow'/200, l='MpServer', x=-83.50, y=87.00, z=190.50], EntityCow['Cow'/201, l='MpServer', x=-81.50, y=87.00, z=189.50], EntityCow['Cow'/202, l='MpServer', x=-82.50, y=85.00, z=186.41], EntityBat['Bat'/8461, l='MpServer', x=-153.30, y=30.31, z=176.79], EntityWarg['Warg'/4647, l='MpServer', x=-25.50, y=75.00, z=264.50], EntityHumanVillager['Oyvor - Nord Farmer'/8746, l='MpServer', x=-247.50, y=69.00, z=19.50], EntityBat['Bat'/8829, l='MpServer', x=-121.01, y=33.37, z=172.59], EntityWarg['Warg'/4750, l='MpServer', x=-212.55, y=69.00, z=180.26], EntityItem['item.item.seeds'/8972, l='MpServer', x=-87.55, y=63.00, z=97.78], EntityItem['item.tile.doublePlant.rose'/8973, l='MpServer', x=-87.83, y=63.00, z=98.13], EntitySquid['Squid'/5160, l='MpServer', x=-94.74, y=62.00, z=169.54], EntitySquid['Squid'/5161, l='MpServer', x=-91.94, y=62.00, z=163.20], EntitySquid['Squid'/5162, l='MpServer', x=-91.29, y=62.27, z=165.41], EntitySquid['Squid'/5163, l='MpServer', x=-94.25, y=62.51, z=164.85], EntityBat['Bat'/9531, l='MpServer', x=-195.50, y=36.99, z=173.58], EntityBat['Bat'/9533, l='MpServer', x=-123.25, y=33.06, z=176.08], EntityCreeper['Creeper'/9548, l='MpServer', x=-166.50, y=17.00, z=177.50], EntityBat['Bat'/9604, l='MpServer', x=-141.44, y=17.36, z=127.38], EntitySkeleton['Skeleton'/9710, l='MpServer', x=-150.50, y=25.00, z=115.50], EntitySkeleton['Skeleton'/9711, l='MpServer', x=-145.50, y=25.00, z=117.50], EntityWarg['Warg'/9754, l='MpServer', x=-167.50, y=71.00, z=152.50], EntityCreeper['Creeper'/9772, l='MpServer', x=-135.50, y=31.00, z=180.50], EntityCreeper['Creeper'/9773, l='MpServer', x=-137.50, y=31.00, z=181.50], EntityItem['item.item.wheat'/9849, l='MpServer', x=-182.18, y=69.94, z=127.85], EntityWarg['Warg'/9942, l='MpServer', x=-261.50, y=65.00, z=94.50], EntityZombie['Zombie'/9949, l='MpServer', x=-203.50, y=37.00, z=166.50], EntityBat['Bat'/10029, l='MpServer', x=-145.50, y=21.10, z=121.50], EntityCreeper['Creeper'/10074, l='MpServer', x=-141.50, y=16.00, z=126.50], EntityCreeper['Creeper'/10075, l='MpServer', x=-139.50, y=16.00, z=127.50], EntitySquid['Squid'/5985, l='MpServer', x=-89.60, y=61.68, z=157.70], EntityBat['Bat'/10131, l='MpServer', x=-93.50, y=18.10, z=211.50], EntityBat['Bat'/10133, l='MpServer', x=-91.50, y=18.10, z=213.50], EntityBat['Bat'/10138, l='MpServer', x=-73.50, y=14.10, z=68.50], EntityPlayerSP['Player906'/1137, l='MpServer', x=-152.17, y=126.74, z=143.04], EntityHumanVillager['Herborg - Nord Farmer'/6238, l='MpServer', x=-221.05, y=71.00, z=53.51], EntityWarg['Warg'/6801, l='MpServer', x=-32.50, y=71.00, z=128.50], EntityBat['Bat'/6836, l='MpServer', x=-126.42, y=31.62, z=175.02], EntityWarg['Warg'/7224, l='MpServer', x=-119.50, y=71.00, z=125.50], EntityHumanVillager['Svanbjorg - Nord Farmer'/7324, l='MpServer', x=-207.46, y=68.00, z=57.24], EntityHumanVillager['Yngvild - Nord Farmer'/7352, l='MpServer', x=-219.51, y=71.00, z=54.73], EntityWarg['Warg'/8166, l='MpServer', x=-27.41, y=76.00, z=161.52], EntityWarg['Warg'/8167, l='MpServer', x=-24.50, y=76.00, z=157.50]]
+	Retry entities: 0 total; []
+	Server brand: fml,forge
+	Server type: Integrated singleplayer server
+Stacktrace:
+	at net.minecraft.client.multiplayer.WorldClient.addWorldInfoToCrashReport(WorldClient.java:461)
+	at net.minecraft.client.Minecraft.addGraphicsAndWorldToCrashReport(Minecraft.java:2888)
+	at net.minecraft.client.Minecraft.run(Minecraft.java:462)
+	at net.minecraft.client.main.Main.main(Main.java:118)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at net.minecraft.launchwrapper.Launch.launch(Launch.java:135)
+	at net.minecraft.launchwrapper.Launch.main(Launch.java:28)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at net.minecraftforge.gradle.GradleStartCommon.launch(GradleStartCommon.java:97)
+	at GradleStart.main(GradleStart.java:25)
+
+-- System Details --
+Details:
+	Minecraft Version: 1.12.2
+	Operating System: Mac OS X (x86_64) version 10.13.6
+	Java Version: 1.8.0_144, Oracle Corporation
+	Java VM Version: Java HotSpot(TM) 64-Bit Server VM (mixed mode), Oracle Corporation
+	Memory: 353148624 bytes (336 MB) / 890241024 bytes (849 MB) up to 1908932608 bytes (1820 MB)
+	JVM Flags: 0 total; 
+	IntCache: cache: 0, tcache: 0, allocated: 13, tallocated: 95
+	FML: MCP 9.42 Powered by Forge 14.23.4.2757 7 mods loaded, 7 mods active
+	States: 'U' = Unloaded 'L' = Loaded 'C' = Constructed 'H' = Pre-initialized 'I' = Initialized 'J' = Post-initialized 'A' = Available 'D' = Disabled 'E' = Errored
+
+	| State     | ID               | Version      | Source                           | Signature |
+	|:--------- |:---------------- |:------------ |:-------------------------------- |:--------- |
+	| UCHIJAAAA | minecraft        | 1.12.2       | minecraft.jar                    | None      |
+	| UCHIJAAAA | mcp              | 9.42         | minecraft.jar                    | None      |
+	| UCHIJAAAA | FML              | 8.0.99.99    | forgeSrc-1.12.2-14.23.4.2757.jar | None      |
+	| UCHIJAAAA | forge            | 14.23.4.2757 | forgeSrc-1.12.2-14.23.4.2757.jar | None      |
+	| UCHIJAAAA | coherentvillages | v0.0.0.1     | modid-1.0.jar                    | None      |
+	| UCHIJAAAA | journeymap       | 1.12.2-5.5.2 | journeymap-1.12.2-5.5.2.jar      | None      |
+	| UCHIJAAAA | torohealthmod    | 1.12.2-11    | torohealth-1.12.2-11.jar         | None      |
+
+	Loaded coremods (and transformers): 
+	GL info: ' Vendor: 'Intel Inc.' Version: '2.1 INTEL-10.36.19' Renderer: 'Intel(R) Iris(TM) Plus Graphics 640'
+	Launched Version: 1.12.2
+	LWJGL: 2.9.2
+	OpenGL: Intel(R) Iris(TM) Plus Graphics 640 GL version 2.1 INTEL-10.36.19, Intel Inc.
+	GL Caps: Using GL 1.3 multitexturing.
+Using GL 1.3 texture combiners.
+Using framebuffer objects because ARB_framebuffer_object is supported and separate blending is supported.
+Shaders are available because OpenGL 2.1 is supported.
+VBOs are available because OpenGL 1.5 is supported.
+
+	Using VBOs: Yes
+	Is Modded: Definitely; Client brand changed to 'fml,forge'
+	Type: Client (map_client.txt)
+	Resource Packs: 
+	Current Language: English (US)
+	Profiler Position: N/A (disabled)
+	CPU: 4x Intel(R) Core(TM) i5-7360U CPU @ 2.30GHz

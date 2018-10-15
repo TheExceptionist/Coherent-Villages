@@ -1,0 +1,40 @@
+package net.theexceptionist.coherentvillages.main.entity;
+
+import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.model.ModelPlayer;
+import net.minecraft.client.renderer.entity.RenderLiving;
+import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.entity.layers.LayerArrow;
+import net.minecraft.client.renderer.entity.layers.LayerBipedArmor;
+import net.minecraft.client.renderer.entity.layers.LayerCape;
+import net.minecraft.client.renderer.entity.layers.LayerCustomHead;
+import net.minecraft.client.renderer.entity.layers.LayerDeadmau5Head;
+import net.minecraft.client.renderer.entity.layers.LayerElytra;
+import net.minecraft.client.renderer.entity.layers.LayerEntityOnShoulder;
+import net.minecraft.client.renderer.entity.layers.LayerHeldItem;
+import net.minecraft.entity.passive.EntityVillager;
+import net.minecraft.util.ResourceLocation;
+import net.theexceptionist.coherentvillages.main.Resources;
+
+public class RenderHumanVillager extends RenderLiving<EntityHumanVillager>
+{
+	public static final ResourceLocation VAGABOND_SKIN_0_F = new ResourceLocation(Resources.MODID,"textures/entity/villager/vagabond_0_f.png");
+	public static final ResourceLocation VAGABOND_SKIN_0_M = new ResourceLocation(Resources.MODID,"textures/entity/villager/vagabond_0_m.png");
+
+	public static final ResourceLocation SOLDIER_SKIN_0_M = new ResourceLocation(Resources.MODID,"textures/entity/villager/soldier_0_m.png");
+	
+	public RenderHumanVillager(RenderManager rendermanagerIn) {
+		super(rendermanagerIn, new ModelPlayer(0.0F, false), 0.5f);
+		this.addLayer(new LayerBipedArmor(this));
+	    this.addLayer(new LayerHeldItem(this));
+	    this.addLayer(new LayerArrow(this));
+	    this.addLayer(new LayerElytra(this));
+	    this.addLayer(new LayerEntityOnShoulder(renderManager));
+	}
+
+	@Override
+	protected ResourceLocation getEntityTexture(EntityHumanVillager entity) {
+		return entity.getResourceLocation();
+	}
+
+}

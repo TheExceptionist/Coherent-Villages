@@ -1,3 +1,7 @@
+entity.human_villager.name=Human Villager
+entity.warg.name=Warg
+entity.bjornserker.name=Bjornserker
+
 entity.villager_soldier.name=Villager Soldier
 entity.villager_peasant.name=Villager Peasant
 entity.villager_man_at_arms.name=Villager Man At Arms

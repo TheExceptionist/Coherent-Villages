@@ -9,12 +9,9 @@ import com.google.common.base.Predicate;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackMelee;
-import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIMoveThroughVillage;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAITasks.EntityAITaskEntry;
 import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityCreeper;
@@ -28,12 +25,9 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 import net.theexceptionist.coherentvillages.entity.EntityVillagerHorse;
 import net.theexceptionist.coherentvillages.entity.ai.EntityAIAttackBackExclude;
-import net.theexceptionist.coherentvillages.entity.ai.EntityAIRest;
-import net.theexceptionist.coherentvillages.entity.ai.EntityAIStayInBorders;
 import net.theexceptionist.coherentvillages.entity.followers.EntitySkeletonMinion;
 import net.theexceptionist.coherentvillages.entity.knight.ai.EntityAIKnightMoveToTarget;
 import net.theexceptionist.coherentvillages.entity.soldier.AbstractVillagerSoldier;
-import net.theexceptionist.coherentvillages.entity.soldier.EntityVillagerManAtArms;
 import net.theexceptionist.coherentvillages.main.Main;
 
 public abstract class AbstractEntityKnight extends AbstractVillagerSoldier{
@@ -90,9 +84,9 @@ public abstract class AbstractEntityKnight extends AbstractVillagerSoldier{
 		//super.initEntityAI();
 		/**Need To replace these***/
         //this.tasks.addTask(0, new EntityAIAttackCharge(this, 1.0D, true));
-        this.tasks.addTask(2, new EntityAIStayInBorders(this, RUNNING));
+        //this.tasks.addTask(2, new EntityAIStayInBorders(this, RUNNING));
         this.tasks.addTask(3, new EntityAIMoveThroughVillage(this, 0.6D, true));
-		this.tasks.addTask(4, new EntityAIRest(this, true));
+		//this.tasks.addTask(4, new EntityAIRest(this, true));
         this.tasks.addTask(5, new EntityAIKnightMoveToTarget(this, SPRINT, 32.0F));
         this.tasks.addTask(6, new EntityAIWanderAvoidWater(this, TROT));
         this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));

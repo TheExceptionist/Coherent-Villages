@@ -10,38 +10,32 @@ import net.minecraft.block.BlockSandStone;
 import net.minecraft.block.BlockStairs;
 import net.minecraft.block.BlockStone;
 import net.minecraft.block.BlockStoneBrick;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Biomes;
 import net.minecraft.init.Blocks;
-import net.minecraft.world.gen.structure.MapGenVillage;
 import net.minecraftforge.event.terraingen.BiomeEvent;
 import net.minecraftforge.event.terraingen.InitMapGenEvent;
 import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.relauncher.ReflectionHelper;
-import net.theexceptionist.coherentvillages.main.Main;
-import net.theexceptionist.coherentvillages.worldgen.ModMapVillageGen;
+import net.theexceptionist.coherentvillages.worldgen.villages.WorldGenVillage;
 
 public class EventOverrideVillages {
 		@SubscribeEvent
 		public void initMapGen(InitMapGenEvent event)
 		{
-			Random rand = new Random();
+			/*for(int i = 0; i < 50; i++)
+			{
+				System.out.println("Gen Event: "+event.getType().name()+" | "+(event.getType().VILLAGE == event.getType()));
+			}*/
+			
 			if(event.getType().VILLAGE == event.getType()){
-				ModMapVillageGen newVillage = new ModMapVillageGen();
+				//System.out.println("Override!");
+				WorldGenVillage newVillage = new WorldGenVillage();
 				event.setNewGen(newVillage);
-				/*MapGenVillage instance = (MapGenVillage) event.getOriginalGen();
-				ReflectionHelper.setPrivateValue(MapGenVillage.class, instance, Main.max_distance, 2);
-				ReflectionHelper.setPrivateValue(MapGenVillage.class, instance, Main.min_distance, 3);*/
-				//System.out.println("Values Set");
-		    	//event.setResult(value);
-				
 			}
 			
 		}
 		
-		@SubscribeEvent
-		public void overrideVillageBlocks(BiomeEvent.GetVillageBlockID event){
+		/*public void overrideVillageBlocks(BiomeEvent.GetVillageBlockID event){
 			//Biomes.PLAINS, Biomes.DESERT, Biomes.SAVANNA, Biomes.TAIGA
 			if (event.getBiome() == Biomes.TAIGA || event.getBiome() == Biomes.MUTATED_TAIGA || event.getBiome() == Biomes.TAIGA_HILLS)
 	        {
@@ -100,9 +94,9 @@ public class EventOverrideVillages {
 					event.setResult(Event.Result.DENY);
 				}
 				
-				/*if(Blocks.STONE_STAIRS == event.getOriginal()){
+				if(Blocks.STONE_STAIRS == event.getOriginal()){
 					//event.setReplacement(Blocks.SPRUCE_FENCE.getDefaultState());
-				}*/
+				}
 				if(Blocks.GRASS_PATH == event.getOriginal().getBlock()){
 					event.setReplacement(Blocks.STONEBRICK.getDefaultState());//.withProperty(BlockPlanks.VARIANT, BlockPlanks.EnumType.OAK));//.withProperty(BlockStone.VARIANT, BlockStone.EnumType.ANDESITE_SMOOTH));
 					event.setResult(Event.Result.DENY);
@@ -113,13 +107,13 @@ public class EventOverrideVillages {
 					event.setResult(Event.Result.DENY);
 				}
 				
-				/*if(Blocks.DOUBLE_STONE_SLAB.getDefaultState() == event.getOriginal()){
+				if(Blocks.DOUBLE_STONE_SLAB.getDefaultState() == event.getOriginal()){
 					//event.setReplacement(Blocks.SPRUCE_FENCE.getDefaultState());
-				}*/
+				}
 				
-				/*if(Blocks.STONEBRICK.getDefaultState() == event.getOriginal()){
+				if(Blocks.STONEBRICK.getDefaultState() == event.getOriginal()){
 					//event.setReplacement(Blocks.SPRUCE_FENCE.getDefaultState());
-				}*/
+				}
 				//event.setResult(Event.Result.DENY);
 			}
 			if(event.getBiome() == Biomes.BIRCH_FOREST ||event.getBiome() == Biomes.BIRCH_FOREST_HILLS || event.getBiome() == Biomes.FOREST || event.getBiome() == Biomes.FOREST_HILLS || event.getBiome() == Biomes.MUTATED_BIRCH_FOREST || event.getBiome() == Biomes.MUTATED_BIRCH_FOREST || event.getBiome() == Biomes.MUTATED_FOREST){
@@ -199,9 +193,9 @@ public class EventOverrideVillages {
 					event.setResult(Event.Result.DENY);
 				}
 				
-				/*if(Blocks.STONE_STAIRS == event.getOriginal()){
+				if(Blocks.STONE_STAIRS == event.getOriginal()){
 					//event.setReplacement(Blocks.BIRCH_STAIRS.getDefaultState());
-				}*/
+				}
 				
 				if(Blocks.GRASS_PATH == event.getOriginal().getBlock()){
 					event.setReplacement(Blocks.PLANKS.getDefaultState().withProperty(BlockPlanks.VARIANT, BlockPlanks.EnumType.OAK));//.withProperty(BlockStone.VARIANT, BlockStone.EnumType.ANDESITE_SMOOTH));
@@ -265,9 +259,9 @@ public class EventOverrideVillages {
 					event.setResult(Event.Result.DENY);
 				}
 				
-				/*if(Blocks.STONEBRICK.getDefaultState() == event.getOriginal()){
+				if(Blocks.STONEBRICK.getDefaultState() == event.getOriginal()){
 					//event.setReplacement(Blocks.PLANKS.getDefaultState().withProperty(BlockPlanks.VARIANT, BlockPlanks.EnumType.OAK));
-		          }*/
+		          }
 			}
 			if(event.getBiome() == Biomes.JUNGLE || event.getBiome() == Biomes.JUNGLE_EDGE || event.getBiome() == Biomes.JUNGLE_HILLS ||event.getBiome() == Biomes.MUTATED_JUNGLE || event.getBiome() == Biomes.MUTATED_JUNGLE_EDGE){
 				if(Blocks.LOG.getDefaultState() == event.getOriginal().getBlock() || event.getOriginal().getBlock() == Blocks.LOG2){
@@ -295,9 +289,9 @@ public class EventOverrideVillages {
 					event.setResult(Event.Result.DENY);
 				}
 				
-				/*if(Blocks.STONE_STAIRS == event.getOriginal()){
+				if(Blocks.STONE_STAIRS == event.getOriginal()){
 					//event.setReplacement(Blocks.BRICK_STAIRS.getDefaultState());
-				}*/
+				}
 				if(Blocks.GRASS_PATH == event.getOriginal().getBlock()){
 					event.setReplacement(Blocks.MOSSY_COBBLESTONE.getDefaultState());//.withProperty(BlockStone.VARIANT, BlockStone.EnumType.ANDESITE_SMOOTH));
 					event.setResult(Event.Result.DENY);
@@ -349,9 +343,9 @@ public class EventOverrideVillages {
 					event.setResult(Event.Result.DENY);
 				}
 				
-				/*if(Blocks.GRAVEL.getDefaultState() == event.getOriginal()){
+				if(Blocks.GRAVEL.getDefaultState() == event.getOriginal()){
 					//event.setReplacement(Blocks.CLAY.getDefaultState().withProperty(BlockStone.VARIANT, BlockStone.EnumType.ANDESITE_SMOOTH));
-		        }*/
+		        }
 				if(Blocks.GRASS_PATH == event.getOriginal().getBlock()){
 					event.setReplacement(Blocks.BRICK_BLOCK.getDefaultState());
 					event.setResult(Event.Result.DENY);
@@ -409,9 +403,9 @@ public class EventOverrideVillages {
 					event.setResult(Event.Result.DENY);
 				}
 				
-				/*if(Blocks.STONEBRICK.getDefaultState() == event.getOriginal()){
+				if(Blocks.STONEBRICK.getDefaultState() == event.getOriginal()){
 					//event.setReplacement(Blocks.HARDENED_CLAY.getStateFromMeta(12));//.withProperty(BlockHardenedClay.VARIANT, BlockHardenedClay.));
-					 }*/
+					 }
 			}
 			
 			if(event.getBiome() == Biomes.MUTATED_SAVANNA || event.getBiome() == Biomes.MUTATED_SAVANNA_ROCK || event.getBiome() == Biomes.SAVANNA || event.getBiome() == Biomes.SAVANNA_PLATEAU){
@@ -484,5 +478,5 @@ public class EventOverrideVillages {
 	    	  event.setResult(Event.Result.DENY);
 	      	}
 	 	}
-	}
+	}*/
 }

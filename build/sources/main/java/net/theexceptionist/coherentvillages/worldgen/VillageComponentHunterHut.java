@@ -58,7 +58,7 @@ public class VillageComponentHunterHut extends StructureVillagePieces.Village
                     return true;
                 }
 
-                this.boundingBox.offset(0, this.averageGroundLvl - this.boundingBox.maxY + 6 - 3, 0);
+                this.boundingBox.offset(0, this.averageGroundLvl - this.boundingBox.maxY + 2, 0);
             }
             
             

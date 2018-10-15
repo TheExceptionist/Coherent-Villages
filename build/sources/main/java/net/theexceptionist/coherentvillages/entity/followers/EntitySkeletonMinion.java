@@ -7,6 +7,7 @@ import javax.annotation.Nullable;
 import com.google.common.base.Predicate;
 
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.ai.EntityAIAvoidEntity;
 import net.minecraft.entity.ai.EntityAIFleeSun;
@@ -39,7 +40,6 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 import net.minecraft.world.storage.loot.LootTableList;
 import net.theexceptionist.coherentvillages.entity.ai.EntityAIShareTarget;
-import net.theexceptionist.coherentvillages.entity.mage.AbstractVillagerMage;
 import net.theexceptionist.coherentvillages.entity.soldier.AbstractVillagerSoldier;
 
 public class EntitySkeletonMinion extends AbstractSkeleton implements IEntityFollower
@@ -197,7 +197,7 @@ public class EntitySkeletonMinion extends AbstractSkeleton implements IEntityFol
      
 
 	@Override
-	public void setMaster(AbstractVillagerSoldier villager) {
+	public void setMaster(EntityLivingBase villager) {
 		// TODO Auto-generated method stub
 		
 	}

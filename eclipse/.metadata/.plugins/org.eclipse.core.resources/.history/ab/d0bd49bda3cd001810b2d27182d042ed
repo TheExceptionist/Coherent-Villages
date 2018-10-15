@@ -1,0 +1,230 @@
+package net.theexceptionist.coherentvillages.main.entity;
+
+import java.util.Random;
+
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.IRangedAttackMob;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.passive.EntityVillager;
+import net.minecraft.init.Items;
+import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
+import net.theexceptionist.coherentvillages.entity.followers.IEntityFollower;
+import net.theexceptionist.coherentvillages.entity.soldier.AbstractVillagerSoldier;
+import net.theexceptionist.coherentvillages.main.Main;
+import net.theexceptionist.coherentvillages.main.NameGenerator;
+import net.theexceptionist.coherentvillages.main.entity.attributes.AttributeFaction;
+import net.theexceptionist.coherentvillages.main.entity.attributes.AttributeRace;
+import net.theexceptionist.coherentvillages.main.entity.attributes.AttributeVocation;
+
+public class EntityHumanVillager extends EntityVillager implements IEntityFollower, IRangedAttackMob{
+	protected String firstName, lastName;
+	protected int gender = -1;
+	protected AttributeRace race;
+	protected AttributeFaction faction;
+	protected AttributeVocation vocation;
+	private ResourceLocation skin;
+	
+	public final static int GENDER_MALE = 0;
+	public final static int GENDER_FEMALE = 1;
+	
+	public static int END_ID = 0;
+
+	public EntityHumanVillager(World worldIn) {
+		this(worldIn, END_ID++);
+	}
+	
+	public EntityHumanVillager(World worldIn, final int ID)
+	{
+		super(worldIn);
+		
+		this.race = AttributeRace.getFromIDRace((ID/2) % AttributeRace.races.size());
+		this.gender = (ID/2) % GENDER_FEMALE;
+
+		this.initEntityClass();
+		this.initEntityCharacteristics();
+		this.initEntityAI();
+		this.applyEquipment();
+		
+		this.initEntityName();
+	}
+	
+	@Override
+	public void readEntityFromNBT(NBTTagCompound compound)
+	{
+		super.readEntityFromNBT(compound);
+	}
+	
+	@Override
+	public void writeEntityToNBT(NBTTagCompound compound)
+	{
+		super.writeEntityToNBT(compound);
+	}
+	
+	@Override
+	protected void entityInit()
+	{
+		super.entityInit();
+	}
+	
+	public void initVocation(int type, int id)
+	{
+		switch(type)
+		{
+			case AttributeVocation.CLASS_SOLDIER:
+			{
+				this.vocation = race.getVocation(type, id);
+			}
+			break;
+			case AttributeVocation.CLASS_ARCHER:
+			{
+				this.vocation = race.getVocation(type, id);
+			}
+			break;
+			case AttributeVocation.CLASS_MAGE:
+			{
+				this.vocation = race.getVocation(type, id);
+			}
+			break;
+			case AttributeVocation.CLASS_ALCHEMIST:
+			{
+				this.vocation = race.getVocation(type, id);
+			}
+			break;
+		}
+	}
+	
+	protected void initEntityCharacteristics() {
+		if(!world.isRemote)
+		{
+			this.generateName(rand);
+		}
+	}
+	
+	protected void initEntityName()
+	{
+		this.setCustomNameTag(this.getTitle());
+		this.setAlwaysRenderNameTag(Main.useNametags);
+	}
+	
+	
+	protected void applyNewAI()
+	{
+		
+	}
+	
+	protected void applyEquipment()
+	{
+		if(vocation == null) return;
+		this.setHeldItem(EnumHand.MAIN_HAND, new ItemStack(Items.IRON_SWORD/*vocation.getWeapon())*/));
+		this.setHeldItem(EnumHand.OFF_HAND, new ItemStack(Items.SHIELD/*vocation.getShield()*/));
+		
+		this.setItemStackToSlot(EntityEquipmentSlot.HEAD, new ItemStack(Items.IRON_HELMET/*vocation.getHelmet()*/));
+		this.setItemStackToSlot(EntityEquipmentSlot.CHEST, new ItemStack(Items.IRON_CHESTPLATE/*vocation.getChestplate()*/));
+		this.setItemStackToSlot(EntityEquipmentSlot.LEGS, new ItemStack(Items.IRON_LEGGINGS/*vocation.getLeggings()*/));
+		this.setItemStackToSlot(EntityEquipmentSlot.FEET, new ItemStack(Items.IRON_BOOTS/*vocation.getBoots()*/));
+		
+		//System.out.println(this.getHeldItem(EnumHand.MAIN_HAND).getDisplayName()+" "+vocation.getWeapon().getUnlocalizedName());
+	}
+	
+	protected void applyEntityAttributes()
+    {
+        super.applyEntityAttributes();
+
+        getAttributeMap().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
+    }
+	
+	private void initEntityClass() 
+	{
+		this.vocation = race.getRecruitVocation(AttributeVocation.CLASS_SOLDIER);		
+		
+		System.out.println("Gender: "+this.gender);
+		if(this.gender == GENDER_MALE) skin = race.getRandomSkinM();
+		else skin = race.getRandomSkinF();
+	}
+	
+	@Override
+	public void attackEntityWithRangedAttack(EntityLivingBase target, float distanceFactor) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setSwingingArms(boolean swingingArms) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setMaster(AbstractVillagerSoldier villager) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean isShouldFollow() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public EntityLiving getLiving() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+    protected void generateName(Random rand)
+    {
+    	this.firstName = NameGenerator.generateRandomName(rand, race, gender);
+    	this.lastName = NameGenerator.generateRandomName(rand, race);
+    }
+    
+    protected String getTitle()
+    {
+    	return this.firstName+" - "+this.race.getName()+" "+this.vocation.getName();
+    }
+    
+    public String getFullName()
+    {
+    	return this.firstName+" "+this.lastName;
+    }
+    
+    public AttributeVocation getVocation()
+    {
+    	return this.vocation;
+    }
+    
+    public AttributeRace getRace()
+    {
+    	return this.race;
+    }
+
+	public ResourceLocation getResourceLocation() {
+		return this.skin;
+	}
+
+}

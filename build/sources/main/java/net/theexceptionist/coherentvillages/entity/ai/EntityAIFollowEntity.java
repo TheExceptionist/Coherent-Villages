@@ -1,21 +1,23 @@
 package net.theexceptionist.coherentvillages.entity.ai;
 
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIBase;
-import net.minecraft.entity.passive.EntityVillager;
 import net.theexceptionist.coherentvillages.entity.followers.IEntityFollower;
 
 public class EntityAIFollowEntity extends EntityAIBase
 {
     private final IEntityFollower theVillager;
-    private EntityVillager toFollow;
+    private EntityLivingBase toFollow;
     private int takeGolemRoseTick;
     private boolean tookGolemRose;
     private int waitTime;
+    private boolean isPlayer;
 
-    public EntityAIFollowEntity(IEntityFollower theVillagerIn, EntityVillager merchant)
+    public EntityAIFollowEntity(IEntityFollower theVillagerIn, EntityLivingBase master, boolean isPlayer)
     {
         this.theVillager = theVillagerIn;
-        this.toFollow = merchant;
+        this.toFollow = master;
+        this.isPlayer = isPlayer;
         this.setMutexBits(3);
     }
 
@@ -24,7 +26,8 @@ public class EntityAIFollowEntity extends EntityAIBase
      */
     public boolean shouldExecute()
     {
-        if (this.theVillager.isShouldFollow())
+    	//System.out.println("Can Follow: "+this.theVillager.isShouldFollow());
+        if (this.theVillager.isShouldFollow() && this.theVillager.getLiving().getAttackingEntity() == null && this.theVillager.getLiving().getAttackTarget() == null)
         {
         	this.waitTime = 0;
             return true;
@@ -41,7 +44,7 @@ public class EntityAIFollowEntity extends EntityAIBase
      */
     public boolean continueExecuting()
     {
-    	if (this.theVillager.isShouldFollow())
+        if (this.theVillager.isShouldFollow() && this.theVillager.getLiving().getAttackingEntity() == null && this.theVillager.getLiving().getAttackTarget() == null)
         {
             return true;
         }
@@ -57,6 +60,7 @@ public class EntityAIFollowEntity extends EntityAIBase
      */
     public void startExecuting()
     {
+    	//System.out.println("Start!");
         this.theVillager.getLiving().getNavigator().getPathToEntityLiving(toFollow);
     }
     
@@ -74,10 +78,12 @@ public class EntityAIFollowEntity extends EntityAIBase
     		//waitTime--;
     	//System.out.println("Following");
     	//}else
-    		if(	this.theVillager.getLiving().getNavigator().noPath()){
+    	if(	this.theVillager.getLiving().getNavigator().noPath()){
     	//	System.out.println("Following New Path");
-    		this.theVillager.getLiving().getNavigator().tryMoveToXYZ(toFollow.posX + this.theVillager.getLiving().world.rand.nextInt(20) - 10, toFollow.posY, toFollow.posZ + this.theVillager.getLiving().world.rand.nextInt(20) - 10, 0.5D);//(merchant, 0.5D);
-    		//this.waitTime = 100 + this.theVillager.world.rand.nextInt(100);
+    		if(!this.isPlayer)this.theVillager.getLiving().getNavigator().tryMoveToXYZ(toFollow.posX + this.theVillager.getLiving().world.rand.nextInt(20) - 10, toFollow.posY, toFollow.posZ + this.theVillager.getLiving().world.rand.nextInt(20) - 10, 0.5D);//(merchant, 0.5D);
+    		else this.theVillager.getLiving().getNavigator().tryMoveToXYZ(toFollow.posX, toFollow.posY, toFollow.posZ + 2, 0.7D);//(merchant, 0.5D);
+    		
+    			//this.waitTime = 100 + this.theVillager.world.rand.nextInt(100);
     	}
     }
 }

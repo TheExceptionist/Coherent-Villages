@@ -44,7 +44,7 @@ public class EntityVillagerMerchant extends EntityVillager{
 	
 	public EntityVillagerMerchant(World worldIn) {
 		super(worldIn);
-		this.title = NameGenerator.generateRandomName(world.rand);
+		this.title = NameGenerator.generateRandomName(world.rand, null);
 		this.setAlwaysRenderNameTag(Main.useNametags);
 		this.canSpawn = Main.villager_spawn.get(Main.Soldier.Merchant.ordinal()).spawn;
 

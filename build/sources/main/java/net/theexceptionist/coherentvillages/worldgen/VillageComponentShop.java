@@ -56,7 +56,7 @@ public class VillageComponentShop extends StructureVillagePieces.Village
                     return true;
                 }
 
-                this.boundingBox.offset(0, this.averageGroundLvl - this.boundingBox.maxY + 4, 0);
+                this.boundingBox.offset(0, this.averageGroundLvl - this.boundingBox.maxY + 6, 0);
             }
             
             
@@ -167,23 +167,23 @@ public class VillageComponentShop extends StructureVillagePieces.Village
                 }
             }
 
-            for (int j = 0; j < 9; ++j)
+            for (int j = 0; j < 7; ++j)
             {
-                for (int i = 0; i < 7; ++i)
+                for (int i = 0; i < 10; ++i)
                 {
                     //this.clearCurrentPositionBlocksUpwards(worldIn, i, 8, j, structureBoundingBoxIn);
                     this.replaceAirAndLiquidDownwards(worldIn, Blocks.PLANKS.getDefaultState(), i, -1, j, structureBoundingBoxIn);
                 }
             }
             
-            if(type == 1)
-            {
+         //   if(type == 1)
+           // {
                 this.setBlockState(worldIn, Blocks.AIR.getDefaultState(), 1, 5, 5, structureBoundingBoxIn);
                 this.fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 1, 5, 1, 5, 5, Blocks.LADDER.getDefaultState(), Blocks.LADDER.getDefaultState(), false);
          
             	this.fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 6, 0, 9, 6, 6, iblockstate4, iblockstate4, false);
                 this.fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 6, 1, 8, 6, 5, Blocks.AIR.getDefaultState(), Blocks.AIR.getDefaultState(), false);
-            }
+          //  }
             
             if(!worldIn.isRemote){
             	this.spawnVillagers(worldIn, structureBoundingBoxIn, 1, 1, 2, 3 + randomIn.nextInt(3));

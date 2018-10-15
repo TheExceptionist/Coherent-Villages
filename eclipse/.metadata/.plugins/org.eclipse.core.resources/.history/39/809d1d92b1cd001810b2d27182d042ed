@@ -1,0 +1,9 @@
+package net.theexceptionist.coherentvillages.main.entity;
+
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.village.Village;
+
+public interface IEntityVillager {
+	Village getVillage();
+	EntityLiving getLiving();
+}

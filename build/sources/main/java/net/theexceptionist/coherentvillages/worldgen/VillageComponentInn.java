@@ -631,9 +631,9 @@ public class VillageComponentInn extends StructureVillagePieces.Village
 
             this.placeTorch(worldIn, EnumFacing.NORTH, 2, 3, 1, structureBoundingBoxIn);
 
-            for (int j = 0; j < 15; ++j)
+            for (int j = 0; j < 16; ++j)
             {
-                for (int i = 0; i < 14; ++i)
+                for (int i = 0; i < 15; ++i)
                 {
                     this.clearCurrentPositionBlocksUpwards(worldIn, i, 12, j, structureBoundingBoxIn);
                     this.replaceAirAndLiquidDownwards(worldIn, Blocks.PLANKS.getDefaultState(), i, -1, j, structureBoundingBoxIn);

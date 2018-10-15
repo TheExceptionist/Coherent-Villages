@@ -1,0 +1,80 @@
+package net.theexceptionist.coherentvillages.main.entity.attributes;
+
+import java.util.ArrayList;
+
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
+
+public class AttributeRace {	
+	//Warrior Race - High Health, Lots of Damage
+	public static final int RACE_TYPE_WARRIOR = 0;
+	//Knight Race - High Armor, has horse
+	public static final int RACE_TYPE_KNIGHT = 1;
+	//Archer Race
+	public static final int RACE_TYPE_ARCHER = 2;
+	//Mage Race
+	public static final int RACE_TYPE_MAGE = 3;
+	//Alchemy Race
+	public static final int RACE_TYPE_ALCHEMY = 4;
+	
+	
+	
+	protected String name;
+	protected int type;
+	protected ArrayList<Item> armor;
+	protected ArrayList<Item> meleeWeapons;
+	protected ArrayList<Item> rangedWeapons;
+	protected ArrayList<Item> spells;
+	protected ArrayList<Item> potions;
+	protected ArrayList<AttributeVocation> vocations;
+	
+	public AttributeRace(final String name, final int type)
+	{
+		this.name = name;
+		this.type = type;
+		this.armor = new ArrayList<Item>();
+		this.meleeWeapons = new ArrayList<Item>();
+		this.rangedWeapons = new ArrayList<Item>();
+		this.spells = new ArrayList<Item>();
+		this.potions = new ArrayList<Item>();
+		
+		this.vocations = new ArrayList<AttributeVocation>();
+	}
+	
+	public void initEquipmentByRaceType()
+	{
+		switch(type)
+		{
+			case RACE_TYPE_WARRIOR:
+			{
+				this.armor.add(Items.CHAINMAIL_BOOTS);
+			}
+			break;
+			case RACE_TYPE_KNIGHT:
+			{
+				
+			}
+			break;
+			case RACE_TYPE_ARCHER:
+			{
+				
+			}
+			break;
+			case RACE_TYPE_MAGE:
+			{
+				
+			}
+			break;
+			case RACE_TYPE_ALCHEMY:
+			{
+				
+			}
+			break;
+		}
+	}
+	
+	public void initVocationByRaceType()
+	{
+		
+	}
+}

@@ -5,6 +5,7 @@ import javax.annotation.Nullable;
 import com.google.common.base.Predicate;
 
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAILookIdle;
@@ -59,7 +60,7 @@ public class EntityMerchantGuard extends AbstractVillagerSoldier {
 	public void setMaster(EntityVillagerMerchant master){
 		//System.out.println(this+" : "+this.master);
 		this.master = master;
-		this.tasks.addTask(3, new EntityAIFollowEntity(this, master));
+		this.tasks.addTask(3, new EntityAIFollowEntity(this, master, false));
 		this.targetTasks.addTask(2, new EntityAIShareTarget(this, master, false));
 		
 	}
@@ -144,15 +145,15 @@ public class EntityMerchantGuard extends AbstractVillagerSoldier {
 	    }
 
 		@Override
-		public void setMaster(AbstractVillagerSoldier villager) {
+		public void setMaster(EntityLivingBase villager) {
 			// TODO Auto-generated method stub
 			
 		}
 
 		@Override
-		public EntityLiving getLiving() {
+		public EntityVillager getLiving() {
 			// TODO Auto-generated method stub
-			return this;
+			return (EntityVillager)this;
 		}
 
 }

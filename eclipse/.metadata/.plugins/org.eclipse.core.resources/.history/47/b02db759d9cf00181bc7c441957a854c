@@ -1,0 +1,54 @@
+package net.theexceptionist.coherentvillages.main.entity.attributes;
+
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3i;
+
+public class AttributeFaction {
+	public static final String[] n_titles = 
+		{
+				"%n's Kingdom of %rs",
+				"%n's %r Village",
+				"%n's %r Jarledom",
+		};
+	
+	public static final String[] n_b_titles = 
+		{
+				"%n's Kingdom of %rs",
+				"%n's %r Village",
+				"%n's %r Jarledom",
+		};
+	
+	private int radius = 30;
+	private BlockPos center = null;
+	
+	protected String name;
+	protected AttributeRace race;
+	protected boolean isBandit = false;
+	
+	AttributeFaction(BlockPos center, AttributeRace race, String name)
+	{
+		this.center = center;
+	}
+	
+	public void setBandit(boolean bandit)
+	{
+		isBandit = bandit;
+	}
+	
+	public boolean getBandit()
+	{
+		return isBandit;// = bandit;
+	}
+	
+	public Vec3i getCenter() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	//return a constant from now
+	public int getVillageRadius() {
+		// TODO Auto-generated method stub
+		return radius;
+	}
+
+}

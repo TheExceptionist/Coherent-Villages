@@ -24,19 +24,19 @@ public class EntityAIHealAllies extends EntityAIBase{
     private final double entityMoveSpeed;
     private int seeTime;
     /** The maximum time the AI has to wait before peforming another ranged attack. */
-    private final float attackRadius;
-    private final float maxAttackDistance;
+    private final double attackRadius;
+    private final double maxAttackDistance;
 	private EntityLivingBase target;
 	//private int coolDown = 0;
 
-    public EntityAIHealAllies(AbstractVillagerAlchemist entityVillagerPotionMaster, double movespeed, int range, float maxAttackDistanceIn, Class <? extends EntityVillager > villager)
+    public EntityAIHealAllies(AbstractVillagerAlchemist entityVillagerPotionMaster, double movespeed, int range, double maxAttackDistanceIn, Class <? extends EntityVillager > villager)
     {
         this(entityVillagerPotionMaster, movespeed, range, maxAttackDistanceIn);
         this.attackTarget = villager;
         
     }
 
-    public EntityAIHealAllies(AbstractVillagerAlchemist entityVillagerHealer, double movespeed, int range, float maxAttackDistanceIn)
+    public EntityAIHealAllies(AbstractVillagerAlchemist entityVillagerHealer, double movespeed, int range, double maxAttackDistanceIn)
     {
         if (!(entityVillagerHealer instanceof EntityLivingBase))
         {
@@ -55,18 +55,20 @@ public class EntityAIHealAllies extends EntityAIBase{
         }
     }
 
-    /**
+
+	/**
      * Returns whether the EntityAIBase should begin execution.
      */
     public boolean shouldExecute()
     {
-    	double d0 = 40.0D;
+    	double d0 = attackRadius * 2;
     	//System.out.println("Working 1");
-        List<EntityVillager> list = this.rangedAttackEntityHost.world.getEntitiesWithinAABB(EntityVillager.class, this.rangedAttackEntityHost.getEntityBoundingBox().expand(d0, 4.0D, d0));
+        List<EntityVillager> list = this.rangedAttackEntityHost.world.getEntitiesWithinAABB(EntityVillager.class, this.rangedAttackEntityHost.getEntityBoundingBox().expand(d0, 8.0D, d0).offset(-d0/2, -4, -d0/2));
        // Collections.sort(list, this.sorter);
-//System.out.println("Searching");
+         //System.out.println(this.entityHost.getCustomNameTag()+" Searching: "+d0+" Axis X: "+this.rangedAttackEntityHost.getEntityBoundingBox().expand(d0, 4.0D, d0).minX+"/"+this.rangedAttackEntityHost.getEntityBoundingBox().expand(d0, 4.0D, d0).maxX+" Axis Y: "+this.rangedAttackEntityHost.getEntityBoundingBox().expand(d0, 4.0D, d0).minY+"/"+this.rangedAttackEntityHost.getEntityBoundingBox().expand(d0, 4.0D, d0).maxY+" Axis Z: "+this.rangedAttackEntityHost.getEntityBoundingBox().expand(d0, 4.0D, d0).minZ+"/"+this.rangedAttackEntityHost.getEntityBoundingBox().expand(d0, 4.0D, d0).maxZ);
         if (list.isEmpty())
         {
+        	System.out.println("empty");
             return false;
         }
         else
@@ -76,6 +78,8 @@ public class EntityAIHealAllies extends EntityAIBase{
 	            this.target = (EntityLivingBase)list.get(i);
 	            AbstractVillagerSoldier soldier = null;
 	            AbstractVillagerSoldier host = null;
+	            
+	          //  System.out.println("Target: "+this.target.getCustomNameTag()+" Health "+this.target.getHealth()+"/"+this.target.getMaxHealth());
 	            
 	        	if(this.target instanceof AbstractVillagerSoldier)
             	{
@@ -93,7 +97,7 @@ public class EntityAIHealAllies extends EntityAIBase{
 	        	
 	        	if(this.target.getHealth() < this.target.getMaxHealth()){
 		            
-	            	 //System.out.println("Searching: "+target.getName()+" Health: "+target.getHealth()+"/"+target.getMaxHealth());
+	            //	 System.out.println("Searching: "+target.getName()+" Health: "+target.getHealth()+"/"+target.getMaxHealth());
 	            	return true;
 	            }
         	}
@@ -127,35 +131,28 @@ public class EntityAIHealAllies extends EntityAIBase{
 	        double d0 = this.entityHost.getDistanceSq(this.target.posX, this.target.getEntityBoundingBox().minY, this.target.posZ);
 	        boolean flag = true;//this.entityHost.getEntitySenses().canSee(this.attackTarget);
 	       //Unused for now
-	       // System.out.println("healing start");
+	        //System.out.println(this.entityHost.getCustomNameTag()+" healing start");
 	        this.rangedAttackEntityHost.setClient(target);
-	        
-	        if (flag)
-	        {
-	            ++this.seeTime;
-	        }
-	        else
-	        {
-	            this.seeTime = 0;
-	        }
 	
-	        if (d0 <= (double)this.maxAttackDistance && this.seeTime >= 20)
+	        /*if (d0 <= (double)this.maxAttackDistance)
 	        {
 	            this.entityHost.getNavigator().clearPath();
+	            System.out.println("Time: "+this.seeTime+" Distance: "+d0+" Max Distance: "+this.maxAttackDistance);
 	        }
 	        else
 	        {
 	            this.entityHost.getNavigator().tryMoveToEntityLiving(this.target, this.entityMoveSpeed);
-	          //  System.out.println("moving start");
-	        }
+	            System.out.println("moving start");
+	        }*/
+	        this.entityHost.getNavigator().tryMoveToEntityLiving(this.target, this.entityMoveSpeed);
 	
 	        this.entityHost.getLookHelper().setLookPositionWithEntity(this.target, 30.0F, 30.0F);
 	
 	        if (d0 < this.range)
 	        {
 	
-	            float f = MathHelper.sqrt(d0) / this.attackRadius;
-	            float lvt_5_1_ = MathHelper.clamp(f, 0.1F, 1.0F);
+	            double f = MathHelper.sqrt(d0) / this.attackRadius;
+	            float lvt_5_1_ = (float)MathHelper.clamp(f, 0.1F, 1.0F);
 	            this.entityHost.getNavigator().tryMoveToEntityLiving(this.target, 0.5D);
 	            this.rangedAttackEntityHost.healEntityWithRangedAttack(this.target, lvt_5_1_);
 	            //System.out.println("Healing: "+this.target);

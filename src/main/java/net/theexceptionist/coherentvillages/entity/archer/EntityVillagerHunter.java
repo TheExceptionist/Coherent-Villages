@@ -83,7 +83,7 @@ public class EntityVillagerHunter extends AbstractVillagerArcher{
 		//super.initEntityAI();
 		this.tasks.addTask(0, new EntityAISwimming(this));
 		this.tasks.addTask(1, new EntityAIAttackWithBow(this, 1.0D, 60, 10.0F));
-        this.tasks.addTask(2, new EntityAIStayInBorders(this, 1.0D));
+      //  this.tasks.addTask(2, new EntityAIStayInBorders(this, 1.0D));
         this.tasks.addTask(3, new EntityAIRestrictOpenDoor(this));
         this.tasks.addTask(4, new EntityAIOpenDoor(this, true));
         this.tasks.addTask(5, new EntityAIMoveTowardsTarget(this, 0.9D, 32.0F));

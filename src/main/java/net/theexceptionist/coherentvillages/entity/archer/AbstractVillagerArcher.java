@@ -99,12 +99,8 @@ public abstract class AbstractVillagerArcher extends AbstractVillagerSoldier imp
 	@Override
 	public void attackEntityWithRangedAttack(EntityLivingBase target,
 			float distanceFactor) {
-		//if(!this.world.isRemote){
-		//System.out.println("Attacking");
 		EntityArrow entityarrow = this.getArrow(distanceFactor);
 		 entityarrow.setDamage((float)this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue());
-		//if(creeperHunter)
-			//entityarrow.setDamage(40D);
 		
         double d0 = target.posX - this.posX;
         double d1 = target.getEntityBoundingBox().minY + (double)(target.height / 3.0F) - entityarrow.posY;
@@ -113,11 +109,7 @@ public abstract class AbstractVillagerArcher extends AbstractVillagerSoldier imp
         entityarrow.shoot(d0, d1 + d3 * 0.20000000298023224D, d2, 1.6F, (float)(14 - this.world.getDifficulty().getDifficultyId() * 4));
        
         this.playSound(SoundEvents.ENTITY_SKELETON_SHOOT, 1.0F, 1.0F / (this.getRNG().nextFloat() * 0.4F + 0.8F));
-        //System.out.println(entityarrow);
-        //if(!this.world.isRemote){
-        	this.world.spawnEntity(entityarrow);
-      //  }
-		//}
+        this.world.spawnEntity(entityarrow);
 	}
 	
 	 @Override

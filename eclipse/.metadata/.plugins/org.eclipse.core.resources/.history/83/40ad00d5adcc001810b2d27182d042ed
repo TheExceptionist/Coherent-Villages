@@ -1,0 +1,9 @@
+package net.theexceptionist.coherentvillages.main.entity;
+
+public class EntityRace {
+	String name;
+	int type; //0 Human skin
+	
+	getAttackBonus();
+	getArmorBonus();
+}

@@ -1,0 +1,21 @@
+package net.theexceptionist.coherentvillages.main.entity.attributes;
+
+import java.util.ArrayList;
+
+import net.minecraft.item.ItemStack;
+
+public class AttributeRace {	
+	//Warrior Race
+	//Knight Race
+	//Archer Race
+	//Mage Race
+	//Alchemy Race
+	
+	
+	
+	protected String name;
+	protected int type;
+	protected ArrayList<ItemStack> equipment;
+	protected ArrayList<AttributeVocation> vocations;
+	
+}

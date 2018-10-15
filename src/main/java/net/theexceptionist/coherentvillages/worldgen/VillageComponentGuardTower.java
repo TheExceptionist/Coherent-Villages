@@ -59,7 +59,7 @@ public class VillageComponentGuardTower extends StructureVillagePieces.Village
                     return true;
                 }
 
-                this.boundingBox.offset(0, this.averageGroundLvl - this.boundingBox.maxY + 5, 0);
+                this.boundingBox.offset(0, this.averageGroundLvl - this.boundingBox.maxY + 6, 0);
             }
             
             int type = randomIn.nextInt(2);
@@ -263,9 +263,9 @@ public class VillageComponentGuardTower extends StructureVillagePieces.Village
 
           //  this.placeTorch(worldIn, EnumFacing.NORTH, 2, 3, 1, structureBoundingBoxIn);
 
-            for (int j = 0; j < 8; ++j)
+            for (int j = 0; j < 7; ++j)
             {
-                for (int i = 0; i < 8; ++i)
+                for (int i = 0; i < 7; ++i)
                 {
                     this.clearCurrentPositionBlocksUpwards(worldIn, i, 10, j, structureBoundingBoxIn);
                     this.replaceAirAndLiquidDownwards(worldIn, Blocks.PLANKS.getDefaultState(), i, -1, j, structureBoundingBoxIn);

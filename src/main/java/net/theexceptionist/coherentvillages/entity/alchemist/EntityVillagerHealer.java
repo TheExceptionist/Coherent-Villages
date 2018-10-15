@@ -5,11 +5,13 @@ import java.util.List;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
+import net.minecraft.entity.ai.EntityAIAvoidEntity;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.ai.EntityAIMoveThroughVillage;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAITasks.EntityAITaskEntry;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
+import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityPotion;
@@ -60,9 +62,6 @@ public class EntityVillagerHealer extends AbstractVillagerAlchemist{
 	    {
 		
 		 super.updateAITasks();
-		 if(this.getAttackTarget() instanceof EntityVillager){
-			 this.setAttackTarget(null);
-		 }
 	    }
 	
 	public void onLivingUpdate()
@@ -141,20 +140,22 @@ public class EntityVillagerHealer extends AbstractVillagerAlchemist{
     {
 		super.initEntityAI();
         this.tasks.addTask(1, new EntityAIHealAllies(this, 1.0D, 60, 60.0F, EntityVillager.class));
+        this.tasks.addTask(2, new EntityAIAvoidEntity(this, EntityZombie.class, 8.0F, 0.6D, 0.6D));
         this.tasks.addTask(5, new EntityAIMoveThroughVillage(this, 0.6D, false));
         
+        
 		 
-		 for(Object task : this.tasks.taskEntries.toArray())
+		 for(Object task : this.targetTasks.taskEntries.toArray())
 			{
 				 EntityAIBase ai = ((EntityAITaskEntry) task).action;
-				 if(ai instanceof EntityAIAttackMelee || ai instanceof EntityAINearestAttackableTarget)
+				 if(ai instanceof EntityAINearestAttackableTarget)
 					 this.tasks.removeTask(ai);	
 				 //System.out.println("Removed");
 			}
 		//this.areAdditionalTasksSet = true;
        // this.tasks.addTask(6, new EntityAIHarvestFarmland(this, 0.6D));
     }
-	
+
 	protected void applyEntityAttributes()
     {
         super.applyEntityAttributes();

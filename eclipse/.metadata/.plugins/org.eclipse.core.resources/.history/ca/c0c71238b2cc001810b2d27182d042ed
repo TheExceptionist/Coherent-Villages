@@ -1,0 +1,6 @@
+package net.theexceptionist.coherentvillages.main.entity;
+
+public class EntityVocation {
+	protected boolean isSubType;
+	protected int type;
+}

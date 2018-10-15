@@ -2,82 +2,18 @@ package net.theexceptionist.coherentvillages.main;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.client.renderer.entity.RenderSkeleton;
 import net.minecraftforge.common.MinecraftForge;
 import net.theexceptionist.coherentvillages.entity.EntityVillagerArrow;
-import net.theexceptionist.coherentvillages.entity.EntityVillagerHorse;
-import net.theexceptionist.coherentvillages.entity.EntityVillagerMerchant;
-import net.theexceptionist.coherentvillages.entity.RenderVillagerHorse;
-import net.theexceptionist.coherentvillages.entity.RenderVillagerMerchant;
-import net.theexceptionist.coherentvillages.entity.alchemist.EntityVillagerAlchemist;
-import net.theexceptionist.coherentvillages.entity.alchemist.EntityVillagerHealer;
-import net.theexceptionist.coherentvillages.entity.alchemist.EntityVillagerPotionMaster;
-import net.theexceptionist.coherentvillages.entity.alchemist.EntityVillagerUndeadHunter;
-import net.theexceptionist.coherentvillages.entity.alchemist.RenderVillagerAlchemist;
-import net.theexceptionist.coherentvillages.entity.alchemist.RenderVillagerHealer;
-import net.theexceptionist.coherentvillages.entity.alchemist.RenderVillagerPotionMaster;
-import net.theexceptionist.coherentvillages.entity.alchemist.RenderVillagerUndeadHunter;
-import net.theexceptionist.coherentvillages.entity.archer.EntityVillagerArcher;
-import net.theexceptionist.coherentvillages.entity.archer.EntityVillagerHunter;
-import net.theexceptionist.coherentvillages.entity.archer.EntityVillagerMageArcher;
-import net.theexceptionist.coherentvillages.entity.archer.EntityVillagerMarksman;
-import net.theexceptionist.coherentvillages.entity.archer.RenderVillagerArcher;
 import net.theexceptionist.coherentvillages.entity.archer.RenderVillagerArrow;
-import net.theexceptionist.coherentvillages.entity.archer.RenderVillagerHunter;
-import net.theexceptionist.coherentvillages.entity.archer.RenderVillagerMageArcher;
-import net.theexceptionist.coherentvillages.entity.archer.RenderVillagerMarksman;
-import net.theexceptionist.coherentvillages.entity.bandit.EntityVillagerBandit;
-import net.theexceptionist.coherentvillages.entity.bandit.EntityVillagerBanditAlchemist;
-import net.theexceptionist.coherentvillages.entity.bandit.EntityVillagerBanditArcher;
-import net.theexceptionist.coherentvillages.entity.bandit.EntityVillagerBanditHorseman;
-import net.theexceptionist.coherentvillages.entity.bandit.EntityVillagerBanditMage;
-import net.theexceptionist.coherentvillages.entity.bandit.EntityVillagerDarkKnight;
-import net.theexceptionist.coherentvillages.entity.bandit.RenderVillagerBandit;
-import net.theexceptionist.coherentvillages.entity.bandit.RenderVillagerBanditAlchemist;
-import net.theexceptionist.coherentvillages.entity.bandit.RenderVillagerBanditArcher;
-import net.theexceptionist.coherentvillages.entity.bandit.RenderVillagerBanditHorseman;
-import net.theexceptionist.coherentvillages.entity.bandit.RenderVillagerBanditMage;
-import net.theexceptionist.coherentvillages.entity.bandit.RenderVillagerDarkKnight;
-import net.theexceptionist.coherentvillages.entity.followers.EntityMerchantGuard;
-import net.theexceptionist.coherentvillages.entity.followers.EntitySkeletonMinion;
-import net.theexceptionist.coherentvillages.entity.followers.EntityVillagerGuardian;
-import net.theexceptionist.coherentvillages.entity.followers.RenderMerchantGuard;
-import net.theexceptionist.coherentvillages.entity.followers.RenderVillagerGuardian;
-import net.theexceptionist.coherentvillages.entity.knight.EntityVillagerApothecary;
-import net.theexceptionist.coherentvillages.entity.knight.EntityVillagerCavalier;
-import net.theexceptionist.coherentvillages.entity.knight.EntityVillagerHorseArcher;
-import net.theexceptionist.coherentvillages.entity.knight.EntityVillagerKnight;
-import net.theexceptionist.coherentvillages.entity.knight.EntityVillagerMageKnight;
-import net.theexceptionist.coherentvillages.entity.knight.EntityVillagerPaladin;
-import net.theexceptionist.coherentvillages.entity.knight.RenderVillagerApothecary;
-import net.theexceptionist.coherentvillages.entity.knight.RenderVillagerCavalier;
-import net.theexceptionist.coherentvillages.entity.knight.RenderVillagerHorseArcher;
-import net.theexceptionist.coherentvillages.entity.knight.RenderVillagerKnight;
-import net.theexceptionist.coherentvillages.entity.knight.RenderVillagerMageKnight;
-import net.theexceptionist.coherentvillages.entity.knight.RenderVillagerPaladin;
-import net.theexceptionist.coherentvillages.entity.mage.EntityVillagerConjurer;
-import net.theexceptionist.coherentvillages.entity.mage.EntityVillagerGrandMage;
-import net.theexceptionist.coherentvillages.entity.mage.EntityVillagerMage;
-import net.theexceptionist.coherentvillages.entity.mage.EntityVillagerNecromancer;
-import net.theexceptionist.coherentvillages.entity.mage.RenderVillagerConjurer;
-import net.theexceptionist.coherentvillages.entity.mage.RenderVillagerGrandMage;
-import net.theexceptionist.coherentvillages.entity.mage.RenderVillagerMage;
-import net.theexceptionist.coherentvillages.entity.mage.RenderVillagerNecromancer;
-import net.theexceptionist.coherentvillages.entity.soldier.EntityVillagerGuard;
-import net.theexceptionist.coherentvillages.entity.soldier.EntityVillagerManAtArms;
-import net.theexceptionist.coherentvillages.entity.soldier.EntityVillagerMilitia;
-import net.theexceptionist.coherentvillages.entity.soldier.EntityVillagerPeasant;
-import net.theexceptionist.coherentvillages.entity.soldier.EntityVillagerSergeant;
-import net.theexceptionist.coherentvillages.entity.soldier.EntityVillagerWarrior;
-import net.theexceptionist.coherentvillages.entity.soldier.RenderVillagerGuard;
-import net.theexceptionist.coherentvillages.entity.soldier.RenderVillagerManAtArms;
-import net.theexceptionist.coherentvillages.entity.soldier.RenderVillagerMilitia;
-import net.theexceptionist.coherentvillages.entity.soldier.RenderVillagerPeasant;
-import net.theexceptionist.coherentvillages.entity.soldier.RenderVillagerSergeant;
-import net.theexceptionist.coherentvillages.entity.soldier.RenderVillagerWarrior;
-import net.theexceptionist.coherentvillages.events.EventOverrideMerchantSpawn;
+import net.theexceptionist.coherentvillages.events.EventModTick;
 import net.theexceptionist.coherentvillages.events.EventOverrideVillages;
 import net.theexceptionist.coherentvillages.events.PlayerConnectionEvent;
+import net.theexceptionist.coherentvillages.main.entity.EntityBjornserker;
+import net.theexceptionist.coherentvillages.main.entity.EntityHumanVillager;
+import net.theexceptionist.coherentvillages.main.entity.EntityWarg;
+import net.theexceptionist.coherentvillages.main.entity.RenderBjornserker;
+import net.theexceptionist.coherentvillages.main.entity.RenderHumanVillager;
+import net.theexceptionist.coherentvillages.main.entity.RenderWarg;
 
 public class ClientProxy extends CommonProxy {
 	public void registerRenderInformation(){
@@ -86,7 +22,13 @@ public class ClientProxy extends CommonProxy {
 	
 	public void registerRenderers(){
 		RenderManager renderManager = Minecraft.getMinecraft().getRenderManager();
-        
+		
+		//Humans
+		renderManager.entityRenderMap.put(EntityHumanVillager.class, new RenderHumanVillager(renderManager));
+		renderManager.entityRenderMap.put(EntityWarg.class, new RenderWarg(renderManager));
+		renderManager.entityRenderMap.put(EntityBjornserker.class, new RenderBjornserker(renderManager));
+		
+		/*
 		//Soldiers
         renderManager.entityRenderMap.put(EntityVillagerGuard.class, new RenderVillagerGuard(renderManager));
         renderManager.entityRenderMap.put(EntityVillagerPeasant.class, new RenderVillagerPeasant(renderManager));
@@ -138,13 +80,13 @@ public class ClientProxy extends CommonProxy {
         renderManager.entityRenderMap.put(EntityVillagerBanditAlchemist.class, new RenderVillagerBanditAlchemist(renderManager));
         renderManager.entityRenderMap.put(EntityVillagerDarkKnight.class, new RenderVillagerDarkKnight(renderManager));
         
-        //renderManager.entityRenderMap.put(EntityVillagerEvilMage.class, new RenderVillagerEvilMage(renderManager));
+        //renderManager.entityRenderMap.put(EntityVillagerEvilMage.class, new RenderVillagerEvilMage(renderManager));*/
         
         renderManager.entityRenderMap.put(EntityVillagerArrow.class, new RenderVillagerArrow(renderManager));
 }
 	
 	public void initEvents(){
-		MinecraftForge.EVENT_BUS.register(new EventOverrideMerchantSpawn());	
+		MinecraftForge.EVENT_BUS.register(new EventModTick());	
 		MinecraftForge.EVENT_BUS.register(new PlayerConnectionEvent());	
 		MinecraftForge.TERRAIN_GEN_BUS.register(new EventOverrideVillages());
 	

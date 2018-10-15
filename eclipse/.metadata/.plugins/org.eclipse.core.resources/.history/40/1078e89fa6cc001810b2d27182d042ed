@@ -1,0 +1,30 @@
+package net.theexceptionist.coherentvillages.main.entity;
+
+import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.renderer.entity.RenderLiving;
+import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.entity.passive.EntityVillager;
+import net.minecraft.util.ResourceLocation;
+
+public class RenderHumanVillager extends RenderLiving<EntityHumanVillager>
+{
+
+	public static final ResourceLocation VAGABOND_SKIN_0 = new ResourceLocation("textures/entity/steve.png");
+
+	public RenderHumanVillager(RenderManager rendermanagerIn, ModelBase modelbaseIn, float shadowsizeIn) {
+		super(rendermanagerIn, modelbaseIn, shadowsizeIn);
+	}
+
+	@Override
+	protected ResourceLocation getEntityTexture(EntityHumanVillager entity) {
+		if(!entity.world.isRemote)
+		{
+			return entity.getResourceLocation();
+		}
+		else
+		{
+			return null;
+		}
+	}
+
+}

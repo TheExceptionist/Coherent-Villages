@@ -1,0 +1,176 @@
+package net.theexceptionist.coherentvillages.main.entity.attributes;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
+
+public class AttributeRace {	
+	//Warrior Race - High Health, Lots of Damage 
+	public static final int RACE_TYPE_WARRIOR = 0;
+	//Knight Race - High Armor, has horses
+	public static final int RACE_TYPE_KNIGHT = 1;
+	//Archer Race - 
+	public static final int RACE_TYPE_ARCHER = 2;
+	//Mage Race
+	public static final int RACE_TYPE_MAGE = 3;
+	//Alchemy Race
+	public static final int RACE_TYPE_ALCHEMY = 4;
+	
+	
+	
+	protected String name;
+	protected int type;
+	protected HashMap<String,Item> armor;
+	protected HashMap<String,Item> meleeWeapons;
+	protected HashMap<String,Item> rangedWeapons;
+	protected HashMap<String,Item> spells;
+	protected HashMap<String,Item> potions;
+	protected HashMap<String,AttributeVocation> vocations;
+	
+	public AttributeRace(final String name, final int type)
+	{
+		this.name = name;
+		this.type = type;
+		this.armor = new HashMap<String,Item>();
+		this.meleeWeapons = new HashMap<String,Item>();
+		this.rangedWeapons = new HashMap<String,Item>();
+		this.spells = new HashMap<String,Item>();
+		this.potions = new HashMap<String,Item>();
+		
+		this.vocations = new HashMap<String,AttributeVocation>();
+		
+		this.initByRaceType();
+	}
+	
+	public void initByRaceType()
+	{
+		switch(type)
+		{
+			case RACE_TYPE_WARRIOR:
+			{
+				this.armor.put("armor_1_head", Items.LEATHER_HELMET);
+				this.armor.put("armor_1_chest", Items.LEATHER_CHESTPLATE);
+				this.armor.put("armor_1_leg", Items.LEATHER_BOOTS);
+				this.armor.put("armor_1_feet", Items.LEATHER_BOOTS);
+				
+				this.armor.put("armor_2_head", Items.LEATHER_HELMET);
+				this.armor.put("armor_2_chest", Items.CHAINMAIL_CHESTPLATE);
+				this.armor.put("armor_2_leg", Items.CHAINMAIL_LEGGINGS);
+				this.armor.put("armor_2_feet", Items.LEATHER_BOOTS);
+				
+				this.armor.put("armor_3_head", Items.IRON_HELMET);
+				this.armor.put("armor_3_chest", Items.CHAINMAIL_CHESTPLATE);
+				this.armor.put("armor_3_leg", Items.CHAINMAIL_LEGGINGS);
+				this.armor.put("armor_3_feet", Items.CHAINMAIL_BOOTS);
+				
+				this.meleeWeapons.put("weapon_1", Items.STONE_AXE);
+				this.meleeWeapons.put("weapon_2", Items.IRON_AXE);
+				this.meleeWeapons.put("weapon_3", Items.IRON_SWORD);
+				
+				this.rangedWeapons.put("weapon_1", Items.BOW);
+				
+				AttributeVocation soldierTier1 = new AttributeVocation("Peasant", AttributeVocation.CLASS_SOLDIER, 0, 10, this);
+				AttributeVocation soldierTier2 = new AttributeVocation("Peasant", AttributeVocation.CLASS_SOLDIER, 0, 10, this);
+				AttributeVocation soldierTier3 = new AttributeVocation("Peasant", AttributeVocation.CLASS_SOLDIER, 0, 10, this);
+				AttributeVocation soldierTier4 = new AttributeVocation("Peasant", AttributeVocation.CLASS_SOLDIER, 0, 10, this);
+				AttributeVocation soldierTier5 = new AttributeVocation("Peasant", AttributeVocation.CLASS_SOLDIER, 0, 10, this);
+				
+				AttributeVocation archerTier1 = new AttributeVocation("", AttributeVocation.CLASS_SOLDIER, 0, 10, this);
+				AttributeVocation archerTier2 = new AttributeVocation("Peasant", AttributeVocation.CLASS_SOLDIER, 0, 10, this);
+				
+				this.vocations.put("", value);
+			}
+			break;
+			case RACE_TYPE_KNIGHT:
+			{
+				this.armor.add(Items.IRON_HELMET);
+				this.armor.add(Items.CHAINMAIL_CHESTPLATE);
+				this.armor.add(Items.CHAINMAIL_LEGGINGS);
+				this.armor.add(Items.CHAINMAIL_BOOTS);
+				this.armor.add(Items.SHIELD);
+			}
+			break;
+			case RACE_TYPE_ARCHER:
+			{
+				
+			}
+			break;
+			case RACE_TYPE_MAGE:
+			{
+				
+			}
+			break;
+			case RACE_TYPE_ALCHEMY:
+			{
+				
+			}
+			break;
+		}
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public int getType() {
+		return type;
+	}
+
+	public void setType(int type) {
+		this.type = type;
+	}
+
+	public HashMap<String, Item> getArmor() {
+		return armor;
+	}
+
+	public void setArmor(HashMap<String, Item> armor) {
+		this.armor = armor;
+	}
+
+	public HashMap<String, Item> getMeleeWeapons() {
+		return meleeWeapons;
+	}
+
+	public void setMeleeWeapons(HashMap<String, Item> meleeWeapons) {
+		this.meleeWeapons = meleeWeapons;
+	}
+
+	public HashMap<String, Item> getRangedWeapons() {
+		return rangedWeapons;
+	}
+
+	public void setRangedWeapons(HashMap<String, Item> rangedWeapons) {
+		this.rangedWeapons = rangedWeapons;
+	}
+
+	public HashMap<String, Item> getSpells() {
+		return spells;
+	}
+
+	public void setSpells(HashMap<String, Item> spells) {
+		this.spells = spells;
+	}
+
+	public HashMap<String, Item> getPotions() {
+		return potions;
+	}
+
+	public void setPotions(HashMap<String, Item> potions) {
+		this.potions = potions;
+	}
+
+	public HashMap<String, AttributeVocation> getVocations() {
+		return vocations;
+	}
+
+	public void setVocations(HashMap<String, AttributeVocation> vocations) {
+		this.vocations = vocations;
+	}
+}

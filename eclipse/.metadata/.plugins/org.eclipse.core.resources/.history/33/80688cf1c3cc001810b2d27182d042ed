@@ -1,0 +1,92 @@
+package net.theexceptionist.coherentvillages.main.entity.attributes;
+
+import net.minecraft.util.ResourceLocation;
+
+public class AttributeVocation {
+	public final static int CLASS_VILLAGER = 0;
+	
+	public final static int CLASS_SOLDIER = 1;
+	public final static int CLASS_ARCHER = 2;
+	public final static int CLASS_MAGE = 3;
+	public final static int CLASS_ALCHEMIST = 4;
+	
+	protected final int type;
+	protected final int rank;
+	protected final int upgradeReq;
+	protected boolean canRide = false;
+	
+	protected final String name;
+	
+	protected AttributeVocation upgradLeft;
+	protected AttributeVocation upgradeRight;
+	protected ResourceLocation skin;
+	
+	protected final AttributeRace originRace;
+	
+	public AttributeVocation(final String name, final int type, final int rank, final int upgradeReq, final AttributeRace race, final ResourceLocation skin)
+	{
+		this.name = name;
+		this.type = type;
+		this.rank = rank;
+		this.upgradeReq = upgradeReq;
+		this.originRace = race;
+		this.skin = skin;
+	}
+	
+	public AttributeVocation(final String name, final int type, final int rank, final int upgradeReq, final AttributeRace race, final ResourceLocation skin, final boolean canRide)
+	{
+		this(name, type, rank, upgradeReq, race, skin);
+		this.canRide = canRide;
+	}
+
+	
+	
+	public boolean isCanRide() {
+		return canRide;
+	}
+
+	public int getUpgradeReq() {
+		return upgradeReq;
+	}
+
+	public int getType() {
+		return type;
+	}
+
+	public int getRank() {
+		return rank;
+	}
+	
+	public String getName() {
+		return name;
+	}
+	
+	public String getTitle()
+	{
+		return originRace.getName() + name;
+	}
+	
+	public AttributeVocation getUpgradeRight() {
+		return upgradeRight;
+	}
+
+	public void setUpgradeRight(AttributeVocation upgradeRight) {
+		this.upgradeRight = upgradeRight;
+	}
+
+	public AttributeRace getOriginRace() {
+		return originRace;
+	}
+
+	public AttributeVocation getUpgradLeft() {
+		return upgradLeft;
+	}
+
+	public void setUpgradLeft(AttributeVocation upgradLeft) {
+		this.upgradLeft = upgradLeft;
+	}
+
+	public ResourceLocation getSkin() {
+		return skin;
+	}
+}

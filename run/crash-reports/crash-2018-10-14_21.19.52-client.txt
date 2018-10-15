@@ -1,0 +1,122 @@
+---- Minecraft Crash Report ----
+// Ouch. That hurt :(
+
+Time: 10/14/18 9:19 PM
+Description: Unexpected error
+
+java.lang.NullPointerException: Unexpected error
+	at net.theexceptionist.coherentvillages.main.entity.EntityHumanVillager.processInteract(EntityHumanVillager.java:374)
+	at net.minecraft.entity.EntityLiving.processInitialInteract(EntityLiving.java:1355)
+	at net.minecraft.entity.player.EntityPlayer.interactOn(EntityPlayer.java:1299)
+	at net.minecraft.client.multiplayer.PlayerControllerMP.interactWithEntity(PlayerControllerMP.java:587)
+	at net.minecraft.client.Minecraft.rightClickMouse(Minecraft.java:1681)
+	at net.minecraft.client.Minecraft.processKeyBinds(Minecraft.java:2380)
+	at net.minecraft.client.Minecraft.runTickKeyboard(Minecraft.java:2146)
+	at net.minecraft.client.Minecraft.runTick(Minecraft.java:1934)
+	at net.minecraft.client.Minecraft.runGameLoop(Minecraft.java:1187)
+	at net.minecraft.client.Minecraft.run(Minecraft.java:441)
+	at net.minecraft.client.main.Main.main(Main.java:118)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at net.minecraft.launchwrapper.Launch.launch(Launch.java:135)
+	at net.minecraft.launchwrapper.Launch.main(Launch.java:28)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at net.minecraftforge.gradle.GradleStartCommon.launch(GradleStartCommon.java:97)
+	at GradleStart.main(GradleStart.java:25)
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Thread: Client thread
+Stacktrace:
+	at net.theexceptionist.coherentvillages.main.entity.EntityHumanVillager.processInteract(EntityHumanVillager.java:374)
+	at net.minecraft.entity.EntityLiving.processInitialInteract(EntityLiving.java:1355)
+	at net.minecraft.entity.player.EntityPlayer.interactOn(EntityPlayer.java:1299)
+	at net.minecraft.client.multiplayer.PlayerControllerMP.interactWithEntity(PlayerControllerMP.java:587)
+	at net.minecraft.client.Minecraft.rightClickMouse(Minecraft.java:1681)
+	at net.minecraft.client.Minecraft.processKeyBinds(Minecraft.java:2380)
+	at net.minecraft.client.Minecraft.runTickKeyboard(Minecraft.java:2146)
+
+-- Affected level --
+Details:
+	Level name: MpServer
+	All players: 1 total; [EntityPlayerSP['Player730'/1545, l='MpServer', x=-140.04, y=63.00, z=263.14]]
+	Chunk stats: MultiplayerChunkCache: 540, 540
+	Level seed: 0
+	Level generator: ID 00 - default, ver 1. Features enabled: false
+	Level generator options: 
+	Level spawn location: World: (-172,64,209), Chunk: (at 4,4,1 in -11,13; contains blocks -176,0,208 to -161,255,223), Region: (-1,0; contains chunks -32,0 to -1,31, blocks -512,0,0 to -1,255,511)
+	Level time: 181 game time, 181 day time
+	Level dimension: 0
+	Level storage version: 0x00000 - Unknown?
+	Level weather: Rain time: 0 (now: false), thunder time: 0 (now: false)
+	Level game mode: Game mode: creative (ID 1). Hardcore: false. Cheats: false
+	Forced entities: 134 total; [EntityHumanVillager['Herleif - Nord Berserker'/79, l='MpServer', x=-267.50, y=64.00, z=324.50], EntityHumanVillager['Hakon - Nord Raider'/84, l='MpServer', x=-254.50, y=69.00, z=144.50], EntityHumanVillager['Eirik - Nord Raider'/85, l='MpServer', x=-263.50, y=64.00, z=152.50], EntityHumanVillager['Vigdis - Nord Berserker'/86, l='MpServer', x=-251.50, y=69.00, z=152.50], EntityWarg['Warg'/87, l='MpServer', x=-251.50, y=68.00, z=144.50], EntityHumanVillager['Audun - Nord Barbarian'/90, l='MpServer', x=-262.50, y=64.00, z=287.50], EntityHumanVillager['Ingemar - Nord Barbarian'/91, l='MpServer', x=-262.50, y=64.00, z=286.50], EntityHumanVillager['Holmes - Nord Barbarian'/96, l='MpServer', x=-258.50, y=64.00, z=296.50], EntityWarg['Warg'/97, l='MpServer', x=-258.50, y=64.00, z=288.50], EntityHumanVillager['Arnhild - Nord Fisherman'/137, l='MpServer', x=-178.49, y=64.00, z=133.70], EntityHumanVillager['Hild - Nord Fisherman'/138, l='MpServer', x=-179.11, y=64.00, z=133.27], EntityHumanVillager['Aasa - Nord Farmer'/140, l='MpServer', x=-174.50, y=63.00, z=135.94], EntityHumanVillager['Asmund - Nord Fisherman'/143, l='MpServer', x=-168.50, y=64.00, z=151.50], EntityHumanVillager['Balder - Nord Fisherman'/145, l='MpServer', x=-168.50, y=64.00, z=152.50], EntityHumanVillager['Ymbjorg - Nord Fisherman'/147, l='MpServer', x=-163.50, y=62.22, z=145.50], EntityHumanVillager['Ingvar - Nord Farmer'/149, l='MpServer', x=-156.80, y=63.00, z=147.59], EntityItem['item.tile.torch'/154, l='MpServer', x=-154.69, y=42.00, z=280.10], EntityHumanVillager['Thurmond - Nord Raider'/156, l='MpServer', x=-157.50, y=64.00, z=296.50], EntityHumanVillager['Holger - Nord Jarl'/159, l='MpServer', x=-146.27, y=63.00, z=150.50], EntityHumanVillager['Venhild - Nord Lumberman'/165, l='MpServer', x=-143.50, y=64.00, z=156.50], EntityHumanVillager['Borgunn - Nord Lumberman'/166, l='MpServer', x=-144.50, y=64.00, z=156.50], EntityHumanVillager['Herleif - Nord Raider'/167, l='MpServer', x=-143.50, y=62.24, z=261.50], EntityWarg['Warg'/168, l='MpServer', x=-143.50, y=62.19, z=253.50], EntityHumanVillager['Jerrik - Nord Viking'/169, l='MpServer', x=-144.50, y=62.45, z=261.50], EntityHumanVillager['Ingfred - Nord Raider'/170, l='MpServer', x=-139.54, y=63.00, z=266.05], EntityWarg['Warg'/171, l='MpServer', x=-143.50, y=64.00, z=258.50], EntityItem['item.tile.torch'/173, l='MpServer', x=-141.88, y=63.00, z=277.50], EntityItem['item.tile.torch'/174, l='MpServer', x=-150.88, y=64.00, z=278.26], EntityHumanVillager['Solveig - Nord Berserker'/175, l='MpServer', x=-148.29, y=64.00, z=274.50], EntityWarg['Warg'/176, l='MpServer', x=-143.50, y=63.00, z=268.50], EntityItem['item.tile.torch'/177, l='MpServer', x=-137.13, y=64.00, z=269.58], EntityHumanVillager['Sven - Nord Raider'/179, l='MpServer', x=-138.50, y=65.00, z=292.50], EntityItem['item.tile.torch'/180, l='MpServer', x=-150.19, y=64.00, z=280.85], EntityHumanVillager['Bjarke - Nord Raider'/181, l='MpServer', x=-143.50, y=64.00, z=305.50], EntityHumanVillager['Thurmond - Nord Raider'/182, l='MpServer', x=-143.50, y=64.00, z=318.50], EntityHumanVillager['Hjalmar - Nord Axeman'/197, l='MpServer', x=-136.14, y=64.00, z=137.36], EntityHumanVillager['Holmes - Nord Archer'/201, l='MpServer', x=-135.42, y=64.00, z=137.51], EntityHumanVillager['Lydvor - Nord Mercenary'/206, l='MpServer', x=-123.50, y=64.00, z=144.50], EntityHumanVillager['Ingfred - Nord Mercenary'/210, l='MpServer', x=-123.50, y=64.00, z=152.50], EntityHumanVillager['Unnhild - Nord Barbarian'/211, l='MpServer', x=-135.50, y=63.00, z=263.50], EntityHumanVillager['Dagmoy - Nord Berserker'/213, l='MpServer', x=-134.00, y=65.00, z=264.00], EntityWarg['Warg'/214, l='MpServer', x=-134.50, y=61.94, z=255.50], EntityItem['item.tile.torch'/215, l='MpServer', x=-128.13, y=64.00, z=269.28], EntityItem['item.tile.torch'/216, l='MpServer', x=-129.10, y=64.00, z=272.40], EntityHumanVillager['Audveig - Nord Raider'/217, l='MpServer', x=-128.70, y=64.00, z=270.62], EntityWarg['Warg'/218, l='MpServer', x=-135.50, y=64.00, z=261.50], EntityHumanVillager['Jerrik - Nord Berserker'/219, l='MpServer', x=-133.85, y=64.00, z=269.24], EntityWarg['Warg'/220, l='MpServer', x=-136.44, y=64.00, z=260.49], EntityHumanVillager['Hildebjorg - Nord Barbarian'/221, l='MpServer', x=-136.49, y=63.00, z=296.26], EntityHumanVillager['Gyda - Nord Berserker'/223, l='MpServer', x=-132.41, y=64.00, z=290.66], EntityWarg['Warg'/224, l='MpServer', x=-134.50, y=62.29, z=278.50], EntityHumanVillager['Geir - Nord Barbarian'/225, l='MpServer', x=-131.50, y=64.00, z=288.50], EntityWarg['Warg'/226, l='MpServer', x=-131.50, y=62.44, z=280.50], EntityHumanVillager['Vigdis - Nord Barbarian'/227, l='MpServer', x=-133.50, y=64.00, z=296.50], EntityWarg['Warg'/228, l='MpServer', x=-133.03, y=64.00, z=289.67], EntityHumanVillager['Nervous Leif - Nord Barbarian'/230, l='MpServer', x=-133.50, y=64.00, z=296.50], EntityHumanVillager['Vigdis - Nord Barbarian'/231, l='MpServer', x=-135.50, y=64.00, z=314.50], EntityWarg['Warg'/232, l='MpServer', x=-137.66, y=64.00, z=314.61], EntityHumanVillager['Nervous Olaf - Nord Barbarian'/234, l='MpServer', x=-135.50, y=64.00, z=314.50], EntityHumanVillager['Carr - Nord Farmer'/240, l='MpServer', x=-110.46, y=63.00, z=147.58], EntityItem['item.tile.torch'/243, l='MpServer', x=-116.57, y=63.00, z=279.63], EntityItem['item.tile.torch'/244, l='MpServer', x=-116.34, y=63.00, z=292.05], EntityItem['item.tile.torch'/246, l='MpServer', x=-118.88, y=64.00, z=281.24], EntityItem['item.tile.torch'/247, l='MpServer', x=-114.36, y=64.00, z=282.79], EntityHumanVillager['Eirik - Nord Berserker'/248, l='MpServer', x=-114.12, y=63.00, z=290.53], EntityHumanVillager['Nervous Stig - Nord Barbarian'/250, l='MpServer', x=-115.70, y=63.00, z=291.49], EntityHumanVillager['Finngerd - Nord Barbarian'/251, l='MpServer', x=-114.50, y=64.00, z=296.50], EntityWarg['Warg'/252, l='MpServer', x=-114.50, y=64.00, z=288.50], EntityHumanVillager['Nervous Ingfred - Nord Barbarian'/254, l='MpServer', x=-114.50, y=64.00, z=296.50], EntityHumanVillager['Hakon - Nord Farmer'/275, l='MpServer', x=-42.50, y=64.00, z=179.50], EntityHumanVillager['Frey - Nord Farmer'/278, l='MpServer', x=-41.50, y=64.00, z=187.50], EntityHumanVillager['Leif - Nord Farmer'/282, l='MpServer', x=-23.51, y=63.00, z=165.17], EntityHumanVillager['Bjorn - Nord Lumberman'/289, l='MpServer', x=-28.50, y=64.00, z=168.50], EntityHumanVillager['Stig - Nord Lumberman'/290, l='MpServer', x=-29.50, y=64.00, z=168.50], EntitySkeleton['Skeleton'/2339, l='MpServer', x=-193.50, y=13.00, z=313.50], EntityHumanVillager['Darby - Nord Farmer'/292, l='MpServer', x=-26.77, y=64.00, z=293.54], EntityHumanVillager['Holger - Nord Archer'/295, l='MpServer', x=-20.50, y=64.00, z=144.50], EntityHumanVillager['Hallgunn - Nord Mercenary'/301, l='MpServer', x=-17.50, y=64.00, z=152.50], EntityHumanVillager['Kjeld - Nord Footman'/314, l='MpServer', x=-18.08, y=62.65, z=318.08], EntityHumanVillager['Gunnar - Nord Axeman'/317, l='MpServer', x=-16.50, y=64.00, z=324.19], EntityHumanVillager['Halvar - Nord Archer'/319, l='MpServer', x=-14.28, y=64.00, z=316.55], EntityHumanVillager['Eirik - Nord Mercenary'/322, l='MpServer', x=-19.50, y=64.00, z=325.50], EntityBat['Bat'/2633, l='MpServer', x=-199.69, y=30.86, z=189.64], EntitySkeleton['Skeleton'/2946, l='MpServer', x=-184.50, y=37.00, z=199.50], EntitySkeleton['Skeleton'/2947, l='MpServer', x=-185.50, y=37.00, z=198.50], EntityBat['Bat'/2979, l='MpServer', x=-191.47, y=31.03, z=292.15], EntitySkeleton['Skeleton'/3022, l='MpServer', x=-99.50, y=23.00, z=299.50], EntitySkeleton['Skeleton'/3036, l='MpServer', x=-187.50, y=32.00, z=280.50], EntitySkeleton['Skeleton'/3043, l='MpServer', x=-105.50, y=33.00, z=311.50], EntitySkeleton['Skeleton'/3076, l='MpServer', x=-211.50, y=15.00, z=270.50], EntityZombie['Zombie'/3093, l='MpServer', x=-114.97, y=16.00, z=235.45], EntityZombie['Zombie'/3094, l='MpServer', x=-114.31, y=16.00, z=235.95], EntityCreeper['Creeper'/3095, l='MpServer', x=-114.50, y=16.00, z=234.50], EntityCreeper['Creeper'/3096, l='MpServer', x=-116.50, y=16.00, z=237.50], EntityBat['Bat'/3097, l='MpServer', x=-138.86, y=21.00, z=220.25], EntitySpider['Spider'/3140, l='MpServer', x=-108.04, y=13.92, z=250.89], EntitySkeleton['Skeleton'/3141, l='MpServer', x=-107.50, y=14.00, z=247.50], EntitySkeleton['Skeleton'/3142, l='MpServer', x=-107.50, y=14.00, z=243.50], EntityCreeper['Creeper'/3143, l='MpServer', x=-105.50, y=14.00, z=245.93], EntityZombie['Zombie'/3163, l='MpServer', x=-202.50, y=11.00, z=278.50], EntityBat['Bat'/3167, l='MpServer', x=-91.04, y=34.15, z=300.46], EntityBat['Bat'/3169, l='MpServer', x=-91.72, y=34.87, z=299.25], EntityZombie['Zombie'/3172, l='MpServer', x=-138.63, y=21.00, z=219.75], EntityBat['Bat'/3179, l='MpServer', x=-87.57, y=25.31, z=275.22], EntityCreeper['Creeper'/3289, l='MpServer', x=-92.50, y=30.00, z=259.50], EntityZombie['Zombie'/3290, l='MpServer', x=-200.50, y=27.00, z=316.50], EntityZombie['Zombie'/3292, l='MpServer', x=-200.50, y=27.00, z=315.50], EntityZombie['Zombie'/3293, l='MpServer', x=-198.50, y=27.00, z=310.50], EntityCreeper['Creeper'/3308, l='MpServer', x=-108.50, y=26.00, z=280.50], EntityBat['Bat'/3312, l='MpServer', x=-142.93, y=24.46, z=214.03], EntityBat['Bat'/3315, l='MpServer', x=-135.25, y=25.00, z=215.75], EntityCreeper['Creeper'/3328, l='MpServer', x=-89.50, y=20.00, z=272.50], EntityCreeper['Creeper'/3329, l='MpServer', x=-178.50, y=39.00, z=194.50], EntityZombie['Zombie'/3357, l='MpServer', x=-78.50, y=23.00, z=279.50], EntityCreeper['Creeper'/3373, l='MpServer', x=-98.85, y=23.00, z=272.47], EntitySkeleton['Skeleton'/3391, l='MpServer', x=-204.50, y=40.00, z=185.50], EntitySkeleton['Skeleton'/3392, l='MpServer', x=-205.50, y=40.00, z=188.50], EntityBat['Bat'/3432, l='MpServer', x=-119.98, y=25.99, z=273.94], EntityBat['Bat'/3433, l='MpServer', x=-110.86, y=26.23, z=279.13], EntityBat['Bat'/3436, l='MpServer', x=-113.47, y=26.34, z=278.75], EntityBat['Bat'/3437, l='MpServer', x=-113.65, y=26.13, z=275.10], EntityZombie['Zombie'/3466, l='MpServer', x=-186.50, y=14.00, z=191.50], EntityCreeper['Creeper'/3480, l='MpServer', x=-177.50, y=39.00, z=194.50], EntityZombie['Zombie'/3483, l='MpServer', x=-87.50, y=24.00, z=312.50], EntityZombie['Zombie'/3484, l='MpServer', x=-87.50, y=24.00, z=310.50], EntityZombie['Zombie'/3485, l='MpServer', x=-87.50, y=24.00, z=311.50], EntityCreeper['Creeper'/3487, l='MpServer', x=-108.50, y=14.00, z=230.50], EntityZombie['Zombie'/3493, l='MpServer', x=-158.50, y=21.00, z=338.50], EntityZombie['Zombie'/3494, l='MpServer', x=-157.50, y=21.00, z=338.50], EntitySkeleton['Skeleton'/3515, l='MpServer', x=-78.50, y=52.00, z=209.50], EntityCreeper['Creeper'/3539, l='MpServer', x=-219.50, y=12.00, z=311.50], EntitySpider['Spider'/3593, l='MpServer', x=-103.50, y=15.00, z=245.50], EntitySkeleton['Skeleton'/3620, l='MpServer', x=-88.50, y=21.00, z=271.50], EntityPlayerSP['Player730'/1545, l='MpServer', x=-140.04, y=63.00, z=263.14]]
+	Retry entities: 0 total; []
+	Server brand: fml,forge
+	Server type: Integrated singleplayer server
+Stacktrace:
+	at net.minecraft.client.multiplayer.WorldClient.addWorldInfoToCrashReport(WorldClient.java:461)
+	at net.minecraft.client.Minecraft.addGraphicsAndWorldToCrashReport(Minecraft.java:2888)
+	at net.minecraft.client.Minecraft.run(Minecraft.java:470)
+	at net.minecraft.client.main.Main.main(Main.java:118)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at net.minecraft.launchwrapper.Launch.launch(Launch.java:135)
+	at net.minecraft.launchwrapper.Launch.main(Launch.java:28)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at net.minecraftforge.gradle.GradleStartCommon.launch(GradleStartCommon.java:97)
+	at GradleStart.main(GradleStart.java:25)
+
+-- System Details --
+Details:
+	Minecraft Version: 1.12.2
+	Operating System: Mac OS X (x86_64) version 10.13.6
+	Java Version: 1.8.0_144, Oracle Corporation
+	Java VM Version: Java HotSpot(TM) 64-Bit Server VM (mixed mode), Oracle Corporation
+	Memory: 318773096 bytes (304 MB) / 874512384 bytes (834 MB) up to 1908932608 bytes (1820 MB)
+	JVM Flags: 0 total; 
+	IntCache: cache: 0, tcache: 0, allocated: 12, tallocated: 94
+	FML: MCP 9.42 Powered by Forge 14.23.4.2757 7 mods loaded, 7 mods active
+	States: 'U' = Unloaded 'L' = Loaded 'C' = Constructed 'H' = Pre-initialized 'I' = Initialized 'J' = Post-initialized 'A' = Available 'D' = Disabled 'E' = Errored
+
+	| State     | ID               | Version      | Source                           | Signature |
+	|:--------- |:---------------- |:------------ |:-------------------------------- |:--------- |
+	| UCHIJAAAA | minecraft        | 1.12.2       | minecraft.jar                    | None      |
+	| UCHIJAAAA | mcp              | 9.42         | minecraft.jar                    | None      |
+	| UCHIJAAAA | FML              | 8.0.99.99    | forgeSrc-1.12.2-14.23.4.2757.jar | None      |
+	| UCHIJAAAA | forge            | 14.23.4.2757 | forgeSrc-1.12.2-14.23.4.2757.jar | None      |
+	| UCHIJAAAA | coherentvillages | v0.0.0.1     | modid-1.0.jar                    | None      |
+	| UCHIJAAAA | journeymap       | 1.12.2-5.5.2 | journeymap-1.12.2-5.5.2.jar      | None      |
+	| UCHIJAAAA | torohealthmod    | 1.12.2-11    | torohealth-1.12.2-11.jar         | None      |
+
+	Loaded coremods (and transformers): 
+	GL info: ' Vendor: 'Intel Inc.' Version: '2.1 INTEL-10.36.19' Renderer: 'Intel(R) Iris(TM) Plus Graphics 640'
+	Launched Version: 1.12.2
+	LWJGL: 2.9.2
+	OpenGL: Intel(R) Iris(TM) Plus Graphics 640 GL version 2.1 INTEL-10.36.19, Intel Inc.
+	GL Caps: Using GL 1.3 multitexturing.
+Using GL 1.3 texture combiners.
+Using framebuffer objects because ARB_framebuffer_object is supported and separate blending is supported.
+Shaders are available because OpenGL 2.1 is supported.
+VBOs are available because OpenGL 1.5 is supported.
+
+	Using VBOs: Yes
+	Is Modded: Definitely; Client brand changed to 'fml,forge'
+	Type: Client (map_client.txt)
+	Resource Packs: 
+	Current Language: English (US)
+	Profiler Position: N/A (disabled)
+	CPU: 4x Intel(R) Core(TM) i5-7360U CPU @ 2.30GHz

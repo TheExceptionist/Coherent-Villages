@@ -1,10 +1,10 @@
 package net.theexceptionist.coherentvillages.entity.followers;
 
 import net.minecraft.entity.EntityLiving;
-import net.theexceptionist.coherentvillages.entity.soldier.AbstractVillagerSoldier;
+import net.minecraft.entity.EntityLivingBase;
 
 public interface IEntityFollower {
-	public void setMaster(AbstractVillagerSoldier villager);
 	public boolean isShouldFollow();
 	public EntityLiving getLiving();
+	public void setMaster(EntityLivingBase villager);
 }

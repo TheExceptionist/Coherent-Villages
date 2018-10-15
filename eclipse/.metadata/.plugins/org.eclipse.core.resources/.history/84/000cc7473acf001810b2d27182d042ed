@@ -1,0 +1,16 @@
+package net.theexceptionist.coherentvillages.worldgen.villages;
+
+public class CharBlockTypes {
+	public static final char LOG_UP = '^';
+	public static final char LOG_SIDE = '>';
+	public static final char OAK_WOOD = 'O';
+	public static final char TORCH_NORTH = 'N';
+	public static final char TORCH_SOUTH = 'S';
+	public static final char STAIRS_LEFT = 'L';
+	public static final char STAIRS_RIGHT = 'R';
+	public static final char GLASS = '|';
+	public static final char DOOR_NORTH = 'D';
+	public static final char DOOR_SOUTH = 'd';
+	public static final char AIR = ' ';
+	public static final char NULL = '-';
+}

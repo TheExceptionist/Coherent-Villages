@@ -25,7 +25,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 import net.theexceptionist.coherentvillages.entity.ai.EntityAIAttackBackExclude;
-import net.theexceptionist.coherentvillages.entity.ai.EntityAIMoveThroughOutskirts;
+import net.theexceptionist.coherentvillages.entity.ai.EntityAIPatrolVillage;
 import net.theexceptionist.coherentvillages.main.Main;
 
 public class EntityVillagerWarrior extends AbstractVillagerSoldier{
@@ -70,7 +70,7 @@ public class EntityVillagerWarrior extends AbstractVillagerSoldier{
         this.tasks.addTask(10, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
         this.tasks.addTask(11, new EntityAILookIdle(this));*/
         
-        this.tasks.addTask(5, new EntityAIMoveThroughOutskirts(this, 0.6D, true));
+        this.tasks.addTask(5, new EntityAIPatrolVillage(this, 0.6D, true));
         //this.tasks.addTask(6, new EntityAISearchHouse(this, 50));
         //this.tasks.addTask(7, new EntityAIMoveTowardsRestriction(this, 1.0D));
         // this.tasks.addTask(8, new EntityAIGuardPost(this, true));

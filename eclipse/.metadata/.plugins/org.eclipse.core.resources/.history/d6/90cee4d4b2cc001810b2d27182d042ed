@@ -1,0 +1,7 @@
+package net.theexceptionist.coherentvillages.main.entity.attributes;
+
+public class AttributeVocation {
+	protected int type;
+	protected String name;
+	
+}

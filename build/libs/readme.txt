@@ -203,9 +203,109 @@ Changelog:
 *Added name tags to regular villagers
 *Improved event spawning location
 
+-Beta v1.4.8
+*Fixed the bounding boxes of all structures
+*Fixed Villager name bug
+*Soldiers might attempt to run away if badly hurt
+*Fixed the alchemist bug
+
+
+
+-Beta v1.4.10
+*Made healers better at their job
+*Fixed the undead horse bug
+*Improved Patroling AI
+*Reduced bandit spawn
+*Improved Alchemist and Healer AI 
+
+-Beta v1.4.11
+*Fixed name bug
+
+-Pre-Release Test v0.0.0.1
+=========================================
+****LATEST STABLE VERSION IS THE LAST BETA RELEASE**** (I just released this so you guys can see my progess so far, expect bugs)
+**Notify me of performance issues**
+***BACKUP YOUR SAVES IF YOUR UPGRADING FROM PREVIOUS VERSIONS, the are incompatible 
+
+*Removed Testificate Villages (THEY WILL BE BACK, REMOVED FROM FURHTER TWEAKING!)
+*Added Cultures
+	**Nord Villages
+	**Latin Villages
+	**German Villages
+	**Slav Villages
+	**Arab Villages
+*Added a job system
+*Finished Nord Villages, spawn in forest and river biomes
+*Config needs to be adjusted (So don't bother right now)
+*Added Genders to villagers
+****LOOKING FOR ARTISTS FOR NORD VILLAGERS!****
+*Added Nord Farmer
+*Added Nord Fisherman
+*Added Nord Lumberman
+*Added Nord Raider (Bandit type)
+*Added Nord Berserker (Bandit type, does crazy amounts of damage)
+*Added Nord Viking (Bandit type)
+*Added Nord Barbarian (Ranged Bandit type)
+
+**Raider now upgrades to Berserker or Viking if they get enough kills
+
+*Added Nord Archer (Soldier)
+*Added Nord Footman (Soldier)
+*Added Nord Axeman (Soldier)
+*Added Nord Warrior (Soldier)
+*Added Nord Huskarl (Elite Soldier)
+*Added Nord Jarl (Ruler)
+
+**Footman now upgrades to Axeman or Warrior if they get enough kills
+**Axeman now upgrades to Huskarl if they get enough kills
+
+*Added Warg (Spawns Naturally in Nord Biomes : Forest, Rivers, Etc.)
+*Added Nord LongHouse
+*Added Nord Hut
+*Added Nord GuardHouse
+*Added Nord ArcherHut
+*Added Nord Jarl's House
+*Added Nord Larger Hut
+*Fixed Well in Nord Villages
+*Viking Villages Not Longer Have Farms
+#Fixed Numerous Bugs
+*Added Factions (Kinda)
+*Added Bjornserker(Can Spawn at night in Nord biomes)
+*Added Shifters(Can transform into Bjornserkers if damaged)
+*Added Mercenaries(Hired with emeralds, "won't be spent.. still working on a GUI", Will follow until the player quits)
+*All NPC now drop loot
+*Wargs and Bjornserkers now drop Loot
+*Added Blocking AI
+*Archer Types are better at bows than other types
+NORD BIOMES:
+Biomes.BEACH, 
+Biomes.BIRCH_FOREST, 
+Biomes.BIRCH_FOREST_HILLS, 
+Biomes.COLD_BEACH, 
+Biomes.DEEP_OCEAN,		
+Biomes.FOREST, 
+Biomes.FOREST_HILLS, 
+Biomes.FROZEN_RIVER, 
+Biomes.FROZEN_OCEAN, 
+Biomes.ICE_MOUNTAINS, 
+Biomes.ICE_PLAINS,	
+Biomes.MUTATED_BIRCH_FOREST, 
+Biomes.MUTATED_BIRCH_FOREST_HILLS, 
+Biomes.MUTATED_FOREST, 
+Biomes.MUTATED_ICE_FLATS,  		
+Biomes.RIVER, 
+Biomes.STONE_BEACH
+=================================
+
+
+
 To Be done later
+*Fix Torch Bug
 *Added University
 *Added Castle
+//Add Bandit spawns outside of bandit villages
+//Add Shrine
+//Replace the rest of the culture village spawning with the nord code
 
 
 

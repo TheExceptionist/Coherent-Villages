@@ -1,0 +1,94 @@
+package net.theexceptionist.coherentvillages.main.entity.attributes;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
+
+public class AttributeRace {	
+	//Warrior Race - High Health, Lots of Damage 
+	public static final int RACE_TYPE_WARRIOR = 0;
+	//Knight Race - High Armor, has horses
+	public static final int RACE_TYPE_KNIGHT = 1;
+	//Archer Race - 
+	public static final int RACE_TYPE_ARCHER = 2;
+	//Mage Race
+	public static final int RACE_TYPE_MAGE = 3;
+	//Alchemy Race
+	public static final int RACE_TYPE_ALCHEMY = 4;
+	
+	
+	
+	protected String name;
+	protected int type;
+	protected HashMap<String,Item> armor;
+	protected HashMap<String,Item> meleeWeapons;
+	protected HashMap<String,Item> rangedWeapons;
+	protected HashMap<String,Item> spells;
+	protected HashMap<String,Item> potions;
+	protected HashMap<String,AttributeVocation> vocations;
+	
+	public AttributeRace(final String name, final int type)
+	{
+		this.name = name;
+		this.type = type;
+		this.armor = new HashMap<String,Item>();
+		this.meleeWeapons = new HashMap<String,Item>();
+		this.rangedWeapons = new HashMap<String,Item>();
+		this.spells = new HashMap<String,Item>();
+		this.potions = new HashMap<String,Item>();
+		
+		this.vocations = new HashMap<String,AttributeVocation>();
+	}
+	
+	public void initEquipmentByRaceType()
+	{
+		switch(type)
+		{
+			case RACE_TYPE_WARRIOR:
+			{
+				this.armor.add(Items.IRON_HELMET);
+				this.armor.add(Items.CHAINMAIL_CHESTPLATE);
+				this.armor.add(Items.CHAINMAIL_LEGGINGS);
+				this.armor.add(Items.CHAINMAIL_BOOTS);
+				this.armor.add(Items.);
+				this.armor.add(Items.CHAINMAIL_BOOTS);
+				this.armor.add(Items.CHAINMAIL_CHESTPLATE);
+				this.armor.add(Items.CHAINMAIL_LEGGINGS);
+				this.armor.add(Items.CHAINMAIL_BOOTS);
+				this.armor.add(Items.SHIELD);
+			}
+			break;
+			case RACE_TYPE_KNIGHT:
+			{
+				this.armor.add(Items.IRON_HELMET);
+				this.armor.add(Items.CHAINMAIL_CHESTPLATE);
+				this.armor.add(Items.CHAINMAIL_LEGGINGS);
+				this.armor.add(Items.CHAINMAIL_BOOTS);
+				this.armor.add(Items.SHIELD);
+			}
+			break;
+			case RACE_TYPE_ARCHER:
+			{
+				
+			}
+			break;
+			case RACE_TYPE_MAGE:
+			{
+				
+			}
+			break;
+			case RACE_TYPE_ALCHEMY:
+			{
+				
+			}
+			break;
+		}
+	}
+	
+	public void initVocationByRaceType()
+	{
+		
+	}
+}

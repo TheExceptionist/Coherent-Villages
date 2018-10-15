@@ -1,0 +1,163 @@
+---- Minecraft Crash Report ----
+// Everything's going to plan. No, really, that was supposed to happen.
+
+Time: 10/14/18 4:09 PM
+Description: Rendering entity in world
+
+java.lang.ClassCastException: java.lang.Boolean cannot be cast to java.lang.Byte
+	at net.minecraft.entity.passive.EntityTameable.isTamed(EntityTameable.java:150)
+	at net.minecraft.entity.passive.EntityTameable.getTeam(EntityTameable.java:248)
+	at net.minecraft.entity.Entity.isInvisibleToPlayer(Entity.java:2612)
+	at net.minecraft.client.renderer.entity.RenderLivingBase.canRenderName(RenderLivingBase.java:509)
+	at net.minecraft.client.renderer.entity.RenderLiving.canRenderName(RenderLiving.java:26)
+	at net.minecraft.client.renderer.entity.RenderLiving.canRenderName(RenderLiving.java:16)
+	at net.minecraft.client.renderer.entity.RenderLivingBase.renderName(RenderLivingBase.java:491)
+	at net.minecraft.client.renderer.entity.RenderLivingBase.renderName(RenderLivingBase.java:25)
+	at net.minecraft.client.renderer.entity.Render.doRender(Render.java:67)
+	at net.minecraft.client.renderer.entity.RenderLivingBase.doRender(RenderLivingBase.java:210)
+	at net.minecraft.client.renderer.entity.RenderLiving.doRender(RenderLiving.java:51)
+	at net.theexceptionist.coherentvillages.main.entity.RenderWarg.doRender(RenderWarg.java:39)
+	at net.theexceptionist.coherentvillages.main.entity.RenderWarg.doRender(RenderWarg.java:13)
+	at net.minecraft.client.renderer.entity.RenderManager.renderEntity(RenderManager.java:390)
+	at net.minecraft.client.renderer.entity.RenderManager.renderEntityStatic(RenderManager.java:374)
+	at net.minecraft.client.renderer.RenderGlobal.renderEntities(RenderGlobal.java:655)
+	at net.minecraft.client.renderer.EntityRenderer.renderWorldPass(EntityRenderer.java:1400)
+	at net.minecraft.client.renderer.EntityRenderer.renderWorld(EntityRenderer.java:1312)
+	at net.minecraft.client.renderer.EntityRenderer.updateCameraAndRender(EntityRenderer.java:1115)
+	at net.minecraft.client.Minecraft.runGameLoop(Minecraft.java:1208)
+	at net.minecraft.client.Minecraft.run(Minecraft.java:441)
+	at net.minecraft.client.main.Main.main(Main.java:118)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at net.minecraft.launchwrapper.Launch.launch(Launch.java:135)
+	at net.minecraft.launchwrapper.Launch.main(Launch.java:28)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at net.minecraftforge.gradle.GradleStartCommon.launch(GradleStartCommon.java:97)
+	at GradleStart.main(GradleStart.java:25)
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Thread: Client thread
+Stacktrace:
+	at net.minecraft.entity.passive.EntityTameable.isTamed(EntityTameable.java:150)
+	at net.minecraft.entity.passive.EntityTameable.getTeam(EntityTameable.java:248)
+	at net.minecraft.entity.Entity.isInvisibleToPlayer(Entity.java:2612)
+	at net.minecraft.client.renderer.entity.RenderLivingBase.canRenderName(RenderLivingBase.java:509)
+	at net.minecraft.client.renderer.entity.RenderLiving.canRenderName(RenderLiving.java:26)
+	at net.minecraft.client.renderer.entity.RenderLiving.canRenderName(RenderLiving.java:16)
+	at net.minecraft.client.renderer.entity.RenderLivingBase.renderName(RenderLivingBase.java:491)
+	at net.minecraft.client.renderer.entity.RenderLivingBase.renderName(RenderLivingBase.java:25)
+	at net.minecraft.client.renderer.entity.Render.doRender(Render.java:67)
+	at net.minecraft.client.renderer.entity.RenderLivingBase.doRender(RenderLivingBase.java:210)
+	at net.minecraft.client.renderer.entity.RenderLiving.doRender(RenderLiving.java:51)
+	at net.theexceptionist.coherentvillages.main.entity.RenderWarg.doRender(RenderWarg.java:39)
+	at net.theexceptionist.coherentvillages.main.entity.RenderWarg.doRender(RenderWarg.java:13)
+
+-- Entity being rendered --
+Details:
+	Entity Type: coherentvillages:warg (net.theexceptionist.coherentvillages.main.entity.EntityWarg)
+	Entity ID: 190514
+	Entity Name: Warg
+	Entity's Exact location: 957.50, 4.00, 2.50
+	Entity's Block location: World: (957,4,2), Chunk: (at 13,0,2 in 59,0; contains blocks 944,0,0 to 959,255,15), Region: (1,0; contains chunks 32,0 to 63,31, blocks 512,0,0 to 1023,255,511)
+	Entity's Momentum: 0.00, 0.00, 0.00
+	Entity's Passengers: []
+	Entity's Vehicle: ~~ERROR~~ NullPointerException: null
+
+-- Renderer details --
+Details:
+	Assigned renderer: net.theexceptionist.coherentvillages.main.entity.RenderWarg@1a787140
+	Location: -3.75,0.00,-0.72 - World: (-4,0,-1), Chunk: (at 12,0,15 in -1,-1; contains blocks -16,0,-16 to -1,255,-1), Region: (-1,-1; contains chunks -32,-32 to -1,-1, blocks -512,0,-512 to -1,255,-1)
+	Rotation: 28.68751
+	Delta: 0.68000025
+Stacktrace:
+	at net.minecraft.client.renderer.entity.RenderManager.renderEntity(RenderManager.java:390)
+	at net.minecraft.client.renderer.entity.RenderManager.renderEntityStatic(RenderManager.java:374)
+	at net.minecraft.client.renderer.RenderGlobal.renderEntities(RenderGlobal.java:655)
+	at net.minecraft.client.renderer.EntityRenderer.renderWorldPass(EntityRenderer.java:1400)
+	at net.minecraft.client.renderer.EntityRenderer.renderWorld(EntityRenderer.java:1312)
+
+-- Affected level --
+Details:
+	Level name: MpServer
+	All players: 1 total; [EntityPlayerSP['Player975'/5, l='MpServer', x=961.25, y=4.00, z=3.21]]
+	Chunk stats: MultiplayerChunkCache: 553, 553
+	Level seed: 0
+	Level generator: ID 01 - flat, ver 0. Features enabled: false
+	Level generator options: 
+	Level spawn location: World: (956,4,13), Chunk: (at 12,0,13 in 59,0; contains blocks 944,0,0 to 959,255,15), Region: (1,0; contains chunks 32,0 to 63,31, blocks 512,0,0 to 1023,255,511)
+	Level time: 954 game time, 954 day time
+	Level dimension: 0
+	Level storage version: 0x00000 - Unknown?
+	Level weather: Rain time: 0 (now: false), thunder time: 0 (now: false)
+	Level game mode: Game mode: creative (ID 1). Hardcore: false. Cheats: false
+	Forced entities: 44 total; [EntitySlime['Slime'/78848, l='MpServer', x=996.39, y=4.00, z=44.97], EntityPig['Pig'/76933, l='MpServer', x=893.50, y=4.00, z=-38.50], EntitySlime['Slime'/143494, l='MpServer', x=965.13, y=4.28, z=-23.66], EntityPig['Pig'/76932, l='MpServer', x=895.50, y=4.00, z=-37.50], EntitySlime['Slime'/45958, l='MpServer', x=998.02, y=4.34, z=29.35], EntityPig['Pig'/76935, l='MpServer', x=889.50, y=4.00, z=-39.50], EntitySlime['Slime'/67206, l='MpServer', x=997.04, y=4.00, z=36.35], EntityPig['Pig'/76934, l='MpServer', x=893.50, y=4.00, z=-36.50], EntityPig['Pig'/76936, l='MpServer', x=881.50, y=4.00, z=60.50], EntityChicken['Chicken'/76941, l='MpServer', x=946.16, y=4.00, z=-57.29], EntityChicken['Chicken'/76940, l='MpServer', x=935.50, y=4.00, z=-52.50], EntitySheep['Sheep'/76943, l='MpServer', x=933.50, y=4.00, z=-54.50], EntityChicken['Chicken'/76942, l='MpServer', x=940.50, y=4.00, z=-48.50], EntitySlime['Slime'/44049, l='MpServer', x=1021.71, y=4.67, z=-58.58], EntitySlime['Slime'/91034, l='MpServer', x=1007.11, y=5.08, z=7.24], EntitySlime['Slime'/12573, l='MpServer', x=979.32, y=4.00, z=-22.96], EntitySlime['Slime'/88991, l='MpServer', x=890.14, y=4.00, z=47.25], EntityChicken['Chicken'/76963, l='MpServer', x=982.76, y=4.00, z=-42.84], EntityPig['Pig'/76965, l='MpServer', x=989.42, y=4.00, z=-57.24], EntityPig['Pig'/76964, l='MpServer', x=986.59, y=4.00, z=-45.98], EntityPig['Pig'/76966, l='MpServer', x=985.79, y=4.00, z=-50.43], EntitySlime['Slime'/136872, l='MpServer', x=1039.73, y=4.00, z=-72.32], EntitySlime['Slime'/188329, l='MpServer', x=963.00, y=5.10, z=-65.00], EntitySlime['Slime'/28461, l='MpServer', x=970.58, y=4.00, z=64.59], EntityWarg['Warg'/190514, l='MpServer', x=957.50, y=4.00, z=2.50], EntitySheep['Sheep'/76986, l='MpServer', x=942.20, y=4.00, z=-65.70], EntitySlime['Slime'/134975, l='MpServer', x=1002.86, y=5.02, z=80.70], EntitySlime['Slime'/95679, l='MpServer', x=906.47, y=4.28, z=34.42], EntitySlime['Slime'/95678, l='MpServer', x=887.30, y=4.12, z=44.93], EntitySlime['Slime'/55618, l='MpServer', x=956.95, y=4.00, z=-64.31], EntitySlime['Slime'/89160, l='MpServer', x=950.34, y=4.50, z=-74.99], EntitySlime['Slime'/5075, l='MpServer', x=892.01, y=4.14, z=41.00], EntitySlime['Slime'/65239, l='MpServer', x=986.16, y=4.00, z=-28.45], EntityWarg['Warg'/161245, l='MpServer', x=959.39, y=4.00, z=7.67], EntitySlime['Slime'/27488, l='MpServer', x=970.71, y=5.08, z=-28.98], EntitySlime['Slime'/98022, l='MpServer', x=985.49, y=4.00, z=-61.59], EntitySlime['Slime'/66409, l='MpServer', x=924.85, y=4.00, z=-41.10], EntitySlime['Slime'/93673, l='MpServer', x=982.23, y=5.00, z=-54.04], EntitySlime['Slime'/182378, l='MpServer', x=946.02, y=4.00, z=-54.18], EntitySlime['Slime'/25961, l='MpServer', x=1029.88, y=5.00, z=-36.58], EntitySlime['Slime'/140534, l='MpServer', x=973.84, y=4.00, z=-4.01], EntitySlime['Slime'/140535, l='MpServer', x=967.03, y=4.28, z=-21.44], EntitySlime['Slime'/168060, l='MpServer', x=891.30, y=4.00, z=82.38], EntityPlayerSP['Player975'/5, l='MpServer', x=961.25, y=4.00, z=3.21]]
+	Retry entities: 0 total; []
+	Server brand: fml,forge
+	Server type: Integrated singleplayer server
+Stacktrace:
+	at net.minecraft.client.multiplayer.WorldClient.addWorldInfoToCrashReport(WorldClient.java:461)
+	at net.minecraft.client.Minecraft.addGraphicsAndWorldToCrashReport(Minecraft.java:2888)
+	at net.minecraft.client.Minecraft.run(Minecraft.java:462)
+	at net.minecraft.client.main.Main.main(Main.java:118)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at net.minecraft.launchwrapper.Launch.launch(Launch.java:135)
+	at net.minecraft.launchwrapper.Launch.main(Launch.java:28)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at net.minecraftforge.gradle.GradleStartCommon.launch(GradleStartCommon.java:97)
+	at GradleStart.main(GradleStart.java:25)
+
+-- System Details --
+Details:
+	Minecraft Version: 1.12.2
+	Operating System: Mac OS X (x86_64) version 10.13.6
+	Java Version: 1.8.0_144, Oracle Corporation
+	Java VM Version: Java HotSpot(TM) 64-Bit Server VM (mixed mode), Oracle Corporation
+	Memory: 513575608 bytes (489 MB) / 948436992 bytes (904 MB) up to 1908932608 bytes (1820 MB)
+	JVM Flags: 0 total; 
+	IntCache: cache: 0, tcache: 0, allocated: 0, tallocated: 0
+	FML: MCP 9.42 Powered by Forge 14.23.4.2757 7 mods loaded, 7 mods active
+	States: 'U' = Unloaded 'L' = Loaded 'C' = Constructed 'H' = Pre-initialized 'I' = Initialized 'J' = Post-initialized 'A' = Available 'D' = Disabled 'E' = Errored
+
+	| State     | ID               | Version      | Source                           | Signature |
+	|:--------- |:---------------- |:------------ |:-------------------------------- |:--------- |
+	| UCHIJAAAA | minecraft        | 1.12.2       | minecraft.jar                    | None      |
+	| UCHIJAAAA | mcp              | 9.42         | minecraft.jar                    | None      |
+	| UCHIJAAAA | FML              | 8.0.99.99    | forgeSrc-1.12.2-14.23.4.2757.jar | None      |
+	| UCHIJAAAA | forge            | 14.23.4.2757 | forgeSrc-1.12.2-14.23.4.2757.jar | None      |
+	| UCHIJAAAA | coherentvillages | v0.0.0.1     | modid-1.0.jar                    | None      |
+	| UCHIJAAAA | journeymap       | 1.12.2-5.5.2 | journeymap-1.12.2-5.5.2.jar      | None      |
+	| UCHIJAAAA | torohealthmod    | 1.12.2-11    | torohealth-1.12.2-11.jar         | None      |
+
+	Loaded coremods (and transformers): 
+	GL info: ' Vendor: 'Intel Inc.' Version: '2.1 INTEL-10.36.19' Renderer: 'Intel(R) Iris(TM) Plus Graphics 640'
+	Launched Version: 1.12.2
+	LWJGL: 2.9.2
+	OpenGL: Intel(R) Iris(TM) Plus Graphics 640 GL version 2.1 INTEL-10.36.19, Intel Inc.
+	GL Caps: Using GL 1.3 multitexturing.
+Using GL 1.3 texture combiners.
+Using framebuffer objects because ARB_framebuffer_object is supported and separate blending is supported.
+Shaders are available because OpenGL 2.1 is supported.
+VBOs are available because OpenGL 1.5 is supported.
+
+	Using VBOs: Yes
+	Is Modded: Definitely; Client brand changed to 'fml,forge'
+	Type: Client (map_client.txt)
+	Resource Packs: 
+	Current Language: English (US)
+	Profiler Position: N/A (disabled)
+	CPU: 4x Intel(R) Core(TM) i5-7360U CPU @ 2.30GHz

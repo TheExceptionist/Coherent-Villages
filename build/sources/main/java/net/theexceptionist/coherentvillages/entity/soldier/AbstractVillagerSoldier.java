@@ -56,14 +56,16 @@ import net.minecraft.village.Village;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 import net.theexceptionist.coherentvillages.entity.ai.EntityAIAttackBackExclude;
+import net.theexceptionist.coherentvillages.entity.ai.EntityAIHideFromHarm;
 import net.theexceptionist.coherentvillages.entity.ai.EntityAIRest;
 import net.theexceptionist.coherentvillages.entity.ai.EntityAIStayInBorders;
 import net.theexceptionist.coherentvillages.entity.followers.EntitySkeletonMinion;
 import net.theexceptionist.coherentvillages.entity.followers.IEntityFollower;
 import net.theexceptionist.coherentvillages.main.Main;
 import net.theexceptionist.coherentvillages.main.NameGenerator;
+import net.theexceptionist.coherentvillages.main.entity.IEntityVillager;
 
-public abstract class AbstractVillagerSoldier extends EntityVillager implements IEntityFollower{
+public abstract class AbstractVillagerSoldier extends EntityVillager implements IEntityFollower {
 	protected String className = "Soldier";
 	protected int faction = 0;
 	public boolean wasSpawned = false, attacking = false;
@@ -101,6 +103,7 @@ public abstract class AbstractVillagerSoldier extends EntityVillager implements 
 	public AbstractVillagerSoldier(World worldIn) {
 		super(worldIn);
 		this.previousClasses = new ArrayList<String>();
+		this.reSupply(5);
 		
 		//Friendly by default
 		this.faction = Main.SOLDIER_FACTION;
@@ -123,6 +126,11 @@ public abstract class AbstractVillagerSoldier extends EntityVillager implements 
 		/*this.creeperHunter = creeperHunter;
 		this.creeperHunter = undeadHunter;
 		this.creeperHunter = livingHunter;*/
+	}
+	
+	public EntityVillager getLiving()
+	{
+		return (EntityVillager)this;
 	}
 	
 	public void addKills(int amount)
@@ -180,6 +188,7 @@ public abstract class AbstractVillagerSoldier extends EntityVillager implements 
 	
 	protected int talkDown = 0;
 	private int killLim;
+	private int supply;
 	@Override
 	public boolean processInteract(EntityPlayer player, EnumHand hand)
     {
@@ -277,8 +286,8 @@ public abstract class AbstractVillagerSoldier extends EntityVillager implements 
     
     protected void generateName(Random rand)
     {
-    	this.firstName = NameGenerator.generateRandomName(rand);
-    	this.lastName = NameGenerator.generateRandomName(rand);
+    	this.firstName = NameGenerator.generateRandomName(rand, null);
+    	this.lastName = NameGenerator.generateRandomName(rand, null);
     }
     
     protected String getTrueName()
@@ -301,14 +310,15 @@ public abstract class AbstractVillagerSoldier extends EntityVillager implements 
 		if(!world.isRemote){
 			this.tasks.addTask(0, new EntityAISwimming(this));
 	        this.tasks.addTask(1, new EntityAIAttackMelee(this, 1.0D, true));
-	        this.tasks.addTask(2, new EntityAIStayInBorders(this, 1.0D));
-	        this.tasks.addTask(3, new EntityAIRest(this, true));
+	       // this.tasks.addTask(2, new EntityAIStayInBorders(this, 1.0D));
+	        //this.tasks.addTask(3, new EntityAIRest(this, true));
 	        this.tasks.addTask(4, new EntityAIRestrictOpenDoor(this));
 	        this.tasks.addTask(5, new EntityAIOpenDoor(this, true));
-	        this.tasks.addTask(6, new EntityAIMoveTowardsTarget(this, 0.9D, 32.0F));
-	        this.tasks.addTask(7, new EntityAIWanderAvoidWater(this, 0.6D));
-	        this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
-	        this.tasks.addTask(9, new EntityAILookIdle(this));
+	        this.tasks.addTask(6, new EntityAIHideFromHarm(this));
+	        this.tasks.addTask(7, new EntityAIMoveTowardsTarget(this, 0.9D, 32.0F));
+	        this.tasks.addTask(8, new EntityAIWanderAvoidWater(this, 0.6D));
+	        this.tasks.addTask(9, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
+	        this.tasks.addTask(10, new EntityAILookIdle(this));
 	        
 	        this.targetTasks.addTask(0, new EntityAINearestAttackableTarget(this, EntityLiving.class, 1, true, true, new Predicate<EntityLiving>()
 	        {
@@ -538,7 +548,7 @@ public abstract class AbstractVillagerSoldier extends EntityVillager implements 
 	        {
 	            f += EnchantmentHelper.getModifierForCreature(this.getHeldItemMainhand(), ((EntityLivingBase)entityIn).getCreatureAttribute());
 	            i += EnchantmentHelper.getKnockbackModifier(this);
-	           }
+	        }
 	        
 	        this.attacking = true;
 	        boolean flag = entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), f);
@@ -617,12 +627,6 @@ public abstract class AbstractVillagerSoldier extends EntityVillager implements 
 
 	public boolean isShouldFollow() {
 		return true;
-	}
-	
-	@Override
-	public EntityLiving getLiving() {
-		// TODO Auto-generated method stub
-		return this;
 	}
 	
 	   /**
@@ -717,9 +721,24 @@ public abstract class AbstractVillagerSoldier extends EntityVillager implements 
     }
 
 	@Override
-	public void setMaster(AbstractVillagerSoldier villager) {
+	public void setMaster(EntityLivingBase villager) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public int getSupply() {
+		// TODO Auto-generated method stub
+		return supply ;
+	}
+	
+	public void reSupply(int amount)
+	{
+		supply += amount;
+	}
+
+	public int getKills() {
+		// TODO Auto-generated method stub
+		return kills;
 	}
 
 }

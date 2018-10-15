@@ -9,7 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 import net.theexceptionist.coherentvillages.entity.ai.EntityAIAttackWithBow;
-import net.theexceptionist.coherentvillages.entity.ai.EntityAIMoveThroughOutskirts;
+import net.theexceptionist.coherentvillages.entity.ai.EntityAIPatrolVillage;
 import net.theexceptionist.coherentvillages.main.Main;
 
 public class EntityVillagerMageArcher extends AbstractVillagerArcher{
@@ -65,7 +65,7 @@ public class EntityVillagerMageArcher extends AbstractVillagerArcher{
     {
 		super.initEntityAI();
 		this.tasks.addTask(1, new EntityAIAttackWithBow(this, 1.0D, 60, 10.0F));
-		this.tasks.addTask(5, new EntityAIMoveThroughOutskirts(this, 0.6D, true));
+		this.tasks.addTask(5, new EntityAIPatrolVillage(this, 0.6D, true));
     }
 
 }

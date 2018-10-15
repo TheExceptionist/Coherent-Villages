@@ -1,0 +1,19 @@
+package net.theexceptionist.coherentvillages.main.entity.attributes;
+
+public class AttributeVocation {
+	public final static int CLASS_VILLAGER = 0;
+	
+	public final static int CLASS_SOLDIER = 1;
+	public final static int CLASS_ARCHER = 2;
+	public final static int CLASS_MAGE = 3;
+	public final static int CLASS_ALCHEMIST = 4;
+	
+	protected int type;
+	protected int rank;
+	protected int upgradeReq;
+	
+	protected String name;
+	
+	AttributeVocation upgrade_left;
+	AttributeVocation upgrade_right;
+}

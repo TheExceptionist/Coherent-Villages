@@ -63,7 +63,7 @@ public class VillageComponentStable extends StructureVillagePieces.Village
                     return true;
                 }
 
-                this.boundingBox.offset(0, this.averageGroundLvl - this.boundingBox.maxY + 3 , 0);
+                this.boundingBox.offset(0, this.averageGroundLvl - this.boundingBox.maxY + 4 , 0);
             }
             
             this.level = worldIn.rand.nextInt(3);
@@ -113,7 +113,7 @@ public class VillageComponentStable extends StructureVillagePieces.Village
 
             for (int j = 0; j < 7; ++j)
             {
-                for (int i = 0; i < 12; ++i)
+                for (int i = 0; i < 13; ++i)
                 {
                     this.clearCurrentPositionBlocksUpwards(worldIn, i, 6, j, structureBoundingBoxIn);
                     this.replaceAirAndLiquidDownwards(worldIn, iblockstate, i, -1, j, structureBoundingBoxIn);

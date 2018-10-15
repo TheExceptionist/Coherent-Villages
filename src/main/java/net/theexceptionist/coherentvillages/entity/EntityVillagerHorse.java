@@ -74,7 +74,7 @@ public class EntityVillagerHorse extends EntityHorse
      */
     public EnumCreatureAttribute getCreatureAttribute()
     {
-        return EnumCreatureAttribute.UNDEAD;
+        return EnumCreatureAttribute.UNDEFINED;
     }
 
     /**
