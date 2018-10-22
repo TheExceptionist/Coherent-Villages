@@ -26,7 +26,7 @@ public class PlayerConnectionEvent{
 		
 		ITextComponent itextcomponent1 = new TextComponentString(
 				"Welcome to "+Resources.NAME+"\n By: TheExceptionist (Or majesticmerlin)\n Your current version is: "+Resources.VERSION
-				+"\n Thank you for downloading this mod! Check for updates on Curseforge and post issues on Github! \nDon't forget to change the config file to suit your needs!\n Special Thanks to: eeeeetdyeeeee and Olkusz_Ssak12 For the Textures");
+				+"\n Thank you for downloading this mod! Check for updates on Curseforge and post issues on Github! \nDon't forget to change the config file to suit your needs!\n Special Thanks to: eeeeetdyeeeee, Olkusz_Ssak12 and various other people For the Textures");
 		
 		
 		itextcomponent1.setStyle(style);

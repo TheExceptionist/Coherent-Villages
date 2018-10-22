@@ -1,0 +1,7 @@
+{
+    "variants": {
+        "normal": [
+            { "model": "coherent_villages:firewood" }
+        ]
+    }
+}

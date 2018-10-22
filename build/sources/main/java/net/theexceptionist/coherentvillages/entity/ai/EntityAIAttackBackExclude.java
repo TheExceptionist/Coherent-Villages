@@ -6,6 +6,8 @@ import net.minecraft.entity.ai.EntityAITarget;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.util.math.AxisAlignedBB;
+import net.theexceptionist.coherentvillages.main.entity.EntityHumanVillager;
+import net.theexceptionist.coherentvillages.main.entity.attributes.AttributeVocation;
 
 public class EntityAIAttackBackExclude extends EntityAITarget
 {
@@ -13,12 +15,14 @@ public class EntityAIAttackBackExclude extends EntityAITarget
     /** Store the previous revengeTimer value */
     private int revengeTimerOld;
     private final Class<?>[] excludedReinforcementTypes;
+    private EntityHumanVillager creatureIn;
 
-    public EntityAIAttackBackExclude(EntityCreature creatureIn, boolean entityCallsForHelpIn, Class<?>... excludedReinforcementTypes)
+    public EntityAIAttackBackExclude(EntityHumanVillager creatureIn, boolean entityCallsForHelpIn, Class<?>... excludedReinforcementTypes)
     {
         super(creatureIn, true);
         this.entityCallsForHelp = entityCallsForHelpIn;
         this.excludedReinforcementTypes = excludedReinforcementTypes;
+        this.creatureIn = creatureIn;
         this.setMutexBits(1);
     }
 
@@ -27,10 +31,32 @@ public class EntityAIAttackBackExclude extends EntityAITarget
      */
     public boolean shouldExecute()
     {
+    	int villagerHostile = -1;
         int i = this.taskOwner.getRevengeTimer();
         EntityLivingBase entitylivingbase = this.taskOwner.getRevengeTarget();
+        
+        if(entitylivingbase != null && entitylivingbase instanceof EntityHumanVillager)
+        {
+        	EntityHumanVillager potentialBandit = (EntityHumanVillager) entitylivingbase;
+        	
+        	if(creatureIn.getVocation().getType() != AttributeVocation.CLASS_BANDIT)
+        	{
+	        	if(potentialBandit.getVocation().getType() == AttributeVocation.CLASS_BANDIT)
+	        	{
+	        		villagerHostile = 1;
+	        	}
+	        	else
+	        	{
+	        		villagerHostile = 0;
+	        	}
+        	}
+        	else
+        	{
+        		villagerHostile = 1;
+        	}
+        }
         //return entitylivingbase != null;
-        return i != this.revengeTimerOld && entitylivingbase != null && this.isSuitableTarget(entitylivingbase, false) && !(entitylivingbase instanceof EntityVillager);
+        return i != this.revengeTimerOld && entitylivingbase != null && this.isSuitableTarget(entitylivingbase, false) && villagerHostile != 0 ? true : false ;
     }
 
     /**

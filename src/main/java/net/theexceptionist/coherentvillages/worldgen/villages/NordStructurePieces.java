@@ -25,8 +25,12 @@ import net.minecraft.init.Biomes;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.Mirror;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
@@ -39,6 +43,9 @@ import net.minecraft.world.gen.structure.MapGenStructureIO;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraft.world.gen.structure.template.TemplateManager;
+import net.minecraft.world.storage.loot.LootTableList;
+import net.theexceptionist.coherentvillages.main.Main;
+import net.theexceptionist.coherentvillages.main.block.BlockRegister;
 import net.theexceptionist.coherentvillages.main.entity.EntityBjornserker;
 import net.theexceptionist.coherentvillages.main.entity.EntityHumanVillager;
 import net.theexceptionist.coherentvillages.main.entity.EntityWarg;
@@ -52,7 +59,7 @@ public class NordStructurePieces
         MapGenStructureIO.registerStructureComponent(NordStructurePieces.ArcherHut.class, "ViBH");//
         MapGenStructureIO.registerStructureComponent(NordStructurePieces.Field1.class, "ViDF");//
         MapGenStructureIO.registerStructureComponent(NordStructurePieces.Field2.class, "ViF");//
-        MapGenStructureIO.registerStructureComponent(NordStructurePieces.Torch.class, "ViL");//
+        MapGenStructureIO.registerStructureComponent(NordStructurePieces.Brazier.class, "ViL");//
         MapGenStructureIO.registerStructureComponent(NordStructurePieces.GuardHouse.class, "ViGH");//
         MapGenStructureIO.registerStructureComponent(NordStructurePieces.LargerHut.class, "ViSH");//**
         MapGenStructureIO.registerStructureComponent(NordStructurePieces.NordHut.class, "ViSmH");//
@@ -198,11 +205,11 @@ public class NordStructurePieces
                 }
             }
 
-            StructureBoundingBox structureboundingbox = NordStructurePieces.Torch.findPieceBox(start, structureComponents, rand, structureMinX, structureMinY, structureMinZ, facing);
+            StructureBoundingBox structureboundingbox = NordStructurePieces.Brazier.findPieceBox(start, structureComponents, rand, structureMinX, structureMinY, structureMinZ, facing);
 
             if (structureboundingbox != null)
             {
-                return new NordStructurePieces.Torch(start, componentType, rand, structureboundingbox, facing);
+                return new NordStructurePieces.Brazier(start, componentType, rand, structureboundingbox, facing);
             }
             else
             {
@@ -1040,7 +1047,7 @@ public class NordStructurePieces
                                     worldIn.setBlockState(blockpos, iblockstate2, 2);
                                     worldIn.setBlockState(blockpos.down(), iblockstate3, 2);
                                     break;
-                                }
+                                } 
 
                                 blockpos = blockpos.down();
                             }
@@ -1104,11 +1111,11 @@ public class NordStructurePieces
             public List<StructureComponent> pendingRoads = Lists.<StructureComponent>newArrayList();
             public Biome biome;
 
-            public Start(BiomeProvider biomeProvider2, int i, Random rand, int j, int k, List<PieceWeight> list, int size)
+            public Start()
             {
             }
 
-            public Start(World worldIn, int x, int z, BiomeProvider biomeProviderIn, int p_i2104_2_, Random rand, int p_i2104_4_, int p_i2104_5_, List<NordStructurePieces.PieceWeight> p_i2104_6_, int p_i2104_7_)
+            public Start(BiomeProvider biomeProviderIn, int p_i2104_2_, Random rand, int p_i2104_4_, int p_i2104_5_, List<NordStructurePieces.PieceWeight> p_i2104_6_, int p_i2104_7_)
             {
                 super((NordStructurePieces.Start)null, 0, rand, p_i2104_4_, p_i2104_5_);
                 this.biomeProvider = biomeProviderIn;
@@ -1132,10 +1139,10 @@ public class NordStructurePieces
                 }
 
                 this.setStructureType(this.structureType);
-                this.isZombieInfested = rand.nextInt(100) == 2;
+                this.isZombieInfested = rand.nextInt(100) <= Main.nord_zombie_infest_rate;
                 if(!this.isZombieInfested) 
                 {
-                	this.isBanditInfested = rand.nextInt(100) < 25;
+                	this.isBanditInfested = rand.nextInt(100) <= Main.nord_bandit_infest_rate;
                 }
                 else 
                 {
@@ -1144,13 +1151,13 @@ public class NordStructurePieces
             }
         }
 
-    public static class Torch extends NordStructurePieces.Village
+    public static class Brazier extends NordStructurePieces.Village
         {
-            public Torch()
+            public Brazier()
             {
             }
 
-            public Torch(NordStructurePieces.Start start, int p_i45568_2_, Random rand, StructureBoundingBox p_i45568_4_, EnumFacing facing)
+            public Brazier(NordStructurePieces.Start start, int p_i45568_2_, Random rand, StructureBoundingBox p_i45568_4_, EnumFacing facing)
             {
                 super(start, p_i45568_2_);
                 this.setCoordBaseMode(facing);
@@ -1160,7 +1167,7 @@ public class NordStructurePieces
             public static StructureBoundingBox findPieceBox(NordStructurePieces.Start start, List<StructureComponent> p_175856_1_, Random rand, int p_175856_3_, int p_175856_4_, int p_175856_5_, EnumFacing facing)
             {
             	if(start.isBanditInfested || start.isZombieInfested) return null;
-                StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(p_175856_3_, p_175856_4_, p_175856_5_, 0, 0, 0, 3, 4, 2, facing);
+                StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(p_175856_3_, p_175856_4_, p_175856_5_, 0, 0, 0, 3, 4, 3, facing);
                 return StructureComponent.findIntersecting(p_175856_1_, structureboundingbox) != null ? null : structureboundingbox;
             }
 
@@ -1179,11 +1186,20 @@ public class NordStructurePieces
                         return true;
                     }
 
-                    this.boundingBox.offset(0, this.averageGroundLvl - this.boundingBox.maxY + 4 - 1, 0);
+                    this.boundingBox.offset(0, this.averageGroundLvl - this.boundingBox.maxY + 2 - 1, 0);
                 }
 
-                IBlockState iblockstate = this.getBiomeSpecificBlockState(Blocks.OAK_FENCE.getDefaultState());
-                this.fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 0, 0, 2, 3, 1, Blocks.AIR.getDefaultState(), Blocks.AIR.getDefaultState(), false);
+                IBlockState iblockstate = Blocks.COBBLESTONE.getDefaultState();
+                Block noSpreadFire = Blocks.FIRE.setTickRandomly(false);
+                //System.out.println("Can tick: "+noSpreadFire.getTickRandomly());
+                this.fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 1, 1, 3, 2, 3, iblockstate, iblockstate, false);
+                this.setBlockState(worldIn, BlockRegister.firewood.getDefaultState(), 2, 1, 2, structureBoundingBoxIn);
+               // this.setBlockState(worldIn, noSpreadFire.getDefaultState(), 2, 2, 2, structureBoundingBoxIn);
+                this.placeTorch(worldIn, EnumFacing.UP, 2, 2, 2, structureBoundingBoxIn);
+                if(worldIn.rand.nextInt(100) <= 50) this.fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 3, 1, 3, 3, 3, Blocks.COBBLESTONE_WALL.getDefaultState(), Blocks.AIR.getDefaultState(), false);
+                this.setBlockState(worldIn, Blocks.AIR.getDefaultState(), 2, 3, 2, structureBoundingBoxIn);
+                //this.getBiomeSpecificBlockState(Blocks.COBBLESTONE.getDefaultState());
+                /*this.fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 0, 0, 2, 3, 1, Blocks.AIR.getDefaultState(), Blocks.AIR.getDefaultState(), false);
                 this.setBlockState(worldIn, iblockstate, 1, 0, 0, structureBoundingBoxIn);
                 this.setBlockState(worldIn, iblockstate, 1, 1, 0, structureBoundingBoxIn);
                 this.setBlockState(worldIn, iblockstate, 1, 2, 0, structureBoundingBoxIn);
@@ -1191,7 +1207,7 @@ public class NordStructurePieces
                 this.placeTorch(worldIn, EnumFacing.EAST, 2, 3, 0, structureBoundingBoxIn);
                 this.placeTorch(worldIn, EnumFacing.NORTH, 1, 3, 1, structureBoundingBoxIn);
                 this.placeTorch(worldIn, EnumFacing.WEST, 0, 3, 0, structureBoundingBoxIn);
-                this.placeTorch(worldIn, EnumFacing.SOUTH, 1, 3, -1, structureBoundingBoxIn);
+                this.placeTorch(worldIn, EnumFacing.SOUTH, 1, 3, -1, structureBoundingBoxIn);*/
                 return true;
             }
         }
@@ -1389,16 +1405,27 @@ public class NordStructurePieces
                         }
                         else if(this.isBanditInfested)
                         {
-                        	EntityHumanVillager entityHumanVillager = new EntityHumanVillager(worldIn, WorldGenVillage.NORD_ID, AttributeRace.getFromIDRace(WorldGenVillage.NORD_ID).getRandomBandit(worldIn), EntityHumanVillager.getRandomGender(worldIn), false);                            
+                        	EntityHumanVillager entityHumanVillager = new EntityHumanVillager(worldIn, WorldGenVillage.NORD_ID, 
+                        			AttributeRace.getFromIDRace(WorldGenVillage.NORD_ID).getRandomBandit(worldIn), EntityHumanVillager.getRandomGender(worldIn), this.ruler == null ? true : false);                            
                         	entityHumanVillager.setLocationAndAngles((double)j + 0.5D, (double)k, (double)l + 0.5D, 0.0F, 0.0F);
+                        	
+                        	if(entityHumanVillager.isRuler())
+                        	{
+                        		entityHumanVillager.getFaction().setBandit(true);
+                        		this.ruler = entityHumanVillager;
+                        	}
+                        	else
+                        	{
+                        		entityHumanVillager.setRuler(this.ruler);
+                        	}
                             //entityHumanVillager.setProfession(this.chooseForgeProfession(i, entityHumanVillager.getProfessionForge()));
                             //entityHumanVillager.finalizeMobSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityHumanVillager)), (IEntityLivingData)null, false);
                             worldIn.spawnEntity(entityHumanVillager);
                             
                             if(upgrade)
                             {
-                            	if(worldIn.rand.nextInt(100) < 25) entityHumanVillager.upgrade();
-                            	if(worldIn.rand.nextInt(100) < 5) entityHumanVillager.upgrade();
+                            	if(worldIn.rand.nextInt(100) < Main.upgrade_chance) entityHumanVillager.upgrade();
+                            	if(worldIn.rand.nextInt(100) < Main.upgrade_chance/5) entityHumanVillager.upgrade();
                             }
                             
                             if(worldIn.rand.nextInt(100) < 30) 
@@ -1409,7 +1436,7 @@ public class NordStructurePieces
 	                            //entityWarg.finalizeMobSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityWarg)), (IEntityLivingData)null, false);
 	                            worldIn.spawnEntity(entityWarg); 
                             }
-                            if(worldIn.rand.nextInt(100) < 5) 
+                            if(worldIn.rand.nextInt(100) <= Main.villager_bjorn_rate * 3) 
                             {
                             	EntityHumanVillager entityBjorn = new EntityHumanVillager(worldIn, WorldGenVillage.NORD_ID, AttributeRace.getFromIDRace(WorldGenVillage.NORD_ID).getRandomBandit(worldIn), EntityHumanVillager.GENDER_MALE, true, new EntityBjornserker(worldIn));                            
                             	entityBjorn.setLocationAndAngles((double)j + 0.5D, (double)k, (double)l + 0.5D, 0.0F, 0.0F);
@@ -1444,15 +1471,15 @@ public class NordStructurePieces
                         	EntityHumanVillager entityHumanVillager = new EntityHumanVillager(worldIn, WorldGenVillage.NORD_ID, AttributeRace.getFromIDRace(WorldGenVillage.NORD_ID).getRandomMercenary(worldIn), EntityHumanVillager.getRandomGender(worldIn), false);                            
                         	entityHumanVillager.setLocationAndAngles((double)j + 0.5D, (double)k, (double)l + 0.5D, 0.0F, 0.0F);
                     
-                        	if(worldIn.rand.nextInt(100) <= 2) entityHumanVillager.setShifter(true, new EntityBjornserker(worldIn));
+                        	if(worldIn.rand.nextInt(100) <= Main.villager_bjorn_rate) entityHumanVillager.setShifter(true, new EntityBjornserker(worldIn), true, -1);
                             //entityHumanVillager.setProfession(this.chooseForgeProfession(i, entityHumanVillager.getProfessionForge()));
                            // entityHumanVillager.finalizeMobSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityHumanVillager)), (IEntityLivingData)null, false);
                             worldIn.spawnEntity(entityHumanVillager);
                             
                             if(upgrade)
                             {
-                            	if(worldIn.rand.nextInt(100) < 25) entityHumanVillager.upgrade();
-                            	if(worldIn.rand.nextInt(100) < 5) entityHumanVillager.upgrade();
+                            	if(worldIn.rand.nextInt(100) < Main.upgrade_chance) entityHumanVillager.upgrade();
+                            	if(worldIn.rand.nextInt(100) < Main.upgrade_chance/5) entityHumanVillager.upgrade();
                             }
                         }
                         else
@@ -1465,16 +1492,17 @@ public class NordStructurePieces
                         	
                         	EntityHumanVillager entityHumanVillager = new EntityHumanVillager(worldIn, WorldGenVillage.NORD_ID, vocation, rank, EntityHumanVillager.getRandomGender(worldIn));                            
                         	entityHumanVillager.setLocationAndAngles((double)j + 0.5D, (double)k, (double)l + 0.5D, 0.0F, 0.0F);
-                    
-                        	if(worldIn.rand.nextInt(100) <= 2) entityHumanVillager.setShifter(true, new EntityBjornserker(worldIn));
+                        	entityHumanVillager.setRuler(ruler);
+                        	
+                        	if(worldIn.rand.nextInt(100) <= Main.villager_bjorn_rate) entityHumanVillager.setShifter(true, new EntityBjornserker(worldIn), true, -1);
                             //entityHumanVillager.setProfession(this.chooseForgeProfession(i, entityHumanVillager.getProfessionForge()));
                            // entityHumanVillager.finalizeMobSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityHumanVillager)), (IEntityLivingData)null, false);
                             worldIn.spawnEntity(entityHumanVillager);
                             
                             if(upgrade)
                             {
-                            	if(worldIn.rand.nextInt(100) < 25) entityHumanVillager.upgrade();
-                            	if(worldIn.rand.nextInt(100) < 5) entityHumanVillager.upgrade();
+                            	if(worldIn.rand.nextInt(100) < Main.upgrade_chance) entityHumanVillager.upgrade();
+                            	if(worldIn.rand.nextInt(100) < Main.upgrade_chance/5) entityHumanVillager.upgrade();
                             }
                         }
                     }
@@ -1598,7 +1626,7 @@ public class NordStructurePieces
 				}
 				
 				if(Blocks.OAK_STAIRS == blockstateIn.getBlock() ){
-					return Blocks.OAK_STAIRS.getDefaultState().withProperty(BlockStairs.FACING, event.getOriginal().getValue(BlockStairs.FACING));
+					return Blocks.OAK_STAIRS.getDefaultState().withProperty(BlockStairs.FACING, blockstateIn.getValue(BlockStairs.FACING));
 					
 				}
 				
@@ -1607,10 +1635,9 @@ public class NordStructurePieces
 				}*/
 				
 				if(Blocks.GRASS_PATH == blockstateIn.getBlock() ){
-					return Blocks.PLANKS.getDefaultState().withProperty(BlockPlanks.VARIANT, BlockPlanks.EnumType.OAK);//.withProperty(BlockStone.VARIANT, BlockStone.EnumType.ANDESITE_SMOOTH)
+					return Blocks.GRASS_PATH.getDefaultState();//.withProperty(BlockStone.VARIANT, BlockStone.EnumType.ANDESITE_SMOOTH)
 					
 				}
-				
 				
 				if(Blocks.GRAVEL == blockstateIn.getBlock() ){
 					return Blocks.PLANKS.getDefaultState().withProperty(BlockPlanks.VARIANT, BlockPlanks.EnumType.OAK);
@@ -1660,6 +1687,7 @@ public class NordStructurePieces
 
             protected void placeTorch(World p_189926_1_, EnumFacing p_189926_2_, int p_189926_3_, int p_189926_4_, int p_189926_5_, StructureBoundingBox p_189926_6_)
             {
+            	//System.out.println(p_189926_2_.getName()+" Placing: "+p_189926_3_+" "+p_189926_4_+" "+p_189926_5_);
                 if (!this.isZombieInfested || !this.isBanditInfested)
                 {
                     this.setBlockState(p_189926_1_, Blocks.TORCH.getDefaultState().withProperty(BlockTorch.FACING, p_189926_2_), p_189926_3_, p_189926_4_, p_189926_5_, p_189926_6_);
@@ -1800,9 +1828,16 @@ public class NordStructurePieces
 		                			this.placeTorch(worldIn, EnumFacing.NORTH, x, y, z, structureBoundingBoxIn);
 		                		}
 		                		break;
+		                		case CharBlockTypes.CHEST:
+		                		{
+		                		      this.generateChest(worldIn, structureBoundingBoxIn, randomIn, x, y, z, LootTableList.CHESTS_VILLAGE_BLACKSMITH);
+		                	    }
+		                		break;
 		                		case CharBlockTypes.TORCH_SOUTH:
 		                		{
-		                			if(z == 0)
+		                			//this.setBlockState(worldIn, iblockstate8, x, y, z, structureBoundingBoxIn);
+		                			this.placeTorch(worldIn, EnumFacing.SOUTH, x, y, z, structureBoundingBoxIn);
+		                			/*if(z == 0)
 		                			{
 		                				this.placeTorch(worldIn, EnumFacing.SOUTH, x, y, 0, structureBoundingBoxIn);
 		                	//			System.out.println("Z Coord 1: "+z+" X Coord 1: "+x+" Y Coord 1: "+y);
@@ -1811,7 +1846,7 @@ public class NordStructurePieces
 		                			{
 		                				this.placeTorch(worldIn, EnumFacing.SOUTH, x, y, 9, structureBoundingBoxIn);
 		                //				System.out.println("Z Coord 2: "+z+" X Coord 2: "+x+" Y Coord 2: "+y);
-		                			}
+		                			}*/
 		       
 		              //  			System.out.println("Z Coord: "+z+" X Coord : "+x+" Y Coord : "+y);
 		                			//this.placeTorch(worldIn, EnumFacing.SOUTH, x, y, z-2, structureBoundingBoxIn);

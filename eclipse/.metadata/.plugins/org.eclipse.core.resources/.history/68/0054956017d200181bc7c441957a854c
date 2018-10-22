@@ -1,0 +1,12 @@
+package net.theexceptionist.coherentvillages.main.items;
+
+import net.minecraft.init.Items;
+
+public class ModItems {
+	public static ItemWeaponThrowable throwingAxe;
+	
+	public static void init()
+	{
+		throwingAxe = new ItemWeaponThrowable("throwing_axe", 16, Items.IRON_AXE);//.setMaxStackSize(maxStackSize)
+	}
+}

@@ -10,24 +10,28 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.monster.EntityGolem;
 import net.minecraft.entity.monster.EntityPolarBear;
 import net.minecraft.entity.monster.IMob;
+import net.minecraft.entity.passive.EntityCow;
+import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.passive.EntityVillager;
+import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.passive.IAnimals;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
-import net.minecraft.init.SoundEvents;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.EnumDifficulty;
+import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
-import net.theexceptionist.coherentvillages.entity.ai.EntityAIAttackBackExclude;
 
 public class EntityBjornserker extends EntityPolarBear implements IMob{
 
-	private int coolDown;
+	private int coolDown, healthDown;
 
 	public EntityBjornserker(World worldIn) {
 		super(worldIn);
@@ -41,7 +45,10 @@ public class EntityBjornserker extends EntityPolarBear implements IMob{
 	    this.targetTasks.addTask(6, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
 	    this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityVillager.class, true));
 	    this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityGolem.class, true));
-	        
+	    this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityCow.class, true));
+	    this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityPig.class, true));
+	    this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityWolf.class, true));
+	    
 	    this.targetTasks.addTask(0, new EntityAINearestAttackableTarget(this, EntityLiving.class, 1, true, true, new Predicate<EntityLiving>()
 	    {
 	       public boolean apply(@Nullable EntityLiving p_apply_1_)
@@ -49,7 +56,7 @@ public class EntityBjornserker extends EntityPolarBear implements IMob{
 	            	return p_apply_1_ != null && ((p_apply_1_ instanceof IAnimals) && !(p_apply_1_ instanceof EntityTameable)) && !(p_apply_1_ instanceof IMob);// /*|| (p_apply_1_ instanceof IAnimal)*/);
 	            }
 	    }));
-	    this.targetTasks.addTask(1, new EntityAIAttackBackExclude(this, true, new Class[0])); 
+	    this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false, new Class[0]));
     }
 	
 	protected void applyEntityAttributes()
@@ -71,6 +78,19 @@ public class EntityBjornserker extends EntityPolarBear implements IMob{
 	public void onLivingUpdate()
 	{
 		super.onLivingUpdate();
+		if(healthDown > 0)
+		{
+			healthDown--;
+		}
+		else
+		{
+			if(!this.world.isRemote && this.getHealth() < this.getMaxHealth())
+			{
+				this.heal(5);
+				healthDown = 100;
+			}
+		}
+		
 		if(coolDown > 0)
 		{
 			coolDown--;
@@ -127,5 +147,35 @@ public class EntityBjornserker extends EntityPolarBear implements IMob{
             }
         }
     }
+	
+	protected boolean isValidLightLevel()
+    {
+        BlockPos blockpos = new BlockPos(this.posX, this.getEntityBoundingBox().minY, this.posZ);
+
+        if (this.world.getLightFor(EnumSkyBlock.SKY, blockpos) > this.rand.nextInt(32))
+        {
+            return false;
+        }
+        else
+        {
+            int i = this.world.getLightFromNeighbors(blockpos);
+
+            if (this.world.isThundering())
+            {
+                int j = this.world.getSkylightSubtracted();
+                this.world.setSkylightSubtracted(10);
+                i = this.world.getLightFromNeighbors(blockpos);
+                this.world.setSkylightSubtracted(j);
+            }
+
+            return i <= this.rand.nextInt(8);
+        }
+    }
+	
+	 public boolean getCanSpawnHere()
+	 {
+	     return this.world.getDifficulty() != EnumDifficulty.PEACEFUL &&  (this.isValidLightLevel() && this.world.rand.nextInt(100) <= 2)  && super.getCanSpawnHere() /*&& this.isCanSpawn() && rand.nextInt(100) < Main.bandit_spawn*/;
+	 }
+	
 
 }

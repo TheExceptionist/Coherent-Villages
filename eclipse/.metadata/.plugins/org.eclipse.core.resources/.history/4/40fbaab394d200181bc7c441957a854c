@@ -1,0 +1,35 @@
+package net.theexceptionist.coherentvillages.main.items;
+
+import net.minecraft.block.BlockBanner;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
+import net.minecraft.tileentity.BannerPattern;
+import scala.util.Random;
+
+public class ItemBannerGenWrapper {
+	public static BlockBanner genRandomBannerBlock(Random rand)
+	{
+		ItemStack itemstack = new ItemStack(Items.BANNER);
+		NBTTagCompound nbttagcompound1 = itemstack.getOrCreateSubCompound("BlockEntityTag");
+        NBTTagList nbttaglist;
+
+        if (nbttagcompound1.hasKey("Patterns", 9))
+        {
+            nbttaglist = nbttagcompound1.getTagList("Patterns", 10);
+        }
+        else
+        {
+            nbttaglist = new NBTTagList();
+            nbttagcompound1.setTag("Patterns", nbttaglist);
+        }
+        
+        BannerPattern bannerpattern = BannerPattern.values()[rand.nextInt(BannerPattern.values().length)];
+
+        NBTTagCompound nbttagcompound = new NBTTagCompound();
+        nbttagcompound.setString("Pattern", bannerpattern.getHashname());
+        nbttagcompound.setInteger("Color", k);
+        nbttaglist.appendTag(nbttagcompound);
+	}
+}

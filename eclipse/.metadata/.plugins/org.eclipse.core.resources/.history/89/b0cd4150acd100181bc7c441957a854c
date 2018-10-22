@@ -1,0 +1,77 @@
+package net.theexceptionist.coherentvillages.main.entity.spells;
+
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
+import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+import net.theexceptionist.coherentvillages.entity.followers.EntityVillagerGuardian;
+import net.theexceptionist.coherentvillages.main.entity.EntityHumanVillager;
+
+public class SpellSummonGhost extends Spell {
+	private int coolDown, coolDownSet, count, lifespan;
+	private EntityHumanVillager toSpawn;
+	
+	public SpellSummonGhost(String name, int type, int coolDown, int count, int lifespan, EntityHumanVillager toSpawn) {
+		super(name, type);
+		// TODO Auto-generated constructor stub
+		this.coolDownSet = coolDown;
+		this.toSpawn = toSpawn;
+		this.count = count;
+		this.lifespan = lifespan;
+	}
+
+	@Override
+	public void execute(EntityHumanVillager caster) {
+		World world = caster.getWorld();
+		
+		if(coolDown > 0)
+		{
+			coolDown--;
+		}
+		if(coolDown == 0){
+			BlockPos spawn = new BlockPos(caster.posX, caster.posY, caster.posZ);
+			
+			for(int i = 0; i < count; i++)
+			{
+				EntityHumanVillager entityvillager = new EntityHumanVillager(toSpawn);
+				
+				
+				world.spawnEntity(entityvillager);
+			}
+			/*for(int i = 0; i < currentSpawns.size(); i++){
+				EntityVillagerGuardian g = (EntityVillagerGuardian) currentSpawns.get(i);
+			}*/
+			// TODO Auto-generated method stub
+		   /*   world.playSound((EntityPlayer)null, this.posX, this.posY, this.posZ, SoundEvents.ENTITY_GHAST_SCREAM, SoundCategory.NEUTRAL, 2.0F, 0.5F + this.rand.nextFloat() * 0.2F);
+		       
+			int amount = 1 + this.world.rand.nextInt(4);
+			BlockPos spawn = new BlockPos(this.posX, this.posY, this.posZ);
+			for(int i =0; i < amount; i++){
+				EntityVillagerGuardian entityvillager = new EntityVillagerGuardian(this.world);
+				entityvillager.onInitialSpawn(this.world.getDifficultyForLocation(getPosition()), null);
+	            entityvillager.setLocationAndAngles(spawn.getX() + rand.nextInt(5),spawn.getY()  + rand.nextInt(5),spawn.getZ()  + rand.nextInt(5), 0.0F, 0.0F);
+	            world.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, 
+	            		(double)(spawn.getX() + rand.nextInt(5)), 
+	            		(double)(spawn.getY()  + rand.nextInt(5)),
+	            		(double)(spawn.getZ()  + rand.nextInt(5)),
+	            		(double)5, 
+	            		(double)5,
+	            		(double)5
+	            		);
+			       
+	            //entityvillager.setSpawnPoint(spawn.getX()  + rand.nextInt(5),spawn.getY()  + rand.nextInt(5),spawn.getZ()  + rand.nextInt(5));
+	          //entityvillager.setProfession(null); 
+	          entityvillager.setMaster(this);
+	          
+	          //entityvillager.finalizeMobSpawn(this.world.getDifficultyForLocation(new BlockPos(entityvillager)), (IEntityLivingData)null, false);
+	          world.spawnEntity(entityvillager);*/
+			
+			
+			coolDown = 40;
+		}
+	}
+
+}

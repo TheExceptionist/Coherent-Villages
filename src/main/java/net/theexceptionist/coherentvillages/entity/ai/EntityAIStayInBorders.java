@@ -5,8 +5,6 @@ import net.minecraft.entity.ai.RandomPositionGenerator;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.village.Village;
-import net.theexceptionist.coherentvillages.entity.soldier.AbstractVillagerSoldier;
-import net.theexceptionist.coherentvillages.main.entity.EntityHumanVillager;
 import net.theexceptionist.coherentvillages.main.entity.IEntityVillager;
 
 public class EntityAIStayInBorders extends EntityAIBase

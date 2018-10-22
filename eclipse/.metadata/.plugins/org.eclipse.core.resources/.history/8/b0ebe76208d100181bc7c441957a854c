@@ -1,0 +1,12 @@
+package net.theexceptionist.coherentvillages.main.events;
+
+import java.util.Random;
+
+public class EventBanditSkirmish extends Event {
+	public EventBanditSkirmish(Random rand) {
+		super(rand);
+	}
+	
+	
+
+}

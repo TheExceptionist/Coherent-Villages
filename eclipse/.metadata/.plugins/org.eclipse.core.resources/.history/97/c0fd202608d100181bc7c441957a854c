@@ -1,0 +1,24 @@
+package net.theexceptionist.coherentvillages.main.events;
+
+import java.util.ArrayList;
+
+public class EventManager {
+	public ArrayList<Event> events;
+	
+	public static final int EVENT_BANDIT_SKIRMISH = 0;
+	
+	public EventManager()
+	{
+		events = new ArrayList<Event>();
+	}
+	
+	public Event getEvent(int i)
+	{
+		return events.get(i);
+	}
+	
+	public void addEvent(Event e)
+	{
+		events.add(e);
+	}
+}

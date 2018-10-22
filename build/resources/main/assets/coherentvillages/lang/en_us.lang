@@ -1,6 +1,24 @@
 entity.human_villager.name=Human Villager
 entity.warg.name=Warg
 entity.bjornserker.name=Bjornserker
+entity.wraith.name=Wraith
+
+tile.firewood.name=Fire Wood
+
+item.throwing_axe.name=Throwing Axe
+
+item.barbarian_helmet.name=Nord Mail Helmet
+item.barbarian_chestplate.name=Nord Mail Chestplate
+item.barbarian_leggings.name=Nord Mail Greaves
+item.barbarian_boots.name=Nord Mail Boots
+
+item.nord_shield.name=Nord Round Shield
+
+item.roman_sword.name=Latin Gladius
+item.spear.name=Spear
+
+item.summon_tome_0.name=Summon Ancient Warriors
+item.attack_tome_0.name=Fireball
 
 entity.villager_soldier.name=Villager Soldier
 entity.villager_peasant.name=Villager Peasant

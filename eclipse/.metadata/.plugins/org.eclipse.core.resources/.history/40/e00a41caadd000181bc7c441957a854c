@@ -1,0 +1,44 @@
+package net.theexceptionist.coherentvillages.main.items;
+
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.item.ItemMonsterPlacer;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import net.theexceptionist.coherentvillages.main.Main;
+import net.theexceptionist.coherentvillages.main.Resources;
+import net.theexceptionist.coherentvillages.main.entity.EntityHumanVillager;
+
+public class EntityHumanVillagerEgg extends ItemMonsterPlacer {
+	@SideOnly(Side.CLIENT)
+    private IIcon theIcon;
+    protected int colorBase = 0x0000FF;
+    protected int colorSpots = 0x000000;
+    protected String entityToSpawnName = "";
+    protected String entityToSpawnNameFull = "";
+    protected EntityHumanVillager humanToSpawn = null;
+    protected EntityLiving entityToSpawn = null;
+    private boolean spawnHuman = false;
+    
+    public EntityHumanVillagerEgg()
+    {
+        super();
+    }
+    
+    public EntityHumanVillagerEgg(String parEntityToSpawnName, int parPrimaryColor, 
+          int parSecondaryColor)
+    {
+        setHasSubtypes(false);
+        maxStackSize = 64;
+        setCreativeTab(Main.villagesTab);
+        setEntityToSpawnName(parEntityToSpawnName);
+        colorBase = parPrimaryColor;
+        colorSpots = parSecondaryColor;
+        //System.out.println("Spawn egg constructor for "+entityToSpawnName);
+    }
+    
+    public void setEntityToSpawnName(String parEntityToSpawnName)
+    {
+        entityToSpawnName = parEntityToSpawnName;
+        entityToSpawnNameFull = Resources.MODID+"."+entityToSpawnName; 
+    }
+}

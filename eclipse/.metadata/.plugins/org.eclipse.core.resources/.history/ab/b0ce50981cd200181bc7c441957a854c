@@ -1,0 +1,41 @@
+package net.theexceptionist.coherentvillages.main.items;
+
+import net.minecraft.init.Items;
+import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.Item;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.registries.IForgeRegistry;
+
+public class ModItems {
+	public static ItemWeaponThrowable throwingAxe;
+	
+	public static ItemNordArmor barbarianHelmet;// = new ItemNordArmor("barbarian_helmet", ItemNordArmor.NORD_MAIL, 0, EntityEquipmentSlot.HEAD);
+	public static ItemNordArmor barbarianChestplate;// = new ItemNordArmor("barbarian_chestplate", ItemNordArmor.NORD_MAIL, 0, EntityEquipmentSlot.HEAD);
+	public static ItemNordArmor barbarianLeggings;// = new ItemNordArmor("barbarian_leggings", ItemNordArmor.NORD_MAIL, 1, EntityEquipmentSlot.HEAD);
+	public static ItemNordArmor barbarianBoots;
+	
+	public static void init()
+	{
+		throwingAxe = new ItemWeaponThrowable("throwing_axe", 16, Items.IRON_AXE);//.setMaxStackSize(maxStackSize)
+		
+		
+		barbarianHelmet = new ItemNordArmor("barbarian_helmet", ItemNordArmor.NORD_MAIL, 0, EntityEquipmentSlot.HEAD);
+		barbarianChestplate = new ItemNordArmor("barbarian_chestplate", ItemNordArmor.NORD_MAIL, 0, EntityEquipmentSlot.HEAD);
+		barbarianLeggings = new ItemNordArmor("barbarian_leggings", ItemNordArmor.NORD_MAIL, 1, EntityEquipmentSlot.HEAD);
+		barbarianBoots = new ItemNordArmor("barbarian_boots", ItemNordArmor.NORD_MAIL, 0, EntityEquipmentSlot.HEAD);
+	}
+	
+	@SubscribeEvent
+	public static void registerItems(final RegistryEvent.Register<Item> event) 
+	{
+		final IForgeRegistry<Item> registry = event.getRegistry();
+		
+		registry.register(throwingAxe);
+		
+		registry.register(barbarianHelmet);
+		registry.register(barbarianChestplate);
+		registry.register(barbarianLeggings);
+		registry.register(barbarianBoots);
+	}
+}

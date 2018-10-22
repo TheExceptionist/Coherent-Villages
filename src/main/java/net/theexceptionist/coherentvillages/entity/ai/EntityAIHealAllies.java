@@ -7,14 +7,13 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.util.math.MathHelper;
-import net.theexceptionist.coherentvillages.entity.alchemist.AbstractVillagerAlchemist;
-import net.theexceptionist.coherentvillages.entity.soldier.AbstractVillagerSoldier;
+import net.theexceptionist.coherentvillages.main.entity.EntityHumanVillager;
 
 public class EntityAIHealAllies extends EntityAIBase{
 	/** The entity the AI instance has been applied to */
     private final EntityLiving entityHost;
     /** The entity (as a RangedAttackMob) the AI instance has been applied to. */
-    private final AbstractVillagerAlchemist rangedAttackEntityHost;
+    private final EntityHumanVillager rangedAttackEntityHost;
     private Class <? extends EntityVillager >  attackTarget;
     /**
      * A decrementing tick that spawns a ranged attack once this value reaches 0. It is then set back to the
@@ -29,14 +28,14 @@ public class EntityAIHealAllies extends EntityAIBase{
 	private EntityLivingBase target;
 	//private int coolDown = 0;
 
-    public EntityAIHealAllies(AbstractVillagerAlchemist entityVillagerPotionMaster, double movespeed, int range, double maxAttackDistanceIn, Class <? extends EntityVillager > villager)
+    public EntityAIHealAllies(EntityHumanVillager entityHumanVillager, double movespeed, int range, double maxAttackDistanceIn, Class <? extends EntityVillager > villager)
     {
-        this(entityVillagerPotionMaster, movespeed, range, maxAttackDistanceIn);
+        this(entityHumanVillager, movespeed, range, maxAttackDistanceIn);
         this.attackTarget = villager;
         
     }
 
-    public EntityAIHealAllies(AbstractVillagerAlchemist entityVillagerHealer, double movespeed, int range, double maxAttackDistanceIn)
+    public EntityAIHealAllies(EntityHumanVillager entityVillagerHealer, double movespeed, int range, double maxAttackDistanceIn)
     {
         if (!(entityVillagerHealer instanceof EntityLivingBase))
         {
@@ -76,24 +75,6 @@ public class EntityAIHealAllies extends EntityAIBase{
         	for(int i = 0; i < list.size(); i++){
         		//list = this.rangedAttackEntityHost.world.getEntitiesWithinAABB(EntityVillager.class, this.rangedAttackEntityHost.getEntityBoundingBox().expand(d0, 4.0D, d0));
 	            this.target = (EntityLivingBase)list.get(i);
-	            AbstractVillagerSoldier soldier = null;
-	            AbstractVillagerSoldier host = null;
-	            
-	          //  System.out.println("Target: "+this.target.getCustomNameTag()+" Health "+this.target.getHealth()+"/"+this.target.getMaxHealth());
-	            
-	        	if(this.target instanceof AbstractVillagerSoldier)
-            	{
-            		soldier = (AbstractVillagerSoldier) this.target;
-            		host = (AbstractVillagerSoldier) this.entityHost;
-            		
-            		if(soldier.getFaction() != host.getFaction())
-            		{
-            			return false;
-            		}
-	            	
-		           // System.out.println("Searching: "+target+" "+target.getHealth()+"/"+target.getMaxHealth()+" "+this.entityHost);
-		            
-            	}
 	        	
 	        	if(this.target.getHealth() < this.target.getMaxHealth()){
 		            
@@ -132,7 +113,7 @@ public class EntityAIHealAllies extends EntityAIBase{
 	        boolean flag = true;//this.entityHost.getEntitySenses().canSee(this.attackTarget);
 	       //Unused for now
 	        //System.out.println(this.entityHost.getCustomNameTag()+" healing start");
-	        this.rangedAttackEntityHost.setClient(target);
+	        //this.rangedAttackEntityHost.setClient(target);
 	
 	        /*if (d0 <= (double)this.maxAttackDistance)
 	        {

@@ -1,0 +1,37 @@
+package net.theexceptionist.coherentvillages.main.entity;
+
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.ai.EntityAIWanderAvoidWaterFlying;
+import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.entity.monster.IMob;
+import net.minecraft.entity.passive.EntityFlying;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+
+public class EntityWraith extends EntityMob implements IMob, EntityFlying{
+
+	
+	public EntityWraith(World worldIn) {
+		super(worldIn);
+		//this.moveHelper = new EntityWraith.GhastMoveHelper(this);
+	}
+	
+
+	@Override
+    public void fall(float distance, float damageMultiplier)
+    {
+		
+    }
+
+	@Override
+    protected void updateFallState(double y, boolean onGroundIn, IBlockState state, BlockPos pos)
+    {
+		
+    }
+	
+	protected void initEntityAI()
+    {
+		this.tasks.addTask(2, new EntityAIWanderAvoidWaterFlying(this, 1.0D));
+		
+    }
+}

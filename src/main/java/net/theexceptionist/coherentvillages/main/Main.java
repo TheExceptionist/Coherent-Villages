@@ -7,12 +7,12 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import org.apache.logging.log4j.Logger;
 
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Biomes;
 import net.minecraft.util.ResourceLocation;
@@ -24,16 +24,25 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.VillagerRegistry;
 import net.minecraftforge.fml.common.registry.VillagerRegistry.IVillageCreationHandler;
-import net.theexceptionist.coherentvillages.entity.EntityVillagerArrow;
+import net.theexceptionist.coherentvillages.commands.CommandCreate;
+import net.theexceptionist.coherentvillages.main.block.BlockRegister;
 import net.theexceptionist.coherentvillages.main.entity.EntityBjornserker;
 import net.theexceptionist.coherentvillages.main.entity.EntityHumanVillager;
 import net.theexceptionist.coherentvillages.main.entity.EntityWarg;
+import net.theexceptionist.coherentvillages.main.entity.EntityWraith;
 import net.theexceptionist.coherentvillages.main.entity.attributes.AttributeRace;
+import net.theexceptionist.coherentvillages.main.entity.attributes.FactionManager;
+import net.theexceptionist.coherentvillages.main.items.EntityWeaponThrowable;
+import net.theexceptionist.coherentvillages.main.items.ModItems;
 import net.theexceptionist.coherentvillages.worldgen.villages.ArabStructurePieces;
+import net.theexceptionist.coherentvillages.worldgen.villages.BritonStructurePieces;
+import net.theexceptionist.coherentvillages.worldgen.villages.FrankStructurePieces;
 import net.theexceptionist.coherentvillages.worldgen.villages.GermanStructurePieces;
+import net.theexceptionist.coherentvillages.worldgen.villages.GreekStructurePieces;
 import net.theexceptionist.coherentvillages.worldgen.villages.LatinStructurePieces;
 import net.theexceptionist.coherentvillages.worldgen.villages.NordStructurePieces;
 import net.theexceptionist.coherentvillages.worldgen.villages.SlavStructurePieces;
@@ -42,7 +51,7 @@ import net.theexceptionist.coherentvillages.worldgen.villages.WorldGenVillage;
 @Mod(modid = Resources.MODID, name = Resources.NAME, version = Resources.VERSION, updateJSON="https://github.com/TheExceptionist/Coherent-Villages/blob/master/UpdateChecker/update.json")
 public class Main
 {
-	public static boolean useNametags = true;
+	public static boolean useNametags = false;
 
 	public static Logger logger;
     
@@ -55,9 +64,29 @@ public class Main
     public static final int SOLDIER_FACTION = 0;
     public static final int BANDIT_FACTION = 1;
     
+	private static int entityIDStart = 1514;
+    
     public static int player_faction = SOLDIER_FACTION;
-   public static int raid_rate = 5;
-   public static int recruit_rate = 0;
+   public static int nord_zombie_infest_rate = 2;
+   public static int nord_bandit_infest_rate = 25;
+   public static int bjornserker_rate = 5;
+   public static int warg_rate = 10;
+   public static int upgrade_chance = 25;
+	public static int villager_bjorn_rate = 5;
+	
+	public static int wraith_rate = 5;
+	public static int wraith_turn_rate = 50;
+	   public static int latin_zombie_infest_rate = 2;
+	   public static int latin_bandit_infest_rate = 25;
+	   
+	   public static int greek_zombie_infest_rate = 2;
+	   public static int greek_bandit_infest_rate = 25;
+	   
+	   public static int frank_zombie_infest_rate = 2;
+	   public static int frank_bandit_infest_rate = 25;
+	   
+	   public static int briton_zombie_infest_rate = 2;
+	   public static int briton_bandit_infest_rate = 25;
    
     private static BufferedWriter writer;
     private static BufferedReader reader;
@@ -72,109 +101,30 @@ public class Main
     			"min_distance=10\n",
     			"#Tested with values 0, 1... change default size of villages\n",
     			"size=1\n",
-    			"#Spawnrate for the bandits outside the villages, 0 or -1 turns them off!\n",
-    			"bandit_spawn_rate=5\n",
-    			"#Show nametags of villagers all the time. (Can still see the nametag above the villager)(1 = on, 0 = off)\n",
-    			"show_nametags=0\n",
-    			"#Village soldier recruiting (for the villages) (out of 100)\n",
-    			"recruit_rate=5\n",
-    			"#Village raid chance (for the villages) (out of 100)\n",
-    			"raid_rate=5\n",
-    			"#Turn soldiers off and on. (1 = on, 0 = off)\n",
-    			"guard=1\n",
-    			"man-at-arms=1\n",
-    			"sergeant=1\n",
-    			"warrior=1\n",
-    			"militia=1\n",
-    			"peasant=1\n",
-     			"archer=1\n",
-    			"hunter=1\n",
-    			"mage_archer=1\n",
-    			"marksman=1\n",
-    			"merchant=1\n",
-    			"mage=1\n",
-     			"conjurer=1\n",
-    			"necromancer=1\n",
-    			"grand_mage=1\n",
-    			"alchemist=1\n",
-    			"healer=1\n",
-    			"undead_hunter=1\n",
-     			"potion_master=1\n",
-    			"cavalier=1\n",
-    			"knight=1\n",
-    			"apothecary=1\n",
-    			"horse_archer=1\n",
-    			"mage_knight=1\n",
-    			"paladin=1\n",
-    			"bandit=1\n",
-    			"bandit_archer=1\n",
-    			"bandit_mage=1\n",
-    			"bandit_alchemist=1\n",
-    			"bandit_horseman=1\n",
-    			"#Turn off Creepers\n",
-    			"spawn_creepers=1\n",
-    			"#mark each biome name with either a 0 or 1 to turn them on/off\n",
-    			"#Ex: Ocean=1 turns on the village in the ocean biome\n",
-    			"#Ex: Ocean=0 turns off the village in the ocean biome\n",
-    			"Ocean=1\n",
-    			"Plains=1\n",
-    			"Desert=1\n",
-    			"Extreme Hills=1\n",
-    			"Forest=1\n",
-    			"Taiga=1\n",
-    			"Swampland=1\n",
-    			"River=1\n",
-    			//"Hell=1\n",
-    			//"Ocean=1\n",
-    			"FrozenOcean=1\n",
-    			"FrozenRiver=1\n",
-    			"Ice Plains=1\n",
-    			"Ice Mountains=1\n",
-    			"MushroomIsland=1\n",
-    			"MushroomIslandShore=1\n",
-    			"Beach=1\n",
-    			"DesertHills=1\n",
-    			"ForestHills=1\n",
-    			"TaigaHills=1\n",
-    			"Extreme Hills Edge=1\n",
-    			"Jungle=1\n",
-    			"JungleHills=1\n",
-    			"JungleEdge=1\n",
-    			"DeepOcean=1\n",
-    			"Stone Beach=1\n",
-    			"Cold Beach=1\n",
-    			"Birch Forest=1\n",
-    			"Birch Forest Hills=1\n",
-    			"Roofed Forest=1\n",
-    			"Cold Taiga=1\n",
-    			"Cold Taiga Hills=1\n",
-    			"Mega Taiga=1\n",
-    			"Mega Taiga Hills=1\n",
-    			"Extreme Hills+=1\n",
-    			"Savanna=1\n",
-    			"Savanna Plateau=1\n",
-    			"Mesa=1\n",
-    			"Mesa Plateau F=1\n",
-    			"Mesa Plateau=1\n",
-    			"Sunflower Plains=1\n",
-    			"Desert M=1\n",
-    			"Taiga M=1\n",
-    			"Swampland M=1\n",
-    			"Ice Plains Spikes=1\n",
-    			"Jungle M=1\n",
-    			"JungleEdge M=1\n",
-    			"Birch Forest M=1\n",
-    			"Birch Forest Hills M=1\n",
-    			"Roofed Forst M=1\n",
-    			"Cold Taiga M=1\n",
-    			"Mega Spruce Taiga=1\n",
-    			"Redwood Taiga Hills M=1\n",
-    			"Extreme Hills+ M=1\n",
-    			"Savanna M=1\n",
-    			"Savanna Plateau M=1\n",
-    			"Mesa (Bryce)=1\n",
-    			"Mesa Plateau F M=1\n",
-    			"Mesa Plateau M=1\n"
+    			"#ID start for entities\n",
+    			"entity_id_start=1514\n",
+    			"#=====NORD CONFIGS=======",
+    			"#The chance a Nord NPC has to gain the ability(or curse) to transform into a Bjornserker!\n",
+    			"bjorn_turn_rate=5\n",
+    			"#The chance a Nord Village will bandit infested!\n",
+    			"nord_bandit_infest_rate=25\n",
+    			"#The chance a Nord Village will zombie infested!\n",
+    			"nord_zombie_infest_rate=2\n",
+    			"#The spawnrate of wargs!\n",
+    			"warg_spawn_rate=10\n",
+    			"#The spawnrate of bjornserkers\n",
+    			"bjornserker_spawn_rate=5\n",
+    			"#The chance a Nord Village attempt to upgrade their soldiers to a higher rank.\n",
+    			"upgrade_chance=25\n",
+    			"#=====ROMAN CONFIGS=======",
+    			"#The spawnrate of wraiths in Latin villages\n",
+    			"wraith_spawn_rate=5\n",
+    			"#The chance when a Latin NPC dies they become a Wraith\n",
+    			"wraith_turn_rate=50\n",
+    			"#The chance a Nord Village will bandit infested!\n",
+    			"latin_bandit_infest_rate=25\n",
+    			"#The chance a Nord Village will zombie infested!\n",
+    			"latin_zombie_infest_rate=2\n",
     	};
     
     public static enum Soldier
@@ -214,43 +164,19 @@ public class Main
     
     public static int max_distance = 9;
     public static int min_distance = 3;
-    public static int bandit_spawn = 5;
     public static int village_size = 0;
-    private static int passes = 0;
+    public static int passes = 0;
     
-    public static ArrayList<BiomeSpawn> biomes_spawn = new ArrayList<BiomeSpawn>();
-    public static ArrayList<VillagerSpawn> villager_spawn = new ArrayList<VillagerSpawn>();
+    public static CreativeTabs villagesTab = new VillagesTab(CreativeTabs.getNextID(), Resources.NAME);
     
-    class BiomeSpawn
-    {
-    	public String name;
-    	public boolean spawn;
-    	
-    	public BiomeSpawn(final String name, final int num)
-    	{
-    		this.name = name;
-    		this.spawn = (num == 1) ? true : false;
-    		//System.out.println(name+" "+spawn);
-    		Main.biomes_spawn.add(this);
-    	}
-    }
-    
-    public class VillagerSpawn
-    {
-    	public String name;
-    	public boolean spawn;
-    	
-    	public VillagerSpawn(final String name, final int spawn)
-    	{
-    		this.name = name;
-    		this.spawn = (spawn == 1) ? true : false;
-    		
-    		Main.villager_spawn.add(this);
-    	}
-    }
-
 	private static boolean spawnCreepers = true;
 
+	@EventHandler
+	public void serverLoad(FMLServerStartingEvent event)
+	{
+		event.registerServerCommand(new CommandCreate());
+	}
+	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		System.out.println(Resources.NAME + " is loading!");
@@ -268,6 +194,9 @@ public class Main
 			//config_file.mkdirs();
 			e.printStackTrace();
 		}
+		
+		BlockRegister.init();
+		ModItems.init();
 		System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
 	}
 	
@@ -356,21 +285,60 @@ public class Main
 				{
 					min_distance = value;
 				}
-				else if(parts[0].contains("spawn_rate"))
+				else if(parts[0].contains("bjorn_turn_rate"))
 				{
-					bandit_spawn = value;
+					villager_bjorn_rate = value;
+					System.out.println("New Bjorn Rate: "+value);
 				}
-				else if(parts[0].contains("recruit_rate"))
+				else if(parts[0].contains("wraith_turn_rate"))
 				{
-					recruit_rate = value;
+					wraith_turn_rate = value;
+					System.out.println("New Wraith Turn Rate: "+value);
 				}
-				else if(parts[0].contains("raid_rate"))
+				else if(parts[0].contains("nord_zombie_infest"))
 				{
-					raid_rate = value;
+					nord_zombie_infest_rate = value;
+					System.out.println("New Nord Zombie Infest Rate: "+value);
+				}
+				else if(parts[0].contains("nord_bandit_infest"))
+				{
+					nord_bandit_infest_rate = value;
+					System.out.println("New Nord Bandit Infest Rate: "+value);
+				}
+				else if(parts[0].contains("latin_zombie_infest"))
+				{
+					latin_zombie_infest_rate = value;
+					System.out.println("New Zombie Infest Rate: "+value);
+				}
+				else if(parts[0].contains("latin_bandit_infest"))
+				{
+					latin_bandit_infest_rate = value;
+					System.out.println("New Bandit Infest Rate: "+value);
+				}
+				else if(parts[0].contains("warg_spawn"))
+				{
+					warg_rate = value;
+					System.out.println("New Warg Spawnrate: "+value);
+				}
+				else if(parts[0].contains("wraith_spawn"))
+				{
+					wraith_rate = value;
+					System.out.println("New Wraith Spawnrate: "+value);
+				}
+				else if(parts[0].contains("bjornserker_spawn"))
+				{
+					bjornserker_rate = value;
+					System.out.println("New Bjornserker Spawnrate: "+value);
+				}
+				else if(parts[0].contains("upgrade"))
+				{
+					upgrade_chance = value;
+					System.out.println("New Upgrade Chance: "+value);
 				}
 				else if(parts[0].contains("creep"))
 				{
 					spawnCreepers = value == 1;
+					System.out.println("New Creeper Spawn: "+spawnCreepers);
 				}
 				else if(parts[0].contains("size"))
 				{
@@ -379,10 +347,11 @@ public class Main
 				else if(parts[0].contains("name"))
 				{
 					useNametags = value == 1 ? true : false;
+					System.out.println("New Nametag value: "+useNametags);
 				}
 				else
 				{
-					if(parts[0].contains("Ocean")) readingBiomes = true;
+					/*if(parts[0].contains("Ocean")) readingBiomes = true;
 						
 					if(!readingBiomes)
 					{
@@ -391,7 +360,7 @@ public class Main
 					else
 					{
 						new BiomeSpawn(parts[0], value);
-					}
+					}*/
 				}
 			}
 			
@@ -405,7 +374,7 @@ public class Main
 				System.out.println("Config couldn't load! Please check to make sure your config file includes a version at the top.");
 			}
 			
-			while(villager_spawn.size() < Soldier.NUM_SOLDIERS.ordinal())
+			/*while(villager_spawn.size() < Soldier.NUM_SOLDIERS.ordinal())
 			{
 				new VillagerSpawn("Placeholder", 1);
 			}
@@ -413,9 +382,9 @@ public class Main
 			for(VillagerSpawn v : villager_spawn)
 			{
 				System.out.println("Spawns: "+v.name+" "+v.spawn);
-			}
+			}*/
 			
-			System.out.println("Read the config file! New Max: "+max_distance+" New Min: "+min_distance+" New Merchant: "+bandit_spawn+" Guard Spawn: "+Main.villager_spawn.get(0).spawn);
+			System.out.println("Read the config file! New Max: "+max_distance+" New Min: "+min_distance+" New Size: "+village_size);//+" Guard Spawn: "+Main.villager_spawn.get(0).spawn);
 		} catch (FileNotFoundException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -426,42 +395,69 @@ public class Main
 	public void init(FMLInitializationEvent event) {
 		proxy.initEvents();
     	proxy.registerRenderers();
+    	proxy.registerRenderInformation();
     	instance = this;
     	
     	AttributeRace.init();
     	
-    	List<Biome> villageBiomes = Arrays.<Biome>asList(new Biome[] {Biomes.JUNGLE, Biomes.JUNGLE_EDGE, Biomes.JUNGLE_HILLS/*Biomes.PLAINS, Biomes.DESERT, Biomes.SAVANNA, Biomes.TAIGA, Biomes.BEACH, Biomes.BIRCH_FOREST, Biomes.BIRCH_FOREST_HILLS, Biomes.COLD_BEACH, Biomes.COLD_TAIGA, Biomes.COLD_TAIGA_HILLS, Biomes.DEEP_OCEAN,
+    	List<Biome> villageBiomes = Arrays.<Biome>asList(new Biome[] {/*Biomes.PLAINS, Biomes.DESERT, Biomes.SAVANNA, Biomes.TAIGA, Biomes.BEACH, Biomes.BIRCH_FOREST, Biomes.BIRCH_FOREST_HILLS, Biomes.COLD_BEACH, Biomes.COLD_TAIGA, Biomes.COLD_TAIGA_HILLS, Biomes.DEEP_OCEAN,
     		Biomes.DESERT, Biomes.DESERT_HILLS, Biomes.EXTREME_HILLS, Biomes.EXTREME_HILLS_EDGE, Biomes.EXTREME_HILLS_WITH_TREES, Biomes.FOREST, Biomes.FOREST_HILLS, Biomes.FROZEN_RIVER, Biomes.FROZEN_OCEAN, Biomes.ICE_MOUNTAINS, Biomes.ICE_PLAINS,
     		Biomes.JUNGLE, Biomes.JUNGLE_EDGE, Biomes.JUNGLE_HILLS, Biomes.MESA, Biomes.MESA_CLEAR_ROCK, Biomes.MESA_ROCK, Biomes.MUSHROOM_ISLAND, Biomes.MUSHROOM_ISLAND_SHORE, Biomes.MUTATED_BIRCH_FOREST, Biomes.PLAINS, Biomes.DESERT, Biomes.SAVANNA, Biomes.TAIGA, Biomes.OCEAN,
     		Biomes.MUTATED_BIRCH_FOREST, Biomes.MUTATED_BIRCH_FOREST_HILLS, Biomes.MUTATED_DESERT, Biomes.MUTATED_EXTREME_HILLS, Biomes.MUTATED_EXTREME_HILLS_WITH_TREES, Biomes.MUTATED_FOREST, Biomes.MUTATED_ICE_FLATS, Biomes.MUTATED_JUNGLE, Biomes.MUTATED_MESA, Biomes.MUTATED_MESA, Biomes.MUTATED_MESA_CLEAR_ROCK,
     		Biomes.MUTATED_MESA_ROCK, Biomes.MUTATED_PLAINS, Biomes.MUTATED_REDWOOD_TAIGA, Biomes.MUTATED_REDWOOD_TAIGA_HILLS, Biomes.MUTATED_ROOFED_FOREST, Biomes.MUTATED_SAVANNA, Biomes.MUTATED_SAVANNA_ROCK, Biomes.MUTATED_SWAMPLAND, Biomes.MUTATED_TAIGA, Biomes.MUTATED_TAIGA_COLD, Biomes.REDWOOD_TAIGA, Biomes.REDWOOD_TAIGA_HILLS, Biomes.RIVER
     		,Biomes.RIVER, Biomes.ROOFED_FOREST, Biomes.SAVANNA_PLATEAU, Biomes.STONE_BEACH, Biomes.SWAMPLAND, Biomes.TAIGA_HILLS*/});
     	
-    	List<Biome> villageNordBiomes = Arrays.<Biome>asList(new Biome[] {Biomes.BEACH, Biomes.BIRCH_FOREST, Biomes.BIRCH_FOREST_HILLS, Biomes.COLD_BEACH, Biomes.DEEP_OCEAN,
-        		Biomes.FOREST, Biomes.FOREST_HILLS, Biomes.FROZEN_RIVER, Biomes.FROZEN_OCEAN, Biomes.ICE_MOUNTAINS, Biomes.ICE_PLAINS,
-        		Biomes.MUTATED_BIRCH_FOREST, Biomes.MUTATED_BIRCH_FOREST_HILLS, Biomes.MUTATED_FOREST, Biomes.MUTATED_ICE_FLATS,
-        		Biomes.RIVER, Biomes.STONE_BEACH});
-        	
-    	List<Biome> villageLatinBiomes = Arrays.<Biome>asList(new Biome[] {Biomes.PLAINS, Biomes.SAVANNA, Biomes.MESA, Biomes.MESA_CLEAR_ROCK, Biomes.MESA_ROCK,
-        		Biomes.MUTATED_MESA, Biomes.MUTATED_MESA, Biomes.MUTATED_MESA_CLEAR_ROCK, Biomes.ROOFED_FOREST,
-        		Biomes.MUTATED_MESA_ROCK, Biomes.MUTATED_PLAINS, Biomes.MUTATED_ROOFED_FOREST, Biomes.MUTATED_SAVANNA, Biomes.MUTATED_SAVANNA_ROCK, Biomes.MUTATED_SWAMPLAND, 
+    	List<Biome> villageNordBiomes = Arrays.<Biome>asList(new Biome[] { 
+    			Biomes.DEEP_OCEAN, 
+        		Biomes.FOREST, Biomes.FOREST_HILLS, 
+        		Biomes.FROZEN_RIVER, Biomes.FROZEN_OCEAN, 
+        		Biomes.MUTATED_FOREST, 
+        		Biomes.RIVER,     			
+    			Biomes.FROZEN_RIVER, Biomes.COLD_TAIGA_HILLS,
         	});
         	
-    	List<Biome> villageGermanBiomes = Arrays.<Biome>asList(new Biome[] {Biomes.PLAINS, Biomes.FOREST, 
-        		Biomes.EXTREME_HILLS, Biomes.EXTREME_HILLS_EDGE, Biomes.EXTREME_HILLS_WITH_TREES, 
-        		Biomes.MUTATED_BIRCH_FOREST_HILLS, Biomes.MUTATED_EXTREME_HILLS, Biomes.MUTATED_EXTREME_HILLS_WITH_TREES, Biomes.MUTATED_FOREST, 
-        		Biomes.MUTATED_PLAINS, Biomes.MUTATED_REDWOOD_TAIGA, Biomes.MUTATED_REDWOOD_TAIGA_HILLS, Biomes.MUTATED_ROOFED_FOREST, Biomes.MUTATED_SAVANNA, Biomes.MUTATED_SAVANNA_ROCK, Biomes.REDWOOD_TAIGA, Biomes.REDWOOD_TAIGA_HILLS,
-        		Biomes.RIVER, Biomes.ROOFED_FOREST, Biomes.SAVANNA_PLATEAU});
+    	List<Biome> villageLatinBiomes = Arrays.<Biome>asList(new Biome[] {
+    			Biomes.PLAINS, Biomes.SAVANNA, 
+        		 Biomes.MUTATED_PLAINS,  
+        		Biomes.MUTATED_SAVANNA, Biomes.MUTATED_SAVANNA_ROCK, Biomes.MUTATED_SWAMPLAND, 
+        		Biomes.SAVANNA_PLATEAU 
+    			
+        	});
         	
-    	List<Biome> villageSlavBiomes = Arrays.<Biome>asList(new Biome[] {Biomes.TAIGA, Biomes.COLD_BEACH, Biomes.COLD_TAIGA, Biomes.COLD_TAIGA_HILLS,
-        		Biomes.ICE_MOUNTAINS,
-        		Biomes.TAIGA,
-        		Biomes.MUTATED_REDWOOD_TAIGA, Biomes.MUTATED_REDWOOD_TAIGA_HILLS, Biomes.MUTATED_TAIGA, Biomes.MUTATED_TAIGA_COLD, Biomes.REDWOOD_TAIGA, Biomes.REDWOOD_TAIGA_HILLS,
-        		Biomes.TAIGA_HILLS});
+    	List<Biome> villageGermanBiomes = Arrays.<Biome>asList(new Biome[] {
+        		Biomes.EXTREME_HILLS, Biomes.EXTREME_HILLS_EDGE, Biomes.EXTREME_HILLS_WITH_TREES, 
+        		Biomes.MUTATED_EXTREME_HILLS, Biomes.MUTATED_EXTREME_HILLS_WITH_TREES, Biomes.STONE_BEACH,
+        		Biomes.MUTATED_ROOFED_FOREST, Biomes.ROOFED_FOREST
+    	});
+        	
+    	List<Biome> villageGreekBiomes = Arrays.<Biome>asList(new Biome[] {
+    			Biomes.MUTATED_MESA, Biomes.MUTATED_MESA, Biomes.MUTATED_MESA_CLEAR_ROCK,
+    			Biomes.MESA, Biomes.MESA_CLEAR_ROCK, Biomes.MESA_ROCK, Biomes.MUTATED_MESA_ROCK,
+    			Biomes.JUNGLE, Biomes.JUNGLE_EDGE, Biomes.JUNGLE_HILLS
+    	});
+    	
+    	List<Biome> villageSlavBiomes = Arrays.<Biome>asList(new Biome[] {
+    		Biomes.TAIGA, Biomes.COLD_TAIGA, 
+    		Biomes.MUTATED_REDWOOD_TAIGA, Biomes.MUTATED_REDWOOD_TAIGA_HILLS, Biomes.MUTATED_TAIGA, 
+    		Biomes.MUTATED_TAIGA_COLD, Biomes.REDWOOD_TAIGA, Biomes.REDWOOD_TAIGA_HILLS,
+    		Biomes.TAIGA_HILLS
+    	});
+    	
+    	List<Biome> villageBritonBiomes = Arrays.<Biome>asList(new Biome[] {
+    		Biomes.MUTATED_ICE_FLATS, Biomes.COLD_BEACH, Biomes.EXTREME_HILLS_EDGE,
+    		Biomes.ICE_MOUNTAINS, Biomes.ICE_PLAINS
+    	});
+    	
+    	List<Biome> villageFrankBiomes = Arrays.<Biome>asList(new Biome[] { 
+    			Biomes.BIRCH_FOREST_HILLS, Biomes.MUTATED_BIRCH_FOREST_HILLS, 
+    			Biomes.BIRCH_FOREST, Biomes.BEACH, 
+    			Biomes.MUTATED_BIRCH_FOREST, Biomes.MUTATED_BIRCH_FOREST_HILLS,
+    	});
         	
     	List<Biome> villageArabBiomes = Arrays.<Biome>asList(new Biome[] {Biomes.DESERT, 
         		Biomes.DESERT, Biomes.DESERT_HILLS, 
-        		Biomes.MUTATED_DESERT});
+        		Biomes.MUTATED_DESERT
+        	});
         	
     	/*addVillagePiece(VillageComponentBarrackSmall.class, "ViGb"); 
     	addVillageCreationHandler(new VillageHandlerBarracksSmall()); 
@@ -515,6 +511,15 @@ public class Main
     	ArabStructurePieces.registerVillagePieces();
     	MapGenStructureIO.registerStructure(WorldGenVillage.ArabStart.class, "Arab Village");
     	
+    	GreekStructurePieces.registerVillagePieces();
+    	MapGenStructureIO.registerStructure(WorldGenVillage.GreekStart.class, "German Village");
+    	
+    	BritonStructurePieces.registerVillagePieces();
+    	MapGenStructureIO.registerStructure(WorldGenVillage.BritonStart.class, "Slav Village");
+    	
+    	FrankStructurePieces.registerVillagePieces();
+    	MapGenStructureIO.registerStructure(WorldGenVillage.FrankStart.class, "Arab Village");
+    	
     	for(Biome b : villageNordBiomes)
     	{
     		WorldGenVillage.NORD_VILLAGE_SPAWN_BIOMES.add(b);
@@ -538,6 +543,21 @@ public class Main
     	for(Biome b : villageArabBiomes)
     	{
     		WorldGenVillage.ARAB_VILLAGE_SPAWN_BIOMES.add(b);
+    	}
+    	
+    	for(Biome b : villageGreekBiomes)
+    	{
+    		WorldGenVillage.GREEK_VILLAGE_SPAWN_BIOMES.add(b);
+    	}
+    	
+    	for(Biome b : villageBritonBiomes)
+    	{
+    		WorldGenVillage.BRITON_VILLAGE_SPAWN_BIOMES.add(b);
+    	}
+    	
+    	for(Biome b : villageFrankBiomes)
+    	{
+    		WorldGenVillage.FRANK_VILLAGE_SPAWN_BIOMES.add(b);
     	}
     	
     	/*
@@ -586,10 +606,12 @@ public class Main
     	
 
     	Biome[] nBiomes = new Biome[villageNordBiomes.size()];
+    	Biome[] lBiomes = new Biome[villageLatinBiomes.size()];
     	
-    	createEntity(EntityHumanVillager.class, 1513, "human_villager", 161425, 1582224, false);
-    	createEntity(EntityWarg.class, 1514, "warg", 261425, 1582224, true);
-    	createEntity(EntityBjornserker.class, 1515, "bjornserker", 361425, 1582224, true);
+    	createEntity(EntityHumanVillager.class, Main.entityIDStart  , "human_villager", 0x101010, 0xFF0000, false);
+    	createEntity(EntityWarg.class, Main.entityIDStart + 1, "warg", 0x101010, 0xFF0000, true);
+    	createEntity(EntityBjornserker.class, Main.entityIDStart + 2, "bjornserker", 0x101010, 0x808080, true);
+    	createEntity(EntityWraith.class, Main.entityIDStart + 3, "wraith", 0x101010, 0x00FF00, true);
     	
     	
     	//Soldiers
@@ -657,11 +679,15 @@ public class Main
     	EntityRegistry.addSpawn(EntityVillagerBanditAlchemist.class, 5, 1, 2, EnumCreatureType.MONSTER, villageBiomes.toArray(biomes));//weightedProb, min, max, typeOfCreature, biomes);
     	*/
     	
-    	EntityRegistry.addSpawn(EntityWarg.class, 5, 2, 6, EnumCreatureType.MONSTER, villageNordBiomes.toArray(nBiomes));//weightedProb, min, max, typeOfCreature, biomes);
-    	EntityRegistry.addSpawn(EntityBjornserker.class, 1, 1, 2, EnumCreatureType.MONSTER, villageNordBiomes.toArray(nBiomes));//weightedProb, min, max, typeOfCreature, biomes);
+    	EntityRegistry.addSpawn(EntityWarg.class, Main.warg_rate, 2, 6, EnumCreatureType.MONSTER, villageNordBiomes.toArray(nBiomes));//weightedProb, min, max, typeOfCreature, biomes);
+    	EntityRegistry.addSpawn(EntityBjornserker.class, Main.bjornserker_rate, 1, 2, EnumCreatureType.MONSTER, villageNordBiomes.toArray(nBiomes));//weightedProb, min, max, typeOfCreature, biomes);
+    	EntityRegistry.addSpawn(EntityWraith.class, Main.wraith_rate, 1, 2, EnumCreatureType.MONSTER, villageLatinBiomes.toArray(lBiomes));//weightedProb, min, max, typeOfCreature, biomes);
 
     	
-    	EntityRegistry.registerModEntity(new ResourceLocation(Resources.MODID, "villager_arrow"), EntityVillagerArrow.class, "entity_villager_arrow", 1, instance,1, 1, false);
+    	//EntityRegistry.registerModEntity(new ResourceLocation(Resources.MODID, "villager_arrow"), EntityVillagerArrow.class, "entity_villager_arrow", 1, instance,1, 1, false);
+       	EntityRegistry.registerModEntity(new ResourceLocation(Resources.MODID, "throwing_axe"), EntityWeaponThrowable.class, "throwing_axe", 1, instance, 64, 10, true);
+       	
+       	FactionManager.init();
 	}
 
 	@EventHandler
@@ -670,9 +696,12 @@ public class Main
 	}
 	
 	public static void createEntity(Class entityClass, int ID, String entityName, int solidColor, int spotColor, boolean withEgg){
-
-    	EntityRegistry.registerModEntity(new ResourceLocation(Resources.MODID+":"+entityName), entityClass, entityName, ID, instance, 128, 1, true);
-    	if(withEgg) EntityRegistry.registerEgg(new ResourceLocation(Resources.MODID+":"+entityName),  solidColor, spotColor);
+		ResourceLocation loc = new ResourceLocation(Resources.MODID+":"+entityName);
+    	EntityRegistry.registerModEntity(loc, entityClass, entityName, ID, instance, 128, 1, true);
+    	if(withEgg) 
+    	{
+    		EntityRegistry.registerEgg(new ResourceLocation(Resources.MODID+":"+entityName),  solidColor, spotColor);
+    	}
     }
 	
 	public static void addVillagePiece(Class c, String s) 

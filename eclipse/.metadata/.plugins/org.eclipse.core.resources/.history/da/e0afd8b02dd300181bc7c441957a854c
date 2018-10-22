@@ -1,0 +1,8 @@
+package assets.coherentvillages.models.item;
+
+public class Snippet {
+	public static void main(String[] args) {
+		diamond_axe.json
+	}
+}
+

@@ -1,0 +1,22 @@
+package net.theexceptionist.coherentvillages.entity.ai;
+
+import net.minecraft.entity.ai.EntityAIBase;
+import net.theexceptionist.coherentvillages.main.entity.EntityHumanVillager;
+
+public class EntityAIBlock extends EntityAIBase
+{
+	protected EntityHumanVillager host;
+	protected double distance;
+	
+	public EntityAIBlock(EntityHumanVillager host, final double distance)
+	{
+		this.host = host;
+		this.distance = distance;
+	}
+	
+	@Override
+	public boolean shouldExecute() {
+		return false;
+	}
+
+}

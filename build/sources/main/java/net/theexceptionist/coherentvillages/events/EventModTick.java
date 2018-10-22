@@ -2,6 +2,8 @@ package net.theexceptionist.coherentvillages.events;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextComponentString;
@@ -11,21 +13,23 @@ import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.theexceptionist.coherentvillages.main.entity.EntityHumanVillager;
-import net.theexceptionist.coherentvillages.main.entity.attributes.AttributeFaction;
-import net.theexceptionist.coherentvillages.worldgen.villages.WorldGenVillage;
+import net.theexceptionist.coherentvillages.main.entity.attributes.AttributeRace;
+import net.theexceptionist.coherentvillages.main.entity.attributes.FactionManager;
+import net.theexceptionist.coherentvillages.main.events.EventManager;
 
 public class EventModTick {
 	public static boolean raidInProgress = false;
 	boolean raidHappened = false;
 	boolean driveAttempted = false;
 	int daysPassed = 0;
-	
+	public static EventManager manager = new EventManager();
 	//Probably will only work on singleplayer
-	//@SubscribeEvent
+	@SubscribeEvent
 	public void checkRaid(TickEvent.PlayerTickEvent event)
 	{
 		EntityPlayer player = event.player;
 		World world = event.player.world;
+
 		
 		Style style = new Style();
 		style.setColor(TextFormatting.DARK_RED);
@@ -33,9 +37,54 @@ public class EventModTick {
 		Style style2 = new Style();
 		style2.setColor(TextFormatting.LIGHT_PURPLE);
 		
-		if(WorldGenVillage.nordManager != null && !world.isRemote)
+		if(world.getTotalWorldTime() % 14500 == 0)
 		{
-			AttributeFaction faction = WorldGenVillage.nordManager.getNearestVillage(player.getPosition(), 50);
+			daysPassed++;
+			FactionManager.updateFactions();
+		}
+		
+		//manager.tick();
+		
+		/*if(!world.isRemote)
+		{
+			if(!spawned && world.isDaytime())
+			{
+				if(world.rand.nextInt(100) <= Main.BANDIT_SKIRMISH) return;
+				int count = world.rand.nextInt(4) + 2;
+				double x = player.posX + range;
+				double z = player.posZ + range;
+				
+				//Vec3d vec = this.polarRotate(x, z, world.rand.nextInt(360));
+				
+				double y = player.world.getTopSolidOrLiquidBlock(new BlockPos(x, 80, z)).getY();
+				BlockPos spawn = new BlockPos(x, y, z);
+				World worldIn = player.world;
+				
+				for(int i = 0; i < count; i++)
+				{
+					EntityHumanVillager soldier = new EntityHumanVillager(worldIn, raceID, AttributeRace.getFromIDRace(raceID).getRandomSoldier(worldIn), EntityHumanVillager.getRandomGender(worldIn), false);                            
+	            	soldier.setLocationAndAngles((double)x + 0.5D, (double)y, (double)z + 0.5D, 0.0F, 0.0F);
+	            	worldIn.spawnEntity(soldier);
+	            	
+					EntityHumanVillager bandit = new EntityHumanVillager(worldIn, raceID, AttributeRace.getFromIDRace(raceID).getRandomBandit(worldIn), EntityHumanVillager.getRandomGender(worldIn), false);                            
+	            	bandit.setLocationAndAngles((double)x + 0.5D, (double)y, (double)z + 0.5D, 0.0F, 0.0F);
+	            	worldIn.spawnEntity(bandit);
+				}
+				
+				Style style3 = new Style();
+				style3.setColor(TextFormatting.GREEN);
+				TextComponentString eventMessage = new TextComponentString("You hear a battle going on somewhere nearby....");
+				eventMessage.setStyle(style3);
+				
+				player.sendMessage(eventMessage);
+				
+				spawned = true;
+			}
+			else if(spawned && !world.isDaytime())
+			{
+				spawned = false;
+			}
+			/*AttributeFaction faction = WorldGenVillage.nordManager.getNearestVillage(player.getPosition(), 50);
 			//System.out.println("Working: "+faction);
 			if(faction != null && !faction.messageSent())
 			{
@@ -45,7 +94,7 @@ public class EventModTick {
 				player.sendMessage(itextcomponent1);
 				faction.setMessageSent(false);
 			}
-		}
+		}*/
 		
 		/*if(world.villageCollection != null){
 			Village village = world.villageCollection.getNearestVillage(player.getPosition(), 30);

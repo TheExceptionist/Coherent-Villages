@@ -7,6 +7,7 @@ import java.util.Map.Entry;
 import java.util.Random;
 
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
@@ -15,32 +16,30 @@ import net.minecraft.world.gen.structure.MapGenVillage;
 import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraft.world.gen.structure.StructureStart;
 import net.minecraft.world.gen.structure.StructureVillagePieces;
+import net.minecraft.world.gen.structure.template.PlacementSettings;
 import net.theexceptionist.coherentvillages.main.Main;
-import net.theexceptionist.coherentvillages.main.NameGenerator;
-import net.theexceptionist.coherentvillages.main.entity.attributes.AttributeFaction;
-import net.theexceptionist.coherentvillages.main.entity.attributes.AttributeRace;
-import net.theexceptionist.coherentvillages.main.entity.attributes.FactionManager;
 
 public class WorldGenVillage extends MapGenVillage
 {
+	final PlacementSettings settings = new PlacementSettings().setRotation(Rotation.NONE);
     /** A list of all the biomes villages can spawn in. */
     public static ArrayList<Biome> NORD_VILLAGE_SPAWN_BIOMES = new ArrayList<Biome>();
     public static ArrayList<Biome> SLAV_VILLAGE_SPAWN_BIOMES = new ArrayList<Biome>();
     public static ArrayList<Biome> LATIN_VILLAGE_SPAWN_BIOMES = new ArrayList<Biome>();
     public static ArrayList<Biome> GERMAN_VILLAGE_SPAWN_BIOMES = new ArrayList<Biome>();
     public static ArrayList<Biome> ARAB_VILLAGE_SPAWN_BIOMES = new ArrayList<Biome>();
+    public static ArrayList<Biome> GREEK_VILLAGE_SPAWN_BIOMES = new ArrayList<Biome>();
+    public static ArrayList<Biome> BRITON_VILLAGE_SPAWN_BIOMES = new ArrayList<Biome>();
+    public static ArrayList<Biome> FRANK_VILLAGE_SPAWN_BIOMES = new ArrayList<Biome>();
     
     public static final int NORD_ID = 0;
     public static final int LATIN_ID = 1;
     public static final int GERMAN_ID = 2;
     public static final int SLAV_ID = 3;
     public static final int ARAB_ID = 4;
-    
-    public static FactionManager nordManager;
-    public static FactionManager latinManager;
-    public static FactionManager slavManager;
-    public static FactionManager germanManager;
-    public static FactionManager arabManager;
+	public static final int GREEK_ID = 5;
+	public static final int BRITON_ID = 6;
+	public static final int FRANK_ID = 7;
     
     /** None */
     private int size;
@@ -53,12 +52,6 @@ public class WorldGenVillage extends MapGenVillage
         this.distance = Main.max_distance;
         this.minTownSeparation = Main.min_distance;
         this.size = Main.village_size;
-        
-        this.nordManager = new FactionManager();
-        this.slavManager = new FactionManager();
-        this.latinManager = new FactionManager();
-        this.germanManager = new FactionManager();
-        this.arabManager = new FactionManager();
     }
 
     public WorldGenVillage(Map<String, String> map)
@@ -122,6 +115,9 @@ public class WorldGenVillage extends MapGenVillage
             boolean flag_g = this.world.getBiomeProvider().areBiomesViable(i * 16 + 8, j * 16 + 8, 0, GERMAN_VILLAGE_SPAWN_BIOMES);
             boolean flag_s = this.world.getBiomeProvider().areBiomesViable(i * 16 + 8, j * 16 + 8, 0, SLAV_VILLAGE_SPAWN_BIOMES);
             boolean flag_a = this.world.getBiomeProvider().areBiomesViable(i * 16 + 8, j * 16 + 8, 0, ARAB_VILLAGE_SPAWN_BIOMES);
+            boolean flag_u = this.world.getBiomeProvider().areBiomesViable(i * 16 + 8, j * 16 + 8, 0, GREEK_VILLAGE_SPAWN_BIOMES);
+            boolean flag_b = this.world.getBiomeProvider().areBiomesViable(i * 16 + 8, j * 16 + 8, 0, BRITON_VILLAGE_SPAWN_BIOMES);
+            boolean flag_f = this.world.getBiomeProvider().areBiomesViable(i * 16 + 8, j * 16 + 8, 0, FRANK_VILLAGE_SPAWN_BIOMES);
 
             //System.out.println("Nord: "+flag_n+" Latin: "+flag_l+" German: "+flag_g+" Slav: "+flag_s+" Arab: "+flag_a);
             
@@ -148,6 +144,21 @@ public class WorldGenVillage extends MapGenVillage
             if (flag_a)
             {
             	this.type = ARAB_ID; 
+                return true;
+            }
+            if (flag_u)
+            {
+            	this.type = GREEK_ID; 
+                return true;
+            }
+            if (flag_b)
+            {
+            	this.type = BRITON_ID; 
+                return true;
+            }
+            if (flag_f)
+            {
+            	this.type = FRANK_ID; 
                 return true;
             }
         }
@@ -194,6 +205,21 @@ public class WorldGenVillage extends MapGenVillage
 	    		//this.nordManager.addFaction(faction);
 	    		return new WorldGenVillage.ArabStart(this.world, this.rand, chunkX, chunkZ, this.size);
 	    	}
+	    	case GREEK_ID:
+	    	{
+	    		//this.nordManager.addFaction(faction);
+	    		return new WorldGenVillage.GreekStart(this.world, this.rand, chunkX, chunkZ, this.size);
+	    	}
+	    	case BRITON_ID:
+	    	{
+	    		//this.nordManager.addFaction(faction);
+	    		return new WorldGenVillage.BritonStart(this.world, this.rand, chunkX, chunkZ, this.size);
+	    	}
+	    	case FRANK_ID:
+	    	{
+	    		//this.nordManager.addFaction(faction);
+	    		return new WorldGenVillage.FrankStart(this.world, this.rand, chunkX, chunkZ, this.size);
+	    	}
 	    	default:
 	    		return new WorldGenVillage.Start(this.world, this.rand, chunkX, chunkZ, this.size);
     	}
@@ -213,7 +239,7 @@ public class WorldGenVillage extends MapGenVillage
                 super(x, z);
                 //System.out.println("Generating: "+x+" "+z);
                 List<NordStructurePieces.PieceWeight> list = NordStructurePieces.getStructureVillageWeightedPieceList(rand, size);
-                NordStructurePieces.Start NordStructurePieces$start = new NordStructurePieces.Start(worldIn, x, z, worldIn.getBiomeProvider(), 0, rand, (x << 4) + 2, (z << 4) + 2, list, size);
+                NordStructurePieces.Start NordStructurePieces$start = new NordStructurePieces.Start(worldIn.getBiomeProvider(), 0, rand, (x << 4) + 2, (z << 4) + 2, list, size);
                 this.components.add(NordStructurePieces$start);
                 NordStructurePieces$start.buildComponent(NordStructurePieces$start, this.components, rand);
                 List<StructureComponent> list1 = NordStructurePieces$start.pendingRoads;
@@ -424,7 +450,7 @@ public class WorldGenVillage extends MapGenVillage
         public LatinStart(World worldIn, Random rand, int x, int z, int size)
         {
             super(x, z);
-            //System.out.println("Generating: "+x+" "+z);
+            //this.updateBoundingBox();
             List<LatinStructurePieces.PieceWeight> list = LatinStructurePieces.getStructureVillageWeightedPieceList(rand, size);
             LatinStructurePieces.Start LatinStructurePieces$start = new LatinStructurePieces.Start(worldIn.getBiomeProvider(), 0, rand, (x << 4) + 2, (z << 4) + 2, list, size);
             this.components.add(LatinStructurePieces$start);
@@ -526,6 +552,222 @@ public class WorldGenVillage extends MapGenVillage
             for (StructureComponent structurecomponent1 : this.components)
             {
                 if (!(structurecomponent1 instanceof ArabStructurePieces.Road))
+                {
+                    ++k;
+                }
+            }
+
+            this.hasMoreThanTwoComponents = k > 2;
+        }
+
+        /**
+         * currently only defined for Villages, returns true if Village has more than 2 non-road components
+         */
+        public boolean isSizeableStructure()
+        {
+            return this.hasMoreThanTwoComponents;
+        }
+
+        public void writeToNBT(NBTTagCompound tagCompound)
+        {
+            super.writeToNBT(tagCompound);
+            tagCompound.setBoolean("Valid", this.hasMoreThanTwoComponents);
+        }
+
+        public void readFromNBT(NBTTagCompound tagCompound)
+        {
+            super.readFromNBT(tagCompound);
+            this.hasMoreThanTwoComponents = tagCompound.getBoolean("Valid");
+        }
+    }
+    
+    public static class GreekStart extends StructureStart
+    {
+        /** well ... thats what it does */
+        private boolean hasMoreThanTwoComponents;
+
+        public GreekStart()
+        {
+        }
+
+        public GreekStart(World worldIn, Random rand, int x, int z, int size)
+        {
+            super(x, z);
+            //this.updateBoundingBox();
+            List<LatinStructurePieces.PieceWeight> list = LatinStructurePieces.getStructureVillageWeightedPieceList(rand, size);
+            LatinStructurePieces.Start LatinStructurePieces$start = new LatinStructurePieces.Start(worldIn.getBiomeProvider(), 0, rand, (x << 4) + 2, (z << 4) + 2, list, size);
+            this.components.add(LatinStructurePieces$start);
+            LatinStructurePieces$start.buildComponent(LatinStructurePieces$start, this.components, rand);
+            List<StructureComponent> list1 = LatinStructurePieces$start.pendingRoads;
+            List<StructureComponent> list2 = LatinStructurePieces$start.pendingHouses;
+            //list2.add(new VillageComponentVillageWall(NordStructurePieces$start, rand, NordStructurePieces$start.getComponentType(), EnumFacing.DOWN, new BlockPos(x, 80, z), list.size() * 10, worldIn));
+            
+            while (!list1.isEmpty() || !list2.isEmpty())
+            {
+                if (list1.isEmpty())
+                {
+                    int i = rand.nextInt(list2.size());
+                    StructureComponent structurecomponent = list2.remove(i);
+                    structurecomponent.buildComponent(LatinStructurePieces$start, this.components, rand);
+                }
+                else
+                {
+                    int j = rand.nextInt(list1.size());
+                    StructureComponent structurecomponent2 = list1.remove(j);
+                    structurecomponent2.buildComponent(LatinStructurePieces$start, this.components, rand);
+                }
+            }
+
+            this.updateBoundingBox();
+            int k = 0;
+
+            for (StructureComponent structurecomponent1 : this.components)
+            {
+                if (!(structurecomponent1 instanceof LatinStructurePieces.Road))
+                {
+                    ++k;
+                }
+            }
+
+            this.hasMoreThanTwoComponents = k > 2;
+        }
+
+        /**
+         * currently only defined for Villages, returns true if Village has more than 2 non-road components
+         */
+        public boolean isSizeableStructure()
+        {
+            return this.hasMoreThanTwoComponents;
+        }
+
+        public void writeToNBT(NBTTagCompound tagCompound)
+        {
+            super.writeToNBT(tagCompound);
+            tagCompound.setBoolean("Valid", this.hasMoreThanTwoComponents);
+        }
+
+        public void readFromNBT(NBTTagCompound tagCompound)
+        {
+            super.readFromNBT(tagCompound);
+            this.hasMoreThanTwoComponents = tagCompound.getBoolean("Valid");
+        }
+    }
+    
+    public static class BritonStart extends StructureStart
+    {
+        /** well ... thats what it does */
+        private boolean hasMoreThanTwoComponents;
+
+        public BritonStart()
+        {
+        }
+
+        public BritonStart(World worldIn, Random rand, int x, int z, int size)
+        {
+            super(x, z);
+            //this.updateBoundingBox();
+            List<LatinStructurePieces.PieceWeight> list = LatinStructurePieces.getStructureVillageWeightedPieceList(rand, size);
+            LatinStructurePieces.Start LatinStructurePieces$start = new LatinStructurePieces.Start(worldIn.getBiomeProvider(), 0, rand, (x << 4) + 2, (z << 4) + 2, list, size);
+            this.components.add(LatinStructurePieces$start);
+            LatinStructurePieces$start.buildComponent(LatinStructurePieces$start, this.components, rand);
+            List<StructureComponent> list1 = LatinStructurePieces$start.pendingRoads;
+            List<StructureComponent> list2 = LatinStructurePieces$start.pendingHouses;
+            //list2.add(new VillageComponentVillageWall(NordStructurePieces$start, rand, NordStructurePieces$start.getComponentType(), EnumFacing.DOWN, new BlockPos(x, 80, z), list.size() * 10, worldIn));
+            
+            while (!list1.isEmpty() || !list2.isEmpty())
+            {
+                if (list1.isEmpty())
+                {
+                    int i = rand.nextInt(list2.size());
+                    StructureComponent structurecomponent = list2.remove(i);
+                    structurecomponent.buildComponent(LatinStructurePieces$start, this.components, rand);
+                }
+                else
+                {
+                    int j = rand.nextInt(list1.size());
+                    StructureComponent structurecomponent2 = list1.remove(j);
+                    structurecomponent2.buildComponent(LatinStructurePieces$start, this.components, rand);
+                }
+            }
+
+            this.updateBoundingBox();
+            int k = 0;
+
+            for (StructureComponent structurecomponent1 : this.components)
+            {
+                if (!(structurecomponent1 instanceof LatinStructurePieces.Road))
+                {
+                    ++k;
+                }
+            }
+
+            this.hasMoreThanTwoComponents = k > 2;
+        }
+
+        /**
+         * currently only defined for Villages, returns true if Village has more than 2 non-road components
+         */
+        public boolean isSizeableStructure()
+        {
+            return this.hasMoreThanTwoComponents;
+        }
+
+        public void writeToNBT(NBTTagCompound tagCompound)
+        {
+            super.writeToNBT(tagCompound);
+            tagCompound.setBoolean("Valid", this.hasMoreThanTwoComponents);
+        }
+
+        public void readFromNBT(NBTTagCompound tagCompound)
+        {
+            super.readFromNBT(tagCompound);
+            this.hasMoreThanTwoComponents = tagCompound.getBoolean("Valid");
+        }
+    }
+    
+    public static class FrankStart extends StructureStart
+    {
+        /** well ... thats what it does */
+        private boolean hasMoreThanTwoComponents;
+
+        public FrankStart()
+        {
+        }
+
+        public FrankStart(World worldIn, Random rand, int x, int z, int size)
+        {
+            super(x, z);
+            //this.updateBoundingBox();
+            List<LatinStructurePieces.PieceWeight> list = LatinStructurePieces.getStructureVillageWeightedPieceList(rand, size);
+            LatinStructurePieces.Start LatinStructurePieces$start = new LatinStructurePieces.Start(worldIn.getBiomeProvider(), 0, rand, (x << 4) + 2, (z << 4) + 2, list, size);
+            this.components.add(LatinStructurePieces$start);
+            LatinStructurePieces$start.buildComponent(LatinStructurePieces$start, this.components, rand);
+            List<StructureComponent> list1 = LatinStructurePieces$start.pendingRoads;
+            List<StructureComponent> list2 = LatinStructurePieces$start.pendingHouses;
+            //list2.add(new VillageComponentVillageWall(NordStructurePieces$start, rand, NordStructurePieces$start.getComponentType(), EnumFacing.DOWN, new BlockPos(x, 80, z), list.size() * 10, worldIn));
+            
+            while (!list1.isEmpty() || !list2.isEmpty())
+            {
+                if (list1.isEmpty())
+                {
+                    int i = rand.nextInt(list2.size());
+                    StructureComponent structurecomponent = list2.remove(i);
+                    structurecomponent.buildComponent(LatinStructurePieces$start, this.components, rand);
+                }
+                else
+                {
+                    int j = rand.nextInt(list1.size());
+                    StructureComponent structurecomponent2 = list1.remove(j);
+                    structurecomponent2.buildComponent(LatinStructurePieces$start, this.components, rand);
+                }
+            }
+
+            this.updateBoundingBox();
+            int k = 0;
+
+            for (StructureComponent structurecomponent1 : this.components)
+            {
+                if (!(structurecomponent1 instanceof LatinStructurePieces.Road))
                 {
                     ++k;
                 }

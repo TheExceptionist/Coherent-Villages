@@ -1,0 +1,113 @@
+---- Minecraft Crash Report ----
+// Why is it breaking :(
+
+Time: 10/17/18 1:35 PM
+Description: Exception preparing structure feature
+
+java.lang.NullPointerException: Exception preparing structure feature
+	at net.theexceptionist.coherentvillages.worldgen.villages.LatinStructurePieces$Well.buildComponent(LatinStructurePieces.java:1918)
+	at net.theexceptionist.coherentvillages.worldgen.villages.WorldGenVillage$LatinStart.<init>(WorldGenVillage.java:431)
+	at net.theexceptionist.coherentvillages.worldgen.villages.WorldGenVillage.getStructureStart(WorldGenVillage.java:180)
+	at net.minecraft.world.gen.structure.MapGenStructure.recursiveGenerate(MapGenStructure.java:48)
+	at net.minecraft.world.gen.MapGenBase.generate(MapGenBase.java:31)
+	at net.minecraft.world.gen.ChunkGeneratorOverworld.generateChunk(ChunkGeneratorOverworld.java:231)
+	at net.minecraft.world.gen.ChunkProviderServer.provideChunk(ChunkProviderServer.java:155)
+	at net.minecraft.world.World.getChunkFromChunkCoords(World.java:361)
+	at net.minecraft.world.World.getChunkFromBlockCoords(World.java:353)
+	at net.minecraft.world.World.getBlockState(World.java:994)
+	at net.minecraft.world.World.isAirBlock(World.java:278)
+	at net.minecraft.world.World.getGroundAboveSeaLevel(World.java:251)
+	at net.minecraft.world.WorldProvider.canCoordinateBeSpawn(WorldProvider.java:102)
+	at net.minecraft.world.WorldServer.createSpawnPosition(WorldServer.java:989)
+	at net.minecraft.world.WorldServer.initialize(WorldServer.java:908)
+	at net.minecraft.server.integrated.IntegratedServer.loadAllWorlds(IntegratedServer.java:124)
+	at net.minecraft.server.integrated.IntegratedServer.init(IntegratedServer.java:160)
+	at net.minecraft.server.MinecraftServer.run(MinecraftServer.java:552)
+	at java.lang.Thread.run(Thread.java:748)
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Thread: Server thread
+Stacktrace:
+	at net.theexceptionist.coherentvillages.worldgen.villages.LatinStructurePieces$Well.buildComponent(LatinStructurePieces.java:1918)
+	at net.theexceptionist.coherentvillages.worldgen.villages.WorldGenVillage$LatinStart.<init>(WorldGenVillage.java:431)
+	at net.theexceptionist.coherentvillages.worldgen.villages.WorldGenVillage.getStructureStart(WorldGenVillage.java:180)
+
+-- Feature being prepared --
+Details:
+	Is feature chunk: True
+	Chunk location: 10,22
+	Chunk pos hash: 94489280522
+	Structure type: net.theexceptionist.coherentvillages.worldgen.villages.WorldGenVillage
+Stacktrace:
+	at net.minecraft.world.gen.structure.MapGenStructure.recursiveGenerate(MapGenStructure.java:48)
+	at net.minecraft.world.gen.MapGenBase.generate(MapGenBase.java:31)
+	at net.minecraft.world.gen.ChunkGeneratorOverworld.generateChunk(ChunkGeneratorOverworld.java:231)
+
+-- Chunk to be generated --
+Details:
+	Location: 5,15
+	Position hash: 64424509445
+	Generator: net.minecraft.world.gen.ChunkGeneratorOverworld@33a5038a
+Stacktrace:
+	at net.minecraft.world.gen.ChunkProviderServer.provideChunk(ChunkProviderServer.java:155)
+	at net.minecraft.world.World.getChunkFromChunkCoords(World.java:361)
+	at net.minecraft.world.World.getChunkFromBlockCoords(World.java:353)
+	at net.minecraft.world.World.getBlockState(World.java:994)
+	at net.minecraft.world.World.isAirBlock(World.java:278)
+	at net.minecraft.world.World.getGroundAboveSeaLevel(World.java:251)
+	at net.minecraft.world.WorldProvider.canCoordinateBeSpawn(WorldProvider.java:102)
+	at net.minecraft.world.WorldServer.createSpawnPosition(WorldServer.java:989)
+
+-- Affected level --
+Details:
+	Level name: New World
+	All players: 0 total; []
+	Chunk stats: ServerChunkCache: 0 Drop: 0
+	Level seed: 5862046491288980794
+	Level generator: ID 04 - customized, ver 0. Features enabled: true
+	Level generator options: {"coordinateScale":684.412,"heightScale":684.412,"lowerLimitScale":512.0,"upperLimitScale":512.0,"depthNoiseScaleX":200.0,"depthNoiseScaleZ":200.0,"depthNoiseScaleExponent":0.5,"mainNoiseScaleX":80.0,"mainNoiseScaleY":160.0,"mainNoiseScaleZ":80.0,"baseSize":8.5,"stretchY":12.0,"biomeDepthWeight":1.0,"biomeDepthOffset":0.0,"biomeScaleWeight":1.0,"biomeScaleOffset":0.0,"seaLevel":63,"useCaves":true,"useDungeons":true,"dungeonChance":8,"useStrongholds":true,"useVillages":true,"useMineShafts":true,"useTemples":true,"useMonuments":true,"useMansions":true,"useRavines":true,"useWaterLakes":true,"waterLakeChance":4,"useLavaLakes":true,"lavaLakeChance":80,"useLavaOceans":false,"fixedBiome":1,"biomeSize":4,"riverSize":4,"dirtSize":33,"dirtCount":10,"dirtMinHeight":0,"dirtMaxHeight":256,"gravelSize":33,"gravelCount":8,"gravelMinHeight":0,"gravelMaxHeight":256,"graniteSize":33,"graniteCount":10,"graniteMinHeight":0,"graniteMaxHeight":80,"dioriteSize":33,"dioriteCount":10,"dioriteMinHeight":0,"dioriteMaxHeight":80,"andesiteSize":33,"andesiteCount":10,"andesiteMinHeight":0,"andesiteMaxHeight":80,"coalSize":17,"coalCount":20,"coalMinHeight":0,"coalMaxHeight":128,"ironSize":9,"ironCount":20,"ironMinHeight":0,"ironMaxHeight":64,"goldSize":9,"goldCount":2,"goldMinHeight":0,"goldMaxHeight":32,"redstoneSize":8,"redstoneCount":8,"redstoneMinHeight":0,"redstoneMaxHeight":16,"diamondSize":8,"diamondCount":1,"diamondMinHeight":0,"diamondMaxHeight":16,"lapisSize":7,"lapisCount":1,"lapisCenterHeight":16,"lapisSpread":16}
+	Level spawn location: World: (0,0,0), Chunk: (at 0,0,0 in 0,0; contains blocks 0,0,0 to 15,255,15), Region: (0,0; contains chunks 0,0 to 31,31, blocks 0,0,0 to 511,255,511)
+	Level time: 0 game time, 0 day time
+	Level dimension: 0
+	Level storage version: 0x04ABD - Anvil
+	Level weather: Rain time: 0 (now: false), thunder time: 0 (now: false)
+	Level game mode: Game mode: creative (ID 1). Hardcore: false. Cheats: true
+Stacktrace:
+	at net.minecraft.world.WorldServer.initialize(WorldServer.java:908)
+	at net.minecraft.server.integrated.IntegratedServer.loadAllWorlds(IntegratedServer.java:124)
+	at net.minecraft.server.integrated.IntegratedServer.init(IntegratedServer.java:160)
+	at net.minecraft.server.MinecraftServer.run(MinecraftServer.java:552)
+	at java.lang.Thread.run(Thread.java:748)
+
+-- System Details --
+Details:
+	Minecraft Version: 1.12.2
+	Operating System: Mac OS X (x86_64) version 10.13.6
+	Java Version: 1.8.0_144, Oracle Corporation
+	Java VM Version: Java HotSpot(TM) 64-Bit Server VM (mixed mode), Oracle Corporation
+	Memory: 478593216 bytes (456 MB) / 860880896 bytes (821 MB) up to 1908932608 bytes (1820 MB)
+	JVM Flags: 0 total; 
+	IntCache: cache: 0, tcache: 0, allocated: 12, tallocated: 94
+	FML: MCP 9.42 Powered by Forge 14.23.4.2757 7 mods loaded, 7 mods active
+	States: 'U' = Unloaded 'L' = Loaded 'C' = Constructed 'H' = Pre-initialized 'I' = Initialized 'J' = Post-initialized 'A' = Available 'D' = Disabled 'E' = Errored
+
+	| State   | ID               | Version      | Source                           | Signature |
+	|:------- |:---------------- |:------------ |:-------------------------------- |:--------- |
+	| UCHIJAA | minecraft        | 1.12.2       | minecraft.jar                    | None      |
+	| UCHIJAA | mcp              | 9.42         | minecraft.jar                    | None      |
+	| UCHIJAA | FML              | 8.0.99.99    | forgeSrc-1.12.2-14.23.4.2757.jar | None      |
+	| UCHIJAA | forge            | 14.23.4.2757 | forgeSrc-1.12.2-14.23.4.2757.jar | None      |
+	| UCHIJAA | coherentvillages | v0.0.0.5     | modid-1.0.jar                    | None      |
+	| UCHIJAA | journeymap       | 1.12.2-5.5.2 | journeymap-1.12.2-5.5.2.jar      | None      |
+	| UCHIJAA | torohealthmod    | 1.12.2-11    | torohealth-1.12.2-11.jar         | None      |
+
+	Loaded coremods (and transformers): 
+	GL info: ~~ERROR~~ RuntimeException: No OpenGL context found in the current thread.
+	Profiler Position: N/A (disabled)
+	Player Count: 0 / 8; []
+	Type: Integrated Server (map_client.txt)
+	Is Modded: Definitely; Client brand changed to 'fml,forge'

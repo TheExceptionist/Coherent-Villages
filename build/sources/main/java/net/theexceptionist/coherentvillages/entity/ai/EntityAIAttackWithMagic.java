@@ -4,7 +4,9 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IRangedAttackMob;
 import net.minecraft.entity.ai.EntityAIBase;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.MathHelper;
+import net.theexceptionist.coherentvillages.main.entity.EntityHumanVillager;
 
 public class EntityAIAttackWithMagic extends EntityAIBase {
     /** The entity the AI instance has been applied to */
@@ -13,7 +15,7 @@ public class EntityAIAttackWithMagic extends EntityAIBase {
     /**
      * The entity (as a RangedAttackMob) the AI instance has been applied to.
      */
-    private final IRangedAttackMob rangedAttackEntityHost;
+    private final EntityHumanVillager rangedAttackEntityHost;
     private EntityLivingBase attackTarget;
 
     /**
@@ -32,12 +34,12 @@ public class EntityAIAttackWithMagic extends EntityAIBase {
     private float field_96562_i;
     private float field_82642_h;
 
-    public EntityAIAttackWithMagic(IRangedAttackMob par1IRangedAttackMob, double par2, int par4, float par5)
+    public EntityAIAttackWithMagic(EntityHumanVillager par1IRangedAttackMob, double par2, int par4, float par5)
     {
         this(par1IRangedAttackMob, par2, par4, par4, par5);
     }
 
-    public EntityAIAttackWithMagic(IRangedAttackMob par1IRangedAttackMob, double par2, int par4, int par5, float par6)
+    public EntityAIAttackWithMagic(EntityHumanVillager par1IRangedAttackMob, double par2, int par4, int par5, float par6)
     {
         this.rangedAttackTime = -1;
 
@@ -102,6 +104,8 @@ public class EntityAIAttackWithMagic extends EntityAIBase {
         double d0 = this.entityHost.getDistanceSq(this.attackTarget.posX, this.attackTarget.posY, this.attackTarget.posZ);
         boolean flag = this.entityHost.getEntitySenses().canSee(this.attackTarget);
 
+        //System.out.println("Executing");
+        
         if (flag)
         {
             ++this.field_75318_f;
@@ -132,6 +136,7 @@ public class EntityAIAttackWithMagic extends EntityAIBase {
 
             f = MathHelper.sqrt(d0) / this.field_96562_i;
             float f1 = f;
+            this.rangedAttackEntityHost.swingArm(EnumHand.MAIN_HAND);
 
             if (f < 0.1F)
             {
@@ -143,7 +148,7 @@ public class EntityAIAttackWithMagic extends EntityAIBase {
                 f1 = 1.0F;
             }
 
-            this.rangedAttackEntityHost.attackEntityWithRangedAttack(this.attackTarget, f1);
+            this.rangedAttackEntityHost.attackEntityWithMagicAttack(this.attackTarget, f1);
             this.rangedAttackTime = 10;// MathHelper.floor(f * (float)(this.maxRangedAttackTime - this.field_96561_g) + (float)this.field_96561_g);
         }
         else if (this.rangedAttackTime < 0)

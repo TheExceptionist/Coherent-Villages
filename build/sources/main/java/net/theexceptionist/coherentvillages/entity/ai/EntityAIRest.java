@@ -45,7 +45,7 @@ public class EntityAIRest extends EntityAIBase
     		{
     			//System.out.println(creature.getCustomNameTag()+" - Executing");
     			//Must be within a village
-    			this.creature.reSupply(this.creature.getKills() * 2);
+    			//this.creature.reSupply(this.creature.getKills() * 2);
     			return true;
     		}
     		else
@@ -64,7 +64,7 @@ public class EntityAIRest extends EntityAIBase
      */
     public boolean shouldContinueExecuting()
     {
-    	return this.creature.getHealth() < this.creature.getMaxHealth() && this.creature.getAttackTarget() == null && this.creature.getAttackingEntity() == null && this.creature.getSupply() > 0;
+    	return false;//return this.creature.getHealth() < this.creature.getMaxHealth() && this.creature.getAttackTarget() == null && this.creature.getAttackingEntity() == null && this.creature.getSupply() > 0;
     }
 
     /**
@@ -90,7 +90,7 @@ public class EntityAIRest extends EntityAIBase
         	attackTimer--;
         }
         
-        if (potiontype != null && attackTimer <= 0 && this.creature.getSupply() > 0)
+      /*  if (potiontype != null && attackTimer <= 0 && this.creature.getSupply() > 0)
         {
         	//ItemStack mainHand = this.creature.getHeldItemMainhand();
            // this.creature.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), potiontype));
@@ -101,7 +101,7 @@ public class EntityAIRest extends EntityAIBase
            // System.out.println(this.creature.getCustomNameTag()+" Healing, Supply: "+this.creature.getSupply());
             
            // this.creature.setHeldItem(EnumHand.MAIN_HAND, mainHand);
-        }
+        }*/
     }
     
     public void updateTask()

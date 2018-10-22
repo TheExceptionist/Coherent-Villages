@@ -1,0 +1,36 @@
+package net.theexceptionist.coherentvillages.main.entity.spells;
+
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.projectile.EntityLargeFireball;
+import net.minecraft.init.SoundEvents;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.Vec3d;
+
+public class SpellFireball extends Spell{
+
+	public SpellFireball(String name, int type) {
+		super(name, type);
+	}
+
+	@Override
+	public void execute() {
+		double d1 = 4.0D;
+        Vec3d vec3d = this.getLook(1.0F);
+        EntityLivingBase entitylivingbase = this.getAttackTarget();
+        
+        double d2 = entitylivingbase.posX - (this.posX + vec3d.x * 4.0D);
+        double d3 = entitylivingbase.getEntityBoundingBox().minY + (double)(entitylivingbase.height / 2.0F) - (0.5D + this.posY + (double)(this.height / 2.0F));
+        double d4 = entitylivingbase.posZ - (this.posZ + vec3d.z * 4.0D);
+        
+        this.world.playSound((EntityPlayer)null, this.posX, this.posY, this.posZ, SoundEvents.BLOCK_FIRE_AMBIENT, SoundCategory.NEUTRAL, 2.0F, 0.5F + this.rand.nextFloat() * 0.2F);
+	       
+        EntityLargeFireball entitylargefireball = new EntityLargeFireball(world, this, d2, d3, d4);
+        entitylargefireball.explosionPower = 0;
+        entitylargefireball.posX = this.posX + vec3d.x * 4.0D;
+        entitylargefireball.posY = this.posY + (double)(this.height / 2.0F) + 0.5D;
+        entitylargefireball.posZ = this.posZ + vec3d.z * 4.0D;
+        world.spawnEntity(entitylargefireball);
+	}
+
+}

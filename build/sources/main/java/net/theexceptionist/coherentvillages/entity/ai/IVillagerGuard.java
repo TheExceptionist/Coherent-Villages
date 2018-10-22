@@ -1,10 +1,10 @@
 package net.theexceptionist.coherentvillages.entity.ai;
 
 import net.minecraft.util.math.BlockPos;
-import net.theexceptionist.coherentvillages.entity.soldier.AbstractVillagerSoldier;
+import net.theexceptionist.coherentvillages.main.entity.EntityHumanVillager;
 
 public interface IVillagerGuard {
-	AbstractVillagerSoldier getSoldier();
+	EntityHumanVillager getSoldier();
 	BlockPos getPost();
 	boolean getArrived();
 }

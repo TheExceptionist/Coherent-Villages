@@ -1,0 +1,30 @@
+version v0.0.1.7
+#distance between villages
+#do not set below 9!
+max_distance=20
+#do not set above max_distance or below 3!
+min_distance=10
+#Tested with values 0, 1... change default size of villages
+size=1
+#ID start for entities
+entity_id_start=1514
+#=====NORD CONFIGS=======#The chance a Nord NPC has to gain the ability(or curse) to transform into a Bjornserker!
+bjorn_turn_rate=5
+#The chance a Nord Village will bandit infested!
+nord_bandit_infest_rate=25
+#The chance a Nord Village will zombie infested!
+nord_zombie_infest_rate=2
+#The spawnrate of wargs!
+warg_spawn_rate=10
+#The spawnrate of bjornserkers
+bjornserker_spawn_rate=5
+#The chance a Nord Village attempt to upgrade their soldiers to a higher rank.
+upgrade_chance=25
+#=====ROMAN CONFIGS=======#The spawnrate of wraiths in Latin villages
+wraith_spawn_rate=5
+#The chance when a Latin NPC dies they become a Wraith
+wraith_turn_rate=50
+#The chance a Nord Village will bandit infested!
+latin_bandit_infest_rate=25
+#The chance a Nord Village will zombie infested!
+latin_zombie_infest_rate=2

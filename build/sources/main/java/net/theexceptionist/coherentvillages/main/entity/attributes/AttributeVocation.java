@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import net.minecraft.item.Item;
+import net.minecraft.potion.PotionType;
+import net.theexceptionist.coherentvillages.main.entity.spells.Spell;
+import net.theexceptionist.coherentvillages.main.items.ItemWeaponThrowable;
 
 public class AttributeVocation {
 	public final static int CLASS_VILLAGER = 0;
@@ -22,6 +25,9 @@ public class AttributeVocation {
 	public final static int CLASS_RULER = 5;
 	public final static int CLASS_BANDIT = 6;
 	public final static int CLASS_MERCENARY = 7;
+	public final static int CLASS_OVERRIDE_NO_ARMOR = 8;
+	
+	public final static int NUM_CLASSES = 8;
 	
 	protected final int type;
 	protected final int rank;
@@ -31,6 +37,7 @@ public class AttributeVocation {
 	protected boolean canRide = false;
 	
 	protected final String name;
+	protected boolean alwaysBlock = false;
 	
 	protected AttributeVocation upgradeLeft = null;
 	protected AttributeVocation upgradeRight = null;
@@ -45,7 +52,23 @@ public class AttributeVocation {
 	protected Item shield = null;
 	protected Item meleeWeapon = null;
 	protected Item rangedWeapon = null;
-
+	protected Item horseArmor = null;
+	
+	protected ItemWeaponThrowable thrown = null;
+	
+	//4 potion slots max
+	protected PotionType[] potions = new PotionType[4];
+	public static final int POTION_SLOT_PASSIVE_1 = 0;
+	public static final int POTION_SLOT_PASSIVE_2 = 1;
+	public static final int POTION_SLOT_ACTIVE_1 = 2;
+	public static final int POTION_SLOT_ACTIVE_2 = 3;
+	
+	protected Spell[] spells = new Spell[4];
+	public static final int SPELL_SLOT_PASSIVE_1 = 0;
+	public static final int SPELL_SLOT_PASSIVE_2 = 1;
+	public static final int SPELL_SLOT_ACTIVE_1 = 2;
+	public static final int SPELL_SLOT_ACTIVE_2 = 3;
+	
 	protected boolean usesShield = false;
 	protected final int ID;
 	protected int subType;
@@ -66,6 +89,14 @@ public class AttributeVocation {
 	private int genderOnly = -1;
 
 	private int classOver = -1;
+
+	private int potionChance = 25;
+
+	private boolean canHeal = false;
+
+	private int horseArmorChance = 0;
+
+	private Random rand = null;
 	//protected Spell[] spells
 	//protected PotionType[] potions
 	public static ArrayList<AttributeVocation> jobs = new ArrayList<AttributeVocation>();
@@ -78,18 +109,24 @@ public class AttributeVocation {
 		this.upgradeReq = upgradeReq;
 		this.originRace = race;
 		this.ID = END_ID++;
-		this.setEquipment(null);
+		this.rand = new Random();
+		this.setEquipment();
 		
 		this.jobs.add(this);
 	}
 	
-	public AttributeVocation(final String name, final int type, final int rank, final int upgradeReq, final AttributeRace race, final boolean canRide, final boolean usesShield, final int shieldChance, Random rand)
+	public AttributeVocation(final String name, final int type, final int rank, final int upgradeReq, final AttributeRace race, final boolean canRide, final boolean usesShield, final int shieldChance, final int potionChance, final int armorChance, final boolean alwaysBlock, Random rand)
 	{
 		this(name, type, rank, upgradeReq, race);
 		this.canRide = canRide;
+		//System.out.println(name+" : "+canRide);
 		this.usesShield = usesShield;
 		this.shieldChance = shieldChance;
-		this.setEquipment(rand);
+		this.potionChance = potionChance;
+		this.horseArmorChance  = armorChance;
+		this.alwaysBlock = alwaysBlock;
+		this.rand = rand;
+		this.setEquipment();
 	}
 	
 	public AttributeVocation(final String name, final int type, final int rank, final int upgradeReq, final AttributeRace race, final Item heldItem, final int subType)
@@ -97,14 +134,24 @@ public class AttributeVocation {
 		this(name, type, rank, upgradeReq, race);
 		this.meleeWeapon = heldItem;
 		this.subType = subType;
+		this.potions[POTION_SLOT_PASSIVE_1] = race.potions.get(AttributeRace.POTION_1);
 	}
 	
 	public AttributeVocation(String string, int classBandit, int i, int j, AttributeRace attributeRace, boolean b,
-			boolean c, int k, Random rand, int classOver) {
-		this(string, classBandit, i, j, attributeRace, b, c, k, rand);
+			boolean c, int k, int p, final int armorChance, final boolean alwaysBlock, Random rand, int classOver) {
+		this(string, classBandit, i, j, attributeRace, b, c, k, p, armorChance, alwaysBlock, rand);
 		this.classOver  = classOver;
-		this.setEquipment(rand);
+		this.rand = rand;
+		this.setEquipment();
 		//System.out.println(classOver);
+	}
+
+	public AttributeVocation(String string, int classAlchemist, int i, int j, AttributeRace attributeRace, boolean b,
+			boolean c, int k, int p, final int armorChance, final boolean alwaysBlock, Random rand, boolean healer) {
+		this(string, classAlchemist, i, j, attributeRace, b, c, k, p, armorChance, alwaysBlock, rand);
+		this.canHeal = healer;
+		this.rand = rand;
+		this.setEquipment();
 	}
 
 	public void setUpgradeTree(AttributeVocation left, AttributeVocation right)
@@ -122,7 +169,12 @@ public class AttributeVocation {
 		return subType;
 	}
 	
-	public void setEquipment(Random rand)
+	public boolean isAlwaysBlocking()
+	{
+		return alwaysBlock;
+	}
+
+	public void setEquipment()
 	{
 		int armorID = (rank - 1) * 4;
 		
@@ -143,6 +195,8 @@ public class AttributeVocation {
 			meleeWeapon = null;//this.originRace.meleeWeapons.get(rank - 1);
 			rangedWeapon = null;//this.originRace.meleeWeapons.get(rank - 1);
 			shield = null;//this.originRace.shield
+			horseArmor = null;
+			thrown = null;
 		}
 		
 		switch(typeUsed)
@@ -157,11 +211,23 @@ public class AttributeVocation {
 				meleeWeapon = this.originRace.meleeWeapons.get(rank - 1);
 				//Rank
 				//System.out.println(this.getName()+" Uses Shield: "+usesShield);
-				if(usesShield && rand != null && rand.nextInt(100) < shieldChance) 
+				if(usesShield && rand.nextInt(100) < shieldChance) 
 				{
 					shield = this.originRace.shield.get(0);
 					//System.out.println("Shield: "+shield);
 				}
+				
+				if(canRide && rand.nextInt(100) < horseArmorChance)
+				{
+					horseArmor = this.originRace.horseArmors.get(rank - 1);
+				}
+				
+				//if(rand != null && rand.nextInt(100) < potionChance) potions[POTION_SLOT_ACTIVE_1]  = this.originRace.potions.get(AttributeRace.POTION_3);
+				//{
+				potions[0] = this.originRace.potions.get(AttributeRace.POTION_1);
+				thrown = this.originRace.thrown.get(AttributeRace.THROWN_1);
+				//potions[POTION_SLOT_ACTIVE_1]  = this.originRace.potions.get(AttributeRace.POTION_3);
+				//}
 			}
 			break;
 			case CLASS_ARCHER:
@@ -172,6 +238,18 @@ public class AttributeVocation {
 				boots = this.originRace.armor.get(feet);
 				//rangedWeapon = this.originRace.rangedWeapons.get(rank);
 				rangedWeapon = this.originRace.rangedWeapons.get(0);
+				
+				if(canRide && rand.nextInt(100) < horseArmorChance)
+				{
+					horseArmor = this.originRace.horseArmors.get(rank - 1);
+				}
+				//if(rand != null && rand.nextInt(100) < potionChance) potions[POTION_SLOT_ACTIVE_1]  = this.originRace.potions.get(AttributeRace.POTION_3);
+
+				//{
+				potions[0] = this.originRace.potions.get(AttributeRace.POTION_1);
+				//potions[POTION_SLOT_ACTIVE_1]  = this.originRace.potions.get(AttributeRace.POTION_3);
+
+				//}
 			}
 			break;
 			case CLASS_MAGE:
@@ -181,6 +259,20 @@ public class AttributeVocation {
 				leggings = this.originRace.armor.get(legs);
 				boots = this.originRace.armor.get(feet);
 				//spells = this.originRace.spells.get(rank);
+				
+				if(canRide && rand.nextInt(100) < horseArmorChance)
+				{
+					horseArmor = this.originRace.horseArmors.get(rank - 1);
+				}
+				//if(rand != null && rand.nextInt(100) < potionChance )
+				//{
+				potions[0] = this.originRace.potions.get(AttributeRace.POTION_1);
+				//}
+				for(int i = 0; i < spells.length; i++)
+				{
+					//System.out.println("Spell: "+this.originRace.spells.get(i + ((rank - 1) * 4)));
+					spells[i] = this.originRace.spells.get(i + ((rank - 1) * 4));
+				}
 			}
 			break;
 			case CLASS_ALCHEMIST:
@@ -189,6 +281,17 @@ public class AttributeVocation {
 				chestplate = this.originRace.armor.get(chest);
 				leggings = this.originRace.armor.get(legs);
 				boots = this.originRace.armor.get(feet);
+				
+				if(canRide && rand.nextInt(100) < horseArmorChance)
+				{
+					horseArmor = this.originRace.horseArmors.get(rank - 1);
+				}
+				
+				for(int i = 0; i < potions.length; i++)
+				{
+					//System.out.println(this.originRace.potions.get(i + ((rank - 1) * 4))+"\nRanks:"+(rank - 1));
+					potions[i] = this.originRace.potions.get(i + ((rank - 1) * 4));
+				}
 				//potions = this.originRace.potions.get(rank);
 			}
 			break;
@@ -202,6 +305,17 @@ public class AttributeVocation {
 				meleeWeapon = this.originRace.meleeWeapons.get(rank - 1);
 				//Rank
 				if(usesShield) shield = this.originRace.shield.get(0);
+				
+				if(canRide && rand.nextInt(100) < horseArmorChance)
+				{
+					horseArmor = this.originRace.horseArmors.get(rank - 1);
+				}
+				
+				if(rand != null && rand.nextInt(100) < potionChance )
+				{
+				//	if(rand != null && rand.nextInt(100) < potionChance) potions[POTION_SLOT_ACTIVE_1]  = this.originRace.potions.get(AttributeRace.POTION_3);
+					potions[0] = this.originRace.potions.get(AttributeRace.POTION_1);
+				}
 			}
 			break;
 			case CLASS_RULER:
@@ -214,6 +328,24 @@ public class AttributeVocation {
 				meleeWeapon = this.originRace.meleeWeapons.get(rank - 1);
 				//Rank
 				if(usesShield) shield = this.originRace.shield.get(0);
+				
+				if(canRide && rand.nextInt(100) < horseArmorChance)
+				{
+					horseArmor = this.originRace.horseArmors.get(rank - 1);
+				}
+				//if(rand != null && rand.nextInt(100) < potionChance )
+				//{
+					potions[0] = this.originRace.potions.get(AttributeRace.POTION_1);
+					//potions[POTION_SLOT_ACTIVE_1]  = this.originRace.potions.get(AttributeRace.POTION_3);
+
+				//}
+			}
+			break;
+			case CLASS_OVERRIDE_NO_ARMOR:
+			{
+				meleeWeapon = this.originRace.meleeWeapons.get(rank - 1);
+				potions[0] = this.originRace.potions.get(AttributeRace.POTION_1);
+				//thrown = this.originRace.thrown.get(AttributeRace.THROWN_1);
 			}
 			break;
 		}
@@ -225,9 +357,30 @@ public class AttributeVocation {
 		this.originRace.spells*/
 	}
 	
+	public Item getHorseArmor() {
+		return horseArmor;
+	}
+
+	public void setHorseArmor(Item horseArmor) {
+		this.horseArmor = horseArmor;
+	}
+
+	public PotionType getPotions(final int num) {
+		return potions[num];
+	}
+
+	public void setPotions(int i, PotionType potions) {
+		this.potions[i] = potions;
+	}
 	
-	
-	
+	public Spell getSpell(final int num) {
+		return this.spells[num];
+	}
+
+	public void setSpell(int i, Spell spell) {
+		this.spells[i] = spell;
+	}
+
 	public int getID() {
 		return ID;
 	}
@@ -359,5 +512,14 @@ public class AttributeVocation {
 
 	public int getGenderOnly() {
 		return genderOnly;
+	}
+
+	public boolean isHealer() {
+		return canHeal ;
+	}
+
+	public ItemWeaponThrowable getThrown() {
+		// TODO Auto-generated method stub
+		return thrown;
 	}
 }

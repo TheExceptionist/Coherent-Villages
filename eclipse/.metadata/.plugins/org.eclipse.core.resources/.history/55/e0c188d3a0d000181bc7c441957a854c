@@ -1,0 +1,11 @@
+package net.theexceptionist.coherentvillages.commands;
+
+public class CommandConjure {
+	protected String entityName;
+	protected Entity conjuredEntity;
+	
+	public CommandConjure()
+	{
+		
+	}
+}

@@ -1,0 +1,6 @@
+{
+    "parent": "item/handheld",
+    "textures": {
+        "layer0": "coherentvillages:items/roman_sword"
+    }
+}

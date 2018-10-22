@@ -1,0 +1,33 @@
+package net.theexceptionist.coherentvillages.main.items;
+
+import net.minecraft.item.Item;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import net.theexceptionist.coherentvillages.main.Main;
+
+public class ItemWeaponThrowable extends Item 
+{
+	public ItemWeaponThrowable(String name, int stackSize)
+	{
+		setUnlocalizedName(name);
+		setRegistryName(name);
+		setMaxStackSize(stackSize);
+		setCreativeTab(Main.villagesTab);
+	}
+	
+	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
+		if (!player.capabilities.isCreativeMode) {
+		--stack.stackSize;
+		}
+
+		world.playSoundAtEntity(player, "random.bow", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
+
+		// IMPORTANT! Only spawn new entities on the server. If the world is not remote,
+		// that means you are on the server:
+		if (!world.isRemote) {
+		world.spawnEntityInWorld(new EntityThrowingRock(world, player));
+		}
+
+		return stack;
+		}
+}

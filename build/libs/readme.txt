@@ -297,15 +297,164 @@ Biomes.RIVER,
 Biomes.STONE_BEACH
 =================================
 
+-Pre-Release Test v0.0.0.3
+=========================================
+*Bjornserker status now saves
+*Bjornserkers now regenerate
+*Villagers now have 4 potion slots max
+*Villagers now have 4 spell slots max
+*Most NPCs Have healing potions now
+*Nord villages now replace dirt with dirt paths
+*Lamp are now replaced with brazier in Nord villages
+*Added config for zombie infestation and bandit villages
+*Added a config for wargs and bjornserkers
+*Added a config for soldier upgrading 
+*Bjornserker now attack cows, pigs, and wolves (including wargs)
+*Wargs attack Sheep and Chicken
+*Wargs run from Bjornserkers
 
+
+=====NEW COMMAND====
+*added create command to summon villagers
+**Usage: /create <villager_race> <villager_vocation>
+**Example: /create nord warrior
+
+*create command lists valid names
+**Usage /create <villager_race> list
+
+*create commands can now take a number to spawn
+**Usage /create <villager_race> <villager_vocation> (Optional)<number>
+
+*create commands now list active cultures
+**Usage /create list
+
+
+=====FIXES========
+*Villagers won't attack bandits
+*Wargs and Bjornserker now spawn correctly (have a small chance to spawn in daylight)
+*Villagers won't attack back
+*Jarl won't target mobs
+
+-Pre-Release Test v0.0.0.5
+=========================================
+*Added chests to Nord Villages
+*Archers now hold their bow correctly
+*Soldiers now swing their weapons
+*Soldiers can now block with their shields
+
+-Pre-Release Test v0.0.1.0
+=========================================
+*Added spells and alchemy back
+*Some Villagers can now ride/search for horses
+*Added Some villager now bard their horses (give them armor)
+*Equipment is now randomized 
+*Added Some Textures for the Romans and Nord
+*Added Nord Mail... An armor set for Nords
+*Villagers now drop loot and sometimes emeralds
+*Added Nord Shield
+
+*****Added Roman Buildings
+**Bath House
+**Archer Tower
+**Guard House
+**Consul House
+**Tall House
+**Small Hut
+**Shrine
+
+******Finished Roman Soldiers and Bandits:
+**Roman Blacksmith
+**Roman Artisan
+**Roman Merchant
+
+**Roman Legionnaire
+**Roman Principle
+**Roman Centurion
+
+Legionnaire upgrades to Principle
+Principle upgrades to Centurion
+
+**Roman Archer
+**Roman Legate
+
+Archer upgrades to LEgate
+
+**Roman Battlemage
+
+**Roman Healer
+**Roman Alchemist
+
+****Bandits
+**Renegade Legionary
+**Reaver
+
+**Brigand
+**Rogue
+
+**Necromancer
+
+**Witchdoctor
+**Blackguard
+
+****Mercenary
+**Gladiator
+
+****Ruler
+**Emperor
+
+****Summons
+**Ancient Warrior
+
+*Some soldiers now spawn with horse
+=============================
+
+-Pre-Release Test v0.0.1.2
+=========================================
+*Fixed Nord arm missing bug
+*Added banners
+*Fixed Server Crash Bug
+*Added a faction system (Right click village leader for more info)
+*Added the Roman Gladius
+*Added Tomes (Can cast spells when right clicked)
+*rebalanced berserker
+*Changed 'Roman' to 'Latin'
+
+
+-Pre-Release Test v0.0.1.7
+=========================================
+*Added throwing weapons
+*Some Nords now throw axes
+*Added Spears
+*Some romans now have spears
+*Added Wraiths(Can't be damaged with normal weapons, only magic and fire), for the roman culture
+*Added some more configs
+*Fixed Healer Bug
+
+//Faction System
+//Day System
+//Events
+
+=====For Nords========
+//Throwing Axes
+//Villager AI
+
+=====For Romans=======
+//Wizard Hats
+//Roman Spear
+//Roman  lorica
+//Ghost
+//Dragon
 
 To Be done later
+//Added Levitate Spell
+//Greeks something special with lighting
 *Fix Torch Bug
 *Added University
 *Added Castle
 //Add Bandit spawns outside of bandit villages
 //Add Shrine
 //Replace the rest of the culture village spawning with the nord code
+//Added biome sharing between villages
 
 
 
@@ -316,10 +465,6 @@ To Be done later
 *Player can "join" bandits (By having a low reputation in a village)
 
 
-Phase 1:
-Polish everything
-Optimize
-Mod Compatibility 
 
 
 Planned Features:

@@ -1,0 +1,17 @@
+package net.theexceptionist.coherentvillages.main.entity.render;
+
+import net.minecraft.client.model.ModelBiped;
+import net.minecraft.client.renderer.entity.RenderBiped;
+import net.minecraft.client.renderer.entity.RenderManager;
+import net.theexceptionist.coherentvillages.main.entity.EntityWraith;
+
+public class RenderWraith extends RenderBiped<EntityWraith>
+{
+	public static final String LATIN_SKIN_M = "textures/entity/villager/human/latin_m/ghost_0.png";
+
+	public RenderWraith(RenderManager renderManagerIn, ModelBiped modelBipedIn, float shadowSize) {
+		super(renderManagerIn, modelBipedIn, shadowSize);
+
+	}
+
+}

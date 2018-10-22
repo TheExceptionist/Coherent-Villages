@@ -1,0 +1,24 @@
+package net.theexceptionist.coherentvillages.main.entity.render;
+
+import net.minecraft.client.model.ModelBiped;
+import net.minecraft.client.renderer.entity.RenderBiped;
+import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.util.ResourceLocation;
+import net.theexceptionist.coherentvillages.main.Resources;
+import net.theexceptionist.coherentvillages.main.entity.EntityWraith;
+
+public class RenderWraith extends RenderBiped<EntityWraith>
+{
+	public static final String GHOST = "textures/entity/villager/human/latin_m/ghost_0.png";
+
+	public RenderWraith(RenderManager renderManagerIn, ModelBiped modelBipedIn, float shadowSize) {
+		super(renderManagerIn, modelBipedIn, shadowSize);
+
+	}
+	
+	@Override
+	protected ResourceLocation getEntityTexture(EntityWraith entity) {
+		return new ResourceLocation(Resources.MODID, GHOST);
+	}
+
+}

@@ -1,0 +1,5 @@
+package net.theexceptionist.coherentvillages.main.events;
+
+public class EventBanditSkirmish {
+
+}

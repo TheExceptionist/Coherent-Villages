@@ -85,12 +85,20 @@ public class EntityAIAttackWithBow extends EntityAIBase {
     {
         return this.shouldExecute() || !this.entityHost.getNavigator().noPath();
     }
+    
+    public void startExecuting()
+    {
+        super.startExecuting();
+        ((IRangedAttackMob)this.rangedAttackEntityHost).setSwingingArms(true);
+    }
 
     /**
-     * Resets the task
+     * Reset the task's internal state. Called when this task is interrupted by another one
      */
     public void resetTask()
     {
+        super.resetTask();
+        ((IRangedAttackMob)this.rangedAttackEntityHost).setSwingingArms(false);
         this.attackTarget = null;
         this.seeTime = 0;
         this.rangedAttackTime = -1;

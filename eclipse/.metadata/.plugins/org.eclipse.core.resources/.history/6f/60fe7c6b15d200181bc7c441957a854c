@@ -1,0 +1,16 @@
+package net.theexceptionist.coherentvillages.main.items;
+
+import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.ItemArmor;
+import net.theexceptionist.coherentvillages.main.Main;
+
+public class ItemNordArmor extends ItemArmor{
+
+	public ItemNordArmor(String name, ArmorMaterial materialIn, int renderIndexIn, EntityEquipmentSlot equipmentSlotIn) {
+		super(materialIn, renderIndexIn, equipmentSlotIn);
+		this.setUnlocalizedName(name);
+		this.setRegistryName(name);
+		this.setCreativeTab(Main.villagesTab);
+	}
+
+}

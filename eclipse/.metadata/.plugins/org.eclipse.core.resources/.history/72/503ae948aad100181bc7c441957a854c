@@ -1,0 +1,17 @@
+package net.theexceptionist.coherentvillages.main.entity.spells;
+
+import net.theexceptionist.coherentvillages.main.entity.EntityHumanVillager;
+
+public class SpellThunderStorm extends Spell {
+
+	public SpellThunderStorm(String name, int type) {
+		super(name, type);
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public void execute(EntityHumanVillager caster) {
+		
+	}
+
+}

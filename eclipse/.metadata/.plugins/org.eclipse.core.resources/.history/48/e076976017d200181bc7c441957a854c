@@ -1,0 +1,26 @@
+package net.theexceptionist.coherentvillages.main.items;
+
+import net.minecraft.init.SoundEvents;
+import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.ItemArmor;
+import net.minecraftforge.common.util.EnumHelper;
+import net.theexceptionist.coherentvillages.main.Main;
+import net.theexceptionist.coherentvillages.main.Resources;
+
+public class ItemNordArmor extends ItemArmor{
+	public static ArmorMaterial NORD_MAIL = EnumHelper.addArmorMaterial("nord_mail", Resources.MODID+":nord_mail", 1500, new int[]{3 , 4, 7, 1}, 10, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 8F);
+	
+	public static ItemNordArmor barbarianHelmet = new ItemNordArmor("barbarian_helmet", ItemNordArmor.NORD_MAIL, 0, EntityEquipmentSlot.HEAD);
+	public static ItemNordArmor barbarianChestplate = new ItemNordArmor("barbarian_chestplate", ItemNordArmor.NORD_MAIL, 0, EntityEquipmentSlot.HEAD);
+	public static ItemNordArmor barbarianLeggings = new ItemNordArmor("barbarian_leggings", ItemNordArmor.NORD_MAIL, 1, EntityEquipmentSlot.HEAD);
+	public static ItemNordArmor barbarianBoots = new ItemNordArmor("barbarian_boots", ItemNordArmor.NORD_MAIL, 0, EntityEquipmentSlot.HEAD);
+	
+			
+	public ItemNordArmor(String name, ArmorMaterial materialIn, int renderIndexIn, EntityEquipmentSlot equipmentSlotIn) {
+		super(materialIn, renderIndexIn, equipmentSlotIn);
+		this.setUnlocalizedName(name);
+		this.setRegistryName(name);
+		this.setCreativeTab(Main.villagesTab);
+	}
+
+}

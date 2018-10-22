@@ -1,0 +1,30 @@
+package net.theexceptionist.coherentvillages.main.events;
+
+import java.util.Random;
+
+public class EventBanditSkirmish extends Event {
+	public EventBanditSkirmish(Random rand, boolean startInDay, int chance) {
+		super(rand, startInDay, chance);
+	}
+
+	@Override
+	public void execute() {
+		if(this.player != null)
+		{
+			
+		}
+		else 
+		{
+			return;
+		}
+	}
+
+	@Override
+	public void reset() {
+		if(this.player != null && this.player.world.isDaytime() != startInDay)
+		{
+			this.spawned = false;
+		}
+	}
+
+}

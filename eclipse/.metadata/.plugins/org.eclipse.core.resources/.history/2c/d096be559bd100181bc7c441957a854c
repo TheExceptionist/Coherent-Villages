@@ -1,0 +1,20 @@
+package net.theexceptionist.coherentvillages.main.items;
+
+import net.minecraft.item.Item;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
+public class BaseItem extends Item 
+{
+	public BaseItem()
+	{
+		super();
+	}
+	
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void registerIcons()
+	{
+		
+	}
+}

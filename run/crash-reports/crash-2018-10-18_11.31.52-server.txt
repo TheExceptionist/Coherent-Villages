@@ -1,0 +1,94 @@
+---- Minecraft Crash Report ----
+// But it works on my machine.
+
+Time: 10/18/18 11:31 AM
+Description: Exception ticking world
+
+java.lang.IllegalArgumentException: Cannot set property PropertyDirection{name=facing, clazz=class net.minecraft.util.EnumFacing, values=[north, south, west, east]} to null on block minecraft:wall_banner, it is not an allowed value
+	at net.minecraft.block.state.BlockStateContainer$StateImplementation.withProperty(BlockStateContainer.java:233)
+	at net.theexceptionist.coherentvillages.main.items.ItemBannerGenWrapper.placeRandomBannerBlock(ItemBannerGenWrapper.java:56)
+	at net.theexceptionist.coherentvillages.worldgen.villages.LatinStructurePieces$Banner.addComponentParts(LatinStructurePieces.java:1263)
+	at net.minecraft.world.gen.structure.StructureStart.generateStructure(StructureStart.java:51)
+	at net.minecraft.world.gen.structure.MapGenStructure.generateStructure(MapGenStructure.java:102)
+	at net.minecraft.world.gen.ChunkGeneratorOverworld.populate(ChunkGeneratorOverworld.java:412)
+	at net.minecraft.world.chunk.Chunk.populate(Chunk.java:1092)
+	at net.minecraft.world.chunk.Chunk.populate(Chunk.java:1058)
+	at net.minecraft.world.gen.ChunkProviderServer.provideChunk(ChunkProviderServer.java:169)
+	at net.minecraft.server.management.PlayerChunkMapEntry.providePlayerChunk(PlayerChunkMapEntry.java:130)
+	at net.minecraft.server.management.PlayerChunkMap.tick(PlayerChunkMap.java:183)
+	at net.minecraft.world.WorldServer.tick(WorldServer.java:236)
+	at net.minecraft.server.MinecraftServer.updateTimeLightAndEntities(MinecraftServer.java:831)
+	at net.minecraft.server.MinecraftServer.tick(MinecraftServer.java:743)
+	at net.minecraft.server.integrated.IntegratedServer.tick(IntegratedServer.java:192)
+	at net.minecraft.server.MinecraftServer.run(MinecraftServer.java:592)
+	at java.lang.Thread.run(Thread.java:748)
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Thread: Server thread
+Stacktrace:
+	at net.minecraft.block.state.BlockStateContainer$StateImplementation.withProperty(BlockStateContainer.java:233)
+	at net.theexceptionist.coherentvillages.main.items.ItemBannerGenWrapper.placeRandomBannerBlock(ItemBannerGenWrapper.java:56)
+	at net.theexceptionist.coherentvillages.worldgen.villages.LatinStructurePieces$Banner.addComponentParts(LatinStructurePieces.java:1263)
+	at net.minecraft.world.gen.structure.StructureStart.generateStructure(StructureStart.java:51)
+	at net.minecraft.world.gen.structure.MapGenStructure.generateStructure(MapGenStructure.java:102)
+	at net.minecraft.world.gen.ChunkGeneratorOverworld.populate(ChunkGeneratorOverworld.java:412)
+	at net.minecraft.world.chunk.Chunk.populate(Chunk.java:1092)
+	at net.minecraft.world.chunk.Chunk.populate(Chunk.java:1058)
+	at net.minecraft.world.gen.ChunkProviderServer.provideChunk(ChunkProviderServer.java:169)
+	at net.minecraft.server.management.PlayerChunkMapEntry.providePlayerChunk(PlayerChunkMapEntry.java:130)
+	at net.minecraft.server.management.PlayerChunkMap.tick(PlayerChunkMap.java:183)
+	at net.minecraft.world.WorldServer.tick(WorldServer.java:236)
+
+-- Affected level --
+Details:
+	Level name: Copy of New World
+	All players: 1 total; [EntityPlayerMP['Player166'/913, l='Copy of New World', x=239.86, y=119.53, z=173.39]]
+	Chunk stats: ServerChunkCache: 586 Drop: 0
+	Level seed: -1780885588466949764
+	Level generator: ID 00 - default, ver 1. Features enabled: true
+	Level generator options: 
+	Level spawn location: World: (212,64,224), Chunk: (at 4,4,0 in 13,14; contains blocks 208,0,224 to 223,255,239), Region: (0,0; contains chunks 0,0 to 31,31, blocks 0,0,0 to 511,255,511)
+	Level time: 209 game time, 209 day time
+	Level dimension: 0
+	Level storage version: 0x04ABD - Anvil
+	Level weather: Rain time: 127273 (now: false), thunder time: 177771 (now: false)
+	Level game mode: Game mode: creative (ID 1). Hardcore: false. Cheats: true
+Stacktrace:
+	at net.minecraft.server.MinecraftServer.updateTimeLightAndEntities(MinecraftServer.java:831)
+	at net.minecraft.server.MinecraftServer.tick(MinecraftServer.java:743)
+	at net.minecraft.server.integrated.IntegratedServer.tick(IntegratedServer.java:192)
+	at net.minecraft.server.MinecraftServer.run(MinecraftServer.java:592)
+	at java.lang.Thread.run(Thread.java:748)
+
+-- System Details --
+Details:
+	Minecraft Version: 1.12.2
+	Operating System: Mac OS X (x86_64) version 10.13.6
+	Java Version: 1.8.0_144, Oracle Corporation
+	Java VM Version: Java HotSpot(TM) 64-Bit Server VM (mixed mode), Oracle Corporation
+	Memory: 213059016 bytes (203 MB) / 868745216 bytes (828 MB) up to 1908932608 bytes (1820 MB)
+	JVM Flags: 0 total; 
+	IntCache: cache: 12, tcache: 94, allocated: 0, tallocated: 0
+	FML: MCP 9.42 Powered by Forge 14.23.4.2757 7 mods loaded, 7 mods active
+	States: 'U' = Unloaded 'L' = Loaded 'C' = Constructed 'H' = Pre-initialized 'I' = Initialized 'J' = Post-initialized 'A' = Available 'D' = Disabled 'E' = Errored
+
+	| State     | ID               | Version      | Source                           | Signature |
+	|:--------- |:---------------- |:------------ |:-------------------------------- |:--------- |
+	| UCHIJAAAA | minecraft        | 1.12.2       | minecraft.jar                    | None      |
+	| UCHIJAAAA | mcp              | 9.42         | minecraft.jar                    | None      |
+	| UCHIJAAAA | FML              | 8.0.99.99    | forgeSrc-1.12.2-14.23.4.2757.jar | None      |
+	| UCHIJAAAA | forge            | 14.23.4.2757 | forgeSrc-1.12.2-14.23.4.2757.jar | None      |
+	| UCHIJAAAA | coherentvillages | v0.0.1.0     | modid-1.0.jar                    | None      |
+	| UCHIJAAAA | journeymap       | 1.12.2-5.5.2 | journeymap-1.12.2-5.5.2.jar      | None      |
+	| UCHIJAAAA | torohealthmod    | 1.12.2-11    | torohealth-1.12.2-11.jar         | None      |
+
+	Loaded coremods (and transformers): 
+	GL info: ~~ERROR~~ RuntimeException: No OpenGL context found in the current thread.
+	Profiler Position: N/A (disabled)
+	Player Count: 1 / 8; [EntityPlayerMP['Player166'/913, l='Copy of New World', x=239.86, y=119.53, z=173.39]]
+	Type: Integrated Server (map_client.txt)
+	Is Modded: Definitely; Client brand changed to 'fml,forge'

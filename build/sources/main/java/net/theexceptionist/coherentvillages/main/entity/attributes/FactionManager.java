@@ -7,40 +7,34 @@ import net.minecraft.util.math.BlockPos;
 import net.theexceptionist.coherentvillages.main.entity.EntityHumanVillager;
 
 public class FactionManager {
-	public ArrayList<AttributeFaction> factions;
-	public HashMap<Integer, EntityHumanVillager> rulers;
+	private static ArrayList<AttributeFaction> factions;
 	
-	public FactionManager()
+	public static void addFaction(AttributeFaction faction)
 	{
-		factions = new ArrayList<AttributeFaction>();
-		rulers = new HashMap<Integer, EntityHumanVillager> ();
-	}
-	
-	public void addFaction(AttributeFaction faction)
-	{
+		//System.out.println("Faction: "+faction.getTitleName()+" ID: "+faction.getID()+" Ruler: "+faction.getRuler().getTitle());
 		factions.add(faction);
 	}
 	
-	public void removeFaction(AttributeFaction faction)
+	public static void removeFaction(AttributeFaction faction)
 	{
 		factions.remove(faction);
 	}
 	
-	public void addRuler(int ID, EntityHumanVillager ruler)
+	public static void updateFactions()
 	{
-		rulers.put(ID, ruler);
+        ArrayList<AttributeFaction> factions2 = factions;
+
+        for (AttributeFaction village1 : factions2)
+        {
+            village1.update();
+        }
 	}
 	
-	public void removeRuler(EntityHumanVillager ruler)
-	{
-		rulers.remove(ruler);
-	}
-	
-	public AttributeFaction getNearestVillage(BlockPos doorBlock, int radius)
+	public static AttributeFaction getNearestVillage(BlockPos doorBlock, int radius)
     {
         AttributeFaction village = null;
         double d0 = 3.4028234663852886E38D;
-        ArrayList<AttributeFaction> factions2 = this.factions;
+        ArrayList<AttributeFaction> factions2 = factions;
 
         for (AttributeFaction village1 : factions2)
         {
@@ -64,5 +58,10 @@ public class FactionManager {
 
         return village;
     }
+
+	public static void init() {
+		// TODO Auto-generated method stub
+		factions = new ArrayList<AttributeFaction>();
+	}
 
 }

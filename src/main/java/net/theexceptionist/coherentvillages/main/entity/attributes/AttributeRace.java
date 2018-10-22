@@ -5,30 +5,44 @@ import java.util.HashMap;
 import java.util.Random;
 
 import net.minecraft.init.Items;
+import net.minecraft.init.PotionTypes;
 import net.minecraft.item.Item;
 import net.minecraft.potion.PotionType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.Biome;
 import net.theexceptionist.coherentvillages.main.Resources;
-import net.theexceptionist.coherentvillages.main.entity.RenderHumanVillager;
+import net.theexceptionist.coherentvillages.main.entity.render.RenderHumanVillager;
+import net.theexceptionist.coherentvillages.main.entity.spells.Spell;
+import net.theexceptionist.coherentvillages.main.items.ItemWeaponThrowable;
+import net.theexceptionist.coherentvillages.main.items.ModItems;
 
 public class AttributeRace {	
 	//Warrior Race - High Health, Lots of Damage, Nords
-	public static final int RACE_TYPE_BARBARIAN = 0;
+	public static final int RACE_TYPE_NORD = 0;
 	//Knight Race - High Armor, has horses, Latins
-	public static final int RACE_TYPE_EMPIRE = 1;
+	public static final int RACE_TYPE_LATIN = 1;
 	//Archer Race - Good Detection and Speed, Slavs
-	public static final int RACE_TYPE_HIGH_BARBARIAN = 2; 
+	public static final int RACE_TYPE_SLAV = 2; 
 	//Mage Race - Celts
-	public static final int RACE_TYPE_FEUDAL = 3;
+	public static final int RACE_TYPE_GERMAN = 3;
 	//Alchemy Race - Arabs
-	public static final int RACE_TYPE_SAND_EMPIRE = 4;
+	public static final int RACE_TYPE_ARAB = 4;
+	//All-around
+	public static final int RACE_TYPE_GREEK = 5;
+	public static final int RACE_TYPE_BRITON = 6;
+	public static final int RACE_TYPE_FRANK = 7;
 	
 	public static AttributeRace nords;// = new AttributeRace("Nord", RACE_TYPE_BARBARIAN, 20, 5, 2, 0);
 	public static AttributeRace latins;// = new AttributeRace("Latin", RACE_TYPE_EMPIRE, 15, 3, 1, 4);
 	public static AttributeRace slavs;// = new AttributeRace("Slav", RACE_TYPE_HIGH_BARBARIAN, 10, 4, 3, 16);
 	public static AttributeRace germans;// = new AttributeRace("Celt", RACE_TYPE_FEUDAL, 5, 5, 2, 8);
 	public static AttributeRace arabs;// = new AttributeRace("Arab", RACE_TYPE_SAND_EMPIRE, 10, 5, 2, 4);
+	public static AttributeRace greeks;
+	public static AttributeRace britons;
+	public static AttributeRace franks;
+	
+	protected Biome homeBiome = null;
 	
 	public static ArrayList<AttributeRace> races;// = new ArrayList<AttributeRace>();
 	
@@ -46,8 +60,10 @@ public class AttributeRace {
 	protected HashMap<Integer,Item> shield;
 	protected HashMap<Integer,Item> meleeWeapons;
 	protected HashMap<Integer,Item> rangedWeapons;
-	protected HashMap<Integer,Item> spells;
+	protected HashMap<Integer,Spell> spells;
 	protected HashMap<Integer,PotionType> potions;
+	protected HashMap<Integer,ItemWeaponThrowable> thrown; 
+	protected HashMap<Integer,Item> horseArmors;
 	
 	protected HashMap<Integer, AttributeVocation> soldiers;
 	protected HashMap<Integer, AttributeVocation> archers;
@@ -94,6 +110,33 @@ public class AttributeRace {
 	public static final int WEAPON_4 = 3;
 	public static final int WEAPON_5 = 4;
 	
+	public static final int POTION_1 = 0;
+	public static final int POTION_2 = 1;
+	public static final int POTION_3 = 2;
+	public static final int POTION_4 = 3;
+	public static final int POTION_5 = 4;
+	public static final int POTION_6 = 5;
+	public static final int POTION_7 = 6;
+	public static final int POTION_8 = 7;
+	public static final int POTION_9 = 8;
+	public static final int POTION_10 = 9;
+	
+	public static final int SPELL_1 = 0;
+	public static final int SPELL_2 = 1;
+	public static final int SPELL_3 = 2;
+	public static final int SPELL_4 = 3;
+	public static final int SPELL_5 = 4;
+	public static final int SPELL_6 = 5;
+	public static final int SPELL_7 = 6;
+	public static final int SPELL_8 = 7;
+	
+	public static final int ARMOR_1_HORSE = 0;
+	public static final int ARMOR_2_HORSE = 1;
+	public static final int ARMOR_3_HORSE = 2;
+	
+	public static final int THROWN_1 = 0;
+	
+	
 	protected static Random rand;// = new Random(System.nanoTime());
 	protected int ID;
 	public static int END_ID = 0;
@@ -104,10 +147,12 @@ public class AttributeRace {
 		this.type = type;
 		this.armor = new HashMap<Integer,Item>();
 		this.shield = new HashMap<Integer, Item>();
+		this.horseArmors = new HashMap<Integer, Item>();
 		this.meleeWeapons = new HashMap<Integer,Item>();
 		this.rangedWeapons = new HashMap<Integer,Item>();
-		this.spells = new HashMap<Integer,Item>();
+		this.spells = new HashMap<Integer,Spell>();
 		this.potions = new HashMap<Integer,PotionType>();
+		this.thrown = new HashMap<Integer, ItemWeaponThrowable>();
 		this.mSkins = mPath;
 		this.fSkins = fPath;
 		
@@ -139,13 +184,25 @@ public class AttributeRace {
 		
 		races = new ArrayList<AttributeRace>();
 		
-		nords = new AttributeRace("Nord", RACE_TYPE_BARBARIAN, 20, 5, 2, 0, 2, RenderHumanVillager.NORD_SKIN_M,RenderHumanVillager.NORD_SKIN_F);
-		latins = new AttributeRace("Latin", RACE_TYPE_EMPIRE, 15, 3, 1, 4, 2, RenderHumanVillager.LATIN_SKIN_M,RenderHumanVillager.LATIN_SKIN_F);
-		slavs = new AttributeRace("Slav", RACE_TYPE_HIGH_BARBARIAN, 10, 4, 3, 16, 1, RenderHumanVillager.SLAV_SKIN_M,RenderHumanVillager.SLAV_SKIN_F);
-		germans = new AttributeRace("German", RACE_TYPE_FEUDAL, 5, 5, 2, 8, 5, RenderHumanVillager.GERMAN_SKIN_M,RenderHumanVillager.GERMAN_SKIN_F);
-		arabs = new AttributeRace("Arab", RACE_TYPE_SAND_EMPIRE, 10, 5, 2, 4, 0, RenderHumanVillager.ARAB_SKIN_M,RenderHumanVillager.ARAB_SKIN_F);
+		nords = new AttributeRace("Nord", RACE_TYPE_NORD, 20, 5, 2, 0, 2, RenderHumanVillager.NORD_SKIN_M,RenderHumanVillager.NORD_SKIN_F);
+		latins = new AttributeRace("Latin", RACE_TYPE_LATIN, 15, 3, 1, 4, 2, RenderHumanVillager.LATIN_SKIN_M,RenderHumanVillager.LATIN_SKIN_F);
+		slavs = new AttributeRace("Slav", RACE_TYPE_SLAV, 10, 4, 3, 16, 1, RenderHumanVillager.SLAV_SKIN_M,RenderHumanVillager.SLAV_SKIN_F);
+		germans = new AttributeRace("Goths", RACE_TYPE_GERMAN, 5, 5, 2, 8, 5, RenderHumanVillager.GERMAN_SKIN_M,RenderHumanVillager.GERMAN_SKIN_F);
+		arabs = new AttributeRace("Arab", RACE_TYPE_ARAB, 10, 5, 2, 4, 0, RenderHumanVillager.ARAB_SKIN_M,RenderHumanVillager.ARAB_SKIN_F);
+		greeks = new AttributeRace("Greek", RACE_TYPE_GREEK, 10, 5, 2, 4, 0, RenderHumanVillager.GREEK_SKIN_M,RenderHumanVillager.GREEK_SKIN_F);
+		britons = new AttributeRace("Briton", RACE_TYPE_BRITON, 10, 5, 2, 4, 0, RenderHumanVillager.BRITON_SKIN_M,RenderHumanVillager.BRITON_SKIN_F);
+		franks = new AttributeRace("Frank", RACE_TYPE_FRANK, 10, 5, 2, 4, 0, RenderHumanVillager.FRANK_SKIN_M,RenderHumanVillager.FRANK_SKIN_F);
+		
 	}
 	
+	public Biome getHomeBiome() {
+		return homeBiome;
+	}
+
+	public void setHomeBiome(Biome homeBiome) {
+		this.homeBiome = homeBiome;
+	}
+
 	public static AttributeRace getRandomRace()
 	{
 		return races.get(rand.nextInt(races.size()));
@@ -155,22 +212,22 @@ public class AttributeRace {
 	{
 		switch(type)
 		{
-			case RACE_TYPE_BARBARIAN:
+			case RACE_TYPE_NORD:
 			{
 				this.armor.put(ARMOR_1_HEAD, Items.LEATHER_HELMET);
 				this.armor.put(ARMOR_1_CHEST, Items.LEATHER_CHESTPLATE);
 				this.armor.put(ARMOR_1_LEGS, Items.LEATHER_LEGGINGS);
 				this.armor.put(ARMOR_1_FEET, Items.LEATHER_BOOTS);
 				
-				this.armor.put(ARMOR_2_HEAD, Items.LEATHER_HELMET);
+				this.armor.put(ARMOR_2_HEAD, ModItems.barbarianHelmet);
 				this.armor.put(ARMOR_2_CHEST, Items.CHAINMAIL_CHESTPLATE);
 				this.armor.put(ARMOR_2_LEGS, Items.CHAINMAIL_LEGGINGS);
-				this.armor.put(ARMOR_2_FEET, Items.LEATHER_BOOTS);
+				this.armor.put(ARMOR_2_FEET, ModItems.barbarianBoots);
 				
 				this.armor.put(ARMOR_3_HEAD, Items.IRON_HELMET);
-				this.armor.put(ARMOR_3_CHEST, Items.CHAINMAIL_CHESTPLATE);
-				this.armor.put(ARMOR_3_LEGS, Items.CHAINMAIL_LEGGINGS);
-				this.armor.put(ARMOR_3_FEET, Items.CHAINMAIL_BOOTS);
+				this.armor.put(ARMOR_3_CHEST, ModItems.barbarianChestplate);
+				this.armor.put(ARMOR_3_LEGS, ModItems.barbarianLeggings);
+				this.armor.put(ARMOR_3_FEET, ModItems.barbarianBoots);
 				
 				this.armor.put(ARMOR_4_HEAD, Items.DIAMOND_HELMET);
 				this.armor.put(ARMOR_4_CHEST, Items.IRON_CHESTPLATE);
@@ -188,17 +245,22 @@ public class AttributeRace {
 				this.meleeWeapons.put(WEAPON_4, Items.IRON_SWORD);
 				this.meleeWeapons.put(WEAPON_5, Items.DIAMOND_AXE);
 				
-				this.shield.put(WEAPON_1, Items.SHIELD);
+				this.shield.put(WEAPON_1, ModItems.nordShield);
 				
 				this.rangedWeapons.put(WEAPON_1, Items.BOW);
 				
+				this.thrown.put(THROWN_1, ModItems.throwingAxe);
+				
+				this.potions.put(POTION_1, PotionTypes.HEALING);
+				this.potions.put(POTION_3, PotionTypes.SLOWNESS);
+				
 				AttributeVocation soldierTier1 = new AttributeVocation("Footman", AttributeVocation.CLASS_SOLDIER, 0, 10, this);
 				AttributeVocation soldierTier2 = new AttributeVocation("Axeman", AttributeVocation.CLASS_SOLDIER, 1, 10, this);
-				AttributeVocation soldierTier3 = new AttributeVocation("Warrior", AttributeVocation.CLASS_SOLDIER, 2, 10, this, false, true, 50, rand);
-				AttributeVocation soldierTier4 = new AttributeVocation("Huskarl", AttributeVocation.CLASS_SOLDIER, 3, 10, this, false, true, 50, rand);
+				AttributeVocation soldierTier3 = new AttributeVocation("Warrior", AttributeVocation.CLASS_SOLDIER, 2, 10, this, false, true, 50, 50, 0, false, rand);
+				AttributeVocation soldierTier4 = new AttributeVocation("Huskarl", AttributeVocation.CLASS_SOLDIER, 3, 10, this, false, true, 50, 75, 5, true, rand);
 				
 				AttributeVocation archerTier1 = new AttributeVocation("Archer", AttributeVocation.CLASS_ARCHER, 0, 10, this);
-				
+
 				soldierTier1.setUpgradeTree(soldierTier2, soldierTier3);
 				soldierTier2.setUpgradeTree(soldierTier4, null);
 				
@@ -220,36 +282,36 @@ public class AttributeRace {
 				this.villagers.put(villagerFisherman.getRank(), villagerFisherman);
 				this.villagers.put(villagerLumberman.getRank(), villagerLumberman);
 				
-				AttributeVocation banditTier1 = new AttributeVocation("Raider", AttributeVocation.CLASS_BANDIT, 0, 10, this, false, false, 0, rand);
-				AttributeVocation banditTier2 = new AttributeVocation("Berserker", AttributeVocation.CLASS_BANDIT, 1, 10, this, false, false, 0, rand);
-				AttributeVocation banditTier3 = new AttributeVocation("Viking",  AttributeVocation.CLASS_BANDIT, 2, 10, this, false, true, 50, rand);
+				AttributeVocation banditTier1 = new AttributeVocation("Raider", AttributeVocation.CLASS_BANDIT, 0, 10, this, false, false, 0, 10, 0, false, rand);
+				AttributeVocation banditTier2 = new AttributeVocation("Berserker", AttributeVocation.CLASS_BANDIT, 1, 10, this, false, false, 0, 20, 0, false, rand, AttributeVocation.CLASS_OVERRIDE_NO_ARMOR);
+				AttributeVocation banditTier3 = new AttributeVocation("Viking",  AttributeVocation.CLASS_BANDIT, 2, 10, this, false, true, 50, 40, 0, true, rand);
 				
 				banditTier1.setUpgradeTree(banditTier2, banditTier3);
 				banditTier2.setDamageOffest(20);
 				
-				AttributeVocation banditTier4 = new AttributeVocation("Barbarian", AttributeVocation.CLASS_BANDIT, 1, 10, this, false, false, 0, rand, AttributeVocation.CLASS_ARCHER);
+				AttributeVocation banditTier4 = new AttributeVocation("Barbarian", AttributeVocation.CLASS_BANDIT, 1, 10, this, false, false, 0, 20, 0, false, rand, AttributeVocation.CLASS_ARCHER);
 
 				this.bandits.put(banditTier1.getRank(), banditTier1);
 				this.bandits.put(banditTier2.getRank(), banditTier2);
 				this.bandits.put(banditTier3.getRank(), banditTier3);
 				this.bandits.put(banditTier4.getRank() + 2, banditTier4);
 				
-				AttributeVocation mercenaryTier3 = new AttributeVocation("Mercenary", AttributeVocation.CLASS_MERCENARY, 2, 10, this, false, true, 50, rand, AttributeVocation.CLASS_SOLDIER);
+				AttributeVocation mercenaryTier3 = new AttributeVocation("Mercenary", AttributeVocation.CLASS_MERCENARY, 2, 10, this, false, true, 50, 80, 0, false, rand, AttributeVocation.CLASS_SOLDIER);
 				
 				this.mercenaries.put(1, mercenaryTier3);
 				
-				AttributeVocation soldierTier5 = new AttributeVocation("Jarl", AttributeVocation.CLASS_RULER, 4, 10, this, false, true, 75, rand);
+				AttributeVocation soldierTier5 = new AttributeVocation("Jarl", AttributeVocation.CLASS_RULER, 4, 10, this, false, true, 75, 90, 10, true, rand);
 				this.rulers.put(1, soldierTier5);
 			}
 			break;
-			case RACE_TYPE_EMPIRE:
+			case RACE_TYPE_LATIN:
 			{
-				this.armor.put(ARMOR_1_HEAD, Items.CHAINMAIL_HELMET);
-				this.armor.put(ARMOR_1_CHEST, Items.CHAINMAIL_CHESTPLATE);
+				this.armor.put(ARMOR_1_HEAD, Items.IRON_HELMET);
+				this.armor.put(ARMOR_1_CHEST, Items.LEATHER_CHESTPLATE);
 				this.armor.put(ARMOR_1_LEGS, Items.LEATHER_LEGGINGS);
 				this.armor.put(ARMOR_1_FEET, Items.LEATHER_BOOTS);
 				
-				this.armor.put(ARMOR_2_HEAD, Items.CHAINMAIL_HELMET);
+				this.armor.put(ARMOR_2_HEAD, Items.IRON_HELMET);
 				this.armor.put(ARMOR_2_CHEST, Items.IRON_CHESTPLATE);
 				this.armor.put(ARMOR_2_LEGS, Items.IRON_LEGGINGS);
 				this.armor.put(ARMOR_2_FEET, Items.IRON_BOOTS);
@@ -259,30 +321,56 @@ public class AttributeRace {
 				this.armor.put(ARMOR_3_LEGS, Items.DIAMOND_LEGGINGS);
 				this.armor.put(ARMOR_3_FEET, Items.DIAMOND_BOOTS);
 				
-				this.meleeWeapons.put(WEAPON_1, Items.STONE_SWORD);
-				this.meleeWeapons.put(WEAPON_2, Items.IRON_SWORD);
-				this.meleeWeapons.put(WEAPON_3, Items.DIAMOND_SWORD);
+				this.meleeWeapons.put(WEAPON_1, ModItems.romanSword);
+				this.meleeWeapons.put(WEAPON_2, ModItems.spear);
+				this.meleeWeapons.put(WEAPON_3, ModItems.romanSword);
 				
 				this.shield.put(WEAPON_1, Items.SHIELD);
 				
 				this.rangedWeapons.put(WEAPON_1, Items.BOW);
+		
+				this.horseArmors.put(ARMOR_1_HORSE, Items.IRON_HORSE_ARMOR);
+				this.horseArmors.put(ARMOR_2_HORSE, Items.GOLDEN_HORSE_ARMOR);
+				this.horseArmors.put(ARMOR_3_HORSE, Items.GOLDEN_HORSE_ARMOR);
+				//Tier 1 potions
+				//On self
+				this.potions.put(POTION_1, PotionTypes.HEALING);
+				this.potions.put(POTION_2, PotionTypes.REGENERATION);
+				//Attack
+				this.potions.put(POTION_3, PotionTypes.WEAKNESS);
+				this.potions.put(POTION_4, PotionTypes.STRONG_HEALING);
+				
+				//Tier 2 potions
+				//On self
+				this.potions.put(POTION_5, PotionTypes.REGENERATION);
+				this.potions.put(POTION_6, PotionTypes.HEALING);
+				//Attack
+				this.potions.put(POTION_7, PotionTypes.POISON);
+				this.potions.put(POTION_8, PotionTypes.HARMING);
+				
+				this.spells.put(SPELL_3, Spell.summon_ancient_warror);
+				this.spells.put(SPELL_4, Spell.fireball_volley);
+				
+				this.spells.put(SPELL_7, Spell.fireball);
+				this.spells.put(SPELL_8, Spell.thunderbolt);
+				//this.spells.put(SPELL_1, Spell.fireball);
 				
 				AttributeVocation soldierTier1 = new AttributeVocation("Legionnaire", AttributeVocation.CLASS_SOLDIER, 0, 10, this);
-				AttributeVocation soldierTier2 = new AttributeVocation("Legate", AttributeVocation.CLASS_SOLDIER, 1, 10, this, true, true, 100, rand);
-				AttributeVocation soldierTier3 = new AttributeVocation("Champion", AttributeVocation.CLASS_SOLDIER, 2, 10, this, true, true, 100, rand);
+				AttributeVocation soldierTier2 = new AttributeVocation("Principle", AttributeVocation.CLASS_SOLDIER, 1, 10, this, true, true, 100, 70, 20, true, rand);
+				AttributeVocation soldierTier3 = new AttributeVocation("Centurion", AttributeVocation.CLASS_SOLDIER, 2, 10, this, true, true, 100, 100, 50, true, rand);
 
 				soldierTier1.setUpgradeTree(soldierTier2, null);
 				soldierTier2.setUpgradeTree(soldierTier3, null);
 				
 				AttributeVocation archerTier1 = new AttributeVocation("Archer", AttributeVocation.CLASS_ARCHER, 0, 10, this);
-				AttributeVocation archerTier2 = new AttributeVocation("Master Archer", AttributeVocation.CLASS_ARCHER, 1, 10, this, true, true, 50, rand);
+				AttributeVocation archerTier2 = new AttributeVocation("Legate", AttributeVocation.CLASS_ARCHER, 1, 10, this, true, true, 50, 70, 5, true, rand);
 				
 				archerTier1.setUpgradeTree(archerTier2, null);
 				
-				AttributeVocation mageTier1 = new AttributeVocation("Battlemage", AttributeVocation.CLASS_MAGE, 0, 10, this, true, false, 20, rand);
+				AttributeVocation mageTier1 = new AttributeVocation("Battlemage", AttributeVocation.CLASS_MAGE, 1, 10, this, true, false, 20, 60, 10, true, rand);
 				
-				AttributeVocation alchemistTier1 = new AttributeVocation("Healer", AttributeVocation.CLASS_ALCHEMIST, 0, 10, this, true, false, 0, rand);
-				AttributeVocation alchemistTier2 = new AttributeVocation("Alchemist", AttributeVocation.CLASS_ALCHEMIST, 0, 10, this, true, true, 20, rand);
+				AttributeVocation alchemistTier1 = new AttributeVocation("Healer", AttributeVocation.CLASS_ALCHEMIST, 0, 10, this, true, false, 0, 50, 0, true, rand, true);
+				AttributeVocation alchemistTier2 = new AttributeVocation("Alchemist", AttributeVocation.CLASS_ALCHEMIST, 1, 10, this, true, true, 20, 40, 15, true, rand, false);
 
 				recruitSoldier = soldierTier1;
 				recruitArcher = archerTier1;
@@ -308,9 +396,39 @@ public class AttributeRace {
 				this.villagers.put(villagerArtisan.getRank(), villagerArtisan);
 				this.villagers.put(villagerMerchant.getRank(), villagerMerchant);
 				this.villagers.put(villagerBlacksmith.getRank(), villagerBlacksmith);
+				
+				AttributeVocation banditTier1 = new AttributeVocation("Renegade Legionary", AttributeVocation.CLASS_BANDIT, 0, 10, this, false, false, 0, 20, 0, false, rand, AttributeVocation.CLASS_SOLDIER);
+				AttributeVocation banditTier2 = new AttributeVocation("Reaver", AttributeVocation.CLASS_BANDIT, 2, 10, this, true, true, 100, 60, 60, true, rand);
+				//Archers
+				AttributeVocation banditTier3 = new AttributeVocation("Brigand", AttributeVocation.CLASS_BANDIT, 0, 10, this, false, false, 0, 60, 40, false, rand, AttributeVocation.CLASS_ARCHER);
+				AttributeVocation banditTier4 = new AttributeVocation("Rogue", AttributeVocation.CLASS_BANDIT, 1, 10, this, true, true, 50, 80, 20, true, rand, AttributeVocation.CLASS_ARCHER);
+				//Mages
+				AttributeVocation banditTier5 = new AttributeVocation("Necromancer", AttributeVocation.CLASS_BANDIT, 0, 10, this, true, false, 20, 50, 30, true, rand, AttributeVocation.CLASS_MAGE);
+				//Alchemists
+				AttributeVocation banditTier6 = new AttributeVocation("Witchdoctor", AttributeVocation.CLASS_BANDIT, 0, 10, this, true, false, 0, 100, 40, true, rand);
+				AttributeVocation banditTier7 = new AttributeVocation("Blackguard", AttributeVocation.CLASS_BANDIT, 0, 10, this, true, true, 20, 100, 50, true, rand);
+
+				this.bandits.put(1, banditTier1);
+				this.bandits.put(2, banditTier2);
+				this.bandits.put(3, banditTier3);
+				this.bandits.put(4, banditTier4);
+				this.bandits.put(5, banditTier5);
+				this.bandits.put(6, banditTier6);
+				this.bandits.put(7, banditTier7);
+				
+				AttributeVocation mercenaryTier3 = new AttributeVocation("Gladiator", AttributeVocation.CLASS_MERCENARY, 2, 10, this, false, true, 50, 65, 75, true, rand, AttributeVocation.CLASS_SOLDIER);
+				
+				this.mercenaries.put(1, mercenaryTier3);
+				
+				AttributeVocation soldierTier5 = new AttributeVocation("Emperor", AttributeVocation.CLASS_RULER, 2, 10, this, true, true, 100, 100, 100, true, rand);
+				this.rulers.put(1, soldierTier5);
+				
+				AttributeVocation ancientWarrior = new AttributeVocation("Ancient Warrior", AttributeVocation.CLASS_SOLDIER, 1, 10, this, true, true, 20, 40, 35, true, rand, false);
+				Spell.summon_ancient_warror.setToSpawn(ancientWarrior);
+
 			}
 			break;
-			case RACE_TYPE_HIGH_BARBARIAN:
+			case RACE_TYPE_SLAV:
 			{
 				this.armor.put(ARMOR_1_HEAD, Items.LEATHER_HELMET);
 				this.armor.put(ARMOR_1_CHEST, Items.LEATHER_CHESTPLATE);
@@ -336,21 +454,21 @@ public class AttributeRace {
 				this.rangedWeapons.put(WEAPON_1, Items.BOW);
 				
 				AttributeVocation soldierTier1 = new AttributeVocation("Tribesman", AttributeVocation.CLASS_SOLDIER, 0, 10, this);
-				AttributeVocation soldierTier2 = new AttributeVocation("Warrior", AttributeVocation.CLASS_SOLDIER, 1, 10, this, true, false, 0, rand);
-				AttributeVocation soldierTier3 = new AttributeVocation("Bogatyr", AttributeVocation.CLASS_SOLDIER, 2, 10, this, true, false, 0, rand);
+				AttributeVocation soldierTier2 = new AttributeVocation("Warrior", AttributeVocation.CLASS_SOLDIER, 1, 10, this, true, false, 0, 45, 0, false,rand);
+				AttributeVocation soldierTier3 = new AttributeVocation("Bogatyr", AttributeVocation.CLASS_SOLDIER, 2, 10, this, true, false, 0, 75, 0, false, rand);
 
 				soldierTier1.setUpgradeTree(soldierTier2, null);
 				soldierTier2.setUpgradeTree(soldierTier3, null);
 				
 				AttributeVocation archerTier1 = new AttributeVocation("Bowman", AttributeVocation.CLASS_ARCHER, 0, 10, this);
 				AttributeVocation archerTier2 = new AttributeVocation("Archer", AttributeVocation.CLASS_ARCHER, 1, 10, this);
-				AttributeVocation archerTier3 = new AttributeVocation("Mage Archer", AttributeVocation.CLASS_ARCHER, 2, 10, this, true, false, 0, rand);
-				AttributeVocation archerTier4 = new AttributeVocation("Marksman", AttributeVocation.CLASS_ARCHER, 2, 10, this, true, false, 0, rand);
+				AttributeVocation archerTier3 = new AttributeVocation("Mage Archer", AttributeVocation.CLASS_ARCHER, 2, 10, this, true, false, 0, 30, 0, false, rand);
+				AttributeVocation archerTier4 = new AttributeVocation("Marksman", AttributeVocation.CLASS_ARCHER, 2, 10, this, true, false, 0, 80, 0, false, rand);
 				
 				archerTier1.setUpgradeTree(archerTier2, archerTier3);
 				archerTier2.setUpgradeTree(archerTier4, null);
 				
-				AttributeVocation mageTier1 = new AttributeVocation("Bogatyr Wizard", AttributeVocation.CLASS_MAGE, 0, 10, this, true, false, 0, rand);
+				AttributeVocation mageTier1 = new AttributeVocation("Bogatyr Wizard", AttributeVocation.CLASS_MAGE, 0, 10, this, true, false, 0, 85, 0, false, rand);
 				
 				recruitSoldier = soldierTier1;
 				recruitArcher = archerTier1;
@@ -374,7 +492,7 @@ public class AttributeRace {
 				this.villagers.put(villagerFletcher.getRank(), villagerFletcher);
 			}
 			break;
-			case RACE_TYPE_FEUDAL:
+			case RACE_TYPE_GERMAN:
 			{
 				this.armor.put(ARMOR_1_HEAD, Items.CHAINMAIL_HELMET);
 				this.armor.put(ARMOR_1_CHEST, Items.LEATHER_CHESTPLATE);
@@ -400,8 +518,8 @@ public class AttributeRace {
 				this.rangedWeapons.put(WEAPON_1, Items.BOW);
 				
 				AttributeVocation soldierTier1 = new AttributeVocation("Militia", AttributeVocation.CLASS_SOLDIER, 0, 10, this);
-				AttributeVocation soldierTier2 = new AttributeVocation("Man-At-Arms", AttributeVocation.CLASS_SOLDIER, 1, 10, this, true, true, 70, rand);
-				AttributeVocation soldierTier3 = new AttributeVocation("Knight", AttributeVocation.CLASS_SOLDIER, 2, 10, this, true, true, 100, rand);
+				AttributeVocation soldierTier2 = new AttributeVocation("Man-At-Arms", AttributeVocation.CLASS_SOLDIER, 1, 10, this, true, true, 70, 50, 50, false, rand);
+				AttributeVocation soldierTier3 = new AttributeVocation("Knight", AttributeVocation.CLASS_SOLDIER, 2, 10, this, true, true, 100, 80, 85, true, rand);
 
 				soldierTier1.setUpgradeTree(soldierTier2, null);
 				soldierTier2.setUpgradeTree(soldierTier3, null);
@@ -409,7 +527,7 @@ public class AttributeRace {
 				AttributeVocation archerTier1 = new AttributeVocation("Archer", AttributeVocation.CLASS_ARCHER, 0, 10, this);
 				
 				AttributeVocation mageTier1 = new AttributeVocation("Mage", AttributeVocation.CLASS_MAGE, 0, 10, this);
-				AttributeVocation mageTier2 = new AttributeVocation("Mage Knight", AttributeVocation.CLASS_MAGE, 1, 10, this, true, true, 50, rand);
+				AttributeVocation mageTier2 = new AttributeVocation("Mage Knight", AttributeVocation.CLASS_MAGE, 1, 10, this, true, true, 50, 90, 70, false, rand);
 				AttributeVocation mageTier3 = new AttributeVocation("Grand Wizard", AttributeVocation.CLASS_MAGE, 1, 10, this);
 			
 				mageTier1.setUpgradeTree(mageTier2, mageTier3);
@@ -437,7 +555,7 @@ public class AttributeRace {
 				this.villagers.put(villagerScribe.getRank(), villagerScribe);
 			}
 			break;
-			case RACE_TYPE_SAND_EMPIRE:
+			case RACE_TYPE_ARAB:
 			{
 				this.armor.put(ARMOR_1_HEAD, Items.LEATHER_HELMET);
 				this.armor.put(ARMOR_1_CHEST, Items.LEATHER_CHESTPLATE);
@@ -463,21 +581,21 @@ public class AttributeRace {
 				this.rangedWeapons.put(WEAPON_1, Items.BOW);
 				
 				AttributeVocation soldierTier1 = new AttributeVocation("Peasant", AttributeVocation.CLASS_SOLDIER, 0, 10, this);
-				AttributeVocation soldierTier2 = new AttributeVocation("Footman", AttributeVocation.CLASS_SOLDIER, 1, 10, this, true, false, 60, rand);
-				AttributeVocation soldierTier3 = new AttributeVocation("Mamluke", AttributeVocation.CLASS_SOLDIER, 2, 10, this, true, true, 80, rand);
+				AttributeVocation soldierTier2 = new AttributeVocation("Footman", AttributeVocation.CLASS_SOLDIER, 1, 10, this, true, false, 60, 30, 30, false, rand);
+				AttributeVocation soldierTier3 = new AttributeVocation("Mamluke", AttributeVocation.CLASS_SOLDIER, 2, 10, this, true, true, 80, 50, 60, false, rand);
 
 				soldierTier1.setUpgradeTree(soldierTier2, null);
 				soldierTier2.setUpgradeTree(soldierTier3, null);
 				
-				AttributeVocation archerTier1 = new AttributeVocation("Archer", AttributeVocation.CLASS_ARCHER, 0, 10, this, true, false, 10, rand);
-				AttributeVocation archerTier2 = new AttributeVocation("Sharpshooter", AttributeVocation.CLASS_ARCHER, 1, 10, this, true, false, 30, rand);
+				AttributeVocation archerTier1 = new AttributeVocation("Archer", AttributeVocation.CLASS_ARCHER, 0, 10, this, true, false, 10, 20, 10, false, rand);
+				AttributeVocation archerTier2 = new AttributeVocation("Sharpshooter", AttributeVocation.CLASS_ARCHER, 1, 10, this, true, false, 30, 35, 45, false, rand);
 				
 				archerTier1.setUpgradeTree(archerTier2, null);
 				
 				AttributeVocation mageTier1 = new AttributeVocation("Conjurer", AttributeVocation.CLASS_MAGE, 0, 10, this);
 				
 				AttributeVocation alchemistTier1 = new AttributeVocation("Undead Hunter", AttributeVocation.CLASS_ALCHEMIST, 0, 10, this);
-				AttributeVocation alchemistTier2 = new AttributeVocation("Potion Master", AttributeVocation.CLASS_ALCHEMIST, 0, 10, this, true, false, 20, rand);
+				AttributeVocation alchemistTier2 = new AttributeVocation("Potion Master", AttributeVocation.CLASS_ALCHEMIST, 0, 10, this, true, false, 20, 100, 20, false, rand);
 				
 				recruitSoldier = soldierTier1;
 				recruitArcher = archerTier1;
@@ -503,6 +621,18 @@ public class AttributeRace {
 				this.villagers.put(villagerNomad.getRank(), villagerNomad);
 				this.villagers.put(villagerScholar.getRank(), villagerScholar);
 				this.villagers.put(villagerQuartermaster.getRank(), villagerQuartermaster);
+			}
+			case RACE_TYPE_GREEK:
+			{
+			
+			}
+			case RACE_TYPE_FRANK:
+			{
+			
+			}
+			case RACE_TYPE_BRITON:
+			{
+			
 			}
 			break;
 		}
@@ -578,11 +708,11 @@ public class AttributeRace {
 		this.rangedWeapons = rangedWeapons;
 	}
 
-	public HashMap<Integer, Item> getSpells() {
+	public HashMap<Integer, Spell> getSpells() {
 		return spells;
 	}
 
-	public void setSpells(HashMap<Integer, Item> spells) {
+	public void setSpells(HashMap<Integer, Spell> spells) {
 		this.spells = spells;
 	}
 
@@ -708,6 +838,31 @@ public class AttributeRace {
 		
 		return null;
 	}
+	
+	public AttributeVocation getRandomRecruitVocation() {
+		int type = rand.nextInt(AttributeVocation.CLASS_ALCHEMIST) + 1;
+		switch(type)
+		{
+			case AttributeVocation.CLASS_SOLDIER:
+			{
+				return recruitSoldier;
+			}
+			case AttributeVocation.CLASS_ARCHER:
+			{
+				return recruitArcher;
+			}
+			case AttributeVocation.CLASS_MAGE:
+			{
+				return recruitMage;
+			}
+			case AttributeVocation.CLASS_ALCHEMIST:
+			{
+				return recruitAlchemist;
+			}
+		}
+		
+		return null;
+	}
 
 	public int getID() {
 		// TODO Auto-generated method stub
@@ -730,14 +885,14 @@ public class AttributeRace {
 		int i = 0;
 		
 		AttributeVocation job = AttributeVocation.getVocationFromID(vocation);
-		return new ResourceLocation(Resources.MODID, mSkins+job.getName().toLowerCase()+"_"+i+".png");
+		return new ResourceLocation(Resources.MODID, mSkins+job.getName().toLowerCase().replace(" ", "_")+"_"+i+".png");
 	}
 	
 	public ResourceLocation getRandomSkinF(int vocation) {
 		int i = 0;
 		
 		AttributeVocation job = AttributeVocation.getVocationFromID(vocation);
-		return new ResourceLocation(Resources.MODID, fSkins+job.getName().toLowerCase()+"_"+i+".png");
+		return new ResourceLocation(Resources.MODID, fSkins+job.getName().toLowerCase().replace(" ", "_")+"_"+i+".png");
 
 	}
 
@@ -766,5 +921,148 @@ public class AttributeRace {
 		int last = i;
 		if(last >= this.bandits.size()) last = this.bandits.size();
 		return this.bandits.get(last);
+	}
+
+	public static AttributeRace getRaceFromString(String string) {
+		switch(string.toLowerCase())
+		{
+			case "nord":
+			{
+				return nords;
+			}
+			case "latin":
+			{
+				return latins;
+			}
+			case "german":
+			{
+				return germans;
+			}
+			case "slav":
+			{
+				return slavs;
+			}
+			case "arab":
+			{
+				return arabs;
+			}
+			case "greek":
+			{
+				return greeks;
+			}
+			case "briton":
+			{
+				return britons;
+			}
+			case "frank":
+			{
+				return franks;
+			}
+			default:
+			{
+				return null;
+			}
+		}
+	}
+	
+	private HashMap<Integer, AttributeVocation> getVocationList(int type)
+	{
+		switch(type)
+		{
+			case AttributeVocation.CLASS_SOLDIER:
+			{
+				return soldiers;
+			}
+			case AttributeVocation.CLASS_ARCHER:
+			{
+				return archers;
+			}
+			case AttributeVocation.CLASS_MAGE:
+			{
+				return mages;
+			}
+			case AttributeVocation.CLASS_ALCHEMIST:
+			{
+				return alchemists;
+			}
+			case AttributeVocation.CLASS_MERCENARY:
+			{
+				return mercenaries;
+			}
+			case AttributeVocation.CLASS_BANDIT:
+			{
+				return bandits;
+			}
+			case AttributeVocation.CLASS_RULER:
+			{
+				return rulers;
+			}
+			case AttributeVocation.CLASS_VILLAGER:
+			{
+				return villagers;
+			}
+			default:
+			{
+				return null;
+			}
+		}
+	}
+
+	public AttributeVocation getVocationFromString(String string) {
+		for(int i = 0; i < AttributeVocation.NUM_CLASSES; i++)
+		{
+			HashMap<Integer, AttributeVocation> list = this.getVocationList(i);
+			if(list == null) continue;
+			
+			for(int n = 0; n < list.size(); n++)
+			{
+				AttributeVocation vocation = list.get(n + 1);
+				
+				//System.out.println("Searching: "+vocation.getName()+" "+string);
+				
+				if(vocation.getName().toLowerCase().replace(" ", "_").contains(string))
+				{
+					return vocation;
+				}
+			}
+		}
+		
+		return null;
+	}
+
+	public String listClassNames() {
+		String result = this.getName().toUpperCase()+" LIST: \n";
+		
+		for(int i = 0; i < AttributeVocation.NUM_CLASSES; i++)
+		{
+			HashMap<Integer, AttributeVocation> list = this.getVocationList(i);
+			if(list == null) continue;
+			
+			for(int n = 0; n < list.size(); n++)
+			{
+				AttributeVocation vocation = list.get(n + 1);
+				result += vocation.getName().toLowerCase().replace(" ", "_")+"\n";
+			}
+		}
+		
+		return result;
+	}
+
+	public static String listRaceNames() {
+		String result = "CULTURE LIST: \n";
+		
+		for(AttributeRace race : races)
+		{
+			result += race.getName().toLowerCase()+"\n";
+		}
+		
+		return result;
+	}
+
+	public AttributeVocation getRandomSoldier(World worldIn) {
+		if(this.archers.size() > 0 && this.rand.nextInt(100) <= 25) return archers.get(this.rand.nextInt(this.archers.size()) + 1);
+		else if(this.mages.size() > 0 && this.rand.nextInt(100) <= 50) return mages.get(this.rand.nextInt(this.mages.size()) + 1);
+		else if(this.alchemists.size() > 0 && this.rand.nextInt(100) <= 75) return alchemists.get(this.rand.nextInt(this.alchemists.size()) + 1);
+		else return soldiers.get(this.rand.nextInt(this.soldiers.size()) + 1);	
 	}
 }

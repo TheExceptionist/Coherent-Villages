@@ -1,0 +1,8 @@
+package net.theexceptionist.coherentvillages.entity.ai;
+
+import net.minecraft.entity.ai.EntityAIBase;
+
+public class EntityAIBlock extends EntityAIBase
+{
+
+}

@@ -1,0 +1,83 @@
+---- Minecraft Crash Report ----
+// Why is it breaking :(
+
+Time: 10/17/18 2:02 PM
+Description: Exception preparing structure feature
+
+java.lang.NullPointerException: Exception preparing structure feature
+	at net.theexceptionist.coherentvillages.worldgen.villages.LatinStructurePieces$Well.buildComponent(LatinStructurePieces.java:1919)
+	at net.theexceptionist.coherentvillages.worldgen.villages.WorldGenVillage$LatinStart.<init>(WorldGenVillage.java:434)
+	at net.theexceptionist.coherentvillages.worldgen.villages.WorldGenVillage.getStructureStart(WorldGenVillage.java:183)
+	at net.minecraft.world.gen.structure.MapGenStructure.recursiveGenerate(MapGenStructure.java:48)
+	at net.minecraft.world.gen.MapGenBase.generate(MapGenBase.java:31)
+	at net.minecraft.world.gen.ChunkGeneratorOverworld.generateChunk(ChunkGeneratorOverworld.java:231)
+	at net.minecraft.world.gen.ChunkProviderServer.provideChunk(ChunkProviderServer.java:155)
+	at net.minecraft.server.MinecraftServer.initialWorldChunkLoad(MinecraftServer.java:383)
+	at net.minecraft.server.integrated.IntegratedServer.loadAllWorlds(IntegratedServer.java:143)
+	at net.minecraft.server.integrated.IntegratedServer.init(IntegratedServer.java:160)
+	at net.minecraft.server.MinecraftServer.run(MinecraftServer.java:552)
+	at java.lang.Thread.run(Thread.java:748)
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Thread: Server thread
+Stacktrace:
+	at net.theexceptionist.coherentvillages.worldgen.villages.LatinStructurePieces$Well.buildComponent(LatinStructurePieces.java:1919)
+	at net.theexceptionist.coherentvillages.worldgen.villages.WorldGenVillage$LatinStart.<init>(WorldGenVillage.java:434)
+	at net.theexceptionist.coherentvillages.worldgen.villages.WorldGenVillage.getStructureStart(WorldGenVillage.java:183)
+
+-- Feature being prepared --
+Details:
+	Is feature chunk: True
+	Chunk location: -9,0
+	Chunk pos hash: 4294967287
+	Structure type: net.theexceptionist.coherentvillages.worldgen.villages.WorldGenVillage
+Stacktrace:
+	at net.minecraft.world.gen.structure.MapGenStructure.recursiveGenerate(MapGenStructure.java:48)
+	at net.minecraft.world.gen.MapGenBase.generate(MapGenBase.java:31)
+	at net.minecraft.world.gen.ChunkGeneratorOverworld.generateChunk(ChunkGeneratorOverworld.java:231)
+
+-- Chunk to be generated --
+Details:
+	Location: -5,3
+	Position hash: 17179869179
+	Generator: net.minecraft.world.gen.ChunkGeneratorOverworld@14801a55
+Stacktrace:
+	at net.minecraft.world.gen.ChunkProviderServer.provideChunk(ChunkProviderServer.java:155)
+	at net.minecraft.server.MinecraftServer.initialWorldChunkLoad(MinecraftServer.java:383)
+	at net.minecraft.server.integrated.IntegratedServer.loadAllWorlds(IntegratedServer.java:143)
+	at net.minecraft.server.integrated.IntegratedServer.init(IntegratedServer.java:160)
+	at net.minecraft.server.MinecraftServer.run(MinecraftServer.java:552)
+	at java.lang.Thread.run(Thread.java:748)
+
+-- System Details --
+Details:
+	Minecraft Version: 1.12.2
+	Operating System: Mac OS X (x86_64) version 10.13.6
+	Java Version: 1.8.0_144, Oracle Corporation
+	Java VM Version: Java HotSpot(TM) 64-Bit Server VM (mixed mode), Oracle Corporation
+	Memory: 403875368 bytes (385 MB) / 861405184 bytes (821 MB) up to 1908932608 bytes (1820 MB)
+	JVM Flags: 0 total; 
+	IntCache: cache: 10, tcache: 0, allocated: 12, tallocated: 94
+	FML: MCP 9.42 Powered by Forge 14.23.4.2757 7 mods loaded, 7 mods active
+	States: 'U' = Unloaded 'L' = Loaded 'C' = Constructed 'H' = Pre-initialized 'I' = Initialized 'J' = Post-initialized 'A' = Available 'D' = Disabled 'E' = Errored
+
+	| State   | ID               | Version      | Source                           | Signature |
+	|:------- |:---------------- |:------------ |:-------------------------------- |:--------- |
+	| UCHIJAA | minecraft        | 1.12.2       | minecraft.jar                    | None      |
+	| UCHIJAA | mcp              | 9.42         | minecraft.jar                    | None      |
+	| UCHIJAA | FML              | 8.0.99.99    | forgeSrc-1.12.2-14.23.4.2757.jar | None      |
+	| UCHIJAA | forge            | 14.23.4.2757 | forgeSrc-1.12.2-14.23.4.2757.jar | None      |
+	| UCHIJAA | coherentvillages | v0.0.0.5     | modid-1.0.jar                    | None      |
+	| UCHIJAA | journeymap       | 1.12.2-5.5.2 | journeymap-1.12.2-5.5.2.jar      | None      |
+	| UCHIJAA | torohealthmod    | 1.12.2-11    | torohealth-1.12.2-11.jar         | None      |
+
+	Loaded coremods (and transformers): 
+	GL info: ~~ERROR~~ RuntimeException: No OpenGL context found in the current thread.
+	Profiler Position: N/A (disabled)
+	Player Count: 0 / 8; []
+	Type: Integrated Server (map_client.txt)
+	Is Modded: Definitely; Client brand changed to 'fml,forge'

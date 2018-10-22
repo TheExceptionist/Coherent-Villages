@@ -1,0 +1,11 @@
+package net.theexceptionist.coherentvillages.main.items;
+
+import net.minecraft.item.ItemShield;
+
+public class ItemNordShield extends ItemShield{
+	public ItemNordShield(String name)
+	{
+		this.setUnlocalizedName(name);
+		this.setRegistryName(name);
+	}
+}

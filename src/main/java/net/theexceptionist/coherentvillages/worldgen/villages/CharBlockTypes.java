@@ -12,7 +12,7 @@ public class CharBlockTypes {
 	public static final char STAIRS_NORTH = 'E';
 	public static final char STAIRS_SOUTH = 'W';
 	public static final char STAIRS_UP = 'U';
-	public static final char STAIRS_DOWN = 'D';
+	public static final char STAIRS_DOWN = '0';
 	public static final char GLASS = '|';
 	public static final char DOOR_NORTH = 'D';
 	public static final char DOOR_SOUTH = 'd';
@@ -24,4 +24,18 @@ public class CharBlockTypes {
 	public static final char POT = 'P';
 	public static final char FURNACE = 'F';
 	public static final char FENCE = 'f';
+	public static final char DOUBLESTAB = ';';
+	public static final char STONEBRICK = '+';
+	public static final char S_STAIRS_LEFT = 'l';
+	public static final char S_STAIRS_RIGHT = 'r';
+	public static final char S_STAIRS_NORTH = 'e';
+	public static final char S_STAIRS_SOUTH = 'w';
+	public static final char S_STAIRS_UP = 'u';
+	public static final char S_STAIRS_DOWN = '1';
+	public static final char WATER = '~';
+	public static final char LADDER = '=';
+	public static final char BANNER_HANGING = '{';
+	public static final char BANNER = '[';
+
+
 }

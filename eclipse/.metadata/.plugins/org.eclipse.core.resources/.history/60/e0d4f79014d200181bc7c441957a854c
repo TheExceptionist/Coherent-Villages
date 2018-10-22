@@ -1,0 +1,10 @@
+package net.theexceptionist.coherentvillages.main.items;
+
+import net.minecraft.item.Item;
+
+public class ItemNordShield extends Item{
+	public ItemNordShield()
+	{
+		
+	}
+}

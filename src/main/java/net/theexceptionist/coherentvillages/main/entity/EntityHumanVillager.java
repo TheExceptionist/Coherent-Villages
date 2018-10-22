@@ -1,8 +1,9 @@
 package net.theexceptionist.coherentvillages.main.entity;
 
-import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Random;
+import java.util.UUID;
 
 import javax.annotation.Nullable;
 
@@ -12,9 +13,9 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.IRangedAttackMob;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAIAttackRanged;
 import net.minecraft.entity.ai.EntityAIAvoidEntity;
 import net.minecraft.entity.ai.EntityAIBase;
@@ -33,10 +34,12 @@ import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAITasks.EntityAITaskEntry;
 import net.minecraft.entity.ai.EntityAITradePlayer;
 import net.minecraft.entity.ai.EntityAIVillagerInteract;
-import net.minecraft.entity.ai.EntityAIVillagerMate;
 import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.ai.EntityAIWatchClosest2;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.entity.ai.attributes.IAttributeInstance;
+import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.monster.EntityEvoker;
 import net.minecraft.entity.monster.EntityGolem;
@@ -44,20 +47,28 @@ import net.minecraft.entity.monster.EntityVex;
 import net.minecraft.entity.monster.EntityVindicator;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.monster.IMob;
+import net.minecraft.entity.passive.AbstractHorse;
+import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
+import net.minecraft.entity.projectile.EntityPotion;
 import net.minecraft.entity.projectile.EntityTippedArrow;
 import net.minecraft.init.Items;
+import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.potion.PotionEffect;
+import net.minecraft.potion.PotionType;
+import net.minecraft.potion.PotionUtils;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
@@ -73,24 +84,30 @@ import net.minecraft.village.Village;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.theexceptionist.coherentvillages.entity.ai.EntityAIAttackBackExclude;
 import net.theexceptionist.coherentvillages.entity.ai.EntityAIAttackWithBow;
 import net.theexceptionist.coherentvillages.entity.ai.EntityAIAttackWithMagic;
+import net.theexceptionist.coherentvillages.entity.ai.EntityAIAttackWithMelee;
+import net.theexceptionist.coherentvillages.entity.ai.EntityAIBlock;
 import net.theexceptionist.coherentvillages.entity.ai.EntityAIFollowEntity;
 import net.theexceptionist.coherentvillages.entity.ai.EntityAIHealAllies;
 import net.theexceptionist.coherentvillages.entity.ai.EntityAIHideFromHarm;
 import net.theexceptionist.coherentvillages.entity.ai.EntityAIRest;
-import net.theexceptionist.coherentvillages.entity.ai.EntityAIShareTarget;
+import net.theexceptionist.coherentvillages.entity.ai.EntityAISearchForHorse;
 import net.theexceptionist.coherentvillages.entity.ai.EntityAIShareTargetPlayer;
 import net.theexceptionist.coherentvillages.entity.ai.EntityAIStayInBorders;
-import net.theexceptionist.coherentvillages.entity.followers.EntitySkeletonMinion;
 import net.theexceptionist.coherentvillages.entity.followers.IEntityFollower;
-import net.theexceptionist.coherentvillages.entity.soldier.AbstractVillagerSoldier;
 import net.theexceptionist.coherentvillages.main.Main;
 import net.theexceptionist.coherentvillages.main.NameGenerator;
 import net.theexceptionist.coherentvillages.main.entity.attributes.AttributeFaction;
 import net.theexceptionist.coherentvillages.main.entity.attributes.AttributeRace;
 import net.theexceptionist.coherentvillages.main.entity.attributes.AttributeVocation;
+import net.theexceptionist.coherentvillages.main.entity.spells.Spell;
+import net.theexceptionist.coherentvillages.main.items.EntityWeaponThrowable;
+import net.theexceptionist.coherentvillages.main.items.ItemWeaponThrowable;
+import net.theexceptionist.coherentvillages.main.items.ModItems;
 
 public class EntityHumanVillager extends EntityVillager implements IEntityFollower, IEntityVillager, IRangedAttackMob{
 	protected String firstName, lastName;
@@ -100,9 +117,10 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
 	protected AttributeVocation vocation;
 	protected Village village;
 	
-	private EntityAIAttackMelee melee;
+	private EntityAIAttackWithMelee melee;
 	private EntityAIAttackRanged ranged;
 	private EntityAIAttackWithBow rangedTrained;
+	private EntityAIBlock block;
 	
 	private int homeCheckTimer = 0;
 	private EntityAIHealAllies heal;
@@ -112,9 +130,8 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
 	private boolean isSwinging = false;
 	private int kills = 0;
 	private EntityAIHarvestFarmland farm;
-	private int supply = 5;
-	private int vassalsKilled = 0;
-	private ArrayList<EntityHumanVillager> vassals;
+	//private int supply = 5;
+	private EntityHumanVillager liege;
 	//private EntityHumanVillager liege = null;
 	private boolean spawnAttempt = false;
 	
@@ -127,14 +144,54 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
 	private EntityLivingBase master = null;
 	private boolean dropLoot = true;
 	
+	//USED to store shifting data
+	private static final int BJORN_ID = 0;
+	private static final int WRAITH_ID = 1;
+	
 	public static int END_ID = 0;
+	
+	protected PotionType PASSIVE_1 = null;
+	protected PotionType PASSIVE_2 = null;
+	protected PotionType ACTIVE_1 = null;
+	protected PotionType ACTIVE_2 = null;
+	private boolean canUsePotions = false;
+	
+	protected Spell S_PASSIVE_1 = null;
+	protected Spell S_PASSIVE_2 = null;
+	protected Spell S_ACTIVE_1 = null;
+	protected Spell S_ACTIVE_2 = null;
+	private boolean isMagic = false;
+	
+	protected ItemWeaponThrowable thrownWeapon = null;
 	
 	private static final DataParameter<Integer> PROFESSION = EntityDataManager.<Integer>createKey(EntityHumanVillager.class, DataSerializers.VARINT);
 	private static final DataParameter<Integer> RACE = EntityDataManager.<Integer>createKey(EntityHumanVillager.class, DataSerializers.VARINT);
 	private static final DataParameter<Integer> GENDER = EntityDataManager.<Integer>createKey(EntityHumanVillager.class, DataSerializers.VARINT);
 	private static final DataParameter<String> FIRST_NAME = EntityDataManager.<String>createKey(EntityHumanVillager.class, DataSerializers.STRING);
 	private static final DataParameter<String> LAST_NAME = EntityDataManager.<String>createKey(EntityHumanVillager.class, DataSerializers.STRING);
-
+	private static final DataParameter<Boolean> SWINGING_ARMS = EntityDataManager.<Boolean>createKey(EntityHumanVillager.class, DataSerializers.BOOLEAN);
+	private static final DataParameter<Boolean> BLOCKING = EntityDataManager.<Boolean>createKey(EntityHumanVillager.class, DataSerializers.BOOLEAN);
+	protected static final DataParameter<Boolean> IS_AGGRESSIVE = EntityDataManager.<Boolean>createKey(EntityHumanVillager.class, DataSerializers.BOOLEAN);
+   
+	protected static final UUID MODIFIER_UUID = UUID.fromString("5CD17E52-A79A-43D3-A529-90FDE04B181E");
+    protected static final AttributeModifier MODIFIER = (new AttributeModifier(MODIFIER_UUID, "Drinking speed penalty", -0.25D, 0)).setSaved(false);
+	
+    protected int attackTimer;
+    protected int coolDown = 0, coolDownDrinking = 0;
+	private boolean isHealer = false;
+	
+	protected ItemStack held;
+	private int lifespan = -1;
+	private boolean hasLifespan = false;
+	
+	private float horseHeight;
+	private float horseWidth;
+	private AbstractHorse horse;
+	private boolean canAttackWithPotions = false;
+	private String factionName = "None";
+	private int healthChange = -1;
+	private boolean nervous = false;
+    
 	public EntityHumanVillager(World worldIn) {
 		super(worldIn);
 		//System.out.println("Reinit"); name = new ();
@@ -205,7 +262,7 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
 		
 		//if(this.liege != null) System.out.println(this.getTitle()+" Ruler: "+this.liege.getTitle());
 		//else System.out.println("None");
-		//System.out.println(this.getTitle()+" Gender: "+gender);
+		//System.out.println(this.getTitle()+" Pos X: "+this.posX+" Pos Y: "+this.posY+" Pos Z: "+this.posZ+" - "+this.shifter);
 	}
 	
 	public EntityHumanVillager(World worldIn, final int ID, final AttributeVocation vocation, final int gender, final String firstName, final String lastName)
@@ -247,9 +304,15 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
 		this.initEntityName();
 		this.initValues();
 		this.setCombatTask();
+		
+		if(ruler) this.createFaction();
 		//System.out.println(this.getTitle()+" Gender: "+gender);
 	}
 	
+	public EntityHumanVillager(EntityHumanVillager toSpawn) {
+		this(toSpawn.world, toSpawn.getRace().getID(), toSpawn.vocation, toSpawn.getGender(), false);
+	}
+
 	public void reInit(final int ID, final AttributeVocation vocation, final int gender, final String firstName, final String lastName)
 	{
 		this.race = AttributeRace.getFromIDRace(ID);
@@ -270,6 +333,27 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
 		//System.out.println(this.getTitle()+" FirstName: "+this.firstName);
 	}
 	
+	@Override
+	 public void onStruckByLightning(EntityLightningBolt lightningBolt)
+	    {
+	       /* if (!this.world.isRemote && !this.isDead)
+	        {
+	            EntityWitch entitywitch = new EntityWitch(this.world);
+	            entitywitch.setLocationAndAngles(this.posX, this.posY, this.posZ, this.rotationYaw, this.rotationPitch);
+	            entitywitch.onInitialSpawn(this.world.getDifficultyForLocation(new BlockPos(entitywitch)), (IEntityLivingData)null);
+	            entitywitch.setNoAI(this.isAIDisabled());
+
+	            if (this.hasCustomName())
+	            {
+	                entitywitch.setCustomNameTag(this.getCustomNameTag());
+	                entitywitch.setAlwaysRenderNameTag(this.getAlwaysRenderNameTag());
+	            }
+
+	            this.world.spawnEntity(entitywitch);
+	            this.setDead();
+	        }*/
+	    }
+	
 	public void transform()
 	{
 		EntityLiving mob = getShifter();
@@ -277,11 +361,11 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
 		if(mob != null)
 		{
 			EntityLiving entityShifter = mob;                           
-        	entityShifter.setLocationAndAngles((double)this.posX + 0.5D, (double)this.posY, (double)this.posZ + 0.5D, 0.0F, 0.0F);
-            //entityShifter.setProfession(this.chooseForgeProfession(i, entityShifter.getProfessionForge()));
-            //entityShifter.finalizeMobSpawn(world.getDifficultyForLocation(new BlockPos(entityShifter)), (IEntityLivingData)null, false);
-            world.spawnEntity(entityShifter);
-            this.setDead();
+	        entityShifter.setLocationAndAngles((double)this.posX + 0.5D, (double)this.posY, (double)this.posZ + 0.5D, 0.0F, 0.0F);
+	            //entityShifter.setProfession(this.chooseForgeProfession(i, entityShifter.getProfessionForge()));
+	            //entityShifter.finalizeMobSpawn(world.getDifficultyForLocation(new BlockPos(entityShifter)), (IEntityLivingData)null, false);
+	        world.spawnEntity(entityShifter);
+	        this.setDead();
 		}
 	}
 	
@@ -294,9 +378,17 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
 		return shifter;
 	}
 
-	public void setShifter(boolean shifter, EntityLiving creature) {
+	public void setShifter(boolean shifter, EntityLiving creature, boolean isNervous, int healthChange) {
 		this.shifter = shifter;
 		this.creatureShiftTo = creature;
+		
+		this.healthChange = healthChange;
+		if(healthChange < 0) this.healthChange = (int) (this.getMaxHealth() / 2);
+		
+		this.nervous = isNervous;
+		
+		this.initEntityName();
+		//System.out.println(this.getTitle()+" Pos X: "+this.posX+" Pos Y: "+this.posY+" Pos Z: "+this.posZ+" - "+this.shifter);
 	}
 
 	@Override
@@ -348,31 +440,54 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
 	
 	public boolean processInteract(EntityPlayer player, EnumHand hand)
 	{
+		System.out.println("Faction Interact: "+faction+" Ruler: "+this.liege);
 		if(this.vocation != null && this.vocation.getType() == AttributeVocation.CLASS_MERCENARY )
 		{	
 			ItemStack item = player.getHeldItem(hand);
 			
+			Style style2 = new Style();
+			style2.setColor(TextFormatting.GREEN);
+			ITextComponent itextcomponent1;
+			
 			if(item.getItem() == Items.EMERALD && this.master == null)
 			{
-				Style style2 = new Style();
-				style2.setColor(TextFormatting.GREEN);
-				
-				ITextComponent itextcomponent1 = new TextComponentString(
+				itextcomponent1 = new TextComponentString(
 						player.getDisplayNameString()+", sure I "+this.firstName+" will follow you.");
 				itextcomponent1.setStyle(style2);
-				player.sendMessage(itextcomponent1);
+
 				//player.setHeldItem(hand, null);
 				this.setMaster(player);
 			}
 			else
 			{
-				return false;
+				itextcomponent1 = new TextComponentString(
+						player.getDisplayNameString()+" you have no emerald!");
+				itextcomponent1.setStyle(style2);
 			}
+			
+			player.sendMessage(itextcomponent1);
 			
 			return false;
 		}
 		else if(this.vocation != null && this.vocation.getType() == AttributeVocation.CLASS_BANDIT)
 		{
+			return false;
+		}
+		else if(this.faction != null && this.vocation != null 
+				&& (this.vocation.getType() == AttributeVocation.CLASS_SOLDIER
+				|| this.vocation.getType() == AttributeVocation.CLASS_ARCHER
+				|| this.vocation.getType() == AttributeVocation.CLASS_MAGE
+				|| this.vocation.getType() == AttributeVocation.CLASS_ALCHEMIST
+				|| this.vocation.getType() == AttributeVocation.CLASS_RULER))
+		{
+			Style style2 = new Style();
+			style2.setColor(TextFormatting.YELLOW);
+			
+			ITextComponent itextcomponent1 = new TextComponentString("Hail "+
+					player.getDisplayNameString()+". I'm "+this.firstName+" "+this.lastName+", and I'm a "
+					+race.getName()+" "+vocation.getName()+" of "+faction.getTitleName()+" with "+this.kills+" kills.");
+			itextcomponent1.setStyle(style2);
+			player.sendMessage(itextcomponent1);
 			return false;
 		}
 		else
@@ -383,7 +498,9 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
 
 	public void onLivingUpdate()
     {
+		this.drinkPotion();
 		super.onLivingUpdate();
+		this.updateArmSwingProgress();
 		
 		//this.vassalsKilled++;
 		//System.out.print("Ruler"+vassalsKilled);
@@ -398,10 +515,39 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
 			this.kills = 0;
 		}
 		
-		if(this.shifter && this.getHealth() < this.getMaxHealth()/2)
+		if(this.shifter && this.getHealth() <= this.healthChange)
 		{
 			this.transform();
 		}
+		
+		if(this.lifespan > 0)
+		{
+			lifespan--;
+		}
+		else if(this.lifespan <= 0 && this.hasLifespan )
+		{
+			this.setDead();
+		}
+		
+		if(this.faction == null && this.liege != null)
+		{
+			this.faction = this.liege.getFaction();
+		}
+		//System.out.println("width and height: "+this.width+" "+this.height);
+		/*if(this.getHeldItemOffhand() != null && this.getHeldItemOffhand().getItem() == Items.SHIELD)
+		{
+			
+			if(this.inCombat())
+			{
+				System.out.println("In Combat");
+				this.setBlocking(true);
+			}
+			else
+			{
+				System.out.println("Not in Combat");
+				this.setBlocking(false);
+			}
+		}*/
 		
 		/*if(this.vassalsKilled > 5 && this.world.isDaytime() && !this.spawnAttempt)
 		{
@@ -439,11 +585,16 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
 	{
 		for(int i = 0; i < num; i++)
 		{
-			EntityHumanVillager entityHumanVillager = new EntityHumanVillager(world, race.getID(), race.getRecruitVocation(AttributeVocation.CLASS_SOLDIER), gender, firstName, lastName);                            
-	    	entityHumanVillager.setLocationAndAngles((double)this.posX + 0.5D, (double)this.posY, (double)this.posZ + 0.5D, 0.0F, 0.0F);
-	        //entityHumanVillager.setProfession(this.chooseForgeProfession(i, entityHumanVillager.getProfessionForge()));
-	        //entityHumanVillager.finalizeMobSpawn(world.getDifficultyForLocation(new BlockPos(entityHumanVillager)), (IEntityLivingData)null, false);
-	        world.spawnEntity(entityHumanVillager);
+			AttributeVocation recruit = race.getRandomRecruitVocation();
+			
+			if(recruit != null)
+			{
+				EntityHumanVillager entityHumanVillager = new EntityHumanVillager(world, race.getID(), recruit, gender, firstName, lastName);                            
+		    	entityHumanVillager.setLocationAndAngles((double)this.posX + 0.5D, (double)this.posY, (double)this.posZ + 0.5D, 0.0F, 0.0F);
+		        //entityHumanVillager.setProfession(this.chooseForgeProfession(i, entityHumanVillager.getProfessionForge()));
+		        //entityHumanVillager.finalizeMobSpawn(world.getDifficultyForLocation(new BlockPos(entityHumanVillager)), (IEntityLivingData)null, false);
+		        world.spawnEntity(entityHumanVillager);
+			}
 		}
 	}
 
@@ -455,6 +606,9 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
 		dataManager.register(PROFESSION, -1);
 		dataManager.register(FIRST_NAME, "");
 		dataManager.register(LAST_NAME, "");
+		dataManager.register(IS_AGGRESSIVE, Boolean.valueOf(false));
+		dataManager.register(SWINGING_ARMS, Boolean.valueOf(false));
+		dataManager.register(BLOCKING, Boolean.valueOf(false));
     }
 	
 	public void setLastNameFromManager(String name)
@@ -539,6 +693,7 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
         }
 
         boolean flag = entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), f);
+        this.swingArm(EnumHand.MAIN_HAND);
         
         if (flag)
         {
@@ -578,7 +733,7 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
 
             this.applyEnchantments(this, entityIn);
         }
-
+ 
         return flag;
     }
 	
@@ -621,6 +776,12 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
         {
             this.tasks.removeTask(this.melee);
             this.tasks.removeTask(this.ranged);
+            this.tasks.removeTask(this.rangedTrained);
+            this.tasks.removeTask(this.potions);
+        	this.tasks.removeTask(this.block);
+        	this.tasks.removeTask(this.spells);
+        	this.tasks.removeTask(this.heal);
+
             
             if(this.vocation.getType() != AttributeVocation.CLASS_VILLAGER)
             {
@@ -635,7 +796,7 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
             	
             ItemStack itemstack = this.getHeldItemMainhand();
             
-            //System.out.println("Executing");
+           // System.out.println("**^%#$@!~@#$%^&*Executing: "+isMagic);
             //if(itemstack != null)System.out.println("Working! "+itemstack.getDisplayName());
 
             if (itemstack.getItem() == Items.BOW)
@@ -648,13 +809,58 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
                 }
 
                 //this.ranged.setAttackCooldown(i);
-                if(this.vocation.getType() != AttributeVocation.CLASS_ARCHER) this.tasks.addTask(1, this.ranged);
-                else this.tasks.addTask(1, this.ranged);
+                if(this.vocation.getType() != AttributeVocation.CLASS_ARCHER) 
+                {
+                	this.tasks.addTask(1, this.ranged);
+                    this.setSwingingArms(true);
+                }
+                else 
+                {
+                	this.tasks.addTask(1, this.rangedTrained);
+                }
+            }
+            else if(isMagic)
+            {
+            	//System.out.println("IsMagic");
+               	this.tasks.addTask(1, this.spells);
+            }
+            else if(canUsePotions)
+            {
+                	System.out.println("Can attack: "+canAttackWithPotions);
+                	if(canAttackWithPotions) 
+                	{
+                		this.tasks.addTask(2, this.potions);
+                	}
+                	if((PASSIVE_1 != null || PASSIVE_2 != null) && vocation.isHealer()) this.tasks.addTask(3, this.heal);
             }
             else
             {
                 this.tasks.addTask(1, this.melee);
+                
+                if(this.getHeldItemOffhand() != null && (this.getHeldItemOffhand().getItem() == Items.SHIELD || this.getHeldItemOffhand().getItem() == ModItems.nordShield))
+                {
+                	//System.out.println("Has Shield");
+                	//this.setBlocking(true);
+                	this.tasks.addTask(2, this.block);
+                }
                 //System.out.println("Melee!");
+            } 
+            
+            
+            
+         //   System.out.println("Can Ride: "+this.vocation.isCanRide());
+            
+            if(this.vocation.isCanRide())
+            {
+           // 	System.out.println("Looking for horse");
+            	this.tasks.addTask(4, new EntityAISearchForHorse(this, 0.5D, 40.0, 100));
+            	
+            	if(world.rand.nextInt(100) < 20) 
+            	{
+            		EntityHorse horse = new EntityHorse(world);
+            		horse.setLocationAndAngles(this.posX, this.posY, this.posZ, 0, 0);
+            		world.spawnEntity(horse);
+            	}
             }
         }
     }
@@ -666,10 +872,11 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
 	{
 		if(vocation == null || this.world.isRemote) return;
 		//this.getVillage();
-		melee = new EntityAIAttackMelee(this, 1.0D, true);
+		melee = new EntityAIAttackWithMelee(this, 1.0, true);
 		ranged = new EntityAIAttackRanged(this, 1.0D, 60,  (float)getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).getAttributeValue() + 16.0F);
 		rangedTrained = new EntityAIAttackWithBow(this, 1.0D, 60, 10.0F);
-		//heal = new EntityAIHealAllies(this, 1.0D, 60, 10.0F, EntityVillager.class);
+		block = new EntityAIBlock(this, 2.0D, this.vocation.isAlwaysBlocking());
+		heal = new EntityAIHealAllies(this, 1.0D, 60, 10.0F, EntityVillager.class);
         potions = new EntityAIAttackRanged(this, 1.0D, 60, 10.0F);
         spells =  new  EntityAIAttackWithMagic(this, 1.0D, 20, 15.0F);
         farm = new EntityAIHarvestFarmland(this, 0.6D);
@@ -686,21 +893,14 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
 		        this.tasks.addTask(3, new EntityAIMoveThroughVillage(this, 0.6D, true));
 		        this.tasks.addTask(4, new EntityAIRestrictOpenDoor(this));
 		        this.tasks.addTask(5, new EntityAIOpenDoor(this, true));
-		        this.tasks.addTask(6, new EntityAIRest(this, true));
+		        //this.tasks.addTask(6, new EntityAIRest(this, true));
 		        this.tasks.addTask(7, new EntityAIHideFromHarm(this));
 		        this.tasks.addTask(8, new EntityAIMoveTowardsTarget(this, 0.9D, 32.0F));
 		        this.tasks.addTask(9, new EntityAIWanderAvoidWater(this, 0.6D));
 		        this.tasks.addTask(10, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
 		        this.tasks.addTask(11, new EntityAILookIdle(this));
 		        
-		        this.targetTasks.addTask(0, new EntityAINearestAttackableTarget(this, EntityLiving.class, 1, true, true, new Predicate<EntityLiving>()
-		        {
-		            public boolean apply(@Nullable EntityLiving p_apply_1_)
-		            {
-		        		return p_apply_1_ != null && ((IMob.VISIBLE_MOB_SELECTOR.apply(p_apply_1_) && !(p_apply_1_ instanceof EntityCreeper) && !(p_apply_1_ instanceof EntityTameable) && !(p_apply_1_ instanceof EntitySkeletonMinion)) || (p_apply_1_ instanceof EntityWarg));
-		            }
-		        }));
-		        this.targetTasks.addTask(1, new EntityAIAttackBackExclude(this, true, new Class[0])); 
+		        this.defaultTargets();
 			}
 			break;
 			case AttributeVocation.CLASS_ARCHER:
@@ -719,14 +919,7 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
 		        this.tasks.addTask(10, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
 		        this.tasks.addTask(11, new EntityAILookIdle(this));
 		        
-		        this.targetTasks.addTask(0, new EntityAINearestAttackableTarget(this, EntityLiving.class, 1, true, true, new Predicate<EntityLiving>()
-		        {
-		            public boolean apply(@Nullable EntityLiving p_apply_1_)
-		            {
-		        		return p_apply_1_ != null && ((IMob.VISIBLE_MOB_SELECTOR.apply(p_apply_1_) && !(p_apply_1_ instanceof EntityCreeper) && !(p_apply_1_ instanceof EntityTameable) && !(p_apply_1_ instanceof EntitySkeletonMinion)) || (p_apply_1_ instanceof EntityWarg));
-		            }
-		        }));
-		        this.targetTasks.addTask(1, new EntityAIAttackBackExclude(this, true, new Class[0])); 
+		        this.defaultTargets();
 			}
 			break;
 			case AttributeVocation.CLASS_MAGE:
@@ -737,21 +930,14 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
 		        this.tasks.addTask(3, new EntityAIMoveThroughVillage(this, 0.6D, true));
 		        this.tasks.addTask(4, new EntityAIRestrictOpenDoor(this));
 		        this.tasks.addTask(5, new EntityAIOpenDoor(this, true));
-		        this.tasks.addTask(6, new EntityAIRest(this, true));
+		        //this.tasks.addTask(6, new EntityAIRest(this, true));
 		        this.tasks.addTask(7, new EntityAIHideFromHarm(this));
 		        this.tasks.addTask(8, new EntityAIMoveTowardsTarget(this, 0.9D, 32.0F));
 		        this.tasks.addTask(9, new EntityAIWanderAvoidWater(this, 0.6D));
 		        this.tasks.addTask(10, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
 		        this.tasks.addTask(11, new EntityAILookIdle(this));
 		        
-		        this.targetTasks.addTask(0, new EntityAINearestAttackableTarget(this, EntityLiving.class, 1, true, true, new Predicate<EntityLiving>()
-		        {
-		            public boolean apply(@Nullable EntityLiving p_apply_1_)
-		            {
-		        		return p_apply_1_ != null && ((IMob.VISIBLE_MOB_SELECTOR.apply(p_apply_1_) && !(p_apply_1_ instanceof EntityCreeper) && !(p_apply_1_ instanceof EntityTameable) && !(p_apply_1_ instanceof EntitySkeletonMinion)) || (p_apply_1_ instanceof EntityWarg));
-		            }
-		        }));
-		        this.targetTasks.addTask(1, new EntityAIAttackBackExclude(this, true, new Class[0])); 
+		        this.defaultTargets();
 			}
 			break;
 			case AttributeVocation.CLASS_ALCHEMIST:
@@ -763,21 +949,14 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
 		        this.tasks.addTask(4, new EntityAIMoveThroughVillage(this, 0.6D, true));
 		        this.tasks.addTask(5, new EntityAIRestrictOpenDoor(this));
 		        this.tasks.addTask(6, new EntityAIOpenDoor(this, true));
-		        this.tasks.addTask(6, new EntityAIRest(this, true));
+		        //this.tasks.addTask(6, new EntityAIRest(this, true));
 		        this.tasks.addTask(8, new EntityAIHideFromHarm(this));
 		        this.tasks.addTask(9, new EntityAIMoveTowardsTarget(this, 0.9D, 32.0F));
 		        this.tasks.addTask(10, new EntityAIWanderAvoidWater(this, 0.6D));
 		        this.tasks.addTask(11, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
 		        this.tasks.addTask(12, new EntityAILookIdle(this));
 		        
-		        this.targetTasks.addTask(0, new EntityAINearestAttackableTarget(this, EntityLiving.class, 1, true, true, new Predicate<EntityLiving>()
-		        {
-		            public boolean apply(@Nullable EntityLiving p_apply_1_)
-		            {
-		        		return p_apply_1_ != null && ((IMob.VISIBLE_MOB_SELECTOR.apply(p_apply_1_) && !(p_apply_1_ instanceof EntityCreeper) && !(p_apply_1_ instanceof EntityTameable) && !(p_apply_1_ instanceof EntitySkeletonMinion)) || (p_apply_1_ instanceof EntityWarg));
-		            }
-		        }));
-		        this.targetTasks.addTask(1, new EntityAIAttackBackExclude(this, true, new Class[0])); 
+		        this.defaultTargets();
 			}
 			break;
 			case AttributeVocation.CLASS_VILLAGER:
@@ -796,7 +975,7 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
 		        this.tasks.addTask(3, new EntityAIRestrictOpenDoor(this));
 		        this.tasks.addTask(4, new EntityAIOpenDoor(this, true));
 		        this.tasks.addTask(5, new EntityAIMoveTowardsRestriction(this, 0.6D));
-		        this.tasks.addTask(6, new EntityAIRest(this, true));
+		        //this.tasks.addTask(6, new EntityAIRest(this, true));
 		       // this.tasks.addTask(6, new EntityAIVillagerMate(this));
 		        this.tasks.addTask(7, new EntityAIFollowGolem(this));
 		        this.tasks.addTask(9, new EntityAIWatchClosest2(this, EntityPlayer.class, 3.0F, 1.0F));
@@ -844,7 +1023,7 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
 		        this.tasks.addTask(3, new EntityAIMoveThroughVillage(this, 0.6D, true));
 		        this.tasks.addTask(4, new EntityAIRestrictOpenDoor(this));
 		        this.tasks.addTask(5, new EntityAIOpenDoor(this, true));
-		        this.tasks.addTask(6, new EntityAIRest(this, true));
+		        //this.tasks.addTask(6, new EntityAIRest(this, true));
 		        this.tasks.addTask(7, new EntityAIHideFromHarm(this));
 		        this.tasks.addTask(8, new EntityAIMoveTowardsTarget(this, 0.9D, 32.0F));
 		        this.tasks.addTask(9, new EntityAIWanderAvoidWater(this, 0.6D));
@@ -880,21 +1059,15 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
 		        //his.tasks.addTask(3, new EntityAIMoveThroughVillage(this, 0.6D, true));
 		        this.tasks.addTask(4, new EntityAIRestrictOpenDoor(this));
 		        this.tasks.addTask(5, new EntityAIOpenDoor(this, true));
-		        this.tasks.addTask(6, new EntityAIRest(this, true));
+		        //this.tasks.addTask(6, new EntityAIRest(this, true));
 		        this.tasks.addTask(7, new EntityAIHideFromHarm(this));
 		        this.tasks.addTask(8, new EntityAIMoveTowardsTarget(this, 0.9D, 32.0F));
 		        this.tasks.addTask(9, new EntityAIWanderAvoidWater(this, 0.6D));
 		        this.tasks.addTask(10, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
 		        this.tasks.addTask(11, new EntityAILookIdle(this));
 		        
-		        this.targetTasks.addTask(0, new EntityAINearestAttackableTarget(this, EntityLiving.class, 1, true, true, new Predicate<EntityLiving>()
-		        {
-		            public boolean apply(@Nullable EntityLiving p_apply_1_)
-		            {
-		        		return p_apply_1_ != null && ((IMob.VISIBLE_MOB_SELECTOR.apply(p_apply_1_) && !(p_apply_1_ instanceof EntityCreeper) && !(p_apply_1_ instanceof EntityTameable) && !(p_apply_1_ instanceof EntitySkeletonMinion)) || (p_apply_1_ instanceof EntityWarg));
-		            }
-		        }));
-		        this.targetTasks.addTask(1, new EntityAIAttackBackExclude(this, true, new Class[0])); 
+		        this.defaultTargets();
+		        
 			}
 			break;
 			case AttributeVocation.CLASS_MERCENARY:
@@ -905,26 +1078,37 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
 		        //this.tasks.addTask(3, new EntityAIMoveThroughVillage(this, 0.6D, true));
 		        this.tasks.addTask(4, new EntityAIRestrictOpenDoor(this));
 		        this.tasks.addTask(5, new EntityAIOpenDoor(this, true));
-		        this.tasks.addTask(6, new EntityAIRest(this, true));
+		        //this.tasks.addTask(6, new EntityAIRest(this, true));
 		        //this.tasks.addTask(7, new EntityAIHideFromHarm(this));
 		        this.tasks.addTask(8, new EntityAIMoveTowardsTarget(this, 0.9D, 32.0F));
 		        this.tasks.addTask(9, new EntityAIWanderAvoidWater(this, 0.6D));
 		        this.tasks.addTask(10, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
 		        this.tasks.addTask(11, new EntityAILookIdle(this));
 		        
-		        this.targetTasks.addTask(0, new EntityAINearestAttackableTarget(this, EntityLiving.class, 1, true, true, new Predicate<EntityLiving>()
-		        {
-		            public boolean apply(@Nullable EntityLiving p_apply_1_)
-		            {
-		        		return p_apply_1_ != null && ((IMob.VISIBLE_MOB_SELECTOR.apply(p_apply_1_) && !(p_apply_1_ instanceof EntityCreeper) && !(p_apply_1_ instanceof EntityTameable) && !(p_apply_1_ instanceof EntitySkeletonMinion)) || (p_apply_1_ instanceof EntityWarg));
-		            }
-		        }));
-		        this.targetTasks.addTask(1, new EntityAIAttackBackExclude(this, true, new Class[0])); 
+		        this.defaultTargets();
 			}
 			break;
 		}
 	}
 	
+	private void defaultTargets() {
+		this.targetTasks.addTask(0, new EntityAINearestAttackableTarget(this, EntityLiving.class, 1, true, true, new Predicate<EntityLiving>()
+        {
+            public boolean apply(@Nullable EntityLiving p_apply_1_)
+            {
+            	if(p_apply_1_ instanceof EntityHumanVillager)
+            	{
+            		EntityHumanVillager villager = (EntityHumanVillager) p_apply_1_;
+            		if(villager.getVocation().getType() == AttributeVocation.CLASS_BANDIT) return true;
+            		else return false;
+            	}
+            	
+        		return p_apply_1_ != null && ((IMob.VISIBLE_MOB_SELECTOR.apply(p_apply_1_) && !(p_apply_1_ instanceof EntityCreeper) && !(p_apply_1_ instanceof EntityTameable)) || (p_apply_1_ instanceof EntityWarg));
+            }
+        }));
+        this.targetTasks.addTask(1, new EntityAIAttackBackExclude(this, true, new Class[0])); 
+	}
+
 	@Override
 	public void readEntityFromNBT(NBTTagCompound compound)
 	{
@@ -936,43 +1120,53 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
         String name1 = compound.getString("First Name");
         String name2 = compound.getString("Last Name");
         
+        this.shifter = compound.getBoolean("Shifter");
+        this.ruler = compound.getBoolean("Ruler");
+        int shiftCreatureID = -1;
+        if(this.shifter) shiftCreatureID = compound.getInteger("creature");
+        if(shiftCreatureID == BJORN_ID) this.creatureShiftTo = new EntityBjornserker(world);
+        if(shiftCreatureID == WRAITH_ID) this.creatureShiftTo = new EntityWraith(world);
+        
         this.reInit(race.getID(), vocation, gender, name1, name2);
         
-        this.kills = compound.getInteger("Kills");
-        int vassals = compound.getInteger("Vassals Killed");
-        if(vassals >= this.vassalsKilled) this.vassalsKilled = vassals;
-
-        /*NBTTagList nbttaglist = compound.getTagList("Equipment", 10);
+        this.factionName = compound.getString("Faction Name");
         
-        for (int i = 0; i < nbttaglist.tagCount(); ++i)
+        int radius = 0;
+        radius = compound.getInteger("Radius");
+        
+        if(ruler) 
         {
-            ItemStack itemstack = new ItemStack(nbttaglist.getCompoundTagAt(i));
-
-            if(itemstack.getItem() instanceof ItemSword || itemstack.getItem() instanceof ItemAxe || itemstack.getItem() instanceof ItemSpade|| itemstack.getItem() instanceof ItemHoe)
-            {
-            	 this.setHeldItem(EnumHand.MAIN_HAND, new ItemStack(nbttaglist.getCompoundTagAt(i)));
-            }
-            else if(itemstack.getItem().isValidArmor(itemstack, EntityEquipmentSlot.HEAD, this))
-            {
-    			this.setItemStackToSlot(EntityEquipmentSlot.HEAD, new ItemStack(nbttaglist.getCompoundTagAt(i)));
-            }
-            else if(itemstack.getItem().isValidArmor(itemstack, EntityEquipmentSlot.CHEST, this))
-            {
-    			this.setItemStackToSlot(EntityEquipmentSlot.CHEST, new ItemStack(nbttaglist.getCompoundTagAt(i)));
-            }
-            else if(itemstack.getItem().isValidArmor(itemstack, EntityEquipmentSlot.LEGS, this))
-            {
-    			this.setItemStackToSlot(EntityEquipmentSlot.LEGS, new ItemStack(nbttaglist.getCompoundTagAt(i)));
-            }
-            else if(itemstack.getItem().isValidArmor(itemstack, EntityEquipmentSlot.FEET, this))
-            {
-    			this.setItemStackToSlot(EntityEquipmentSlot.FEET, new ItemStack(nbttaglist.getCompoundTagAt(i)));
-            }
-        }*/
-
-        //this.isDirty = true;
+        	this.createFaction();
+        	
+        	List<EntityHumanVillager> list = this.world.getEntitiesWithinAABB(EntityHumanVillager.class, this.getEntityBoundingBox().expand(radius, 8.0D, radius).offset(-radius/2, -4, -radius/2));
+        	
+        	if (!list.isEmpty())
+             {
+        		for(int i = 0; i < list.size(); i++){
+             		//list = this.rangedAttackEntityHost.world.getEntitiesWithinAABB(EntityVillager.class, this.rangedAttackEntityHost.getEntityBoundingBox().expand(d0, 4.0D, d0));
+     	            EntityHumanVillager potentialMember = (EntityHumanVillager)list.get(i);
+     	        	
+     	            if((potentialMember.vocation.getType() == AttributeVocation.CLASS_SOLDIER
+     	   				|| potentialMember.vocation.getType() == AttributeVocation.CLASS_ARCHER
+     					|| potentialMember.vocation.getType() == AttributeVocation.CLASS_MAGE
+     					|| potentialMember.vocation.getType() == AttributeVocation.CLASS_ALCHEMIST
+     					|| potentialMember.vocation.getType() == AttributeVocation.CLASS_RULER))
+     	            {
+     	            	potentialMember.setRuler(this);
+     	            }
+             	}
+             }
+            
+        }
+        
+        this.kills = compound.getInteger("Kills");
 	}
 	
+	private void createFaction() {
+		this.faction = new AttributeFaction(world, this.getPos(), this.getRace(), this.firstName, this, factionName);
+		this.factionName = this.faction.getTitleName();
+	}
+
 	@Override
 	public void writeEntityToNBT(NBTTagCompound compound)
 	{
@@ -982,18 +1176,19 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
         compound.setInteger("Race", this.getRaceFromManager());
         compound.setInteger("Gender", this.getGender());
         compound.setInteger("Kills", this.kills);
-        compound.setInteger("Vassals Killed", this.vassalsKilled);
         compound.setString("First Name", this.getNameFromManager());
         compound.setString("Last Name", this.getLastNameFromManager());
-        //this.setCustomNameTag(this.getTitle());
-        /*compound.setInteger("Career", this.careerId);
-        compound.setInteger("CareerLevel", this.careerLevel);
-        compound.setBoolean("Willing", this.isWillingToMate);*/
-
-        /*if (this.buyingList != null)
+        compound.setBoolean("Shifter", this.isShifter());
+        compound.setBoolean("Ruler", this.ruler);
+        compound.setString("Faction Name", this.factionName);
+        
+        if(this.getVillage() != null) compound.setInteger("Radius", this.getVillage().getVillageRadius());
+        
+        if(this.isShifter())
         {
-            compound.setTag("Offers", this.buyingList.getRecipiesAsTags());
-        }*/
+        	if(this.creatureShiftTo instanceof EntityBjornserker) compound.setInteger("creature", BJORN_ID);
+        	if(this.creatureShiftTo instanceof EntityBjornserker) compound.setInteger("creature", WRAITH_ID);
+        }
 
         NBTTagList nbttaglist = new NBTTagList();
         
@@ -1057,7 +1252,7 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
 	{
 		if(this.isShifter())
 		{ 
-			this.setCustomNameTag("Nervous "+this.getTitle());
+			if(this.nervous) this.setCustomNameTag("Nervous "+this.getTitle());
 			//System.out.println(this.getTitle());
 		}
 		else
@@ -1091,6 +1286,32 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
 		this.setItemStackToSlot(EntityEquipmentSlot.LEGS, new ItemStack(vocation.getLeggings()));
 		this.setItemStackToSlot(EntityEquipmentSlot.FEET, new ItemStack(vocation.getBoots()));
 		
+		PASSIVE_1 = vocation.getPotions(0);
+		PASSIVE_2 = vocation.getPotions(1);
+		ACTIVE_1 = vocation.getPotions(2);
+		ACTIVE_2 = vocation.getPotions(3);
+		
+		
+		S_PASSIVE_1 = vocation.getSpell(0);
+		S_PASSIVE_2 = vocation.getSpell(1);
+		S_ACTIVE_1 = vocation.getSpell(2);
+		S_ACTIVE_2 = vocation.getSpell(3);
+		
+		thrownWeapon = vocation.getThrown();
+		
+		//System.out.println("Potions:\n"+PASSIVE_1+"\n"+PASSIVE_2+"\n"+ACTIVE_1+"\n"+ACTIVE_2);
+		this.isHealer = vocation.isHealer();
+		
+		if(PASSIVE_1 != null || PASSIVE_2 != null)
+		{
+			if(ACTIVE_1 != null || ACTIVE_2 != null) canAttackWithPotions  = true;
+			canUsePotions  = true;
+		}
+		if(S_PASSIVE_1 != null || S_PASSIVE_2 != null || S_ACTIVE_1 != null || S_ACTIVE_2 != null) isMagic  = true;
+		
+		//Reset equipment for next guy
+		vocation.setEquipment();
+		//System.out.println("Magic: "+isMagic);
 		//System.out.println(this.getHeldItem(EnumHand.MAIN_HAND).getDisplayName()+" "+vocation.getWeapon().getUnlocalizedName());
 	}
 	
@@ -1116,26 +1337,178 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
 		else skin = race.getRandomSkinF(this.vocation);
 	}*/
 	
+	public void attackWithThrown(EntityLivingBase target, float distanceFactor, ItemWeaponThrowable thrown)
+	{
+		double d0 = target.posY + (double)target.getEyeHeight() - 1.100000023841858D;
+        double d1 = target.posX + target.motionX - this.posX;
+        double d2 = d0 - this.posY;
+        double d3 = target.posZ + target.motionZ - this.posZ;
+        float f = MathHelper.sqrt(d1 * d1 + d3 * d3);
+            
+	    EntityWeaponThrowable entitypotion = new EntityWeaponThrowable(world, this, thrown.getWeapon(), 0);//EntityPotion(this.world, this, PotionUtils.addPotionToItemStack(new ItemStack(Items.SPLASH_POTION), potiontype));
+	    entitypotion.rotationPitch -= -20.0F;
+	    entitypotion.shoot(d1, d2 + (double)(f * 0.2F), d3, 0.75F, 8.0F);
+	    this.world.playSound((EntityPlayer)null, this.posX, this.posY, this.posZ, SoundEvents.ENTITY_WITCH_THROW, this.getSoundCategory(), 1.0F, 0.8F + this.rand.nextFloat() * 0.4F);
+	    this.world.spawnEntity(entitypotion);
+		
+	}
+	
 	@Override
 	public void attackEntityWithRangedAttack(EntityLivingBase target, float distanceFactor) {
-		if (this.world != null && !this.world.isRemote)
-        {
-            ItemStack itemstack = this.getHeldItemMainhand();
+		if(!this.world.isRemote)
+			if (this.world != null)
+	        {
+	            ItemStack itemstack = this.getHeldItemMainhand();
+	
+	            if (itemstack.getItem() == Items.BOW)
+	            {
+	                this.attackWithBow(target, distanceFactor);
+	            }
+	        }
+		
+			if (!this.isDrinkingPotion() && this.canAttackWithPotions)
+	        {
+	            double d0 = target.posY + (double)target.getEyeHeight() - 1.100000023841858D;
+	            double d1 = target.posX + target.motionX - this.posX;
+	            double d2 = d0 - this.posY;
+	            double d3 = target.posZ + target.motionZ - this.posZ;
+	            float f = MathHelper.sqrt(d1 * d1 + d3 * d3);
+	            PotionType potiontype = ACTIVE_1;
+	            
+	            if(world.rand.nextInt(100) < 50 && ACTIVE_2 != null) potiontype = ACTIVE_2;
 
-            if (itemstack.getItem() == Items.BOW)
+	            boolean undeadEffective = false;
+	            boolean spiderEffective = false;
+	            boolean targetUndead = target.isEntityUndead();
+	            boolean targetSpider = target.getCreatureAttribute() == EnumCreatureAttribute.ARTHROPOD;
+	            for (PotionEffect potioneffect : potiontype.getEffects())
+	            {
+	            	if(targetUndead && (potioneffect.getPotion() == MobEffects.INSTANT_HEALTH)) undeadEffective = true;
+	            	else if(targetSpider && (potioneffect.getPotion() != MobEffects.POISON)) spiderEffective = true;
+	            }
+	            
+	            if ((targetUndead && !undeadEffective) || (targetSpider && !spiderEffective))
+	            {
+	            	this.tasks.addTask(1, new EntityAIAvoidEntity(this, target.getClass(), 8.0F, 0.6D, 0.6D));
+	            	return;
+	            }
+	           
+	            if(potiontype != null)
+	            {
+		            EntityPotion entitypotion = new EntityPotion(this.world, this, PotionUtils.addPotionToItemStack(new ItemStack(Items.SPLASH_POTION), potiontype));
+		            entitypotion.rotationPitch -= -20.0F;
+		            entitypotion.shoot(d1, d2 + (double)(f * 0.2F), d3, 0.75F, 8.0F);
+		            this.world.playSound((EntityPlayer)null, this.posX, this.posY, this.posZ, SoundEvents.ENTITY_WITCH_THROW, this.getSoundCategory(), 1.0F, 0.8F + this.rand.nextFloat() * 0.4F);
+		            this.world.spawnEntity(entitypotion);
+	            }
+	        }
+		}
+		
+	public void drinkPotion()
+	{
+		if (!this.world.isRemote && this.canUsePotions)
+        {
+        	//this.setHeldItem(EnumHand.MAIN_HAND, new ItemStack(Items.POTIONITEM));
+            if (this.isDrinkingPotion())
             {
-                this.attackWithBow(target, distanceFactor);
+                if (this.attackTimer-- <= 0)
+                {
+                    this.setAggressive(false);
+                    ItemStack itemstack = this.getHeldItemMainhand();
+                    this.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, held);
+
+                    if (itemstack.getItem() == Items.POTIONITEM)
+                    {
+                        List<PotionEffect> list = PotionUtils.getEffectsFromStack(itemstack);
+
+                        if (list != null)
+                        {
+                            for (PotionEffect potioneffect : list)
+                            {
+                                this.addPotionEffect(new PotionEffect(potioneffect));
+                            }
+                        }
+                    }
+
+                    this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).removeModifier(MODIFIER);
+                    coolDownDrinking = 160 / this.vocation.getRank();
+                }
+            }
+            else 
+            {
+            	if(((this.getHealth() < this.getMaxHealth() && !this.inCombat()) || this.getHealth() <= this.getMaxHealth()/4) && coolDownDrinking <= 0)
+            	{
+	                PotionType potiontype = PASSIVE_1;
+	                
+	                if(this.rand.nextInt(100) < 50 && PASSIVE_2 != null) potiontype = PASSIVE_2;// && !this.isPotionActive(MobEffects.REGENERATION))
+	               
+	                if(potiontype != null)
+	                {
+	                	held = this.getItemStackFromSlot(EntityEquipmentSlot.MAINHAND);
+	                	
+	                	this.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), potiontype));
+		                this.attackTimer = this.getHeldItemMainhand().getMaxItemUseDuration();
+		                this.setAggressive(true);
+		                this.world.playSound((EntityPlayer)null, this.posX, this.posY, this.posZ, SoundEvents.ENTITY_WITCH_DRINK, this.getSoundCategory(), 1.0F, 0.8F + this.rand.nextFloat() * 0.4F);
+		                IAttributeInstance iattributeinstance = this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED);
+		                iattributeinstance.removeModifier(MODIFIER);
+		                iattributeinstance.applyModifier(MODIFIER);
+	                }
+            	}
+            	else if(coolDownDrinking > 0)
+            	{
+            		coolDownDrinking--;
+            	}
+            }
+
+            if (this.rand.nextFloat() < 7.5E-4F)
+            {
+                this.world.setEntityState(this, (byte)15);
             }
         }
-		
 	}
+	
+	public boolean inCombat()
+	{
+		return (this.getAttackingEntity() != null || this.getAttackTarget() != null);
+	}
+	
+	@SideOnly(Side.CLIENT)
+	public boolean isBlocking()
+	{
+		return ((Boolean)this.dataManager.get(BLOCKING)).booleanValue();
+	}
+
+	@SideOnly(Side.CLIENT)
+    public boolean isSwingingArms()
+    {
+        return ((Boolean)this.dataManager.get(SWINGING_ARMS)).booleanValue();
+    }
+	
+	@Override
+	public boolean isActiveItemStackBlocking()
+    {
+        if (this.isBlocking())
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 
 	@Override
-	public void setSwingingArms(boolean swingingArms) {
-		// TODO Auto-generated method stub
-		
+    public void setSwingingArms(boolean swingingArms)
+    {
+		//System.out.println("Set swinging!");
+        this.dataManager.set(SWINGING_ARMS, Boolean.valueOf(swingingArms));
+    }
+	
+	public void setBlocking(boolean b) {
+	      this.dataManager.set(BLOCKING, Boolean.valueOf(b));
 	}
-
+	
 	@Override
 	public void setMaster(EntityLivingBase player) {
 		// TODO Auto-generated method stub
@@ -1173,7 +1546,7 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
     	this.lastName = NameGenerator.generateRandomName(rand, race);
     }
     
-    protected String getTitle()
+    public String getTitle()
     {
     	return this.firstName+" - "+this.race.getName()+" "+this.vocation.getName();
     }
@@ -1208,8 +1581,6 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
 		DamageSource newSrc = handleInWall(damageSrc);
 		float damage = damageAmount;
 		if(newSrc == null) return;
-		//Placeholder until I figure the shield thing out
-		if(newSrc.getImmediateSource() instanceof EntityArrow) damage /= 2; 
 		super.damageEntity(newSrc, damage);
     }
 	
@@ -1271,7 +1642,7 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
 		this.kills  += i;
 	}
 
-	public int getSupply() {
+	/*public int getSupply() {
 		// TODO Auto-generated method stub
 		return supply;
 	}
@@ -1279,19 +1650,11 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
 	public void reSupply(int i) {
 		// TODO Auto-generated method stub
 		supply += i;
-	}
+	}*/
 
 	public int getKills() {
 		// TODO Auto-generated method stub
 		return kills;
-	}
-
-	public int getVassalsKilled() {
-		return vassalsKilled;
-	}
-
-	public void setVassalsKilled(int vassalsKilled) {
-		this.vassalsKilled = vassalsKilled;
 	}
 
 	public void setKills(int kills) {
@@ -1317,5 +1680,205 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
     {
         return dropLoot ;
     }
+	
+	protected void dropEquipment(boolean wasRecentlyHit, int lootingModifier)
+    {
+		if(!world.isRemote)
+		{
+			//System.out.println("Dropping");
+	        for (EntityEquipmentSlot entityequipmentslot : EntityEquipmentSlot.values())
+	        {
+	            ItemStack itemstack = this.getItemStackFromSlot(entityequipmentslot);
+	
+	            if (!itemstack.isEmpty() && !EnchantmentHelper.hasVanishingCurse(itemstack) && this.rand.nextInt(100) < 25)
+	            {
+	                if (itemstack.isItemStackDamageable())
+	                {
+	                    itemstack.setItemDamage(itemstack.getMaxDamage() - this.rand.nextInt(1 + this.rand.nextInt(Math.max(itemstack.getMaxDamage() - 3, 1))));
+	                }
+	
+	                this.entityDropItem(itemstack, 0.0F);
+	            }
+	        }
+	        
+	        int count = rand.nextInt(5);
+	        
+	        for(int i = 0; i < count; i++)
+	        {
+	        	ItemStack itemstack = new ItemStack(Items.EMERALD);
+	        	this.entityDropItem(itemstack, 0.0F);
+	        }
+		}
+    }
 
+	public void healEntityWithRangedAttack(EntityLivingBase target, float lvt_5_1_) {
+		if(coolDown > 0)
+		{
+			coolDown--;
+		}
+		else
+		{
+			 if (!this.isDrinkingPotion())
+		        {
+		            double d0 = target.posY + (double)target.getEyeHeight() - 1.100000023841858D;
+		            double d1 = target.posX + target.motionX - this.posX;
+		            double d2 = d0 - this.posY;
+		            double d3 = target.posZ + target.motionZ - this.posZ;
+		            float f = MathHelper.sqrt(d1 * d1 + d3 * d3);
+		            PotionType potiontype = PASSIVE_1;
+		            
+		            if(world.rand.nextInt(100) <= 50) potiontype = PASSIVE_2;
+		            
+		            EntityPotion entitypotion = new EntityPotion(this.world, this, PotionUtils.addPotionToItemStack(new ItemStack(Items.SPLASH_POTION), potiontype));
+		            entitypotion.rotationPitch -= -20.0F;
+		            entitypotion.shoot(d1, d2 + (double)(f * 0.2F), d3, 0.75F, 8.0F);
+		            this.world.playSound((EntityPlayer)null, this.posX, this.posY, this.posZ, SoundEvents.ENTITY_WITCH_THROW, this.getSoundCategory(), 1.0F, 0.8F + this.rand.nextFloat() * 0.4F);
+		            this.world.spawnEntity(entitypotion);
+
+	                coolDown = 10;
+		        }
+			
+		}
+	}
+	
+	/**
+     * Reduces damage, depending on potions
+     */
+    protected float applyPotionDamageCalculations(DamageSource source, float damage)
+    {
+        damage = super.applyPotionDamageCalculations(source, damage);
+
+        if (source.getTrueSource() == this)
+        {
+            damage = 0.0F;
+        }
+
+        if (source.isMagicDamage())
+        {
+            damage = (float)((double)damage * 0.15D);
+        }
+
+        return damage;
+    }
+    
+    @SideOnly(Side.CLIENT)
+    public void handleStatusUpdate(byte id)
+    {
+        if (id == 15)
+        {
+            for (int i = 0; i < this.rand.nextInt(35) + 10; ++i)
+            {
+                if(this.isMagic ) this.world.spawnParticle(EnumParticleTypes.SPELL_WITCH, this.posX + this.rand.nextGaussian() * 0.12999999523162842D, this.getEntityBoundingBox().maxY + 0.5D + this.rand.nextGaussian() * 0.12999999523162842D, this.posZ + this.rand.nextGaussian() * 0.12999999523162842D, 0.0D, 0.0D, 0.0D, new int[0]);
+            }
+        }
+        else
+        {
+            super.handleStatusUpdate(id);
+        }
+    }
+    
+    public void setAggressive(boolean aggressive)
+    {
+        this.getDataManager().set(IS_AGGRESSIVE, Boolean.valueOf(aggressive));
+    }
+
+    public boolean isDrinkingPotion()
+    {
+        return ((Boolean)this.getDataManager().get(IS_AGGRESSIVE)).booleanValue();
+    }
+
+	public EntityLivingBase getHostileEntity() 
+	{
+		if(this.getAttackTarget() != null)
+		{
+			return this.getAttackTarget();
+		}
+		else if(this.getAttackingEntity() != null)
+		{
+			return this.getAttackingEntity();
+		}
+		else 
+		{
+			return null;
+		}
+	}
+
+	public void attackEntityWithMagicAttack(EntityLivingBase attackTarget, float f1) 
+	{
+		//System.out.println("Attacking");
+		if(!world.isRemote)
+		{
+			Spell usedSpell = S_ACTIVE_1;
+			
+			if(S_ACTIVE_2 !=  null && world.rand.nextInt(100) < 50) usedSpell = S_ACTIVE_2;
+			
+			if(usedSpell != null)
+			{
+				usedSpell.execute(this);
+			}
+		
+		}
+	}
+
+	public void setLifespan(int lifespan) {
+		this.lifespan  = lifespan;
+		this.hasLifespan = true;
+	}
+
+	/*public boolean isRiding() {
+		return isRiding;
+	}*/
+
+	public void setRidingHorse(AbstractHorse horse) {
+		if(!this.world.isRemote)
+		{
+	    	this.horse = horse;
+	        this.horse.setPosition((double)this.posX, (double)this.posY, (double)this.posZ);    
+			this.horse.setHorseTamed(true);
+			this.horse.setGrowingAge(0);
+			this.horse.enablePersistence();
+			
+			if(this.horse instanceof EntityHorse)
+			{
+				EntityHorse armorHorse = (EntityHorse)this.horse;
+				Item armor = this.vocation.getHorseArmor();
+				armorHorse.setHorseArmorStack(new ItemStack(armor));
+			}
+			
+	    	this.startRiding(this.horse);
+		}
+	}
+
+	public AttributeFaction getFaction() {
+		return faction;
+	}
+
+	public void setFaction(AttributeFaction faction) {
+		this.faction = faction;
+	}
+
+	public void setRuler(EntityHumanVillager ruler2) {
+		if(!this.world.isRemote)
+		{
+			this.liege = ruler2;
+			this.faction = ruler2.getFaction();
+			//System.out.println(this.getTitle()+" Joined Faction: "+this.faction.getTitleName());
+		}
+		//this.faction.addMember(this);
+	}
+
+	public boolean isRuler() {
+		// TODO Auto-generated method stub
+		return ruler;
+	}
+
+	public ItemWeaponThrowable getThrownWeapon() {
+		return thrownWeapon;
+	}
+
+	public void setThrownWeapon(ItemWeaponThrowable thrownWeapon) {
+		this.thrownWeapon = thrownWeapon;
+	}
+	
+	
 }

@@ -1,0 +1,15 @@
+package net.theexceptionist.coherentvillages.main.entity.attributes;
+
+public abstract class Spell {
+	public static final int SPELL_TYPE_ATTACK = 0;
+	public static final int SPELL_TYPE_SUMMON = 1;
+	public static final int SPELL_TYPE_WEATHER = 2;
+	public static final int SPELL_TYPE_TRANSMUTE = 3;
+	
+	protected String name;
+	protected int type;
+	
+	public abstract void execute();
+	
+	
+}
