@@ -2,6 +2,7 @@ entity.human_villager.name=Human Villager
 entity.warg.name=Warg
 entity.bjornserker.name=Bjornserker
 entity.wraith.name=Wraith
+entity.lemure.name=Lemure
 
 tile.firewood.name=Fire Wood
 
@@ -12,7 +13,14 @@ item.barbarian_chestplate.name=Nord Mail Chestplate
 item.barbarian_leggings.name=Nord Mail Greaves
 item.barbarian_boots.name=Nord Mail Boots
 
-item.nord_shield.name=Nord Round Shield
+item.nord_shield_0.name=Nord Round Shield
+item.nord_shield_1.name=Nord Round Shield
+item.nord_shield_2.name=Nord Round Shield
+item.nord_shield_3.name=Nord Round Shield
+item.nord_shield_4.name=Nord Round Shield
+item.nord_shield_5.name=Nord Round Shield
+
+item.roman_shield.name=Roman Shield
 
 item.roman_sword.name=Latin Gladius
 item.spear.name=Spear

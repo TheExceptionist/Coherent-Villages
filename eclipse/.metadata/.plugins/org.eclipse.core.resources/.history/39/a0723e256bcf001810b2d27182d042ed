@@ -1,7 +1,0 @@
-package net.theexceptionist.coherentvillages.main.entity;
-
-import net.minecraft.client.model.ModelBase;
-
-public class ModelWarg extends ModelBase {
-
-}

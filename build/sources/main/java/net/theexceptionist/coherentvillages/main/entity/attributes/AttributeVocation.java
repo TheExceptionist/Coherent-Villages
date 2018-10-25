@@ -27,7 +27,9 @@ public class AttributeVocation {
 	public final static int CLASS_MERCENARY = 7;
 	public final static int CLASS_OVERRIDE_NO_ARMOR = 8;
 	
-	public final static int NUM_CLASSES = 8;
+	public final static int CLASS_HYBRID_MAGE_SOLDER = 9;
+	
+	public final static int NUM_CLASSES = 10;
 	
 	protected final int type;
 	protected final int rank;
@@ -97,6 +99,8 @@ public class AttributeVocation {
 	private int horseArmorChance = 0;
 
 	private Random rand = null;
+
+	private boolean alwaysHorse = false;
 	//protected Spell[] spells
 	//protected PotionType[] potions
 	public static ArrayList<AttributeVocation> jobs = new ArrayList<AttributeVocation>();
@@ -152,6 +156,22 @@ public class AttributeVocation {
 		this.canHeal = healer;
 		this.rand = rand;
 		this.setEquipment();
+	}
+
+	public AttributeVocation(String string, int classBandit, int i, int j, AttributeRace attributeRace, boolean b,
+			boolean c, int k, int p, final int armorChance, final boolean alwaysBlock, Random rand, boolean healer, boolean alwaysHorse) {
+		this(string,  classBandit, i, j, attributeRace, b, c, k, p, armorChance, alwaysBlock, rand, healer);
+		this.alwaysHorse = alwaysHorse;
+	}
+
+	
+	
+	public boolean isAlwaysHorse() {
+		return alwaysHorse;
+	}
+
+	public void setAlwaysHorse(boolean alwaysHorse) {
+		this.alwaysHorse = alwaysHorse;
 	}
 
 	public void setUpgradeTree(AttributeVocation left, AttributeVocation right)
@@ -213,7 +233,7 @@ public class AttributeVocation {
 				//System.out.println(this.getName()+" Uses Shield: "+usesShield);
 				if(usesShield && rand.nextInt(100) < shieldChance) 
 				{
-					shield = this.originRace.shield.get(0);
+					shield = this.originRace.shield.get(rand.nextInt(this.originRace.shield.size()));
 					//System.out.println("Shield: "+shield);
 				}
 				
@@ -339,6 +359,30 @@ public class AttributeVocation {
 					//potions[POTION_SLOT_ACTIVE_1]  = this.originRace.potions.get(AttributeRace.POTION_3);
 
 				//}
+			}
+			break;
+			case CLASS_HYBRID_MAGE_SOLDER:
+			{
+				helmet = this.originRace.armor.get(head);
+				chestplate = this.originRace.armor.get(chest);
+				leggings = this.originRace.armor.get(legs);
+				boots = this.originRace.armor.get(feet);
+				//spells = this.originRace.spells.get(rank);
+				meleeWeapon = this.originRace.meleeWeapons.get(rank - 1);
+				
+				if(canRide && rand.nextInt(100) < horseArmorChance)
+				{
+					horseArmor = this.originRace.horseArmors.get(rank - 1);
+				}
+				//if(rand != null && rand.nextInt(100) < potionChance )
+				//{
+				potions[0] = this.originRace.potions.get(AttributeRace.POTION_1);
+				//}
+				for(int i = 0; i < spells.length; i++)
+				{
+					//System.out.println("Spell: "+this.originRace.spells.get(i + ((rank - 1) * 4)));
+					spells[i] = this.originRace.spells.get(i + ((rank - 1) * 4));
+				}
 			}
 			break;
 			case CLASS_OVERRIDE_NO_ARMOR:

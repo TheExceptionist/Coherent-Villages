@@ -1,0 +1,96 @@
+---- Minecraft Crash Report ----
+// Uh... Did I do that?
+
+Time: 10/25/18 5:18 PM
+Description: Exception ticking world
+
+java.lang.IllegalArgumentException: Cannot set property PropertyInteger{name=age, clazz=class java.lang.Integer, values=[0, 1, 2, 3]} to 7 on block minecraft:beetroots, it is not an allowed value
+	at net.minecraft.block.state.BlockStateContainer$StateImplementation.withProperty(BlockStateContainer.java:233)
+	at net.minecraft.block.BlockCrops.withAge(BlockCrops.java:64)
+	at net.minecraft.block.BlockCrops.getStateFromMeta(BlockCrops.java:266)
+	at net.theexceptionist.coherentvillages.worldgen.villages.FrankStructurePieces$Field2.addComponentParts(FrankStructurePieces.java:573)
+	at net.minecraft.world.gen.structure.StructureStart.generateStructure(StructureStart.java:51)
+	at net.minecraft.world.gen.structure.MapGenStructure.generateStructure(MapGenStructure.java:102)
+	at net.minecraft.world.gen.ChunkGeneratorOverworld.populate(ChunkGeneratorOverworld.java:412)
+	at net.minecraft.world.chunk.Chunk.populate(Chunk.java:1092)
+	at net.minecraft.world.chunk.Chunk.populate(Chunk.java:1053)
+	at net.minecraft.world.gen.ChunkProviderServer.provideChunk(ChunkProviderServer.java:169)
+	at net.minecraft.server.management.PlayerChunkMapEntry.providePlayerChunk(PlayerChunkMapEntry.java:130)
+	at net.minecraft.server.management.PlayerChunkMap.tick(PlayerChunkMap.java:183)
+	at net.minecraft.world.WorldServer.tick(WorldServer.java:236)
+	at net.minecraft.server.MinecraftServer.updateTimeLightAndEntities(MinecraftServer.java:831)
+	at net.minecraft.server.MinecraftServer.tick(MinecraftServer.java:743)
+	at net.minecraft.server.integrated.IntegratedServer.tick(IntegratedServer.java:192)
+	at net.minecraft.server.MinecraftServer.run(MinecraftServer.java:592)
+	at java.lang.Thread.run(Thread.java:748)
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Thread: Server thread
+Stacktrace:
+	at net.minecraft.block.state.BlockStateContainer$StateImplementation.withProperty(BlockStateContainer.java:233)
+	at net.minecraft.block.BlockCrops.withAge(BlockCrops.java:64)
+	at net.minecraft.block.BlockCrops.getStateFromMeta(BlockCrops.java:266)
+	at net.theexceptionist.coherentvillages.worldgen.villages.FrankStructurePieces$Field2.addComponentParts(FrankStructurePieces.java:573)
+	at net.minecraft.world.gen.structure.StructureStart.generateStructure(StructureStart.java:51)
+	at net.minecraft.world.gen.structure.MapGenStructure.generateStructure(MapGenStructure.java:102)
+	at net.minecraft.world.gen.ChunkGeneratorOverworld.populate(ChunkGeneratorOverworld.java:412)
+	at net.minecraft.world.chunk.Chunk.populate(Chunk.java:1092)
+	at net.minecraft.world.chunk.Chunk.populate(Chunk.java:1053)
+	at net.minecraft.world.gen.ChunkProviderServer.provideChunk(ChunkProviderServer.java:169)
+	at net.minecraft.server.management.PlayerChunkMapEntry.providePlayerChunk(PlayerChunkMapEntry.java:130)
+	at net.minecraft.server.management.PlayerChunkMap.tick(PlayerChunkMap.java:183)
+	at net.minecraft.world.WorldServer.tick(WorldServer.java:236)
+
+-- Affected level --
+Details:
+	Level name: Screenshot World (DON'T DELETE)
+	All players: 1 total; [EntityPlayerMP['Player390'/190, l='Screenshot World (DON'T DELETE)', x=-66.36, y=101.18, z=760.73]]
+	Chunk stats: ServerChunkCache: 862 Drop: 0
+	Level seed: -5641544162712021789
+	Level generator: ID 00 - default, ver 1. Features enabled: true
+	Level generator options: 
+	Level spawn location: World: (-176,64,256), Chunk: (at 0,4,0 in -11,16; contains blocks -176,0,256 to -161,255,271), Region: (-1,0; contains chunks -32,0 to -1,31, blocks -512,0,0 to -1,255,511)
+	Level time: 19444 game time, 1137 day time
+	Level dimension: 0
+	Level storage version: 0x04ABD - Anvil
+	Level weather: Rain time: 83829 (now: false), thunder time: 555 (now: false)
+	Level game mode: Game mode: creative (ID 1). Hardcore: false. Cheats: true
+Stacktrace:
+	at net.minecraft.server.MinecraftServer.updateTimeLightAndEntities(MinecraftServer.java:831)
+	at net.minecraft.server.MinecraftServer.tick(MinecraftServer.java:743)
+	at net.minecraft.server.integrated.IntegratedServer.tick(IntegratedServer.java:192)
+	at net.minecraft.server.MinecraftServer.run(MinecraftServer.java:592)
+	at java.lang.Thread.run(Thread.java:748)
+
+-- System Details --
+Details:
+	Minecraft Version: 1.12.2
+	Operating System: Mac OS X (x86_64) version 10.13.6
+	Java Version: 1.8.0_144, Oracle Corporation
+	Java VM Version: Java HotSpot(TM) 64-Bit Server VM (mixed mode), Oracle Corporation
+	Memory: 526109528 bytes (501 MB) / 1078460416 bytes (1028 MB) up to 1908932608 bytes (1820 MB)
+	JVM Flags: 0 total; 
+	IntCache: cache: 0, tcache: 0, allocated: 13, tallocated: 95
+	FML: MCP 9.42 Powered by Forge 14.23.4.2757 7 mods loaded, 7 mods active
+	States: 'U' = Unloaded 'L' = Loaded 'C' = Constructed 'H' = Pre-initialized 'I' = Initialized 'J' = Post-initialized 'A' = Available 'D' = Disabled 'E' = Errored
+
+	| State     | ID               | Version      | Source                           | Signature |
+	|:--------- |:---------------- |:------------ |:-------------------------------- |:--------- |
+	| UCHIJAAAA | minecraft        | 1.12.2       | minecraft.jar                    | None      |
+	| UCHIJAAAA | mcp              | 9.42         | minecraft.jar                    | None      |
+	| UCHIJAAAA | FML              | 8.0.99.99    | forgeSrc-1.12.2-14.23.4.2757.jar | None      |
+	| UCHIJAAAA | forge            | 14.23.4.2757 | forgeSrc-1.12.2-14.23.4.2757.jar | None      |
+	| UCHIJAAAA | coherentvillages | v0.0.2.6     | modid-1.0.jar                    | None      |
+	| UCHIJAAAA | journeymap       | 1.12.2-5.5.2 | journeymap-1.12.2-5.5.2.jar      | None      |
+	| UCHIJAAAA | torohealthmod    | 1.12.2-11    | torohealth-1.12.2-11.jar         | None      |
+
+	Loaded coremods (and transformers): 
+	GL info: ~~ERROR~~ RuntimeException: No OpenGL context found in the current thread.
+	Profiler Position: N/A (disabled)
+	Player Count: 1 / 8; [EntityPlayerMP['Player390'/190, l='Screenshot World (DON'T DELETE)', x=-66.36, y=101.18, z=760.73]]
+	Type: Integrated Server (map_client.txt)
+	Is Modded: Definitely; Client brand changed to 'fml,forge'

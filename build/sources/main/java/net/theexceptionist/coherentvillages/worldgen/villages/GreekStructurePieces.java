@@ -747,7 +747,7 @@ public class GreekStructurePieces
 
                 this.placeStructureBase(worldIn, structureBoundingBoxIn, randomIn, LatinBuildingsArray.bathhouse_1, LatinBuildingsArray.BATHHOUSE_LENGTH, LatinBuildingsArray.BATHHOUSE_HEIGHT, LatinBuildingsArray.BATHHOUSE_WIDTH);
 
-                this.spawnVillagers(worldIn, structureBoundingBoxIn, 2, 1, 1, 1, AttributeVocation.CLASS_ALCHEMIST, randomIn.nextInt(2), false);
+                this.spawnVillagers(worldIn, structureBoundingBoxIn, 2, 1, 1, 1, AttributeVocation.CLASS_MAGE, randomIn.nextInt(2), false);
                 return true;
             }
 

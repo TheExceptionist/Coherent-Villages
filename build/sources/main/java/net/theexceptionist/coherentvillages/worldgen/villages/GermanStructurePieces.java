@@ -12,6 +12,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockCrops;
 import net.minecraft.block.BlockDoor;
 import net.minecraft.block.BlockLog;
+import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.BlockLog.EnumAxis;
 import net.minecraft.block.BlockQuartz;
 import net.minecraft.block.BlockStairs;
@@ -56,15 +57,15 @@ public class GermanStructurePieces
         MapGenStructureIO.registerStructureComponent(GermanStructurePieces.Field1.class, "ViDF");//**
         MapGenStructureIO.registerStructureComponent(GermanStructurePieces.Field2.class, "ViF");//**
         MapGenStructureIO.registerStructureComponent(GermanStructurePieces.Torch.class, "ViL");//**
-        MapGenStructureIO.registerStructureComponent(GermanStructurePieces.Banner.class, "ViB");
+        MapGenStructureIO.registerStructureComponent(GermanStructurePieces.Banner.class, "ViB");//**
         MapGenStructureIO.registerStructureComponent(GermanStructurePieces.GuardHouse.class, "ViGH");//**
-        MapGenStructureIO.registerStructureComponent(GermanStructurePieces.Shrine.class, "ViSH");//
+        MapGenStructureIO.registerStructureComponent(GermanStructurePieces.Shrine.class, "ViSH");//**
         MapGenStructureIO.registerStructureComponent(GermanStructurePieces.SmallHut.class, "ViSmH");//**
-        MapGenStructureIO.registerStructureComponent(GermanStructurePieces.ConsulHouse.class, "ViST");//**
-        MapGenStructureIO.registerStructureComponent(GermanStructurePieces.BathHouse.class, "ViS");//**
+        MapGenStructureIO.registerStructureComponent(GermanStructurePieces.Cathedral.class, "ViST");//**
+        MapGenStructureIO.registerStructureComponent(GermanStructurePieces.Library.class, "ViS");//**
         MapGenStructureIO.registerStructureComponent(GermanStructurePieces.Start.class, "ViStart");//**
         MapGenStructureIO.registerStructureComponent(GermanStructurePieces.Path.class, "ViSR");//**
-        MapGenStructureIO.registerStructureComponent(GermanStructurePieces.TallHouse.class, "ViLH");//**
+        MapGenStructureIO.registerStructureComponent(GermanStructurePieces.House.class, "ViLH");//**
         MapGenStructureIO.registerStructureComponent(GermanStructurePieces.Well.class, "ViW");//**
     }
 
@@ -72,13 +73,13 @@ public class GermanStructurePieces
     {
         List<GermanStructurePieces.PieceWeight> list = Lists.<GermanStructurePieces.PieceWeight>newArrayList();
         list.add(new GermanStructurePieces.PieceWeight(GermanStructurePieces.Shrine.class, 4, MathHelper.getInt(random, 2 + size, 4 + size * 2)));
-        list.add(new GermanStructurePieces.PieceWeight(GermanStructurePieces.ConsulHouse.class, 20, MathHelper.getInt(random, 0 + size, 1 + size)));
+        list.add(new GermanStructurePieces.PieceWeight(GermanStructurePieces.Cathedral.class, 20, MathHelper.getInt(random, 0 + size, 1 + size)));
         list.add(new GermanStructurePieces.PieceWeight(GermanStructurePieces.ArcherHut.class, 20, MathHelper.getInt(random, 0 + size, 2 + size)));
         list.add(new GermanStructurePieces.PieceWeight(GermanStructurePieces.SmallHut.class, 3, MathHelper.getInt(random, 2 + size, 5 + size * 3)));
-        list.add(new GermanStructurePieces.PieceWeight(GermanStructurePieces.TallHouse.class, 15, MathHelper.getInt(random, 0 + size, 2 + size)));
+        list.add(new GermanStructurePieces.PieceWeight(GermanStructurePieces.House.class, 15, MathHelper.getInt(random, 0 + size, 2 + size)));
         list.add(new GermanStructurePieces.PieceWeight(GermanStructurePieces.Field1.class, 3, MathHelper.getInt(random, 1 + size, 4 + size)));
         list.add(new GermanStructurePieces.PieceWeight(GermanStructurePieces.Field2.class, 3, MathHelper.getInt(random, 2 + size, 4 + size * 2)));
-        list.add(new GermanStructurePieces.PieceWeight(GermanStructurePieces.BathHouse.class, 15, MathHelper.getInt(random, 0, 1 + size)));
+        list.add(new GermanStructurePieces.PieceWeight(GermanStructurePieces.Library.class, 15, MathHelper.getInt(random, 0, 1 + size)));
         list.add(new GermanStructurePieces.PieceWeight(GermanStructurePieces.GuardHouse.class, 8, MathHelper.getInt(random, 0 + size, 3 + size * 2)));
         Iterator<GermanStructurePieces.PieceWeight> iterator = list.iterator();
 
@@ -120,9 +121,9 @@ public class GermanStructurePieces
         {
             NordStructurePieces$village = GermanStructurePieces.Shrine.createPiece(start, structureComponents, rand, structureMinX, structureMinY, structureMinZ, facing, componentType);
         }
-        else if (oclass == GermanStructurePieces.ConsulHouse.class)
+        else if (oclass == GermanStructurePieces.Cathedral.class)
         {
-            NordStructurePieces$village = GermanStructurePieces.ConsulHouse.createPiece(start, structureComponents, rand, structureMinX, structureMinY, structureMinZ, facing, componentType);
+            NordStructurePieces$village = GermanStructurePieces.Cathedral.createPiece(start, structureComponents, rand, structureMinX, structureMinY, structureMinZ, facing, componentType);
         }
         else if (oclass == GermanStructurePieces.ArcherHut.class)
         {
@@ -144,13 +145,13 @@ public class GermanStructurePieces
         {
             NordStructurePieces$village = GermanStructurePieces.Field2.createPiece(start, structureComponents, rand, structureMinX, structureMinY, structureMinZ, facing, componentType);
         }
-        else if (oclass == GermanStructurePieces.BathHouse.class)
+        else if (oclass == GermanStructurePieces.Library.class)
         {
-            NordStructurePieces$village = GermanStructurePieces.BathHouse.createPiece(start, structureComponents, rand, structureMinX, structureMinY, structureMinZ, facing, componentType);
+            NordStructurePieces$village = GermanStructurePieces.Library.createPiece(start, structureComponents, rand, structureMinX, structureMinY, structureMinZ, facing, componentType);
         }
-        else if (oclass == GermanStructurePieces.TallHouse.class)
+        else if (oclass == GermanStructurePieces.House.class)
         {
-            NordStructurePieces$village = GermanStructurePieces.TallHouse.createPiece(start, structureComponents, rand, structureMinX, structureMinY, structureMinZ, facing, componentType);
+            NordStructurePieces$village = GermanStructurePieces.House.createPiece(start, structureComponents, rand, structureMinX, structureMinY, structureMinZ, facing, componentType);
         }
 
         return NordStructurePieces$village;
@@ -273,13 +274,13 @@ public class GermanStructurePieces
         }
     }
 
-    public static class ConsulHouse extends GermanStructurePieces.Village
+    public static class Cathedral extends GermanStructurePieces.Village
         {
-            public ConsulHouse()
+            public Cathedral()
             {
             }
 
-            public ConsulHouse(GermanStructurePieces.Start start, int type, Random rand, StructureBoundingBox p_i45564_4_, EnumFacing facing)
+            public Cathedral(GermanStructurePieces.Start start, int type, Random rand, StructureBoundingBox p_i45564_4_, EnumFacing facing)
             {
                 super(start, type);
                 this.setCoordBaseMode(facing);
@@ -287,10 +288,10 @@ public class GermanStructurePieces
                 this.boundingBox = p_i45564_4_;
             }
 
-            public static GermanStructurePieces.ConsulHouse createPiece(GermanStructurePieces.Start start, List<StructureComponent> p_175854_1_, Random rand, int p_175854_3_, int p_175854_4_, int p_175854_5_, EnumFacing facing, int p_175854_7_)
+            public static GermanStructurePieces.Cathedral createPiece(GermanStructurePieces.Start start, List<StructureComponent> p_175854_1_, Random rand, int p_175854_3_, int p_175854_4_, int p_175854_5_, EnumFacing facing, int p_175854_7_)
             {
-                StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(p_175854_3_, p_175854_4_, p_175854_5_, 0, 0, 0, LatinBuildingsArray.CONSUL_WIDTH, LatinBuildingsArray.CONSUL_HEIGHT, LatinBuildingsArray.CONSUL_LENGTH, facing);
-                return canVillageGoDeeper(structureboundingbox) && StructureComponent.findIntersecting(p_175854_1_, structureboundingbox) == null ? new GermanStructurePieces.ConsulHouse(start, p_175854_7_, rand, structureboundingbox, facing) : null;
+                StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(p_175854_3_, p_175854_4_, p_175854_5_, 0, 0, 0, GermanBuildingsArray.CATHEDRAL_WIDTH, GermanBuildingsArray.CATHEDRAL_HEIGHT, GermanBuildingsArray.CATHEDRAL_LENGTH, facing);
+                return canVillageGoDeeper(structureboundingbox) && StructureComponent.findIntersecting(p_175854_1_, structureboundingbox) == null ? new GermanStructurePieces.Cathedral(start, p_175854_7_, rand, structureboundingbox, facing) : null;
             }
 
             /**
@@ -308,11 +309,12 @@ public class GermanStructurePieces
                         return true;
                     }
 
-                    this.boundingBox.offset(0, this.averageGroundLvl - this.boundingBox.maxY + LatinBuildingsArray.CONSUL_HEIGHT - 1, 0);
+                    this.boundingBox.offset(0, this.averageGroundLvl - this.boundingBox.maxY + GermanBuildingsArray.CATHEDRAL_HEIGHT - 1, 0);
                 }
-
-                this.placeStructureBase(worldIn, structureBoundingBoxIn, randomIn, LatinBuildingsArray.consul, LatinBuildingsArray.CONSUL_LENGTH, LatinBuildingsArray.CONSUL_HEIGHT, LatinBuildingsArray.CONSUL_WIDTH, front);
-
+                
+                this.placeStructureBase(worldIn, structureBoundingBoxIn, randomIn, GermanBuildingsArray.cathedral, GermanBuildingsArray.CATHEDRAL_WIDTH, GermanBuildingsArray.CATHEDRAL_HEIGHT, GermanBuildingsArray.CATHEDRAL_LENGTH, front);
+                //this.fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 0, 0, GermanBuildingsArray.CATHEDRAL_WIDTH, GermanBuildingsArray.CATHEDRAL_HEIGHT, GermanBuildingsArray.CATHEDRAL_LENGTH, Blocks.COBBLESTONE.getDefaultState(), Blocks.COBBLESTONE.getDefaultState(), true);
+                
                 this.spawnVillagers(worldIn, structureBoundingBoxIn, 2, 1, 2, 1, AttributeVocation.CLASS_MERCENARY, 0, true);
                 return true;
             }
@@ -395,16 +397,12 @@ public class GermanStructurePieces
 
             private Block getRandomCropType(Random rand)
             {
-                switch (rand.nextInt(10))
+                switch (rand.nextInt(5))
                 {
-                    case 0:
                     case 1:
                         return Blocks.CARROTS;
-                    case 2:
                     case 3:
                         return Blocks.POTATOES;
-                    case 4:
-                        return Blocks.BEETROOTS;
                     default:
                         return Blocks.WHEAT;
                 }
@@ -524,16 +522,12 @@ public class GermanStructurePieces
 
             private Block getRandomCropType(Random rand)
             {
-                switch (rand.nextInt(10))
+                switch (rand.nextInt(5))
                 {
-                    case 0:
                     case 1:
                         return Blocks.CARROTS;
-                    case 2:
                     case 3:
                         return Blocks.POTATOES;
-                    case 4:
-                        return Blocks.BEETROOTS;
                     default:
                         return Blocks.WHEAT;
                 }
@@ -615,7 +609,7 @@ public class GermanStructurePieces
 
             public static GermanStructurePieces.GuardHouse createPiece(GermanStructurePieces.Start start, List<StructureComponent> p_175857_1_, Random rand, int p_175857_3_, int p_175857_4_, int p_175857_5_, EnumFacing facing, int p_175857_7_)
             {
-                StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(p_175857_3_, p_175857_4_, p_175857_5_, 0, 0, 0, LatinBuildingsArray.GUARDHOUSE_WIDTH, LatinBuildingsArray.GUARDHOUSE_HEIGHT, LatinBuildingsArray.GUARDHOUSE_LENGTH, facing);
+                StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(p_175857_3_, p_175857_4_, p_175857_5_, 0, 0, 0, GermanBuildingsArray.GUARDHOUSE_WIDTH, GermanBuildingsArray.GUARDHOUSE_HEIGHT, GermanBuildingsArray.GUARDHOUSE_LENGTH, facing);
                 return canVillageGoDeeper(structureboundingbox) && StructureComponent.findIntersecting(p_175857_1_, structureboundingbox) == null ? new GermanStructurePieces.GuardHouse(start, p_175857_7_, rand, structureboundingbox, facing) : null;
             }
 
@@ -634,15 +628,12 @@ public class GermanStructurePieces
                         return true;
                     }
 
-                    this.boundingBox.offset(0, this.averageGroundLvl - this.boundingBox.maxY + LatinBuildingsArray.GUARDHOUSE_HEIGHT, 0);
+                    this.boundingBox.offset(0, this.averageGroundLvl - this.boundingBox.maxY + GermanBuildingsArray.GUARDHOUSE_HEIGHT, 0);
                 }
-                final BlockPos basePos = new BlockPos(this.getXWithOffset(0, 0), this.getYWithOffset(0), this.getZWithOffset(0, 0));
-                final PlacementSettings settings = new PlacementSettings().setRotation(Rotation.NONE);
-                final Template template = worldIn.getSaveHandler().getStructureTemplateManager().getTemplate(worldIn.getMinecraftServer(), GermanBuildingsArray.TEST);
-                template.addBlocksToWorld(worldIn, basePos, settings);
-             
                 
-                this.spawnVillagers(worldIn, structureBoundingBoxIn, 2, 1, 2, 2, AttributeVocation.CLASS_SOLDIER, 0, true);
+                this.placeStructureBase(worldIn, structureBoundingBoxIn, randomIn, GermanBuildingsArray.guardhouse, GermanBuildingsArray.GUARDHOUSE_WIDTH, GermanBuildingsArray.GUARDHOUSE_HEIGHT, GermanBuildingsArray.GUARDHOUSE_WIDTH, front);
+                
+                this.spawnVillagers(worldIn, structureBoundingBoxIn, -1, 1, 2, 2, AttributeVocation.CLASS_SOLDIER, 0, true);
                 return true;
             }
 
@@ -668,7 +659,7 @@ public class GermanStructurePieces
 
             public static GermanStructurePieces.ArcherHut createPiece(GermanStructurePieces.Start start, List<StructureComponent> p_175850_1_, Random rand, int p_175850_3_, int p_175850_4_, int p_175850_5_, EnumFacing facing, int p_175850_7_)
             {
-                StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(p_175850_3_, p_175850_4_, p_175850_5_, 0, 0, 0, LatinBuildingsArray.ARCHERHUT_WIDTH, LatinBuildingsArray.ARCHERHUT_HEIGHT, LatinBuildingsArray.ARCHERHUT_LENGTH, facing);
+                StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(p_175850_3_, p_175850_4_, p_175850_5_, 0, 0, 0, GermanBuildingsArray.ARCHER_WIDTH, GermanBuildingsArray.ARCHER_HEIGHT, GermanBuildingsArray.ARCHER_LENGTH, facing);
                 return canVillageGoDeeper(structureboundingbox) && StructureComponent.findIntersecting(p_175850_1_, structureboundingbox) == null ? new GermanStructurePieces.ArcherHut(start, p_175850_7_, rand, structureboundingbox, facing) : null;
             }
 
@@ -687,10 +678,10 @@ public class GermanStructurePieces
                         return true;
                     }
 
-                    this.boundingBox.offset(0, this.averageGroundLvl - this.boundingBox.maxY + LatinBuildingsArray.ARCHERHUT_HEIGHT - 1, 0);
+                    this.boundingBox.offset(0, this.averageGroundLvl - this.boundingBox.maxY + GermanBuildingsArray.ARCHER_HEIGHT - 1, 0);
                 }
 
-                this.placeStructureBase(worldIn, structureBoundingBoxIn, randomIn, LatinBuildingsArray.archer_hut_1, LatinBuildingsArray.ARCHERHUT_LENGTH, LatinBuildingsArray.ARCHERHUT_HEIGHT, LatinBuildingsArray.ARCHERHUT_WIDTH, front);
+                this.placeStructureBase(worldIn, structureBoundingBoxIn, randomIn, GermanBuildingsArray.archerhouse, GermanBuildingsArray.ARCHER_WIDTH, GermanBuildingsArray.ARCHER_HEIGHT, GermanBuildingsArray.ARCHER_WIDTH, front);
                 this.spawnVillagers(worldIn, structureBoundingBoxIn, 3, 2, -2, 2, AttributeVocation.CLASS_ARCHER, 0, true);
                 return true;
             }
@@ -701,15 +692,15 @@ public class GermanStructurePieces
             }
         }
 
-    public static class BathHouse extends GermanStructurePieces.Village
+    public static class Library extends GermanStructurePieces.Village
         {
             private boolean hasMadeChest;
 
-            public BathHouse()
+            public Library()
             {
             }
 
-            public BathHouse(GermanStructurePieces.Start start, int type, Random rand, StructureBoundingBox p_i45563_4_, EnumFacing facing)
+            public Library(GermanStructurePieces.Start start, int type, Random rand, StructureBoundingBox p_i45563_4_, EnumFacing facing)
             {
                 super(start, type);
                 this.front = facing;
@@ -717,10 +708,10 @@ public class GermanStructurePieces
                 this.boundingBox = p_i45563_4_;
             }
 
-            public static GermanStructurePieces.BathHouse createPiece(GermanStructurePieces.Start start, List<StructureComponent> p_175855_1_, Random rand, int p_175855_3_, int p_175855_4_, int p_175855_5_, EnumFacing facing, int p_175855_7_)
+            public static GermanStructurePieces.Library createPiece(GermanStructurePieces.Start start, List<StructureComponent> p_175855_1_, Random rand, int p_175855_3_, int p_175855_4_, int p_175855_5_, EnumFacing facing, int p_175855_7_)
             {
-                StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(p_175855_3_, p_175855_4_, p_175855_5_, 0, 0, 0, LatinBuildingsArray.BATHHOUSE_WIDTH, LatinBuildingsArray.BATHHOUSE_HEIGHT, LatinBuildingsArray.BATHHOUSE_LENGTH, facing);
-                return canVillageGoDeeper(structureboundingbox) && StructureComponent.findIntersecting(p_175855_1_, structureboundingbox) == null ? new GermanStructurePieces.BathHouse(start, p_175855_7_, rand, structureboundingbox, facing) : null;
+                StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(p_175855_3_, p_175855_4_, p_175855_5_, 0, 0, 0, GermanBuildingsArray.LIBRARY_WIDTH, GermanBuildingsArray.LIBRARY_HEIGHT, GermanBuildingsArray.LIBRARY_LENGTH, facing);
+                return canVillageGoDeeper(structureboundingbox) && StructureComponent.findIntersecting(p_175855_1_, structureboundingbox) == null ? new GermanStructurePieces.Library(start, p_175855_7_, rand, structureboundingbox, facing) : null;
             }
 
             /**
@@ -756,12 +747,12 @@ public class GermanStructurePieces
                         return true;
                     }
 
-                    this.boundingBox.offset(0, this.averageGroundLvl - this.boundingBox.maxY + LatinBuildingsArray.BATHHOUSE_HEIGHT - 1, 0);
+                    this.boundingBox.offset(0, this.averageGroundLvl - this.boundingBox.maxY + GermanBuildingsArray.LIBRARY_HEIGHT - 1, 0);
                 }
 
-                this.placeStructureBase(worldIn, structureBoundingBoxIn, randomIn, LatinBuildingsArray.bathhouse_1, LatinBuildingsArray.BATHHOUSE_LENGTH, LatinBuildingsArray.BATHHOUSE_HEIGHT, LatinBuildingsArray.BATHHOUSE_WIDTH, front);
+                this.placeStructureBase(worldIn, structureBoundingBoxIn, randomIn, GermanBuildingsArray.library, GermanBuildingsArray.LIBRARY_LENGTH, GermanBuildingsArray.LIBRARY_HEIGHT, GermanBuildingsArray.LIBRARY_WIDTH, front);
 
-                this.spawnVillagers(worldIn, structureBoundingBoxIn, 2, 1, 1, 1, AttributeVocation.CLASS_ALCHEMIST, randomIn.nextInt(2), false);
+                this.spawnVillagers(worldIn, structureBoundingBoxIn, 2, 1, 1, 1, AttributeVocation.CLASS_MAGE, randomIn.nextInt(2), false);
                 return true;
             }
 
@@ -771,13 +762,13 @@ public class GermanStructurePieces
             }
         }
 
-    public static class TallHouse extends GermanStructurePieces.Village
+    public static class House extends GermanStructurePieces.Village
         {
-            public TallHouse()
+            public House()
             {
             }
 
-            public TallHouse(GermanStructurePieces.Start start, int type, Random rand, StructureBoundingBox p_i45561_4_, EnumFacing facing)
+            public House(GermanStructurePieces.Start start, int type, Random rand, StructureBoundingBox p_i45561_4_, EnumFacing facing)
             {
                 super(start, type);
                 this.front = facing;
@@ -785,10 +776,10 @@ public class GermanStructurePieces
                 this.boundingBox = p_i45561_4_;
             }
 
-            public static GermanStructurePieces.TallHouse createPiece(GermanStructurePieces.Start start, List<StructureComponent> p_175849_1_, Random rand, int p_175849_3_, int p_175849_4_, int p_175849_5_, EnumFacing facing, int p_175849_7_)
+            public static GermanStructurePieces.House createPiece(GermanStructurePieces.Start start, List<StructureComponent> p_175849_1_, Random rand, int p_175849_3_, int p_175849_4_, int p_175849_5_, EnumFacing facing, int p_175849_7_)
             {
-                StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(p_175849_3_, p_175849_4_, p_175849_5_, 0, 0, 0, LatinBuildingsArray.TALLHOUSE_WIDTH, LatinBuildingsArray.TALLHOUSE_HEIGHT, LatinBuildingsArray.TALLHOUSE_HEIGHT, facing);
-                return canVillageGoDeeper(structureboundingbox) && StructureComponent.findIntersecting(p_175849_1_, structureboundingbox) == null ? new GermanStructurePieces.TallHouse(start, p_175849_7_, rand, structureboundingbox, facing) : null;
+                StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(p_175849_3_, p_175849_4_, p_175849_5_, 0, 0, 0, GermanBuildingsArray.HOUSE_WIDTH, GermanBuildingsArray.HOUSE_HEIGHT, GermanBuildingsArray.HOUSE_LENGTH, facing);
+                return canVillageGoDeeper(structureboundingbox) && StructureComponent.findIntersecting(p_175849_1_, structureboundingbox) == null ? new GermanStructurePieces.House(start, p_175849_7_, rand, structureboundingbox, facing) : null;
             }
 
             /**
@@ -806,10 +797,10 @@ public class GermanStructurePieces
                         return true;
                     }
 
-                    this.boundingBox.offset(0, this.averageGroundLvl - this.boundingBox.maxY + LatinBuildingsArray.TALLHOUSE_HEIGHT - 1, -1);
+                    this.boundingBox.offset(0, this.averageGroundLvl - this.boundingBox.maxY + GermanBuildingsArray.HOUSE_HEIGHT - 1, -1);
                 }
 
-                this.placeStructureBase(worldIn, structureBoundingBoxIn, randomIn, LatinBuildingsArray.tallhouse_0, LatinBuildingsArray.TALLHOUSE_LENGTH, LatinBuildingsArray.TALLHOUSE_HEIGHT, LatinBuildingsArray.TALLHOUSE_WIDTH, front);
+                this.placeStructureBase(worldIn, structureBoundingBoxIn, randomIn, GermanBuildingsArray.house, GermanBuildingsArray.HOUSE_LENGTH, GermanBuildingsArray.HOUSE_HEIGHT, GermanBuildingsArray.HOUSE_WIDTH, front);
                 //this.placeTorch(worldIn, EnumFacing.EAST, 2, 3, 0, structureBoundingBoxIn);
                 //this.placeTorch(worldIn, EnumFacing.WEST, 3, 3, 0, structureBoundingBoxIn);
                 //this.placeTorch(worldIn, EnumFacing.NORTH, 5, 3, 0, structureBoundingBoxIn);
@@ -862,7 +853,7 @@ public class GermanStructurePieces
 
             public static GermanStructurePieces.Shrine createPiece(GermanStructurePieces.Start start, List<StructureComponent> p_175858_1_, Random rand, int p_175858_3_, int p_175858_4_, int p_175858_5_, EnumFacing facing, int p_175858_7_)
             {
-                StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(p_175858_3_, p_175858_4_, p_175858_5_, 0, 0, 0, LatinBuildingsArray.SHRINE_WIDTH, LatinBuildingsArray.SHRINE_HEIGHT, LatinBuildingsArray.SHRINE_LENGTH, facing);
+                StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(p_175858_3_, p_175858_4_, p_175858_5_, 0, 0, 0, GermanBuildingsArray.SHRINE_WIDTH, GermanBuildingsArray.SHRINE_HEIGHT, GermanBuildingsArray.SHRINE_LENGTH, facing);
                 return StructureComponent.findIntersecting(p_175858_1_, structureboundingbox) != null ? null : new GermanStructurePieces.Shrine(start, p_175858_7_, rand, structureboundingbox, facing);
             }
 
@@ -881,10 +872,10 @@ public class GermanStructurePieces
                         return true;
                     }
 
-                    this.boundingBox.offset(0, this.averageGroundLvl - this.boundingBox.maxY + LatinBuildingsArray.SHRINE_HEIGHT - 1, 0);
+                    this.boundingBox.offset(0, this.averageGroundLvl - this.boundingBox.maxY + GermanBuildingsArray.SHRINE_HEIGHT - 1, 0);
                 }
                 
-               this.placeStructureBase(worldIn, structureBoundingBoxIn, randomIn, LatinBuildingsArray.shrine_0, LatinBuildingsArray.SHRINE_LENGTH, LatinBuildingsArray.SHRINE_HEIGHT, LatinBuildingsArray.SHRINE_WIDTH, front);
+               this.placeStructureBase(worldIn, structureBoundingBoxIn, randomIn, GermanBuildingsArray.shrinehouse, GermanBuildingsArray.SHRINE_LENGTH, GermanBuildingsArray.SHRINE_HEIGHT, GermanBuildingsArray.SHRINE_WIDTH, front);
                 this.spawnVillagers(worldIn, structureBoundingBoxIn, -1, 1, 2, 1, AttributeVocation.CLASS_MAGE, 0, false);
                 return true;
             }
@@ -1040,7 +1031,7 @@ public class GermanStructurePieces
                             {
                                 IBlockState iblockstate4 = worldIn.getBlockState(blockpos);
 
-                                if (iblockstate4.getBlock() == Blocks.GRASS && worldIn.isAirBlock(blockpos.up()))
+                                if ((iblockstate4.getBlock() == Blocks.GRASS || iblockstate4.getBlock() == Blocks.STONE)&& worldIn.isAirBlock(blockpos.up()))
                                 {
                                     worldIn.setBlockState(blockpos, iblockstate, 2);
                                     break;
@@ -1149,10 +1140,10 @@ public class GermanStructurePieces
                 }
 
                 this.setStructureType(this.structureType);
-                this.isZombieInfested = rand.nextInt(100) <= Main.latin_zombie_infest_rate;
+                this.isZombieInfested = rand.nextInt(100) <= Main.german_zombie_infest_rate;
                 if(!this.isZombieInfested) 
                 {
-                	this.isBanditInfested = rand.nextInt(100) <= Main.latin_bandit_infest_rate;
+                	this.isBanditInfested = rand.nextInt(100) <= Main.german_bandit_infest_rate;
                 }
                 else 
                 {
@@ -1177,7 +1168,7 @@ public class GermanStructurePieces
             public static StructureBoundingBox findPieceBox(GermanStructurePieces.Start start, List<StructureComponent> p_175856_1_, Random rand, int p_175856_3_, int p_175856_4_, int p_175856_5_, EnumFacing facing)
             {
             	if(start.isBanditInfested || start.isZombieInfested) return null;
-                StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(p_175856_3_, p_175856_4_, p_175856_5_, 0, 0, 0, 1, 4, 1, facing);
+                StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(p_175856_3_, p_175856_4_, p_175856_5_, 0, 0, 0, 1, 5, 1, facing);
                 return StructureComponent.findIntersecting(p_175856_1_, structureboundingbox) != null ? null : structureboundingbox;
             }
 
@@ -1196,7 +1187,7 @@ public class GermanStructurePieces
                         return true;
                     }
 
-                    this.boundingBox.offset(0, this.averageGroundLvl - this.boundingBox.maxY + 3 - 1, 0);
+                    this.boundingBox.offset(0, this.averageGroundLvl - this.boundingBox.maxY + 4 - 1, 0);
                 }
 
                 IBlockState iblockstate = Blocks.COBBLESTONE_WALL.getDefaultState();
@@ -1204,7 +1195,9 @@ public class GermanStructurePieces
                 this.setBlockState(worldIn, iblockstate, 1, 1, 1, structureBoundingBoxIn);
                 this.setBlockState(worldIn, iblockstate, 1, 2, 1, structureBoundingBoxIn);
                 this.setBlockState(worldIn, iblockstate, 1, 3, 1, structureBoundingBoxIn);
-                this.setBlockState(worldIn, Blocks.GLOWSTONE.getDefaultState(), 1, 4, 1, structureBoundingBoxIn);
+                this.setBlockState(worldIn, Blocks.REDSTONE_LAMP.getDefaultState(), 1, 4, 1, structureBoundingBoxIn);
+                this.setBlockState(worldIn, Blocks.DAYLIGHT_DETECTOR_INVERTED.getDefaultState(), 1, 5, 1, structureBoundingBoxIn);
+                this.replaceAirAndLiquidDownwards(worldIn, Blocks.STONEBRICK.getDefaultState(), 1, 0, 1, structureBoundingBoxIn);//(worldIn, structureBoundingBoxIn, 0, 0, 0, 1, 0, 1, Blocks.STONEBRICK.getDefaultState(), Blocks.STONEBRICK.getDefaultState(), false);
                 // this.setBlockState(worldIn, noSpreadFire.getDefaultState(), 2, 2, 2, structureBoundingBoxIn);
                 
                //this.getBiomeSpecificBlockState(Blocks.COBBLESTONE.getDefaultState());
@@ -1479,10 +1472,11 @@ public class GermanStructurePieces
                         }
                         else if(this.isBanditInfested)
                         {
-                        	EntityHumanVillager entityHumanVillager = new EntityHumanVillager(worldIn, WorldGenVillage.LATIN_ID, AttributeRace.getFromIDRace(WorldGenVillage.LATIN_ID).getRandomBandit(worldIn), EntityHumanVillager.getRandomGender(worldIn), this.ruler == null ? true : false);                            
-                        	entityHumanVillager.setLocationAndAngles((double)j + 0.5D, (double)k, (double)l + 0.5D, 0.0F, 0.0F);                        	if(worldIn.rand.nextInt(100) <= Main.wraith_turn_rate) entityHumanVillager.setShifter(true, new EntityWraith(worldIn), false, 1);
+                        	EntityHumanVillager entityHumanVillager = new EntityHumanVillager(worldIn, WorldGenVillage.GERMAN_ID, AttributeRace.getFromIDRace(WorldGenVillage.GERMAN_ID).getRandomBandit(worldIn), EntityHumanVillager.getRandomGender(worldIn), this.ruler == null ? true : false);                            
+                        	entityHumanVillager.setLocationAndAngles((double)j + 0.5D, (double)k, (double)l + 0.5D, 0.0F, 0.0F);                        	
+                        	//if(worldIn.rand.nextInt(100) <= Main.wraith_turn_rate) entityHumanVillager.setShifter(true, new EntityWraith(worldIn), false, 1);
 
-                        	if(worldIn.rand.nextInt(100) <= Main.wraith_turn_rate) entityHumanVillager.setShifter(true, new EntityWraith(worldIn), false, 1);
+                        	//if(worldIn.rand.nextInt(100) <= Main.wraith_turn_rate) entityHumanVillager.setShifter(true, new EntityWraith(worldIn), false, 1);
                             //entityHumanVillager.setProfession(this.chooseForgeProfession(i, entityHumanVillager.getProfessionForge()));
                             //entityHumanVillager.finalizeMobSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityHumanVillager)), (IEntityLivingData)null, false);
                             worldIn.spawnEntity(entityHumanVillager);
@@ -1507,18 +1501,18 @@ public class GermanStructurePieces
                         {
                         	if(this.ruler == null)
                         	{
-                            	EntityHumanVillager entityRuler = new EntityHumanVillager(worldIn, WorldGenVillage.LATIN_ID, AttributeRace.getFromIDRace(WorldGenVillage.LATIN_ID).getRandomRuler(worldIn), EntityHumanVillager.getRandomGender(worldIn), true);                            
+                            	EntityHumanVillager entityRuler = new EntityHumanVillager(worldIn, WorldGenVillage.GERMAN_ID, AttributeRace.getFromIDRace(WorldGenVillage.GERMAN_ID).getRandomRuler(worldIn), EntityHumanVillager.getRandomGender(worldIn), true);                            
                         		this.ruler = entityRuler;
                         	}
                         	
-                        	/*AttributeFaction faction = new AttributeFaction(worldIn, new BlockPos(x, 70, z), AttributeRace.getFromIDRace(WorldGenVillage.LATIN_ID), NameGenerator.generateRandomName(worldIn.rand, AttributeRace.getFromIDRace(WorldGenVillage.LATIN_ID)));
+                        	/*AttributeFaction faction = new AttributeFaction(worldIn, new BlockPos(x, 70, z), AttributeRace.getFromIDRace(WorldGenVillage.GERMAN_ID), NameGenerator.generateRandomName(worldIn.rand, AttributeRace.getFromIDRace(WorldGenVillage.GERMAN_ID)));
                             faction.setBandit(isBanditInfested);
                             faction.setName();
                             faction.addRuler(ruler);
                             WorldGenVillage.nordManager.addFaction(faction);
                             WorldGenVillage.nordManager.addRuler(faction.getID(), ruler);
                             System.out.println(ruler.getName()+" - "+faction.getTitleName());*/
-                        	//EntityHumanVillager entityHumanVillager = new EntityHumanVillager(worldIn, WorldGenVillage.LATIN_ID, AttributeRace.getFromIDRace(WorldGenVillage.LATIN_ID).getRandomRuler(worldIn), EntityHumanVillager.getRandomGender(worldIn));                            
+                        	//EntityHumanVillager entityHumanVillager = new EntityHumanVillager(worldIn, WorldGenVillage.GERMAN_ID, AttributeRace.getFromIDRace(WorldGenVillage.GERMAN_ID).getRandomRuler(worldIn), EntityHumanVillager.getRandomGender(worldIn));                            
                         	this.ruler.setLocationAndAngles((double)j + 0.5D, (double)k, (double)l + 0.5D, 0.0F, 0.0F);
                             //entityHumanVillager.setProfession(this.chooseForgeProfession(i, entityHumanVillager.getProfessionForge()));
                             //entityHumanVillager.finalizeMobSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityHumanVillager)), (IEntityLivingData)null, false);
@@ -1526,7 +1520,7 @@ public class GermanStructurePieces
                         }
                         else if(vocation == AttributeVocation.CLASS_MERCENARY)
                         {
-                        	EntityHumanVillager entityHumanVillager = new EntityHumanVillager(worldIn, WorldGenVillage.LATIN_ID, AttributeRace.getFromIDRace(WorldGenVillage.LATIN_ID).getRandomMercenary(worldIn), EntityHumanVillager.getRandomGender(worldIn), false);                            
+                        	EntityHumanVillager entityHumanVillager = new EntityHumanVillager(worldIn, WorldGenVillage.GERMAN_ID, AttributeRace.getFromIDRace(WorldGenVillage.GERMAN_ID).getRandomMercenary(worldIn), EntityHumanVillager.getRandomGender(worldIn), false);                            
                         	entityHumanVillager.setLocationAndAngles((double)j + 0.5D, (double)k, (double)l + 0.5D, 0.0F, 0.0F);
                     
                         	 //entityHumanVillager.setProfession(this.chooseForgeProfession(i, entityHumanVillager.getProfessionForge()));
@@ -1543,15 +1537,15 @@ public class GermanStructurePieces
                         {
                         	if(this.ruler == null)
                         	{
-                            	EntityHumanVillager entityRuler = new EntityHumanVillager(worldIn, WorldGenVillage.LATIN_ID, AttributeRace.getFromIDRace(WorldGenVillage.LATIN_ID).getRandomRuler(worldIn), EntityHumanVillager.getRandomGender(worldIn), true);                            
+                            	EntityHumanVillager entityRuler = new EntityHumanVillager(worldIn, WorldGenVillage.GERMAN_ID, AttributeRace.getFromIDRace(WorldGenVillage.GERMAN_ID).getRandomRuler(worldIn), EntityHumanVillager.getRandomGender(worldIn), true);                            
                         		this.ruler = entityRuler;
                         	}
                         	
-                        	EntityHumanVillager entityHumanVillager = new EntityHumanVillager(worldIn, WorldGenVillage.LATIN_ID, vocation, rank, EntityHumanVillager.getRandomGender(worldIn));                            
+                        	EntityHumanVillager entityHumanVillager = new EntityHumanVillager(worldIn, WorldGenVillage.GERMAN_ID, vocation, rank, EntityHumanVillager.getRandomGender(worldIn));                            
                         	entityHumanVillager.setLocationAndAngles((double)j + 0.5D, (double)k, (double)l + 0.5D, 0.0F, 0.0F);
                         	entityHumanVillager.setRuler(ruler);
                         	
-                        	if(worldIn.rand.nextInt(100) <= Main.wraith_turn_rate) entityHumanVillager.setShifter(true, new EntityWraith(worldIn), false, 1);
+                        	//if(worldIn.rand.nextInt(100) <= Main.wraith_turn_rate) entityHumanVillager.setShifter(true, new EntityWraith(worldIn), false, 1);
                             
                         	//entityHumanVillager.setProfession(this.chooseForgeProfession(i, entityHumanVillager.getProfessionForge()));
                            // entityHumanVillager.finalizeMobSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityHumanVillager)), (IEntityLivingData)null, false);
@@ -1664,16 +1658,16 @@ public class GermanStructurePieces
                     }
                 }*/
                 if(Blocks.LOG == blockstateIn.getBlock()  || blockstateIn.getBlock()  == Blocks.LOG2){
-                	return Blocks.QUARTZ_BLOCK.getDefaultState().withProperty(BlockQuartz.VARIANT, BlockQuartz.EnumType.LINES_Y);
+                	return Blocks.COBBLESTONE.getDefaultState();//.withProperty(BlockQuartz.VARIANT, BlockQuartz.EnumType.LINES_Y);
 				}
 				
 				if(Blocks.COBBLESTONE == blockstateIn.getBlock() ){
-					return Blocks.QUARTZ_BLOCK.getDefaultState();//.withProperty(BlockQuartz.VARIANT, BlockQuartz.EnumType.CHISELED);//.withProperty(BlockLog.LOG_AXIS, event.getOriginal().getValue(BlockLog.LOG_AXIS))
+					return Blocks.COBBLESTONE.getDefaultState();//.withProperty(BlockQuartz.VARIANT, BlockQuartz.EnumType.CHISELED);//.withProperty(BlockLog.LOG_AXIS, event.getOriginal().getValue(BlockLog.LOG_AXIS))
 					
 				}
 				
 				if(Blocks.PLANKS == blockstateIn.getBlock() ){
-					return Blocks.BRICK_BLOCK.getDefaultState();//return Blocks.PLANKS.getDefaultState().withProperty(BlockPlanks.VARIANT, BlockPlanks.EnumType.OAK);
+					return Blocks.PLANKS.getDefaultState().withProperty(BlockPlanks.VARIANT, BlockPlanks.EnumType.SPRUCE);//return Blocks.PLANKS.getDefaultState().withProperty(BlockPlanks.VARIANT, BlockPlanks.EnumType.OAK);
 					
 				}
 				
@@ -1683,7 +1677,7 @@ public class GermanStructurePieces
 				}
 				
 				if(Blocks.OAK_STAIRS == blockstateIn.getBlock() ){
-					return Blocks.BRICK_STAIRS.getDefaultState().withProperty(BlockStairs.FACING, blockstateIn.getValue(BlockStairs.FACING));
+					return Blocks.OAK_STAIRS.getDefaultState().withProperty(BlockStairs.FACING, blockstateIn.getValue(BlockStairs.FACING));
 					
 				}
 				
@@ -1692,11 +1686,11 @@ public class GermanStructurePieces
 				}
 				
 				if(Blocks.GRASS_PATH == blockstateIn.getBlock() ){
-					return Blocks.QUARTZ_BLOCK.getDefaultState().withProperty(BlockQuartz.VARIANT, BlockQuartz.EnumType.CHISELED);					
+					return Blocks.STONEBRICK.getDefaultState();//.withProperty(BlockQuartz.VARIANT, BlockQuartz.EnumType.CHISELED);					
 				}
 				
 				if(Blocks.GRAVEL == blockstateIn.getBlock() ){
-					return Blocks.BRICK_BLOCK.getDefaultState();//.withProperty(BlockQuartz.VARIANT, BlockQuartz.EnumType.CHISELED);					
+					return Blocks.PLANKS.getDefaultState();//.withProperty(property, value);//.withProperty(BlockQuartz.VARIANT, BlockQuartz.EnumType.CHISELED);					
 				}
 				
 				if(Blocks.DOUBLE_STONE_SLAB == blockstateIn.getBlock() ){
@@ -1704,7 +1698,7 @@ public class GermanStructurePieces
 				}
 				
 				if(Blocks.STONEBRICK == blockstateIn.getBlock() ){
-					return Blocks.QUARTZ_BLOCK.getDefaultState().withProperty(BlockQuartz.VARIANT, BlockQuartz.EnumType.CHISELED);					
+					return Blocks.STONEBRICK.getDefaultState();//.withProperty(BlockQuartz.VARIANT, BlockQuartz.EnumType.CHISELED);					
 				}
 
                 return blockstateIn;
@@ -1763,23 +1757,268 @@ public class GermanStructurePieces
             }
             
             protected void placeStructureBase(World worldIn, StructureBoundingBox structureBoundingBoxIn, Random randomIn, char[][] plan, int length, int height, int width, EnumFacing front) {
-				IBlockState iblockstate = this.getBiomeSpecificBlockState(Blocks.COBBLESTONE.getDefaultState());
+				IBlockState iblockstate = Blocks.COBBLESTONE.getDefaultState();
                 IBlockState iblockstate1 = this.getBiomeSpecificBlockState(Blocks.LOG.getDefaultState().withProperty(BlockLog.LOG_AXIS, EnumAxis.X));
                 IBlockState iblockstate2 = this.getBiomeSpecificBlockState(Blocks.LOG.getDefaultState());
-                IBlockState iblockstate3 = this.getBiomeSpecificBlockState(Blocks.OAK_STAIRS.getDefaultState().withProperty(BlockStairs.FACING, EnumFacing.EAST));
-                IBlockState iblockstate4 = this.getBiomeSpecificBlockState(Blocks.OAK_STAIRS.getDefaultState().withProperty(BlockStairs.FACING, EnumFacing.WEST));
-                IBlockState iblockstate7 = this.getBiomeSpecificBlockState(Blocks.OAK_STAIRS.getDefaultState().withProperty(BlockStairs.FACING, EnumFacing.NORTH));
-                IBlockState iblockstate5 = this.getBiomeSpecificBlockState(Blocks.PLANKS.getDefaultState());
-                IBlockState iblockstate6 = this.getBiomeSpecificBlockState(Blocks.GLASS.getDefaultState());
-                IBlockState iblockstate8 = this.getBiomeSpecificBlockState(Blocks.OAK_FENCE.getDefaultState());
-                IBlockState iblockstate9 = this.getBiomeSpecificBlockState(Blocks.OAK_STAIRS.getDefaultState().withProperty(BlockStairs.FACING, EnumFacing.SOUTH));
-                IBlockState iblockstate10 = this.getBiomeSpecificBlockState(Blocks.STONEBRICK.getDefaultState());
+                IBlockState iblockstate3 = this.getBiomeSpecificBlockState(Blocks.STONE_BRICK_STAIRS.getDefaultState().withProperty(BlockStairs.FACING, EnumFacing.EAST));
+                IBlockState iblockstate4 = this.getBiomeSpecificBlockState(Blocks.STONE_BRICK_STAIRS.getDefaultState().withProperty(BlockStairs.FACING, EnumFacing.WEST));
+                IBlockState iblockstate5 = this.getBiomeSpecificBlockState(Blocks.STONE_BRICK_STAIRS.getDefaultState().withProperty(BlockStairs.FACING, EnumFacing.NORTH));
+                IBlockState iblockstate6 = this.getBiomeSpecificBlockState(Blocks.STONE_BRICK_STAIRS.getDefaultState().withProperty(BlockStairs.FACING, EnumFacing.SOUTH));
+                IBlockState iblockstate7 = Blocks.PLANKS.getDefaultState().withProperty(BlockPlanks.VARIANT, BlockPlanks.EnumType.SPRUCE);;
+            //    IBlockState iblockstate6 = this.getBiomeSpecificBlockState(Blocks.GLASS.getDefaultState());
+             //   IBlockState iblockstate8 = this.getBiomeSpecificBlockState(Blocks.OAK_FENCE.getDefaultState());
+              //  IBlockState iblockstate9 = this.getBiomeSpecificBlockState(Blocks.OAK_STAIRS.getDefaultState().withProperty(BlockStairs.FACING, EnumFacing.SOUTH));
+                IBlockState iblockstate8 = Blocks.STONEBRICK.getDefaultState();//);
                 IBlockState iblockstate14 = this.getBiomeSpecificBlockState(Blocks.STONE_STAIRS.getDefaultState().withProperty(BlockStairs.FACING, EnumFacing.SOUTH));
                 IBlockState iblockstate11 = this.getBiomeSpecificBlockState(Blocks.STONE_STAIRS.getDefaultState().withProperty(BlockStairs.FACING, EnumFacing.EAST));
                 IBlockState iblockstate12 = this.getBiomeSpecificBlockState(Blocks.STONE_STAIRS.getDefaultState().withProperty(BlockStairs.FACING, EnumFacing.WEST));
                 IBlockState iblockstate13 = this.getBiomeSpecificBlockState(Blocks.STONE_STAIRS.getDefaultState().withProperty(BlockStairs.FACING, EnumFacing.NORTH));
                 IBlockState iblockstate15 = this.getBiomeSpecificBlockState(Blocks.LADDER.getDefaultState());//.withProperty(BlockStairs.FACING, EnumFacing.NORTH));
-               
+                IBlockState iblockstate16 = this.getBiomeSpecificBlockState(Blocks.GLASS.getDefaultState());//.withProperty(BlockStairs.FACING, EnumFacing.NORTH));
+
+                
+                int j = this.getXWithOffset(0, 0);
+                //j -= 0.5D;
+                int k = this.getYWithOffset(0);
+                int l = this.getZWithOffset(0, 0); 
+                
+               // this.fillWithAir(worldIn, structureBoundingBoxIn, 0, 0, 0, width, height, length);
+                
+                for(int y = 0; y < height; y++)
+                {
+                	for(int z = 0; z < length; z++)
+                	{
+	                	for(int x = 0; x < width; x++)
+	                	{
+	                		switch(plan[y][x + (z * width)])
+	                		{
+		                		case CharBlockTypes.BANNER_HANGING:
+		                		{
+		                			EnumFacing face = front;
+		                			if(EnumFacing.SOUTH == front)
+		                			{
+		                				face = EnumFacing.NORTH;
+		                			}
+		                			if(EnumFacing.NORTH == front)
+		                			{
+		                				face = EnumFacing.SOUTH;
+		                				continue;
+		                			}
+		                			if(EnumFacing.EAST == front)
+		                			{
+		                				face = EnumFacing.WEST;
+		                				continue;
+		                			}
+		                			if(EnumFacing.WEST == front)
+		                			{
+		                				face = EnumFacing.EAST;
+		                				continue;
+		                			}
+		                			
+		                			ItemBannerGenWrapper.placeRandomBannerBlock(worldIn, worldIn.rand, face, new BlockPos(j + x, k + y, l + z));
+		                		}
+		                		break;
+		                		case CharBlockTypes.LADDER:
+		                		{
+		                			this.setBlockState(worldIn, iblockstate15, x, y, z, structureBoundingBoxIn);
+		                		}
+		                		break;
+		                		case CharBlockTypes.STONEBRICK:
+		                		{
+		                			this.setBlockState(worldIn, iblockstate8, x, y, z, structureBoundingBoxIn);	
+		                		}
+		                		break;
+		                		case CharBlockTypes.COBBLESTONE:
+		                		{
+		                			this.setBlockState(worldIn, iblockstate, x, y, z, structureBoundingBoxIn);
+		                		}
+		                		break;
+		                		case CharBlockTypesGerman.BOOKCASE:
+		                		{
+		                			this.setBlockState(worldIn, Blocks.BOOKSHELF.getDefaultState(), x, y, z, structureBoundingBoxIn);
+		                		}
+		                		break;
+		                		case CharBlockTypes.AIR:
+		                		{
+		                			this.setBlockState(worldIn, Blocks.AIR.getDefaultState(), x, y, z, structureBoundingBoxIn);
+		                		}
+		                		break;
+		                		case CharBlockTypes.CRAFTING_TABLE:
+		                		{
+		                			this.setBlockState(worldIn, Blocks.CRAFTING_TABLE.getDefaultState(), x, y, z, structureBoundingBoxIn);
+		                		}
+		                		break;
+		                		case CharBlockTypes.DOOR_NORTH:
+		                		{
+		                			this.createVillageDoor(worldIn, structureBoundingBoxIn, randomIn, x, y, z, EnumFacing.NORTH, Mirror.NONE);
+		                            if (this.getBlockStateFromPos(worldIn, x, y - 1, z - 1, structureBoundingBoxIn).getMaterial() == Material.AIR)
+		                            {
+		                            	this.setBlockState(worldIn, iblockstate7, x, y - 1, z - 1, structureBoundingBoxIn);
+		                            }
+		                            if (this.getBlockStateFromPos(worldIn, x, y - 2, z - 1, structureBoundingBoxIn).getBlock() == Blocks.GRASS_PATH)
+                                    {
+                                        this.setBlockState(worldIn, Blocks.GRASS.getDefaultState(), x, y - 2, z - 1, structureBoundingBoxIn);
+                                    }   
+		                		}
+		                		break;
+		                		case CharBlockTypes.DOOR_SOUTH:
+		                		{
+		                		    this.setBlockState(worldIn, this.biomeDoor().getDefaultState().withProperty(BlockDoor.FACING, EnumFacing.NORTH), x, y, z, structureBoundingBoxIn);
+		                		    this.setBlockState(worldIn, this.biomeDoor().getDefaultState().withProperty(BlockDoor.FACING, EnumFacing.NORTH).withProperty(BlockDoor.HALF, BlockDoor.EnumDoorHalf.UPPER).withMirror(Mirror.LEFT_RIGHT), x, y + 1, z, structureBoundingBoxIn);
+		                		    if (this.getBlockStateFromPos(worldIn, x, y - 1, z - 1, structureBoundingBoxIn).getMaterial() == Material.AIR)
+			                        {
+			                          	this.setBlockState(worldIn, iblockstate7, x, y - 1, z - 1, structureBoundingBoxIn);
+			                        }
+			                        if (this.getBlockStateFromPos(worldIn, x, y - 2, z - 1, structureBoundingBoxIn).getBlock() == Blocks.GRASS_PATH)
+	                                {
+	                                   this.setBlockState(worldIn, Blocks.GRASS.getDefaultState(), x, y - 2, z - 1, structureBoundingBoxIn);
+	                                }   
+		                			//this.biomeDoor().getDefaultState().withProperty(BlockDoor.FACING, EnumFacing.NORTH);
+		                        	//this.biomeDoor().getDefaultState().withProperty(BlockDoor.FACING, EnumFacing.NORTH).withProperty(BlockDoor.HALF, BlockDoor.EnumDoorHalf.UPPER).withMirror(Mirror.LEFT_RIGHT);
+		                            
+		                	    }
+		                		break;
+		                		case CharBlockTypes.NULL:
+		                		{
+		                			continue;
+		                		}
+		                		case CharBlockTypes.LOG_SIDE:
+		                		{
+		                			this.setBlockState(worldIn, iblockstate2, x, y, z, structureBoundingBoxIn);
+		                		}
+		                		break;
+		                		case CharBlockTypes.GLASS:
+		                		{
+		                			this.setBlockState(worldIn, iblockstate16, x, y, z, structureBoundingBoxIn);
+		                		}
+		                		break;
+		                		case CharBlockTypes.WATER:
+		                		{
+		                			this.setBlockState(worldIn, Blocks.WATER.getDefaultState(), x, y, z, structureBoundingBoxIn);
+		                		}
+		                		break;
+		                		case CharBlockTypes.OAK_WOOD:
+		                		{
+		                			this.setBlockState(worldIn, iblockstate7, x, y, z, structureBoundingBoxIn);
+		                		}
+		                		break;
+		                		case CharBlockTypesGerman.STAIRS_EAST_U:
+		                		{
+		                			this.setBlockState(worldIn, iblockstate3, x, y, z, structureBoundingBoxIn);
+		                		}
+		                		break;
+		                		case CharBlockTypesGerman.STAIRS_WEST_U:
+		                		{
+		                			this.setBlockState(worldIn, iblockstate4, x, y, z, structureBoundingBoxIn);
+		                		}
+		                		break;
+		                		case CharBlockTypesGerman.STAIRS_NORTH_U:
+		                		{
+		                			this.setBlockState(worldIn, iblockstate5, x, y, z, structureBoundingBoxIn);
+		                		}
+		                		break;
+		                		case CharBlockTypesGerman.STAIRS_SOUTH_U:
+		                		{
+		                			this.setBlockState(worldIn, iblockstate6, x, y, z, structureBoundingBoxIn);
+		                		}
+		                		break;
+		                		case CharBlockTypesGerman.STAIRS_EAST_D:
+		                		{
+		                			this.setBlockState(worldIn, iblockstate3.withProperty(BlockStairs.HALF, BlockStairs.EnumHalf.TOP), x, y, z, structureBoundingBoxIn);
+		                		}
+		                		break;
+		                		case CharBlockTypesGerman.STAIRS_WEST_D:
+		                		{
+		                			this.setBlockState(worldIn, iblockstate4.withProperty(BlockStairs.HALF, BlockStairs.EnumHalf.TOP), x, y, z, structureBoundingBoxIn);
+		                		}
+		                		break;
+		                		case CharBlockTypesGerman.STAIRS_NORTH_D:
+		                		{
+		                			this.setBlockState(worldIn, iblockstate5.withProperty(BlockStairs.HALF, BlockStairs.EnumHalf.TOP), x, y, z, structureBoundingBoxIn);
+		                		}
+		                		break;
+		                		case CharBlockTypesGerman.STAIRS_SOUTH_D:
+		                		{
+		                			this.setBlockState(worldIn, iblockstate6.withProperty(BlockStairs.HALF, BlockStairs.EnumHalf.TOP), x, y, z, structureBoundingBoxIn);
+		                		}
+		                		break;
+		                		case CharBlockTypes.TORCH_NORTH:
+		                		{
+		                			this.placeTorch(worldIn, EnumFacing.NORTH, x, y, z, structureBoundingBoxIn);
+		                		}
+		                		break;
+		                		case CharBlockTypes.CHEST:
+		                		{
+		                		      this.generateChest(worldIn, structureBoundingBoxIn, randomIn, x, y, z, LootTableList.CHESTS_VILLAGE_BLACKSMITH);
+		                	    }
+		                		break;
+		                		case CharBlockTypes.TORCH_SOUTH:
+		                		{
+		                			//this.setBlockState(worldIn, iblockstate8, x, y, z, structureBoundingBoxIn);
+		                			this.placeTorch(worldIn, EnumFacing.SOUTH, x, y, z, structureBoundingBoxIn);
+		                			/*if(z == 0)
+		                			{
+		                				this.placeTorch(worldIn, EnumFacing.SOUTH, x, y, 0, structureBoundingBoxIn);
+		                	//			System.out.println("Z Coord 1: "+z+" X Coord 1: "+x+" Y Coord 1: "+y);
+		                			}
+		                			if(z == 9)
+		                			{
+		                				this.placeTorch(worldIn, EnumFacing.SOUTH, x, y, 9, structureBoundingBoxIn);
+		                //				System.out.println("Z Coord 2: "+z+" X Coord 2: "+x+" Y Coord 2: "+y);
+		                			}*/
+		       
+		              //  			System.out.println("Z Coord: "+z+" X Coord : "+x+" Y Coord : "+y);
+		                			//this.placeTorch(worldIn, EnumFacing.SOUTH, x, y, z-2, structureBoundingBoxIn);
+		                			//this.placeTorch(worldIn, EnumFacing.SOUTH, x, y, z-1, structureBoundingBoxIn);
+		                			//this.placeTorch(worldIn, EnumFacing.SOUTH, x, y, z, structureBoundingBoxIn);
+		                			//this.placeTorch(worldIn, EnumFacing.SOUTH, x, y, z+1, structureBoundingBoxIn);
+		                			//this.placeTorch(worldIn, EnumFacing.SOUTH, x, y, z+2, structureBoundingBoxIn);
+		                			
+		                			
+		                			//this.placeTorch(worldIn, EnumFacing.SOUTH, x, y, 0, structureBoundingBoxIn);
+		                			//this.placeTorch(worldIn, EnumFacing.SOUTH, x, y, 9, structureBoundingBoxIn);
+		                			//this.placeTorch(worldIn, EnumFacing.EAST, x, y, z + 1, structureBoundingBoxIn);
+		                			//this.placeTorch(worldIn, EnumFacing.WEST, x + 1, y, z + 1, structureBoundingBoxIn);
+		                			//this.placeTorch(worldIn, EnumFacing.NORTH, x + 2, y, z + 1, structureBoundingBoxIn);
+		                		}
+		                		break;
+	                		}
+	                	}
+                	}
+                }
+                
+                for (int i = 0; i <= length - 1; ++i)
+                {
+                    for (int jj = 0; jj <= width - 1; ++jj)
+                    {
+                        this.clearCurrentPositionBlocksUpwards(worldIn, jj, height + 1, i, structureBoundingBoxIn);
+                        this.replaceAirAndLiquidDownwards(worldIn, iblockstate8, jj, -1, i, structureBoundingBoxIn);
+                    }
+                }
+
+			}
+            
+            protected void placeStructureBase(World worldIn, StructureBoundingBox structureBoundingBoxIn, Random randomIn, char[][] plan, int length, int height, int width, EnumFacing front, boolean debug) {
+				IBlockState iblockstate = Blocks.COBBLESTONE.getDefaultState();
+                IBlockState iblockstate1 = this.getBiomeSpecificBlockState(Blocks.LOG.getDefaultState().withProperty(BlockLog.LOG_AXIS, EnumAxis.X));
+                IBlockState iblockstate2 = this.getBiomeSpecificBlockState(Blocks.LOG.getDefaultState());
+                IBlockState iblockstate3 = this.getBiomeSpecificBlockState(Blocks.STONE_BRICK_STAIRS.getDefaultState().withProperty(BlockStairs.FACING, EnumFacing.EAST));
+                IBlockState iblockstate4 = this.getBiomeSpecificBlockState(Blocks.STONE_BRICK_STAIRS.getDefaultState().withProperty(BlockStairs.FACING, EnumFacing.WEST));
+                IBlockState iblockstate5 = this.getBiomeSpecificBlockState(Blocks.STONE_BRICK_STAIRS.getDefaultState().withProperty(BlockStairs.FACING, EnumFacing.NORTH));
+                IBlockState iblockstate6 = this.getBiomeSpecificBlockState(Blocks.STONE_BRICK_STAIRS.getDefaultState().withProperty(BlockStairs.FACING, EnumFacing.SOUTH));
+                IBlockState iblockstate7 = Blocks.PLANKS.getDefaultState().withProperty(BlockPlanks.VARIANT, BlockPlanks.EnumType.SPRUCE);;
+            //    IBlockState iblockstate6 = this.getBiomeSpecificBlockState(Blocks.GLASS.getDefaultState());
+             //   IBlockState iblockstate8 = this.getBiomeSpecificBlockState(Blocks.OAK_FENCE.getDefaultState());
+              //  IBlockState iblockstate9 = this.getBiomeSpecificBlockState(Blocks.OAK_STAIRS.getDefaultState().withProperty(BlockStairs.FACING, EnumFacing.SOUTH));
+                IBlockState iblockstate8 = Blocks.STONEBRICK.getDefaultState();//);
+                IBlockState iblockstate14 = this.getBiomeSpecificBlockState(Blocks.STONE_STAIRS.getDefaultState().withProperty(BlockStairs.FACING, EnumFacing.SOUTH));
+                IBlockState iblockstate11 = this.getBiomeSpecificBlockState(Blocks.STONE_STAIRS.getDefaultState().withProperty(BlockStairs.FACING, EnumFacing.EAST));
+                IBlockState iblockstate12 = this.getBiomeSpecificBlockState(Blocks.STONE_STAIRS.getDefaultState().withProperty(BlockStairs.FACING, EnumFacing.WEST));
+                IBlockState iblockstate13 = this.getBiomeSpecificBlockState(Blocks.STONE_STAIRS.getDefaultState().withProperty(BlockStairs.FACING, EnumFacing.NORTH));
+                IBlockState iblockstate15 = this.getBiomeSpecificBlockState(Blocks.LADDER.getDefaultState());//.withProperty(BlockStairs.FACING, EnumFacing.NORTH));
+                IBlockState iblockstate16 = this.getBiomeSpecificBlockState(Blocks.GLASS.getDefaultState());//.withProperty(BlockStairs.FACING, EnumFacing.NORTH));
+
+                
                 int j = this.getXWithOffset(0, 0);
                 //j -= 0.5D;
                 int k = this.getYWithOffset(0);
@@ -1791,13 +2030,9 @@ public class GermanStructurePieces
                 	{
 	                	for(int x = 0; x < width; x++)
 	                	{
+                			if(debug) System.out.print(plan[y][x + (z * width)] + " ");//System.out.println("X:"+x+"Y:"+y+"Z:"+z+" Char: "+plan[y][x + (z * width)]);
 	                		switch(plan[y][x + (z * width)])
 	                		{
-		                		case CharBlockTypes.FENCE:
-		                		{
-		                			this.setBlockState(worldIn, iblockstate8, x, y, z, structureBoundingBoxIn);
-		                		}
-		                		break;
 		                		case CharBlockTypes.BANNER_HANGING:
 		                		{
 		                			EnumFacing face = front;
@@ -1836,7 +2071,7 @@ public class GermanStructurePieces
 		                		break;
 		                		case CharBlockTypes.STONEBRICK:
 		                		{
-		                			this.setBlockState(worldIn, iblockstate10, x, y, z, structureBoundingBoxIn);	
+		                			this.setBlockState(worldIn, iblockstate8, x, y, z, structureBoundingBoxIn);	
 		                		}
 		                		break;
 		                		case CharBlockTypes.COBBLESTONE:
@@ -1900,7 +2135,7 @@ public class GermanStructurePieces
 		                		break;
 		                		case CharBlockTypes.GLASS:
 		                		{
-		                			this.setBlockState(worldIn, iblockstate6, x, y, z, structureBoundingBoxIn);
+		                			this.setBlockState(worldIn, iblockstate16, x, y, z, structureBoundingBoxIn);
 		                		}
 		                		break;
 		                		case CharBlockTypes.WATER:
@@ -1910,47 +2145,47 @@ public class GermanStructurePieces
 		                		break;
 		                		case CharBlockTypes.OAK_WOOD:
 		                		{
-		                			this.setBlockState(worldIn, iblockstate5, x, y, z, structureBoundingBoxIn);
+		                			this.setBlockState(worldIn, iblockstate7, x, y, z, structureBoundingBoxIn);
 		                		}
 		                		break;
-		                		case CharBlockTypes.STAIRS_LEFT:
+		                		case CharBlockTypesGerman.STAIRS_EAST_U:
 		                		{
 		                			this.setBlockState(worldIn, iblockstate3, x, y, z, structureBoundingBoxIn);
 		                		}
 		                		break;
-		                		case CharBlockTypes.STAIRS_RIGHT:
+		                		case CharBlockTypesGerman.STAIRS_WEST_U:
 		                		{
 		                			this.setBlockState(worldIn, iblockstate4, x, y, z, structureBoundingBoxIn);
 		                		}
 		                		break;
-		                		case CharBlockTypes.STAIRS_NORTH:
+		                		case CharBlockTypesGerman.STAIRS_NORTH_U:
 		                		{
-		                			this.setBlockState(worldIn, iblockstate7, x, y, z, structureBoundingBoxIn);
+		                			this.setBlockState(worldIn, iblockstate5, x, y, z, structureBoundingBoxIn);
 		                		}
 		                		break;
-		                		case CharBlockTypes.STAIRS_SOUTH:
+		                		case CharBlockTypesGerman.STAIRS_SOUTH_U:
 		                		{
-		                			this.setBlockState(worldIn, iblockstate9, x, y, z, structureBoundingBoxIn);
+		                			this.setBlockState(worldIn, iblockstate6, x, y, z, structureBoundingBoxIn);
 		                		}
 		                		break;
-		                		case CharBlockTypes.S_STAIRS_LEFT:
+		                		case CharBlockTypesGerman.STAIRS_EAST_D:
 		                		{
-		                			this.setBlockState(worldIn, iblockstate11, x, y, z, structureBoundingBoxIn);
+		                			this.setBlockState(worldIn, iblockstate3.withProperty(BlockStairs.HALF, BlockStairs.EnumHalf.TOP), x, y, z, structureBoundingBoxIn);
 		                		}
 		                		break;
-		                		case CharBlockTypes.S_STAIRS_RIGHT:
+		                		case CharBlockTypesGerman.STAIRS_WEST_D:
 		                		{
-		                			this.setBlockState(worldIn, iblockstate12, x, y, z, structureBoundingBoxIn);
+		                			this.setBlockState(worldIn, iblockstate4.withProperty(BlockStairs.HALF, BlockStairs.EnumHalf.TOP), x, y, z, structureBoundingBoxIn);
 		                		}
 		                		break;
-		                		case CharBlockTypes.S_STAIRS_NORTH:
+		                		case CharBlockTypesGerman.STAIRS_NORTH_D:
 		                		{
-		                			this.setBlockState(worldIn, iblockstate13, x, y, z, structureBoundingBoxIn);
+		                			this.setBlockState(worldIn, iblockstate5.withProperty(BlockStairs.HALF, BlockStairs.EnumHalf.TOP), x, y, z, structureBoundingBoxIn);
 		                		}
 		                		break;
-		                		case CharBlockTypes.S_STAIRS_SOUTH:
+		                		case CharBlockTypesGerman.STAIRS_SOUTH_D:
 		                		{
-		                			this.setBlockState(worldIn, iblockstate14, x, y, z, structureBoundingBoxIn);
+		                			this.setBlockState(worldIn, iblockstate6.withProperty(BlockStairs.HALF, BlockStairs.EnumHalf.TOP), x, y, z, structureBoundingBoxIn);
 		                		}
 		                		break;
 		                		case CharBlockTypes.TORCH_NORTH:
@@ -1995,6 +2230,7 @@ public class GermanStructurePieces
 		                		break;
 	                		}
 	                	}
+	                	if(debug) System.out.println("");//plan[y][x + (z * width)] + " ");
                 	}
                 }
                 
@@ -2003,7 +2239,7 @@ public class GermanStructurePieces
                     for (int jj = 0; jj <= width - 1; ++jj)
                     {
                         this.clearCurrentPositionBlocksUpwards(worldIn, jj, height + 1, i, structureBoundingBoxIn);
-                        this.replaceAirAndLiquidDownwards(worldIn, iblockstate10, jj, -1, i, structureBoundingBoxIn);
+                        this.replaceAirAndLiquidDownwards(worldIn, iblockstate8, jj, -1, i, structureBoundingBoxIn);
                     }
                 }
 
@@ -2176,7 +2412,7 @@ public class GermanStructurePieces
 
             public static GermanStructurePieces.SmallHut createPiece(GermanStructurePieces.Start start, List<StructureComponent> p_175853_1_, Random rand, int p_175853_3_, int p_175853_4_, int p_175853_5_, EnumFacing facing, int p_175853_7_)
             {
-                StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(p_175853_3_, p_175853_4_, p_175853_5_, 0, 0, 0, LatinBuildingsArray.SMALLHUT_WIDTH, LatinBuildingsArray.SMALLHUT_HEIGHT, LatinBuildingsArray.SMALLHUT_LENGTH, facing);
+                StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(p_175853_3_, p_175853_4_, p_175853_5_, 0, 0, 0, GermanBuildingsArray.HUT_WIDTH, GermanBuildingsArray.HUT_HEIGHT, GermanBuildingsArray.HUT_LENGTH, facing);
                 return canVillageGoDeeper(structureboundingbox) && StructureComponent.findIntersecting(p_175853_1_, structureboundingbox) == null ? new GermanStructurePieces.SmallHut(start, p_175853_7_, rand, structureboundingbox, facing) : null;
             }
 
@@ -2195,10 +2431,10 @@ public class GermanStructurePieces
                         return true;
                     }
 
-                    this.boundingBox.offset(0, this.averageGroundLvl - this.boundingBox.maxY + LatinBuildingsArray.SMALLHUT_HEIGHT, 0);
+                    this.boundingBox.offset(0, this.averageGroundLvl - this.boundingBox.maxY + GermanBuildingsArray.HUT_HEIGHT, 0);
                 }
 
-                this.placeStructureBase(worldIn, structureBoundingBoxIn, randomIn, LatinBuildingsArray.smallhut_1, LatinBuildingsArray.SMALLHUT_LENGTH, LatinBuildingsArray.SMALLHUT_HEIGHT, LatinBuildingsArray.SMALLHUT_WIDTH, front);
+                this.placeStructureBase(worldIn, structureBoundingBoxIn, randomIn, GermanBuildingsArray.huthouse, GermanBuildingsArray.HUT_LENGTH, GermanBuildingsArray.HUT_HEIGHT, GermanBuildingsArray.HUT_WIDTH, front);
 
                 this.spawnVillagers(worldIn, structureBoundingBoxIn, 1, 1, 2, 1, AttributeVocation.CLASS_VILLAGER, 0, false);
                 return true;

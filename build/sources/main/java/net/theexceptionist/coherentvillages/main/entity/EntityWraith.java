@@ -6,11 +6,13 @@ import net.minecraft.block.BlockLog;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAIWanderAvoidWaterFlying;
 import net.minecraft.entity.ai.EntityFlyHelper;
 import net.minecraft.entity.monster.EntityGolem;
 import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.entity.monster.EntityPigZombie;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.passive.EntityFlying;
 import net.minecraft.entity.passive.EntityVillager;
@@ -58,9 +60,11 @@ public class EntityWraith extends EntityMob implements IMob, EntityFlying{
     {
 		this.tasks.addTask(0, new EntityAIAttackWithMelee(this, 1.0, true));
 		this.tasks.addTask(2, new EntityAIWanderAvoidWaterFlying(this, 1.0D));
+		
 	    this.targetTasks.addTask(6, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
 	    this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityVillager.class, true));
 	    this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityGolem.class, true));
+	    this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true, new Class[] {EntityPigZombie.class}));
     }
 	
 	 protected void applyEntityAttributes()

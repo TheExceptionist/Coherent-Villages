@@ -2,37 +2,37 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="villager" key="selection"/>
+		<item value="HAND_STATES" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
-			<item value="this"/>
-			<item value="careerId"/>
-			<item value="career"/>
-			<item value="doUp"/>
-			<item value="j"/>
-			<item value="Faction"/>
-			<item value="Ice"/>
-			<item value="Snow"/>
+			<item value="HAND_STATES"/>
+			<item value="BLOCKING"/>
+			<item value="shield"/>
+			<item value="vocation.getWeapo"/>
+			<item value="Field"/>
+			<item value="cane"/>
+			<item value="reed"/>
+			<item value="Blocking"/>
 		</list>
 		<list key="replacehistory">
-			<item value="villager"/>
-			<item value="VillageComponentPathNonConnected"/>
-			<item value="soldier"/>
-			<item value="IRON_BLOCK"/>
-			<item value="VillageComponentCaneFarm"/>
-			<item value="VillageHandlerCaneFarm"/>
-			<item value="bandit"/>
-			<item value="center.getX()"/>
+			<item value="zero"/>
+			<item value="GERMAN_ID"/>
+			<item value="char"/>
+			<item value="EntityWraith"/>
+			<item value="ModItems"/>
+			<item value="Latin"/>
+			<item value="*"/>
+			<item value="WorldGenVillage.LATIN_ID"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
 		<item value="290" key="DIALOG_WIDTH"/>
 		<item value="1|.SF NS Text|11.0|0|COCOA|1|.SFNSText" key="DIALOG_FONT_NAME"/>
-		<item value="409" key="DIALOG_HEIGHT"/>
-		<item value="721" key="DIALOG_X_ORIGIN"/>
-		<item value="237" key="DIALOG_Y_ORIGIN"/>
+		<item value="411" key="DIALOG_HEIGHT"/>
+		<item value="145" key="DIALOG_X_ORIGIN"/>
+		<item value="213" key="DIALOG_Y_ORIGIN"/>
 	</section>
 </section>

@@ -32,6 +32,7 @@ import net.theexceptionist.coherentvillages.commands.CommandCreate;
 import net.theexceptionist.coherentvillages.main.block.BlockRegister;
 import net.theexceptionist.coherentvillages.main.entity.EntityBjornserker;
 import net.theexceptionist.coherentvillages.main.entity.EntityHumanVillager;
+import net.theexceptionist.coherentvillages.main.entity.EntityLemure;
 import net.theexceptionist.coherentvillages.main.entity.EntityWarg;
 import net.theexceptionist.coherentvillages.main.entity.EntityWraith;
 import net.theexceptionist.coherentvillages.main.entity.attributes.AttributeRace;
@@ -74,10 +75,14 @@ public class Main
    public static int upgrade_chance = 25;
 	public static int villager_bjorn_rate = 5;
 	
+	public static int lemure_rate = 5;
 	public static int wraith_rate = 5;
 	public static int wraith_turn_rate = 50;
 	   public static int latin_zombie_infest_rate = 2;
 	   public static int latin_bandit_infest_rate = 25;
+	   
+	   public static int german_zombie_infest_rate = 2;
+	   public static int german_bandit_infest_rate = 25;
 	   
 	   public static int greek_zombie_infest_rate = 2;
 	   public static int greek_bandit_infest_rate = 25;
@@ -117,7 +122,9 @@ public class Main
     			"#The chance a Nord Village attempt to upgrade their soldiers to a higher rank.\n",
     			"upgrade_chance=25\n",
     			"#=====ROMAN CONFIGS=======",
-    			"#The spawnrate of wraiths in Latin villages\n",
+    			"#The spawnrate of lemure in Latin biomes (DON'T CHANGE RIGHT NOW!)\n",
+    			"lemure_spawn_rate=2\n",
+    			"#The spawnrate of wraiths in Latin biomes\n",
     			"wraith_spawn_rate=5\n",
     			"#The chance when a Latin NPC dies they become a Wraith\n",
     			"wraith_turn_rate=50\n",
@@ -125,6 +132,11 @@ public class Main
     			"latin_bandit_infest_rate=25\n",
     			"#The chance a Nord Village will zombie infested!\n",
     			"latin_zombie_infest_rate=2\n",
+    			"#=====German CONFIGS=======",
+    			"#The chance a Nord Village will bandit infested!\n",
+    			"german_bandit_infest_rate=25\n",
+    			"#The chance a Nord Village will zombie infested!\n",
+    			"german_zombie_infest_rate=2\n",
     	};
     
     public static enum Soldier
@@ -305,6 +317,16 @@ public class Main
 					nord_bandit_infest_rate = value;
 					System.out.println("New Nord Bandit Infest Rate: "+value);
 				}
+				else if(parts[0].contains("german_zombie_infest"))
+				{
+					german_zombie_infest_rate = value;
+					System.out.println("New German Zombie Infest Rate: "+value);
+				}
+				else if(parts[0].contains("german_bandit_infest"))
+				{
+					german_bandit_infest_rate = value;
+					System.out.println("New German Bandit Infest Rate: "+value);
+				}
 				else if(parts[0].contains("latin_zombie_infest"))
 				{
 					latin_zombie_infest_rate = value;
@@ -324,6 +346,11 @@ public class Main
 				{
 					wraith_rate = value;
 					System.out.println("New Wraith Spawnrate: "+value);
+				}
+				else if(parts[0].contains("lemure_spawn"))
+				{
+					lemure_rate = value;
+					System.out.println("New Lemure Spawnrate: "+value);
 				}
 				else if(parts[0].contains("bjornserker_spawn"))
 				{
@@ -419,7 +446,8 @@ public class Main
     	List<Biome> villageLatinBiomes = Arrays.<Biome>asList(new Biome[] {
     			Biomes.PLAINS, Biomes.SAVANNA, 
         		 Biomes.MUTATED_PLAINS,  
-        		Biomes.MUTATED_SAVANNA, Biomes.MUTATED_SAVANNA_ROCK, Biomes.MUTATED_SWAMPLAND, 
+        		Biomes.MUTATED_SAVANNA, Biomes.MUTATED_SAVANNA_ROCK, 
+        		Biomes.MUTATED_SWAMPLAND,  Biomes.SWAMPLAND,
         		Biomes.SAVANNA_PLATEAU 
     			
         	});
@@ -612,6 +640,7 @@ public class Main
     	createEntity(EntityWarg.class, Main.entityIDStart + 1, "warg", 0x101010, 0xFF0000, true);
     	createEntity(EntityBjornserker.class, Main.entityIDStart + 2, "bjornserker", 0x101010, 0x808080, true);
     	createEntity(EntityWraith.class, Main.entityIDStart + 3, "wraith", 0x101010, 0x00FF00, true);
+    	createEntity(EntityLemure.class, Main.entityIDStart + 4, "lemure", 0x404040, 0x00AA00, true);
     	
     	
     	//Soldiers
@@ -682,7 +711,7 @@ public class Main
     	EntityRegistry.addSpawn(EntityWarg.class, Main.warg_rate, 2, 6, EnumCreatureType.MONSTER, villageNordBiomes.toArray(nBiomes));//weightedProb, min, max, typeOfCreature, biomes);
     	EntityRegistry.addSpawn(EntityBjornserker.class, Main.bjornserker_rate, 1, 2, EnumCreatureType.MONSTER, villageNordBiomes.toArray(nBiomes));//weightedProb, min, max, typeOfCreature, biomes);
     	EntityRegistry.addSpawn(EntityWraith.class, Main.wraith_rate, 1, 2, EnumCreatureType.MONSTER, villageLatinBiomes.toArray(lBiomes));//weightedProb, min, max, typeOfCreature, biomes);
-
+    	EntityRegistry.addSpawn(EntityLemure.class, Main.lemure_rate, 1, 2, EnumCreatureType.MONSTER, villageLatinBiomes.toArray(lBiomes));//weightedProb, min, max, typeOfCreature, biomes);
     	
     	//EntityRegistry.registerModEntity(new ResourceLocation(Resources.MODID, "villager_arrow"), EntityVillagerArrow.class, "entity_villager_arrow", 1, instance,1, 1, false);
        	EntityRegistry.registerModEntity(new ResourceLocation(Resources.MODID, "throwing_axe"), EntityWeaponThrowable.class, "throwing_axe", 1, instance, 64, 10, true);

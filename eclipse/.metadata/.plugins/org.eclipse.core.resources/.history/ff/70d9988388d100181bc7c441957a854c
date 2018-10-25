@@ -1,5 +1,0 @@
-package net.theexceptionist.coherentvillages.main.entity.attributes;
-
-public abstract class Spell {
-	public abstract void execute();
-}

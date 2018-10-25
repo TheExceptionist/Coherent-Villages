@@ -1,0 +1,77 @@
+package net.theexceptionist.coherentvillages.main.items;
+
+import net.minecraft.client.model.ModelBiped;
+import net.minecraft.client.tutorial.Tutorial;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.ItemArmor;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
+public class ItemModHelmet extends ItemModArmor{
+	
+	private static final ModelRomanGalea modelNordHelmet = new ModelRomanGalea();
+	private static final ModelNordHornedHelmet modelRomanHelmet = new ModelNordHornedHelmet();
+
+	public ItemModHelmet(String name, ArmorMaterial materialIn, int renderIndexIn,
+			EntityEquipmentSlot equipmentSlotIn) {
+		super(name, materialIn, renderIndexIn, equipmentSlotIn);
+	}
+	
+	@SideOnly(Side.CLIENT)
+	@Override
+	public net.minecraft.client.model.ModelBiped getArmorModel(EntityLivingBase entityLiving, ItemStack itemStack, EntityEquipmentSlot armorSlot, net.minecraft.client.model.ModelBiped _default)
+    {
+		if (itemStack != null) {
+			if (itemStack.getItem() instanceof ItemArmor) {
+
+				EntityEquipmentSlot type = ((ItemArmor) itemStack.getItem()).armorType;
+				ModelBiped armorModel = null;
+				
+				switch (type) {
+					case HEAD:
+						if(itemStack.getItem() == ModItems.hornHelmet)
+						{
+							armorModel = modelNordHelmet;
+						}
+						else
+						{
+							armorModel = modelRomanHelmet;
+						}
+						break;
+				default:
+					break;
+				}
+
+				armorModel.bipedHead.showModel = armorSlot == EntityEquipmentSlot.HEAD;
+				armorModel.bipedHeadwear.showModel = armorSlot == EntityEquipmentSlot.HEAD;
+				armorModel.bipedBody.showModel = (armorSlot == EntityEquipmentSlot.CHEST)
+						|| (armorSlot == EntityEquipmentSlot.CHEST);
+				armorModel.bipedRightArm.showModel = armorSlot == EntityEquipmentSlot.CHEST;
+				armorModel.bipedLeftArm.showModel = armorSlot == EntityEquipmentSlot.CHEST;
+				armorModel.bipedRightLeg.showModel = (armorSlot == EntityEquipmentSlot.LEGS)
+						|| (armorSlot == EntityEquipmentSlot.FEET);
+				armorModel.bipedLeftLeg.showModel = (armorSlot == EntityEquipmentSlot.LEGS)
+						|| (armorSlot == EntityEquipmentSlot.FEET);
+
+				armorModel.isSneak = defaultModel.isSneak;
+				armorModel.isRiding = defaultModel.isRiding;
+				armorModel.isChild = defaultModel.isChild;
+				armorModel.rightArmPose = defaultModel.rightArmPose;
+				armorModel.leftArmPose = defaultModel.leftArmPose;
+
+				return armorModel;
+			}
+		}
+		return null;
+		if(this.getArmorMaterial() == ModItems.NORD_HELMET)
+		{
+			return modelNordHelmet;
+		}
+		else
+		{
+			return modelRomanHelmet;
+		}
+    }
+}

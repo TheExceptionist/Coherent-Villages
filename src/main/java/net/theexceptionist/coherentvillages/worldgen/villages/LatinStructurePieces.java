@@ -393,19 +393,7 @@ public class LatinStructurePieces
 
             private Block getRandomCropType(Random rand)
             {
-                switch (rand.nextInt(10))
-                {
-                    case 0:
-                    case 1:
-                        return Blocks.CARROTS;
-                    case 2:
-                    case 3:
-                        return Blocks.POTATOES;
-                    case 4:
-                        return Blocks.BEETROOTS;
-                    default:
-                        return Blocks.WHEAT;
-                }
+            	return Blocks.WHEAT;
             }
 
             public static LatinStructurePieces.Field1 createPiece(LatinStructurePieces.Start start, List<StructureComponent> p_175851_1_, Random rand, int p_175851_3_, int p_175851_4_, int p_175851_5_, EnumFacing facing, int p_175851_7_)
@@ -522,19 +510,8 @@ public class LatinStructurePieces
 
             private Block getRandomCropType(Random rand)
             {
-                switch (rand.nextInt(10))
-                {
-                    case 0:
-                    case 1:
-                        return Blocks.CARROTS;
-                    case 2:
-                    case 3:
-                        return Blocks.POTATOES;
-                    case 4:
-                        return Blocks.BEETROOTS;
-                    default:
-                        return Blocks.WHEAT;
-                }
+            	if(rand.nextInt(50) <= 25) return Blocks.BEETROOTS;
+            	return Blocks.WHEAT;
             }
 
             public static LatinStructurePieces.Field2 createPiece(LatinStructurePieces.Start start, List<StructureComponent> p_175852_1_, Random rand, int p_175852_3_, int p_175852_4_, int p_175852_5_, EnumFacing facing, int p_175852_7_)

@@ -39,7 +39,6 @@ import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraft.world.gen.structure.template.TemplateManager;
 import net.minecraft.world.storage.loot.LootTableList;
 import net.theexceptionist.coherentvillages.main.Main;
-import net.theexceptionist.coherentvillages.main.entity.EntityBjornserker;
 import net.theexceptionist.coherentvillages.main.entity.EntityHumanVillager;
 import net.theexceptionist.coherentvillages.main.entity.EntityWarg;
 import net.theexceptionist.coherentvillages.main.entity.attributes.AttributeRace;
@@ -569,11 +568,11 @@ public class FrankStructurePieces
 
                 for (int i = 1; i <= 7; ++i)
                 {
-                    int j = ((BlockCrops)this.cropTypeA).getMaxAge();
+                    int j = this.cropTypeA instanceof BlockCrops ? ((BlockCrops)this.cropTypeA).getMaxAge() : 0;
                     int k = j / 3;
                     this.setBlockState(worldIn, this.cropTypeA.getStateFromMeta(MathHelper.getInt(randomIn, k, j)), 1, 1, i, structureBoundingBoxIn);
                     this.setBlockState(worldIn, this.cropTypeA.getStateFromMeta(MathHelper.getInt(randomIn, k, j)), 2, 1, i, structureBoundingBoxIn);
-                    int l = ((BlockCrops)this.cropTypeB).getMaxAge();
+                    int l = this.cropTypeA instanceof BlockCrops ? ((BlockCrops)this.cropTypeA).getMaxAge() : 0;
                     int i1 = l / 3;
                     this.setBlockState(worldIn, this.cropTypeB.getStateFromMeta(MathHelper.getInt(randomIn, i1, l)), 4, 1, i, structureBoundingBoxIn);
                     this.setBlockState(worldIn, this.cropTypeB.getStateFromMeta(MathHelper.getInt(randomIn, i1, l)), 5, 1, i, structureBoundingBoxIn);

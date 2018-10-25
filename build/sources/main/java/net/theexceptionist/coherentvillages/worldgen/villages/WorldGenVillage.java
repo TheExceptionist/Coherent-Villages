@@ -18,6 +18,7 @@ import net.minecraft.world.gen.structure.StructureStart;
 import net.minecraft.world.gen.structure.StructureVillagePieces;
 import net.minecraft.world.gen.structure.template.PlacementSettings;
 import net.theexceptionist.coherentvillages.main.Main;
+import net.theexceptionist.coherentvillages.main.entity.attributes.AttributeRace;
 
 public class WorldGenVillage extends MapGenVillage
 {
@@ -32,14 +33,14 @@ public class WorldGenVillage extends MapGenVillage
     public static ArrayList<Biome> BRITON_VILLAGE_SPAWN_BIOMES = new ArrayList<Biome>();
     public static ArrayList<Biome> FRANK_VILLAGE_SPAWN_BIOMES = new ArrayList<Biome>();
     
-    public static final int NORD_ID = 0;
-    public static final int LATIN_ID = 1;
-    public static final int GERMAN_ID = 2;
-    public static final int SLAV_ID = 3;
-    public static final int ARAB_ID = 4;
-	public static final int GREEK_ID = 5;
-	public static final int BRITON_ID = 6;
-	public static final int FRANK_ID = 7;
+    public static final int NORD_ID = AttributeRace.RACE_TYPE_NORD;
+    public static final int LATIN_ID = AttributeRace.RACE_TYPE_LATIN;
+    public static final int GERMAN_ID = AttributeRace.RACE_TYPE_GERMAN;
+    public static final int SLAV_ID = AttributeRace.RACE_TYPE_SLAV;
+    public static final int ARAB_ID = AttributeRace.RACE_TYPE_ARAB;
+	public static final int GREEK_ID = AttributeRace.RACE_TYPE_GREEK;
+	public static final int BRITON_ID = AttributeRace.RACE_TYPE_BRITON;
+	public static final int FRANK_ID = AttributeRace.RACE_TYPE_FRANK;
     
     /** None */
     private int size;

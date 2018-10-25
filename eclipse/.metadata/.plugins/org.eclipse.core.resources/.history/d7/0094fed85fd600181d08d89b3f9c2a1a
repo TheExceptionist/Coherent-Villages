@@ -1,0 +1,16 @@
+package net.theexceptionist.coherentvillages.main.entity.model;
+
+import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.model.ModelRenderer;
+
+public class ModelLemure extends ModelBase
+{
+	public ModelRenderer head;
+	public ModelRenderer leftArm;
+	public ModelRenderer rightArm;
+	
+	public ModelLemure()
+	{
+		this.head =  new ModelRenderer(this, 0, 0);
+	}
+}

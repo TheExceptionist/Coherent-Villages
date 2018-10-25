@@ -16,6 +16,7 @@ import net.minecraft.block.BlockLog.EnumAxis;
 import net.minecraft.block.BlockOldLog;
 import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.BlockStairs;
+import net.minecraft.block.BlockStem;
 import net.minecraft.block.BlockTorch;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -23,14 +24,9 @@ import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.monster.EntityZombieVillager;
 import net.minecraft.init.Biomes;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.EnumDyeColor;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.Mirror;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
@@ -397,15 +393,13 @@ public class NordStructurePieces
                 switch (rand.nextInt(10))
                 {
                     case 0:
+                    	//return Blocks.WHEAT;
                     case 1:
-                        return Blocks.CARROTS;
                     case 2:
                     case 3:
-                        return Blocks.POTATOES;
-                    case 4:
-                        return Blocks.BEETROOTS;
+                    	return Blocks.PUMPKIN_STEM;
                     default:
-                        return Blocks.WHEAT;
+                    	return Blocks.MELON_STEM;
                 }
             }
 
@@ -450,21 +444,22 @@ public class NordStructurePieces
 
                 for (int i = 1; i <= 7; ++i)
                 {
-                    int j = ((BlockCrops)this.cropTypeA).getMaxAge();
+                	//System.out.println("Crop: "+this.cropTypeA.getUnlocalizedName()+" Type: "+(this.cropTypeA instanceof BlockStem));
+                    int j = 7;// : ((BlockCrops)this.cropTypeA).getMaxAge();
                     int k = j / 3;
                     this.setBlockState(worldIn, this.cropTypeA.getStateFromMeta(MathHelper.getInt(randomIn, k, j)), 1, 1, i, structureBoundingBoxIn);
-                    this.setBlockState(worldIn, this.cropTypeA.getStateFromMeta(MathHelper.getInt(randomIn, k, j)), 2, 1, i, structureBoundingBoxIn);
-                    int l = ((BlockCrops)this.cropTypeB).getMaxAge();
+                 //   this.setBlockState(worldIn, this.cropTypeA.getStateFromMeta(MathHelper.getInt(randomIn, k, j)), 2, 1, i, structureBoundingBoxIn);
+                    int l = 7;//this.cropTypeA instanceof BlockStem ? 7 : ((BlockCrops)this.cropTypeB).getMaxAge();
                     int i1 = l / 3;
-                    this.setBlockState(worldIn, this.cropTypeB.getStateFromMeta(MathHelper.getInt(randomIn, i1, l)), 4, 1, i, structureBoundingBoxIn);
+                   // this.setBlockState(worldIn, this.cropTypeB.getStateFromMeta(MathHelper.getInt(randomIn, i1, l)), 4, 1, i, structureBoundingBoxIn);
                     this.setBlockState(worldIn, this.cropTypeB.getStateFromMeta(MathHelper.getInt(randomIn, i1, l)), 5, 1, i, structureBoundingBoxIn);
-                    int j1 = ((BlockCrops)this.cropTypeC).getMaxAge();
+                    int j1 = 7;//this.cropTypeA instanceof BlockStem ? 7 : ((BlockCrops)this.cropTypeC).getMaxAge();
                     int k1 = j1 / 3;
                     this.setBlockState(worldIn, this.cropTypeC.getStateFromMeta(MathHelper.getInt(randomIn, k1, j1)), 7, 1, i, structureBoundingBoxIn);
-                    this.setBlockState(worldIn, this.cropTypeC.getStateFromMeta(MathHelper.getInt(randomIn, k1, j1)), 8, 1, i, structureBoundingBoxIn);
-                    int l1 = ((BlockCrops)this.cropTypeD).getMaxAge();
+                    //this.setBlockState(worldIn, this.cropTypeC.getStateFromMeta(MathHelper.getInt(randomIn, k1, j1)), 8, 1, i, structureBoundingBoxIn);
+                    int l1 = 7;//this.cropTypeA instanceof BlockStem ? 7 : ((BlockCrops)this.cropTypeD).getMaxAge();
                     int i2 = l1 / 3;
-                    this.setBlockState(worldIn, this.cropTypeD.getStateFromMeta(MathHelper.getInt(randomIn, i2, l1)), 10, 1, i, structureBoundingBoxIn);
+                    //this.setBlockState(worldIn, this.cropTypeD.getStateFromMeta(MathHelper.getInt(randomIn, i2, l1)), 10, 1, i, structureBoundingBoxIn);
                     this.setBlockState(worldIn, this.cropTypeD.getStateFromMeta(MathHelper.getInt(randomIn, i2, l1)), 11, 1, i, structureBoundingBoxIn);
                 }
 
@@ -523,20 +518,9 @@ public class NordStructurePieces
 
             private Block getRandomCropType(Random rand)
             {
-                switch (rand.nextInt(10))
-                {
-                    case 0:
-                    case 1:
-                        return Blocks.CARROTS;
-                    case 2:
-                    case 3:
-                        return Blocks.POTATOES;
-                    case 4:
-                        return Blocks.BEETROOTS;
-                    default:
-                        return Blocks.WHEAT;
-                }
+                return Blocks.WHEAT;
             }
+
 
             public static NordStructurePieces.Field2 createPiece(NordStructurePieces.Start start, List<StructureComponent> p_175852_1_, Random rand, int p_175852_3_, int p_175852_4_, int p_175852_5_, EnumFacing facing, int p_175852_7_)
             {

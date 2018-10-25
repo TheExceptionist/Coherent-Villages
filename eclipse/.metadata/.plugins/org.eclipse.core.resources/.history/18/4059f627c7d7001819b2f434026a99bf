@@ -1,0 +1,32 @@
+package net.theexceptionist.coherentvillages.main.items;
+
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
+public class ItemModHelmet extends ItemModArmor{
+	
+	private static final ModelRomanGalea modelNordHelmet = new ModelRomanGalea();
+	private static final ModelNordHornedHelmet modelRomanHelmet = new ModelNordHornedHelmet();
+
+	public ItemModHelmet(String name, ArmorMaterial materialIn, int renderIndexIn,
+			EntityEquipmentSlot equipmentSlotIn) {
+		super(name, materialIn, renderIndexIn, equipmentSlotIn);
+	}
+	
+	@SideOnly(Side.CLIENT)
+	@Override
+	public net.minecraft.client.model.ModelBiped getArmorModel(EntityLivingBase entityLiving, ItemStack itemStack, EntityEquipmentSlot armorSlot, net.minecraft.client.model.ModelBiped _default)
+    {
+		if(this.getArmorMaterial() == ModItems.NORD_HELMET)
+		{
+			return modelNordHelmet;
+		}
+		else
+		{
+			return modelRomanHelmet;
+		}
+    }
+}

@@ -1,0 +1,6 @@
+package net.theexceptionist.coherentvillages.main.entity.render;
+
+public class RenderLemure {
+	public static final String TEXTURE = "textures/entity/lemure.png";
+	
+}

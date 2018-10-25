@@ -1,25 +1,18 @@
 package net.theexceptionist.coherentvillages.main.entity.render;
 
 import net.minecraft.client.model.ModelBiped;
-import net.minecraft.client.model.ModelPlayer;
-import net.minecraft.client.model.ModelZombie;
 import net.minecraft.client.renderer.entity.RenderBiped;
 import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.client.renderer.entity.layers.LayerArrow;
 import net.minecraft.client.renderer.entity.layers.LayerBipedArmor;
 import net.minecraft.client.renderer.entity.layers.LayerCustomHead;
-import net.minecraft.client.renderer.entity.layers.LayerElytra;
-import net.minecraft.client.renderer.entity.layers.LayerEntityOnShoulder;
-import net.minecraft.client.renderer.entity.layers.LayerHeldItem;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumHandSide;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import net.theexceptionist.coherentvillages.main.Resources;
 import net.theexceptionist.coherentvillages.main.entity.EntityHumanVillager;
 import net.theexceptionist.coherentvillages.main.entity.model.ModelHumanVillager;
+import net.theexceptionist.coherentvillages.main.items.ItemModShield;
 
 @SideOnly(Side.CLIENT)
 public class RenderHumanVillager extends RenderBiped<EntityHumanVillager>
@@ -55,15 +48,7 @@ public class RenderHumanVillager extends RenderBiped<EntityHumanVillager>
 	
 	public RenderHumanVillager(RenderManager rendermanagerIn) {
 		super(rendermanagerIn, new ModelHumanVillager(), 0.5f);
-		/*LayerBipedArmor layerbipedarmor = new LayerBipedArmor(this)
-        {
-            protected void initArmor()
-            {
-                this.modelLeggings = new ModelHumanVillager(0.5F, true);
-                this.modelArmor = new ModelHumanVillager(1.0F, true);
-            }
-        };*/
-        this.addLayer(new LayerBipedArmor(this)/*layerbipedarmor*/);
+        this.addLayer(new LayerBipedArmor(this));
         this.addLayer(new LayerCustomHead(this.getMainModel().bipedHead));
 	}
 	
@@ -114,14 +99,16 @@ public class RenderHumanVillager extends RenderBiped<EntityHumanVillager>
             }
         }
 
+        //System.out.println("Empty: "+itemstack1.isEmpty());
         if (!itemstack1.isEmpty())
         {
             modelbiped$armpose1 = ModelBiped.ArmPose.ITEM;
-
+            
+            //System.out.println("In use: "+villager.getItemInUseCount());
             if (villager.getItemInUseCount() > 0)
             {
                 EnumAction enumaction1 = itemstack1.getItemUseAction();
-
+                
                 if (enumaction1 == EnumAction.BLOCK)
                 {
                     modelbiped$armpose1 = ModelBiped.ArmPose.BLOCK;
@@ -132,84 +119,11 @@ public class RenderHumanVillager extends RenderBiped<EntityHumanVillager>
                     modelbiped$armpose1 = ModelBiped.ArmPose.BOW_AND_ARROW;
                 }
             }
-            
-            modelhuman.rightArmPose = modelbiped$armpose;
-            modelhuman.leftArmPose = modelbiped$armpose1;
         }
+
+        modelhuman.rightArmPose = modelbiped$armpose;
+        modelhuman.leftArmPose = modelbiped$armpose1;
     }
-
-       /* if (villager.isSpectator())
-        {
-            modelplayer.setVisible(false);
-            modelplayer.bipedHead.showModel = true;
-            modelplayer.bipedHeadwear.showModel = true;
-        }
-        else
-        {
-            ItemStack itemstack = villager.getHeldItemMainhand();
-            ItemStack itemstack1 = villager.getHeldItemOffhand();
-            modelplayer.setVisible(true);
-            /*modelplayer.bipedHeadwear.showModel = villager.isWearing(EnumPlayerModelParts.HAT);
-            modelplayer.bipedBodyWear.showModel = villager.isWearing(EnumPlayerModelParts.JACKET);
-            modelplayer.bipedLeftLegwear.showModel = villager.isWearing(EnumPlayerModelParts.LEFT_PANTS_LEG);
-            modelplayer.bipedRightLegwear.showModel = villager.isWearing(EnumPlayerModelParts.RIGHT_PANTS_LEG);
-            modelplayer.bipedLeftArmwear.showModel = villager.isWearing(EnumPlayerModelParts.LEFT_SLEEVE);
-            modelplayer.bipedRightArmwear.showModel = villager.isWearing(EnumPlayerModelParts.RIGHT_SLEEVE);
-            modelplayer.isSneak = villager.isSneaking();
-            ModelBiped.ArmPose modelbiped$armpose = ModelBiped.ArmPose.EMPTY;
-            ModelBiped.ArmPose modelbiped$armpose1 = ModelBiped.ArmPose.EMPTY;
-
-            if (!itemstack.isEmpty())
-            {
-                modelbiped$armpose = ModelBiped.ArmPose.ITEM;
-
-                if (villager.getItemInUseCount() > 0)
-                {
-                    EnumAction enumaction = itemstack.getItemUseAction();
-
-                    if (enumaction == EnumAction.BLOCK)
-                    {
-                        modelbiped$armpose = ModelBiped.ArmPose.BLOCK;
-                    }
-                    else if (enumaction == EnumAction.BOW)
-                    {
-                        modelbiped$armpose = ModelBiped.ArmPose.BOW_AND_ARROW;
-                    }
-                }
-            }
-
-            if (!itemstack1.isEmpty())
-            {
-                modelbiped$armpose1 = ModelBiped.ArmPose.ITEM;
-
-                if (villager.getItemInUseCount() > 0)
-                {
-                    EnumAction enumaction1 = itemstack1.getItemUseAction();
-
-                    if (enumaction1 == EnumAction.BLOCK)
-                    {
-                        modelbiped$armpose1 = ModelBiped.ArmPose.BLOCK;
-                    }
-                    // FORGE: fix MC-88356 allow offhand to use bow and arrow animation
-                    else if (enumaction1 == EnumAction.BOW)
-                    {
-                        modelbiped$armpose1 = ModelBiped.ArmPose.BOW_AND_ARROW;
-                    }
-                }
-            }
-
-            if (villager.getPrimaryHand() == EnumHandSide.RIGHT)
-            {
-                modelplayer.rightArmPose = modelbiped$armpose;
-                modelplayer.leftArmPose = modelbiped$armpose1;
-            }
-            else
-            {
-                modelplayer.rightArmPose = modelbiped$armpose1;
-                modelplayer.leftArmPose = modelbiped$armpose;
-            }
-        //}
-    }*/
 
 	@Override
 	protected ResourceLocation getEntityTexture(EntityHumanVillager entity) {

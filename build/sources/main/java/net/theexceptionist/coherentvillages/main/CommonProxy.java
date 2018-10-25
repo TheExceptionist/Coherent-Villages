@@ -1,5 +1,7 @@
 package net.theexceptionist.coherentvillages.main;
 
+import net.minecraft.client.model.ModelBiped;
+
 public class CommonProxy {
 	public void registerRenderInformation(){
 		
@@ -11,5 +13,10 @@ public class CommonProxy {
 	
 	public void initEvents(){
 		
+	}
+
+	public ModelBiped getArmorID(int i) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

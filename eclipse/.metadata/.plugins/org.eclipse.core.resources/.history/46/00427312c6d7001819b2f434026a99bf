@@ -1,0 +1,141 @@
+package net.theexceptionist.coherentvillages.main.items;
+
+import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.entity.Entity;
+import net.minecraft.client.renderer.GlStateManager;
+import org.lwjgl.opengl.GL11;
+
+/**
+ * Nord_horned_helmet - Username_02
+ * Created using Tabula 7.0.0
+ */
+public class ModelNordHornedHelmet extends ModelBase {
+    public ModelRenderer Helmet;
+    public ModelRenderer Rhorn_1;
+    public ModelRenderer RHorn_2;
+    public ModelRenderer RHorn_3;
+    public ModelRenderer RHorn_4;
+    public ModelRenderer Lhorn_1;
+    public ModelRenderer Lhorn_2;
+    public ModelRenderer Lhorn_3;
+    public ModelRenderer Lhorn_4;
+
+    public ModelNordHornedHelmet() {
+        this.textureWidth = 32;
+        this.textureHeight = 32;
+        this.Helmet = new ModelRenderer(this, 0, 0);
+        this.Helmet.setRotationPoint(-4.0F, -8.0F, -4.0F);
+        this.Helmet.addBox(0.0F, 0.0F, 0.0F, 8, 8, 8, 0.0F);
+        this.RHorn_2 = new ModelRenderer(this, 22, 28);
+        this.RHorn_2.mirror = true;
+        this.RHorn_2.setRotationPoint(6.5F, -4.5F, 0.0F);
+        this.RHorn_2.addBox(0.0F, -1.0F, -1.0F, 3, 2, 2, 0.0F);
+        this.setRotateAngle(RHorn_2, 0.0F, 0.0F, -0.7853981633974483F);
+        this.RHorn_4 = new ModelRenderer(this, 0, 6);
+        this.RHorn_4.setRotationPoint(7.5F, -8.0F, 0.0F);
+        this.RHorn_4.addBox(0.0F, 0.0F, -0.5F, 2, 1, 1, 0.0F);
+        this.setRotateAngle(RHorn_4, 0.0F, 0.0F, -0.7853981633974483F);
+        this.Rhorn_1 = new ModelRenderer(this, 0, 26);
+        this.Rhorn_1.setRotationPoint(4.0F, -6.0F, -1.0F);
+        this.Rhorn_1.addBox(0.0F, 0.0F, 0.0F, 5, 3, 3, 0.0F);
+        this.Lhorn_3 = new ModelRenderer(this, 0, 0);
+        this.Lhorn_3.setRotationPoint(-8.8F, -5.7F, -0.5F);
+        this.Lhorn_3.addBox(0.0F, -1.0F, -1.0F, 3, 1, 1, 0.0F);
+        this.setRotateAngle(Lhorn_3, 0.0F, 0.0F, -1.5707963267948966F);
+        this.Lhorn_4 = new ModelRenderer(this, 0, 6);
+        this.Lhorn_4.setRotationPoint(-8.4F, -7.4F, 0.0F);
+        this.Lhorn_4.addBox(0.0F, 0.0F, -0.5F, 2, 1, 1, 0.0F);
+        this.setRotateAngle(Lhorn_4, 0.0F, 0.0F, -2.356194490192345F);
+        this.Lhorn_1 = new ModelRenderer(this, 0, 26);
+        this.Lhorn_1.setRotationPoint(-4.0F, -6.0F, -1.0F);
+        this.Lhorn_1.addBox(0.0F, 0.0F, -3.0F, 5, 3, 3, 0.0F);
+        this.setRotateAngle(Lhorn_1, 3.141592653589793F, 0.0F, 3.141592653589793F);
+        this.RHorn_3 = new ModelRenderer(this, 0, 0);
+        this.RHorn_3.setRotationPoint(8.8F, -5.7F, 0.5F);
+        this.RHorn_3.addBox(0.0F, -1.0F, -1.0F, 3, 1, 1, 0.0F);
+        this.setRotateAngle(RHorn_3, 0.0F, 0.0F, -1.5707963267948966F);
+        this.Lhorn_2 = new ModelRenderer(this, 22, 28);
+        this.Lhorn_2.setRotationPoint(-6.5F, -4.5F, 0.0F);
+        this.Lhorn_2.addBox(0.0F, -1.0F, -1.0F, 3, 2, 2, 0.0F);
+        this.setRotateAngle(Lhorn_2, 0.0F, 0.0F, -2.356194490192345F);
+    }
+
+    @Override
+    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) { 
+        this.Helmet.render(f5);
+        GlStateManager.pushMatrix();
+        GlStateManager.translate(this.RHorn_2.offsetX, this.RHorn_2.offsetY, this.RHorn_2.offsetZ);
+        GlStateManager.translate(this.RHorn_2.rotationPointX * f5, this.RHorn_2.rotationPointY * f5, this.RHorn_2.rotationPointZ * f5);
+        GlStateManager.scale(0.8D, 0.8D, 0.8D);
+        GlStateManager.translate(-this.RHorn_2.offsetX, -this.RHorn_2.offsetY, -this.RHorn_2.offsetZ);
+        GlStateManager.translate(-this.RHorn_2.rotationPointX * f5, -this.RHorn_2.rotationPointY * f5, -this.RHorn_2.rotationPointZ * f5);
+        this.RHorn_2.render(f5);
+        GlStateManager.popMatrix();
+        GlStateManager.pushMatrix();
+        GlStateManager.translate(this.RHorn_4.offsetX, this.RHorn_4.offsetY, this.RHorn_4.offsetZ);
+        GlStateManager.translate(this.RHorn_4.rotationPointX * f5, this.RHorn_4.rotationPointY * f5, this.RHorn_4.rotationPointZ * f5);
+        GlStateManager.scale(1.0D, 1.0D, 0.8D);
+        GlStateManager.translate(-this.RHorn_4.offsetX, -this.RHorn_4.offsetY, -this.RHorn_4.offsetZ);
+        GlStateManager.translate(-this.RHorn_4.rotationPointX * f5, -this.RHorn_4.rotationPointY * f5, -this.RHorn_4.rotationPointZ * f5);
+        this.RHorn_4.render(f5);
+        GlStateManager.popMatrix();
+        GlStateManager.pushMatrix();
+        GlStateManager.translate(this.Rhorn_1.offsetX, this.Rhorn_1.offsetY, this.Rhorn_1.offsetZ);
+        GlStateManager.translate(this.Rhorn_1.rotationPointX * f5, this.Rhorn_1.rotationPointY * f5, this.Rhorn_1.rotationPointZ * f5);
+        GlStateManager.scale(0.55D, 0.7D, 0.7D);
+        GlStateManager.translate(-this.Rhorn_1.offsetX, -this.Rhorn_1.offsetY, -this.Rhorn_1.offsetZ);
+        GlStateManager.translate(-this.Rhorn_1.rotationPointX * f5, -this.Rhorn_1.rotationPointY * f5, -this.Rhorn_1.rotationPointZ * f5);
+        this.Rhorn_1.render(f5);
+        GlStateManager.popMatrix();
+        GlStateManager.pushMatrix();
+        GlStateManager.translate(this.Lhorn_3.offsetX, this.Lhorn_3.offsetY, this.Lhorn_3.offsetZ);
+        GlStateManager.translate(this.Lhorn_3.rotationPointX * f5, this.Lhorn_3.rotationPointY * f5, this.Lhorn_3.rotationPointZ * f5);
+        GlStateManager.scale(-1.3D, 0.8D, -1.0D);
+        GlStateManager.translate(-this.Lhorn_3.offsetX, -this.Lhorn_3.offsetY, -this.Lhorn_3.offsetZ);
+        GlStateManager.translate(-this.Lhorn_3.rotationPointX * f5, -this.Lhorn_3.rotationPointY * f5, -this.Lhorn_3.rotationPointZ * f5);
+        this.Lhorn_3.render(f5);
+        GlStateManager.popMatrix();
+        GlStateManager.pushMatrix();
+        GlStateManager.translate(this.Lhorn_4.offsetX, this.Lhorn_4.offsetY, this.Lhorn_4.offsetZ);
+        GlStateManager.translate(this.Lhorn_4.rotationPointX * f5, this.Lhorn_4.rotationPointY * f5, this.Lhorn_4.rotationPointZ * f5);
+        GlStateManager.scale(1.0D, 1.0D, 0.8D);
+        GlStateManager.translate(-this.Lhorn_4.offsetX, -this.Lhorn_4.offsetY, -this.Lhorn_4.offsetZ);
+        GlStateManager.translate(-this.Lhorn_4.rotationPointX * f5, -this.Lhorn_4.rotationPointY * f5, -this.Lhorn_4.rotationPointZ * f5);
+        this.Lhorn_4.render(f5);
+        GlStateManager.popMatrix();
+        GlStateManager.pushMatrix();
+        GlStateManager.translate(this.Lhorn_1.offsetX, this.Lhorn_1.offsetY, this.Lhorn_1.offsetZ);
+        GlStateManager.translate(this.Lhorn_1.rotationPointX * f5, this.Lhorn_1.rotationPointY * f5, this.Lhorn_1.rotationPointZ * f5);
+        GlStateManager.scale(0.65D, 0.7D, 0.7D);
+        GlStateManager.translate(-this.Lhorn_1.offsetX, -this.Lhorn_1.offsetY, -this.Lhorn_1.offsetZ);
+        GlStateManager.translate(-this.Lhorn_1.rotationPointX * f5, -this.Lhorn_1.rotationPointY * f5, -this.Lhorn_1.rotationPointZ * f5);
+        this.Lhorn_1.render(f5);
+        GlStateManager.popMatrix();
+        GlStateManager.pushMatrix();
+        GlStateManager.translate(this.RHorn_3.offsetX, this.RHorn_3.offsetY, this.RHorn_3.offsetZ);
+        GlStateManager.translate(this.RHorn_3.rotationPointX * f5, this.RHorn_3.rotationPointY * f5, this.RHorn_3.rotationPointZ * f5);
+        GlStateManager.scale(1.3D, 0.8D, 1.0D);
+        GlStateManager.translate(-this.RHorn_3.offsetX, -this.RHorn_3.offsetY, -this.RHorn_3.offsetZ);
+        GlStateManager.translate(-this.RHorn_3.rotationPointX * f5, -this.RHorn_3.rotationPointY * f5, -this.RHorn_3.rotationPointZ * f5);
+        this.RHorn_3.render(f5);
+        GlStateManager.popMatrix();
+        GlStateManager.pushMatrix();
+        GlStateManager.translate(this.Lhorn_2.offsetX, this.Lhorn_2.offsetY, this.Lhorn_2.offsetZ);
+        GlStateManager.translate(this.Lhorn_2.rotationPointX * f5, this.Lhorn_2.rotationPointY * f5, this.Lhorn_2.rotationPointZ * f5);
+        GlStateManager.scale(0.8D, 0.8D, 0.8D);
+        GlStateManager.translate(-this.Lhorn_2.offsetX, -this.Lhorn_2.offsetY, -this.Lhorn_2.offsetZ);
+        GlStateManager.translate(-this.Lhorn_2.rotationPointX * f5, -this.Lhorn_2.rotationPointY * f5, -this.Lhorn_2.rotationPointZ * f5);
+        this.Lhorn_2.render(f5);
+        GlStateManager.popMatrix();
+    }
+
+    /**
+     * This is a helper function from Tabula to set the rotation of model parts
+     */
+    public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
+        modelRenderer.rotateAngleX = x;
+        modelRenderer.rotateAngleY = y;
+        modelRenderer.rotateAngleZ = z;
+    }
+}

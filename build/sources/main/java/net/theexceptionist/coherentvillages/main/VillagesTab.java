@@ -20,7 +20,7 @@ public class VillagesTab extends CreativeTabs {
 
 	@Override
 	public ItemStack getTabIconItem() {
-		return new ItemStack(ModItems.nordShield, 1, 0);
+		return new ItemStack(ModItems.nordShield[0], 1, 0);
 	}
 
 }

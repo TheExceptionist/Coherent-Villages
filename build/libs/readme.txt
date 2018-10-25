@@ -420,7 +420,7 @@ Archer upgrades to LEgate
 *Changed 'Roman' to 'Latin'
 
 
--Pre-Release Test v0.0.1.7
+-Pre-Release Test v0.0.2.1
 =========================================
 *Added throwing weapons
 *Some Nords now throw axes
@@ -429,7 +429,55 @@ Archer upgrades to LEgate
 *Added Wraiths(Can't be damaged with normal weapons, only magic and fire), for the roman culture
 *Added some more configs
 *Fixed Healer Bug
+*Improved the farm of the 3 cultures
+***Added the Gothic Culture***
+*Added Serf
+*Added Priest
+*Added Scribe
+*Added Militia
+*Added Man-at-Arms
+*Added Knight
+*Added Archer
+*Added Mage
+*Added Mage Knight
+*Added Grand Wizard
+*Added King 
+*Added Hired Sword
 
+*Adde Bandit Horseman
+*Added Bandit Horse Archer
+*Added Bandit Lancer
+
+
+-Pre-Release Test v0.0.2.2
+=========================================
+*Fixed a crash with the Nord farm
+
+
+-Pre-Release Test v0.0.2.4
+=========================================
+*Added Lemures to Latin Biomes, can perform a blinding claw attack as well as cast a magic spell (Still Testing!)
+*Added a new config for lemures (Notify me of performance drops)
+*Added more shield variants
+*Added special AI to the Mage Knight (Notify me of performace drops)
+
+
+-Pre-Release Test v0.0.2.5
+=========================================
+*Fixed more crop crashes
+
+-Pre-Release Test v0.0.2.6
+=========================================
+*Fixed shield Bug
+*Fixed more crashes
+
+-Pre-Release Test v0.0.2.7
+=========================================
+*Fixed more crashes
+*Tweaked nord shield spawn rates
+
+
+//Blocking bug
 //Faction System
 //Day System
 //Events

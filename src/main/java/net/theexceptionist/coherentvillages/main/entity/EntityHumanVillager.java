@@ -106,8 +106,8 @@ import net.theexceptionist.coherentvillages.main.entity.attributes.AttributeRace
 import net.theexceptionist.coherentvillages.main.entity.attributes.AttributeVocation;
 import net.theexceptionist.coherentvillages.main.entity.spells.Spell;
 import net.theexceptionist.coherentvillages.main.items.EntityWeaponThrowable;
+import net.theexceptionist.coherentvillages.main.items.ItemModShield;
 import net.theexceptionist.coherentvillages.main.items.ItemWeaponThrowable;
-import net.theexceptionist.coherentvillages.main.items.ModItems;
 
 public class EntityHumanVillager extends EntityVillager implements IEntityFollower, IEntityVillager, IRangedAttackMob{
 	protected String firstName, lastName;
@@ -191,6 +191,8 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
 	private String factionName = "None";
 	private int healthChange = -1;
 	private boolean nervous = false;
+	private boolean magicMelee = false;
+	private int combatType = 0;
     
 	public EntityHumanVillager(World worldIn) {
 		super(worldIn);
@@ -533,6 +535,19 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
 		{
 			this.faction = this.liege.getFaction();
 		}
+		
+		if(this.magicMelee)
+		{
+			EntityLivingBase target = this.getTarget();
+			if(target != null && target.getDistance(this) < 4)
+			{
+				if(this.combatType == 0) this.forceCombatTask(1);
+			}
+			else
+			{
+				if(this.combatType == 1) this.forceCombatTask(0);
+			}
+		}
 		//System.out.println("width and height: "+this.width+" "+this.height);
 		/*if(this.getHeldItemOffhand() != null && this.getHeldItemOffhand().getItem() == Items.SHIELD)
 		{
@@ -561,6 +576,34 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
 		}*/
     }
 	
+	private void forceCombatTask(int i) {
+		// TODO Auto-generated method stub
+		if (this.world != null && !this.world.isRemote)
+        {
+            this.tasks.removeTask(this.melee);
+            this.tasks.removeTask(this.ranged);
+            this.tasks.removeTask(this.rangedTrained);
+            this.tasks.removeTask(this.potions);
+        	this.tasks.removeTask(this.block);
+        	this.tasks.removeTask(this.spells);
+        	this.tasks.removeTask(this.heal);
+        	
+        	switch(i)
+        	{
+        	case 0:
+        		 this.tasks.addTask(0, this.spells);
+        		 this.combatType = 0;
+        		 break;
+        	case 1:
+       		 	this.tasks.addTask(0, this.melee);
+       		 	this.combatType = 1;
+       		 	break;
+        	}
+        	
+        	//System.out.println("Running");
+        }
+	}
+
 	public void upgrade() {
 		if(this.world.isRemote) return;
 		
@@ -823,21 +866,15 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
             {
             	//System.out.println("IsMagic");
                	this.tasks.addTask(1, this.spells);
-            }
-            else if(canUsePotions)
-            {
-                	System.out.println("Can attack: "+canAttackWithPotions);
-                	if(canAttackWithPotions) 
-                	{
-                		this.tasks.addTask(2, this.potions);
-                	}
-                	if((PASSIVE_1 != null || PASSIVE_2 != null) && vocation.isHealer()) this.tasks.addTask(3, this.heal);
-            }
+            }else if(canAttackWithPotions) 
+        	{
+        		this.tasks.addTask(2, this.potions);
+        	}
             else
             {
                 this.tasks.addTask(1, this.melee);
                 
-                if(this.getHeldItemOffhand() != null && (this.getHeldItemOffhand().getItem() == Items.SHIELD || this.getHeldItemOffhand().getItem() == ModItems.nordShield))
+                if(this.getHeldItemOffhand() != null && (this.getHeldItemOffhand().getItem() == Items.SHIELD || this.getHeldItemOffhand().getItem() instanceof ItemModShield))
                 {
                 	//System.out.println("Has Shield");
                 	//this.setBlocking(true);
@@ -846,6 +883,13 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
                 //System.out.println("Melee!");
             } 
             
+            
+            if(canUsePotions)
+            {
+                	//System.out.println("Can attack: "+canAttackWithPotions);
+                	
+                	if((PASSIVE_1 != null || PASSIVE_2 != null) && vocation.isHealer()) this.tasks.addTask(3, this.heal);
+            }
             
             
          //   System.out.println("Can Ride: "+this.vocation.isCanRide());
@@ -1088,6 +1132,24 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
 		        this.defaultTargets();
 			}
 			break;
+			case AttributeVocation.CLASS_HYBRID_MAGE_SOLDER:
+			{
+				this.tasks.addTask(0, new EntityAISwimming(this));
+		       // this.tasks.addTask(1, melee);
+		        this.tasks.addTask(2, new EntityAIStayInBorders(this, 1.0D));
+		        this.tasks.addTask(3, new EntityAIMoveThroughVillage(this, 0.6D, true));
+		        this.tasks.addTask(4, new EntityAIRestrictOpenDoor(this));
+		        this.tasks.addTask(5, new EntityAIOpenDoor(this, true));
+		        //this.tasks.addTask(6, new EntityAIRest(this, true));
+		        this.tasks.addTask(7, new EntityAIHideFromHarm(this));
+		        this.tasks.addTask(8, new EntityAIMoveTowardsTarget(this, 0.9D, 32.0F));
+		        this.tasks.addTask(9, new EntityAIWanderAvoidWater(this, 0.6D));
+		        this.tasks.addTask(10, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
+		        this.tasks.addTask(11, new EntityAILookIdle(this));
+		        
+		        this.defaultTargets();
+		        this.magicMelee = true;
+			}
 		}
 	}
 	
@@ -1279,8 +1341,6 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
 		this.setHeldItem(EnumHand.MAIN_HAND, new ItemStack(vocation.getWeapon()));
 		this.setHeldItem(EnumHand.OFF_HAND, new ItemStack(vocation.getShield()));
 		
-		//System.out.println(vocation.getName()+" Has Shield "+vocation.getShield());
-		
 		this.setItemStackToSlot(EntityEquipmentSlot.HEAD, new ItemStack(vocation.getHelmet()));
 		this.setItemStackToSlot(EntityEquipmentSlot.CHEST, new ItemStack(vocation.getChestplate()));
 		this.setItemStackToSlot(EntityEquipmentSlot.LEGS, new ItemStack(vocation.getLeggings()));
@@ -1309,6 +1369,18 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
 		}
 		if(S_PASSIVE_1 != null || S_PASSIVE_2 != null || S_ACTIVE_1 != null || S_ACTIVE_2 != null) isMagic  = true;
 		
+		
+		//Put somewhere else
+		/*if(vocation.isAlwaysHorse())
+		{
+			EntityHorse newHorse = new EntityHorse(world);
+			newHorse.setLocationAndAngles(this.posX, this.posY, this.posZ, 0, 0);
+			world.spawnEntity(newHorse);
+			
+			
+			System.out.println("Spawning.."+newHorse.getCustomNameTag());
+			//this.setRidingHorse(horse);
+		}*/
 		//Reset equipment for next guy
 		vocation.setEquipment();
 		//System.out.println("Magic: "+isMagic);
@@ -1472,8 +1544,7 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
 	{
 		return (this.getAttackingEntity() != null || this.getAttackTarget() != null);
 	}
-	
-	@SideOnly(Side.CLIENT)
+
 	public boolean isBlocking()
 	{
 		return ((Boolean)this.dataManager.get(BLOCKING)).booleanValue();
@@ -1488,14 +1559,7 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
 	@Override
 	public boolean isActiveItemStackBlocking()
     {
-        if (this.isBlocking())
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return this.isBlocking();
     }
 
 	@Override
@@ -1507,6 +1571,8 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
 	
 	public void setBlocking(boolean b) {
 	      this.dataManager.set(BLOCKING, Boolean.valueOf(b));
+	      if(b) this.setActiveHand(EnumHand.OFF_HAND);
+	      else this.resetActiveHand();
 	}
 	
 	@Override
@@ -1865,6 +1931,23 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
 			//System.out.println(this.getTitle()+" Joined Faction: "+this.faction.getTitleName());
 		}
 		//this.faction.addMember(this);
+	}
+	
+	public EntityLivingBase getTarget()
+	{
+		EntityLivingBase target = null;
+		
+		if(this.getAttackingEntity() != null)
+		{
+			target = this.getAttackingEntity();
+		}
+		
+		if(this.getAttackTarget() != null)
+		{
+			target = this.getAttackTarget();
+		}
+		
+		return target;
 	}
 
 	public boolean isRuler() {

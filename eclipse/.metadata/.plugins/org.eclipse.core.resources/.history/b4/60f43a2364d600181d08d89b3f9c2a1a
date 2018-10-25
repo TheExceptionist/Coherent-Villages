@@ -1,0 +1,5 @@
+package net.theexceptionist.coherentvillages.main.entity.render;
+
+public class RenderLemure {
+
+}
