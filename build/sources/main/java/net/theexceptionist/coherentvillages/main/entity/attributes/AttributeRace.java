@@ -508,15 +508,15 @@ public class AttributeRace {
 				this.armor.put(ARMOR_1_LEGS, Items.LEATHER_LEGGINGS);
 				this.armor.put(ARMOR_1_FEET, Items.LEATHER_BOOTS);
 				
-				this.armor.put(ARMOR_2_HEAD, Items.CHAINMAIL_HELMET);
-				this.armor.put(ARMOR_2_CHEST, Items.IRON_CHESTPLATE);
-				this.armor.put(ARMOR_2_LEGS, Items.IRON_LEGGINGS);
-				this.armor.put(ARMOR_2_FEET, Items.IRON_BOOTS);
+				this.armor.put(ARMOR_2_HEAD, ModItems.gothicHelmet);
+				this.armor.put(ARMOR_2_CHEST, ModItems.gothicChestplate);
+				this.armor.put(ARMOR_2_LEGS, ModItems.gothicLeggings);
+				this.armor.put(ARMOR_2_FEET, ModItems.gothicBoots);
 				
-				this.armor.put(ARMOR_3_HEAD, Items.DIAMOND_HELMET);
-				this.armor.put(ARMOR_3_CHEST, Items.IRON_CHESTPLATE);
-				this.armor.put(ARMOR_3_LEGS, Items.IRON_LEGGINGS);
-				this.armor.put(ARMOR_3_FEET, Items.IRON_BOOTS);
+				this.armor.put(ARMOR_3_HEAD, ModItems.gothicHelmet);
+				this.armor.put(ARMOR_3_CHEST, ModItems.gothicChestplate);
+				this.armor.put(ARMOR_3_LEGS, ModItems.gothicLeggings);
+				this.armor.put(ARMOR_3_FEET, ModItems.gothicBoots);
 				
 				this.armor.put(ARMOR_4_HEAD, Items.DIAMOND_HELMET);
 				this.armor.put(ARMOR_4_CHEST, Items.DIAMOND_CHESTPLATE);
@@ -1108,5 +1108,13 @@ public class AttributeRace {
 		else if(this.mages.size() > 0 && this.rand.nextInt(100) <= 50) return mages.get(this.rand.nextInt(this.mages.size()) + 1);
 		else if(this.alchemists.size() > 0 && this.rand.nextInt(100) <= 75) return alchemists.get(this.rand.nextInt(this.alchemists.size()) + 1);
 		else return soldiers.get(this.rand.nextInt(this.soldiers.size()) + 1);	
+	}
+
+	public AttributeVocation getRandomVillager(World world) {
+		if(this.archers.size() > 0 && this.rand.nextInt(100) <= 1/6) return archers.get(this.rand.nextInt(this.archers.size()) + 1);
+		else if(this.mages.size() > 0 && this.rand.nextInt(100) <= 2/6) return mages.get(this.rand.nextInt(this.mages.size()) + 1);
+		else if(this.alchemists.size() > 0 && this.rand.nextInt(100) <= 3/6) return alchemists.get(this.rand.nextInt(this.alchemists.size()) + 1);
+		else if(this.soldiers.size() > 0 && this.rand.nextInt(100) <= 4/6)  return soldiers.get(this.rand.nextInt(this.soldiers.size()) + 1);	//return alchemists.get(this.rand.nextInt(this.alchemists.size()) + 1);
+		else return villagers.get(this.rand.nextInt(this.villagers.size()) + 1);	
 	}
 }

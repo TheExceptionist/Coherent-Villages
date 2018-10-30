@@ -476,6 +476,16 @@ Archer upgrades to LEgate
 *Fixed more crashes
 *Tweaked nord shield spawn rates
 
+-Pre-Release Test v0.0.2.9
+=========================================
+*Fixed a crash caused by the crops
+*Added an event system
+*2 new events!
+**Raid Event
+**Immigration Event
+*Added some new configs
+*Added Gothic Armor set to the Goths
+
 
 //Blocking bug
 //Faction System

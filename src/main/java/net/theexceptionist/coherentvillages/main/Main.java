@@ -31,6 +31,7 @@ import net.minecraftforge.fml.common.registry.VillagerRegistry.IVillageCreationH
 import net.theexceptionist.coherentvillages.commands.CommandCreate;
 import net.theexceptionist.coherentvillages.main.block.BlockRegister;
 import net.theexceptionist.coherentvillages.main.entity.EntityBjornserker;
+import net.theexceptionist.coherentvillages.main.entity.EntityDrachen;
 import net.theexceptionist.coherentvillages.main.entity.EntityHumanVillager;
 import net.theexceptionist.coherentvillages.main.entity.EntityLemure;
 import net.theexceptionist.coherentvillages.main.entity.EntityWarg;
@@ -137,6 +138,14 @@ public class Main
     			"german_bandit_infest_rate=25\n",
     			"#The chance a Nord Village will zombie infested!\n",
     			"german_zombie_infest_rate=2\n",
+    			"#=====Event CONFIGS=======",
+    			"#Show event messages!\n",
+    			"show_event_messages=1\n",
+    			"#The chance a village will be raid by bandits!\n",
+    			"raid_rate=50\n",
+    			"#The chance a village will recieve immigrates!\n",
+    			"immigrate_rate=50\n",
+    			
     	};
     
     public static enum Soldier
@@ -182,6 +191,20 @@ public class Main
     public static CreativeTabs villagesTab = new VillagesTab(CreativeTabs.getNextID(), Resources.NAME);
     
 	private static boolean spawnCreepers = true;
+
+	public static int SMALL_RAID_RATE = 50;
+
+	public static int MEDIUM_RAID_RATE = 50;
+
+	public static int LARGE_RAID_RATE = 50;
+
+	public static int SMALL_IMMIGRATE_RATE = 50;
+
+	public static int MEDIUM_IMMIGRATE_RATE = 50;
+
+	public static int LARGE_IMMIGRATE_RATE = 50;
+
+	public static boolean sendMessage = true;
 
 	@EventHandler
 	public void serverLoad(FMLServerStartingEvent event)
@@ -296,6 +319,21 @@ public class Main
 				else if(parts[0].contains("min"))
 				{
 					min_distance = value;
+				}
+				else if(parts[0].contains("show_event"))
+				{
+					sendMessage = value == 1 ? true : false;
+					System.out.println("Show Message Events: "+value);
+				}
+				else if(parts[0].contains("raid_rate"))
+				{
+					SMALL_RAID_RATE = MEDIUM_RAID_RATE = LARGE_RAID_RATE = value;// == 1 ? true : false;
+					System.out.println("New Raid Rate: "+value);
+				}
+				else if(parts[0].contains("immigrate_rate"))
+				{
+					SMALL_IMMIGRATE_RATE = MEDIUM_IMMIGRATE_RATE = LARGE_IMMIGRATE_RATE = value;
+					System.out.println("New Immigrate Rate: "+value);
 				}
 				else if(parts[0].contains("bjorn_turn_rate"))
 				{
@@ -641,6 +679,7 @@ public class Main
     	createEntity(EntityBjornserker.class, Main.entityIDStart + 2, "bjornserker", 0x101010, 0x808080, true);
     	createEntity(EntityWraith.class, Main.entityIDStart + 3, "wraith", 0x101010, 0x00FF00, true);
     	createEntity(EntityLemure.class, Main.entityIDStart + 4, "lemure", 0x404040, 0x00AA00, true);
+    	createEntity(EntityDrachen.class, Main.entityIDStart + 5, "drachen", 0x808080, 0x005500, true);
     	
     	
     	//Soldiers

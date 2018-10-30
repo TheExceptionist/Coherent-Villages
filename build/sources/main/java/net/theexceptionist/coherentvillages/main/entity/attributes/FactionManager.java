@@ -19,17 +19,7 @@ public class FactionManager {
 	{
 		factions.remove(faction);
 	}
-	
-	public static void updateFactions()
-	{
-        ArrayList<AttributeFaction> factions2 = factions;
 
-        for (AttributeFaction village1 : factions2)
-        {
-            village1.update();
-        }
-	}
-	
 	public static AttributeFaction getNearestVillage(BlockPos doorBlock, int radius)
     {
         AttributeFaction village = null;

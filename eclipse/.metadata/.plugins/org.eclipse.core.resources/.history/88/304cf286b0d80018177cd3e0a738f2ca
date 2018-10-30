@@ -1,0 +1,10 @@
+package net.theexceptionist.coherentvillages.main.events;
+
+public class Event {
+	public Event()
+	{
+		
+	}
+	
+	public abstract void 
+}

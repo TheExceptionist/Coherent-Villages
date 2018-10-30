@@ -1,0 +1,13 @@
+package net.theexceptionist.coherentvillages.main.events;
+
+public abstract class Event {
+	protected String name;
+	
+	public Event(String name)
+	{
+		this.name = name;
+	}
+	
+	public abstract void execute();
+	public abstract void reset();
+}

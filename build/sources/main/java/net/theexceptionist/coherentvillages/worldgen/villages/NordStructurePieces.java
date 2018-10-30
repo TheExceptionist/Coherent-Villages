@@ -16,7 +16,6 @@ import net.minecraft.block.BlockLog.EnumAxis;
 import net.minecraft.block.BlockOldLog;
 import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.BlockStairs;
-import net.minecraft.block.BlockStem;
 import net.minecraft.block.BlockTorch;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -27,6 +26,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.Mirror;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
@@ -40,13 +40,16 @@ import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraft.world.gen.structure.template.TemplateManager;
 import net.minecraft.world.storage.loot.LootTableList;
+import net.theexceptionist.coherentvillages.events.PlayerConnectionEvent;
 import net.theexceptionist.coherentvillages.main.Main;
+import net.theexceptionist.coherentvillages.main.Resources;
 import net.theexceptionist.coherentvillages.main.block.BlockRegister;
 import net.theexceptionist.coherentvillages.main.entity.EntityBjornserker;
 import net.theexceptionist.coherentvillages.main.entity.EntityHumanVillager;
 import net.theexceptionist.coherentvillages.main.entity.EntityWarg;
 import net.theexceptionist.coherentvillages.main.entity.attributes.AttributeRace;
 import net.theexceptionist.coherentvillages.main.entity.attributes.AttributeVocation;
+import net.theexceptionist.coherentvillages.worldgen.helper.ModTemplate;
 
 public class NordStructurePieces
 {
@@ -721,6 +724,7 @@ public class NordStructurePieces
              * second Part of Structure generating, this for example places Spiderwebs, Mob Spawners, it closes
              * Mineshafts at the end, it adds Fences...
              */
+            private static final ResourceLocation Inn = new ResourceLocation(Resources.MODID+":inn");
             public boolean addComponentParts(World worldIn, Random randomIn, StructureBoundingBox structureBoundingBoxIn)
             {
                 if (this.averageGroundLvl < 0)
@@ -734,9 +738,12 @@ public class NordStructurePieces
 
                     this.boundingBox.offset(0, this.averageGroundLvl - this.boundingBox.maxY + NordBuildingsArray.DOCKYARD_HEIGHT - 1, 0);
                 }
-
+                BlockPos pos = new BlockPos(this.getXWithOffset(0, 0), this.getYWithOffset(0), this.getZWithOffset(0, 0));
                 this.placeStructureBase(worldIn, structureBoundingBoxIn, randomIn, NordBuildingsArray.dockyard_0, NordBuildingsArray.DOCKYARD_LENGTH, NordBuildingsArray.DOCKYARD_HEIGHT, NordBuildingsArray.DOCKYARD_WIDTH);
 
+                ModTemplate template = PlayerConnectionEvent.templateHandler.getTemplate(worldIn.getMinecraftServer(), Inn);//worldIn.getSaveHandler().getStructureTemplateManager().getTemplate(worldIn.getMinecraftServer(), Inn);
+                
+                template.addBlocksToWorld(worldIn, pos, WorldGenVillage.settings);
                 this.spawnVillagers(worldIn, structureBoundingBoxIn, 2, 1, 1, 1, AttributeVocation.CLASS_VILLAGER, 1, false);
                 return true;
             }

@@ -16,13 +16,13 @@ import net.minecraft.world.gen.structure.MapGenVillage;
 import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraft.world.gen.structure.StructureStart;
 import net.minecraft.world.gen.structure.StructureVillagePieces;
-import net.minecraft.world.gen.structure.template.PlacementSettings;
 import net.theexceptionist.coherentvillages.main.Main;
 import net.theexceptionist.coherentvillages.main.entity.attributes.AttributeRace;
+import net.theexceptionist.coherentvillages.worldgen.helper.ModPlacementSettings;
 
 public class WorldGenVillage extends MapGenVillage
 {
-	final PlacementSettings settings = new PlacementSettings().setRotation(Rotation.NONE);
+	public static final ModPlacementSettings settings = new ModPlacementSettings().setRotation(Rotation.NONE);
     /** A list of all the biomes villages can spawn in. */
     public static ArrayList<Biome> NORD_VILLAGE_SPAWN_BIOMES = new ArrayList<Biome>();
     public static ArrayList<Biome> SLAV_VILLAGE_SPAWN_BIOMES = new ArrayList<Biome>();

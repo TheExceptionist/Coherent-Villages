@@ -1,11 +1,12 @@
 package net.theexceptionist.coherentvillages.main.entity.attributes;
 
-import net.minecraft.nbt.NBTTagCompound;
+import java.util.ArrayList;
+
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;
-import net.minecraft.world.storage.WorldSavedData;
 import net.theexceptionist.coherentvillages.main.entity.EntityHumanVillager;
+import net.theexceptionist.coherentvillages.main.events.Event;
 
 public class AttributeFaction {
 	private static final String[] n_titles = 
@@ -92,6 +93,11 @@ public class AttributeFaction {
 
 	private boolean messageSend = false;
 	private EntityHumanVillager ruler;
+
+	private boolean wasUpdated = false;
+	private ArrayList<Event> events;
+
+	private int size;
 	//private ArrayList<EntityHumanVillager> members;
 	
 	public AttributeFaction(World world, BlockPos center, AttributeRace race, String name, EntityHumanVillager entityHumanVillager, String factionName)
@@ -102,6 +108,8 @@ public class AttributeFaction {
 		this.race = race;
 		this.ID = END_ID++;
 		this.ruler = entityHumanVillager;
+		this.events = new ArrayList<Event>();
+		this.size = 1;
 		
 		if(!world.isRemote)
 		{
@@ -117,10 +125,25 @@ public class AttributeFaction {
 			FactionManager.addFaction(this);
 		}
 		
-		
+		this.getEvents();
 	//this.members = new ArrayList<EntityHumanVillager>();
 	}
 	
+	private void getEvents() {
+		events.add(Event.small_raid);
+		events.add(Event.medium_raid);
+		events.add(Event.large_raid);
+		
+		events.add(Event.small_immgrate);
+		events.add(Event.medium_immgrate);
+		events.add(Event.large_immgrate);
+		
+		switch(race.getID())
+		{
+			
+		}
+	}
+
 	public EntityHumanVillager getRuler() {
 		return ruler;
 	}
@@ -134,7 +157,7 @@ public class AttributeFaction {
 	}
 
 	public void setName()
-	{
+	{		
 		switch(race.getType())
 		{
 			case AttributeRace.RACE_TYPE_NORD:
@@ -185,6 +208,12 @@ public class AttributeFaction {
 		}
 	}
 	
+	public Event getRandomEvent()
+	{
+		if(events.size() < 1) return null;
+		return events.get(world.rand.nextInt(events.size()));
+	}
+	
 	public void setBandit(boolean bandit)
 	{
 		isBandit = bandit;
@@ -220,9 +249,29 @@ public class AttributeFaction {
 		this.ruler = ruler;
 	}
 
-	public void update() {
+	public void update(boolean day, BlockPos spawn) {
+		//System.out.println("Spawn: "+spawn.getX()+" - "+spawn.getZ());
+		getRandomEvent().execute(world, day, spawn, race, this);
+	}
+
+	public boolean doneUpdate() {
 		// TODO Auto-generated method stub
-		
+		return wasUpdated;
+	}
+
+	public void setUpdate(boolean b) {
+		// TODO Auto-generated method stub
+		wasUpdated = b;
+	}
+
+	public void addVillager() {
+		// TODO Auto-generated method stub
+		size++;
+	}
+
+	public int getNumVillagers() {
+		// TODO Auto-generated method stub
+		return size;
 	}
 
 	/*public void addMember(EntityHumanVillager entityHumanVillager) {

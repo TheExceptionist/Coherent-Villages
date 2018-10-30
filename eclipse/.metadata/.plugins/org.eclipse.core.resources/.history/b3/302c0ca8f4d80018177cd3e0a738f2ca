@@ -1,0 +1,32 @@
+package net.theexceptionist.coherentvillages.main.entity;
+
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.IRangedAttackMob;
+import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.entity.monster.IMob;
+import net.minecraft.entity.passive.EntityFlying;
+import net.minecraft.world.World;
+
+public class EntityDrachen extends EntityMob implements IMob, EntityFlying, IRangedAttackMob
+{
+
+	public EntityDrachen(World worldIn) {
+		super(worldIn);
+		this.width = 5;
+		this.height = 4;
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public void attackEntityWithRangedAttack(EntityLivingBase target, float distanceFactor) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setSwingingArms(boolean swingingArms) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

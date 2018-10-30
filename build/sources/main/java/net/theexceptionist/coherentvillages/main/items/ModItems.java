@@ -22,6 +22,7 @@ public class ModItems {
 	public static ArmorMaterial NORD_MAIL = EnumHelper.addArmorMaterial("nord_mail", Resources.MODID+":nord_mail", 1500, new int[]{3 , 4, 7, 1}, 10, SoundEvents.ITEM_ARMOR_EQUIP_CHAIN, 8F);
 	public static ArmorMaterial ROMAN_ARMOR = EnumHelper.addArmorMaterial("roman_armor", Resources.MODID+":roman_armor_2", 2000, new int[]{4, 4, 7, 2}, 5, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 12F);
 	public static ArmorMaterial ROMAN_ARMOR_ELITE = EnumHelper.addArmorMaterial("roman_armor_elite", Resources.MODID+":roman_armor", 2500, new int[]{5, 6, 7, 2}, 7, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 15F);
+	public static ArmorMaterial GOTHIC_ARMOR = EnumHelper.addArmorMaterial("gothic_armor", Resources.MODID+":gothic_armor", 2250, new int[]{5, 8, 5, 2}, 7, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 20F);
 	
 	public static ArmorMaterial NORD_HELMET = EnumHelper.addArmorMaterial("horn_helmet", Resources.MODID+":horn_helmet", 1700, new int[]{6, 4, 3, 1}, 8, SoundEvents.ITEM_ARMOR_EQUIP_CHAIN, 10F);
 	public static ArmorMaterial ROMAN_ARMOR_HELMET = EnumHelper.addArmorMaterial("roman_helmet", Resources.MODID+":roman_helmet", 2000, new int[]{4, 4, 7, 2}, 5, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 12F);
@@ -45,6 +46,11 @@ public class ModItems {
 	public static ItemModArmor romanChestplateElite;// = new ItemNordArmor("barbarian_chestplate", ItemNordArmor.NORD_MAIL, 0, EntityEquipmentSlot.HEAD);
 	public static ItemModArmor romanLeggingsElite;// = new ItemNordArmor("barbarian_leggings", ItemNordArmor.NORD_MAIL, 1, EntityEquipmentSlot.HEAD);
 	public static ItemModArmor romanBootsElite;
+	
+	public static ItemModArmor gothicHelmet;// = new ItemNordArmor("barbarian_helmet", ItemNordArmor.NORD_MAIL, 0, EntityEquipmentSlot.HEAD);
+	public static ItemModArmor gothicChestplate;// = new ItemNordArmor("barbarian_chestplate", ItemNordArmor.NORD_MAIL, 0, EntityEquipmentSlot.HEAD);
+	public static ItemModArmor gothicLeggings;// = new ItemNordArmor("barbarian_leggings", ItemNordArmor.NORD_MAIL, 1, EntityEquipmentSlot.HEAD);
+	public static ItemModArmor gothicBoots;
 	
 	public static ItemModHelmet hornHelmet;
 	
@@ -89,6 +95,10 @@ public class ModItems {
 		romanLeggingsElite = new ItemModArmor("roman_leggings_elite", ModItems.ROMAN_ARMOR_ELITE, 0, EntityEquipmentSlot.LEGS);
 		romanBootsElite = new ItemModArmor("roman_boots_elite", ModItems.ROMAN_ARMOR_ELITE, 0, EntityEquipmentSlot.FEET);
 		
+		gothicHelmet = new ItemModArmor("gothic_helmet", ModItems.GOTHIC_ARMOR, 0, EntityEquipmentSlot.HEAD);
+		gothicChestplate = new ItemModArmor("gothic_chestplate", ModItems.GOTHIC_ARMOR, 0, EntityEquipmentSlot.CHEST);
+		gothicLeggings = new ItemModArmor("gothic_leggings", ModItems.GOTHIC_ARMOR, 0, EntityEquipmentSlot.LEGS);
+		gothicBoots = new ItemModArmor("gothic_boots", ModItems.GOTHIC_ARMOR, 0, EntityEquipmentSlot.FEET);
 		
 		tomeSummonAncient = new ItemTome("summon_tome_0", Spell.summon_ancient_warror);
 		tomeFireball = new ItemTome("attack_tome_0", Spell.fireball);
@@ -127,6 +137,11 @@ public class ModItems {
 		registry.registerAll(romanChestplateElite);
 		registry.registerAll(romanLeggingsElite);
 		registry.registerAll(romanBootsElite);
+		
+		registry.registerAll(gothicHelmet);
+		registry.registerAll(gothicChestplate);
+		registry.registerAll(gothicLeggings);
+		registry.registerAll(gothicBoots);
 
 		registry.registerAll(tomeSummonAncient);
 		registry.registerAll(tomeFireball);
@@ -163,6 +178,11 @@ public class ModItems {
 		registerRender(romanChestplateElite);
 		registerRender(romanLeggingsElite);
 		registerRender(romanBootsElite);
+		
+		registerRender(gothicHelmet);
+		registerRender(gothicChestplate);
+		registerRender(gothicLeggings);
+		registerRender(gothicBoots);
 		
 		registerRender(tomeSummonAncient);
 		registerRender(tomeFireball);

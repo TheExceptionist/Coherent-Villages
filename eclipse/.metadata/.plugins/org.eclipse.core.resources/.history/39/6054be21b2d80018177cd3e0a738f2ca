@@ -1,0 +1,28 @@
+package net.theexceptionist.coherentvillages.main.events;
+
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.Style;
+import net.minecraft.util.text.TextComponentString;
+import net.theexceptionist.coherentvillages.main.entity.attributes.AttributeFaction;
+import net.theexceptionist.coherentvillages.main.entity.attributes.AttributeRace;
+
+public abstract class Event {
+	protected String name;
+	protected AttributeRace race;
+	protected Style style;
+	protected TextComponentString eventMessage;
+	protected boolean startInDay;
+	protected int range, count;
+	
+	public Event(String name, AttributeRace race, boolean startInDay, int range, int count)
+	{
+		this.name = name;
+		this.race = race;
+		this.startInDay = startInDay;
+		this.range = range;
+		this.count = count;
+	}
+	
+	public abstract void execute(boolean day, BlockPos spawn, AttributeFaction faction);
+	public abstract void reset(boolean day);
+}

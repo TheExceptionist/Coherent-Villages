@@ -1,0 +1,9 @@
+package net.theexceptionist.coherentvillages.main.entity.render;
+
+import net.minecraft.client.renderer.entity.RenderLiving;
+import net.theexceptionist.coherentvillages.main.entity.EntityDragon;
+
+public class RenderDragon  extends RenderLiving<EntityDragon>
+{
+
+}

@@ -1,0 +1,10 @@
+package net.theexceptionist.coherentvillages.main.entity;
+
+import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.entity.monster.IMob;
+import net.minecraft.entity.passive.EntityFlying;
+
+public class EntityDragon extends EntityMob implements IMob, EntityFlying
+{
+
+}

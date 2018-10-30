@@ -548,6 +548,20 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
 				if(this.combatType == 1) this.forceCombatTask(0);
 			}
 		}
+		
+		if(this.ruler && this.faction != null && !this.world.isRemote)
+		{
+			if(this.world.isDaytime() && !faction.doneUpdate())
+			{
+				faction.update(this.world.isDaytime(), this.getPos());
+				faction.setUpdate(true);
+			}
+			else if(!this.world.isDaytime() && faction.doneUpdate())
+			{
+				faction.update(this.world.isDaytime(), this.getPos());
+				faction.setUpdate(false);
+			}
+		}
 		//System.out.println("width and height: "+this.width+" "+this.height);
 		/*if(this.getHeldItemOffhand() != null && this.getHeldItemOffhand().getItem() == Items.SHIELD)
 		{
@@ -1215,6 +1229,7 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
      					|| potentialMember.vocation.getType() == AttributeVocation.CLASS_RULER))
      	            {
      	            	potentialMember.setRuler(this);
+     	            	if(faction != null) faction.addVillager();
      	            }
              	}
              }

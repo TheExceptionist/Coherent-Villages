@@ -1,0 +1,29 @@
+package net.theexceptionist.coherentvillages.main.entity.render;
+
+import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.renderer.entity.RenderLiving;
+import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import net.theexceptionist.coherentvillages.main.Resources;
+import net.theexceptionist.coherentvillages.main.entity.EntityModDragon;
+import net.theexceptionist.coherentvillages.main.entity.model.ModModelDragon;
+
+@SideOnly(Side.CLIENT)
+public class ModRenderDragon extends RenderLiving<EntityModDragon>
+{
+	public static final ResourceLocation TEXTURE = new ResourceLocation(Resources.MODID, "textures/entity/dragon.png");
+
+	public ModRenderDragon(RenderManager rendermanagerIn) {
+		super(rendermanagerIn, new ModModelDragon(), 0);
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	protected ResourceLocation getEntityTexture(EntityModDragon entity) {
+		// TODO Auto-generated method stub
+		return TEXTURE;
+	}
+
+}

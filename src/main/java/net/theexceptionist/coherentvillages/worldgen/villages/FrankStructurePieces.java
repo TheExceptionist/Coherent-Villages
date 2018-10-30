@@ -568,14 +568,14 @@ public class FrankStructurePieces
 
                 for (int i = 1; i <= 7; ++i)
                 {
-                    int j = this.cropTypeA instanceof BlockCrops ? ((BlockCrops)this.cropTypeA).getMaxAge() : 0;
+                   /* int j = this.cropTypeA instanceof BlockCrops ? ((BlockCrops)this.cropTypeA).getMaxAge() : 0;
                     int k = j / 3;
                     this.setBlockState(worldIn, this.cropTypeA.getStateFromMeta(MathHelper.getInt(randomIn, k, j)), 1, 1, i, structureBoundingBoxIn);
                     this.setBlockState(worldIn, this.cropTypeA.getStateFromMeta(MathHelper.getInt(randomIn, k, j)), 2, 1, i, structureBoundingBoxIn);
                     int l = this.cropTypeA instanceof BlockCrops ? ((BlockCrops)this.cropTypeA).getMaxAge() : 0;
                     int i1 = l / 3;
                     this.setBlockState(worldIn, this.cropTypeB.getStateFromMeta(MathHelper.getInt(randomIn, i1, l)), 4, 1, i, structureBoundingBoxIn);
-                    this.setBlockState(worldIn, this.cropTypeB.getStateFromMeta(MathHelper.getInt(randomIn, i1, l)), 5, 1, i, structureBoundingBoxIn);
+                    this.setBlockState(worldIn, this.cropTypeB.getStateFromMeta(MathHelper.getInt(randomIn, i1, l)), 5, 1, i, structureBoundingBoxIn);*/
                 }
 
                 for (int j1 = 0; j1 < 9; ++j1)

@@ -1,8 +1,11 @@
 package net.theexceptionist.coherentvillages.main;
 
 import net.minecraft.client.model.ModelBiped;
+import net.minecraft.util.datafix.DataFixer;
 
 public class CommonProxy {
+	public static DataFixer fixer = null;
+	
 	public void registerRenderInformation(){
 		
 	}

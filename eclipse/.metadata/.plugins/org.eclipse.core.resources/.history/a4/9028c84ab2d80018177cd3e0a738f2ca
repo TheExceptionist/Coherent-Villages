@@ -1,0 +1,44 @@
+package net.theexceptionist.coherentvillages.main.events;
+
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.Style;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextFormatting;
+import net.theexceptionist.coherentvillages.main.entity.attributes.AttributeFaction;
+import net.theexceptionist.coherentvillages.main.entity.attributes.AttributeRace;
+
+public class EventBanditRaid extends Event {
+
+	public EventBanditRaid(String name, AttributeRace race, boolean startInDay, int range, int count) {
+		super(name, race, startInDay, range, count);
+		this.style = new Style();
+		this.style.setColor(TextFormatting.GREEN);
+		this.eventMessage = new TextComponentString("Bandits arrive at %f....");
+		this.eventMessage.setStyle(style);
+	}
+
+	@Override
+	public boolean execute(boolean day, BlockPos spawn, AttributeFaction faction) {
+		boolean executed = true;
+		BlockPos pos = spawn;
+		
+		if(day == startInDay)
+		{
+			
+		}
+		else
+		{
+			executed = false;
+		}
+		
+		return executed;
+	}
+
+	@Override
+	public void reset(boolean day) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+
+}

@@ -1,0 +1,33 @@
+package net.theexceptionist.coherentvillages.main.events;
+
+import java.util.Random;
+
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.text.Style;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraft.world.World;
+import net.theexceptionist.coherentvillages.main.entity.EntityHumanVillager;
+import net.theexceptionist.coherentvillages.main.entity.attributes.AttributeRace;
+
+public class EventBanditSkirmish extends Event {
+
+	public EventBanditSkirmish(String name, AttributeRace race) {
+		super(name, race);
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public void execute() {
+		
+	}
+
+	@Override
+	public void reset() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+
+}

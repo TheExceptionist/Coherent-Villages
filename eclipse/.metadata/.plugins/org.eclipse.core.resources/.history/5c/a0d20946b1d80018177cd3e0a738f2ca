@@ -1,0 +1,23 @@
+package net.theexceptionist.coherentvillages.main.events;
+
+import net.minecraft.util.text.Style;
+import net.minecraft.util.text.TextComponentString;
+import net.theexceptionist.coherentvillages.main.entity.attributes.AttributeRace;
+
+public abstract class Event {
+	protected String name;
+	protected AttributeRace race;
+	protected Style style;
+	protected TextComponentString eventMessage;
+	protected boolean startInDay;
+	
+	public Event(String name, AttributeRace race, boolean startInDay)
+	{
+		this.name = name;
+		this.race = race;
+		this.startInDay = startInDay;
+	}
+	
+	public abstract void execute();
+	public abstract void reset();
+}

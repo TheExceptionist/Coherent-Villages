@@ -1,9 +1,9 @@
 package net.theexceptionist.coherentvillages.events;
 
+import java.util.ArrayList;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextComponentString;
@@ -13,17 +13,20 @@ import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.theexceptionist.coherentvillages.main.entity.EntityHumanVillager;
-import net.theexceptionist.coherentvillages.main.entity.attributes.AttributeRace;
-import net.theexceptionist.coherentvillages.main.entity.attributes.FactionManager;
-import net.theexceptionist.coherentvillages.main.events.EventManager;
 
 public class EventModTick {
 	public static boolean raidInProgress = false;
 	boolean raidHappened = false;
 	boolean driveAttempted = false;
 	int daysPassed = 0;
-	public static EventManager manager = new EventManager();
+	private static ArrayList<TextComponentString> messageReader = new ArrayList<TextComponentString>(); 
 	//Probably will only work on singleplayer
+	
+	public static void addMessage(TextComponentString msg)
+	{
+		messageReader.add(msg);
+	}
+	
 	@SubscribeEvent
 	public void checkRaid(TickEvent.PlayerTickEvent event)
 	{
@@ -37,12 +40,15 @@ public class EventModTick {
 		Style style2 = new Style();
 		style2.setColor(TextFormatting.LIGHT_PURPLE);
 		
-		if(world.getTotalWorldTime() % 14500 == 0)
-		{
-			daysPassed++;
-			FactionManager.updateFactions();
-		}
 		
+		if(messageReader.size() > 0)
+		{
+			TextComponentString str = messageReader.get(0);
+			
+			player.sendMessage(str);
+			
+			messageReader.remove(str);
+		}
 		//manager.tick();
 		
 		/*if(!world.isRemote)

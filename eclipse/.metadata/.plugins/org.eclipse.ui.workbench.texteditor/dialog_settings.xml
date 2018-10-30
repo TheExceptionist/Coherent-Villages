@@ -2,37 +2,37 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="HAND_STATES" key="selection"/>
-		<item value="false" key="casesensitive"/>
+		<item value="getMovementOffsets" key="selection"/>
+		<item value="true" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
-			<item value="HAND_STATES"/>
-			<item value="BLOCKING"/>
-			<item value="shield"/>
-			<item value="vocation.getWeapo"/>
-			<item value="Field"/>
-			<item value="cane"/>
-			<item value="reed"/>
-			<item value="Blocking"/>
+			<item value="getMovementOffsets"/>
+			<item value="EntityDragon"/>
+			<item value="p_i46360_1_"/>
+			<item value="(this, 0, 0);"/>
+			<item value="(this, 0, 32);"/>
+			<item value="neck1"/>
+			<item value="head1"/>
+			<item value="leg1"/>
 		</list>
 		<list key="replacehistory">
-			<item value="zero"/>
-			<item value="GERMAN_ID"/>
-			<item value="char"/>
-			<item value="EntityWraith"/>
-			<item value="ModItems"/>
-			<item value="Latin"/>
-			<item value="*"/>
-			<item value="WorldGenVillage.LATIN_ID"/>
+			<item value="EntityDrachen"/>
+			<item value="(this, 200, 156);"/>
+			<item value="(this, 0, 36);"/>
+			<item value="wingR1"/>
+			<item value="wingL1"/>
+			<item value="eyes1"/>
+			<item value="foot1"/>
+			<item value="leg1"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
 		<item value="290" key="DIALOG_WIDTH"/>
 		<item value="1|.SF NS Text|11.0|0|COCOA|1|.SFNSText" key="DIALOG_FONT_NAME"/>
 		<item value="411" key="DIALOG_HEIGHT"/>
-		<item value="145" key="DIALOG_X_ORIGIN"/>
-		<item value="213" key="DIALOG_Y_ORIGIN"/>
+		<item value="610" key="DIALOG_X_ORIGIN"/>
+		<item value="266" key="DIALOG_Y_ORIGIN"/>
 	</section>
 </section>

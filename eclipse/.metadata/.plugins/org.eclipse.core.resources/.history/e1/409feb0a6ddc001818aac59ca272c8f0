@@ -1,0 +1,9 @@
+package assets.coherentvillages.textures.items;
+
+public class Snippet {
+	iron_boots.png
+	iron_chestplate.png
+	iron_helmet.png
+	iron_leggings.png
+}
+

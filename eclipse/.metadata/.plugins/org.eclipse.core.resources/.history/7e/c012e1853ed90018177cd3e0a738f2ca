@@ -1,0 +1,80 @@
+package net.theexceptionist.coherentvillages.main.entity.render;
+
+import net.minecraft.client.renderer.entity.RenderLiving;
+import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.entity.Entity;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import net.theexceptionist.coherentvillages.main.Resources;
+import net.theexceptionist.coherentvillages.main.entity.EntityDrachen;
+import net.theexceptionist.coherentvillages.main.entity.model.ModelDrachen;
+import net.theexceptionist.coherentvillages.main.entity.model.ModelHumanVillager;
+
+@SideOnly(Side.CLIENT)
+public class RenderDrachen extends RenderLiving<EntityDrachen>
+{
+	public static final ResourceLocation TEXTURE = new ResourceLocation(Resources.MODID, "textures/entity/drachen/drachen.png");
+	
+	 protected double distanceMovedTotal = 0.0D;
+	 protected static final double CYCLES_PER_BLOCK = 3.0D; 
+	 protected int cycleIndex = 0;
+	 protected float[][] undulationCycle = new float[][]
+	 {
+	        { 45F, -45F, -45F, 0F, 45F, 45F, 0F, -45F },
+	        { 0F, 45F, -45F, -45F, 0F, 45F, 45F, 0F },
+	        { -45F, 90F, 0F, -45F, -45F, 0F, 45F, 45F },
+	        { -45F, 45F, 45F, 0F, -45F, -45F, 0F, 45F },
+	        { 0F, -45F, 45F, 45F, 0F, -45F, -45F, 0F },
+	        { 45F, -90F, 0F, 45F, 45F, 0F, -45F, -45F },
+	 };
+	
+	public RenderDrachen(RenderManager rendermanagerIn) {
+		super(rendermanagerIn, new ModelDrachen(), 0);
+		// TODO Auto-generated constructor stub
+	}
+	
+	 public void doRender(EntityDrachen entity, double x, double y, double z, float entityYaw, float partialTicks)
+	 {
+	     super.doRender(entity, x, y, z, entityYaw, partialTicks);
+	     updateDistanceMovedTotal(entity);
+	     
+	     ModelDrachen model = getMainModel();
+	     
+	     cycleIndex = (int) ((getDistanceMovedTotal(entity)*CYCLES_PER_BLOCK)
+	              %undulationCycle.length);
+	        
+	     model.thighR1.rotateAngleX = degToRad(undulationCycle[cycleIndex][0]) ;
+	     model.thighR2.rotateAngleX = degToRad(undulationCycle[cycleIndex][1]) ;
+	     model.thighL1.rotateAngleX = degToRad(undulationCycle[cycleIndex][2]) ;
+	     model.thighL2.rotateAngleX = degToRad(undulationCycle[cycleIndex][3]) ;
+	 }
+	    
+	    protected void updateDistanceMovedTotal(Entity parEntity) 
+	    {
+	        distanceMovedTotal += parEntity.getDistance(parEntity.prevPosX, parEntity.prevPosY, 
+	              parEntity.prevPosZ);
+	    }
+	    
+	    protected double getDistanceMovedTotal(Entity parEntity) 
+	    {
+	        return (distanceMovedTotal);
+	    }
+
+	    protected float degToRad(float degrees)
+	    {
+	        return degrees * (float)Math.PI / 180 ;
+	    }
+
+	public ModelDrachen getMainModel()
+	 {
+	        return (ModelDrachen)super.getMainModel();
+	 }
+
+	@Override
+	protected ResourceLocation getEntityTexture(EntityDrachen entity) {
+		// TODO Auto-generated method stub
+		return TEXTURE;
+	}
+
+}

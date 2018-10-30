@@ -1,0 +1,37 @@
+package net.theexceptionist.coherentvillages.main.events;
+
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.Style;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraft.world.World;
+import net.theexceptionist.coherentvillages.main.entity.attributes.AttributeFaction;
+import net.theexceptionist.coherentvillages.main.entity.attributes.AttributeRace;
+
+public abstract class Event {
+	public static final EventBanditRaid small_raid = new EventBanditRaid("Bandit Raid Small", false, 25, 5);
+	public static final EventBanditRaid medium_raid = new EventBanditRaid("Bandit Raid Medium", false, 30, 10);
+	public static final EventBanditRaid large_raid = new EventBanditRaid("Bandit Raid Large", false, 35, 1);
+	
+	public static final EventImmigration small_immgrate = new EventImmigration("Immigration Small", true, 25, 5, 20);
+	public static final EventImmigration medium_immgrate = new EventImmigration("Immigration Medium", true, 30, 10, 30);
+	public static final EventImmigration large_immgrate = new EventImmigration("Immigration Large", true, 35, 1, 40);
+	
+	protected String name;
+	protected AttributeRace race;
+	protected Style style;
+	protected String eventMessage;
+	protected boolean startInDay;
+	protected int range, count, chance;
+	
+	public Event(String name, boolean startInDay, int range, int count, int chance)
+	{
+		this.name = name;
+		this.startInDay = startInDay;
+		this.range = range;
+		this.count = count;
+		this.chance = chance;
+	}
+	
+	public abstract boolean execute(World world, boolean day, BlockPos spawn, AttributeRace race, AttributeFaction faction);
+	public abstract void reset(boolean day);
+}

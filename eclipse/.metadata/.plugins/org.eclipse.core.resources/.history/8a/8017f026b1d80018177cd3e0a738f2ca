@@ -1,0 +1,17 @@
+package net.theexceptionist.coherentvillages.main.events;
+
+import net.theexceptionist.coherentvillages.main.entity.attributes.AttributeRace;
+
+public abstract class Event {
+	protected String name;
+	protected AttributeRace race;
+	
+	public Event(String name, AttributeRace race)
+	{
+		this.name = name;
+		this.race = race;
+	}
+	
+	public abstract void execute();
+	public abstract void reset();
+}

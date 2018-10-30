@@ -3,16 +3,19 @@ package net.theexceptionist.coherentvillages.main;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.init.Items;
+import net.minecraft.util.datafix.DataFixer;
 import net.minecraftforge.common.MinecraftForge;
 import net.theexceptionist.coherentvillages.events.EventModTick;
 import net.theexceptionist.coherentvillages.events.EventOverrideVillages;
 import net.theexceptionist.coherentvillages.events.PlayerConnectionEvent;
 import net.theexceptionist.coherentvillages.main.entity.EntityBjornserker;
+import net.theexceptionist.coherentvillages.main.entity.EntityDrachen;
 import net.theexceptionist.coherentvillages.main.entity.EntityHumanVillager;
 import net.theexceptionist.coherentvillages.main.entity.EntityLemure;
 import net.theexceptionist.coherentvillages.main.entity.EntityWarg;
 import net.theexceptionist.coherentvillages.main.entity.EntityWraith;
 import net.theexceptionist.coherentvillages.main.entity.render.RenderBjornserker;
+import net.theexceptionist.coherentvillages.main.entity.render.RenderDrachen;
 import net.theexceptionist.coherentvillages.main.entity.render.RenderHumanVillager;
 import net.theexceptionist.coherentvillages.main.entity.render.RenderLemure;
 import net.theexceptionist.coherentvillages.main.entity.render.RenderWarg;
@@ -23,7 +26,6 @@ import net.theexceptionist.coherentvillages.main.items.RenderWeaponThrowable;
 import net.theexceptionist.coherentvillages.main.items.ShieldTileStackRenderer;
 
 public class ClientProxy extends CommonProxy {
-	
 	public void registerRenderInformation(){
 		for(int i = 0; i < ModItems.nordShield.length; i++)
 		{
@@ -34,7 +36,7 @@ public class ClientProxy extends CommonProxy {
 	
 	public void registerRenderers(){
 		RenderManager renderManager = Minecraft.getMinecraft().getRenderManager();
-		
+		fixer = Minecraft.getMinecraft().getDataFixer();
 		//Humans
 		renderManager.entityRenderMap.put(EntityHumanVillager.class, new RenderHumanVillager(renderManager));
 		
@@ -43,6 +45,7 @@ public class ClientProxy extends CommonProxy {
 		renderManager.entityRenderMap.put(EntityBjornserker.class, new RenderBjornserker(renderManager));	
 		renderManager.entityRenderMap.put(EntityWraith.class, new RenderWraith(renderManager));
 		renderManager.entityRenderMap.put(EntityLemure.class, new RenderLemure(renderManager));
+		renderManager.entityRenderMap.put(EntityDrachen.class, new RenderDrachen(renderManager));
 		
 		renderManager.entityRenderMap.put(EntityWeaponThrowable.class, new RenderWeaponThrowable(renderManager, Items.IRON_AXE, Minecraft.getMinecraft().getRenderItem()));
 		
