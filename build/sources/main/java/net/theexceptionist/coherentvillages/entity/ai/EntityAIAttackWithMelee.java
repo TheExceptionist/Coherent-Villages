@@ -178,8 +178,42 @@ public class EntityAIAttackWithMelee extends EntityAIBase
             {
                 this.delayCounter += 5;
             }
+            
+            boolean findPath;
+            
+            if(!this.attacker.isRiding()) findPath = this.attacker.getNavigator().tryMoveToEntityLiving(entitylivingbase, this.speedTowardsTarget);
+            else 
+            {
+            	double x = entitylivingbase.posX;// + (this.attacker.world.rand.nextInt(100) <= 50 ? 0 : 5);
+            	double y = entitylivingbase.posY;
+            	double z = entitylivingbase.posZ;// + (this.attacker.world.rand.nextInt(100) <= 50 ? 0 : 5);
+            	
+            	
+	            if(this.attacker.posX < x)
+	            {
+	            	x += 20;
+	            }
+	            else
+	            {
+	            	x -= 20;
+	            }
+	            	
+	            if(this.attacker.posZ < z)
+	            {
+	            	z += 20;
+	            }
+	            else
+	            {
+	            	z -= 20;
+	            }
+            	
 
-            if (!this.attacker.getNavigator().tryMoveToEntityLiving(entitylivingbase, this.speedTowardsTarget))
+            	
+            	findPath = this.attacker.getNavigator().tryMoveToXYZ(x, y, z, this.speedTowardsTarget);
+            }
+            
+            
+            if (findPath)
             {
                 this.delayCounter += 15;
             }

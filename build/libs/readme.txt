@@ -486,6 +486,13 @@ Archer upgrades to LEgate
 *Added some new configs
 *Added Gothic Armor set to the Goths
 
+-Pre-Release Test v0.0.2.11
+=========================================
+*Added In Mongols, bandits to the Gothic
+*Improved the create command
+*Improved Horse Riding AI
+
+
 
 //Blocking bug
 //Faction System

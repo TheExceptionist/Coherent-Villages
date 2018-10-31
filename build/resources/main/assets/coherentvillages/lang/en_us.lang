@@ -13,6 +13,11 @@ item.barbarian_chestplate.name=Nord Mail Chestplate
 item.barbarian_leggings.name=Nord Mail Greaves
 item.barbarian_boots.name=Nord Mail Boots
 
+item.gothic_helmet.name=Gothic Helmet
+item.gothic_chestplate.name=Gothic Chestplate
+item.gothic_leggings.name=Gothic Greaves
+item.gothic_boots.name=Gothic Boots
+
 item.nord_shield_0.name=Nord Round Shield
 item.nord_shield_1.name=Nord Round Shield
 item.nord_shield_2.name=Nord Round Shield

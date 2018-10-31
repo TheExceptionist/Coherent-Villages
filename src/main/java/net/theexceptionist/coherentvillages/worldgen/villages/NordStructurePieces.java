@@ -738,12 +738,12 @@ public class NordStructurePieces
 
                     this.boundingBox.offset(0, this.averageGroundLvl - this.boundingBox.maxY + NordBuildingsArray.DOCKYARD_HEIGHT - 1, 0);
                 }
-                BlockPos pos = new BlockPos(this.getXWithOffset(0, 0), this.getYWithOffset(0), this.getZWithOffset(0, 0));
+                //BlockPos pos = new BlockPos(this.getXWithOffset(0, 0), this.getYWithOffset(0), this.getZWithOffset(0, 0));
                 this.placeStructureBase(worldIn, structureBoundingBoxIn, randomIn, NordBuildingsArray.dockyard_0, NordBuildingsArray.DOCKYARD_LENGTH, NordBuildingsArray.DOCKYARD_HEIGHT, NordBuildingsArray.DOCKYARD_WIDTH);
 
-                ModTemplate template = PlayerConnectionEvent.templateHandler.getTemplate(worldIn.getMinecraftServer(), Inn);//worldIn.getSaveHandler().getStructureTemplateManager().getTemplate(worldIn.getMinecraftServer(), Inn);
+                //ModTemplate template = WorldGenVillage.templateHandler.getTemplate(worldIn.getMinecraftServer(), Inn);//worldIn.getSaveHandler().getStructureTemplateManager().getTemplate(worldIn.getMinecraftServer(), Inn);
                 
-                template.addBlocksToWorld(worldIn, pos, WorldGenVillage.settings);
+                //template.addBlocksToWorld(worldIn, pos, WorldGenVillage.settings);
                 this.spawnVillagers(worldIn, structureBoundingBoxIn, 2, 1, 1, 1, AttributeVocation.CLASS_VILLAGER, 1, false);
                 return true;
             }

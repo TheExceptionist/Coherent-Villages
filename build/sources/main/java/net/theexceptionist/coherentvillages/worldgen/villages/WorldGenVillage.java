@@ -1,5 +1,6 @@
 package net.theexceptionist.coherentvillages.worldgen.villages;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -19,9 +20,11 @@ import net.minecraft.world.gen.structure.StructureVillagePieces;
 import net.theexceptionist.coherentvillages.main.Main;
 import net.theexceptionist.coherentvillages.main.entity.attributes.AttributeRace;
 import net.theexceptionist.coherentvillages.worldgen.helper.ModPlacementSettings;
+import net.theexceptionist.coherentvillages.worldgen.helper.ModTemplateHandler;
 
 public class WorldGenVillage extends MapGenVillage
 {
+	public static ModTemplateHandler templateHandler = null;
 	public static final ModPlacementSettings settings = new ModPlacementSettings().setRotation(Rotation.NONE);
     /** A list of all the biomes villages can spawn in. */
     public static ArrayList<Biome> NORD_VILLAGE_SPAWN_BIOMES = new ArrayList<Biome>();
@@ -41,6 +44,7 @@ public class WorldGenVillage extends MapGenVillage
 	public static final int GREEK_ID = AttributeRace.RACE_TYPE_GREEK;
 	public static final int BRITON_ID = AttributeRace.RACE_TYPE_BRITON;
 	public static final int FRANK_ID = AttributeRace.RACE_TYPE_FRANK;
+	public static final int MONGOL_ID = AttributeRace.RACE_TYPE_MONGOL;
     
     /** None */
     private int size;
@@ -179,6 +183,8 @@ public class WorldGenVillage extends MapGenVillage
     	//System.out.println("Starting: "+chunkX * 16+" | "+chunkZ * 16);
     	
     	
+		if(templateHandler == null) templateHandler = new ModTemplateHandler((new File(this.world.getSaveHandler().getWorldDirectory(), "structures")).toString(), Main.proxy.fixer);
+
     	switch(this.type)
     	{
 	    	case NORD_ID:

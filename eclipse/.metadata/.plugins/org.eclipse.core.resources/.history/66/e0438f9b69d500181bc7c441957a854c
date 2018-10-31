@@ -1,7 +1,0 @@
-package net.theexceptionist.coherentvillages.main.items;
-
-import net.minecraft.item.ItemArmor;
-
-public class ItemNordHelmet extends ItemArmor{
-
-}

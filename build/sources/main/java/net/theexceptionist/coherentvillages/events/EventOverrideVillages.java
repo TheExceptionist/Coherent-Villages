@@ -1,5 +1,6 @@
 package net.theexceptionist.coherentvillages.events;
 
+import java.io.File;
 import java.util.Random;
 
 import net.minecraft.block.BlockLog;
@@ -16,9 +17,12 @@ import net.minecraftforge.event.terraingen.BiomeEvent;
 import net.minecraftforge.event.terraingen.InitMapGenEvent;
 import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.theexceptionist.coherentvillages.main.Main;
+import net.theexceptionist.coherentvillages.worldgen.helper.ModTemplateHandler;
 import net.theexceptionist.coherentvillages.worldgen.villages.WorldGenVillage;
 
 public class EventOverrideVillages {
+	
 		@SubscribeEvent
 		public void initMapGen(InitMapGenEvent event)
 		{
@@ -31,6 +35,7 @@ public class EventOverrideVillages {
 				//System.out.println("Override!");
 				WorldGenVillage newVillage = new WorldGenVillage();
 				event.setNewGen(newVillage);
+				
 			}
 			
 		}

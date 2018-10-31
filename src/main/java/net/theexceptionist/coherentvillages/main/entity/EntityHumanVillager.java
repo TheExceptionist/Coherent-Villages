@@ -14,6 +14,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
+import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.IRangedAttackMob;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackRanged;
@@ -193,6 +194,7 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
 	private boolean nervous = false;
 	private boolean magicMelee = false;
 	private int combatType = 0;
+	private boolean horseSpawned = false;
     
 	public EntityHumanVillager(World worldIn) {
 		super(worldIn);
@@ -562,6 +564,30 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
 				faction.setUpdate(false);
 			}
 		}
+		
+		//if(this.vocation != null)System.out.println("Vocation: "+this.vocation+" Can Ride: "+this.vocation.isCanRide()+" Riding: "+this.vocation.getHorseChance() );
+		
+		if(!this.world.isRemote &&
+				this.vocation != null &&
+				this.vocation.isCanRide() && 
+				!this.horseSpawned)
+		{
+			if(this.rand.nextInt(100) <= this.vocation.getHorseChance())
+			{
+		        EntityHorse horse = new EntityHorse(world);
+				horse.setLocationAndAngles(this.posX, this.posY, this.posZ, 0, 0);
+				horse.onInitialSpawn(world.getDifficultyForLocation(new BlockPos(horse)), (IEntityLivingData)null);
+				world.spawnEntity(horse);
+	
+				this.setRidingHorse(horse);
+				
+				this.horseSpawned  = true;
+			}
+			else
+			{
+				this.horseSpawned  = true;
+			}
+		}
 		//System.out.println("width and height: "+this.width+" "+this.height);
 		/*if(this.getHeldItemOffhand() != null && this.getHeldItemOffhand().getItem() == Items.SHIELD)
 		{
@@ -913,12 +939,12 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
            // 	System.out.println("Looking for horse");
             	this.tasks.addTask(4, new EntityAISearchForHorse(this, 0.5D, 40.0, 100));
             	
-            	if(world.rand.nextInt(100) < 20) 
+            	/*if(world.rand.nextInt(100) < 20) 
             	{
             		EntityHorse horse = new EntityHorse(world);
             		horse.setLocationAndAngles(this.posX, this.posY, this.posZ, 0, 0);
             		world.spawnEntity(horse);
-            	}
+            	}*/
             }
         }
     }
@@ -938,8 +964,6 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
         potions = new EntityAIAttackRanged(this, 1.0D, 60, 10.0F);
         spells =  new  EntityAIAttackWithMagic(this, 1.0D, 20, 15.0F);
         farm = new EntityAIHarvestFarmland(this, 0.6D);
-        
-
 		
 		switch(vocation.getType())
 		{
@@ -1629,7 +1653,14 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
     
     public String getTitle()
     {
-    	return this.firstName+" - "+this.race.getName()+" "+this.vocation.getName();
+    	String villagerName = this.firstName;
+    	
+    	if(villagerName != null && villagerName != "" && villagerName != " ")
+    	{
+    		villagerName += " - ";
+    	}
+    	
+    	return villagerName+this.race.getName()+" "+this.vocation.getName();
     }
     
     public String getFullName()
@@ -1926,6 +1957,8 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
 				armorHorse.setHorseArmorStack(new ItemStack(armor));
 			}
 			
+        	this.tasks.removeTask(this.ranged);
+        	this.tasks.addTask(1, this.rangedTrained);
 	    	this.startRiding(this.horse);
 		}
 	}

@@ -32,9 +32,9 @@ public class AttributeFaction {
 	
 	private static final String[] l_b_titles = 
 		{
-				"%n's Pillagers of the %rs",
-				"%n's %r Viking Den",
-				"The %n's %r Sea Raiders",
+				"%n's Rebels of the %rs",
+				"%n's %r Resistance",
+				"The %n's %r Renegades",
 		};
 	
 	private static final String[] g_titles = 
@@ -46,9 +46,9 @@ public class AttributeFaction {
 	
 	private static final String[] g_b_titles = 
 		{
-				"%n's Pillagers of the %rs",
-				"%n's %r Viking Den",
-				"The %n's %r Sea Raiders",
+				"%n's Raiders of the %rs",
+				"%n's %r Horde",
+				"The %n's %r Khanate",
 		};
 	
 	private static final String[] s_titles = 

@@ -18,9 +18,7 @@ import net.theexceptionist.coherentvillages.main.Resources;
 import net.theexceptionist.coherentvillages.worldgen.helper.ModTemplateHandler;
 
 public class PlayerConnectionEvent{
-	
-	public static ModTemplateHandler templateHandler = null;
-	
+		
 	@SubscribeEvent
 	public void sendPlayerMessage(PlayerEvent.PlayerLoggedInEvent event)
 	{
@@ -37,9 +35,7 @@ public class PlayerConnectionEvent{
 				"Welcome to "+Resources.NAME+"\n By: TheExceptionist (Or majesticmerlin)\n Your current version is: "+Resources.VERSION
 				+"\n Thank you for downloading this mod! Check for updates on Curseforge and post issues on Github! \nDon't forget to change the config file to suit your needs!\n Special Thanks to: eeeeetdyeeeee, Olkusz_Ssak12 and various other people For the Textures");
 		
-		
-		if(templateHandler == null) templateHandler = new ModTemplateHandler((new File(world.getSaveHandler().getWorldDirectory(), "structures")).toString(), Main.proxy.fixer);
-		
+			
 		itextcomponent1.setStyle(style);
 		EntityPlayer player = event.player;
 		

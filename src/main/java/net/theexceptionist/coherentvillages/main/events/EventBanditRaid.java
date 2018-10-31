@@ -43,7 +43,7 @@ public class EventBanditRaid extends Event {
 				EntityHumanVillager bandit = new EntityHumanVillager(world, raceID, AttributeRace.getFromIDRace(raceID).getRandomBandit(world), EntityHumanVillager.getRandomGender(world), false);                            
             	bandit.setLocationAndAngles((double)x + 0.5D, (double)y, (double)z + 0.5D, 0.0F, 0.0F);
             	world.spawnEntity(bandit);
-            	System.out.println("Spawning - X: "+x+" Y: "+y+" Z: "+z);
+            	//System.out.println("Spawning - X: "+x+" Y: "+y+" Z: "+z);
 			}
 			
 			if(Main.sendMessage) EventModTick.addMessage(message);

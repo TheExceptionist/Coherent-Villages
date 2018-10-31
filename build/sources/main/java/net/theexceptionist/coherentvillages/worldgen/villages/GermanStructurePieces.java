@@ -1472,7 +1472,7 @@ public class GermanStructurePieces
                         }
                         else if(this.isBanditInfested)
                         {
-                        	EntityHumanVillager entityHumanVillager = new EntityHumanVillager(worldIn, WorldGenVillage.GERMAN_ID, AttributeRace.getFromIDRace(WorldGenVillage.GERMAN_ID).getRandomBandit(worldIn), EntityHumanVillager.getRandomGender(worldIn), this.ruler == null ? true : false);                            
+                        	EntityHumanVillager entityHumanVillager = new EntityHumanVillager(worldIn, WorldGenVillage.MONGOL_ID, AttributeRace.getFromIDRace(WorldGenVillage.MONGOL_ID).getRandomBandit(worldIn), EntityHumanVillager.getRandomGender(worldIn), this.ruler == null ? true : false);                            
                         	entityHumanVillager.setLocationAndAngles((double)j + 0.5D, (double)k, (double)l + 0.5D, 0.0F, 0.0F);                        	
                         	//if(worldIn.rand.nextInt(100) <= Main.wraith_turn_rate) entityHumanVillager.setShifter(true, new EntityWraith(worldIn), false, 1);
 

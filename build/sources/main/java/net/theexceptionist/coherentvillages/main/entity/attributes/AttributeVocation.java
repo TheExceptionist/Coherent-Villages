@@ -101,6 +101,8 @@ public class AttributeVocation {
 	private Random rand = null;
 
 	private boolean alwaysHorse = false;
+
+	private int horseChance = 5;
 	//protected Spell[] spells
 	//protected PotionType[] potions
 	public static ArrayList<AttributeVocation> jobs = new ArrayList<AttributeVocation>();
@@ -162,16 +164,16 @@ public class AttributeVocation {
 			boolean c, int k, int p, final int armorChance, final boolean alwaysBlock, Random rand, boolean healer, boolean alwaysHorse) {
 		this(string,  classBandit, i, j, attributeRace, b, c, k, p, armorChance, alwaysBlock, rand, healer);
 		this.alwaysHorse = alwaysHorse;
+		if(alwaysHorse) horseChance = 100;
 	}
 
-	
-	
 	public boolean isAlwaysHorse() {
 		return alwaysHorse;
 	}
 
 	public void setAlwaysHorse(boolean alwaysHorse) {
 		this.alwaysHorse = alwaysHorse;
+		if(alwaysHorse) horseChance = 100;
 	}
 
 	public void setUpgradeTree(AttributeVocation left, AttributeVocation right)
@@ -565,5 +567,10 @@ public class AttributeVocation {
 	public ItemWeaponThrowable getThrown() {
 		// TODO Auto-generated method stub
 		return thrown;
+	}
+
+	public int getHorseChance() {
+		// TODO Auto-generated method stub
+		return horseChance ;
 	}
 }

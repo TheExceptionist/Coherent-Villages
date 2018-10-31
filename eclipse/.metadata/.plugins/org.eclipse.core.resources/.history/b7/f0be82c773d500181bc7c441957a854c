@@ -1,8 +1,0 @@
-package net.theexceptionist.coherentvillages.main.entity.model;
-
-import net.minecraft.client.model.ModelBiped;
-
-public class ModelWraith extends ModelBiped
-{
-
-}

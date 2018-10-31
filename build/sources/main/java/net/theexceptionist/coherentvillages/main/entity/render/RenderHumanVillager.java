@@ -45,6 +45,9 @@ public class RenderHumanVillager extends RenderBiped<EntityHumanVillager>
 	
 	public static final String BRITON_SKIN_M = "textures/entity/villager/human/briton_m/";
 	public static final String BRITON_SKIN_F = "textures/entity/villager/human/briton_f/";
+
+		public static final String MONGOL_SKIN_M = "textures/entity/villager/human/mongol_m/";
+	public static final String MONGOL_SKIN_F = "textures/entity/villager/human/mongol_f/";
 	
 	public RenderHumanVillager(RenderManager rendermanagerIn) {
 		super(rendermanagerIn, new ModelHumanVillager(), 0.5f);
