@@ -1,0 +1,27 @@
+package net.theexceptionist.coherentvillages.entity.ai;
+
+import net.minecraft.entity.ai.EntityAIBase;
+import net.minecraft.village.Village;
+import net.minecraft.world.World;
+import net.theexceptionist.coherentvillages.main.entity.EntityHumanVillager;
+
+public class EntityAITravelToAnotherVillage extends EntityAIBase {
+	private EntityHumanVillager villager;
+	private Village targetVillage;
+	
+	public EntityAITravelToAnotherVillage(EntityHumanVillager villager)
+	{
+		this.villager = villager;
+	}
+	
+	@Override
+	public boolean shouldExecute() {
+		// TODO Auto-generated method stub
+		World world = villager.world;
+		targetVillage = world.villageCollection.getVillageList().get(world.rand.nextInt(world.villageCollection.getVillageList().size()));
+		
+		
+		return false;
+	}
+
+}

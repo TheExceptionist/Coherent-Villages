@@ -5,6 +5,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import net.theexceptionist.coherentvillages.entity.EntityVillagerLighting;
+import net.theexceptionist.coherentvillages.main.entity.EntityHumanVillager;
 
 public class SpellThunder extends Spell {
 	private int coolDown, coolDownSet;
@@ -16,12 +17,12 @@ public class SpellThunder extends Spell {
 
 	@Override
 	public void execute(EntityLivingBase caster) {
-		if(caster instanceof EntityLiving)
+		if(caster instanceof EntityHumanVillager)
 		{
 			if(coolDown <= 0)
 			{
 				EntityLivingBase target = ((EntityLiving)caster).getAttackTarget();
-				caster.world.addWeatherEffect(new EntityVillagerLighting(caster.world, target.posX, target.posY, target.posZ, true));
+				caster.world.addWeatherEffect(new EntityVillagerLighting(caster.world, (EntityHumanVillager)caster, target.posX, target.posY, target.posZ, true));
 				this.coolDown = this.coolDownSet;
 			}
 			else

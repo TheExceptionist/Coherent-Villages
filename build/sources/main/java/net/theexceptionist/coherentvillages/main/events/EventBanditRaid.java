@@ -34,9 +34,7 @@ public class EventBanditRaid extends Event {
 		
 		if(day == startInDay)
 		{
-			this.eventMessage = this.eventMessage.replaceAll("&f", faction.getTitleName());
-			TextComponentString message = new TextComponentString(eventMessage);
-			message.setStyle(style);
+			
 			
 			for(int i = 0; i < count; i++)
 			{
@@ -46,7 +44,7 @@ public class EventBanditRaid extends Event {
             	//System.out.println("Spawning - X: "+x+" Y: "+y+" Z: "+z);
 			}
 			
-			if(Main.sendMessage) EventModTick.addMessage(message);
+			this.setEventMessage(faction);
 		}
 		else
 		{

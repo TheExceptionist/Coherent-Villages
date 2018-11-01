@@ -1,0 +1,108 @@
+---- Minecraft Crash Report ----
+// You should try our sister game, Minceraft!
+
+Time: 11/1/18 5:19 PM
+Description: Ticking entity
+
+java.lang.NullPointerException: Ticking entity
+	at net.theexceptionist.coherentvillages.main.entity.EntityHumanVillager.applyAttributes(EntityHumanVillager.java:758)
+	at net.theexceptionist.coherentvillages.main.entity.EntityHumanVillager.<init>(EntityHumanVillager.java:306)
+	at net.theexceptionist.coherentvillages.main.events.EventSkirmish.execute(EventSkirmish.java:39)
+	at net.theexceptionist.coherentvillages.main.entity.attributes.AttributeFaction.update(AttributeFaction.java:258)
+	at net.theexceptionist.coherentvillages.main.entity.EntityHumanVillager.onLivingUpdate(EntityHumanVillager.java:559)
+	at net.minecraft.entity.EntityLivingBase.onUpdate(EntityLivingBase.java:2398)
+	at net.minecraft.entity.EntityLiving.onUpdate(EntityLiving.java:346)
+	at net.minecraft.world.World.updateEntityWithOptionalForce(World.java:2168)
+	at net.minecraft.world.WorldServer.updateEntityWithOptionalForce(WorldServer.java:871)
+	at net.minecraft.world.World.updateEntity(World.java:2127)
+	at net.minecraft.world.World.updateEntities(World.java:1928)
+	at net.minecraft.world.WorldServer.updateEntities(WorldServer.java:643)
+	at net.minecraft.server.MinecraftServer.updateTimeLightAndEntities(MinecraftServer.java:842)
+	at net.minecraft.server.MinecraftServer.tick(MinecraftServer.java:743)
+	at net.minecraft.server.integrated.IntegratedServer.tick(IntegratedServer.java:192)
+	at net.minecraft.server.MinecraftServer.run(MinecraftServer.java:592)
+	at java.lang.Thread.run(Thread.java:748)
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Thread: Server thread
+Stacktrace:
+	at net.theexceptionist.coherentvillages.main.entity.EntityHumanVillager.applyAttributes(EntityHumanVillager.java:758)
+	at net.theexceptionist.coherentvillages.main.entity.EntityHumanVillager.<init>(EntityHumanVillager.java:306)
+	at net.theexceptionist.coherentvillages.main.events.EventSkirmish.execute(EventSkirmish.java:39)
+	at net.theexceptionist.coherentvillages.main.entity.attributes.AttributeFaction.update(AttributeFaction.java:258)
+	at net.theexceptionist.coherentvillages.main.entity.EntityHumanVillager.onLivingUpdate(EntityHumanVillager.java:559)
+	at net.minecraft.entity.EntityLivingBase.onUpdate(EntityLivingBase.java:2398)
+	at net.minecraft.entity.EntityLiving.onUpdate(EntityLiving.java:346)
+	at net.minecraft.world.World.updateEntityWithOptionalForce(World.java:2168)
+	at net.minecraft.world.WorldServer.updateEntityWithOptionalForce(WorldServer.java:871)
+	at net.minecraft.world.World.updateEntity(World.java:2127)
+
+-- Entity being ticked --
+Details:
+	Entity Type: coherentvillages:human_villager (net.theexceptionist.coherentvillages.main.entity.EntityHumanVillager)
+	Entity ID: 5702
+	Entity Name: Alan - Gothic King
+	Entity's Exact location: 340.50, 81.00, 660.50
+	Entity's Block location: World: (340,81,660), Chunk: (at 4,5,4 in 21,41; contains blocks 336,0,656 to 351,255,671), Region: (0,1; contains chunks 0,32 to 31,63, blocks 0,0,512 to 511,255,1023)
+	Entity's Momentum: 0.00, -0.08, 0.00
+	Entity's Passengers: []
+	Entity's Vehicle: ~~ERROR~~ NullPointerException: null
+Stacktrace:
+	at net.minecraft.world.World.updateEntities(World.java:1928)
+	at net.minecraft.world.WorldServer.updateEntities(WorldServer.java:643)
+
+-- Affected level --
+Details:
+	Level name: New World
+	All players: 1 total; [EntityPlayerMP['Player359'/854, l='New World', x=164.89, y=91.52, z=495.77]]
+	Chunk stats: ServerChunkCache: 799 Drop: 0
+	Level seed: 8161705689306748725
+	Level generator: ID 00 - default, ver 1. Features enabled: true
+	Level generator options: 
+	Level spawn location: World: (176,64,252), Chunk: (at 0,4,12 in 11,15; contains blocks 176,0,240 to 191,255,255), Region: (0,0; contains chunks 0,0 to 31,31, blocks 0,0,0 to 511,255,511)
+	Level time: 1215 game time, 1215 day time
+	Level dimension: 0
+	Level storage version: 0x04ABD - Anvil
+	Level weather: Rain time: 139321 (now: false), thunder time: 42716 (now: false)
+	Level game mode: Game mode: creative (ID 1). Hardcore: false. Cheats: true
+Stacktrace:
+	at net.minecraft.server.MinecraftServer.updateTimeLightAndEntities(MinecraftServer.java:842)
+	at net.minecraft.server.MinecraftServer.tick(MinecraftServer.java:743)
+	at net.minecraft.server.integrated.IntegratedServer.tick(IntegratedServer.java:192)
+	at net.minecraft.server.MinecraftServer.run(MinecraftServer.java:592)
+	at java.lang.Thread.run(Thread.java:748)
+
+-- System Details --
+Details:
+	Minecraft Version: 1.12.2
+	Operating System: Mac OS X (x86_64) version 10.13.6
+	Java Version: 1.8.0_144, Oracle Corporation
+	Java VM Version: Java HotSpot(TM) 64-Bit Server VM (mixed mode), Oracle Corporation
+	Memory: 278222456 bytes (265 MB) / 1072168960 bytes (1022 MB) up to 1908932608 bytes (1820 MB)
+	JVM Flags: 0 total; 
+	IntCache: cache: 0, tcache: 9, allocated: 20, tallocated: 86
+	FML: MCP 9.42 Powered by Forge 14.23.4.2757 9 mods loaded, 9 mods active
+	States: 'U' = Unloaded 'L' = Loaded 'C' = Constructed 'H' = Pre-initialized 'I' = Initialized 'J' = Post-initialized 'A' = Available 'D' = Disabled 'E' = Errored
+
+	| State     | ID               | Version      | Source                           | Signature |
+	|:--------- |:---------------- |:------------ |:-------------------------------- |:--------- |
+	| UCHIJAAAA | minecraft        | 1.12.2       | minecraft.jar                    | None      |
+	| UCHIJAAAA | mcp              | 9.42         | minecraft.jar                    | None      |
+	| UCHIJAAAA | FML              | 8.0.99.99    | forgeSrc-1.12.2-14.23.4.2757.jar | None      |
+	| UCHIJAAAA | forge            | 14.23.4.2757 | forgeSrc-1.12.2-14.23.4.2757.jar | None      |
+	| UCHIJAAAA | coherentvillages | v0.0.2.9     | modid-1.0.jar                    | None      |
+	| UCHIJAAAA | ichunutil        | 7.1.0        | iChunUtil-1.12.2-7.1.0.jar       | None      |
+	| UCHIJAAAA | journeymap       | 1.12.2-5.5.2 | journeymap-1.12.2-5.5.2.jar      | None      |
+	| UCHIJAAAA | tabula           | 7.0.0        | Tabula-1.12.2-7.0.0.jar          | None      |
+	| UCHIJAAAA | torohealthmod    | 1.12.2-11    | torohealth-1.12.2-11.jar         | None      |
+
+	Loaded coremods (and transformers): 
+	GL info: ~~ERROR~~ RuntimeException: No OpenGL context found in the current thread.
+	Profiler Position: N/A (disabled)
+	Player Count: 1 / 8; [EntityPlayerMP['Player359'/854, l='New World', x=164.89, y=91.52, z=495.77]]
+	Type: Integrated Server (map_client.txt)
+	Is Modded: Definitely; Client brand changed to 'fml,forge'

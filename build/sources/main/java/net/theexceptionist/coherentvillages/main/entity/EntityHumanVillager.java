@@ -99,6 +99,7 @@ import net.theexceptionist.coherentvillages.entity.ai.EntityAIRest;
 import net.theexceptionist.coherentvillages.entity.ai.EntityAISearchForHorse;
 import net.theexceptionist.coherentvillages.entity.ai.EntityAIShareTargetPlayer;
 import net.theexceptionist.coherentvillages.entity.ai.EntityAIStayInBorders;
+import net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage;
 import net.theexceptionist.coherentvillages.entity.followers.IEntityFollower;
 import net.theexceptionist.coherentvillages.main.Main;
 import net.theexceptionist.coherentvillages.main.NameGenerator;
@@ -135,6 +136,7 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
 	private EntityHumanVillager liege;
 	//private EntityHumanVillager liege = null;
 	private boolean spawnAttempt = false;
+	private boolean patrolShift = true;
 	
 	public final static int GENDER_MALE = 0;
 	public final static int GENDER_FEMALE = 1;
@@ -749,6 +751,7 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
 		if(this.world.isRemote) return;
 		int healthBonus = race.getHealthBonus();
 		int attackBonus = race.getAttackBonus();
+		int magicBonus = race.getMagicBonus();
 		int detectBonus = race.getDetectBonus();
 		int speedBonus = race.getSpeedBonus();
 		int knockbackBonus = race.getKnockbackBonus();
@@ -760,6 +763,7 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
         getEntityAttribute(SharedMonsterAttributes.ARMOR_TOUGHNESS).setBaseValue(32.0D);
         getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(16.0D + (detectBonus * vocation.getRank()) + this.vocation.getDetectOffest());
         getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(4.0D + (attackBonus * vocation.getRank()) + this.vocation.getDamageOffest());
+        getEntityAttribute(AttributeRace.MAGIC_DAMAGE).setBaseValue(2.0D + (magicBonus * vocation.getRank()) + this.vocation.getDamageOffest());
         
         this.setHealth((float) getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).getBaseValue());
     }
@@ -964,7 +968,9 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
         potions = new EntityAIAttackRanged(this, 1.0D, 60, 10.0F);
         spells =  new  EntityAIAttackWithMagic(this, 1.0D, 20, 15.0F);
         farm = new EntityAIHarvestFarmland(this, 0.6D);
-		
+		patrolShift = vocation.getType() == AttributeVocation.CLASS_BANDIT ? this.world.rand.nextInt(100) < 75 : this.world.rand.nextInt(100) < 25;
+        
+        
 		switch(vocation.getType())
 		{
 			case AttributeVocation.CLASS_SOLDIER:
@@ -972,7 +978,7 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
 				this.tasks.addTask(0, new EntityAISwimming(this));
 		       // this.tasks.addTask(1, melee);
 		        this.tasks.addTask(2, new EntityAIStayInBorders(this, 1.0D));
-		        this.tasks.addTask(3, new EntityAIMoveThroughVillage(this, 0.6D, true));
+		        this.tasks.addTask(3, new EntityAIMoveThroughVillage(this, 0.6D, patrolShift));
 		        this.tasks.addTask(4, new EntityAIRestrictOpenDoor(this));
 		        this.tasks.addTask(5, new EntityAIOpenDoor(this, true));
 		        //this.tasks.addTask(6, new EntityAIRest(this, true));
@@ -991,7 +997,7 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
 		        this.tasks.addTask(3, new EntityAIRest(this, true));
 		     //   this.tasks.addTask(1, ranged);
 		        this.tasks.addTask(2, new EntityAIStayInBorders(this, 1.0D));
-		        this.tasks.addTask(3, new EntityAIMoveThroughVillage(this, 0.6D, true));
+		        this.tasks.addTask(3, new EntityAIMoveThroughVillage(this, 0.6D, patrolShift));
 		        this.tasks.addTask(4, new EntityAIRestrictOpenDoor(this));
 		        this.tasks.addTask(5, new EntityAIOpenDoor(this, true));
 		      //  this.tasks.addTask(6, new EntityAIMoveThroughVillage(this, 0.6D, true));
@@ -1009,7 +1015,7 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
 				this.tasks.addTask(0, new EntityAISwimming(this));
 		    //    this.tasks.addTask(1, spells);
 		        this.tasks.addTask(2, new EntityAIStayInBorders(this, 1.0D));
-		        this.tasks.addTask(3, new EntityAIMoveThroughVillage(this, 0.6D, true));
+		        this.tasks.addTask(3, new EntityAIMoveThroughVillage(this, 0.6D, patrolShift));
 		        this.tasks.addTask(4, new EntityAIRestrictOpenDoor(this));
 		        this.tasks.addTask(5, new EntityAIOpenDoor(this, true));
 		        //this.tasks.addTask(6, new EntityAIRest(this, true));
@@ -1028,7 +1034,7 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
 		        //this.tasks.addTask(1, potions);
 		       // this.tasks.addTask(2, heal);
 		        this.tasks.addTask(3, new EntityAIStayInBorders(this, 1.0D));
-		        this.tasks.addTask(4, new EntityAIMoveThroughVillage(this, 0.6D, true));
+		        this.tasks.addTask(4, new EntityAIMoveThroughVillage(this, 0.6D, patrolShift));
 		        this.tasks.addTask(5, new EntityAIRestrictOpenDoor(this));
 		        this.tasks.addTask(6, new EntityAIOpenDoor(this, true));
 		        //this.tasks.addTask(6, new EntityAIRest(this, true));
@@ -1081,7 +1087,8 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
 			        break;
 			        case AttributeVocation.SUBCLASS_MERCHANT:
 			        {
-			        	
+			        	//Implement later
+						//this.tasks.addTask(0, new EntityAITravelToAnotherVillage(this));
 			        }
 			        break;
 			        case AttributeVocation.SUBCLASS_TRAINER:
@@ -1102,7 +1109,7 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
 				this.tasks.addTask(0, new EntityAISwimming(this));
 		       // this.tasks.addTask(1, melee);
 		        this.tasks.addTask(2, new EntityAIStayInBorders(this, 1.0D));
-		        this.tasks.addTask(3, new EntityAIMoveThroughVillage(this, 0.6D, true));
+		        this.tasks.addTask(3, new EntityAIMoveThroughVillage(this, 0.6D, patrolShift));
 		        this.tasks.addTask(4, new EntityAIRestrictOpenDoor(this));
 		        this.tasks.addTask(5, new EntityAIOpenDoor(this, true));
 		        //this.tasks.addTask(6, new EntityAIRest(this, true));
@@ -1175,7 +1182,7 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
 				this.tasks.addTask(0, new EntityAISwimming(this));
 		       // this.tasks.addTask(1, melee);
 		        this.tasks.addTask(2, new EntityAIStayInBorders(this, 1.0D));
-		        this.tasks.addTask(3, new EntityAIMoveThroughVillage(this, 0.6D, true));
+		        this.tasks.addTask(3, new EntityAIMoveThroughVillage(this, 0.6D, patrolShift));
 		        this.tasks.addTask(4, new EntityAIRestrictOpenDoor(this));
 		        this.tasks.addTask(5, new EntityAIOpenDoor(this, true));
 		        //this.tasks.addTask(6, new EntityAIRest(this, true));
@@ -1431,6 +1438,7 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
         super.applyEntityAttributes();
 
         getAttributeMap().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
+        getAttributeMap().registerAttribute(AttributeRace.MAGIC_DAMAGE);
     }
 	
 	private void initEntityClass() 

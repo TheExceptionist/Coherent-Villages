@@ -34,6 +34,7 @@ import net.theexceptionist.coherentvillages.main.entity.EntityBjornserker;
 import net.theexceptionist.coherentvillages.main.entity.EntityDrachen;
 import net.theexceptionist.coherentvillages.main.entity.EntityHumanVillager;
 import net.theexceptionist.coherentvillages.main.entity.EntityLemure;
+import net.theexceptionist.coherentvillages.main.entity.EntitySkeletonSummon;
 import net.theexceptionist.coherentvillages.main.entity.EntityWarg;
 import net.theexceptionist.coherentvillages.main.entity.EntityWraith;
 import net.theexceptionist.coherentvillages.main.entity.attributes.AttributeRace;
@@ -145,6 +146,8 @@ public class Main
     			"raid_rate=50\n",
     			"#The chance a village will recieve immigrates!\n",
     			"immigrate_rate=50\n",
+    			"#The chance a skirmish will happen out in the wild!\n",
+    			"skirmish_rate=50\n",
     			
     	};
     
@@ -205,6 +208,11 @@ public class Main
 	public static int LARGE_IMMIGRATE_RATE = 50;
 
 	public static boolean sendMessage = true;
+
+	public static int SMALL_SKIRMISH_RATE = 50;
+	public static int MEDIUM_SKIRMISH_RATE = 50;
+	public static int LARGE_SKIRMISH_RATE = 50;
+
 
 	@EventHandler
 	public void serverLoad(FMLServerStartingEvent event)
@@ -334,6 +342,11 @@ public class Main
 				{
 					SMALL_IMMIGRATE_RATE = MEDIUM_IMMIGRATE_RATE = LARGE_IMMIGRATE_RATE = value;
 					System.out.println("New Immigrate Rate: "+value);
+				}
+				else if(parts[0].contains("skirmish_rate"))
+				{
+					SMALL_SKIRMISH_RATE = MEDIUM_SKIRMISH_RATE = LARGE_SKIRMISH_RATE = value;
+					System.out.println("New Skirmish Rate: "+value);
 				}
 				else if(parts[0].contains("bjorn_turn_rate"))
 				{
@@ -680,7 +693,8 @@ public class Main
     	createEntity(EntityWraith.class, Main.entityIDStart + 3, "wraith", 0x101010, 0x00FF00, true);
     	createEntity(EntityLemure.class, Main.entityIDStart + 4, "lemure", 0x404040, 0x00AA00, true);
     	createEntity(EntityDrachen.class, Main.entityIDStart + 5, "drachen", 0x808080, 0x005500, true);
-    	
+    	createEntity(EntitySkeletonSummon.class, Main.entityIDStart + 6, "minion", 0x404040, 0x00AA00, false);
+
     	
     	//Soldiers
     	/*createEntity(EntityVillagerGuard.class, 1513, "villager_guard", 161425, 1582224);

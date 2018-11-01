@@ -2,20 +2,20 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="//" key="selection"/>
+		<item value="onLivin" key="selection"/>
 		<item value="true" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
-			<item value="//"/>
-			<item value="Template"/>
-			<item value="PlacementSettings"/>
-			<item value="ModPlacementSettings"/>
-			<item value="getMovementOffsets"/>
-			<item value="EntityDragon"/>
-			<item value="p_i46360_1_"/>
-			<item value="(this, 0, 0);"/>
+			<item value="onLivin"/>
+			<item value="getTitle"/>
+			<item value="getRandom"/>
+			<item value="horse"/>
+			<item value="spear"/>
+			<item value="bandit"/>
+			<item value="onLiv"/>
+			<item value="onLiving"/>
 		</list>
 		<list key="replacehistory">
 			<item value="ModPlacementSettings"/>
@@ -33,6 +33,6 @@
 		<item value="1|.SF NS Text|11.0|0|COCOA|1|.SFNSText" key="DIALOG_FONT_NAME"/>
 		<item value="411" key="DIALOG_HEIGHT"/>
 		<item value="2" key="DIALOG_X_ORIGIN"/>
-		<item value="192" key="DIALOG_Y_ORIGIN"/>
+		<item value="16" key="DIALOG_Y_ORIGIN"/>
 	</section>
 </section>

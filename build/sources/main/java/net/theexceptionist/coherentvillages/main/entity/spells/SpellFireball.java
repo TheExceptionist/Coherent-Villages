@@ -5,11 +5,12 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityFireball;
 import net.minecraft.entity.projectile.EntityLargeFireball;
-import net.minecraft.entity.projectile.EntitySmallFireball;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.theexceptionist.coherentvillages.main.entity.projectile.EntityModFireballSmall;
+import net.theexceptionist.coherentvillages.main.entity.projectile.EntityModLargeFireball;
 
 public class SpellFireball extends Spell{
 	private int count, power;
@@ -53,17 +54,18 @@ public class SpellFireball extends Spell{
 		        
 	        	if(largeFireball)
 	        	{
-	        		entitylargefireball = new EntityLargeFireball(world, caster, d2, d3, d4);
+	        		entitylargefireball = new EntityModLargeFireball(world, caster, d2, d3, d4);
 	        		((EntityLargeFireball)entitylargefireball).explosionPower = power;
 	        	}
 	        	else
 	        	{
-	        		entitylargefireball = new EntitySmallFireball(world, caster, d2, d3, d4);
+	        		entitylargefireball = new EntityModFireballSmall(world, caster, d2, d3, d4);
 	        	}
 	        	
 		        entitylargefireball.posX = caster.posX + vec3d.x * 4.0D;
 		        entitylargefireball.posY = caster.posY + (double)(caster.height / 2.0F) + 0.5D;
 		        entitylargefireball.posZ = caster.posZ + vec3d.z * 4.0D;
+		        
 		        world.spawnEntity(entitylargefireball);
 		        this.burst--;
 	        }

@@ -1,3 +1,644 @@
-[07:22:36] [main/INFO] [net.minecraft.client.Minecraft]: Stopping!
-[07:22:37] [main/INFO] [net.minecraft.client.audio.SoundManager]: SoundSystem shutting down...
-[07:22:37] [main/WARN] [net.minecraft.client.audio.SoundManager]: Author: Paul Lamb, www.paulscode.com
+[18:45:55] [main/INFO] [GradleStart]: Extra: []
+[18:45:55] [main/INFO] [GradleStart]: Running with arguments: [--userProperties, {}, --assetsDir, /Users/kennethstepney/.gradle/caches/minecraft/assets, --assetIndex, 1.12, --accessToken{REDACTED}, --version, 1.12.2, --tweakClass, net.minecraftforge.fml.common.launcher.FMLTweaker, --tweakClass, net.minecraftforge.gradle.tweakers.CoremodTweaker]
+[18:45:55] [main/INFO] [LaunchWrapper]: Loading tweak class name net.minecraftforge.fml.common.launcher.FMLTweaker
+[18:45:55] [main/INFO] [LaunchWrapper]: Using primary tweak class name net.minecraftforge.fml.common.launcher.FMLTweaker
+[18:45:55] [main/INFO] [LaunchWrapper]: Loading tweak class name net.minecraftforge.gradle.tweakers.CoremodTweaker
+[18:45:55] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.fml.common.launcher.FMLTweaker
+[18:45:55] [main/INFO] [FML]: Forge Mod Loader version 14.23.4.2757 for Minecraft 1.12.2 loading
+[18:45:55] [main/INFO] [FML]: Java is Java HotSpot(TM) 64-Bit Server VM, version 1.8.0_144, running on Mac OS X:x86_64:10.13.6, installed at /Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home/jre
+[18:45:55] [main/ERROR] [FML]: Apache Maven library folder was not in the format expected. Using default libraries directory.
+[18:45:55] [main/ERROR] [FML]: Full: /Users/kennethstepney/.gradle/caches/modules-2/files-2.1/org.apache.maven/maven-artifact/3.5.3/7dc72b6d6d8a6dced3d294ed54c2cc3515ade9f4/maven-artifact-3.5.3.jar
+[18:45:55] [main/ERROR] [FML]: Trimmed: /users/kennethstepney/.gradle/caches/modules-2/files-2.1/org.apache.maven/maven-artifact/3.5.3/
+[18:45:55] [main/INFO] [FML]: Managed to load a deobfuscated Minecraft name- we are in a deobfuscated environment. Skipping runtime deobfuscation
+[18:45:55] [main/INFO] [FML]: Detected deobfuscated environment, loading log configs for colored console logs.
+[18:45:56] [main/INFO] [FML]: Ignoring missing certificate for coremod FMLCorePlugin (net.minecraftforge.fml.relauncher.FMLCorePlugin), we are in deobf and it's a forge core plugin
+[18:45:56] [main/INFO] [FML]: Ignoring missing certificate for coremod FMLForgePlugin (net.minecraftforge.classloading.FMLForgePlugin), we are in deobf and it's a forge core plugin
+[18:45:56] [main/INFO] [FML]: Searching /Users/kennethstepney/Documents/GitHub/Coherent-Villages/run/./mods for mods
+[18:45:56] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.gradle.tweakers.CoremodTweaker
+[18:45:56] [main/INFO] [GradleStart]: Injecting location in coremod net.minecraftforge.fml.relauncher.FMLCorePlugin
+[18:45:56] [main/INFO] [GradleStart]: Injecting location in coremod net.minecraftforge.classloading.FMLForgePlugin
+[18:45:56] [main/INFO] [LaunchWrapper]: Loading tweak class name net.minecraftforge.fml.common.launcher.FMLInjectionAndSortingTweaker
+[18:45:56] [main/INFO] [LaunchWrapper]: Loading tweak class name net.minecraftforge.fml.common.launcher.FMLDeobfTweaker
+[18:45:56] [main/INFO] [LaunchWrapper]: Loading tweak class name net.minecraftforge.gradle.tweakers.AccessTransformerTweaker
+[18:45:56] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.fml.common.launcher.FMLInjectionAndSortingTweaker
+[18:45:56] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.fml.common.launcher.FMLInjectionAndSortingTweaker
+[18:45:56] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.fml.relauncher.CoreModManager$FMLPluginWrapper
+[18:45:57] [main/ERROR] [FML]: FML appears to be missing any signature data. This is not a good thing
+[18:45:57] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.fml.relauncher.CoreModManager$FMLPluginWrapper
+[18:45:57] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.fml.common.launcher.FMLDeobfTweaker
+[18:45:57] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.gradle.tweakers.AccessTransformerTweaker
+[18:45:57] [main/INFO] [GradleStart]: Remapping AccessTransformer rules...
+[18:45:57] [main/INFO] [LaunchWrapper]: Loading tweak class name net.minecraftforge.fml.common.launcher.TerminalTweaker
+[18:45:57] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.fml.common.launcher.TerminalTweaker
+[18:45:57] [main/INFO] [LaunchWrapper]: Launching wrapped minecraft {net.minecraft.client.main.Main}
+[18:45:58] [main/INFO] [net.minecraft.client.Minecraft]: Setting user: Player50
+[18:46:01] [main/WARN] [net.minecraft.client.settings.GameSettings]: Skipping bad option: lastServer:
+[18:46:01] [main/INFO] [net.minecraft.client.Minecraft]: LWJGL Version: 2.9.2
+[18:46:01] [main/INFO] [FML]: -- System Details --
+Details:
+	Minecraft Version: 1.12.2
+	Operating System: Mac OS X (x86_64) version 10.13.6
+	Java Version: 1.8.0_144, Oracle Corporation
+	Java VM Version: Java HotSpot(TM) 64-Bit Server VM (mixed mode), Oracle Corporation
+	Memory: 334004400 bytes (318 MB) / 506986496 bytes (483 MB) up to 1908932608 bytes (1820 MB)
+	JVM Flags: 0 total; 
+	IntCache: cache: 0, tcache: 0, allocated: 0, tallocated: 0
+	FML: 
+	Loaded coremods (and transformers): 
+	GL info: ' Vendor: 'Intel Inc.' Version: '2.1 INTEL-10.36.19' Renderer: 'Intel(R) Iris(TM) Plus Graphics 640'
+[18:46:01] [main/INFO] [FML]: MinecraftForge v14.23.4.2757 Initialized
+[18:46:01] [main/INFO] [FML]: Starts to replace vanilla recipe ingredients with ore ingredients.
+[18:46:01] [main/INFO] [FML]: Replaced 1036 ore ingredients
+[18:46:01] [main/INFO] [FML]: Searching /Users/kennethstepney/Documents/GitHub/Coherent-Villages/run/./mods for mods
+[18:46:02] [main/INFO] [FML]: Forge Mod Loader has identified 9 mods to load
+[18:46:03] [main/INFO] [FML]: Attempting connection with missing mods [minecraft, mcp, FML, forge, coherentvillages, ichunutil, journeymap, tabula, torohealthmod] at CLIENT
+[18:46:03] [main/INFO] [FML]: Attempting connection with missing mods [minecraft, mcp, FML, forge, coherentvillages, ichunutil, journeymap, tabula, torohealthmod] at SERVER
+[18:46:03] [main/INFO] [net.minecraft.client.resources.SimpleReloadableResourceManager]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Coherent Villages Mod Beta, FMLFileResourcePack:iChunUtil, FMLFileResourcePack:JourneyMap, FMLFileResourcePack:Tabula, FMLFileResourcePack:ToroHealth Damage Indicators
+[18:46:04] [main/INFO] [FML]: Processing ObjectHolder annotations
+[18:46:04] [main/INFO] [FML]: Found 1168 ObjectHolder annotations
+[18:46:04] [main/INFO] [FML]: Identifying ItemStackHolder annotations
+[18:46:04] [main/INFO] [FML]: Found 0 ItemStackHolder annotations
+[18:46:04] [main/INFO] [FML]: Configured a dormant chunk cache size of 0
+[18:46:04] [main/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.main.Main:preInit:225]: Coherent Villages Pre-Release is loading!
+[18:46:04] [Forge Version Check/INFO] [forge.VersionCheck]: [forge] Starting version check at http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions_slim.json
+[18:46:04] [main/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.main.Main:preInit:226]: &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+[18:46:04] [main/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.main.Main:preInit:227]: Working Directory = /Users/kennethstepney/Documents/GitHub/Coherent-Villages/run
+[18:46:04] [main/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.main.Main:preInit:229]: coherentvillages| Checking for config file
+/Users/kennethstepney/Documents/GitHub/Coherent-Villages/run/config
+[18:46:04] [main/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.main.Main:readConfig:280]: coherentvillages| Config file found! 
+Loading...
+[18:46:04] [main/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.main.Main:readConfig:354]: New Bjorn Rate: 5
+[18:46:04] [main/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.main.Main:readConfig:369]: New Nord Bandit Infest Rate: 25
+[18:46:04] [main/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.main.Main:readConfig:364]: New Nord Zombie Infest Rate: 2
+[18:46:04] [main/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.main.Main:readConfig:394]: New Warg Spawnrate: 10
+[18:46:04] [main/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.main.Main:readConfig:409]: New Bjornserker Spawnrate: 5
+[18:46:04] [main/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.main.Main:readConfig:414]: New Upgrade Chance: 25
+[18:46:04] [main/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.main.Main:readConfig:404]: New Lemure Spawnrate: 2
+[18:46:04] [main/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.main.Main:readConfig:399]: New Wraith Spawnrate: 5
+[18:46:04] [main/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.main.Main:readConfig:359]: New Wraith Turn Rate: 50
+[18:46:04] [main/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.main.Main:readConfig:389]: New Bandit Infest Rate: 25
+[18:46:04] [main/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.main.Main:readConfig:384]: New Zombie Infest Rate: 2
+[18:46:04] [main/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.main.Main:readConfig:379]: New German Bandit Infest Rate: 25
+[18:46:04] [main/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.main.Main:readConfig:374]: New German Zombie Infest Rate: 2
+[18:46:04] [main/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.main.Main:readConfig:334]: Show Message Events: 1
+[18:46:04] [main/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.main.Main:readConfig:339]: New Raid Rate: 50
+[18:46:04] [main/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.main.Main:readConfig:344]: New Immigrate Rate: 50
+[18:46:04] [main/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.main.Main:readConfig:465]: Read the config file! New Max: 20 New Min: 10 New Size: 1
+[18:46:04] [main/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.main.Main:preInit:243]: &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+[18:46:04] [Thread-3/INFO] [FML]: Using sync timing. 200 frames of Display.update took 699882704 nanos
+[18:46:04] [Forge Version Check/INFO] [forge.VersionCheck]: [forge] Found status: OUTDATED Target: 14.23.5.2768
+[18:46:04] [Forge Version Check/INFO] [forge.VersionCheck]: [coherentvillages] Starting version check at https://github.com/TheExceptionist/Coherent-Villages/blob/master/UpdateChecker/update.json
+[18:46:04] [main/INFO] [journeymap]: No plugins for JourneyMap API discovered.
+[18:46:04] [main/WARN] [FML]: Potentially Dangerous alternative prefix `minecraft` for name `tabula_tabularasa`, expected `tabula`. This could be a intended override, but in most cases indicates a broken mod.
+[18:46:04] [main/INFO] [FML]: Applying holder lookups
+[18:46:04] [main/INFO] [FML]: Holder lookups applied
+[18:46:04] [main/WARN] [FML]: ****************************************
+[18:46:04] [main/WARN] [FML]: * Registry Item: The object net.theexceptionist.coherentvillages.main.items.ItemModShield@7c5024c1 has been registered twice for the same name coherentvillages:nord_shield_0.
+[18:46:04] [main/WARN] [FML]: *  at net.minecraftforge.registries.ForgeRegistry.add(ForgeRegistry.java:308)
+[18:46:04] [main/WARN] [FML]: *  at net.minecraftforge.registries.ForgeRegistry.add(ForgeRegistry.java:289)
+[18:46:04] [main/WARN] [FML]: *  at net.minecraftforge.registries.ForgeRegistry.register(ForgeRegistry.java:122)
+[18:46:04] [main/WARN] [FML]: *  at net.minecraftforge.registries.ForgeRegistry.registerAll(ForgeRegistry.java:163)
+[18:46:04] [main/WARN] [FML]: *  at net.theexceptionist.coherentvillages.main.items.ModItems.registerItems(ModItems.java:124)
+[18:46:04] [main/WARN] [FML]: *  at net.minecraftforge.fml.common.eventhandler.ASMEventHandler_4_ModItems_registerItems_Register.invoke(.dynamic)...
+[18:46:04] [main/WARN] [FML]: ****************************************
+[18:46:04] [main/INFO] [FML]: Applying holder lookups
+[18:46:04] [main/INFO] [FML]: Holder lookups applied
+[18:46:04] [main/INFO] [FML]: Applying holder lookups
+[18:46:04] [main/INFO] [FML]: Holder lookups applied
+[18:46:04] [main/INFO] [FML]: Applying holder lookups
+[18:46:04] [main/INFO] [FML]: Holder lookups applied
+[18:46:04] [main/INFO] [FML]: Injecting itemstacks
+[18:46:04] [main/INFO] [FML]: Itemstack injection complete
+[18:46:06] [Sound Library Loader/INFO] [net.minecraft.client.audio.SoundManager]: Starting up SoundSystem...
+[18:46:06] [Thread-4/INFO] [net.minecraft.client.audio.SoundManager]: Initializing LWJGL OpenAL
+[18:46:06] [Thread-4/INFO] [net.minecraft.client.audio.SoundManager]: (The LWJGL binding of OpenAL.  For more information, see http://www.lwjgl.org)
+[18:46:06] [Thread-4/INFO] [net.minecraft.client.audio.SoundManager]: OpenAL initialized.
+[18:46:06] [Sound Library Loader/INFO] [net.minecraft.client.audio.SoundManager]: Sound engine started
+[18:46:09] [main/INFO] [FML]: Max texture size: 16384
+[18:46:09] [main/INFO] [net.minecraft.client.renderer.texture.TextureMap]: Created: 512x512 textures-atlas
+[18:46:10] [main/INFO] [FML]: Applying holder lookups
+[18:46:10] [main/INFO] [FML]: Holder lookups applied
+[18:46:11] [main/ERROR] [journeymap]: Default theme not found in ./journeymap/icon/theme/flat/OceanMonument.theme2.json: OceanMonument (SUPPRESSED)
+[18:46:11] [main/WARN] [journeymap]: core (Initialized) Bad configField entry during updateFrom(): optionsManagerViewed=null
+[18:46:11] [main/WARN] [journeymap]: core (Initialized) Bad configField entry during updateFrom(): splashViewed=null
+[18:46:11] [main/INFO] [journeymap]: JourneyMap log initialized.
+[18:46:11] [main/INFO] [journeymap]: initialize ENTER
+[18:46:11] [main/WARN] [journeymap]: core (Initialized) Bad configField entry during updateFrom(): optionsManagerViewed=null
+[18:46:11] [main/WARN] [journeymap]: core (Initialized) Bad configField entry during updateFrom(): splashViewed=null
+[18:46:11] [main/INFO] [journeymap]: [ClientAPI] built with JourneyMap API 1.4
+[18:46:11] [main/INFO] [journeymap]: Initializing plugins with Client API: journeymap.client.api.impl.ClientAPI
+[18:46:11] [main/INFO] [journeymap]: initialize EXIT, elapsed count 0 avg �ms
+[18:46:11] [main/INFO] [FML]: Injecting itemstacks
+[18:46:11] [main/INFO] [FML]: Itemstack injection complete
+[18:46:12] [main/INFO] [journeymap]: Added entity icons from journeymap:icon/entity. Success: false
+[18:46:12] [main/INFO] [journeymap]: Preloaded theme textures: 71
+[18:46:12] [JM-VersionCheck-1/ERROR] [journeymap]: Could not check version URL
+com.google.gson.JsonSyntaxException: com.google.gson.stream.MalformedJsonException: Use JsonReader.setLenient(true) to accept malformed JSON at line 2 column 2 path $
+	at com.google.gson.JsonParser.parse(JsonParser.java:65) ~[JsonParser.class:?]
+	at com.google.gson.JsonParser.parse(JsonParser.java:45) ~[JsonParser.class:?]
+	at journeymap.common.version.VersionCheck$1.run(VersionCheck.java:134) [VersionCheck$1.class:1.12.2-5.5.2]
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511) [?:1.8.0_144]
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266) [?:1.8.0_144]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) [?:1.8.0_144]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) [?:1.8.0_144]
+	at java.lang.Thread.run(Thread.java:748) [?:1.8.0_144]
+Caused by: com.google.gson.stream.MalformedJsonException: Use JsonReader.setLenient(true) to accept malformed JSON at line 2 column 2 path $
+	at com.google.gson.stream.JsonReader.syntaxError(JsonReader.java:1559) ~[JsonReader.class:?]
+	at com.google.gson.stream.JsonReader.checkLenient(JsonReader.java:1401) ~[JsonReader.class:?]
+	at com.google.gson.stream.JsonReader.doPeek(JsonReader.java:542) ~[JsonReader.class:?]
+	at com.google.gson.stream.JsonReader.peek(JsonReader.java:425) ~[JsonReader.class:?]
+	at com.google.gson.JsonParser.parse(JsonParser.java:60) ~[JsonParser.class:?]
+	... 7 more
+[18:46:12] [main/INFO] [STDERR]: [me.ichun.mods.ichunutil.common.core.util.ObfHelper:getEntityTexture:131]: java.lang.reflect.InvocationTargetException
+[18:46:12] [main/INFO] [STDERR]: [me.ichun.mods.ichunutil.common.core.util.ObfHelper:getEntityTexture:131]: 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+[18:46:12] [main/INFO] [STDERR]: [me.ichun.mods.ichunutil.common.core.util.ObfHelper:getEntityTexture:131]: 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+[18:46:12] [main/INFO] [STDERR]: [me.ichun.mods.ichunutil.common.core.util.ObfHelper:getEntityTexture:131]: 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+[18:46:12] [main/INFO] [STDERR]: [me.ichun.mods.ichunutil.common.core.util.ObfHelper:getEntityTexture:131]: 	at java.lang.reflect.Method.invoke(Method.java:498)
+[18:46:12] [main/INFO] [STDERR]: [me.ichun.mods.ichunutil.common.core.util.ObfHelper:getEntityTexture:131]: 	at me.ichun.mods.ichunutil.common.core.util.ObfHelper.getEntityTexture(ObfHelper.java:120)
+[18:46:12] [main/INFO] [STDERR]: [me.ichun.mods.ichunutil.common.core.util.ObfHelper:getEntityTexture:131]: 	at me.ichun.mods.tabula.client.core.ProxyClient.mapModelInfo(ProxyClient.java:335)
+[18:46:12] [main/INFO] [STDERR]: [me.ichun.mods.ichunutil.common.core.util.ObfHelper:getEntityTexture:131]: 	at me.ichun.mods.tabula.client.core.ProxyClient.postInit(ProxyClient.java:125)
+[18:46:12] [main/INFO] [STDERR]: [me.ichun.mods.ichunutil.common.core.util.ObfHelper:getEntityTexture:131]: 	at me.ichun.mods.tabula.common.Tabula.postInit(Tabula.java:78)
+[18:46:12] [main/INFO] [STDERR]: [me.ichun.mods.ichunutil.common.core.util.ObfHelper:getEntityTexture:131]: 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+[18:46:12] [main/INFO] [STDERR]: [me.ichun.mods.ichunutil.common.core.util.ObfHelper:getEntityTexture:131]: 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+[18:46:12] [main/INFO] [STDERR]: [me.ichun.mods.ichunutil.common.core.util.ObfHelper:getEntityTexture:131]: 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+[18:46:12] [main/INFO] [STDERR]: [me.ichun.mods.ichunutil.common.core.util.ObfHelper:getEntityTexture:131]: 	at java.lang.reflect.Method.invoke(Method.java:498)
+[18:46:12] [main/INFO] [STDERR]: [me.ichun.mods.ichunutil.common.core.util.ObfHelper:getEntityTexture:131]: 	at net.minecraftforge.fml.common.FMLModContainer.handleModStateEvent(FMLModContainer.java:629)
+[18:46:12] [main/INFO] [STDERR]: [me.ichun.mods.ichunutil.common.core.util.ObfHelper:getEntityTexture:131]: 	at sun.reflect.GeneratedMethodAccessor12.invoke(Unknown Source)
+[18:46:12] [main/INFO] [STDERR]: [me.ichun.mods.ichunutil.common.core.util.ObfHelper:getEntityTexture:131]: 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+[18:46:12] [main/INFO] [STDERR]: [me.ichun.mods.ichunutil.common.core.util.ObfHelper:getEntityTexture:131]: 	at java.lang.reflect.Method.invoke(Method.java:498)
+[18:46:12] [main/INFO] [STDERR]: [me.ichun.mods.ichunutil.common.core.util.ObfHelper:getEntityTexture:131]: 	at com.google.common.eventbus.Subscriber.invokeSubscriberMethod(Subscriber.java:91)
+[18:46:12] [main/INFO] [STDERR]: [me.ichun.mods.ichunutil.common.core.util.ObfHelper:getEntityTexture:131]: 	at com.google.common.eventbus.Subscriber$SynchronizedSubscriber.invokeSubscriberMethod(Subscriber.java:150)
+[18:46:12] [main/INFO] [STDERR]: [me.ichun.mods.ichunutil.common.core.util.ObfHelper:getEntityTexture:131]: 	at com.google.common.eventbus.Subscriber$1.run(Subscriber.java:76)
+[18:46:12] [main/INFO] [STDERR]: [me.ichun.mods.ichunutil.common.core.util.ObfHelper:getEntityTexture:131]: 	at com.google.common.util.concurrent.MoreExecutors$DirectExecutor.execute(MoreExecutors.java:399)
+[18:46:12] [main/INFO] [STDERR]: [me.ichun.mods.ichunutil.common.core.util.ObfHelper:getEntityTexture:131]: 	at com.google.common.eventbus.Subscriber.dispatchEvent(Subscriber.java:71)
+[18:46:12] [main/INFO] [STDERR]: [me.ichun.mods.ichunutil.common.core.util.ObfHelper:getEntityTexture:131]: 	at com.google.common.eventbus.Dispatcher$PerThreadQueuedDispatcher.dispatch(Dispatcher.java:116)
+[18:46:12] [main/INFO] [STDERR]: [me.ichun.mods.ichunutil.common.core.util.ObfHelper:getEntityTexture:131]: 	at com.google.common.eventbus.EventBus.post(EventBus.java:217)
+[18:46:12] [main/INFO] [STDERR]: [me.ichun.mods.ichunutil.common.core.util.ObfHelper:getEntityTexture:131]: 	at net.minecraftforge.fml.common.LoadController.sendEventToModContainer(LoadController.java:218)
+[18:46:12] [main/INFO] [STDERR]: [me.ichun.mods.ichunutil.common.core.util.ObfHelper:getEntityTexture:131]: 	at net.minecraftforge.fml.common.LoadController.propogateStateMessage(LoadController.java:196)
+[18:46:12] [main/INFO] [STDERR]: [me.ichun.mods.ichunutil.common.core.util.ObfHelper:getEntityTexture:131]: 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+[18:46:12] [main/INFO] [STDERR]: [me.ichun.mods.ichunutil.common.core.util.ObfHelper:getEntityTexture:131]: 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+[18:46:12] [main/INFO] [STDERR]: [me.ichun.mods.ichunutil.common.core.util.ObfHelper:getEntityTexture:131]: 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+[18:46:12] [main/INFO] [STDERR]: [me.ichun.mods.ichunutil.common.core.util.ObfHelper:getEntityTexture:131]: 	at java.lang.reflect.Method.invoke(Method.java:498)
+[18:46:12] [main/INFO] [STDERR]: [me.ichun.mods.ichunutil.common.core.util.ObfHelper:getEntityTexture:131]: 	at com.google.common.eventbus.Subscriber.invokeSubscriberMethod(Subscriber.java:91)
+[18:46:12] [main/INFO] [STDERR]: [me.ichun.mods.ichunutil.common.core.util.ObfHelper:getEntityTexture:131]: 	at com.google.common.eventbus.Subscriber$SynchronizedSubscriber.invokeSubscriberMethod(Subscriber.java:150)
+[18:46:12] [main/INFO] [STDERR]: [me.ichun.mods.ichunutil.common.core.util.ObfHelper:getEntityTexture:131]: 	at com.google.common.eventbus.Subscriber$1.run(Subscriber.java:76)
+[18:46:12] [main/INFO] [STDERR]: [me.ichun.mods.ichunutil.common.core.util.ObfHelper:getEntityTexture:131]: 	at com.google.common.util.concurrent.MoreExecutors$DirectExecutor.execute(MoreExecutors.java:399)
+[18:46:12] [main/INFO] [STDERR]: [me.ichun.mods.ichunutil.common.core.util.ObfHelper:getEntityTexture:131]: 	at com.google.common.eventbus.Subscriber.dispatchEvent(Subscriber.java:71)
+[18:46:12] [main/INFO] [STDERR]: [me.ichun.mods.ichunutil.common.core.util.ObfHelper:getEntityTexture:131]: 	at com.google.common.eventbus.Dispatcher$PerThreadQueuedDispatcher.dispatch(Dispatcher.java:116)
+[18:46:12] [main/INFO] [STDERR]: [me.ichun.mods.ichunutil.common.core.util.ObfHelper:getEntityTexture:131]: 	at com.google.common.eventbus.EventBus.post(EventBus.java:217)
+[18:46:12] [main/INFO] [STDERR]: [me.ichun.mods.ichunutil.common.core.util.ObfHelper:getEntityTexture:131]: 	at net.minecraftforge.fml.common.LoadController.distributeStateMessage(LoadController.java:135)
+[18:46:12] [main/INFO] [STDERR]: [me.ichun.mods.ichunutil.common.core.util.ObfHelper:getEntityTexture:131]: 	at net.minecraftforge.fml.common.Loader.initializeMods(Loader.java:749)
+[18:46:12] [main/INFO] [STDERR]: [me.ichun.mods.ichunutil.common.core.util.ObfHelper:getEntityTexture:131]: 	at net.minecraftforge.fml.client.FMLClientHandler.finishMinecraftLoading(FMLClientHandler.java:336)
+[18:46:12] [main/INFO] [STDERR]: [me.ichun.mods.ichunutil.common.core.util.ObfHelper:getEntityTexture:131]: 	at net.minecraft.client.Minecraft.init(Minecraft.java:581)
+[18:46:12] [main/INFO] [STDERR]: [me.ichun.mods.ichunutil.common.core.util.ObfHelper:getEntityTexture:131]: 	at net.minecraft.client.Minecraft.run(Minecraft.java:421)
+[18:46:12] [main/INFO] [STDERR]: [me.ichun.mods.ichunutil.common.core.util.ObfHelper:getEntityTexture:131]: 	at net.minecraft.client.main.Main.main(Main.java:118)
+[18:46:12] [main/INFO] [STDERR]: [me.ichun.mods.ichunutil.common.core.util.ObfHelper:getEntityTexture:131]: 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+[18:46:12] [main/INFO] [STDERR]: [me.ichun.mods.ichunutil.common.core.util.ObfHelper:getEntityTexture:131]: 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+[18:46:12] [main/INFO] [STDERR]: [me.ichun.mods.ichunutil.common.core.util.ObfHelper:getEntityTexture:131]: 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+[18:46:12] [main/INFO] [STDERR]: [me.ichun.mods.ichunutil.common.core.util.ObfHelper:getEntityTexture:131]: 	at java.lang.reflect.Method.invoke(Method.java:498)
+[18:46:12] [main/INFO] [STDERR]: [me.ichun.mods.ichunutil.common.core.util.ObfHelper:getEntityTexture:131]: 	at net.minecraft.launchwrapper.Launch.launch(Launch.java:135)
+[18:46:12] [main/INFO] [STDERR]: [me.ichun.mods.ichunutil.common.core.util.ObfHelper:getEntityTexture:131]: 	at net.minecraft.launchwrapper.Launch.main(Launch.java:28)
+[18:46:12] [main/INFO] [STDERR]: [me.ichun.mods.ichunutil.common.core.util.ObfHelper:getEntityTexture:131]: 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+[18:46:12] [main/INFO] [STDERR]: [me.ichun.mods.ichunutil.common.core.util.ObfHelper:getEntityTexture:131]: 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+[18:46:12] [main/INFO] [STDERR]: [me.ichun.mods.ichunutil.common.core.util.ObfHelper:getEntityTexture:131]: 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+[18:46:12] [main/INFO] [STDERR]: [me.ichun.mods.ichunutil.common.core.util.ObfHelper:getEntityTexture:131]: 	at java.lang.reflect.Method.invoke(Method.java:498)
+[18:46:12] [main/INFO] [STDERR]: [me.ichun.mods.ichunutil.common.core.util.ObfHelper:getEntityTexture:131]: 	at net.minecraftforge.gradle.GradleStartCommon.launch(GradleStartCommon.java:97)
+[18:46:12] [main/INFO] [STDERR]: [me.ichun.mods.ichunutil.common.core.util.ObfHelper:getEntityTexture:131]: 	at GradleStart.main(GradleStart.java:25)
+[18:46:12] [main/INFO] [STDERR]: [java.lang.Throwable:printStackTrace:634]: Caused by: java.lang.NullPointerException
+[18:46:12] [main/INFO] [STDERR]: [java.lang.Throwable:printStackTrace:634]: 	at net.theexceptionist.coherentvillages.main.entity.EntityHumanVillager.getSkin(EntityHumanVillager.java:1752)
+[18:46:12] [main/INFO] [STDERR]: [java.lang.Throwable:printStackTrace:634]: 	at net.theexceptionist.coherentvillages.main.entity.EntityHumanVillager.getVillagerSkin(EntityHumanVillager.java:1744)
+[18:46:12] [main/INFO] [STDERR]: [java.lang.Throwable:printStackTrace:634]: 	at net.theexceptionist.coherentvillages.main.entity.render.RenderHumanVillager.getEntityTexture(RenderHumanVillager.java:133)
+[18:46:12] [main/INFO] [STDERR]: [java.lang.Throwable:printStackTrace:634]: 	at net.theexceptionist.coherentvillages.main.entity.render.RenderHumanVillager.getEntityTexture(RenderHumanVillager.java:17)
+[18:46:12] [main/INFO] [STDERR]: [java.lang.Throwable:printStackTrace:634]: 	... 54 more
+[18:46:13] [main/INFO] [FML]: Forge Mod Loader has successfully loaded 9 mods
+[18:46:13] [main/WARN] [net.minecraft.client.settings.GameSettings]: Skipping bad option: lastServer:
+[18:46:13] [main/ERROR] [FML.TEXTURE_ERRORS]: +=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=
+[18:46:13] [main/ERROR] [FML.TEXTURE_ERRORS]: The following texture errors were found.
+[18:46:13] [main/ERROR] [FML.TEXTURE_ERRORS]: ==================================================
+[18:46:13] [main/ERROR] [FML.TEXTURE_ERRORS]:   DOMAIN coherentvillages
+[18:46:13] [main/ERROR] [FML.TEXTURE_ERRORS]: --------------------------------------------------
+[18:46:13] [main/ERROR] [FML.TEXTURE_ERRORS]:   domain coherentvillages is missing 0 textures
+[18:46:13] [main/ERROR] [FML.TEXTURE_ERRORS]:     domain coherentvillages has 1 location:
+[18:46:13] [main/ERROR] [FML.TEXTURE_ERRORS]:       mod coherentvillages resources at /Users/kennethstepney/Documents/GitHub/Coherent-Villages/build/libs/modid-1.0.jar
+[18:46:13] [main/ERROR] [FML.TEXTURE_ERRORS]: -------------------------
+[18:46:13] [main/ERROR] [FML.TEXTURE_ERRORS]:     The following other errors were reported for domain coherentvillages:
+[18:46:13] [main/ERROR] [FML.TEXTURE_ERRORS]: -------------------------
+[18:46:13] [main/ERROR] [FML.TEXTURE_ERRORS]:     Problem: broken aspect ratio and not an animation
+[18:46:13] [main/ERROR] [FML.TEXTURE_ERRORS]:       textures/models/armor/roman_armor_2_layer_1.png
+[18:46:13] [main/ERROR] [FML.TEXTURE_ERRORS]:       textures/models/armor/roman_armor_layer_1.png
+[18:46:13] [main/ERROR] [FML.TEXTURE_ERRORS]: ==================================================
+[18:46:13] [main/ERROR] [FML.TEXTURE_ERRORS]: +=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=
+[18:46:15] [Realms Notification Availability checker #1/INFO] [com.mojang.realmsclient.client.RealmsClient]: Could not authorize you against Realms server: Invalid session id
+[18:46:18] [Server thread/INFO] [net.minecraft.server.integrated.IntegratedServer]: Starting integrated minecraft server version 1.12.2
+[18:46:18] [Server thread/INFO] [net.minecraft.server.integrated.IntegratedServer]: Generating keypair
+[18:46:19] [Server thread/INFO] [FML]: Injecting existing registry data into this server instance
+[18:46:19] [Server thread/INFO] [FML]: Applying holder lookups
+[18:46:19] [Server thread/INFO] [FML]: Holder lookups applied
+[18:46:19] [Server thread/INFO] [FML]: Loading dimension 0 (Copy of New World) (net.minecraft.server.integrated.IntegratedServer@2f473647)
+[18:46:19] [Server thread/INFO] [net.minecraft.advancements.AdvancementList]: Loaded 488 advancements
+[18:46:20] [Server thread/INFO] [FML]: Loading dimension -1 (Copy of New World) (net.minecraft.server.integrated.IntegratedServer@2f473647)
+[18:46:20] [Server thread/INFO] [FML]: Loading dimension 1 (Copy of New World) (net.minecraft.server.integrated.IntegratedServer@2f473647)
+[18:46:20] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Preparing start region for level 0
+[18:46:21] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Preparing spawn area: 7%
+[18:46:22] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Preparing spawn area: 14%
+[18:46:23] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Preparing spawn area: 24%
+[18:46:24] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Preparing spawn area: 34%
+[18:46:25] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Preparing spawn area: 40%
+[18:46:26] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Preparing spawn area: 46%
+[18:46:27] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Preparing spawn area: 52%
+[18:46:28] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Preparing spawn area: 61%
+[18:46:29] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Preparing spawn area: 74%
+[18:46:30] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Preparing spawn area: 86%
+[18:46:31] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Preparing spawn area: 97%
+[18:46:32] [Server thread/ERROR] [journeymap]: ExecutionException in getPlayer: com.google.common.util.concurrent.UncheckedExecutionException: java.lang.NullPointerException
+	at com.google.common.cache.LocalCache$Segment.get(LocalCache.java:2217)
+	at com.google.common.cache.LocalCache.get(LocalCache.java:4154)
+	at com.google.common.cache.LocalCache.getOrLoad(LocalCache.java:4158)
+	at com.google.common.cache.LocalCache$LocalLoadingCache.get(LocalCache.java:5147)
+	at journeymap.client.data.DataCache.getPlayer(DataCache.java:303)
+	at journeymap.client.data.DataCache.getPlayer(DataCache.java:190)
+	at journeymap.client.forge.event.WorldEventHandler.onUnload(WorldEventHandler.java:33)
+	at net.minecraftforge.fml.common.eventhandler.ASMEventHandler_59_WorldEventHandler_onUnload_Unload.invoke(.dynamic)
+	at net.minecraftforge.fml.common.eventhandler.ASMEventHandler.invoke(ASMEventHandler.java:90)
+	at net.minecraftforge.fml.common.eventhandler.EventBus.post(EventBus.java:182)
+	at net.minecraftforge.common.DimensionManager.unloadWorlds(DimensionManager.java:403)
+	at net.minecraft.server.MinecraftServer.updateTimeLightAndEntities(MinecraftServer.java:863)
+	at net.minecraft.server.MinecraftServer.tick(MinecraftServer.java:743)
+	at net.minecraft.server.integrated.IntegratedServer.tick(IntegratedServer.java:192)
+	at net.minecraft.server.MinecraftServer.run(MinecraftServer.java:592)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: java.lang.NullPointerException
+	at com.google.common.base.Preconditions.checkNotNull(Preconditions.java:770)
+	at com.google.common.cache.LocalCache.get(LocalCache.java:4153)
+	at com.google.common.cache.LocalCache.getOrLoad(LocalCache.java:4158)
+	at com.google.common.cache.LocalCache$LocalLoadingCache.get(LocalCache.java:5147)
+	at com.google.common.cache.LocalCache$LocalLoadingCache.getUnchecked(LocalCache.java:5153)
+	at journeymap.client.data.DataCache.getEntityDTO(DataCache.java:441)
+	at journeymap.client.data.PlayerData.load(PlayerData.java:86)
+	at journeymap.client.data.PlayerData.load(PlayerData.java:30)
+	at com.google.common.cache.LocalCache$LoadingValueReference.loadFuture(LocalCache.java:3716)
+	at com.google.common.cache.LocalCache$Segment.loadSync(LocalCache.java:2424)
+	at com.google.common.cache.LocalCache$Segment.lockedGetOrLoad(LocalCache.java:2298)
+	at com.google.common.cache.LocalCache$Segment.get(LocalCache.java:2211)
+	... 15 more
+
+[18:46:32] [Server thread/ERROR] [journeymap]: Error handling WorldEvent.Unload
+java.lang.NullPointerException: null
+	at journeymap.client.forge.event.WorldEventHandler.onUnload(WorldEventHandler.java:33) [WorldEventHandler.class:1.12.2-5.5.2]
+	at net.minecraftforge.fml.common.eventhandler.ASMEventHandler_59_WorldEventHandler_onUnload_Unload.invoke(.dynamic) [?:?]
+	at net.minecraftforge.fml.common.eventhandler.ASMEventHandler.invoke(ASMEventHandler.java:90) [ASMEventHandler.class:?]
+	at net.minecraftforge.fml.common.eventhandler.EventBus.post(EventBus.java:182) [EventBus.class:?]
+	at net.minecraftforge.common.DimensionManager.unloadWorlds(DimensionManager.java:403) [DimensionManager.class:?]
+	at net.minecraft.server.MinecraftServer.updateTimeLightAndEntities(MinecraftServer.java:863) [MinecraftServer.class:?]
+	at net.minecraft.server.MinecraftServer.tick(MinecraftServer.java:743) [MinecraftServer.class:?]
+	at net.minecraft.server.integrated.IntegratedServer.tick(IntegratedServer.java:192) [IntegratedServer.class:?]
+	at net.minecraft.server.MinecraftServer.run(MinecraftServer.java:592) [MinecraftServer.class:?]
+	at java.lang.Thread.run(Thread.java:748) [?:1.8.0_144]
+[18:46:32] [Server thread/INFO] [FML]: Unloading dimension -1
+[18:46:32] [Server thread/ERROR] [journeymap]: ExecutionException in getPlayer: com.google.common.util.concurrent.UncheckedExecutionException: java.lang.NullPointerException
+	at com.google.common.cache.LocalCache$Segment.get(LocalCache.java:2217)
+	at com.google.common.cache.LocalCache.get(LocalCache.java:4154)
+	at com.google.common.cache.LocalCache.getOrLoad(LocalCache.java:4158)
+	at com.google.common.cache.LocalCache$LocalLoadingCache.get(LocalCache.java:5147)
+	at journeymap.client.data.DataCache.getPlayer(DataCache.java:303)
+	at journeymap.client.data.DataCache.getPlayer(DataCache.java:190)
+	at journeymap.client.forge.event.WorldEventHandler.onUnload(WorldEventHandler.java:33)
+	at net.minecraftforge.fml.common.eventhandler.ASMEventHandler_59_WorldEventHandler_onUnload_Unload.invoke(.dynamic)
+	at net.minecraftforge.fml.common.eventhandler.ASMEventHandler.invoke(ASMEventHandler.java:90)
+	at net.minecraftforge.fml.common.eventhandler.EventBus.post(EventBus.java:182)
+	at net.minecraftforge.common.DimensionManager.unloadWorlds(DimensionManager.java:403)
+	at net.minecraft.server.MinecraftServer.updateTimeLightAndEntities(MinecraftServer.java:863)
+	at net.minecraft.server.MinecraftServer.tick(MinecraftServer.java:743)
+	at net.minecraft.server.integrated.IntegratedServer.tick(IntegratedServer.java:192)
+	at net.minecraft.server.MinecraftServer.run(MinecraftServer.java:592)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: java.lang.NullPointerException
+	at com.google.common.base.Preconditions.checkNotNull(Preconditions.java:770)
+	at com.google.common.cache.LocalCache.get(LocalCache.java:4153)
+	at com.google.common.cache.LocalCache.getOrLoad(LocalCache.java:4158)
+	at com.google.common.cache.LocalCache$LocalLoadingCache.get(LocalCache.java:5147)
+	at com.google.common.cache.LocalCache$LocalLoadingCache.getUnchecked(LocalCache.java:5153)
+	at journeymap.client.data.DataCache.getEntityDTO(DataCache.java:441)
+	at journeymap.client.data.PlayerData.load(PlayerData.java:86)
+	at journeymap.client.data.PlayerData.load(PlayerData.java:30)
+	at com.google.common.cache.LocalCache$LoadingValueReference.loadFuture(LocalCache.java:3716)
+	at com.google.common.cache.LocalCache$Segment.loadSync(LocalCache.java:2424)
+	at com.google.common.cache.LocalCache$Segment.lockedGetOrLoad(LocalCache.java:2298)
+	at com.google.common.cache.LocalCache$Segment.get(LocalCache.java:2211)
+	... 15 more
+
+[18:46:32] [Server thread/ERROR] [journeymap]: Error handling WorldEvent.Unload
+java.lang.NullPointerException: null
+	at journeymap.client.forge.event.WorldEventHandler.onUnload(WorldEventHandler.java:33) [WorldEventHandler.class:1.12.2-5.5.2]
+	at net.minecraftforge.fml.common.eventhandler.ASMEventHandler_59_WorldEventHandler_onUnload_Unload.invoke(.dynamic) [?:?]
+	at net.minecraftforge.fml.common.eventhandler.ASMEventHandler.invoke(ASMEventHandler.java:90) [ASMEventHandler.class:?]
+	at net.minecraftforge.fml.common.eventhandler.EventBus.post(EventBus.java:182) [EventBus.class:?]
+	at net.minecraftforge.common.DimensionManager.unloadWorlds(DimensionManager.java:403) [DimensionManager.class:?]
+	at net.minecraft.server.MinecraftServer.updateTimeLightAndEntities(MinecraftServer.java:863) [MinecraftServer.class:?]
+	at net.minecraft.server.MinecraftServer.tick(MinecraftServer.java:743) [MinecraftServer.class:?]
+	at net.minecraft.server.integrated.IntegratedServer.tick(IntegratedServer.java:192) [IntegratedServer.class:?]
+	at net.minecraft.server.MinecraftServer.run(MinecraftServer.java:592) [MinecraftServer.class:?]
+	at java.lang.Thread.run(Thread.java:748) [?:1.8.0_144]
+[18:46:32] [Server thread/INFO] [FML]: Unloading dimension 1
+[18:46:32] [Server thread/INFO] [net.minecraft.server.integrated.IntegratedServer]: Changing view distance to 12, from 10
+[18:46:33] [Netty Local Client IO #0/INFO] [FML]: Server protocol version 2
+[18:46:33] [Netty Server IO #1/INFO] [FML]: Client protocol version 2
+[18:46:33] [Netty Server IO #1/INFO] [FML]: Client attempting to join with 9 mods : minecraft@1.12.2,ichunutil@7.1.0,tabula@7.0.0,FML@8.0.99.99,forge@14.23.4.2757,torohealthmod@1.12.2-11,mcp@9.42,coherentvillages@v0.0.2.9,journeymap@1.12.2-5.5.2
+[18:46:33] [Netty Local Client IO #0/INFO] [FML]: [Netty Local Client IO #0] Client side modded connection established
+[18:46:33] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Poney - Latin Merchant] Traveling to - X: 133 Y: 65 Z: 109 From - X: 148.5 Y: 81.0 Z: 383.5
+[18:46:33] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Fadutis - Latin Merchant] Traveling to - X: 133 Y: 65 Z: 109 From - X: 148.5 Y: 81.0 Z: 382.5
+[18:46:33] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Oppius - Latin Merchant] Traveling to - X: 133 Y: 65 Z: 109 From - X: 360.5 Y: 66.0 Z: 359.5
+[18:46:33] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Polus - Latin Merchant] Traveling to - X: 133 Y: 65 Z: 109 From - X: 361.5 Y: 66.0 Z: 359.5
+[18:46:33] [Server thread/INFO] [FML]: [Server thread] Server side modded connection established
+[18:46:33] [Server thread/INFO] [net.minecraft.server.management.PlayerList]: Player50[local:E:55b815f8] logged in with entity id 1120 at (202.5, 68.0, 254.5)
+[18:46:33] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Player50 joined the game
+[18:46:34] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Poney - Latin Merchant] has no path!
+[18:46:34] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Fadutis - Latin Merchant] has no path!
+[18:46:34] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Oppius - Latin Merchant] has no path!
+[18:46:34] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Polus - Latin Merchant] has no path!
+[18:46:34] [Server thread/INFO] [net.minecraft.server.integrated.IntegratedServer]: Saving and pausing game...
+[18:46:34] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Saving chunks for level 'Copy of New World'/overworld
+[18:46:35] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Welcome to Coherent Villages Pre-Release\n By: TheExceptionist (Or majesticmerlin)\n Your current version is: v0.0.2.9\n Thank you for downloading this mod! Check for updates on Curseforge and post issues on Github! \nDon't forget to change the config file to suit your needs!\n Special Thanks to: eeeeetdyeeeee, Olkusz_Ssak12 and various other people For the Textures
+[18:46:35] [main/WARN] [journeymap]: core (Initialized) Bad configField entry during updateFrom(): optionsManagerViewed=null
+[18:46:35] [main/WARN] [journeymap]: core (Initialized) Bad configField entry during updateFrom(): splashViewed=null
+[18:46:35] [main/INFO] [journeymap]: Loading journeymap.topo.config
+[18:46:35] [pool-2-thread-1/WARN] [com.mojang.authlib.yggdrasil.YggdrasilMinecraftSessionService]: Couldn't look up profile properties for com.mojang.authlib.GameProfile@6a89e0a3[id=5613b4a9-5b8c-3e0b-9915-baa04888ddd5,name=Player50,properties={},legacy=false]
+com.mojang.authlib.exceptions.AuthenticationException: The client has sent too many requests within a certain amount of time
+	at com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService.makeRequest(YggdrasilAuthenticationService.java:79) ~[YggdrasilAuthenticationService.class:?]
+	at com.mojang.authlib.yggdrasil.YggdrasilMinecraftSessionService.fillGameProfile(YggdrasilMinecraftSessionService.java:180) [YggdrasilMinecraftSessionService.class:?]
+	at com.mojang.authlib.yggdrasil.YggdrasilMinecraftSessionService$1.load(YggdrasilMinecraftSessionService.java:60) [YggdrasilMinecraftSessionService$1.class:?]
+	at com.mojang.authlib.yggdrasil.YggdrasilMinecraftSessionService$1.load(YggdrasilMinecraftSessionService.java:57) [YggdrasilMinecraftSessionService$1.class:?]
+	at com.google.common.cache.LocalCache$LoadingValueReference.loadFuture(LocalCache.java:3716) [guava-21.0.jar:?]
+	at com.google.common.cache.LocalCache$Segment.loadSync(LocalCache.java:2424) [guava-21.0.jar:?]
+	at com.google.common.cache.LocalCache$Segment.lockedGetOrLoad(LocalCache.java:2298) [guava-21.0.jar:?]
+	at com.google.common.cache.LocalCache$Segment.get(LocalCache.java:2211) [guava-21.0.jar:?]
+	at com.google.common.cache.LocalCache.get(LocalCache.java:4154) [guava-21.0.jar:?]
+	at com.google.common.cache.LocalCache.getOrLoad(LocalCache.java:4158) [guava-21.0.jar:?]
+	at com.google.common.cache.LocalCache$LocalLoadingCache.get(LocalCache.java:5147) [guava-21.0.jar:?]
+	at com.google.common.cache.LocalCache$LocalLoadingCache.getUnchecked(LocalCache.java:5153) [guava-21.0.jar:?]
+	at com.mojang.authlib.yggdrasil.YggdrasilMinecraftSessionService.fillProfileProperties(YggdrasilMinecraftSessionService.java:170) [YggdrasilMinecraftSessionService.class:?]
+	at net.minecraft.client.Minecraft.getProfileProperties(Minecraft.java:3181) [Minecraft.class:?]
+	at net.minecraft.client.resources.SkinManager$3.run(SkinManager.java:138) [SkinManager$3.class:?]
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511) [?:1.8.0_144]
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266) [?:1.8.0_144]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) [?:1.8.0_144]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) [?:1.8.0_144]
+	at java.lang.Thread.run(Thread.java:748) [?:1.8.0_144]
+[18:46:35] [Server thread/WARN] [net.minecraft.server.MinecraftServer]: Can't keep up! Did the system time change, or is the server overloaded? Running 3674ms behind, skipping 73 tick(s)
+[18:46:35] [main/INFO] [journeymap]: Loaded 0 waypoints from ./journeymap/data/sp/Copy of New World/waypoints
+[18:46:35] [main/INFO] [journeymap]: Mapping started in ./journeymap/data/sp/Copy of New World/DIM0. Memory: 855MB total, 371MB free 
+[18:46:35] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] JourneyMap: Press [J]
+[18:46:35] [main/INFO] [journeymap]: JourneyMap: Press [J]
+[18:46:35] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Poney - Latin Merchant] Traveling to - X: 133 Y: 65 Z: 109 From - X: 148.38986078482696 Y: 81.0 Z: 383.5
+[18:46:36] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Fadutis - Latin Merchant] Traveling to - X: 133 Y: 65 Z: 109 From - X: 148.54526724871752 Y: 81.0 Z: 382.43614581777865
+[18:46:36] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Oppius - Latin Merchant] Traveling to - X: 133 Y: 65 Z: 109 From - X: 360.54526724871755 Y: 66.0 Z: 359.43614581777865
+[18:46:36] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Polus - Latin Merchant] Traveling to - X: 133 Y: 65 Z: 109 From - X: 361.54526724871755 Y: 66.0 Z: 359.43614581777865
+[18:46:36] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Poney - Latin Merchant] has no path!
+[18:46:36] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Fadutis - Latin Merchant] has no path!
+[18:46:36] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Oppius - Latin Merchant] has no path!
+[18:46:36] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Polus - Latin Merchant] has no path!
+[18:46:36] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Acaunus - Latin Merchant] Traveling to - X: 133 Y: 65 Z: 109 From - X: 168.5 Y: 65.0 Z: 81.5
+[18:46:36] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Fulvius - Latin Merchant] Traveling to - X: 133 Y: 65 Z: 109 From - X: 169.5 Y: 65.0 Z: 81.5
+[18:46:37] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Poney - Latin Merchant] Traveling to - X: 133 Y: 65 Z: 109 From - X: 148.35246815529288 Y: 81.0 Z: 383.39052759976164
+[18:46:37] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Fadutis - Latin Merchant] Traveling to - X: 133 Y: 65 Z: 109 From - X: 148.4419313876353 Y: 81.0 Z: 382.40448244694977
+[18:46:37] [main/WARN] [net.minecraft.client.network.NetHandlerPlayClient]: Received passengers for unknown entity
+[18:46:37] [main/WARN] [net.minecraft.client.network.NetHandlerPlayClient]: Received passengers for unknown entity
+[18:46:37] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Oppius - Latin Merchant] Traveling to - X: 133 Y: 65 Z: 109 From - X: 360.54487275576 Y: 66.0 Z: 359.28712088064134
+[18:46:37] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Polus - Latin Merchant] Traveling to - X: 133 Y: 65 Z: 109 From - X: 361.4419313876353 Y: 66.0 Z: 359.40448244694977
+[18:46:37] [main/WARN] [net.minecraft.client.network.NetHandlerPlayClient]: Received passengers for unknown entity
+[18:46:37] [main/WARN] [net.minecraft.client.network.NetHandlerPlayClient]: Received passengers for unknown entity
+[18:46:37] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Poney - Latin Merchant] has no path!
+[18:46:37] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Fadutis - Latin Merchant] has no path!
+[18:46:37] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Oppius - Latin Merchant] has no path!
+[18:46:37] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Polus - Latin Merchant] has no path!
+[18:46:37] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Fulvius - Latin Merchant] has no path!
+[18:46:37] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Poney - Latin Merchant] Traveling to - X: 133 Y: 65 Z: 109 From - X: 148.24385124873945 Y: 81.0 Z: 383.34834275534985
+[18:46:37] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Fadutis - Latin Merchant] Traveling to - X: 133 Y: 65 Z: 109 From - X: 148.287023581316 Y: 81.0 Z: 382.4122998941353
+[18:46:37] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Oppius - Latin Merchant] Traveling to - X: 133 Y: 65 Z: 109 From - X: 360.5404087776483 Y: 66.0 Z: 359.12430223262805
+[18:46:37] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Polus - Latin Merchant] Traveling to - X: 133 Y: 65 Z: 109 From - X: 361.28702358131596 Y: 66.0 Z: 359.4122998941353
+[18:46:37] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Poney - Latin Merchant] has no path!
+[18:46:37] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Fadutis - Latin Merchant] has no path!
+[18:46:37] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Oppius - Latin Merchant] has no path!
+[18:46:37] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Polus - Latin Merchant] has no path!
+[18:46:37] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Fulvius - Latin Merchant] Traveling to - X: 145 Y: 76 Z: 404 From - X: 169.25218676381635 Y: 65.0 Z: 81.5
+[18:46:37] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Poney - Latin Merchant] Traveling to - X: 133 Y: 65 Z: 109 From - X: 148.21083321280642 Y: 81.0 Z: 383.2427421852407
+[18:46:37] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Fadutis - Latin Merchant] Traveling to - X: 145 Y: 76 Z: 404 From - X: 148.1238996439615 Y: 81.0 Z: 382.42098037327065
+[18:46:37] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Fulvius - Latin Merchant] has no path!
+[18:46:37] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Oppius - Latin Merchant] Traveling to - X: 133 Y: 65 Z: 109 From - X: 360.53527510829053 Y: 66.0 Z: 358.95930963203386
+[18:46:37] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Polus - Latin Merchant] Traveling to - X: 133 Y: 65 Z: 109 From - X: 361.12389964396147 Y: 66.0 Z: 359.42098037327065
+[18:46:37] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Poney - Latin Merchant] has no path!
+[18:46:37] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Fadutis - Latin Merchant] has no path!
+[18:46:37] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Oppius - Latin Merchant] has no path!
+[18:46:37] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Polus - Latin Merchant] has no path!
+[18:46:37] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Acaunus - Latin Merchant] has no path!
+[18:46:37] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Fulvius - Latin Merchant] Traveling to - X: 145 Y: 76 Z: 404 From - X: 169.1672322333784 Y: 65.0 Z: 81.39303565596782
+[18:46:37] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Poney - Latin Merchant] Traveling to - X: 145 Y: 76 Z: 404 From - X: 148.10893942389677 Y: 81.0 Z: 383.20798378276044
+[18:46:37] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Fadutis - Latin Merchant] Traveling to - X: 145 Y: 76 Z: 404 From - X: 148.09765242765792 Y: 81.0 Z: 382.52641862244064
+[18:46:37] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Fulvius - Latin Merchant] has no path!
+[18:46:37] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Oppius - Latin Merchant] Traveling to - X: 148 Y: 65 Z: 112 From - X: 360.4598841259844 Y: 66.0 Z: 358.7383880638426
+[18:46:37] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Polus - Latin Merchant] Traveling to - X: 148 Y: 65 Z: 112 From - X: 361.02998703385356 Y: 66.0 Z: 359.4891439716713
+[18:46:37] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Poney - Latin Merchant] has no path!
+[18:46:37] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Fadutis - Latin Merchant] has no path!
+[18:46:37] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Oppius - Latin Merchant] has no path!
+[18:46:37] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Polus - Latin Merchant] has no path!
+[18:46:37] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Acaunus - Latin Merchant] Traveling to - X: 148 Y: 65 Z: 112 From - X: 168.56053365791794 Y: 65.0 Z: 81.36292099500649
+[18:46:37] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Fulvius - Latin Merchant] Traveling to - X: 148 Y: 65 Z: 112 From - X: 169.26474338305943 Y: 65.0 Z: 81.23531543593505
+[18:46:37] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Poney - Latin Merchant] Traveling to - X: 154 Y: 76 Z: 399 From - X: 147.96729216764032 Y: 81.0 Z: 383.26248037858954
+[18:46:37] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Fadutis - Latin Merchant] Traveling to - X: 148 Y: 65 Z: 112 From - X: 148.14644376690597 Y: 81.0 Z: 382.67182654683234
+[18:46:37] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Acaunus - Latin Merchant] has no path!
+[18:46:37] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Fulvius - Latin Merchant] has no path!
+[18:46:37] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Oppius - Latin Merchant] Traveling to - X: 148 Y: 65 Z: 112 From - X: 360.4533018685734 Y: 66.0 Z: 358.56371386655894
+[18:46:37] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Polus - Latin Merchant] Traveling to - X: 148 Y: 65 Z: 112 From - X: 361.05172381890156 Y: 66.0 Z: 359.54434827839975
+[18:46:37] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Poney - Latin Merchant] has no path!
+[18:46:37] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Fadutis - Latin Merchant] has no path!
+[18:46:37] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Oppius - Latin Merchant] has no path!
+[18:46:37] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Polus - Latin Merchant] has no path!
+[18:46:37] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Acaunus - Latin Merchant] Traveling to - X: 148 Y: 65 Z: 112 From - X: 168.5270578060838 Y: 65.0 Z: 81.17179583916541
+[18:46:37] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Fulvius - Latin Merchant] Traveling to - X: 154 Y: 76 Z: 399 From - X: 169.3341057423203 Y: 65.0 Z: 81.075493162013
+[18:46:38] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Poney - Latin Merchant] Traveling to - X: 154 Y: 76 Z: 399 From - X: 147.7924285901815 Y: 81.0 Z: 383.38338780099207
+[18:46:38] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Fadutis - Latin Merchant] Traveling to - X: 154 Y: 76 Z: 399 From - X: 148.08360811866862 Y: 81.0 Z: 382.6540475609904
+[18:46:38] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Fulvius - Latin Merchant] has no path!
+[18:46:38] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Oppius - Latin Merchant] Traveling to - X: 148 Y: 65 Z: 112 From - X: 360.4567017768832 Y: 66.0 Z: 358.3966223314024
+[18:46:38] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Polus - Latin Merchant] Traveling to - X: 154 Y: 76 Z: 399 From - X: 361.0164218115431 Y: 66.0 Z: 359.50320109039524
+[18:46:38] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Poney - Latin Merchant] has no path!
+[18:46:38] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Fadutis - Latin Merchant] has no path!
+[18:46:38] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Oppius - Latin Merchant] has no path!
+[18:46:38] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Polus - Latin Merchant] has no path!
+[18:46:38] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Acaunus - Latin Merchant] has no path!
+[18:46:38] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Fulvius - Latin Merchant] Traveling to - X: 148 Y: 65 Z: 112 From - X: 169.3837581876503 Y: 65.0 Z: 80.91609208359924
+[18:46:38] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Poney - Latin Merchant] Traveling to - X: 148 Y: 65 Z: 112 From - X: 147.6257346749327 Y: 81.0 Z: 383.415469893742
+[18:46:38] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Fadutis - Latin Merchant] Traveling to - X: 154 Y: 76 Z: 399 From - X: 148.0661896370852 Y: 81.0 Z: 382.74487850770373
+[18:46:38] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Fulvius - Latin Merchant] has no path!
+[18:46:38] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Oppius - Latin Merchant] Traveling to - X: 154 Y: 76 Z: 399 From - X: 360.4604644690963 Y: 66.0 Z: 358.2307955867786
+[18:46:38] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Polus - Latin Merchant] Traveling to - X: 154 Y: 76 Z: 399 From - X: 361.046689206822 Y: 66.0 Z: 359.4524010365909
+[18:46:38] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Poney - Latin Merchant] has no path!
+[18:46:38] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Fadutis - Latin Merchant] has no path!
+[18:46:38] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Oppius - Latin Merchant] has no path!
+[18:46:38] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Polus - Latin Merchant] has no path!
+[18:46:38] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Acaunus - Latin Merchant] Traveling to - X: 150 Y: 65 Z: 113 From - X: 168.5166857569842 Y: 65.0 Z: 80.85471697972362
+[18:46:38] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Fulvius - Latin Merchant] Traveling to - X: 154 Y: 76 Z: 399 From - X: 169.29895479180374 Y: 65.0 Z: 80.81792179251843
+[18:46:38] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Poney - Latin Merchant] Traveling to - X: 154 Y: 76 Z: 399 From - X: 147.42168662191816 Y: 81.0 Z: 383.46956289655765
+[18:46:38] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Fadutis - Latin Merchant] Traveling to - X: 154 Y: 76 Z: 399 From - X: 148.17234503012395 Y: 81.0 Z: 382.8414903082559
+[18:46:38] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Acaunus - Latin Merchant] has no path!
+[18:46:38] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Fulvius - Latin Merchant] has no path!
+[18:46:38] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Oppius - Latin Merchant] Traveling to - X: 150 Y: 65 Z: 113 From - X: 360.4647147348706 Y: 66.0 Z: 358.0652188898164
+[18:46:38] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Polus - Latin Merchant] Traveling to - X: 154 Y: 76 Z: 399 From - X: 361.0970882909533 Y: 66.0 Z: 359.49112364680076
+[18:46:38] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Poney - Latin Merchant] has no path!
+[18:46:38] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Oppius - Latin Merchant] has no path!
+[18:46:38] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Polus - Latin Merchant] has no path!
+[18:46:38] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Acaunus - Latin Merchant] Traveling to - X: 160 Y: 75 Z: 396 From - X: 168.515714050371 Y: 65.0 Z: 80.63827452161071
+[18:46:38] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Fulvius - Latin Merchant] Traveling to - X: 150 Y: 65 Z: 113 From - X: 169.15616367470446 Y: 65.0 Z: 80.75071307548187
+[18:46:38] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Poney - Latin Merchant] Traveling to - X: 150 Y: 65 Z: 113 From - X: 147.2172750184105 Y: 81.0 Z: 383.5145132300031
+[18:46:38] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Acaunus - Latin Merchant] has no path!
+[18:46:38] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Fulvius - Latin Merchant] has no path!
+[18:46:38] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Oppius - Latin Merchant] Traveling to - X: 162 Y: 75 Z: 396 From - X: 360.46969480969443 Y: 66.0 Z: 357.89975737906195
+[18:46:38] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Polus - Latin Merchant] Traveling to - X: 162 Y: 75 Z: 396 From - X: 360.9732161209131 Y: 66.0 Z: 359.5038488661574
+[18:46:38] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Poney - Latin Merchant] has no path!
+[18:46:38] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Oppius - Latin Merchant] has no path!
+[18:46:38] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Polus - Latin Merchant] has no path!
+[18:46:38] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Acaunus - Latin Merchant] Traveling to - X: 150 Y: 65 Z: 113 From - X: 168.45571732722806 Y: 65.0 Z: 80.44900481849001
+[18:46:38] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Fulvius - Latin Merchant] Traveling to - X: 150 Y: 65 Z: 113 From - X: 169.06260001012274 Y: 65.0 Z: 80.70767581752156
+[18:46:38] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Poney - Latin Merchant] Traveling to - X: 150 Y: 65 Z: 113 From - X: 147.04524223936593 Y: 81.0 Z: 383.5164976721269
+[18:46:38] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Fulvius - Latin Merchant] has no path!
+[18:46:38] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Oppius - Latin Merchant] Traveling to - X: 164 Y: 74 Z: 399 From - X: 360.47135672392056 Y: 66.0 Z: 357.73412473874697
+[18:46:38] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Polus - Latin Merchant] Traveling to - X: 164 Y: 74 Z: 399 From - X: 360.85396361659633 Y: 66.0 Z: 359.44452746231275
+[18:46:38] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Poney - Latin Merchant] has no path!
+[18:46:38] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Oppius - Latin Merchant] has no path!
+[18:46:38] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Polus - Latin Merchant] has no path!
+[18:46:38] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Acaunus - Latin Merchant] has no path!
+[18:46:38] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Fulvius - Latin Merchant] Traveling to - X: 150 Y: 65 Z: 113 From - X: 168.98743742932382 Y: 65.0 Z: 80.6835017340813
+[18:46:38] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Poney - Latin Merchant] Traveling to - X: 150 Y: 65 Z: 113 From - X: 147.05375871326333 Y: 81.0 Z: 383.4720824767664
+[18:46:38] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Fulvius - Latin Merchant] has no path!
+[18:46:38] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Oppius - Latin Merchant] Traveling to - X: 150 Y: 65 Z: 113 From - X: 360.47314608451876 Y: 66.0 Z: 357.56840704197964
+[18:46:38] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Polus - Latin Merchant] Traveling to - X: 150 Y: 65 Z: 113 From - X: 360.7859275521964 Y: 66.0 Z: 359.30491799720863
+[18:46:38] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Poney - Latin Merchant] has no path!
+[18:46:38] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Oppius - Latin Merchant] has no path!
+[18:46:38] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Polus - Latin Merchant] has no path!
+[18:46:38] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Acaunus - Latin Merchant] Traveling to - X: 161 Y: 66 Z: 110 From - X: 168.3350301865563 Y: 65.0 Z: 80.05582638453367
+[18:46:38] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Fulvius - Latin Merchant] Traveling to - X: 161 Y: 66 Z: 110 From - X: 168.95207293630207 Y: 65.0 Z: 80.6372597333632
+[18:46:38] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Poney - Latin Merchant] Traveling to - X: 166 Y: 74 Z: 399 From - X: 147.0177926335627 Y: 81.0 Z: 383.51232434571835
+[18:46:38] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Fulvius - Latin Merchant] has no path!
+[18:46:38] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Oppius - Latin Merchant] Traveling to - X: 161 Y: 66 Z: 110 From - X: 360.4750917400789 Y: 66.0 Z: 357.40268220621164
+[18:46:38] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Polus - Latin Merchant] Traveling to - X: 161 Y: 66 Z: 110 From - X: 360.7284102732166 Y: 66.0 Z: 359.1513994995973
+[18:46:38] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Poney - Latin Merchant] has no path!
+[18:46:38] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Oppius - Latin Merchant] has no path!
+[18:46:38] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Polus - Latin Merchant] has no path!
+[18:46:38] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Fulvius - Latin Merchant] Traveling to - X: 168 Y: 74 Z: 399 From - X: 168.88507584996123 Y: 65.0 Z: 80.53732040784672
+[18:46:38] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Poney - Latin Merchant] Traveling to - X: 168 Y: 74 Z: 399 From - X: 147.04762938706054 Y: 81.0 Z: 383.4739553081603
+[18:46:38] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Acaunus - Latin Merchant] has no path!
+[18:46:38] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Fulvius - Latin Merchant] has no path!
+[18:46:38] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Oppius - Latin Merchant] Traveling to - X: 168 Y: 74 Z: 399 From - X: 360.4772393641152 Y: 66.0 Z: 357.23696566721867
+[18:46:38] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Polus - Latin Merchant] Traveling to - X: 168 Y: 74 Z: 399 From - X: 360.673122998502 Y: 66.0 Z: 358.9954337002451
+[18:46:39] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Poney - Latin Merchant] has no path!
+[18:46:39] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Oppius - Latin Merchant] has no path!
+[18:46:39] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Polus - Latin Merchant] has no path!
+[18:46:39] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Acaunus - Latin Merchant] Traveling to - X: 168 Y: 74 Z: 399 From - X: 168.30375968199223 Y: 65.0 Z: 79.71398570164868
+[18:46:39] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Fulvius - Latin Merchant] Traveling to - X: 168 Y: 74 Z: 399 From - X: 168.94801786481858 Y: 65.0 Z: 80.51917842012149
+[18:46:39] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Poney - Latin Merchant] Traveling to - X: 161 Y: 66 Z: 110 From - X: 147.09999720754675 Y: 81.0 Z: 383.5141005457514
+[18:46:39] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Acaunus - Latin Merchant] has no path!
+[18:46:39] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Fulvius - Latin Merchant] has no path!
+[18:46:39] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Oppius - Latin Merchant] Traveling to - X: 161 Y: 66 Z: 110 From - X: 360.4796682748684 Y: 66.0 Z: 357.0712650010098
+[18:46:39] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Polus - Latin Merchant] Traveling to - X: 161 Y: 66 Z: 110 From - X: 360.6327039787137 Y: 66.0 Z: 358.83580117741377
+[18:46:39] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Poney - Latin Merchant] has no path!
+[18:46:39] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Oppius - Latin Merchant] has no path!
+[18:46:39] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Polus - Latin Merchant] has no path!
+[18:46:39] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Acaunus - Latin Merchant] Traveling to - X: 172 Y: 74 Z: 404 From - X: 168.3163351281546 Y: 65.0 Z: 79.49928000543416
+[18:46:39] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Fulvius - Latin Merchant] Traveling to - X: 161 Y: 66 Z: 110 From - X: 168.917203802801 Y: 65.0 Z: 80.40038094770466
+[18:46:39] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Poney - Latin Merchant] Traveling to - X: 161 Y: 66 Z: 110 From - X: 146.97684038346753 Y: 81.0 Z: 383.5226583213375
+[18:46:39] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Acaunus - Latin Merchant] has no path!
+[18:46:39] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Fulvius - Latin Merchant] has no path!
+[18:46:39] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Oppius - Latin Merchant] Traveling to - X: 172 Y: 74 Z: 404 From - X: 360.4825082330472 Y: 66.0 Z: 356.90559087460036
+[18:46:39] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Polus - Latin Merchant] Traveling to - X: 161 Y: 66 Z: 110 From - X: 360.61241392695456 Y: 66.0 Z: 358.6717013953259
+[18:46:39] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Poney - Latin Merchant] has no path!
+[18:46:39] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Oppius - Latin Merchant] has no path!
+[18:46:39] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Polus - Latin Merchant] has no path!
+[18:46:39] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Acaunus - Latin Merchant] Traveling to - X: 323 Y: 75 Z: 314 From - X: 168.33042088104412 Y: 65.0 Z: 79.3278875664841
+[18:46:39] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Fulvius - Latin Merchant] Traveling to - X: 172 Y: 74 Z: 404 From - X: 168.85453080485075 Y: 65.0 Z: 80.25512556652747
+[18:46:39] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Poney - Latin Merchant] Traveling to - X: 172 Y: 74 Z: 404 From - X: 146.81808465165568 Y: 81.0 Z: 383.52070570908876
+[18:46:39] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Acaunus - Latin Merchant] has no path!
+[18:46:39] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Oppius - Latin Merchant] Traveling to - X: 161 Y: 66 Z: 110 From - X: 360.3799208973364 Y: 66.0 Z: 356.8099554133668
+[18:46:39] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Polus - Latin Merchant] Traveling to - X: 161 Y: 66 Z: 110 From - X: 360.59885286894723 Y: 66.0 Z: 358.5068297118901
+[18:46:39] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Oppius - Latin Merchant] has no path!
+[18:46:39] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Polus - Latin Merchant] has no path!
+[18:46:39] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Acaunus - Latin Merchant] Traveling to - X: 324 Y: 74 Z: 325 From - X: 168.34610738232732 Y: 65.0 Z: 79.16411245215401
+[18:46:39] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Acaunus - Latin Merchant] has no path!
+[18:46:39] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Oppius - Latin Merchant] Traveling to - X: 172 Y: 74 Z: 404 From - X: 360.30000001192093 Y: 66.0 Z: 356.74850028606943
+[18:46:39] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Polus - Latin Merchant] Traveling to - X: 172 Y: 74 Z: 404 From - X: 360.59126033220537 Y: 66.0 Z: 358.3418827550393
+[18:46:39] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Oppius - Latin Merchant] has no path!
+[18:46:39] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Polus - Latin Merchant] has no path!
+[18:46:40] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Acaunus - Latin Merchant] Traveling to - X: 172 Y: 74 Z: 404 From - X: 168.37179947601916 Y: 65.0 Z: 79.00236633678261
+[18:46:40] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Acaunus - Latin Merchant] has no path!
+[18:46:40] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Oppius - Latin Merchant] Traveling to - X: 335 Y: 73 Z: 325 From - X: 360.30000001192093 Y: 66.0 Z: 356.69838724856174
+[18:46:40] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Polus - Latin Merchant] Traveling to - X: 335 Y: 73 Z: 325 From - X: 360.5828283699798 Y: 66.0 Z: 358.17707549463336
+[18:46:40] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Oppius - Latin Merchant] has no path!
+[18:46:40] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Polus - Latin Merchant] has no path!
+[18:46:40] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Acaunus - Latin Merchant] Traveling to - X: 340 Y: 71 Z: 333 From - X: 168.43866949384469 Y: 65.0 Z: 79.0223874631441
+[18:46:40] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Oppius - Latin Merchant] Traveling to - X: 340 Y: 71 Z: 333 From - X: 360.19290682070033 Y: 66.0 Z: 356.6569734634755
+[18:46:40] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Polus - Latin Merchant] Traveling to - X: 172 Y: 74 Z: 404 From - X: 360.57323116512134 Y: 66.0 Z: 358.01252851512817
+[18:46:40] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Oppius - Latin Merchant] has no path!
+[18:46:40] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Polus - Latin Merchant] has no path!
+[18:46:40] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Oppius - Latin Merchant] Traveling to - X: 340 Y: 71 Z: 333 From - X: 360.0401018782343 Y: 66.0 Z: 356.6196046928857
+[18:46:40] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Polus - Latin Merchant] Traveling to - X: 161 Y: 66 Z: 110 From - X: 360.522137858862 Y: 66.0 Z: 358.0271829524568
+[18:46:40] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Oppius - Latin Merchant] has no path!
+[18:46:40] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Polus - Latin Merchant] has no path!
+[18:46:40] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Oppius - Latin Merchant] Traveling to - X: 161 Y: 66 Z: 108 From - X: 360.0602956226436 Y: 66.0 Z: 356.5516123863307
+[18:46:40] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Polus - Latin Merchant] Traveling to - X: 340 Y: 71 Z: 333 From - X: 360.47142227402486 Y: 66.0 Z: 358.07746696564334
+[18:46:40] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Oppius - Latin Merchant] has no path!
+[18:46:40] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Polus - Latin Merchant] has no path!
+[18:46:41] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Oppius - Latin Merchant] Traveling to - X: 163 Y: 66 Z: 106 From - X: 360.02154432220334 Y: 66.0 Z: 356.48919636329754
+[18:46:41] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Polus - Latin Merchant] Traveling to - X: 172 Y: 74 Z: 404 From - X: 360.46407216033884 Y: 66.0 Z: 357.9542004742201
+[18:46:41] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Oppius - Latin Merchant] has no path!
+[18:46:41] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Polus - Latin Merchant] has no path!
+[18:46:41] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Oppius - Latin Merchant] Traveling to - X: 340 Y: 71 Z: 333 From - X: 360.0504826725702 Y: 66.0 Z: 356.5240453079392
+[18:46:41] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Polus - Latin Merchant] Traveling to - X: 340 Y: 71 Z: 333 From - X: 360.4672738201659 Y: 66.0 Z: 357.79557909643165
+[18:46:41] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Oppius - Latin Merchant] has no path!
+[18:46:41] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Polus - Latin Merchant] has no path!
+[18:46:41] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Oppius - Latin Merchant] Traveling to - X: 172 Y: 74 Z: 404 From - X: 360.0181202540182 Y: 66.0 Z: 356.48807001457317
+[18:46:41] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Polus - Latin Merchant] Traveling to - X: 340 Y: 71 Z: 333 From - X: 360.46921707134214 Y: 66.0 Z: 357.6310095395774
+[18:46:41] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Oppius - Latin Merchant] has no path!
+[18:46:41] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Polus - Latin Merchant] has no path!
+[18:46:41] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Oppius - Latin Merchant] Traveling to - X: 163 Y: 66 Z: 106 From - X: 360.04907998861427 Y: 66.0 Z: 356.5320813030216
+[18:46:41] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Polus - Latin Merchant] Traveling to - X: 163 Y: 66 Z: 106 From - X: 360.4713190135405 Y: 66.0 Z: 357.4654791914934
+[18:46:41] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Oppius - Latin Merchant] has no path!
+[18:46:41] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Polus - Latin Merchant] has no path!
+[18:46:41] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Oppius - Latin Merchant] Traveling to - X: 172 Y: 74 Z: 404 From - X: 360.1010522595312 Y: 66.0 Z: 356.4944380103892
+[18:46:41] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Polus - Latin Merchant] Traveling to - X: 172 Y: 74 Z: 404 From - X: 360.4736277207009 Y: 66.0 Z: 357.2998029070326
+[18:46:41] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Oppius - Latin Merchant] has no path!
+[18:46:41] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Polus - Latin Merchant] has no path!
+[18:46:41] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Oppius - Latin Merchant] Traveling to - X: 340 Y: 71 Z: 333 From - X: 359.9776909848134 Y: 66.0 Z: 356.4843336064188
+[18:46:41] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Polus - Latin Merchant] Traveling to - X: 163 Y: 66 Z: 106 From - X: 360.4762080801626 Y: 66.0 Z: 357.13411796605516
+[18:46:41] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Oppius - Latin Merchant] has no path!
+[18:46:41] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Polus - Latin Merchant] has no path!
+[18:46:41] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Oppius - Latin Merchant] Traveling to - X: 172 Y: 74 Z: 404 From - X: 359.7636036503009 Y: 66.0 Z: 356.42768090923033
+[18:46:41] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Polus - Latin Merchant] Traveling to - X: 163 Y: 66 Z: 106 From - X: 360.5340963193598 Y: 66.0 Z: 357.0280055174575
+[18:46:41] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Oppius - Latin Merchant] has no path!
+[18:46:41] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Polus - Latin Merchant] has no path!
+[18:46:41] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Oppius - Latin Merchant] Traveling to - X: 163 Y: 66 Z: 106 From - X: 359.57955509437767 Y: 66.0 Z: 356.4168810386327
+[18:46:41] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Polus - Latin Merchant] Traveling to - X: 163 Y: 66 Z: 106 From - X: 360.5055388577149 Y: 66.0 Z: 357.05860007298935
+[18:46:41] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Polus - Latin Merchant] has no path!
+[18:46:41] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Polus - Latin Merchant] Traveling to - X: 163 Y: 66 Z: 106 From - X: 360.4616350836212 Y: 66.0 Z: 357.0273387438147
+[18:46:41] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Polus - Latin Merchant] has no path!
+[18:46:41] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Polus - Latin Merchant] Traveling to - X: 172 Y: 74 Z: 404 From - X: 360.5035750803327 Y: 66.0 Z: 357.06016950165673
+[18:46:41] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Polus - Latin Merchant] has no path!
+[18:46:41] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Polus - Latin Merchant] Traveling to - X: 172 Y: 74 Z: 404 From - X: 360.5546392134705 Y: 66.0 Z: 357.0300288102161
+[18:46:41] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Polus - Latin Merchant] has no path!
+[18:46:41] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Polus - Latin Merchant] Traveling to - X: 172 Y: 74 Z: 404 From - X: 360.5112997334277 Y: 66.0 Z: 357.06425801118326
+[18:46:41] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Polus - Latin Merchant] has no path!
+[18:46:42] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Polus - Latin Merchant] Traveling to - X: 340 Y: 71 Z: 333 From - X: 360.45933490221057 Y: 66.0 Z: 357.03270160466724
+[18:46:42] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Polus - Latin Merchant] has no path!
+[18:46:42] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Polus - Latin Merchant] Traveling to - X: 172 Y: 74 Z: 404 From - X: 360.50047273754956 Y: 66.0 Z: 357.06553860254434
+[18:46:42] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldContinueExecuting:67]: [Polus - Latin Merchant] has no path!
+[18:46:42] [Server thread/INFO] [STDOUT]: [net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage:shouldExecute:43]: [Polus - Latin Merchant] Traveling to - X: 340 Y: 71 Z: 333 From - X: 360.5514898231429 Y: 66.0 Z: 357.0350659146963
+[18:46:45] [Server thread/INFO] [net.minecraft.server.integrated.IntegratedServer]: Saving and pausing game...
+[18:46:45] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Saving chunks for level 'Copy of New World'/overworld
+[18:47:02] [main/INFO] [net.minecraft.client.Minecraft]: Stopping!
+[18:47:02] [main/INFO] [journeymap]: Mapping halted in ./journeymap/data/sp/Copy of New World/DIM0
+[18:47:02] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Stopping server
+[18:47:02] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Saving players
+[18:47:02] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Saving worlds
+[18:47:02] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Saving chunks for level 'Copy of New World'/overworld
+[18:47:03] [Server thread/INFO] [FML]: Unloading dimension 0
+[18:47:03] [Server thread/INFO] [FML]: Applying holder lookups
+[18:47:03] [Server thread/INFO] [FML]: Holder lookups applied
+[18:47:03] [main/INFO] [net.minecraft.client.audio.SoundManager]: SoundSystem shutting down...
+[18:47:03] [main/WARN] [net.minecraft.client.audio.SoundManager]: Author: Paul Lamb, www.paulscode.com

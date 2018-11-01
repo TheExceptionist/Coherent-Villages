@@ -6,6 +6,7 @@ import java.util.Random;
 import net.minecraft.item.Item;
 import net.minecraft.potion.PotionType;
 import net.theexceptionist.coherentvillages.main.entity.spells.Spell;
+import net.theexceptionist.coherentvillages.main.entity.spells.SpellSummonSkeleton;
 import net.theexceptionist.coherentvillages.main.items.ItemWeaponThrowable;
 
 public class AttributeVocation {
@@ -292,6 +293,7 @@ public class AttributeVocation {
 				//}
 				for(int i = 0; i < spells.length; i++)
 				{
+					if(spells[i] != null) continue;
 					//System.out.println("Spell: "+this.originRace.spells.get(i + ((rank - 1) * 4)));
 					spells[i] = this.originRace.spells.get(i + ((rank - 1) * 4));
 				}
@@ -382,6 +384,7 @@ public class AttributeVocation {
 				//}
 				for(int i = 0; i < spells.length; i++)
 				{
+					if(spells[i] != null) continue;
 					//System.out.println("Spell: "+this.originRace.spells.get(i + ((rank - 1) * 4)));
 					spells[i] = this.originRace.spells.get(i + ((rank - 1) * 4));
 				}
@@ -572,5 +575,9 @@ public class AttributeVocation {
 	public int getHorseChance() {
 		// TODO Auto-generated method stub
 		return horseChance ;
+	}
+
+	public void overrideSpells(int spell3, Spell summonSkeleton) {
+		spells[spell3] = summonSkeleton;
 	}
 }

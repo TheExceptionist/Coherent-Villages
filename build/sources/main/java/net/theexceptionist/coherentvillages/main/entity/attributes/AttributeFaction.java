@@ -138,6 +138,10 @@ public class AttributeFaction {
 		events.add(Event.medium_immgrate);
 		events.add(Event.large_immgrate);
 		
+		events.add(Event.small_skirmish);
+		events.add(Event.medium_skirmish);
+		events.add(Event.large_skirmish);
+		
 		switch(race.getID())
 		{
 			
@@ -153,7 +157,7 @@ public class AttributeFaction {
 	}
 
 	public String getTitleName() {
-		return this.name;
+		return this.name != null ? this.name : "{NO NAME}";
 	}
 
 	public void setName()

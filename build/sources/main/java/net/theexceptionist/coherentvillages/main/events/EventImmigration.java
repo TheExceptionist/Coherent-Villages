@@ -25,6 +25,8 @@ public class EventImmigration extends Event {
 
 	@Override
 	public boolean execute(World world, boolean day, BlockPos spawn, AttributeRace race, AttributeFaction faction) {
+		if(race == null || faction == null) return false;
+		
 		boolean executed = true;	
 		int roll = world.rand.nextInt(100);
 		if(roll > this.chance) return (executed = false);
@@ -41,10 +43,6 @@ public class EventImmigration extends Event {
 		{
 			if(day == startInDay)
 			{		
-				this.eventMessage = this.eventMessage.replaceAll("&f", faction.getTitleName());
-				TextComponentString message = new TextComponentString(eventMessage);
-				message.setStyle(style);
-				
 				for(int i = 0; i < count; i++)
 				{
 					EntityHumanVillager villager = new EntityHumanVillager(world, raceID, AttributeRace.getFromIDRace(raceID).getRandomVillager(world), EntityHumanVillager.getRandomGender(world), false);                            
@@ -52,7 +50,7 @@ public class EventImmigration extends Event {
 	            	world.spawnEntity(villager);
 				}
 				
-				if(Main.sendMessage) EventModTick.addMessage(message);
+				this.setEventMessage(faction);
 			}
 			else
 			{

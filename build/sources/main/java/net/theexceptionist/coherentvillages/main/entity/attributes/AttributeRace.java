@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
+import net.minecraft.entity.ai.attributes.IAttribute;
+import net.minecraft.entity.ai.attributes.RangedAttribute;
 import net.minecraft.init.Items;
 import net.minecraft.init.PotionTypes;
 import net.minecraft.item.Item;
@@ -34,6 +36,8 @@ public class AttributeRace {
 	public static final int RACE_TYPE_FRANK = 7;
 	public static final int RACE_TYPE_MONGOL = 8;
 	
+    public static final IAttribute MAGIC_DAMAGE = new RangedAttribute((IAttribute)null, "generic.magicDamage", 2.0D, 0.0D, 2048.0D);
+	
 	public static AttributeRace nords;// = new AttributeRace("Nord", RACE_TYPE_BARBARIAN, 20, 5, 2, 0);
 	public static AttributeRace latins;// = new AttributeRace("Latin", RACE_TYPE_EMPIRE, 15, 3, 1, 4);
 	public static AttributeRace slavs;// = new AttributeRace("Slav", RACE_TYPE_HIGH_BARBARIAN, 10, 4, 3, 16);
@@ -57,6 +61,8 @@ public class AttributeRace {
 	protected int speedBonus;
 	protected int detectBonus;
 	protected int knockbackBonus;
+	protected int magicBonus;
+
 	
 	protected HashMap<Integer,Item> armor;
 	protected HashMap<Integer,Item> shield;
@@ -75,6 +81,8 @@ public class AttributeRace {
 	protected HashMap<Integer, AttributeVocation> bandits;
 	protected HashMap<Integer, AttributeVocation> mercenaries;
 	protected HashMap<Integer, AttributeVocation> rulers;
+	
+	public static HashMap<Integer, AttributeVocation> merchants;
 	
 	private AttributeVocation recruitSoldier = null;
 	private AttributeVocation recruitArcher = null;
@@ -147,7 +155,7 @@ public class AttributeRace {
 	protected int ID;
 	public static int END_ID = 0;
 	
-	public AttributeRace(final String name, final int type, final int health, final int attack, final int speed, final int detect, final int knockback, final String mPath, final String fPath)
+	public AttributeRace(final String name, final int type, final int health, final int attack, final int speed, final int detect, final int knockback, final int magicBonus, final String mPath, final String fPath)
 	{
 		this.name = name;
 		this.type = type;
@@ -167,6 +175,7 @@ public class AttributeRace {
 		this.speedBonus = speed;
 		this.detectBonus = detect;
 		this.knockbackBonus = knockback;
+		this.magicBonus = magicBonus;
 		
 		this.soldiers = new HashMap<Integer, AttributeVocation>();
 		this.archers = new HashMap<Integer, AttributeVocation>();
@@ -189,18 +198,19 @@ public class AttributeRace {
 		rand = new Random(System.nanoTime());
 		
 		races = new ArrayList<AttributeRace>();
+		merchants = new HashMap<Integer, AttributeVocation>();
 		
-		nords = new AttributeRace("Nord", RACE_TYPE_NORD, 20, 5, 2, 0, 2, RenderHumanVillager.NORD_SKIN_M,RenderHumanVillager.NORD_SKIN_F);
-		latins = new AttributeRace("Latin", RACE_TYPE_LATIN, 15, 3, 1, 4, 2, RenderHumanVillager.LATIN_SKIN_M,RenderHumanVillager.LATIN_SKIN_F);
-		slavs = new AttributeRace("Slav", RACE_TYPE_SLAV, 10, 4, 3, 16, 1, RenderHumanVillager.SLAV_SKIN_M,RenderHumanVillager.SLAV_SKIN_F);
-		germans = new AttributeRace("Gothic", RACE_TYPE_GERMAN, 5, 5, 2, 8, 5, RenderHumanVillager.GERMAN_SKIN_M,RenderHumanVillager.GERMAN_SKIN_F);
-		arabs = new AttributeRace("Arab", RACE_TYPE_ARAB, 10, 5, 2, 4, 0, RenderHumanVillager.ARAB_SKIN_M,RenderHumanVillager.ARAB_SKIN_F);
+		nords = new AttributeRace("Nord", RACE_TYPE_NORD, 20, 5, 2, 0, 2, 0, RenderHumanVillager.NORD_SKIN_M,RenderHumanVillager.NORD_SKIN_F);
+		latins = new AttributeRace("Latin", RACE_TYPE_LATIN, 15, 3, 1, 4, 2, 2, RenderHumanVillager.LATIN_SKIN_M,RenderHumanVillager.LATIN_SKIN_F);
+		slavs = new AttributeRace("Slav", RACE_TYPE_SLAV, 10, 4, 3, 16, 1, 3, RenderHumanVillager.SLAV_SKIN_M,RenderHumanVillager.SLAV_SKIN_F);
+		germans = new AttributeRace("Gothic", RACE_TYPE_GERMAN, 5, 5, 2, 8, 5, 5, RenderHumanVillager.GERMAN_SKIN_M,RenderHumanVillager.GERMAN_SKIN_F);
+		arabs = new AttributeRace("Arab", RACE_TYPE_ARAB, 10, 5, 2, 4, 0, 2, RenderHumanVillager.ARAB_SKIN_M,RenderHumanVillager.ARAB_SKIN_F);
 		
-		greeks = new AttributeRace("Greek", RACE_TYPE_GREEK, 10, 5, 2, 4, 0, RenderHumanVillager.GREEK_SKIN_M,RenderHumanVillager.GREEK_SKIN_F);
-		britons = new AttributeRace("Briton", RACE_TYPE_BRITON, 10, 5, 2, 4, 0, RenderHumanVillager.BRITON_SKIN_M,RenderHumanVillager.BRITON_SKIN_F);
-		franks = new AttributeRace("Frank", RACE_TYPE_FRANK, 10, 5, 2, 4, 0, RenderHumanVillager.FRANK_SKIN_M,RenderHumanVillager.FRANK_SKIN_F);
+		greeks = new AttributeRace("Greek", RACE_TYPE_GREEK, 10, 5, 2, 4, 0, 3, RenderHumanVillager.GREEK_SKIN_M,RenderHumanVillager.GREEK_SKIN_F);
+		britons = new AttributeRace("Briton", RACE_TYPE_BRITON, 10, 5, 2, 4, 0, 3, RenderHumanVillager.BRITON_SKIN_M,RenderHumanVillager.BRITON_SKIN_F);
+		franks = new AttributeRace("Frank", RACE_TYPE_FRANK, 10, 5, 2, 4, 0, 4, RenderHumanVillager.FRANK_SKIN_M,RenderHumanVillager.FRANK_SKIN_F);
 		
-		mongols = new AttributeRace("Mongol", RACE_TYPE_MONGOL, 5, 2, 4, 16, 0, RenderHumanVillager.MONGOL_SKIN_M,RenderHumanVillager.MONGOL_SKIN_F);
+		mongols = new AttributeRace("Mongol", RACE_TYPE_MONGOL, 5, 2, 4, 16, 0, 1, RenderHumanVillager.MONGOL_SKIN_M,RenderHumanVillager.MONGOL_SKIN_F);
 
 	}
 	
@@ -272,7 +282,7 @@ public class AttributeRace {
 				AttributeVocation soldierTier3 = new AttributeVocation("Warrior", AttributeVocation.CLASS_SOLDIER, 2, 10, this, false, true, 75, 50, 0, false, rand);
 				AttributeVocation soldierTier4 = new AttributeVocation("Huskarl", AttributeVocation.CLASS_SOLDIER, 3, 10, this, false, true, 100, 75, 5, true, rand);
 				
-				AttributeVocation archerTier1 = new AttributeVocation("Archer", AttributeVocation.CLASS_ARCHER, 0, 10, this);
+				AttributeVocation archerTier1 = new AttributeVocation("Archer", AttributeVocation.CLASS_ARCHER, 1, 10, this);
 
 				soldierTier1.setUpgradeTree(soldierTier2, soldierTier3);
 				soldierTier2.setUpgradeTree(soldierTier4, null);
@@ -296,18 +306,18 @@ public class AttributeRace {
 				this.villagers.put(villagerLumberman.getRank(), villagerLumberman);
 				
 				AttributeVocation banditTier1 = new AttributeVocation("Raider", AttributeVocation.CLASS_BANDIT, 0, 10, this, false, false, 0, 10, 0, false, rand);
-				AttributeVocation banditTier2 = new AttributeVocation("Berserker", AttributeVocation.CLASS_BANDIT, 1, 10, this, false, false, 0, 20, 0, false, rand, AttributeVocation.CLASS_OVERRIDE_NO_ARMOR);
+				AttributeVocation banditTier2 = new AttributeVocation("Berserker", AttributeVocation.CLASS_BANDIT, 0, 10, this, false, false, 0, 20, 0, false, rand, AttributeVocation.CLASS_OVERRIDE_NO_ARMOR);
 				AttributeVocation banditTier3 = new AttributeVocation("Viking",  AttributeVocation.CLASS_BANDIT, 2, 10, this, false, true, 90, 40, 0, true, rand);
 				
 				banditTier1.setUpgradeTree(banditTier2, banditTier3);
 				banditTier2.setDamageOffest(20);
 				
-				AttributeVocation banditTier4 = new AttributeVocation("Barbarian", AttributeVocation.CLASS_BANDIT, 1, 10, this, false, false, 0, 20, 0, false, rand, AttributeVocation.CLASS_ARCHER);
+				AttributeVocation banditTier4 = new AttributeVocation("Barbarian", AttributeVocation.CLASS_BANDIT, 0, 10, this, false, false, 0, 20, 0, false, rand, AttributeVocation.CLASS_ARCHER);
 
-				this.bandits.put(banditTier1.getRank(), banditTier1);
-				this.bandits.put(banditTier2.getRank(), banditTier2);
-				this.bandits.put(banditTier3.getRank(), banditTier3);
-				this.bandits.put(banditTier4.getRank() + 2, banditTier4);
+				this.bandits.put(1, banditTier1);
+				this.bandits.put(2, banditTier2);
+				this.bandits.put(3, banditTier3);
+				this.bandits.put(4, banditTier4);
 				
 				AttributeVocation mercenaryTier3 = new AttributeVocation("Mercenary", AttributeVocation.CLASS_MERCENARY, 2, 10, this, false, true, 50, 80, 0, false, rand, AttributeVocation.CLASS_SOLDIER);
 				
@@ -375,10 +385,12 @@ public class AttributeRace {
 				soldierTier1.setUpgradeTree(soldierTier2, null);
 				soldierTier2.setUpgradeTree(soldierTier3, null);
 				
-				AttributeVocation archerTier1 = new AttributeVocation("Archer", AttributeVocation.CLASS_ARCHER, 0, 10, this);
-				AttributeVocation archerTier2 = new AttributeVocation("Legate", AttributeVocation.CLASS_ARCHER, 1, 10, this, true, true, 50, 70, 5, true, rand);
+				AttributeVocation archerTier1 = new AttributeVocation("Auxillary", AttributeVocation.CLASS_ARCHER, 0, 10, this);
+				AttributeVocation archerTier2 = new AttributeVocation("Archer", AttributeVocation.CLASS_ARCHER, 1, 10, this);
+				AttributeVocation archerTier3 = new AttributeVocation("Legate", AttributeVocation.CLASS_ARCHER, 2, 10, this, true, true, 50, 70, 5, true, rand);
 				
 				archerTier1.setUpgradeTree(archerTier2, null);
+				archerTier2.setUpgradeTree(archerTier3, null);
 				
 				AttributeVocation mageTier1 = new AttributeVocation("Battlemage", AttributeVocation.CLASS_MAGE, 1, 10, this, true, false, 20, 60, 10, true, rand);
 				
@@ -396,6 +408,7 @@ public class AttributeRace {
 				
 				this.archers.put(1, archerTier1);
 				this.archers.put(2, archerTier2);
+				this.archers.put(3, archerTier3);
 				
 				this.mages.put(1, mageTier1);
 			
@@ -408,15 +421,18 @@ public class AttributeRace {
 				
 				this.villagers.put(villagerArtisan.getRank(), villagerArtisan);
 				this.villagers.put(villagerMerchant.getRank(), villagerMerchant);
+				this.merchants.put(1, villagerMerchant);
 				this.villagers.put(villagerBlacksmith.getRank(), villagerBlacksmith);
 				
 				AttributeVocation banditTier1 = new AttributeVocation("Renegade Legionary", AttributeVocation.CLASS_BANDIT, 0, 10, this, false, false, 0, 20, 0, false, rand, AttributeVocation.CLASS_SOLDIER);
-				AttributeVocation banditTier2 = new AttributeVocation("Reaver", AttributeVocation.CLASS_BANDIT, 2, 10, this, true, true, 100, 60, 60, true, rand);
+				AttributeVocation banditTier2 = new AttributeVocation("Reaver", AttributeVocation.CLASS_BANDIT, 1, 10, this, true, true, 100, 60, 60, true, rand);
 				//Archers
 				AttributeVocation banditTier3 = new AttributeVocation("Brigand", AttributeVocation.CLASS_BANDIT, 0, 10, this, false, false, 0, 60, 40, false, rand, AttributeVocation.CLASS_ARCHER);
 				AttributeVocation banditTier4 = new AttributeVocation("Rogue", AttributeVocation.CLASS_BANDIT, 1, 10, this, true, true, 50, 80, 20, true, rand, AttributeVocation.CLASS_ARCHER);
 				//Mages
 				AttributeVocation banditTier5 = new AttributeVocation("Necromancer", AttributeVocation.CLASS_BANDIT, 0, 10, this, true, false, 20, 50, 30, true, rand, AttributeVocation.CLASS_MAGE);
+				banditTier5.overrideSpells(SPELL_3, Spell.summon_skeleton);
+				
 				//Alchemists
 				AttributeVocation banditTier6 = new AttributeVocation("Witchdoctor", AttributeVocation.CLASS_BANDIT, 0, 10, this, true, false, 0, 100, 40, true, rand);
 				AttributeVocation banditTier7 = new AttributeVocation("Blackguard", AttributeVocation.CLASS_BANDIT, 0, 10, this, true, true, 20, 100, 50, true, rand);
@@ -1008,6 +1024,11 @@ public class AttributeRace {
 		if(this.mercenaries.isEmpty()) return null;
 		return this.mercenaries.get(world.rand.nextInt(mercenaries.size()) + 1);
 	}
+	
+	public AttributeVocation getRandomMerchant(World world) {
+		if(this.merchants.isEmpty()) return null;
+		return this.merchants.get(world.rand.nextInt(merchants.size()) + 1);
+	}
 
 	public AttributeVocation getRandomBandit(World world) {
 		if(this.bandits.isEmpty()) return null;
@@ -1159,7 +1180,7 @@ public class AttributeRace {
 				
 				//System.out.println("Searching: "+vocation.getName().toLowerCase().replace(" ", "_")+" "+string);
 				
-				if(vocation.getName().toLowerCase().replace(" ", "_").contains(string.toLowerCase().replace("_", " ")))
+				if(vocation.getName().toLowerCase().replace(" ", "_").contains(string.toLowerCase()))
 				{
 					return vocation;
 				}
@@ -1212,5 +1233,9 @@ public class AttributeRace {
 		else if(this.alchemists.size() > 0 && this.rand.nextInt(100) <= 3/6) return alchemists.get(this.rand.nextInt(this.alchemists.size()) + 1);
 		else if(this.soldiers.size() > 0 && this.rand.nextInt(100) <= 4/6)  return soldiers.get(this.rand.nextInt(this.soldiers.size()) + 1);	//return alchemists.get(this.rand.nextInt(this.alchemists.size()) + 1);
 		else return villagers.get(this.rand.nextInt(this.villagers.size()) + 1);	
+	}
+
+	public int getMagicBonus() {
+		return this.magicBonus;
 	}
 }

@@ -11,6 +11,9 @@ public abstract class Spell {
 	
 	public static final SpellSummonAncient summon_ancient_warror = new SpellSummonAncient("Summon Ancient Warrior", Spell.SPELL_TYPE_SUMMON, 40, 3, 1000);
 	
+	public static final SpellSummonSkeleton summon_skeleton = new SpellSummonSkeleton("Summon Skeleton", Spell.SPELL_TYPE_SUMMON, 30, 5, 500);
+	public static final SpellSummonSkeleton summon_skeleton_horde = new SpellSummonSkeleton("Summon Skeleton Horde", Spell.SPELL_TYPE_SUMMON, 20, 10, 200);
+
 	public static final SpellThunder thunderbolt = new SpellThunder("Thunderbolt", Spell.SPELL_TYPE_ATTACK, 10);
 	
 	public static final SpellThunderStorm storm = new SpellThunderStorm("Storm", Spell.SPELL_TYPE_WEATHER);

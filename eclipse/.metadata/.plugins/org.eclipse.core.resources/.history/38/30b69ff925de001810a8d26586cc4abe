@@ -1,0 +1,20 @@
+package net.theexceptionist.coherentvillages.entity.ai;
+
+import net.minecraft.entity.ai.EntityAIBase;
+import net.theexceptionist.coherentvillages.main.entity.EntityHumanVillager;
+
+public class EntityAITravelToAnotherVillage extends EntityAIBase {
+	private EntityHumanVillager villager;
+	
+	public EntityAITravelToAnotherVillage(EntityHumanVillager villager)
+	{
+		this.villager = villager.
+	}
+	
+	@Override
+	public boolean shouldExecute() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+}

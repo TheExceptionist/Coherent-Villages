@@ -4,16 +4,19 @@ import java.util.List;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
+import net.theexceptionist.coherentvillages.main.entity.EntityHumanVillager;
 
 public class EntityVillagerLighting extends EntityLightningBolt
 {
@@ -24,8 +27,9 @@ public class EntityVillagerLighting extends EntityLightningBolt
     /** Determines the time before the EntityLightningBolt is destroyed. It is a random integer decremented over time. */
     private int boltLivingTime;
     private final boolean effectOnly;
+	private EntityHumanVillager caster;
 
-    public EntityVillagerLighting(World worldIn, double x, double y, double z, boolean effectOnlyIn)
+    public EntityVillagerLighting(World worldIn, EntityHumanVillager caster, double x, double y, double z, boolean effectOnlyIn)
     {
         super(worldIn, z, z, z, effectOnlyIn);
         this.setLocationAndAngles(x, y, z, 0.0F, 0.0F);
@@ -33,6 +37,7 @@ public class EntityVillagerLighting extends EntityLightningBolt
         this.boltVertex = this.rand.nextLong();
         this.boltLivingTime = this.rand.nextInt(3) + 1;
         this.effectOnly = effectOnlyIn;
+        this.caster = caster;
         BlockPos blockpos = new BlockPos(this);
 
         if (!effectOnlyIn && !worldIn.isRemote && worldIn.getGameRules().getBoolean("doFireTick") && (worldIn.getDifficulty() == EnumDifficulty.NORMAL || worldIn.getDifficulty() == EnumDifficulty.HARD) && worldIn.isAreaLoaded(blockpos, 10))
@@ -113,7 +118,11 @@ public class EntityVillagerLighting extends EntityLightningBolt
                 {
                     Entity entity = (Entity)list.get(i);
                     if (!net.minecraftforge.event.ForgeEventFactory.onEntityStruckByLightning(entity, this))
+                    {
                         entity.onStruckByLightning(this);
+                        if(this.caster != null) entity.attackEntityFrom(DamageSource.LIGHTNING_BOLT, (float) caster.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue() / 2);
+                    }
+                    	
                 }
             }
         }

@@ -492,6 +492,23 @@ Archer upgrades to LEgate
 *Improved the create command
 *Improved Horse Riding AI
 
+-Pre-Release Test v0.0.2.15
+=========================================
+*Added patrol shifts
+*Improved archer tower for Latins
+*Fixed a crash
+*Fixed a command bugs
+*Tinkered nord barbarian
+*Tinkered Nord Berserker
+*Tinker Latin Reaver
+*Added Roman Auxillary (Basic Archer type unit)
+*Improved some magic spells
+*Added A new stat that determines magic damage
+*Added summon skeleton spell to Necromancer
+*Added Skirmish Event (Battles now happen in the wild!)
+*Added more configs
+*Fixed a Viking texture bug
+
 
 
 //Blocking bug
