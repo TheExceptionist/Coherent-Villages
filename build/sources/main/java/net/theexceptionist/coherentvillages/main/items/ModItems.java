@@ -30,6 +30,9 @@ public class ModItems {
 	
 	public static ToolMaterial ROMAN_STEEL = EnumHelper.addToolMaterial("roman_steel", 2, 2000, 6.5f, 5.0f, 7);//.addToolMaterial("nord_mail", Resources.MODID+":nord_mail", 1500, new int[]{3 , 4, 7, 1}, 10, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 8F);
 	
+	public static ToolMaterial SLAV_STEEL = EnumHelper.addToolMaterial("slav_steel", 1, 1500, 3.5f, 10.0f, 2);//.addToolMaterial("nord_mail", Resources.MODID+":nord_mail", 1500, new int[]{3 , 4, 7, 1}, 10, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 8F);
+	
+	
 	public static ItemWeaponThrowable throwingAxe;
 	
 	public static ItemModArmor barbarianHelmet;// = new ItemNordArmor("barbarian_helmet", ItemNordArmor.NORD_MAIL, 0, EntityEquipmentSlot.HEAD);
@@ -59,6 +62,7 @@ public class ModItems {
 	
 	public static ItemModSword romanSword;
 	public static ItemSpear spear;
+	public static ItemSpear bardiche;
 	
 	public static ItemTome tomeSummonAncient;
 	public static ItemTome tomeFireball;
@@ -82,6 +86,7 @@ public class ModItems {
 		
 		romanSword = new ItemModSword("roman_sword", ModItems.ROMAN_STEEL);
 		spear = new ItemSpear("spear", ModItems.ROMAN_STEEL);
+		bardiche = new ItemSpear("bardiche", ModItems.SLAV_STEEL);
 		
 		hornHelmet = new ItemModHelmet("horn_helmet", ModItems.NORD_HELMET, 0, EntityEquipmentSlot.HEAD);
 		
@@ -126,6 +131,7 @@ public class ModItems {
 		
 		registry.registerAll(romanSword);
 		registry.registerAll(spear);
+		registry.registerAll(bardiche);
 		
 		//registry.registerAll(hornHelmet);
 		registry.registerAll(romanHelmet);
@@ -167,6 +173,7 @@ public class ModItems {
 		
 		registerRender(romanSword);
 		registerRender(spear);
+		registerRender(bardiche);
 		
 		//registerRender(hornHelmet);
 		registerRender(romanHelmet);

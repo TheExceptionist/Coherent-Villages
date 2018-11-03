@@ -66,6 +66,9 @@ public class SpellFireball extends Spell{
 		        entitylargefireball.posY = caster.posY + (double)(caster.height / 2.0F) + 0.5D;
 		        entitylargefireball.posZ = caster.posZ + vec3d.z * 4.0D;
 		        
+	        	this.spawnExplosionParticle(world, caster, entitylargefireball.posX, entitylargefireball.posY, entitylargefireball.posZ);
+
+		        
 		        world.spawnEntity(entitylargefireball);
 		        this.burst--;
 	        }

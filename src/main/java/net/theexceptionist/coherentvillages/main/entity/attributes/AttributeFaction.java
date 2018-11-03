@@ -60,9 +60,9 @@ public class AttributeFaction {
 	
 	private static final String[] s_b_titles = 
 		{
-				"%n's Pillagers of the %rs",
-				"%n's %r Viking Den",
-				"The %n's %r Sea Raiders",
+				"%n's Raiders of the %rs",
+				"%n's %r Horde",
+				"The %n's %r Khanate",
 		};
 	
 	private static final String[] a_titles = 
@@ -221,6 +221,7 @@ public class AttributeFaction {
 	public void setBandit(boolean bandit)
 	{
 		isBandit = bandit;
+		this.setName();
 	}
 	
 	public boolean getBandit()

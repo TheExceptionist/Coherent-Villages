@@ -1,0 +1,11 @@
+package net.theexceptionist.coherentvillages.main.entity;
+
+import net.minecraft.world.World;
+
+public class EntityVampire extends EntityHumanVillager{
+
+	public EntityVampire(World worldIn) {
+		super(worldIn);
+	}
+
+}

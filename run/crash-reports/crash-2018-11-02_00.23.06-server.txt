@@ -1,0 +1,98 @@
+---- Minecraft Crash Report ----
+// Oh - I know what I did wrong!
+
+Time: 11/2/18 12:23 AM
+Description: Exception ticking world
+
+java.lang.NullPointerException: Exception ticking world
+	at net.theexceptionist.coherentvillages.main.entity.EntityHumanVillager.applyAttributes(EntityHumanVillager.java:760)
+	at net.theexceptionist.coherentvillages.main.entity.EntityHumanVillager.<init>(EntityHumanVillager.java:238)
+	at net.theexceptionist.coherentvillages.worldgen.villages.SlavStructurePieces$Village.spawnVillagers(SlavStructurePieces.java:1538)
+	at net.theexceptionist.coherentvillages.worldgen.villages.SlavStructurePieces$Shrine.addComponentParts(SlavStructurePieces.java:876)
+	at net.minecraft.world.gen.structure.StructureStart.generateStructure(StructureStart.java:51)
+	at net.minecraft.world.gen.structure.MapGenStructure.generateStructure(MapGenStructure.java:102)
+	at net.minecraft.world.gen.ChunkGeneratorOverworld.populate(ChunkGeneratorOverworld.java:412)
+	at net.minecraft.world.chunk.Chunk.populate(Chunk.java:1092)
+	at net.minecraft.world.chunk.Chunk.populate(Chunk.java:1058)
+	at net.minecraft.world.gen.ChunkProviderServer.provideChunk(ChunkProviderServer.java:169)
+	at net.minecraft.server.management.PlayerChunkMapEntry.providePlayerChunk(PlayerChunkMapEntry.java:130)
+	at net.minecraft.server.management.PlayerChunkMap.tick(PlayerChunkMap.java:183)
+	at net.minecraft.world.WorldServer.tick(WorldServer.java:236)
+	at net.minecraft.server.MinecraftServer.updateTimeLightAndEntities(MinecraftServer.java:831)
+	at net.minecraft.server.MinecraftServer.tick(MinecraftServer.java:743)
+	at net.minecraft.server.integrated.IntegratedServer.tick(IntegratedServer.java:192)
+	at net.minecraft.server.MinecraftServer.run(MinecraftServer.java:592)
+	at java.lang.Thread.run(Thread.java:748)
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Thread: Server thread
+Stacktrace:
+	at net.theexceptionist.coherentvillages.main.entity.EntityHumanVillager.applyAttributes(EntityHumanVillager.java:760)
+	at net.theexceptionist.coherentvillages.main.entity.EntityHumanVillager.<init>(EntityHumanVillager.java:238)
+	at net.theexceptionist.coherentvillages.worldgen.villages.SlavStructurePieces$Village.spawnVillagers(SlavStructurePieces.java:1538)
+	at net.theexceptionist.coherentvillages.worldgen.villages.SlavStructurePieces$Shrine.addComponentParts(SlavStructurePieces.java:876)
+	at net.minecraft.world.gen.structure.StructureStart.generateStructure(StructureStart.java:51)
+	at net.minecraft.world.gen.structure.MapGenStructure.generateStructure(MapGenStructure.java:102)
+	at net.minecraft.world.gen.ChunkGeneratorOverworld.populate(ChunkGeneratorOverworld.java:412)
+	at net.minecraft.world.chunk.Chunk.populate(Chunk.java:1092)
+	at net.minecraft.world.chunk.Chunk.populate(Chunk.java:1058)
+	at net.minecraft.world.gen.ChunkProviderServer.provideChunk(ChunkProviderServer.java:169)
+	at net.minecraft.server.management.PlayerChunkMapEntry.providePlayerChunk(PlayerChunkMapEntry.java:130)
+	at net.minecraft.server.management.PlayerChunkMap.tick(PlayerChunkMap.java:183)
+	at net.minecraft.world.WorldServer.tick(WorldServer.java:236)
+
+-- Affected level --
+Details:
+	Level name: New World
+	All players: 1 total; [EntityPlayerMP['Player565'/946, l='New World', x=-218.50, y=97.00, z=271.50]]
+	Chunk stats: ServerChunkCache: 609 Drop: 0
+	Level seed: 7706954302422277060
+	Level generator: ID 04 - customized, ver 0. Features enabled: true
+	Level generator options: {"coordinateScale":684.412,"heightScale":684.412,"lowerLimitScale":512.0,"upperLimitScale":512.0,"depthNoiseScaleX":200.0,"depthNoiseScaleZ":200.0,"depthNoiseScaleExponent":0.5,"mainNoiseScaleX":80.0,"mainNoiseScaleY":160.0,"mainNoiseScaleZ":80.0,"baseSize":8.5,"stretchY":12.0,"biomeDepthWeight":1.0,"biomeDepthOffset":0.0,"biomeScaleWeight":1.0,"biomeScaleOffset":0.0,"seaLevel":63,"useCaves":true,"useDungeons":true,"dungeonChance":8,"useStrongholds":true,"useVillages":true,"useMineShafts":true,"useTemples":true,"useMonuments":true,"useMansions":true,"useRavines":true,"useWaterLakes":true,"waterLakeChance":4,"useLavaLakes":true,"lavaLakeChance":80,"useLavaOceans":false,"fixedBiome":5,"biomeSize":4,"riverSize":4,"dirtSize":33,"dirtCount":10,"dirtMinHeight":0,"dirtMaxHeight":256,"gravelSize":33,"gravelCount":8,"gravelMinHeight":0,"gravelMaxHeight":256,"graniteSize":33,"graniteCount":10,"graniteMinHeight":0,"graniteMaxHeight":80,"dioriteSize":33,"dioriteCount":10,"dioriteMinHeight":0,"dioriteMaxHeight":80,"andesiteSize":33,"andesiteCount":10,"andesiteMinHeight":0,"andesiteMaxHeight":80,"coalSize":17,"coalCount":20,"coalMinHeight":0,"coalMaxHeight":128,"ironSize":9,"ironCount":20,"ironMinHeight":0,"ironMaxHeight":64,"goldSize":9,"goldCount":2,"goldMinHeight":0,"goldMaxHeight":32,"redstoneSize":8,"redstoneCount":8,"redstoneMinHeight":0,"redstoneMaxHeight":16,"diamondSize":8,"diamondCount":1,"diamondMinHeight":0,"diamondMaxHeight":16,"lapisSize":7,"lapisCount":1,"lapisCenterHeight":16,"lapisSpread":16}
+	Level spawn location: World: (-223,64,273), Chunk: (at 1,4,1 in -14,17; contains blocks -224,0,272 to -209,255,287), Region: (-1,0; contains chunks -32,0 to -1,31, blocks -512,0,0 to -1,255,511)
+	Level time: 7 game time, 7 day time
+	Level dimension: 0
+	Level storage version: 0x04ABD - Anvil
+	Level weather: Rain time: 123242 (now: false), thunder time: 32891 (now: false)
+	Level game mode: Game mode: creative (ID 1). Hardcore: false. Cheats: true
+Stacktrace:
+	at net.minecraft.server.MinecraftServer.updateTimeLightAndEntities(MinecraftServer.java:831)
+	at net.minecraft.server.MinecraftServer.tick(MinecraftServer.java:743)
+	at net.minecraft.server.integrated.IntegratedServer.tick(IntegratedServer.java:192)
+	at net.minecraft.server.MinecraftServer.run(MinecraftServer.java:592)
+	at java.lang.Thread.run(Thread.java:748)
+
+-- System Details --
+Details:
+	Minecraft Version: 1.12.2
+	Operating System: Mac OS X (x86_64) version 10.13.6
+	Java Version: 1.8.0_144, Oracle Corporation
+	Java VM Version: Java HotSpot(TM) 64-Bit Server VM (mixed mode), Oracle Corporation
+	Memory: 339034280 bytes (323 MB) / 914358272 bytes (872 MB) up to 1908932608 bytes (1820 MB)
+	JVM Flags: 0 total; 
+	IntCache: cache: 0, tcache: 0, allocated: 13, tallocated: 95
+	FML: MCP 9.42 Powered by Forge 14.23.4.2757 9 mods loaded, 9 mods active
+	States: 'U' = Unloaded 'L' = Loaded 'C' = Constructed 'H' = Pre-initialized 'I' = Initialized 'J' = Post-initialized 'A' = Available 'D' = Disabled 'E' = Errored
+
+	| State     | ID               | Version      | Source                           | Signature |
+	|:--------- |:---------------- |:------------ |:-------------------------------- |:--------- |
+	| UCHIJAAAA | minecraft        | 1.12.2       | minecraft.jar                    | None      |
+	| UCHIJAAAA | mcp              | 9.42         | minecraft.jar                    | None      |
+	| UCHIJAAAA | FML              | 8.0.99.99    | forgeSrc-1.12.2-14.23.4.2757.jar | None      |
+	| UCHIJAAAA | forge            | 14.23.4.2757 | forgeSrc-1.12.2-14.23.4.2757.jar | None      |
+	| UCHIJAAAA | coherentvillages | v0.0.2.17    | modid-1.0.jar                    | None      |
+	| UCHIJAAAA | ichunutil        | 7.1.0        | iChunUtil-1.12.2-7.1.0.jar       | None      |
+	| UCHIJAAAA | journeymap       | 1.12.2-5.5.2 | journeymap-1.12.2-5.5.2.jar      | None      |
+	| UCHIJAAAA | tabula           | 7.0.0        | Tabula-1.12.2-7.0.0.jar          | None      |
+	| UCHIJAAAA | torohealthmod    | 1.12.2-11    | torohealth-1.12.2-11.jar         | None      |
+
+	Loaded coremods (and transformers): 
+	GL info: ~~ERROR~~ RuntimeException: No OpenGL context found in the current thread.
+	Profiler Position: N/A (disabled)
+	Player Count: 1 / 8; [EntityPlayerMP['Player565'/946, l='New World', x=-218.50, y=97.00, z=271.50]]
+	Type: Integrated Server (map_client.txt)
+	Is Modded: Definitely; Client brand changed to 'fml,forge'

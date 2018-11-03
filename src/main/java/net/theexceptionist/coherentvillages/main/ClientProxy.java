@@ -8,6 +8,7 @@ import net.theexceptionist.coherentvillages.events.EventModTick;
 import net.theexceptionist.coherentvillages.events.EventOverrideVillages;
 import net.theexceptionist.coherentvillages.events.PlayerConnectionEvent;
 import net.theexceptionist.coherentvillages.main.entity.EntityBjornserker;
+import net.theexceptionist.coherentvillages.main.entity.EntityBloodBat;
 import net.theexceptionist.coherentvillages.main.entity.EntityDrachen;
 import net.theexceptionist.coherentvillages.main.entity.EntityHumanVillager;
 import net.theexceptionist.coherentvillages.main.entity.EntityLemure;
@@ -15,6 +16,7 @@ import net.theexceptionist.coherentvillages.main.entity.EntitySkeletonSummon;
 import net.theexceptionist.coherentvillages.main.entity.EntityWarg;
 import net.theexceptionist.coherentvillages.main.entity.EntityWraith;
 import net.theexceptionist.coherentvillages.main.entity.render.RenderBjornserker;
+import net.theexceptionist.coherentvillages.main.entity.render.RenderBloodBat;
 import net.theexceptionist.coherentvillages.main.entity.render.RenderDrachen;
 import net.theexceptionist.coherentvillages.main.entity.render.RenderHumanVillager;
 import net.theexceptionist.coherentvillages.main.entity.render.RenderLemure;
@@ -48,7 +50,8 @@ public class ClientProxy extends CommonProxy {
 		renderManager.entityRenderMap.put(EntityLemure.class, new RenderLemure(renderManager));
 		renderManager.entityRenderMap.put(EntityDrachen.class, new RenderDrachen(renderManager));
 		renderManager.entityRenderMap.put(EntitySkeletonSummon.class, new RenderSkeletonSummon(renderManager));
-		
+		renderManager.entityRenderMap.put(EntityBloodBat.class, new RenderBloodBat(renderManager));
+
 		renderManager.entityRenderMap.put(EntityWeaponThrowable.class, new RenderWeaponThrowable(renderManager, Items.IRON_AXE, Minecraft.getMinecraft().getRenderItem()));
 		
 		/*

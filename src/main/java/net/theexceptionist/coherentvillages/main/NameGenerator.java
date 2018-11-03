@@ -4065,6 +4065,17 @@ public class NameGenerator {
 					return fBritonNames[rand.nextInt(fBritonNames.length)].trim();
 				}
 			}
+			case AttributeRace.RACE_TYPE_VAMPIRE:
+			{
+				if(gender == EntityHumanVillager.GENDER_MALE)
+				{
+					return mGermanNames[rand.nextInt(mGermanNames.length)].trim();
+				}
+				else
+				{
+					return fGermanNames[rand.nextInt(fGermanNames.length)].trim();
+				}
+			}
 			default:
 			{
 				return "";
@@ -4109,6 +4120,10 @@ public class NameGenerator {
 			case AttributeRace.RACE_TYPE_BRITON:
 			{
 				return lBritonNames[rand.nextInt(lBritonNames.length)].trim();
+			}
+			case AttributeRace.RACE_TYPE_VAMPIRE:
+			{
+				return lGermanNames[rand.nextInt(lGermanNames.length)].trim();
 			}
 			default:
 			{

@@ -1,0 +1,43 @@
+{
+    "__comment": "Model generated using MrCrayfish's Model Creator (http://mrcrayfish.com/modelcreator/)",
+    "textures": {
+        "0": "blocks/bardiche"
+    },
+    "elements": [
+        {
+            "name": "Handle",
+            "from": [ 8.0, 0.0, 8.0 ], 
+            "to": [ 9.0, 26.0, 9.0 ], 
+            "faces": {
+                "north": { "texture": "#0", "uv": [ 0.0, 0.0, 0.5, 16.0 ] },
+                "east": { "texture": "#0", "uv": [ 1.0, 0.0, 1.5, 16.0 ] },
+                "south": { "texture": "#0", "uv": [ 2.0, 0.0, 2.5, 16.0 ] },
+                "west": { "texture": "#0", "uv": [ 0.0, 0.0, 0.5, 16.0 ] },
+                "up": { "texture": "#0", "uv": [ 2.0, 10.0, 3.0, 11.0 ] },
+                "down": { "texture": "#0", "uv": [ 1.0, 3.0, 2.0, 4.0 ] }
+            }
+        },
+        {
+            "name": "blade",
+            "from": [ 8.3, 19.0, 9.0 ], 
+            "to": [ 8.600000000000001, 31.0, 12.0 ], 
+            "faces": {
+                "east": { "texture": "#0", "uv": [ 3.0, 3.0, 6.0, 16.0 ], "cullface": "east" },
+                "west": { "texture": "#0", "uv": [ 6.0, 3.0, 9.0, 16.0 ], "cullface": "west" }
+            }
+        },
+        {
+            "name": "Iron_ring",
+            "from": [ 7.8, 22.5, 7.8 ], 
+            "to": [ 9.3, 24.0, 9.3 ], 
+            "faces": {
+                "north": { "texture": "#0", "uv": [ 4.5, 5.5, 5.0, 6.0 ] },
+                "east": { "texture": "#0", "uv": [ 4.5, 6.5, 5.0, 7.0 ] },
+                "south": { "texture": "#0", "uv": [ 4.5, 5.5, 5.0, 6.0 ] },
+                "west": { "texture": "#0", "uv": [ 4.5, 8.5, 5.0, 9.0 ] },
+                "up": { "texture": "#0", "uv": [ 3.5, 9.5, 4.0, 10.0 ] },
+                "down": { "texture": "#0", "uv": [ 4.5, 5.5, 5.0, 6.0 ] }
+            }
+        }
+    ]
+}

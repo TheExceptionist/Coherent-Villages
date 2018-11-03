@@ -33,6 +33,12 @@ public class EntityModLargeFireball  extends EntityLargeFireball
     {
         super(worldIn, shooter, accelX, accelY, accelZ);
     }
+    
+    
+    public void setShooter(EntityLivingBase shooter)
+    {
+    	this.shootingEntity = shooter;
+    }
 
     /**
      * Called when this EntityFireball hits a block or entity.
@@ -41,27 +47,40 @@ public class EntityModLargeFireball  extends EntityLargeFireball
     {
         if (!this.world.isRemote)
         {	
-            if (result.entityHit != null)
-            {
-                result.entityHit.attackEntityFrom(DamageSource.causeFireballDamage(this, this.shootingEntity), 6.0F);
-                this.applyEnchantments(this.shootingEntity, result.entityHit);
-            }
 
         	EntityHumanVillager villager = null;
         	boolean flag = false;
+            if (result.entityHit != null)
+            {
+
+	        	if(this.shootingEntity instanceof EntityHumanVillager)
+	        	{
+	        		villager = (EntityHumanVillager) shootingEntity;
+	    			//System.out.println("Shooting Entity: "+(this.shootingEntity != null)+" Fireball: "+(this != null)+" Hit: "+(result.entityHit != null));
+	                flag = result.entityHit.attackEntityFrom(DamageSource.causeFireballDamage(this, this.shootingEntity), (float) villager.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue());
+	            	if(villager.isDestructive())
+	            	{
+	            		this.world.newExplosion((Entity)null, this.posX, this.posY, this.posZ, (float)this.explosionPower, flag, flag);
+	            		result.entityHit.setFire(5);	
+	            	}
+	        	}
+	        	else
+	        	{
+	    			//System.out.println("Shooting Entity: "+(this.shootingEntity != null)+" Fireball: "+(this != null)+" Hit: "+(result.entityHit != null));
+	        		flag = result.entityHit.attackEntityFrom(DamageSource.causeFireballDamage(this, this.shootingEntity), 5.0f);
+	        	}
         	
+            }
+            
         	if(this.shootingEntity instanceof EntityHumanVillager)
         	{
         		villager = (EntityHumanVillager) shootingEntity;
-                flag = result.entityHit.attackEntityFrom(DamageSource.causeFireballDamage(this, this.shootingEntity), (float) villager.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue());
+            	if(villager.isDestructive())
+            	{
+            		this.world.newExplosion((Entity)null, this.posX, this.posY, this.posZ, (float)this.explosionPower, true, true);            	}
         	}
-        	else
-        	{
-                flag = result.entityHit.attackEntityFrom(DamageSource.causeFireballDamage(this, this.shootingEntity), 5.0f);
-        		return;
-        	}
+
         	
-        	this.world.newExplosion((Entity)null, this.posX, this.posY, this.posZ, (float)this.explosionPower, flag, flag);
             this.setDead();
         }
     }

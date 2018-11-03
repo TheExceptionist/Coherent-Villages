@@ -11,7 +11,10 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
+import net.theexceptionist.coherentvillages.main.Main;
+import net.theexceptionist.coherentvillages.main.entity.EntityBjornserker;
 import net.theexceptionist.coherentvillages.main.entity.EntityHumanVillager;
+import net.theexceptionist.coherentvillages.main.entity.EntityWraith;
 import net.theexceptionist.coherentvillages.main.entity.attributes.AttributeRace;
 import net.theexceptionist.coherentvillages.main.entity.attributes.AttributeVocation;
 
@@ -91,11 +94,18 @@ public class CommandCreate implements ICommand{
             else
             {
             	int count = 1;
+            	boolean vampire = false, bjornserker = false, wraith = false;
 	            AttributeVocation vocation = race.getVocationFromString(args[1]);
 	            EntityHumanVillager villager = null;//new EntityHumanVillager(world, race.getID(), vocation, 0, false);
             	AttributeVocation job = race.getRandomSoldier(world);
             	
             	if(args.length > 2) count = Integer.parseInt(args[2]);
+            	if(args.length > 3) 
+            	{
+            		vampire = Integer.parseInt(args[3]) == 0;
+            		bjornserker = Integer.parseInt(args[3]) == 1;
+            		wraith = Integer.parseInt(args[3]) == 2;
+            	}
 	            
 	            for(int i = 0; i < count; i++)
 	            {
@@ -120,6 +130,20 @@ public class CommandCreate implements ICommand{
 	            	}
 	 
 		            villager.setLocationAndAngles((double)sender.getPosition().getX() + 0.5D, (double)sender.getPosition().getY(), (double)sender.getPosition().getZ() + 0.5D, 0.0F, 0.0F);
+		            
+		            if(vampire)
+		            {
+		            	villager.setVampire(true);
+		            }
+		            else if(bjornserker)
+		            {
+                    	villager.setShifter(true, new EntityBjornserker(world), true, -1);
+		            }
+		            else if(wraith)
+		            {
+                    	villager.setShifter(true, new EntityWraith(world), false, 1);	
+		            }
+		            
 		            world.spawnEntity(villager);
 		            sender.sendMessage(new TextComponentString("Successfully spawned new "+villager.getRace().getName()+" "+villager.getVocation().getName()+": "+villager.getTitle()));
 		       }

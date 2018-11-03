@@ -44,7 +44,10 @@ public abstract class Event {
 	
 	public void setEventMessage(AttributeFaction faction)
 	{
-		this.eventMessage = this.eventMessage.replaceAll("&f", faction.getTitleName());
+		String factionName = faction.getTitleName();
+		if(factionName == null) factionName = "|NULL|";
+		
+		this.eventMessage = this.eventMessage.replaceAll("&f", factionName);
 		TextComponentString message = new TextComponentString(eventMessage);
 		message.setStyle(style);
 		if(Main.sendMessage) EventModTick.addMessage(message);

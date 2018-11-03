@@ -33,7 +33,7 @@ public class EntityAIStayInBorders extends EntityAIBase
     	{
     		BlockPos pos = village.getCenter();
     		int dist = (int) Math.floor(Math.sqrt(pos.distanceSq(this.creature.getLiving().getPos())));
-    		int radius = village.getVillageRadius();
+    		int radius = village.getVillageRadius() * 2;
     		
     		if(dist > radius)
     		{

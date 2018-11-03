@@ -509,6 +509,70 @@ Archer upgrades to LEgate
 *Added more configs
 *Fixed a Viking texture bug
 
+-Pre-Release Test v0.0.2.17
+=========================================
+*Added patrol types
+*Fixed auxiliary texture 
+
+-Pre-Release Test v0.0.4.2
+=========================================
+*Added More Configs for the Slavs
+*Added Culture Slavs 
+**Added Tribesman
+**Added Warrior
+**Added Bogatyr
+**Added Bowman
+**Added Archer
+**Added Mage Archers can attack with spells and a bow
+**Added Marksman
+**Added Rangers to the Slavic culture can fight with Both a soldier and bow
+**Added Bogatyr
+
+**Added Bandit
+**Added Bandit Archer
+**Added Retinue
+**Added Highwayman
+
+**Added Hunter 
+**Added Bard
+**Added Fletcher
+
+**Added Mercenary Archer
+
+**Added Boyar
+
+*Added Bardiche Weapon to Slavs
+*Fixed an event bug with bandit villages
+*Improved Patrol AI
+*Made Hybrid mage soldiers and archers immune to magic
+*Fixed more bugs
+*Improved Horse Riding for NPCs even more
+*Added a new stat that adds health to horses
+*Added vampires
+**Added Vampire Peasant
+**Added Vampire
+**Added Vampire Liege
+**Added Vampire Count
+**Added Black Knight
+*Improved Magic AI
+*Horses are more sturdy 
+*Vampires can now regenerate health but only at night, and when they aren't on fire
+*Vampire burn in daily in on snowy biomes
+*Can create abnormals with create command 
+*Added Blood Bats
+*Fire damage is 2x as effective against vampires
+*Added new spells to the gothic and vampire
+*Improved spells
+*Added the allow for destructive villagers config
+*Added difficulty scaling
+*Improved How villagers equip horse
+*Villagers can now heal their horses
+*Vampires now can slow down enemies
+
+
+//Fixed blood bats
+//Added vampires to Gothics
+
 
 
 //Blocking bug

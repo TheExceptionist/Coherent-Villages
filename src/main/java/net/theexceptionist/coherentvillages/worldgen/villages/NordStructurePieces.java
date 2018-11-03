@@ -1362,6 +1362,7 @@ public class NordStructurePieces
             /**
              * Spawns a number of villagers in this component. Parameters: world, component bounding box, x offset, y
              * offset, z offset, number of villagers
+             * @param b 
              */
             protected void spawnVillagers(World worldIn, StructureBoundingBox structurebb, int x, int y, int z, int count, int vocation, int rank, boolean upgrade)
             {
@@ -1397,18 +1398,18 @@ public class NordStructurePieces
                         else if(this.isBanditInfested)
                         {
                         	EntityHumanVillager entityHumanVillager = new EntityHumanVillager(worldIn, WorldGenVillage.NORD_ID, 
-                        			AttributeRace.getFromIDRace(WorldGenVillage.NORD_ID).getRandomBandit(worldIn), EntityHumanVillager.getRandomGender(worldIn), this.ruler == null ? true : false);                            
+                        			AttributeRace.getFromIDRace(WorldGenVillage.NORD_ID).getRandomBandit(worldIn), EntityHumanVillager.getRandomGender(worldIn), vocation == AttributeVocation.CLASS_RULER ? true : false);                            
                         	entityHumanVillager.setLocationAndAngles((double)j + 0.5D, (double)k, (double)l + 0.5D, 0.0F, 0.0F);
+                        	
+                        	if(worldIn.rand.nextInt(100) <= Main.villager_bjorn_rate) entityHumanVillager.setShifter(true, new EntityBjornserker(worldIn), true, -1);
                         	
                         	if(entityHumanVillager.isRuler())
                         	{
                         		entityHumanVillager.getFaction().setBandit(true);
                         		this.ruler = entityHumanVillager;
+                        		//System.out.println("Ruler: - "+this.ruler.getTitle());
                         	}
-                        	else
-                        	{
-                        		entityHumanVillager.setRuler(this.ruler);
-                        	}
+                        	
                             //entityHumanVillager.setProfession(this.chooseForgeProfession(i, entityHumanVillager.getProfessionForge()));
                             //entityHumanVillager.finalizeMobSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityHumanVillager)), (IEntityLivingData)null, false);
                             worldIn.spawnEntity(entityHumanVillager);
@@ -1444,6 +1445,7 @@ public class NordStructurePieces
                         		this.ruler = entityRuler;
                         	}
                         	
+                        	if(worldIn.rand.nextInt(100) <= Main.villager_bjorn_rate) ruler.setShifter(true, new EntityBjornserker(worldIn), true, -1);
                         	/*AttributeFaction faction = new AttributeFaction(worldIn, new BlockPos(x, 70, z), AttributeRace.getFromIDRace(WorldGenVillage.NORD_ID), NameGenerator.generateRandomName(worldIn.rand, AttributeRace.getFromIDRace(WorldGenVillage.NORD_ID)));
                             faction.setBandit(isBanditInfested);
                             faction.setName();

@@ -30,7 +30,7 @@ public class EventBanditRaid extends Event {
 		int z = spawn.getZ() + (world.rand.nextInt(100) < 50 ? range : -range);
 		int y = world.getTopSolidOrLiquidBlock(new BlockPos(x, 80, z)).getY();
 		int count = world.rand.nextInt(this.count) + 1;
-		int raceID = race.getID();
+		int raceID = race == AttributeRace.germans ? AttributeRace.RACE_TYPE_MONGOL : race.getID();
 		
 		if(day == startInDay)
 		{

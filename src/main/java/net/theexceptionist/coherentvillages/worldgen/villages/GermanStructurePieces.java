@@ -1144,6 +1144,15 @@ public class GermanStructurePieces
                 if(!this.isZombieInfested) 
                 {
                 	this.isBanditInfested = rand.nextInt(100) <= Main.german_bandit_infest_rate;
+                	
+                	if(!this.isBanditInfested)
+                	{
+                		this.isVampireInfested = rand.nextInt(100) <= Main.german_vampire_infest_rate;
+                	}
+                	else
+                	{
+                		this.isVampireInfested = false;
+                	}
                 }
                 else 
                 {
@@ -1286,6 +1295,7 @@ public class GermanStructurePieces
             protected int structureType;
             protected boolean isZombieInfested;
             protected boolean isBanditInfested;
+			protected boolean isVampireInfested;
             protected EnumFacing front;
             EntityHumanVillager ruler;
             protected GermanStructurePieces.Start startPiece;
@@ -1303,6 +1313,7 @@ public class GermanStructurePieces
                     this.structureType = start.structureType;
                     this.isZombieInfested = start.isZombieInfested;
                     this.isBanditInfested = start.isBanditInfested;
+                    this.isVampireInfested = start.isVampireInfested;
                     this.ruler = null;
                     startPiece = start;
                 }
@@ -1472,9 +1483,9 @@ public class GermanStructurePieces
                         }
                         else if(this.isBanditInfested)
                         {
-                        	EntityHumanVillager entityHumanVillager = new EntityHumanVillager(worldIn, WorldGenVillage.MONGOL_ID, AttributeRace.getFromIDRace(WorldGenVillage.MONGOL_ID).getRandomBandit(worldIn), EntityHumanVillager.getRandomGender(worldIn), this.ruler == null ? true : false);                            
+                        	EntityHumanVillager entityHumanVillager = new EntityHumanVillager(worldIn, WorldGenVillage.MONGOL_ID, AttributeRace.getFromIDRace(WorldGenVillage.MONGOL_ID).getRandomBandit(worldIn), EntityHumanVillager.getRandomGender(worldIn), vocation == AttributeVocation.CLASS_RULER ? true : false);                            
                         	entityHumanVillager.setLocationAndAngles((double)j + 0.5D, (double)k, (double)l + 0.5D, 0.0F, 0.0F);                        	
-                        	//if(worldIn.rand.nextInt(100) <= Main.wraith_turn_rate) entityHumanVillager.setShifter(true, new EntityWraith(worldIn), false, 1);
+                        	if(worldIn.rand.nextInt(100) <= Main.german_vampire_spawn_rate) entityHumanVillager.setVampire(true);
 
                         	//if(worldIn.rand.nextInt(100) <= Main.wraith_turn_rate) entityHumanVillager.setShifter(true, new EntityWraith(worldIn), false, 1);
                             //entityHumanVillager.setProfession(this.chooseForgeProfession(i, entityHumanVillager.getProfessionForge()));
@@ -1486,10 +1497,22 @@ public class GermanStructurePieces
                         		entityHumanVillager.getFaction().setBandit(true);
                         		this.ruler = entityHumanVillager;
                         	}
-                        	else
-                        	{
-                        		entityHumanVillager.setRuler(this.ruler);
-                        	}
+                        	
+                            
+                            if(upgrade)
+                            {
+                            	if(worldIn.rand.nextInt(100) < Main.upgrade_chance) entityHumanVillager.upgrade();
+                            	if(worldIn.rand.nextInt(100) < Main.upgrade_chance/5) entityHumanVillager.upgrade();
+                            }
+                        }
+                        else if(this.isVampireInfested)
+                        {
+                        	EntityHumanVillager entityHumanVillager = new EntityHumanVillager(worldIn, AttributeRace.RACE_TYPE_VAMPIRE, AttributeRace.getFromIDRace(AttributeRace.RACE_TYPE_VAMPIRE).getRandomBandit(worldIn), EntityHumanVillager.getRandomGender(worldIn), vocation == AttributeVocation.CLASS_RULER ? true : false);                            
+                        	entityHumanVillager.setLocationAndAngles((double)j + 0.5D, (double)k, (double)l + 0.5D, 0.0F, 0.0F);                        	
+                        	//if(worldIn.rand.nextInt(100) <= Main.wraith_turn_rate) entityHumanVillager.setShifter(true, new EntityWraith(worldIn), false, 1);
+                            //entityHumanVillager.setProfession(this.chooseForgeProfession(i, entityHumanVillager.getProfessionForge()));
+                            //entityHumanVillager.finalizeMobSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityHumanVillager)), (IEntityLivingData)null, false);
+                            worldIn.spawnEntity(entityHumanVillager);
                             
                             if(upgrade)
                             {
@@ -1545,7 +1568,7 @@ public class GermanStructurePieces
                         	entityHumanVillager.setLocationAndAngles((double)j + 0.5D, (double)k, (double)l + 0.5D, 0.0F, 0.0F);
                         	entityHumanVillager.setRuler(ruler);
                         	
-                        	//if(worldIn.rand.nextInt(100) <= Main.wraith_turn_rate) entityHumanVillager.setShifter(true, new EntityWraith(worldIn), false, 1);
+                        	if(worldIn.rand.nextInt(100) <= Main.german_vampire_spawn_rate) entityHumanVillager.setVampire(true);
                             
                         	//entityHumanVillager.setProfession(this.chooseForgeProfession(i, entityHumanVillager.getProfessionForge()));
                            // entityHumanVillager.finalizeMobSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityHumanVillager)), (IEntityLivingData)null, false);

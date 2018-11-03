@@ -31,6 +31,7 @@ import net.minecraftforge.fml.common.registry.VillagerRegistry.IVillageCreationH
 import net.theexceptionist.coherentvillages.commands.CommandCreate;
 import net.theexceptionist.coherentvillages.main.block.BlockRegister;
 import net.theexceptionist.coherentvillages.main.entity.EntityBjornserker;
+import net.theexceptionist.coherentvillages.main.entity.EntityBloodBat;
 import net.theexceptionist.coherentvillages.main.entity.EntityDrachen;
 import net.theexceptionist.coherentvillages.main.entity.EntityHumanVillager;
 import net.theexceptionist.coherentvillages.main.entity.EntityLemure;
@@ -130,15 +131,28 @@ public class Main
     			"wraith_spawn_rate=5\n",
     			"#The chance when a Latin NPC dies they become a Wraith\n",
     			"wraith_turn_rate=50\n",
-    			"#The chance a Nord Village will bandit infested!\n",
+    			"#The chance a Latin Village will bandit infested!\n",
     			"latin_bandit_infest_rate=25\n",
-    			"#The chance a Nord Village will zombie infested!\n",
+    			"#The chance a Latin Village will zombie infested!\n",
     			"latin_zombie_infest_rate=2\n",
-    			"#=====German CONFIGS=======",
-    			"#The chance a Nord Village will bandit infested!\n",
-    			"german_bandit_infest_rate=25\n",
-    			"#The chance a Nord Village will zombie infested!\n",
+    			"#=====GERMAN CONFIGS=======",
+    			"#The chance a German Village will be Mongol infested!\n",
+    			"german_bandit_infest_rate=8\n",
+    			"#The chance a German Village will zombie infested!\n",
     			"german_zombie_infest_rate=2\n",
+    			"#The chance when a German Village will vampire infested!\n",
+    			"german_vampire_infest_rate=15\n",
+    			"#The chance when a vampire attacks a NPC they will be turned!\n",
+    			"german_vampire_turn_rate=5\n",
+    			"#The chance when a German NPC spawns, they will be a vampire!\n",
+    			"german_vampire_spawn_rate=5\n",
+    			"#=====SLAVIC CONFIGS=======",
+    			"#The chance a Slavic Village will bandit infested!\n",
+    			"slav_bandit_infest_rate=15\n",
+    			"#The chance a Slavic Village will zombie infested!\n",
+    			"slav_zombie_infest_rate=2\n",
+    			"#The chance a Slavic Village will mongol infested!\n",
+    			"slav_mongol_infest_rate=8\n",
     			"#=====Event CONFIGS=======",
     			"#Show event messages!\n",
     			"show_event_messages=1\n",
@@ -147,7 +161,12 @@ public class Main
     			"#The chance a village will recieve immigrates!\n",
     			"immigrate_rate=50\n",
     			"#The chance a skirmish will happen out in the wild!\n",
-    			"skirmish_rate=50\n",
+    			"skirmish_rate=50\n",    			
+    			"#=====General CONFIGS=======",
+    			"#Allows for spells to cause damage to the world\n",
+    			"allow_destructive_villagers=1\n",
+    			"#Makes all villagers destructive, not just hostile ones\n",
+    			"all_villagers_destructive=1\n",
     			
     	};
     
@@ -208,10 +227,23 @@ public class Main
 	public static int LARGE_IMMIGRATE_RATE = 50;
 
 	public static boolean sendMessage = true;
+	public static boolean allowDestructive = true;
+	public static boolean allDestructive = true;
 
 	public static int SMALL_SKIRMISH_RATE = 50;
 	public static int MEDIUM_SKIRMISH_RATE = 50;
 	public static int LARGE_SKIRMISH_RATE = 50;
+
+	public static int slav_zombie_infest_rate = 2;
+
+	public static int slav_bandit_infest_rate = 15;
+
+	public static int slav_mongol_infest_rate = 8;
+
+	public static int german_vampire_turn_chance = 5;
+	public static int german_vampire_infest_rate = 5;
+
+	public static int german_vampire_spawn_rate = 5;
 
 
 	@EventHandler
@@ -331,7 +363,17 @@ public class Main
 				else if(parts[0].contains("show_event"))
 				{
 					sendMessage = value == 1 ? true : false;
-					System.out.println("Show Message Events: "+value);
+					System.out.println("Show Message Events: "+sendMessage);
+				}
+				else if(parts[0].contains("allow_destructive"))
+				{
+					allowDestructive = value == 1 ? true : false;
+					System.out.println("Allow Destructive Villagers: "+allowDestructive);
+				}
+				else if(parts[0].contains("all_villagers"))
+				{
+					allDestructive  = value == 1 ? true : false;
+					System.out.println("All Villagers Destructive: "+allDestructive);
 				}
 				else if(parts[0].contains("raid_rate"))
 				{
@@ -373,10 +415,40 @@ public class Main
 					german_zombie_infest_rate = value;
 					System.out.println("New German Zombie Infest Rate: "+value);
 				}
+				else if(parts[0].contains("german_vampire_infest"))
+				{
+					german_vampire_infest_rate = value;
+					System.out.println("New German Bandit Infest Rate: "+value);
+				}
 				else if(parts[0].contains("german_bandit_infest"))
 				{
 					german_bandit_infest_rate = value;
 					System.out.println("New German Bandit Infest Rate: "+value);
+				}//german_vampire_turn
+				else if(parts[0].contains("german_vampire_turn"))
+				{
+					german_vampire_turn_chance = value;
+					System.out.println("New German Vampire Turn Rate: "+value);
+				}
+				else if(parts[0].contains("german_vampire_spawn"))
+				{
+					german_vampire_spawn_rate = value;
+					System.out.println("New German Vampire Turn Rate: "+value);
+				}
+				else if(parts[0].contains("slav_zombie_infest"))
+				{
+					slav_zombie_infest_rate = value;
+					System.out.println("New Slavic Zombie Infest Rate: "+value);
+				}
+				else if(parts[0].contains("slav_bandit_infest"))
+				{
+					slav_bandit_infest_rate = value;
+					System.out.println("New Slavic Bandit Infest Rate: "+value);
+				}
+				else if(parts[0].contains("slav_mongol_infest"))
+				{
+					slav_mongol_infest_rate = value;
+					System.out.println("New Slavic Mongol Infest Rate: "+value);
 				}
 				else if(parts[0].contains("latin_zombie_infest"))
 				{
@@ -694,6 +766,7 @@ public class Main
     	createEntity(EntityLemure.class, Main.entityIDStart + 4, "lemure", 0x404040, 0x00AA00, true);
     	createEntity(EntityDrachen.class, Main.entityIDStart + 5, "drachen", 0x808080, 0x005500, true);
     	createEntity(EntitySkeletonSummon.class, Main.entityIDStart + 6, "minion", 0x404040, 0x00AA00, false);
+    	createEntity(EntityBloodBat.class, Main.entityIDStart + 7, "blood_bat", 0xA0A080, 0x005500, true);
 
     	
     	//Soldiers

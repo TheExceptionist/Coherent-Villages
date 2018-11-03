@@ -2,15 +2,13 @@ package net.theexceptionist.coherentvillages.main.events;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.Style;
-import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.village.Village;
 import net.minecraft.world.World;
-import net.theexceptionist.coherentvillages.events.EventModTick;
-import net.theexceptionist.coherentvillages.main.Main;
 import net.theexceptionist.coherentvillages.main.entity.EntityHumanVillager;
 import net.theexceptionist.coherentvillages.main.entity.attributes.AttributeFaction;
 import net.theexceptionist.coherentvillages.main.entity.attributes.AttributeRace;
+import net.theexceptionist.coherentvillages.main.entity.attributes.AttributeVocation;
 
 public class EventImmigration extends Event {
 	protected int limit;
@@ -45,7 +43,10 @@ public class EventImmigration extends Event {
 			{		
 				for(int i = 0; i < count; i++)
 				{
-					EntityHumanVillager villager = new EntityHumanVillager(world, raceID, AttributeRace.getFromIDRace(raceID).getRandomVillager(world), EntityHumanVillager.getRandomGender(world), false);                            
+					AttributeVocation job = AttributeRace.getFromIDRace(raceID).getRandomVillager(world);
+					if(job == null) continue;
+					
+					EntityHumanVillager villager = new EntityHumanVillager(world, raceID, job, EntityHumanVillager.getRandomGender(world), false);                            
 	            	villager.setLocationAndAngles((double)x + 0.5D, (double)y, (double)z + 0.5D, 0.0F, 0.0F);
 	            	world.spawnEntity(villager);
 				}

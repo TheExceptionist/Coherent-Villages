@@ -16,12 +16,15 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.IRangedAttackMob;
+import net.minecraft.entity.MoverType;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackRanged;
 import net.minecraft.entity.ai.EntityAIAvoidEntity;
 import net.minecraft.entity.ai.EntityAIBase;
+import net.minecraft.entity.ai.EntityAIFleeSun;
 import net.minecraft.entity.ai.EntityAIFollowGolem;
 import net.minecraft.entity.ai.EntityAIHarvestFarmland;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILookAtTradePlayer;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIMoveIndoors;
@@ -31,6 +34,7 @@ import net.minecraft.entity.ai.EntityAIMoveTowardsTarget;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAIOpenDoor;
 import net.minecraft.entity.ai.EntityAIRestrictOpenDoor;
+import net.minecraft.entity.ai.EntityAIRestrictSun;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAITasks.EntityAITaskEntry;
 import net.minecraft.entity.ai.EntityAITradePlayer;
@@ -44,6 +48,7 @@ import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.monster.EntityEvoker;
 import net.minecraft.entity.monster.EntityGolem;
+import net.minecraft.entity.monster.EntityPigZombie;
 import net.minecraft.entity.monster.EntityVex;
 import net.minecraft.entity.monster.EntityVindicator;
 import net.minecraft.entity.monster.EntityZombie;
@@ -52,6 +57,7 @@ import net.minecraft.entity.passive.AbstractHorse;
 import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.passive.EntityVillager;
+import net.minecraft.entity.passive.IAnimals;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.entity.projectile.EntityPotion;
@@ -75,6 +81,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
@@ -95,11 +102,11 @@ import net.theexceptionist.coherentvillages.entity.ai.EntityAIBlock;
 import net.theexceptionist.coherentvillages.entity.ai.EntityAIFollowEntity;
 import net.theexceptionist.coherentvillages.entity.ai.EntityAIHealAllies;
 import net.theexceptionist.coherentvillages.entity.ai.EntityAIHideFromHarm;
+import net.theexceptionist.coherentvillages.entity.ai.EntityAIPatrolEntireVillage;
 import net.theexceptionist.coherentvillages.entity.ai.EntityAIRest;
 import net.theexceptionist.coherentvillages.entity.ai.EntityAISearchForHorse;
 import net.theexceptionist.coherentvillages.entity.ai.EntityAIShareTargetPlayer;
 import net.theexceptionist.coherentvillages.entity.ai.EntityAIStayInBorders;
-import net.theexceptionist.coherentvillages.entity.ai.EntityAITravelToAnotherVillage;
 import net.theexceptionist.coherentvillages.entity.followers.IEntityFollower;
 import net.theexceptionist.coherentvillages.main.Main;
 import net.theexceptionist.coherentvillages.main.NameGenerator;
@@ -143,6 +150,7 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
 	private boolean ruler = false;
 	
 	protected boolean shifter = false;
+	protected boolean destructive = false;
 	protected EntityLiving creatureShiftTo = null;
 	private EntityLivingBase master = null;
 	private boolean dropLoot = true;
@@ -166,6 +174,8 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
 	private boolean isMagic = false;
 	
 	protected ItemWeaponThrowable thrownWeapon = null;
+	protected Item meleeWeapon = null;
+	protected Item rangedWeapon = null;
 	
 	private static final DataParameter<Integer> PROFESSION = EntityDataManager.<Integer>createKey(EntityHumanVillager.class, DataSerializers.VARINT);
 	private static final DataParameter<Integer> RACE = EntityDataManager.<Integer>createKey(EntityHumanVillager.class, DataSerializers.VARINT);
@@ -175,7 +185,8 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
 	private static final DataParameter<Boolean> SWINGING_ARMS = EntityDataManager.<Boolean>createKey(EntityHumanVillager.class, DataSerializers.BOOLEAN);
 	private static final DataParameter<Boolean> BLOCKING = EntityDataManager.<Boolean>createKey(EntityHumanVillager.class, DataSerializers.BOOLEAN);
 	protected static final DataParameter<Boolean> IS_AGGRESSIVE = EntityDataManager.<Boolean>createKey(EntityHumanVillager.class, DataSerializers.BOOLEAN);
-   
+	protected static final DataParameter<Boolean> IS_VAMPIRE = EntityDataManager.<Boolean>createKey(EntityHumanVillager.class, DataSerializers.BOOLEAN);
+
 	protected static final UUID MODIFIER_UUID = UUID.fromString("5CD17E52-A79A-43D3-A529-90FDE04B181E");
     protected static final AttributeModifier MODIFIER = (new AttributeModifier(MODIFIER_UUID, "Drinking speed penalty", -0.25D, 0)).setSaved(false);
 	
@@ -197,6 +208,9 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
 	private boolean magicMelee = false;
 	private int combatType = 0;
 	private boolean horseSpawned = false;
+	private int patrolType = 0;
+	private boolean magicRanged = false;
+	private boolean withDoors, useHomePosition;
     
 	public EntityHumanVillager(World worldIn) {
 		super(worldIn);
@@ -359,6 +373,7 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
 	            this.setDead();
 	        }*/
 	    }
+
 	
 	public void transform()
 	{
@@ -447,6 +462,7 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
 	public boolean processInteract(EntityPlayer player, EnumHand hand)
 	{
 		System.out.println("Faction Interact: "+faction+" Ruler: "+this.liege);
+		if(this.isVampire()) return false;
 		if(this.vocation != null && this.vocation.getType() == AttributeVocation.CLASS_MERCENARY )
 		{	
 			ItemStack item = player.getHeldItem(hand);
@@ -540,14 +556,14 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
 			this.faction = this.liege.getFaction();
 		}
 		
-		if(this.magicMelee)
+		if(this.magicMelee && !this.world.isRemote)
 		{
 			EntityLivingBase target = this.getTarget();
 			if(target != null && target.getDistance(this) < 4)
 			{
 				if(this.combatType == 0) this.forceCombatTask(1);
 			}
-			else
+			else if(target != null)
 			{
 				if(this.combatType == 1) this.forceCombatTask(0);
 			}
@@ -559,11 +575,13 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
 			{
 				faction.update(this.world.isDaytime(), this.getPos());
 				faction.setUpdate(true);
+				//System.out.println("Faction Day Update: "+this.getTitle());
 			}
 			else if(!this.world.isDaytime() && faction.doneUpdate())
 			{
 				faction.update(this.world.isDaytime(), this.getPos());
 				faction.setUpdate(false);
+				//System.out.println("Faction Night Update: "+this.getTitle());
 			}
 		}
 		
@@ -590,6 +608,107 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
 				this.horseSpawned  = true;
 			}
 		}
+		
+		if(!this.world.isRemote && this.meleeWeapon != null && this.rangedWeapon != null)
+		{
+			EntityLivingBase target = this.getTarget();
+			if(target != null && target.getDistance(this) < 4)
+			{
+				//System.out.println("Melee");
+				if(this.combatType == 2) 
+				{
+					this.setHeldItem(EnumHand.MAIN_HAND, new ItemStack(this.meleeWeapon));
+					this.forceCombatTask(1);
+					//System.out.println("Melee set");
+				}
+			}
+			else if(target != null)
+			{
+				//System.out.println("Ranged");
+				if(this.combatType == 1)
+				{
+					this.setHeldItem(EnumHand.MAIN_HAND, new ItemStack(this.rangedWeapon));
+					this.forceCombatTask(2);
+					//System.out.println("Ranged set");
+				}
+			}
+		}
+		
+		if(this.horse != null && !this.isRiding() && !this.world.isRemote)
+		{
+		//	System.out.println("3 - Width: "+this.width+" Height: "+this.height);
+			this.setSize2(this.width - this.horseWidth, this.height - this.horseHeight);
+			this.horseWidth = 0;
+			this.horseHeight = 0;
+			this.horse = null;
+			//System.out.println("4 - Width: "+this.width+" Height: "+this.height);
+		}
+		
+		if(!this.world.isRemote && this.isVampire() 
+				&& this.getRace().getID() != AttributeRace.RACE_TYPE_VAMPIRE
+				&& (this.ticksExisted / ((60 * 60) * 12)) >= 1
+				//&& (this.ticksExisted / (200)) >= 1
+				&& !this.world.isDaytime())
+		{
+			System.out.println("Setting to vampire!");
+			EntityHumanVillager vampire = new EntityHumanVillager(world, AttributeRace.vampires.getID(), AttributeRace.vampires.getBandit(1), gender, firstName, lastName);                            
+        	vampire.setLocationAndAngles((double)this.posX + 0.5D, (double)this.posY, (double)this.posZ + 0.5D, 0.0F, 0.0F);
+            vampire.setVampire(true);
+        	//entityHumanVillager.setProfession(this.chooseForgeProfession(i, entityHumanVillager.getProfessionForge()));
+            //entityHumanVillager.finalizeMobSpawn(world.getDifficultyForLocation(new BlockPos(entityHumanVillager)), (IEntityLivingData)null, false);
+            world.spawnEntity(vampire);
+            this.setDead();
+		}
+		
+		//if(this.isVampire() && !this.world.isRemote) System.out.println(this.getTitle()+" Ticks Existed: "+this.ticksExisted+" | Needed Ticks: "+(200));
+		
+		//System.out.println("Ticks Existed: "+this.ticksExisted+" | Needed Ticks: "+((60 * 60) * 12));
+		
+		if(!this.world.isRemote)
+        {
+			if(this.getRace().getID() == AttributeRace.RACE_TYPE_VAMPIRE)
+			{
+				if(this.world.isDaytime() && !this.world.getBiome(this.getPos()).isSnowyBiome())
+				{
+		            float f = this.getBrightness();
+		
+		            if (f > 0.5F && this.rand.nextFloat() * 30.0F < (f - 0.4F) * 2.0F && this.world.canSeeSky(new BlockPos(this.posX, this.posY + (double)this.getEyeHeight(), this.posZ)))
+		            {
+		                boolean flag = true;
+		                ItemStack itemstack = this.getItemStackFromSlot(EntityEquipmentSlot.HEAD);
+		
+		                if (!itemstack.isEmpty())
+		                {
+		                    if (itemstack.isItemStackDamageable())
+		                    {
+		                        itemstack.setItemDamage(itemstack.getItemDamage() + this.rand.nextInt(2));
+		
+		                        if (itemstack.getItemDamage() >= itemstack.getMaxDamage())
+		                        {
+		                            this.renderBrokenItemStack(itemstack);
+		                            this.setItemStackToSlot(EntityEquipmentSlot.HEAD, ItemStack.EMPTY);
+		                        }
+		                    }
+		
+		                    flag = false;
+		                }
+		
+		                if (flag)
+		                {
+		                    this.setFire(8);
+		                }
+		            }
+				}
+				else if(!this.world.isDaytime() && ((this.ticksExisted % (200) == 0 && !this.isBurning())))
+				{
+					//System.out.println("heal");
+					this.heal(4);
+				}
+				
+				//System.out.println("Ticks Existed: "+this.ticksExisted+" Satisfied: "+(this.ticksExisted % ((60 * 60) * 4) == 0));
+			}
+        }
+		
 		//System.out.println("width and height: "+this.width+" "+this.height);
 		/*if(this.getHeldItemOffhand() != null && this.getHeldItemOffhand().getItem() == Items.SHIELD)
 		{
@@ -639,6 +758,10 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
         	case 1:
        		 	this.tasks.addTask(0, this.melee);
        		 	this.combatType = 1;
+       		 	break;
+        	case 2:
+       		 	this.tasks.addTask(0, this.ranged);
+       		 	this.combatType = 2;
        		 	break;
         	}
         	
@@ -694,6 +817,24 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
 		dataManager.register(IS_AGGRESSIVE, Boolean.valueOf(false));
 		dataManager.register(SWINGING_ARMS, Boolean.valueOf(false));
 		dataManager.register(BLOCKING, Boolean.valueOf(false));
+		dataManager.register(IS_VAMPIRE, Boolean.valueOf(false));
+    }
+	
+	public void setVampire(boolean vampire)
+    {
+        this.getDataManager().set(IS_VAMPIRE, Boolean.valueOf(vampire));
+        
+        //System.out.println("Vampire created");
+        
+		if(vampire) 
+		{
+			this.initEntityName();
+		}
+    }
+
+    public boolean isVampire()
+    {
+        return ((Boolean)this.getDataManager().get(IS_VAMPIRE)).booleanValue();
     }
 	
 	public void setLastNameFromManager(String name)
@@ -755,16 +896,28 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
 		int detectBonus = race.getDetectBonus();
 		int speedBonus = race.getSpeedBonus();
 		int knockbackBonus = race.getKnockbackBonus();
+		int horseHealth = race.getHorseHealthBonus();
+		float scale = vocation.getScale();
 		
-        getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(20.0D + (healthBonus * vocation.getRank()) + this.vocation.getHealthOffest());
-        getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.4D + ((speedBonus * vocation.getRank())/20) + this.vocation.getSpeedOffest());
+		this.setScale(scale);
+		
+		int difficulty = 1;
+		
+		if(this.getRace().getType() == AttributeRace.RACE_TYPE_VAMPIRE || this.getVocation().getID() == AttributeVocation.CLASS_BANDIT)
+		{
+			difficulty = -1 * (this.world.getDifficulty().getDifficultyId() - 4);
+		}
+		
+        getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(20.0D + ((healthBonus * vocation.getRank()) + this.vocation.getHealthOffest())/difficulty);
+        getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.4D + (((speedBonus * vocation.getRank())/20) + this.vocation.getSpeedOffest()));
         getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue((knockbackBonus * vocation.getRank() + this.vocation.getKnockBackOffest())/10);
         getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(0.2D);
         getEntityAttribute(SharedMonsterAttributes.ARMOR_TOUGHNESS).setBaseValue(32.0D);
         getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(16.0D + (detectBonus * vocation.getRank()) + this.vocation.getDetectOffest());
-        getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(4.0D + (attackBonus * vocation.getRank()) + this.vocation.getDamageOffest());
-        getEntityAttribute(AttributeRace.MAGIC_DAMAGE).setBaseValue(2.0D + (magicBonus * vocation.getRank()) + this.vocation.getDamageOffest());
-        
+        getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(4.0D + ((attackBonus * vocation.getRank()) + this.vocation.getDamageOffest())/difficulty);
+        getEntityAttribute(AttributeRace.MAGIC_DAMAGE).setBaseValue(2.0D + ((magicBonus * vocation.getRank()) + this.vocation.getDamageOffest())/difficulty);
+        getEntityAttribute(AttributeRace.HORSE_HEALTH).setBaseValue(2.0D + (horseHealth * vocation.getRank())/difficulty);
+
         this.setHealth((float) getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).getBaseValue());
     }
 	
@@ -777,6 +930,19 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
         {
             f += EnchantmentHelper.getModifierForCreature(this.getHeldItemMainhand(), ((EntityLivingBase)entityIn).getCreatureAttribute());
             i += EnchantmentHelper.getKnockbackModifier(this);
+            
+            if(this.isVampire())
+            {
+            	((EntityLivingBase)entityIn).addPotionEffect(new PotionEffect(MobEffects.NAUSEA, 300));
+            	
+            	if(this.getRNG().nextInt(100) < 5) ((EntityLivingBase)entityIn).addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 150));
+            
+            	
+            	if(entityIn instanceof EntityHumanVillager) 
+            	{
+            		if(this.getRNG().nextInt(100) < Main.german_vampire_turn_chance) ((EntityHumanVillager)entityIn).setVampire(true);
+            	}
+            }
         }
 
         boolean flag = entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), f);
@@ -905,11 +1071,14 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
                 {
                 	this.tasks.addTask(1, this.rangedTrained);
                 }
+                
+                this.combatType = 2;
             }
             else if(isMagic)
             {
             	//System.out.println("IsMagic");
                	this.tasks.addTask(1, this.spells);
+               	this.combatType = 0;
             }else if(canAttackWithPotions) 
         	{
         		this.tasks.addTask(2, this.potions);
@@ -924,6 +1093,7 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
                 	//this.setBlocking(true);
                 	this.tasks.addTask(2, this.block);
                 }
+                this.combatType = 1;
                 //System.out.println("Melee!");
             } 
             
@@ -966,236 +1136,361 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
 		block = new EntityAIBlock(this, 2.0D, this.vocation.isAlwaysBlocking());
 		heal = new EntityAIHealAllies(this, 1.0D, 60, 10.0F, EntityVillager.class);
         potions = new EntityAIAttackRanged(this, 1.0D, 60, 10.0F);
-        spells =  new  EntityAIAttackWithMagic(this, 1.0D, 20, 15.0F);
+        spells =  new  EntityAIAttackWithMagic(this, 1.0D, 20, (float) this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).getBaseValue(), 6.0f);  
         farm = new EntityAIHarvestFarmland(this, 0.6D);
 		patrolShift = vocation.getType() == AttributeVocation.CLASS_BANDIT ? this.world.rand.nextInt(100) < 75 : this.world.rand.nextInt(100) < 25;
+        patrolType = this.world.rand.nextInt(2);
+        withDoors = this.world.rand.nextInt(2) == 0;
+        boolean useHomePosition = this.world.rand.nextInt(2) == 0;
         
-        
-		switch(vocation.getType())
-		{
-			case AttributeVocation.CLASS_SOLDIER:
-			{
-				this.tasks.addTask(0, new EntityAISwimming(this));
-		       // this.tasks.addTask(1, melee);
-		        this.tasks.addTask(2, new EntityAIStayInBorders(this, 1.0D));
-		        this.tasks.addTask(3, new EntityAIMoveThroughVillage(this, 0.6D, patrolShift));
-		        this.tasks.addTask(4, new EntityAIRestrictOpenDoor(this));
-		        this.tasks.addTask(5, new EntityAIOpenDoor(this, true));
-		        //this.tasks.addTask(6, new EntityAIRest(this, true));
-		        this.tasks.addTask(7, new EntityAIHideFromHarm(this));
-		        this.tasks.addTask(8, new EntityAIMoveTowardsTarget(this, 0.9D, 32.0F));
-		        this.tasks.addTask(9, new EntityAIWanderAvoidWater(this, 0.6D));
-		        this.tasks.addTask(10, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
-		        this.tasks.addTask(11, new EntityAILookIdle(this));
-		        
-		        this.defaultTargets();
-			}
-			break;
-			case AttributeVocation.CLASS_ARCHER:
-			{
-				this.tasks.addTask(0, new EntityAISwimming(this));
-		        this.tasks.addTask(3, new EntityAIRest(this, true));
-		     //   this.tasks.addTask(1, ranged);
-		        this.tasks.addTask(2, new EntityAIStayInBorders(this, 1.0D));
-		        this.tasks.addTask(3, new EntityAIMoveThroughVillage(this, 0.6D, patrolShift));
-		        this.tasks.addTask(4, new EntityAIRestrictOpenDoor(this));
-		        this.tasks.addTask(5, new EntityAIOpenDoor(this, true));
-		      //  this.tasks.addTask(6, new EntityAIMoveThroughVillage(this, 0.6D, true));
-		        this.tasks.addTask(7, new EntityAIHideFromHarm(this));
-		        this.tasks.addTask(8, new EntityAIMoveTowardsTarget(this, 0.9D, 32.0F));
-		        this.tasks.addTask(9, new EntityAIWanderAvoidWater(this, 0.6D));
-		        this.tasks.addTask(10, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
-		        this.tasks.addTask(11, new EntityAILookIdle(this));
-		        
-		        this.defaultTargets();
-			}
-			break;
-			case AttributeVocation.CLASS_MAGE:
-			{
-				this.tasks.addTask(0, new EntityAISwimming(this));
-		    //    this.tasks.addTask(1, spells);
-		        this.tasks.addTask(2, new EntityAIStayInBorders(this, 1.0D));
-		        this.tasks.addTask(3, new EntityAIMoveThroughVillage(this, 0.6D, patrolShift));
-		        this.tasks.addTask(4, new EntityAIRestrictOpenDoor(this));
-		        this.tasks.addTask(5, new EntityAIOpenDoor(this, true));
-		        //this.tasks.addTask(6, new EntityAIRest(this, true));
-		        this.tasks.addTask(7, new EntityAIHideFromHarm(this));
-		        this.tasks.addTask(8, new EntityAIMoveTowardsTarget(this, 0.9D, 32.0F));
-		        this.tasks.addTask(9, new EntityAIWanderAvoidWater(this, 0.6D));
-		        this.tasks.addTask(10, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
-		        this.tasks.addTask(11, new EntityAILookIdle(this));
-		        
-		        this.defaultTargets();
-			}
-			break;
-			case AttributeVocation.CLASS_ALCHEMIST:
-			{
-				this.tasks.addTask(0, new EntityAISwimming(this));
-		        //this.tasks.addTask(1, potions);
-		       // this.tasks.addTask(2, heal);
-		        this.tasks.addTask(3, new EntityAIStayInBorders(this, 1.0D));
-		        this.tasks.addTask(4, new EntityAIMoveThroughVillage(this, 0.6D, patrolShift));
-		        this.tasks.addTask(5, new EntityAIRestrictOpenDoor(this));
-		        this.tasks.addTask(6, new EntityAIOpenDoor(this, true));
-		        //this.tasks.addTask(6, new EntityAIRest(this, true));
-		        this.tasks.addTask(8, new EntityAIHideFromHarm(this));
-		        this.tasks.addTask(9, new EntityAIMoveTowardsTarget(this, 0.9D, 32.0F));
-		        this.tasks.addTask(10, new EntityAIWanderAvoidWater(this, 0.6D));
-		        this.tasks.addTask(11, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
-		        this.tasks.addTask(12, new EntityAILookIdle(this));
-		        
-		        this.defaultTargets();
-			}
-			break;
-			case AttributeVocation.CLASS_VILLAGER:
-			{
-				int subType = vocation.getSubType();
-				
-				this.tasks.addTask(0, new EntityAISwimming(this));
-		     //   this.tasks.addTask(1, melee);
-		        this.tasks.addTask(1, new EntityAIAvoidEntity(this, EntityZombie.class, 8.0F, 0.6D, 0.6D));
-		        this.tasks.addTask(1, new EntityAIAvoidEntity(this, EntityEvoker.class, 12.0F, 0.8D, 0.8D));
-		        this.tasks.addTask(1, new EntityAIAvoidEntity(this, EntityVindicator.class, 8.0F, 0.8D, 0.8D));
-		        this.tasks.addTask(1, new EntityAIAvoidEntity(this, EntityVex.class, 8.0F, 0.6D, 0.6D));
-		        this.tasks.addTask(1, new EntityAITradePlayer(this));
-		        this.tasks.addTask(1, new EntityAILookAtTradePlayer(this));
-		        this.tasks.addTask(2, new EntityAIMoveIndoors(this));
-		        this.tasks.addTask(3, new EntityAIRestrictOpenDoor(this));
-		        this.tasks.addTask(4, new EntityAIOpenDoor(this, true));
-		        this.tasks.addTask(5, new EntityAIMoveTowardsRestriction(this, 0.6D));
-		        //this.tasks.addTask(6, new EntityAIRest(this, true));
-		       // this.tasks.addTask(6, new EntityAIVillagerMate(this));
-		        this.tasks.addTask(7, new EntityAIFollowGolem(this));
-		        this.tasks.addTask(9, new EntityAIWatchClosest2(this, EntityPlayer.class, 3.0F, 1.0F));
-		        this.tasks.addTask(9, new EntityAIVillagerInteract(this));
-		        this.tasks.addTask(9, new EntityAIWanderAvoidWater(this, 0.6D));
-		        this.tasks.addTask(10, new EntityAIWatchClosest(this, EntityLiving.class, 8.0F));
+        if(this.race.getID() == AttributeRace.RACE_TYPE_VAMPIRE)
+        {
+        	if(!this.isVampire()) this.setVampire(true);
+        		
+        	this.tasks.addTask(1, new EntityAISwimming(this));
+            this.tasks.addTask(2, new EntityAIRestrictSun(this));
+            this.tasks.addTask(3, new EntityAIFleeSun(this, 1.0D));
+	        this.tasks.addTask(4, new EntityAIRestrictOpenDoor(this));
+	        this.tasks.addTask(5, new EntityAIOpenDoor(this, true));
+            this.tasks.addTask(5, new EntityAIMoveTowardsRestriction(this, 1.0D));
+            this.tasks.addTask(6, new EntityAIMoveTowardsTarget(this, 0.9D, 32.0F));
+            this.tasks.addTask(7, new EntityAIWanderAvoidWater(this, 1.0D));
+            this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
+            this.tasks.addTask(8, new EntityAILookIdle(this));
 
-		        this.targetTasks.addTask(1, new EntityAIAttackBackExclude(this, true, new Class[0])); 
-		        
-		        switch(subType)
-		        {
-			        case AttributeVocation.SUBCLASS_FARMER:
-			        {
-			        	this.tasks.addTask(6, farm);
-			        }
-			        break;
-			        case AttributeVocation.SUBCLASS_CRAFTER:
-			        {
-			        	
-			        }
-			        break;
-			        case AttributeVocation.SUBCLASS_MERCHANT:
-			        {
-			        	//Implement later
-						//this.tasks.addTask(0, new EntityAITravelToAnotherVillage(this));
-			        }
-			        break;
-			        case AttributeVocation.SUBCLASS_TRAINER:
-			        {
-			        	
-			        }
-			        break;
-			        case AttributeVocation.SUBCLASS_WORKER:
-			        {
-			        	
-			        }
-			        break;
-		        }
-			}
-			break;
-			case AttributeVocation.CLASS_BANDIT:
-			{
-				this.tasks.addTask(0, new EntityAISwimming(this));
-		       // this.tasks.addTask(1, melee);
-		        this.tasks.addTask(2, new EntityAIStayInBorders(this, 1.0D));
-		        this.tasks.addTask(3, new EntityAIMoveThroughVillage(this, 0.6D, patrolShift));
-		        this.tasks.addTask(4, new EntityAIRestrictOpenDoor(this));
-		        this.tasks.addTask(5, new EntityAIOpenDoor(this, true));
-		        //this.tasks.addTask(6, new EntityAIRest(this, true));
-		        this.tasks.addTask(7, new EntityAIHideFromHarm(this));
-		        this.tasks.addTask(8, new EntityAIMoveTowardsTarget(this, 0.9D, 32.0F));
-		        this.tasks.addTask(9, new EntityAIWanderAvoidWater(this, 0.6D));
-		        this.tasks.addTask(10, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
-		        this.tasks.addTask(11, new EntityAILookIdle(this));
-		        
-		        this.targetTasks.addTask(6, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
-				//this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityVillager.class, true));
-				this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityGolem.class, true));
-		        
-		        this.targetTasks.addTask(0, new EntityAINearestAttackableTarget(this, EntityLiving.class, 1, true, true, new Predicate<EntityLiving>()
-		        {
-		            public boolean apply(@Nullable EntityLiving p_apply_1_)
-		            {
-		            	if(p_apply_1_ instanceof EntityHumanVillager)
-		            	{
-		            		EntityHumanVillager villager = (EntityHumanVillager) p_apply_1_;
-		            		if(villager.getVocation().getType() == AttributeVocation.CLASS_BANDIT) return false;
-		            		else return true;
-		            	}
-		            	
-		        		return p_apply_1_ != null && (IMob.VISIBLE_MOB_SELECTOR.apply(p_apply_1_) && !(p_apply_1_ instanceof EntityCreeper)) && !(p_apply_1_ instanceof EntityWarg);
-		            }
-		        }));
-		        this.targetTasks.addTask(1, new EntityAIAttackBackExclude(this, true, new Class[0])); 
-			}
-			break;
-			case AttributeVocation.CLASS_RULER:
-			{
-				this.tasks.addTask(0, new EntityAISwimming(this));
-		       // this.tasks.addTask(1, melee);
-		        this.tasks.addTask(2, new EntityAIStayInBorders(this, 1.0D));
-		        //his.tasks.addTask(3, new EntityAIMoveThroughVillage(this, 0.6D, true));
-		        this.tasks.addTask(4, new EntityAIRestrictOpenDoor(this));
-		        this.tasks.addTask(5, new EntityAIOpenDoor(this, true));
-		        //this.tasks.addTask(6, new EntityAIRest(this, true));
-		        this.tasks.addTask(7, new EntityAIHideFromHarm(this));
-		        this.tasks.addTask(8, new EntityAIMoveTowardsTarget(this, 0.9D, 32.0F));
-		        this.tasks.addTask(9, new EntityAIWanderAvoidWater(this, 0.6D));
-		        this.tasks.addTask(10, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
-		        this.tasks.addTask(11, new EntityAILookIdle(this));
-		        
-		        this.defaultTargets();
-		        
-			}
-			break;
-			case AttributeVocation.CLASS_MERCENARY:
-			{
-				this.tasks.addTask(0, new EntityAISwimming(this));
-		       // this.tasks.addTask(1, melee);
-		        //this.tasks.addTask(2, new EntityAIStayInBorders(this, 1.0D));
-		        //this.tasks.addTask(3, new EntityAIMoveThroughVillage(this, 0.6D, true));
-		        this.tasks.addTask(4, new EntityAIRestrictOpenDoor(this));
-		        this.tasks.addTask(5, new EntityAIOpenDoor(this, true));
-		        //this.tasks.addTask(6, new EntityAIRest(this, true));
-		        //this.tasks.addTask(7, new EntityAIHideFromHarm(this));
-		        this.tasks.addTask(8, new EntityAIMoveTowardsTarget(this, 0.9D, 32.0F));
-		        this.tasks.addTask(9, new EntityAIWanderAvoidWater(this, 0.6D));
-		        this.tasks.addTask(10, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
-		        this.tasks.addTask(11, new EntityAILookIdle(this));
-		        
-		        this.defaultTargets();
-			}
-			break;
-			case AttributeVocation.CLASS_HYBRID_MAGE_SOLDER:
-			{
-				this.tasks.addTask(0, new EntityAISwimming(this));
-		       // this.tasks.addTask(1, melee);
-		        this.tasks.addTask(2, new EntityAIStayInBorders(this, 1.0D));
-		        this.tasks.addTask(3, new EntityAIMoveThroughVillage(this, 0.6D, patrolShift));
-		        this.tasks.addTask(4, new EntityAIRestrictOpenDoor(this));
-		        this.tasks.addTask(5, new EntityAIOpenDoor(this, true));
-		        //this.tasks.addTask(6, new EntityAIRest(this, true));
-		        this.tasks.addTask(7, new EntityAIHideFromHarm(this));
-		        this.tasks.addTask(8, new EntityAIMoveTowardsTarget(this, 0.9D, 32.0F));
-		        this.tasks.addTask(9, new EntityAIWanderAvoidWater(this, 0.6D));
-		        this.tasks.addTask(10, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
-		        this.tasks.addTask(11, new EntityAILookIdle(this));
-		        
-		        this.defaultTargets();
+	        this.targetTasks.addTask(6, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
+			this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityGolem.class, true));
+	        
+	        this.targetTasks.addTask(0, new EntityAINearestAttackableTarget(this, EntityLiving.class, 1, true, true, new Predicate<EntityLiving>()
+	        {
+	            public boolean apply(@Nullable EntityLiving p_apply_1_)
+	            {
+	            	if(p_apply_1_ instanceof EntityHumanVillager)
+	            	{
+	            		EntityHumanVillager villager = (EntityHumanVillager) p_apply_1_;
+	            		
+	            		//System.out.println(villager.getTitle()+" | Vampire: "+villager.isVampire());
+	            		
+	            		if(villager.isVampire()) return false;
+	            		else if(villager.getVocation().getType() == AttributeVocation.CLASS_BANDIT) return true;
+	            		else return true;
+	            	}
+	            	
+	        		return p_apply_1_ != null && (IMob.VISIBLE_MOB_SELECTOR.apply(p_apply_1_) && !(p_apply_1_ instanceof EntityCreeper)) && !(p_apply_1_ instanceof EntityWarg);
+	            }
+	        }));
+	        this.targetTasks.addTask(1, new EntityAIAttackBackExclude(this, true, new Class[0])); 
+	
+	        if(vocation.getType() == AttributeVocation.CLASS_HYBRID_MAGE_SOLDER)
+	        {
 		        this.magicMelee = true;
+	        }
+	        
+	        this.destructive = true;
+        }
+        else
+        {
+			switch(vocation.getType())
+			{
+				case AttributeVocation.CLASS_SOLDIER:
+				{
+					if(patrolType == 1) this.tasks.addTask(3, new EntityAIPatrolEntireVillage(this, 0.6D, patrolShift, withDoors, useHomePosition));
+					else this.tasks.addTask(3, new EntityAIMoveThroughVillage(this, 0.6D, patrolShift));
+	
+					this.tasks.addTask(0, new EntityAISwimming(this));
+			       // this.tasks.addTask(1, melee);
+			        this.tasks.addTask(2, new EntityAIStayInBorders(this, 1.0D));
+			        this.tasks.addTask(4, new EntityAIRestrictOpenDoor(this));
+			        this.tasks.addTask(5, new EntityAIOpenDoor(this, true));
+			        //this.tasks.addTask(6, new EntityAIRest(this, true));
+			        this.tasks.addTask(7, new EntityAIHideFromHarm(this));
+			        this.tasks.addTask(8, new EntityAIMoveTowardsTarget(this, 0.9D, 32.0F));
+			        this.tasks.addTask(9, new EntityAIWanderAvoidWater(this, 0.6D));
+			        this.tasks.addTask(10, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
+			        this.tasks.addTask(11, new EntityAILookIdle(this));
+			        
+			        this.defaultTargets();
+				}
+				break;
+				case AttributeVocation.CLASS_ARCHER:
+				{
+					if(patrolType == 1) this.tasks.addTask(3, new EntityAIPatrolEntireVillage(this, 0.6D, patrolShift, withDoors, useHomePosition));
+					else this.tasks.addTask(3, new EntityAIMoveThroughVillage(this, 0.6D, patrolShift));
+	
+					this.tasks.addTask(0, new EntityAISwimming(this));
+			        this.tasks.addTask(3, new EntityAIRest(this, true));
+			     //   this.tasks.addTask(1, ranged);
+			        this.tasks.addTask(2, new EntityAIStayInBorders(this, 1.0D));
+			    //    this.tasks.addTask(3, new EntityAIMoveThroughVillage(this, 0.6D, patrolShift));
+			        this.tasks.addTask(4, new EntityAIRestrictOpenDoor(this));
+			        this.tasks.addTask(5, new EntityAIOpenDoor(this, true));
+			      //  this.tasks.addTask(6, new EntityAIMoveThroughVillage(this, 0.6D, true));
+			        this.tasks.addTask(7, new EntityAIHideFromHarm(this));
+			        this.tasks.addTask(8, new EntityAIMoveTowardsTarget(this, 0.9D, 32.0F));
+			        this.tasks.addTask(9, new EntityAIWanderAvoidWater(this, 0.6D));
+			        this.tasks.addTask(10, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
+			        this.tasks.addTask(11, new EntityAILookIdle(this));
+			        
+			        this.defaultTargets();
+				}
+				break;
+				case AttributeVocation.CLASS_MAGE:
+				{
+					if(patrolType == 1) this.tasks.addTask(3, new EntityAIPatrolEntireVillage(this, 0.6D, patrolShift, withDoors, useHomePosition));
+					else this.tasks.addTask(3, new EntityAIMoveThroughVillage(this, 0.6D, patrolShift));
+	
+					this.tasks.addTask(0, new EntityAISwimming(this));
+			    //    this.tasks.addTask(1, spells);
+			        this.tasks.addTask(2, new EntityAIStayInBorders(this, 1.0D));
+			      //  this.tasks.addTask(3, new EntityAIMoveThroughVillage(this, 0.6D, patrolShift));
+			        this.tasks.addTask(4, new EntityAIRestrictOpenDoor(this));
+			        this.tasks.addTask(5, new EntityAIOpenDoor(this, true));
+			        //this.tasks.addTask(6, new EntityAIRest(this, true));
+			        this.tasks.addTask(7, new EntityAIHideFromHarm(this));
+			        this.tasks.addTask(8, new EntityAIMoveTowardsTarget(this, 0.9D, 32.0F));
+			        this.tasks.addTask(9, new EntityAIWanderAvoidWater(this, 0.6D));
+			        this.tasks.addTask(10, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
+			        this.tasks.addTask(11, new EntityAILookIdle(this));
+			        
+			        this.defaultTargets();
+				}
+				break;
+				case AttributeVocation.CLASS_ALCHEMIST:
+				{
+					if(patrolType == 1) this.tasks.addTask(3, new EntityAIPatrolEntireVillage(this, 0.6D, patrolShift, withDoors, useHomePosition));
+					else this.tasks.addTask(3, new EntityAIMoveThroughVillage(this, 0.6D, patrolShift));
+	
+					this.tasks.addTask(0, new EntityAISwimming(this));
+			        //this.tasks.addTask(1, potions);
+			       // this.tasks.addTask(2, heal);
+			        this.tasks.addTask(3, new EntityAIStayInBorders(this, 1.0D));
+			    //    this.tasks.addTask(4, new EntityAIMoveThroughVillage(this, 0.6D, patrolShift));
+			        this.tasks.addTask(5, new EntityAIRestrictOpenDoor(this));
+			        this.tasks.addTask(6, new EntityAIOpenDoor(this, true));
+			        //this.tasks.addTask(6, new EntityAIRest(this, true));
+			        this.tasks.addTask(8, new EntityAIHideFromHarm(this));
+			        this.tasks.addTask(9, new EntityAIMoveTowardsTarget(this, 0.9D, 32.0F));
+			        this.tasks.addTask(10, new EntityAIWanderAvoidWater(this, 0.6D));
+			        this.tasks.addTask(11, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
+			        this.tasks.addTask(12, new EntityAILookIdle(this));
+			        
+			        this.defaultTargets();
+				}
+				break;
+				case AttributeVocation.CLASS_VILLAGER:
+				{
+					int subType = vocation.getSubType();
+					
+					this.tasks.addTask(0, new EntityAISwimming(this));
+			     //   this.tasks.addTask(1, melee);
+			        this.tasks.addTask(1, new EntityAIAvoidEntity(this, EntityZombie.class, 8.0F, 0.6D, 0.6D));
+			        this.tasks.addTask(1, new EntityAIAvoidEntity(this, EntityEvoker.class, 12.0F, 0.8D, 0.8D));
+			        this.tasks.addTask(1, new EntityAIAvoidEntity(this, EntityVindicator.class, 8.0F, 0.8D, 0.8D));
+			        this.tasks.addTask(1, new EntityAIAvoidEntity(this, EntityVex.class, 8.0F, 0.6D, 0.6D));
+			        this.tasks.addTask(1, new EntityAITradePlayer(this));
+			        this.tasks.addTask(1, new EntityAILookAtTradePlayer(this));
+			        this.tasks.addTask(2, new EntityAIMoveIndoors(this));
+			        this.tasks.addTask(3, new EntityAIRestrictOpenDoor(this));
+			        this.tasks.addTask(4, new EntityAIOpenDoor(this, true));
+			        this.tasks.addTask(5, new EntityAIMoveTowardsRestriction(this, 0.6D));
+			        //this.tasks.addTask(6, new EntityAIRest(this, true));
+			       // this.tasks.addTask(6, new EntityAIVillagerMate(this));
+			        this.tasks.addTask(7, new EntityAIFollowGolem(this));
+			        this.tasks.addTask(9, new EntityAIWatchClosest2(this, EntityPlayer.class, 3.0F, 1.0F));
+			        this.tasks.addTask(9, new EntityAIVillagerInteract(this));
+			        this.tasks.addTask(9, new EntityAIWanderAvoidWater(this, 0.6D));
+			        this.tasks.addTask(10, new EntityAIWatchClosest(this, EntityLiving.class, 8.0F));
+	
+			        this.targetTasks.addTask(1, new EntityAIAttackBackExclude(this, true, new Class[0])); 
+			        
+			        switch(subType)
+			        {
+				        case AttributeVocation.SUBCLASS_FARMER:
+				        {
+				        	this.tasks.addTask(6, farm);
+				        }
+				        break;
+				        case AttributeVocation.SUBCLASS_CRAFTER:
+				        {
+				        	
+				        }
+				        break;
+				        case AttributeVocation.SUBCLASS_MERCHANT:
+				        {
+				        	//Implement later
+							//this.tasks.addTask(0, new EntityAITravelToAnotherVillage(this));
+				        }
+				        break;
+				        case AttributeVocation.SUBCLASS_TRAINER:
+				        {
+				        	
+				        }
+				        break;
+				        case AttributeVocation.SUBCLASS_WORKER:
+				        {
+				        	
+				        }
+				        break;
+				        case AttributeVocation.SUBCLASS_HUNTER:
+				        {
+					        this.targetTasks.addTask(0, new EntityAINearestAttackableTarget(this, EntityLiving.class, 1, true, true, new Predicate<EntityLiving>()
+					        {
+					            public boolean apply(@Nullable EntityLiving p_apply_1_)
+					            {
+					        		return p_apply_1_ != null && (p_apply_1_ instanceof IAnimals) && !(p_apply_1_ instanceof EntityTameable) && !(p_apply_1_ instanceof AbstractHorse);
+					            }
+					        }));
+					        this.targetTasks.addTask(1, new EntityAIAttackBackExclude(this, true, new Class[0])); 
+				        }
+				        break;
+			        }
+				}
+				break;
+				case AttributeVocation.CLASS_BANDIT:
+				{
+					if(patrolType == 1) this.tasks.addTask(3, new EntityAIPatrolEntireVillage(this, 0.6D, patrolShift, withDoors, useHomePosition));
+					else this.tasks.addTask(3, new EntityAIMoveThroughVillage(this, 0.6D, patrolShift));
+	
+					this.tasks.addTask(0, new EntityAISwimming(this));
+			       // this.tasks.addTask(1, melee);
+			        this.tasks.addTask(2, new EntityAIStayInBorders(this, 1.0D));
+			        //this.tasks.addTask(3, new EntityAIMoveThroughVillage(this, 0.6D, patrolShift));
+			        this.tasks.addTask(4, new EntityAIRestrictOpenDoor(this));
+			        this.tasks.addTask(5, new EntityAIOpenDoor(this, true));
+			        //this.tasks.addTask(6, new EntityAIRest(this, true));
+			        this.tasks.addTask(7, new EntityAIHideFromHarm(this));
+			        this.tasks.addTask(8, new EntityAIMoveTowardsTarget(this, 0.9D, 32.0F));
+			        this.tasks.addTask(9, new EntityAIWanderAvoidWater(this, 0.6D));
+			        this.tasks.addTask(10, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
+			        this.tasks.addTask(11, new EntityAILookIdle(this));
+			        
+			        this.targetTasks.addTask(6, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
+					//this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityVillager.class, true));
+					this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityGolem.class, true));
+			        
+			        this.targetTasks.addTask(0, new EntityAINearestAttackableTarget(this, EntityLiving.class, 1, true, true, new Predicate<EntityLiving>()
+			        {
+			            public boolean apply(@Nullable EntityLiving p_apply_1_)
+			            {
+			            	if(p_apply_1_ instanceof EntityHumanVillager)
+			            	{
+			            		EntityHumanVillager villager = (EntityHumanVillager) p_apply_1_;
+			            		if(villager.getVocation().getType() == AttributeVocation.CLASS_BANDIT) return false;
+			            		if(villager.getRace().getID() == AttributeRace.RACE_TYPE_VAMPIRE) return true;
+			            		else return true;
+			            	}
+			            	
+			        		return p_apply_1_ != null && (IMob.VISIBLE_MOB_SELECTOR.apply(p_apply_1_) && !(p_apply_1_ instanceof EntityCreeper)) && !(p_apply_1_ instanceof EntityWarg);
+			            }
+			        }));
+			        this.targetTasks.addTask(1, new EntityAIAttackBackExclude(this, true, new Class[0])); 
+			        this.destructive = true;
+				}
+				break;
+				case AttributeVocation.CLASS_RULER:
+				{
+					this.tasks.addTask(0, new EntityAISwimming(this));
+			       // this.tasks.addTask(1, melee);
+			        this.tasks.addTask(2, new EntityAIStayInBorders(this, 1.0D));
+			        //his.tasks.addTask(3, new EntityAIMoveThroughVillage(this, 0.6D, true));
+			        this.tasks.addTask(4, new EntityAIRestrictOpenDoor(this));
+			        this.tasks.addTask(5, new EntityAIOpenDoor(this, true));
+			        //this.tasks.addTask(6, new EntityAIRest(this, true));
+			        this.tasks.addTask(7, new EntityAIHideFromHarm(this));
+			        this.tasks.addTask(8, new EntityAIMoveTowardsTarget(this, 0.9D, 32.0F));
+			        this.tasks.addTask(9, new EntityAIWanderAvoidWater(this, 0.6D));
+			        this.tasks.addTask(10, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
+			        this.tasks.addTask(11, new EntityAILookIdle(this));
+			        
+			        this.defaultTargets();
+			        
+				}
+				break;
+				case AttributeVocation.CLASS_MERCENARY:
+				{
+					this.tasks.addTask(0, new EntityAISwimming(this));
+			       // this.tasks.addTask(1, melee);
+			        //this.tasks.addTask(2, new EntityAIStayInBorders(this, 1.0D));
+			        //this.tasks.addTask(3, new EntityAIMoveThroughVillage(this, 0.6D, true));
+			        this.tasks.addTask(4, new EntityAIRestrictOpenDoor(this));
+			        this.tasks.addTask(5, new EntityAIOpenDoor(this, true));
+			        //this.tasks.addTask(6, new EntityAIRest(this, true));
+			        //this.tasks.addTask(7, new EntityAIHideFromHarm(this));
+			        this.tasks.addTask(8, new EntityAIMoveTowardsTarget(this, 0.9D, 32.0F));
+			        this.tasks.addTask(9, new EntityAIWanderAvoidWater(this, 0.6D));
+			        this.tasks.addTask(10, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
+			        this.tasks.addTask(11, new EntityAILookIdle(this));
+			        
+			        this.defaultTargets();
+				}
+				break;
+				case AttributeVocation.CLASS_HYBRID_MAGE_SOLDER:
+				{
+					if(patrolType == 1) this.tasks.addTask(3, new EntityAIPatrolEntireVillage(this, 0.6D, patrolShift, withDoors, useHomePosition));
+					else this.tasks.addTask(3, new EntityAIMoveThroughVillage(this, 0.6D, patrolShift));
+	
+					this.tasks.addTask(0, new EntityAISwimming(this));
+			       // this.tasks.addTask(1, melee);
+			        this.tasks.addTask(2, new EntityAIStayInBorders(this, 1.0D));
+			     //   this.tasks.addTask(3, new EntityAIMoveThroughVillage(this, 0.6D, patrolShift));
+			        this.tasks.addTask(4, new EntityAIRestrictOpenDoor(this));
+			        this.tasks.addTask(5, new EntityAIOpenDoor(this, true));
+			        //this.tasks.addTask(6, new EntityAIRest(this, true));
+			        this.tasks.addTask(7, new EntityAIHideFromHarm(this));
+			        this.tasks.addTask(8, new EntityAIMoveTowardsTarget(this, 0.9D, 32.0F));
+			        this.tasks.addTask(9, new EntityAIWanderAvoidWater(this, 0.6D));
+			        this.tasks.addTask(10, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
+			        this.tasks.addTask(11, new EntityAILookIdle(this));
+			        
+			        this.defaultTargets();
+			        this.magicMelee = true;
+				}
+				break;
+				case AttributeVocation.CLASS_HYBRID_ARCHER_SOLDIER:
+				{
+					if(patrolType == 1) this.tasks.addTask(3, new EntityAIPatrolEntireVillage(this, 0.6D, patrolShift, withDoors, useHomePosition));
+					else this.tasks.addTask(3, new EntityAIMoveThroughVillage(this, 0.6D, patrolShift));
+	
+					this.tasks.addTask(0, new EntityAISwimming(this));
+			       // this.tasks.addTask(1, melee);
+			        this.tasks.addTask(2, new EntityAIStayInBorders(this, 1.0D));
+			   //     this.tasks.addTask(3, new EntityAIMoveThroughVillage(this, 0.6D, patrolShift));
+			        this.tasks.addTask(4, new EntityAIRestrictOpenDoor(this));
+			        this.tasks.addTask(5, new EntityAIOpenDoor(this, true));
+			        //this.tasks.addTask(6, new EntityAIRest(this, true));
+			        this.tasks.addTask(7, new EntityAIHideFromHarm(this));
+			        this.tasks.addTask(8, new EntityAIMoveTowardsTarget(this, 0.9D, 32.0F));
+			        this.tasks.addTask(9, new EntityAIWanderAvoidWater(this, 0.6D));
+			        this.tasks.addTask(10, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
+			        this.tasks.addTask(11, new EntityAILookIdle(this));
+			        
+			        this.defaultTargets();
+				}
+				break;
+				case AttributeVocation.CLASS_HYBRID_MAGE_ARCHER:
+				{
+					if(patrolType == 1) this.tasks.addTask(3, new EntityAIPatrolEntireVillage(this, 0.6D, patrolShift, withDoors, useHomePosition));
+					else this.tasks.addTask(3, new EntityAIMoveThroughVillage(this, 0.6D, patrolShift));
+	
+					this.tasks.addTask(0, new EntityAISwimming(this));
+			       // this.tasks.addTask(1, melee);
+			        this.tasks.addTask(2, new EntityAIStayInBorders(this, 1.0D));
+			     //   this.tasks.addTask(3, new EntityAIMoveThroughVillage(this, 0.6D, patrolShift));
+			        this.tasks.addTask(4, new EntityAIRestrictOpenDoor(this));
+			        this.tasks.addTask(5, new EntityAIOpenDoor(this, true));
+			        //this.tasks.addTask(6, new EntityAIRest(this, true));
+			        this.tasks.addTask(7, new EntityAIHideFromHarm(this));
+			        this.tasks.addTask(8, new EntityAIMoveTowardsTarget(this, 0.9D, 32.0F));
+			        this.tasks.addTask(9, new EntityAIWanderAvoidWater(this, 0.6D));
+			        this.tasks.addTask(10, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
+			        this.tasks.addTask(11, new EntityAILookIdle(this));
+			        
+			        this.defaultTargets();
+			        this.magicRanged = true;
+				}
+				break;
 			}
-		}
+        }
 	}
 	
 	private void defaultTargets() {
@@ -1207,6 +1502,7 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
             	{
             		EntityHumanVillager villager = (EntityHumanVillager) p_apply_1_;
             		if(villager.getVocation().getType() == AttributeVocation.CLASS_BANDIT) return true;
+            		if(villager.getRace().getID() == AttributeRace.RACE_TYPE_VAMPIRE) return true;
             		else return false;
             	}
             	
@@ -1229,6 +1525,7 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
         
         this.shifter = compound.getBoolean("Shifter");
         this.ruler = compound.getBoolean("Ruler");
+        if(race.getID() != AttributeRace.RACE_TYPE_VAMPIRE) this.setVampire(compound.getBoolean("Vampire"), false);
         int shiftCreatureID = -1;
         if(this.shifter) shiftCreatureID = compound.getInteger("creature");
         if(shiftCreatureID == BJORN_ID) this.creatureShiftTo = new EntityBjornserker(world);
@@ -1270,6 +1567,10 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
         this.kills = compound.getInteger("Kills");
 	}
 	
+	private void setVampire(boolean vampire, boolean b) {
+        if(b) this.getDataManager().set(IS_VAMPIRE, Boolean.valueOf(vampire));
+	}
+
 	private void createFaction() {
 		this.faction = new AttributeFaction(world, this.getPos(), this.getRace(), this.firstName, this, factionName);
 		this.factionName = this.faction.getTitleName();
@@ -1288,6 +1589,7 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
         compound.setString("Last Name", this.getLastNameFromManager());
         compound.setBoolean("Shifter", this.isShifter());
         compound.setBoolean("Ruler", this.ruler);
+        if(race.getID() != AttributeRace.RACE_TYPE_VAMPIRE)   compound.setBoolean("Vampire", this.isVampire());
         compound.setString("Faction Name", this.factionName);
         
         if(this.getVillage() != null) compound.setInteger("Radius", this.getVillage().getVillageRadius());
@@ -1361,11 +1663,12 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
 		if(this.isShifter())
 		{ 
 			if(this.nervous) this.setCustomNameTag("Nervous "+this.getTitle());
-			//System.out.println(this.getTitle());
+			if(this.ruler && this.vocation.getID() == AttributeVocation.CLASS_BANDIT) this.setCustomNameTag("Leader: "+this.getTitle());
 		}
 		else
 		{
-			this.setCustomNameTag(this.getTitle());
+			if(this.isVampire()) this.setCustomNameTag("Sickly "+this.getTitle());
+			else this.setCustomNameTag(this.getTitle());
 		}
 		
 		this.setAlwaysRenderNameTag(Main.useNametags);
@@ -1384,7 +1687,18 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
 		//System.out.println(this.toString()+" "+this.vocation.getName()+" "+vocation.getChestplate());
 		//System.out.println(this.toString()+" "+this.vocation.getName()+" "+this.race.getName());
 		
-		this.setHeldItem(EnumHand.MAIN_HAND, new ItemStack(vocation.getWeapon()));
+		meleeWeapon = vocation.getMeleeWeapon();
+		rangedWeapon = vocation.getRangedWeapon();
+		
+		if(rangedWeapon != null)
+		{
+			this.setHeldItem(EnumHand.MAIN_HAND, new ItemStack(rangedWeapon));
+		}
+		else
+		{
+			this.setHeldItem(EnumHand.MAIN_HAND, new ItemStack(meleeWeapon));
+		}
+		
 		this.setHeldItem(EnumHand.OFF_HAND, new ItemStack(vocation.getShield()));
 		
 		this.setItemStackToSlot(EntityEquipmentSlot.HEAD, new ItemStack(vocation.getHelmet()));
@@ -1439,6 +1753,7 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
 
         getAttributeMap().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
         getAttributeMap().registerAttribute(AttributeRace.MAGIC_DAMAGE);
+        getAttributeMap().registerAttribute(AttributeRace.HORSE_HEALTH);
     }
 	
 	private void initEntityClass() 
@@ -1482,6 +1797,7 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
 	            if (itemstack.getItem() == Items.BOW)
 	            {
 	                this.attackWithBow(target, distanceFactor);
+	                if(this.magicRanged) this.forceCombatTask(0);
 	            }
 	        }
 		
@@ -1545,6 +1861,11 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
                             for (PotionEffect potioneffect : list)
                             {
                                 this.addPotionEffect(new PotionEffect(potioneffect));
+                                
+                                if(this.horse != null)
+                                {
+                                	this.horse.addPotionEffect(new PotionEffect(potioneffect));
+                                }
                             }
                         }
                     }
@@ -1701,6 +2022,14 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
 		DamageSource newSrc = handleInWall(damageSrc);
 		float damage = damageAmount;
 		if(newSrc == null) return;
+		
+		if(this.isVampire())
+		{
+			if(newSrc.isFireDamage())
+			{
+				damage *= 2;
+			}
+		}
 		super.damageEntity(newSrc, damage);
     }
 	
@@ -1713,6 +2042,17 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
 			this.posZ += 1;
 			return null;
 		}
+		else if(this.vocation.getID() == AttributeVocation.CLASS_HYBRID_MAGE_ARCHER ||this.vocation.getID() == AttributeVocation.CLASS_HYBRID_MAGE_SOLDER )
+		{
+			if(source.isFireDamage() || source.isMagicDamage() || source.isExplosion())
+			{
+				return null;
+			}
+			else
+			{
+				return source;
+			}
+		}
 		else
 		{
 			return source;
@@ -1722,8 +2062,17 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
 	protected void attackWithBow(EntityLivingBase target,
 			float distanceFactor)
 	{
+		/*RayTraceResult result = this.rayTrace(64.0f, 1.0f);
+		Entity entity = result.entityHit;
+		
+		if(entity instanceof EntityHumanVillager && this.getVocation().getType() != AttributeVocation.CLASS_BANDIT)
+		{
+			System.out.println("Villager in Front!");
+			if(((EntityHumanVillager)entity).getVocation().getType() != AttributeVocation.CLASS_BANDIT) return;
+		}*/
+		
 		EntityArrow entityarrow = this.getArrow(distanceFactor);
-		 entityarrow.setDamage((float)this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue());
+		entityarrow.setDamage((float)this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue());
 		
        double d0 = target.posX - this.posX;
        double d1 = target.getEntityBoundingBox().minY + (double)(target.height / 3.0F) - entityarrow.posY;
@@ -1937,6 +2286,7 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
 				usedSpell.execute(this);
 			}
 		
+            if(this.magicRanged) this.forceCombatTask(2);
 		}
 	}
 
@@ -1957,12 +2307,24 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
 			this.horse.setHorseTamed(true);
 			this.horse.setGrowingAge(0);
 			this.horse.enablePersistence();
+			this.horse.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(this.horse.getMaxHealth() + this.getEntityAttribute(AttributeRace.HORSE_HEALTH).getBaseValue());
+			this.horse.heal(1000);
+			//this.getCollisionBox(entityIn);
+			this.horseWidth = this.horse.width;
+			this.horseHeight = this.horse.height;
+			//System.out.println("1 - Width and Height: "+this.width+" "+this.height);
+			this.setSize2(this.width + this.horseWidth, this.height + this.horseHeight);
+			//System.out.println("2 - Width and Height: "+this.width+" "+this.height);
+			boolean success = this.horse.replaceItemInInventory(400, new ItemStack(Items.SADDLE));
+			System.out.println("Success: "+success);
 			
 			if(this.horse instanceof EntityHorse)
 			{
 				EntityHorse armorHorse = (EntityHorse)this.horse;
 				Item armor = this.vocation.getHorseArmor();
 				armorHorse.setHorseArmorStack(new ItemStack(armor));
+				success = this.horse.replaceItemInInventory(401, new ItemStack(armor));
+				System.out.println("Success: "+success);
 			}
 			
         	this.tasks.removeTask(this.ranged);
@@ -1970,6 +2332,36 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
 	    	this.startRiding(this.horse);
 		}
 	}
+	
+	/**
+     * Sets the width and height of the entity.
+     */
+    protected void setSize2(float width, float height)
+    {
+    	//System.out.println(width+" "+height);
+        if (width != this.width || height != this.height)
+        {
+        	//System.out.println("Running");
+            float f = this.width;
+            this.width = width;
+            this.height = height;
+
+            if (this.width < f)
+            {
+                double d0 = (double)width / 2.0D;
+                this.setEntityBoundingBox(new AxisAlignedBB(this.posX - d0, this.posY, this.posZ - d0, this.posX + d0, this.posY + (double)this.height, this.posZ + d0));
+                return;
+            }
+
+            AxisAlignedBB axisalignedbb = this.getEntityBoundingBox();
+            this.setEntityBoundingBox(new AxisAlignedBB(axisalignedbb.minX, axisalignedbb.minY, axisalignedbb.minZ, axisalignedbb.minX + (double)this.width, axisalignedbb.minY + (double)this.height, axisalignedbb.minZ + (double)this.width));
+
+            if (this.width > f && !this.firstUpdate && !this.world.isRemote)
+            {
+                this.move(MoverType.SELF, (double)(f - this.width), 0.0D, (double)(f - this.width));
+            }
+        }
+    }
 
 	public AttributeFaction getFaction() {
 		return faction;
@@ -2005,6 +2397,12 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
 		
 		return target;
 	}
+	
+	public EnumCreatureAttribute getCreatureAttribute()
+    {
+		if(this.isVampire()) return EnumCreatureAttribute.UNDEAD;
+        return EnumCreatureAttribute.UNDEFINED;
+    }
 
 	public boolean isRuler() {
 		// TODO Auto-generated method stub
@@ -2017,6 +2415,19 @@ public class EntityHumanVillager extends EntityVillager implements IEntityFollow
 
 	public void setThrownWeapon(ItemWeaponThrowable thrownWeapon) {
 		this.thrownWeapon = thrownWeapon;
+	}
+
+	public boolean isDestructive() {
+		if(Main.allowDestructive) 
+		{
+			if(Main.allDestructive) return true;
+			else return destructive;
+		}
+		else return false;
+	}
+
+	public void setDestructive(boolean destructive) {
+		this.destructive = destructive;
 	}
 	
 	

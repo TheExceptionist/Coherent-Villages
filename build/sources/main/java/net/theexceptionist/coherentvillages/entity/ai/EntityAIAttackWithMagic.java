@@ -2,9 +2,9 @@ package net.theexceptionist.coherentvillages.entity.ai;
 
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.IRangedAttackMob;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.theexceptionist.coherentvillages.main.entity.EntityHumanVillager;
 
@@ -34,12 +34,14 @@ public class EntityAIAttackWithMagic extends EntityAIBase {
     private float field_96562_i;
     private float field_82642_h;
 
-    public EntityAIAttackWithMagic(EntityHumanVillager par1IRangedAttackMob, double par2, int par4, float par5)
+	private float distance;
+
+    public EntityAIAttackWithMagic(EntityHumanVillager par1IRangedAttackMob, double par2, int par4, float par5, float distance)
     {
-        this(par1IRangedAttackMob, par2, par4, par4, par5);
+        this(par1IRangedAttackMob, par2, par4, par4, par5, distance);
     }
 
-    public EntityAIAttackWithMagic(EntityHumanVillager par1IRangedAttackMob, double par2, int par4, int par5, float par6)
+    public EntityAIAttackWithMagic(EntityHumanVillager par1IRangedAttackMob, double par2, int par4, int par5, float par6, float distance)
     {
         this.rangedAttackTime = -1;
 
@@ -56,6 +58,7 @@ public class EntityAIAttackWithMagic extends EntityAIBase {
             this.maxRangedAttackTime = par5;
             this.field_96562_i = par6;
             this.field_82642_h = par6 * par6;
+            this.distance = distance;
             this.setMutexBits(3);
         }
     }
@@ -117,11 +120,21 @@ public class EntityAIAttackWithMagic extends EntityAIBase {
 
         if (d0 <= (double)this.field_82642_h && this.field_75318_f >= 20)
         {
-           // this.entityHost.getNavigator().clearPathEntity();
+            this.entityHost.getNavigator().clearPath();
         }
         else
         {
-            //this.entityHost.getNavigator().tryMoveToEntityLiving(this.attackTarget, this.entityMoveSpeed);
+        	BlockPos pos = this.attackTarget.getPosition();
+        	float radius = distance;
+        	double rad = Math.toRadians(this.attackTarget.getRNG().nextInt(360));
+        	
+        	double x = radius * Math.cos(rad);
+        	double z = radius * Math.sin(rad);
+
+        	BlockPos targetPos = pos.add(new BlockPos(x, 0, z));
+        	double y = this.attackTarget.world.getTopSolidOrLiquidBlock(targetPos).getY();
+
+            this.entityHost.getNavigator().tryMoveToXYZ(targetPos.getX(), y, targetPos.getZ(), this.entityMoveSpeed);
         }
 
         this.entityHost.getLookHelper().setLookPositionWithEntity(this.attackTarget, 30.0F, 30.0F);

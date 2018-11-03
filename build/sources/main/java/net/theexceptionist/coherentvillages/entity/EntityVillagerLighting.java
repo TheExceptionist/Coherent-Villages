@@ -124,6 +124,8 @@ public class EntityVillagerLighting extends EntityLightningBolt
                     }
                     	
                 }
+                
+                if(this.caster.isDestructive()) this.world.newExplosion((Entity)null, this.posX, this.posY, this.posZ, (float)this.caster.getVocation().getRank(), true, true);
             }
         }
     }

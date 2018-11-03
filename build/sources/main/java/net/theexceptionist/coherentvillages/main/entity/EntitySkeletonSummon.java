@@ -10,7 +10,7 @@ import net.theexceptionist.coherentvillages.entity.followers.IEntityFollower;
 
 public class EntitySkeletonSummon extends EntitySkeleton implements IEntityFollower{
 	private EntityLivingBase master = null;
-	private int lifespan;
+	private int lifespan = 0;
 	
 	public EntitySkeletonSummon(World worldIn) {
 		super(worldIn);
@@ -26,12 +26,10 @@ public class EntitySkeletonSummon extends EntitySkeleton implements IEntityFollo
 	public void onLivingUpdate() {
 		super.onLivingUpdate();
 		
-		if(this.lifespan <= 0)
+		if(this.ticksExisted == this.lifespan)
 		{
 			this.setDead();
 		}
-		
-		this.lifespan--;
 	}
 
 	@Override

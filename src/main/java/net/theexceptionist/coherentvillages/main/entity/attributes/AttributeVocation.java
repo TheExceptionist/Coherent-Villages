@@ -17,6 +17,7 @@ public class AttributeVocation {
 	public final static int SUBCLASS_WORKER = 2;
 	public final static int SUBCLASS_MERCHANT = 3;
 	public final static int SUBCLASS_TRAINER = 4;
+	public final static int SUBCLASS_HUNTER = 5;
 	
 	public final static int CLASS_SOLDIER = 1;
 	public final static int CLASS_ARCHER = 2;
@@ -29,8 +30,10 @@ public class AttributeVocation {
 	public final static int CLASS_OVERRIDE_NO_ARMOR = 8;
 	
 	public final static int CLASS_HYBRID_MAGE_SOLDER = 9;
+	public final static int CLASS_HYBRID_MAGE_ARCHER = 10;
+	public final static int CLASS_HYBRID_ARCHER_SOLDIER = 11;
 	
-	public final static int NUM_CLASSES = 10;
+	public final static int NUM_CLASSES = 12;
 	
 	protected final int type;
 	protected final int rank;
@@ -104,6 +107,8 @@ public class AttributeVocation {
 	private boolean alwaysHorse = false;
 
 	private int horseChance = 5;
+
+	private float scale = 1;
 	//protected Spell[] spells
 	//protected PotionType[] potions
 	public static ArrayList<AttributeVocation> jobs = new ArrayList<AttributeVocation>();
@@ -390,6 +395,52 @@ public class AttributeVocation {
 				}
 			}
 			break;
+			case CLASS_HYBRID_MAGE_ARCHER:
+			{
+				helmet = this.originRace.armor.get(head);
+				chestplate = this.originRace.armor.get(chest);
+				leggings = this.originRace.armor.get(legs);
+				boots = this.originRace.armor.get(feet);
+				//spells = this.originRace.spells.get(rank);
+				rangedWeapon = this.originRace.rangedWeapons.get(0);
+				
+				if(canRide && rand.nextInt(100) < horseArmorChance)
+				{
+					horseArmor = this.originRace.horseArmors.get(rank - 1);
+				}
+				//if(rand != null && rand.nextInt(100) < potionChance )
+				//{
+				potions[0] = this.originRace.potions.get(AttributeRace.POTION_1);
+				//}
+				for(int i = 0; i < spells.length; i++)
+				{
+					if(spells[i] != null) continue;
+					//System.out.println("Spell: "+this.originRace.spells.get(i + ((rank - 1) * 4)));
+					spells[i] = this.originRace.spells.get(i + ((rank - 1) * 4));
+				}
+			}
+			break;
+			case CLASS_HYBRID_ARCHER_SOLDIER:
+			{
+				helmet = this.originRace.armor.get(head);
+				chestplate = this.originRace.armor.get(chest);
+				leggings = this.originRace.armor.get(legs);
+				boots = this.originRace.armor.get(feet);
+				//spells = this.originRace.spells.get(rank);
+				meleeWeapon = this.originRace.meleeWeapons.get(rank - 1);
+				rangedWeapon = this.originRace.rangedWeapons.get(0);
+				
+				
+				if(canRide && rand.nextInt(100) < horseArmorChance)
+				{
+					horseArmor = this.originRace.horseArmors.get(rank - 1);
+				}
+				//if(rand != null && rand.nextInt(100) < potionChance )
+				//{
+				potions[0] = this.originRace.potions.get(AttributeRace.POTION_1);
+				//}
+			}
+			break;
 			case CLASS_OVERRIDE_NO_ARMOR:
 			{
 				meleeWeapon = this.originRace.meleeWeapons.get(rank - 1);
@@ -579,5 +630,20 @@ public class AttributeVocation {
 
 	public void overrideSpells(int spell3, Spell summonSkeleton) {
 		spells[spell3] = summonSkeleton;
+	}
+
+	public Item getMeleeWeapon() {
+		// TODO Auto-generated method stub
+		return this.meleeWeapon;
+	}
+
+	public float getScale() {
+		// TODO Auto-generated method stub
+		return scale ;
+	}
+	
+	public void setScale(float f) {
+		// TODO Auto-generated method stub
+		scale = f;
 	}
 }

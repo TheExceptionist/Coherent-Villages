@@ -1450,7 +1450,7 @@ public class LatinStructurePieces
                         }
                         else if(this.isBanditInfested)
                         {
-                        	EntityHumanVillager entityHumanVillager = new EntityHumanVillager(worldIn, WorldGenVillage.LATIN_ID, AttributeRace.getFromIDRace(WorldGenVillage.LATIN_ID).getRandomBandit(worldIn), EntityHumanVillager.getRandomGender(worldIn), this.ruler == null ? true : false);                            
+                        	EntityHumanVillager entityHumanVillager = new EntityHumanVillager(worldIn, WorldGenVillage.LATIN_ID, AttributeRace.getFromIDRace(WorldGenVillage.LATIN_ID).getRandomBandit(worldIn), EntityHumanVillager.getRandomGender(worldIn), vocation == AttributeVocation.CLASS_RULER ? true : false);                            
                         	entityHumanVillager.setLocationAndAngles((double)j + 0.5D, (double)k, (double)l + 0.5D, 0.0F, 0.0F);                        	if(worldIn.rand.nextInt(100) <= Main.wraith_turn_rate) entityHumanVillager.setShifter(true, new EntityWraith(worldIn), false, 1);
 
                         	if(worldIn.rand.nextInt(100) <= Main.wraith_turn_rate) entityHumanVillager.setShifter(true, new EntityWraith(worldIn), false, 1);
@@ -1463,11 +1463,7 @@ public class LatinStructurePieces
                         		entityHumanVillager.getFaction().setBandit(true);
                         		this.ruler = entityHumanVillager;
                         	}
-                        	else
-                        	{
-                        		entityHumanVillager.setRuler(this.ruler);
-                        	}
-                            
+                        	
                             if(upgrade)
                             {
                             	if(worldIn.rand.nextInt(100) < Main.upgrade_chance) entityHumanVillager.upgrade();
@@ -1481,6 +1477,8 @@ public class LatinStructurePieces
                             	EntityHumanVillager entityRuler = new EntityHumanVillager(worldIn, WorldGenVillage.LATIN_ID, AttributeRace.getFromIDRace(WorldGenVillage.LATIN_ID).getRandomRuler(worldIn), EntityHumanVillager.getRandomGender(worldIn), true);                            
                         		this.ruler = entityRuler;
                         	}
+                        	
+                        	if(worldIn.rand.nextInt(100) <= Main.wraith_turn_rate) ruler.setShifter(true, new EntityWraith(worldIn), false, 1);
                         	
                         	/*AttributeFaction faction = new AttributeFaction(worldIn, new BlockPos(x, 70, z), AttributeRace.getFromIDRace(WorldGenVillage.LATIN_ID), NameGenerator.generateRandomName(worldIn.rand, AttributeRace.getFromIDRace(WorldGenVillage.LATIN_ID)));
                             faction.setBandit(isBanditInfested);

@@ -3,6 +3,7 @@ entity.warg.name=Warg
 entity.bjornserker.name=Bjornserker
 entity.wraith.name=Wraith
 entity.lemure.name=Lemure
+entity.blood_bat.name=Blood Bat
 
 tile.firewood.name=Fire Wood
 
@@ -29,6 +30,7 @@ item.roman_shield.name=Roman Shield
 
 item.roman_sword.name=Latin Gladius
 item.spear.name=Spear
+item.bardiche.name=Bardiche
 
 item.summon_tome_0.name=Summon Ancient Warriors
 item.attack_tome_0.name=Fireball

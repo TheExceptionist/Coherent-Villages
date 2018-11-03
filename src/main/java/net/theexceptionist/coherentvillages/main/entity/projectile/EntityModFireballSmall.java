@@ -1,5 +1,6 @@
 package net.theexceptionist.coherentvillages.main.entity.projectile;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -37,6 +38,11 @@ public class EntityModFireballSmall extends EntitySmallFireball
     {
         EntityFireball.registerFixesFireball(fixer, "SmallFireball");
     }
+    
+    public void setShooter(EntityLivingBase shooter)
+    {
+    	this.shootingEntity = shooter;
+    }
 
     /**
      * Called when this EntityFireball hits a block or entity.
@@ -55,12 +61,14 @@ public class EntityModFireballSmall extends EntitySmallFireball
                 	if(this.shootingEntity instanceof EntityHumanVillager)
                 	{
                 		villager = (EntityHumanVillager) shootingEntity;
-                        flag = result.entityHit.attackEntityFrom(DamageSource.causeFireballDamage(this, this.shootingEntity), (float) villager.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue());
+            			//System.out.println("Shooting Entity: "+(this.shootingEntity != null)+" Fireball: "+(this != null)+" Hit: "+(result.entityHit != null));
+            			flag = result.entityHit.attackEntityFrom(DamageSource.causeFireballDamage(this, this.shootingEntity), (float) villager.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue());
+                		
                 	}
                 	else
                 	{
-                        flag = result.entityHit.attackEntityFrom(DamageSource.causeFireballDamage(this, this.shootingEntity), 5.0f);
-                		return;
+            			//System.out.println("Shooting Entity: "+(this.shootingEntity != null)+" Fireball: "+(this != null)+" Hit: "+(result.entityHit != null));
+            			flag = result.entityHit.attackEntityFrom(DamageSource.causeFireballDamage(this, this.shootingEntity), 5.0f);
                 	}
                 	
                     if (flag)
@@ -77,6 +85,11 @@ public class EntityModFireballSmall extends EntitySmallFireball
                 if (this.shootingEntity != null && this.shootingEntity instanceof EntityLiving)
                 {
                     flag1 = net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(this.world, this.shootingEntity);
+                
+                    if(this.shootingEntity instanceof EntityHumanVillager)
+                	{
+                		if(flag1) flag1 = ((EntityHumanVillager)this.shootingEntity).isDestructive();//) this.world.newExplosion((Entity)null, this.posX, this.posY, this.posZ, (float)this.explosionPower, true, true);
+                	}
                 }
 
                 if (flag1)
