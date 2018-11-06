@@ -1,0 +1,8 @@
+package net.theexceptionist.coherentvillages.main.entity.spells;
+
+import net.minecraft.potion.PotionType;
+
+public class SpellBanishTouch extends Spell {
+
+
+}

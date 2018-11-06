@@ -570,6 +570,103 @@ Archer upgrades to LEgate
 *Vampires now can slow down enemies
 
 
+-Pre-Release Test v0.0.4.4
+=========================================
+*Horse now sprint
+*Horse can knock back entities
+*Added arrow Particle effect
+*Fixed Rider AI bug
+*Movement speed for horse is now increased
+*Fixed shield bug
+*Improved Faction System(Each race and bandit now has their own faction)
+*Fixed Skeleton Summon Spawn Bug
+*Fixed another horse taming bug for the villagers
+
+-Pre-Release Test v0.0.5.6
+=========================================
+*Bjornserkers and some villagers can now break through blocks
+*Vampire brutes, vampire knights and berserkers can break through blocks
+*Added a new transmute spell
+*Slav Wizards have the new transmute spell
+*Fixed In Wall bug
+*Added a lot of new spells
+
+*Finished Arab culture
+**Added Footman
+**Added Infantry
+**Added Mamluke
+
+**Added Archer
+**Added Sharpshooter
+
+**Added Magi
+**Added Greater Magi
+**Added Magus
+
+**Added Undead Hunter
+**Added Potion Master
+
+**Added Nomad
+**Added Scholar
+**Added Quartermaster
+
+**Added Desert Bandit
+**Added Moor
+**Added Desert Rider
+**Added Hashasin
+
+**Added Janissary
+**Added Sultan
+
+*Alchemists can now use lingering potions
+*Improved Alchemist AI
+
+**Added Nord Thane (The most well equipped NPC)
+**Added Nord Skald (Healer)
+**Added Nord Troubadour (Healer)
+
+==============New Spells=============
+**Added Wood Skin to Latin and Gothic Mages (Reduces all damage by 25%)
+**Added Storm to Latin Mage and Gothic Mage Knight (Summons a thunderstorm when this entity is on fire)
+**Added Stone Skin to Latin Battlemage (Reduces all damage by 50%)
+**Added Banish Aura to Latin Battlemage (Instantly kills any undead mob who steps within range of this mob, and gravely damages vampires)
+**Added Long Drop to Latin Battlemage, and Gothic Mage (Teleports target mob a certain amount of blocks in the air, then drops it down)
+
+**Added Ice Foot to Slav Mage Archer and Bogatyr Sorcerer (Turns water this entity steps on into ice)
+**Added Snow Foot to Slav Mage Archer and Bogatyr Sorcerer (Turns the block above grass into snow when this entity steps on it)
+**Added Greater Bury to Slav Mage Archer (Does the opposite of the Long Drop, burys a target entity underground by a certain amount of blocks)
+**Added Bury to Slav Bogatyr Sorcerer (Does the opposite of the Long Drop, burys a target entity underground by a certain amount of blocks)
+**Added Flame Aura to Slav Pyro Bandit (Turns the block about this entity into fire, if it steps on a grass block)
+
+**Added Life to Gothic Mage, Gothic Mage Knight and Grand Wizard (gives this entity extra absorption points)
+**Added Iron Skin to Grand Wizard (75% damage reduction)
+
+**Added Poison Skin to Arab Magi (poisons entity on contact)
+**Added Spike Skin to Arab Greater Magi (hurts entity on contact)
+**Added Flame Skin to Arab Magus (ignites entity on contact)
+
+**Added Poison to Arab Magi (poisons targeted entity)
+**Added Curse to Arab Magus (withers targeted entity)
+**Added Implode to Arab Magus (implodes targeted entity)
+
+**Added Teleport to Arab Magus (teleports when damaged)
+
+**Added Sand Tomb to Arab Greater Magi (traps entity with sand)
+**Added Glass Tomb to Arab Greater Magi (traps entity with glass)
+
+**Added Thrall to Vampire Peasant, Lieges, Knight, Counts (forces an enemy to fight for this entity)
+**Added Arrow-Proof to Vampire Peasant, Lieges, Knight, Counts, Mongol Shaman (immune to projectiles)
+**Added Web Encase to Mongol Shaman (Traps entity in webs)
+
+**Noted these are all the spells that were added... And by no means a list of all the spells villagers can perform
+
+
+
+
+
+
+
+
 //Fixed blood bats
 //Added vampires to Gothics
 

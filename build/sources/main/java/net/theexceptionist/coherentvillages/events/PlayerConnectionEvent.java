@@ -39,6 +39,8 @@ public class PlayerConnectionEvent{
 		itextcomponent1.setStyle(style);
 		EntityPlayer player = event.player;
 		
+		//Main.proxy.openGUI(0);
+		
 		player.sendMessage(itextcomponent1);
 	}
 }

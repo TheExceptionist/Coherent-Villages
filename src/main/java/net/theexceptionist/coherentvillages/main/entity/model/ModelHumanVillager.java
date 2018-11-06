@@ -5,8 +5,8 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.monster.AbstractSkeleton;
 import net.minecraft.init.Items;
+import net.minecraft.item.ItemShield;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumHandSide;
@@ -77,7 +77,7 @@ public class ModelHumanVillager extends ModelBiped
                 this.leftArmPose = ModelBiped.ArmPose.BOW_AND_ARROW;
             }
         }
-        else if(offstack != null && offstack.getItem() == Items.SHIELD && ((EntityHumanVillager)entitylivingbaseIn).isBlocking())
+        else if(offstack != null && offstack.getItem() instanceof ItemShield && ((EntityHumanVillager)entitylivingbaseIn).isBlocking())
         {
         	if (entitylivingbaseIn.getPrimaryHand() == EnumHandSide.RIGHT)
             {

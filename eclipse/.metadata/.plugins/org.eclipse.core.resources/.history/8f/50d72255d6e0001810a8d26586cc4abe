@@ -1,0 +1,20 @@
+package net.theexceptionist.coherentvillages.main.entity.spells;
+
+import net.minecraft.entity.EntityLivingBase;
+
+public class SpellSpiderSkin extends Spell {
+
+	EntitySpider;
+	
+	public SpellSpiderSkin(String name, int type) {
+		super(name, type);
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public void execute(EntityLivingBase caster) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

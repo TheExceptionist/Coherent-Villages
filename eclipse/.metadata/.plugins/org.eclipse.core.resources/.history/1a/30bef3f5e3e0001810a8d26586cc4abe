@@ -1,0 +1,43 @@
+package net.theexceptionist.coherentvillages.main.entity.spells;
+
+import java.util.List;
+
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.potion.PotionType;
+import net.theexceptionist.coherentvillages.main.entity.EntityHumanVillager;
+
+public class SpellBanishTouch extends Spell {
+
+	public SpellBanishTouch(String name, int type) {
+		super(name, type);
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public void execute(EntityLivingBase caster) {
+		// TODO Auto-generated method stub
+		if(caster instanceof EntityHumanVillager)
+		{
+			EntityHumanVillager villager = (EntityHumanVillager) caster;
+			
+			if(villager.inCombat())
+			{
+				List<Entity> entities = caster.world.getEntitiesWithinAABBExcludingEntity(caster, caster.getEntityBoundingBox().grow(3).offset(-1, -1, -1));
+				
+				for(Entity entity : entities)
+				{
+					if(entity instanceof EntityLiving)
+					{
+						if(((EntityLiving) entity).isEntityUndead())
+						{
+							((EntityLiving) entity).spawnExplosionParticle();
+							entity.setDead();
+						}
+					}
+				}
+			}
+		}
+	}
+}

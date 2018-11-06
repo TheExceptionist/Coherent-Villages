@@ -30,6 +30,13 @@ public class EntityAIAttackWithMelee extends EntityAIBase
     protected final int attackInterval = 20;
     private int failedPathFindingPenalty = 0;
     private boolean canPenalize = false;
+    private boolean strafingClockwise;
+    private boolean strafingBackwards;
+    private int strafingTime = -1;
+	private double maxAttackDistance;
+	private BlockPos targetPos = null;
+	private int locateTime = -1;
+	private boolean relocating = false;
 
     public EntityAIAttackWithMelee(EntityCreature creature, double speedIn, boolean useLongMemory)
     {
@@ -142,7 +149,8 @@ public class EntityAIAttackWithMelee extends EntityAIBase
     public void updateTask()
     {
         EntityLivingBase entitylivingbase = this.attacker.getAttackTarget();
-        this.attacker.getLookHelper().setLookPositionWithEntity(entitylivingbase, 30.0F, 30.0F);
+        if(!this.attacker.isRiding()) this.attacker.getLookHelper().setLookPositionWithEntity(entitylivingbase, 30.0F, 30.0F);
+        
         double d0 = this.attacker.getDistanceSq(entitylivingbase.posX, entitylivingbase.getEntityBoundingBox().minY, entitylivingbase.posZ);
         --this.delayCounter;
 
@@ -179,17 +187,116 @@ public class EntityAIAttackWithMelee extends EntityAIBase
                 this.delayCounter += 5;
             }
             
-            boolean findPath;
+            boolean findPath = false;
             
-            if(!this.attacker.isRiding()) findPath = this.attacker.getNavigator().tryMoveToEntityLiving(entitylivingbase, this.speedTowardsTarget);
+            if(!this.attacker.isRiding())	
+            {
+                findPath = this.attacker.getNavigator().tryMoveToEntityLiving(entitylivingbase, this.speedTowardsTarget);
+            }
             else 
             {
-            	double x = entitylivingbase.posX;// + (this.attacker.world.rand.nextInt(100) <= 50 ? 0 : 5);
-            	double y = entitylivingbase.posY;
-            	double z = entitylivingbase.posZ;// + (this.attacker.world.rand.nextInt(100) <= 50 ? 0 : 5);
+            	/*if (d0 <= (double)this.maxAttackDistance)
+                {
+               	 //System.out.println("Clear!");
+                    this.attacker.getNavigator().clearPath();
+                    ++this.strafingTime;
+                }
+                else
+                {
+               	// System.out.println("Start! Distance: "+d0+" Max Distance: "+(double)this.maxAttackDistance);//+" See Time: "+(this.seeTime >= 20));
+                    findPath = this.attacker.getNavigator().tryMoveToEntityLiving(entitylivingbase, this.speedTowardsTarget);
+                    this.strafingTime = -1;
+                }
+
+                if (this.strafingTime >= 20)
+                {
+                    if ((double)this.attacker.getRNG().nextFloat() < 0.3D)
+                    {
+                        this.strafingClockwise = !this.strafingClockwise;
+                    }
+
+                    if ((double)this.attacker.getRNG().nextFloat() < 0.3D)
+                    {
+                        this.strafingBackwards = !this.strafingBackwards;
+                    }
+
+                    this.strafingTime = 0;
+                }
+
+                if (this.strafingTime > -1)
+                {
+                    if (d0 > (double)(this.maxAttackDistance * 0.75F))
+                    {
+                        this.strafingBackwards = false;
+                    }
+                    else if (d0 < (double)(this.maxAttackDistance * 0.25F))
+                    {
+                        this.strafingBackwards = true;
+                    }
+
+                    //this.attacker.getMoveHelper().strafe(this.strafingBackwards ? -0.5F : 0.5F, this.strafingClockwise ? 0.5F : -0.5F);
+                    this.attacker.getMoveHelper().strafe(this.strafingBackwards ? -0.5F : 0.5F, this.strafingClockwise ? 0.5F : -0.5F);
+                    if(!this.attacmer.isRiding()) this.entity.faceEntity(entitylivingbase, 30.0F, 30.0F);
+                }  
+                else
+                {
+                    this.attacker.getLookHelper().setLookPositionWithEntity(entitylivingbase, 30.0F, 30.0F);
+                }*/
             	
+            	if(!relocating) findPath = this.attacker.getNavigator().tryMoveToEntityLiving(entitylivingbase, speedTowardsTarget);
+            	else 
+            	{
+            		if(this.locateTime <= -1)
+            		{
+            			double x = -1 * (attacker.posX - entitylivingbase.posX);// ? entitylivingbase.posX - attacker.posX : attacker.posX - entitylivingbase.posX;// + (this.attacker.world.rand.nextInt(100) <= 50 ? 0 : 5);
+	                	double y = entitylivingbase.posY;// > attacker.posX ? entitylivingbase.posX - attacker.posX : attacker.posX - entitylivingbase.posX;
+	                	double z = -1 * (attacker.posZ - entitylivingbase.posZ);//> attacker.posZ ? entitylivingbase.posZ - attacker.posZ : attacker.posZ - entitylivingbase.posZ;// + (this.attacker.world.rand.nextInt(100) <= 50 ? 0 : 5);
+	                	double radius = Math.sqrt(x * x + z * z);
+	                	double rad = -1 * Math.atan2(z, x);
+	                	
+	                	z = radius * Math.cos(rad);
+	                	x = radius * Math.sin(rad);
+	                	
+	                	targetPos = new BlockPos(x + entitylivingbase.posX, this.world.getTopSolidOrLiquidBlock(new BlockPos(x + entitylivingbase.posX, y, z + entitylivingbase.posZ)).getY(), z + entitylivingbase.posZ);
+	                	this.attacker.getNavigator().tryMoveToXYZ(targetPos.getX(), targetPos.getY(), targetPos.getZ(), this.speedTowardsTarget);
+	                	
+	                	this.locateTime = 1;
+            		}
+            		else if(this.locateTime > 0)
+            		{
+            			locateTime--;
+            		}
+            		else
+            		{
+            			relocating = false;
+            			this.locateTime = -1;
+            		}
+            		
+            		//System.out.println("Relocating: "+relocating+" Time: "+this.locateTime);
+            	}
+            	/*
+            	double x = -1 * (attacker.posX - entitylivingbase.posX);// ? entitylivingbase.posX - attacker.posX : attacker.posX - entitylivingbase.posX;// + (this.attacker.world.rand.nextInt(100) <= 50 ? 0 : 5);
+            	double y = entitylivingbase.posY;// > attacker.posX ? entitylivingbase.posX - attacker.posX : attacker.posX - entitylivingbase.posX;
+            	double z = -1 * (attacker.posZ - entitylivingbase.posZ);//> attacker.posZ ? entitylivingbase.posZ - attacker.posZ : attacker.posZ - entitylivingbase.posZ;// + (this.attacker.world.rand.nextInt(100) <= 50 ? 0 : 5);
+            	double radius = Math.sqrt(x * x + z * z);
+            	double rad = -1 * Math.atan2(z, x);
             	
-	            if(this.attacker.posX < x)
+            	z = radius * Math.cos(rad);
+            	x = radius * Math.sin(rad);
+            	
+            	targetPos = new BlockPos(x + entitylivingbase.posX, this.world.getTopSolidOrLiquidBlock(new BlockPos(x + entitylivingbase.posX, y, z + entitylivingbase.posZ)).getY(), z + entitylivingbase.posZ);
+            	this.attacker.getNavigator().tryMoveToXYZ(targetPos.getX(), targetPos.getY(), targetPos.getZ(), this.speedTowardsTarget);
+            	*/
+				/*
+            	if(!findPath)
+            	{
+            		this.attacker.getNavigator().tryMoveToEntityLiving(entitylivingbase, speedTowardsTarget);
+            	}*/
+            	
+            	//System.out.println(" Target: ("+targetPos.getX()+","+targetPos.getY()+","+targetPos.getZ()+") Pos: ("+this.attacker.posX+","+this.attacker.posY+","+this.attacker.posZ+")");
+        	
+
+	            /*if(this.attacker.posX < x)
 	            {
 	            	x += 20;
 	            }
@@ -210,6 +317,7 @@ public class EntityAIAttackWithMelee extends EntityAIBase
 
             	
             	findPath = this.attacker.getNavigator().tryMoveToXYZ(x, y, z, this.speedTowardsTarget);
+            	*/
             }
             
             
@@ -231,6 +339,7 @@ public class EntityAIAttackWithMelee extends EntityAIBase
         if(this.attacker.isRiding()) d1 = 2;
         if (p_190102_2_ - d1 <= d0 && this.attackTick <= 0)
         {
+        	this.relocating = true;
             this.attackTick = 20;
             this.attacker.swingArm(EnumHand.MAIN_HAND);
             this.attacker.attackEntityAsMob(p_190102_1_);

@@ -1,0 +1,52 @@
+package net.theexceptionist.coherentvillages.main.entity.spells;
+
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.util.DamageSource;
+import net.theexceptionist.coherentvillages.main.entity.EntityHumanVillager;
+
+public class SpellLaser extends Spell {
+	private int coolDown, setCoolDown;
+	private int damage;
+	private int explosion;
+	
+	public SpellLaser(String name, int type, int coolDown, int damage, int explosion) {
+		super(name, type);
+		this.coolDown = coolDown;
+		this.setCoolDown = coolDown;
+		this.damage = damage;
+		this.explosion = explosion;
+	}
+
+	@Override
+	public void execute(EntityLivingBase caster) {
+		if(coolDown <= 0 && caster instanceof EntityLiving)
+		{
+			EntityLivingBase target = ((EntityLiving)caster).getAttackTarget();
+			
+			this.spawnEndParticle(target.world, target, target.posX, target.posY, target.posZ);
+			target.attackEntityFrom(DamageSource.causeIndirectMagicDamage(caster, caster), damage);
+           // entitylivingbase.attackEntityFrom(DamageSource.causeMobDamage(this.guardian), (float)this.guardian.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue());
+            if(explosion == 0)
+            {
+            	int explosion = 0;
+            	
+            	if(caster instanceof EntityHumanVillager) explosion = ((EntityHumanVillager)caster).getVocation().getRank();
+            	
+                caster.world.newExplosion((Entity)null, target.posX, target.posY, target.posZ, (float)explosion, true, true);
+            }
+            else if(explosion != -1)
+            {
+                caster.world.newExplosion((Entity)null, target.posX, target.posY, target.posZ, (float)explosion, true, true);
+            }
+			
+			coolDown = this.setCoolDown;
+		}
+		else
+		{
+			coolDown--;
+		}
+	}
+
+}

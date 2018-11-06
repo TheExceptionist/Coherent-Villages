@@ -3,6 +3,9 @@ package net.theexceptionist.coherentvillages.main.entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntitySkeleton;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 import net.theexceptionist.coherentvillages.entity.ai.EntityAIFollowEntity;
 import net.theexceptionist.coherentvillages.entity.ai.EntityAIShareTargetPlayer;
@@ -14,6 +17,13 @@ public class EntitySkeletonSummon extends EntitySkeleton implements IEntityFollo
 	
 	public EntitySkeletonSummon(World worldIn) {
 		super(worldIn);
+		
+		this.onInitialSpawn(worldIn.getDifficultyForLocation(this.getPosition()), null);
+		
+		if(worldIn.rand.nextInt(100) <= 50) 
+		{
+			this.setHeldItem(EnumHand.MAIN_HAND, new ItemStack(Items.IRON_SWORD));
+		}
 	}
 
 	@Override

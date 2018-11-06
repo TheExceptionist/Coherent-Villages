@@ -1,0 +1,35 @@
+package net.theexceptionist.coherentvillages.main.entity.spells;
+
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
+import net.theexceptionist.coherentvillages.main.entity.EntityHumanVillager;
+
+public class SpellThrall extends Spell {
+
+	private int duration;
+
+	public SpellThrall(String name, int type, int cool
+			int duration) {
+		super(name, type);
+		this.duration = duration;
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public void execute(EntityLivingBase caster) {
+		if(caster instanceof EntityHumanVillager)
+		{
+			EntityHumanVillager human = (EntityHumanVillager)caster;
+			EntityLivingBase target = human.getAttackTarget();
+			
+			if(target != null && target instanceof EntityHumanVillager)
+			{
+				EntityHumanVillager villager = (EntityHumanVillager) target;
+				
+				villager.setMaster(caster);
+				villager.setControlTime(duration);
+			}
+		}
+	}
+
+}

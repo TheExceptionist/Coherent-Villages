@@ -1,0 +1,27 @@
+package net.theexceptionist.coherentvillages.main.entity.spells;
+
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.init.MobEffects;
+import net.minecraft.potion.PotionEffect;
+import net.minecraft.potion.PotionType;
+
+public class SpellInflict extends Spell{
+
+	private PotionType inflict;
+	
+	public SpellInflict(String name, int type, PotionType inflict) {
+		super(name, type);
+		this.inflict = inflict;
+
+	}
+
+	@Override
+	public void execute(EntityLivingBase caster) {
+		for (PotionEffect potioneffect : inflict.getEffects())
+        {
+        	if(targetUndead && (potioneffect.getPotion() == MobEffects.INSTANT_HEALTH)) undeadEffective = true;
+        	else if(targetSpider && (potioneffect.getPotion() != MobEffects.POISON)) spiderEffective = true;
+        }
+	}
+
+}

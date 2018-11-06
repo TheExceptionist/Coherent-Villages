@@ -97,8 +97,7 @@ public class CommandCreate implements ICommand{
             	boolean vampire = false, bjornserker = false, wraith = false;
 	            AttributeVocation vocation = race.getVocationFromString(args[1]);
 	            EntityHumanVillager villager = null;//new EntityHumanVillager(world, race.getID(), vocation, 0, false);
-            	AttributeVocation job = race.getRandomSoldier(world);
-            	
+            	AttributeVocation job = race.getRandomSoldier(world);            	
             	if(args.length > 2) count = Integer.parseInt(args[2]);
             	if(args.length > 3) 
             	{
@@ -106,7 +105,7 @@ public class CommandCreate implements ICommand{
             		bjornserker = Integer.parseInt(args[3]) == 1;
             		wraith = Integer.parseInt(args[3]) == 2;
             	}
-	            
+            
 	            for(int i = 0; i < count; i++)
 	            {
 	            	if(vocation != null) 
@@ -130,7 +129,15 @@ public class CommandCreate implements ICommand{
 	            	}
 	 
 		            villager.setLocationAndAngles((double)sender.getPosition().getX() + 0.5D, (double)sender.getPosition().getY(), (double)sender.getPosition().getZ() + 0.5D, 0.0F, 0.0F);
-		            
+	            	int faction = villager.getFactionNumber();
+	            	
+	               // System.out.println("2 - Bandit? :"+vocation.getType() == AttributeVocation.CLASS_BANDIT+" Faction Number: "+faction);
+	            	
+	            	if(args.length > 4) 
+	            	{
+	            		faction = Integer.parseInt(args[4]);
+	            	}
+	            	
 		            if(vampire)
 		            {
 		            	villager.setVampire(true);
@@ -143,6 +150,8 @@ public class CommandCreate implements ICommand{
 		            {
                     	villager.setShifter(true, new EntityWraith(world), false, 1);	
 		            }
+		            
+		            villager.setFactionNumber(faction);
 		            
 		            world.spawnEntity(villager);
 		            sender.sendMessage(new TextComponentString("Successfully spawned new "+villager.getRace().getName()+" "+villager.getVocation().getName()+": "+villager.getTitle()));

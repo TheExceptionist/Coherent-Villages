@@ -1,0 +1,45 @@
+package net.theexceptionist.coherentvillages.main.entity.spells;
+
+import java.util.List;
+
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
+import net.theexceptionist.coherentvillages.main.entity.EntityHumanVillager;
+
+public class SpellExtendLife extends Spell {
+	private int coolDown, coolDownSet;
+	private int health;
+	public SpellExtendLife(String name, int type, int health, int coolDown) {
+		super(name, type);
+		this.health = health;
+		this.coolDown = coolDownSet = coolDown;
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public void execute(EntityLivingBase caster) {
+		// TODO Auto-generated method stub
+		if(caster instanceof EntityHumanVillager)
+		{
+			EntityHumanVillager villager = (EntityHumanVillager) caster;
+			
+			if(villager.inCombat())
+			{
+				List<Entity> entities = caster.world.getEntitiesWithinAABBExcludingEntity(caster, caster.getEntityBoundingBox());
+				
+				for(Entity entity : entities)
+				{
+					if(entity instanceof EntityLiving)
+					{
+						if(((EntityLiving) entity).isEntityUndead())
+						{
+							entity.setDead();
+						}
+					}
+				}
+			}
+		}
+	}
+
+}

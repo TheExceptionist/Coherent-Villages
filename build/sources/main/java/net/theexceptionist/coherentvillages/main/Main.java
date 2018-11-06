@@ -153,6 +153,11 @@ public class Main
     			"slav_zombie_infest_rate=2\n",
     			"#The chance a Slavic Village will mongol infested!\n",
     			"slav_mongol_infest_rate=8\n",
+    			"#=====ARABIC CONFIGS=======",
+    			"#The chance a Arab Village will bandit infested!\n",
+    			"arab_bandit_infest_rate=23\n",
+    			"#The chance a Arab Village will zombie infested!\n",
+    			"arab_zombie_infest_rate=2\n",
     			"#=====Event CONFIGS=======",
     			"#Show event messages!\n",
     			"show_event_messages=1\n",
@@ -233,6 +238,9 @@ public class Main
 	public static int SMALL_SKIRMISH_RATE = 50;
 	public static int MEDIUM_SKIRMISH_RATE = 50;
 	public static int LARGE_SKIRMISH_RATE = 50;
+	
+	public static int arab_zombie_infest_rate = 2;
+	public static int arab_bandit_infest_rate = 23;
 
 	public static int slav_zombie_infest_rate = 2;
 
@@ -434,6 +442,16 @@ public class Main
 				{
 					german_vampire_spawn_rate = value;
 					System.out.println("New German Vampire Turn Rate: "+value);
+				}
+				else if(parts[0].contains("arab_zombie_infest"))
+				{
+					arab_zombie_infest_rate = value;
+					System.out.println("New Arab Zombie Infest Rate: "+value);
+				}
+				else if(parts[0].contains("arab_bandit_infest"))
+				{
+					arab_bandit_infest_rate = value;
+					System.out.println("New Arab Bandit Infest Rate: "+value);
 				}
 				else if(parts[0].contains("slav_zombie_infest"))
 				{

@@ -1,0 +1,48 @@
+package net.theexceptionist.coherentvillages.main.entity.spells;
+
+import net.minecraft.block.Block;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
+
+public class SpellEncase extends Spell {
+
+	private int coolDown, setCoolDown;
+	private Block encasingBlock;
+	private int radius;
+
+	
+	public SpellEncase(String name, int type, int coolDown, int radius, Block encasingBlock) {
+		super(name, type);
+		this.coolDown = coolDown;
+		this.setCoolDown = coolDown;
+		this.radius = radius;
+		this.encasingBlock = encasingBlock;
+	}
+
+	@Override
+	public void execute(EntityLivingBase caster) {
+		// TODO Auto-generated method stub
+		if(coolDown <= 0 && caster instanceof EntityLiving)
+		{
+			EntityLivingBase target = ((EntityLiving)caster).getAttackTarget();
+			
+			for(int x = -radius; x < radius; x++)
+			{
+				for(int y = -radius; y < radius; y++)
+				{
+					for(int z = -radius; z < radius; z++)
+					{
+						
+					}
+				}
+			}
+			
+			coolDown = this.setCoolDown;
+		}
+		else
+		{
+			coolDown--;
+		}
+	}
+
+}

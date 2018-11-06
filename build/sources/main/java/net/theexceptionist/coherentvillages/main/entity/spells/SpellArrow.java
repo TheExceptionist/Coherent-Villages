@@ -48,7 +48,7 @@ public class SpellArrow extends Spell{
 	        EntityLivingBase entitylivingbase = ((EntityLiving)caster).getAttackTarget();
 	        World world = caster.world;
 	        
-	        world.playSound((EntityPlayer)null, caster.posX, caster.posY, caster.posZ, SoundEvents.ENTITY_BLAZE_SHOOT, SoundCategory.NEUTRAL, 2.0F, 0.5F + world.rand.nextFloat() * 0.2F);
+	        world.playSound((EntityPlayer)null, caster.posX, caster.posY, caster.posZ, SoundEvents.ENTITY_ARROW_SHOOT, SoundCategory.NEUTRAL, 2.0F, 0.5F + world.rand.nextFloat() * 0.2F);
 		    
 	        int numFireballs = count;
 	        if(isVolley) numFireballs = world.rand.nextInt(count) + 1;
@@ -95,7 +95,8 @@ public class SpellArrow extends Spell{
 	        	}
 	        	
 	    		entityarrow.setDamage((float)caster.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue() / (2 * (caster.getRNG().nextInt(2) - 1)));
-	    		
+	    		//entityarrow.setIsCritical(true);
+
 	           double d0 = entitylivingbase.posX - x;
 	           double d1 = entitylivingbase.getEntityBoundingBox().minY + (double)(entitylivingbase.height / 3.0F) - entityarrow.posY;
 	           double d2 = entitylivingbase.posZ - z;

@@ -1,0 +1,45 @@
+package net.theexceptionist.coherentvillages.main.entity.spells;
+
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.init.MobEffects;
+import net.minecraft.potion.PotionEffect;
+import net.minecraft.potion.PotionType;
+
+public class SpellInflict extends Spell{
+
+	private PotionType inflict;
+	private int coolDown;
+	
+	public SpellInflict(String name, int type, int coolDown, PotionType inflict) {
+		super(name, type);
+		this.coolDown = coolDown;
+		this.inflict = inflict;
+
+	}
+
+	@Override
+	public void execute(EntityLivingBase caster) {
+		if(caster instanceof EntityLiving)
+		{
+			EntityLivingBase target = ((EntityLiving)caster).getAttackTarget();
+			
+			if(target != null)
+			{
+				for (PotionEffect potioneffect : inflict.getEffects())
+		        {
+					target.addPotionEffect(new PotionEffect(potioneffect));
+		        }
+				
+				double x = caster.posX - target.posX;
+				double z = caster.posZ - target.posZ;
+				
+				if(x != 0) x /= x;
+				if(z != 0) z /= z;
+				
+				target.addVelocity(x, 0, z);
+			}
+		}
+	}
+
+}

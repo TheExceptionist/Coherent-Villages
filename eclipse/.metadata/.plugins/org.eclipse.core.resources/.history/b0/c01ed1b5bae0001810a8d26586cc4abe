@@ -1,0 +1,56 @@
+package net.theexceptionist.coherentvillages.main.entity.spells;
+
+import net.minecraft.block.Block;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.util.math.BlockPos;
+
+public class SpellEncase extends Spell {
+
+	private int coolDown, setCoolDown;
+	private Block encasingBlock, castSpot = null;
+	private int radius;
+	private boolean casted = false;
+
+	
+	public SpellEncase(String name, int type, int coolDown, int radius, Block encasingBlock) {
+		super(name, type);
+		this.coolDown = coolDown;
+		this.setCoolDown = coolDown;
+		this.radius = radius;
+		this.encasingBlock = encasingBlock;
+	}
+
+	@Override
+	public void execute(EntityLivingBase caster) {
+		// TODO Auto-generated method stub
+		if(coolDown <= 0 && caster instanceof EntityLiving)
+		{
+			EntityLivingBase target = ((EntityLiving)caster).getAttackTarget();
+			
+			for(int x = -radius; x < radius; x++)
+			{
+				for(int y = -radius; y < radius; y++)
+				{
+					for(int z = -radius; z < radius; z++)
+					{
+						BlockPos spawnPos = caster.getPosition().up().add(x, y, z);
+						
+						if(caster.world.isAirBlock(spawnPos))
+						{
+							caster.world.setBlockState(spawnPos, encasingBlock.getDefaultState());
+						}
+					}
+				}
+			}
+			
+			coolDown = this.setCoolDown;
+			casted  = true;
+		}
+		else
+		{
+			coolDown--;
+		}
+	}
+
+}

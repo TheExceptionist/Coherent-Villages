@@ -1,0 +1,28 @@
+package net.theexceptionist.coherentvillages.main.entity.spells;
+
+import net.minecraft.block.Block;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.util.math.BlockPos;
+
+public class SpellTransmuteFoot extends Spell{
+	private Block toChange;
+	private Block changeTo;
+	public SpellTransmuteFoot(String name, int type, Block toChange, Block changeTo) {
+		super(name, type);
+		
+		this.toChange = toChange;
+		this.changeTo = changeTo;
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public void execute(EntityLivingBase caster) {
+		BlockPos blockToChange = caster.getPosition().down();
+		
+		if(caster.world.getBlockState(blockToChange).getBlock() == toChange)
+		{
+			
+		}
+	}
+
+}

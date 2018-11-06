@@ -77,7 +77,8 @@ public class EntityModLargeFireball  extends EntityLargeFireball
         		villager = (EntityHumanVillager) shootingEntity;
             	if(villager.isDestructive())
             	{
-            		this.world.newExplosion((Entity)null, this.posX, this.posY, this.posZ, (float)this.explosionPower, true, true);            	}
+            		this.world.newExplosion((Entity)null, this.posX, this.posY, this.posZ, (float)this.explosionPower, true, true);            	
+            	}
         	}
 
         	

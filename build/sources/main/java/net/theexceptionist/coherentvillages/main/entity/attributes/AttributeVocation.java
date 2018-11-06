@@ -3,6 +3,7 @@ package net.theexceptionist.coherentvillages.main.entity.attributes;
 import java.util.ArrayList;
 import java.util.Random;
 
+import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.potion.PotionType;
 import net.theexceptionist.coherentvillages.main.entity.spells.Spell;
@@ -109,6 +110,10 @@ public class AttributeVocation {
 	private int horseChance = 5;
 
 	private float scale = 1;
+
+	private boolean breakBlocks = false;
+
+	private Block targetBlock = null;
 	//protected Spell[] spells
 	//protected PotionType[] potions
 	public static ArrayList<AttributeVocation> jobs = new ArrayList<AttributeVocation>();
@@ -127,7 +132,9 @@ public class AttributeVocation {
 		this.jobs.add(this);
 	}
 	
-	public AttributeVocation(final String name, final int type, final int rank, final int upgradeReq, final AttributeRace race, final boolean canRide, final boolean usesShield, final int shieldChance, final int potionChance, final int armorChance, final boolean alwaysBlock, Random rand)
+	public AttributeVocation(final String name, final int type, final int rank, final int upgradeReq, 
+			final AttributeRace race, final boolean canRide, final boolean usesShield, final int shieldChance, 
+			final int potionChance, final int armorChance, final boolean alwaysBlock, Random rand)
 	{
 		this(name, type, rank, upgradeReq, race);
 		this.canRide = canRide;
@@ -141,7 +148,8 @@ public class AttributeVocation {
 		this.setEquipment();
 	}
 	
-	public AttributeVocation(final String name, final int type, final int rank, final int upgradeReq, final AttributeRace race, final Item heldItem, final int subType)
+	public AttributeVocation(final String name, final int type, final int rank, final int upgradeReq, 
+			final AttributeRace race, final Item heldItem, final int subType)
 	{
 		this(name, type, rank, upgradeReq, race);
 		this.meleeWeapon = heldItem;
@@ -149,28 +157,49 @@ public class AttributeVocation {
 		this.potions[POTION_SLOT_PASSIVE_1] = race.potions.get(AttributeRace.POTION_1);
 	}
 	
-	public AttributeVocation(String string, int classBandit, int i, int j, AttributeRace attributeRace, boolean b,
-			boolean c, int k, int p, final int armorChance, final boolean alwaysBlock, Random rand, int classOver) {
-		this(string, classBandit, i, j, attributeRace, b, c, k, p, armorChance, alwaysBlock, rand);
+	public AttributeVocation(String name, int type, int rank, int upgradeReq, AttributeRace attributeRace, 
+			final boolean canRide, final boolean usesShield, final int shieldChance, 
+			final int potionChance, final int armorChance, final boolean alwaysBlock, Random rand, int classOver) {
+		this(name, type, rank, upgradeReq, attributeRace, canRide, usesShield, shieldChance, potionChance, armorChance, alwaysBlock, rand);
 		this.classOver  = classOver;
 		this.rand = rand;
 		this.setEquipment();
 		//System.out.println(classOver);
 	}
 
-	public AttributeVocation(String string, int classAlchemist, int i, int j, AttributeRace attributeRace, boolean b,
-			boolean c, int k, int p, final int armorChance, final boolean alwaysBlock, Random rand, boolean healer) {
-		this(string, classAlchemist, i, j, attributeRace, b, c, k, p, armorChance, alwaysBlock, rand);
+	public AttributeVocation(String name, int type, int rank, int upgradeReq, AttributeRace attributeRace, 
+			final boolean canRide, final boolean usesShield, final int shieldChance, 
+			final int potionChance, final int armorChance, final boolean alwaysBlock, Random rand, boolean healer) {
+		this(name, type, rank, upgradeReq, attributeRace, canRide, usesShield, shieldChance, potionChance, armorChance, alwaysBlock, rand);
 		this.canHeal = healer;
 		this.rand = rand;
 		this.setEquipment();
 	}
 
-	public AttributeVocation(String string, int classBandit, int i, int j, AttributeRace attributeRace, boolean b,
-			boolean c, int k, int p, final int armorChance, final boolean alwaysBlock, Random rand, boolean healer, boolean alwaysHorse) {
-		this(string,  classBandit, i, j, attributeRace, b, c, k, p, armorChance, alwaysBlock, rand, healer);
+	public AttributeVocation(String name, int type, int rank, int upgradeReq, AttributeRace attributeRace, 
+			final boolean canRide, final boolean usesShield, final int shieldChance, 
+			final int potionChance, final int armorChance, final boolean alwaysBlock, Random rand
+			, boolean healer, boolean alwaysHorse) {
+		this(name, type, rank, upgradeReq, attributeRace, canRide, usesShield, shieldChance, potionChance, armorChance, alwaysBlock, rand);
 		this.alwaysHorse = alwaysHorse;
 		if(alwaysHorse) horseChance = 100;
+	}
+
+	public AttributeVocation(String string, int classVillager, int i, int j, AttributeRace attributeRace, Item stoneAxe,
+			int subclassWorker, Block log) {
+		this(string, classVillager, i, j, attributeRace, stoneAxe,
+				subclassWorker);
+		this.targetBlock  = log;
+	}
+	
+	
+
+	public Block getTargetBlock() {
+		return targetBlock;
+	}
+
+	public void setTargetBlock(Block targetBlock) {
+		this.targetBlock = targetBlock;
 	}
 
 	public boolean isAlwaysHorse() {
@@ -645,5 +674,23 @@ public class AttributeVocation {
 	public void setScale(float f) {
 		// TODO Auto-generated method stub
 		scale = f;
+	}
+
+	public boolean getBreakBlocks() {
+		// TODO Auto-generated method stub
+		return breakBlocks;
+	}
+	
+	public void setBreakBlocks(boolean b) {
+		// TODO Auto-generated method stub
+		breakBlocks = b;
+	}
+
+	public void setHeal(boolean b) {
+		this.canHeal = b;
+	}
+
+	public void setCanRide(boolean b) {
+		this.canRide = b;
 	}
 }

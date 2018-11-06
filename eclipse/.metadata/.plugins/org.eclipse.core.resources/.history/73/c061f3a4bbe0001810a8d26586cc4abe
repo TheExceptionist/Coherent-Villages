@@ -1,0 +1,32 @@
+package net.theexceptionist.coherentvillages.main.entity.spells;
+
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.util.EnumParticleTypes;
+
+public class SpellLaser extends Spell {
+	private int coolDown, setCoolDown;
+	
+	public SpellLaser(String name, int type, int coolDown) {
+		super(name, type);
+		this.coolDown = coolDown;
+		this.setCoolDown = coolDown;
+	}
+
+	@Override
+	public void execute(EntityLivingBase caster) {
+		if(coolDown <= 0 && caster instanceof EntityLiving)
+		{
+			EntityLivingBase target = ((EntityLiving)caster).getAttackTarget();
+			
+			caster.world.spawnParticle(EnumParticleTypes.PORTAL, target.posX + (target.world.rand.nextDouble() - 0.5D) * (double)target.width, target.posY + target.world.rand.nextDouble() * (double)target.height - 0.25D, target.posZ + (target.world.rand.nextDouble() - 0.5D) * (double)target.width, (target.world.rand.nextDouble() - 0.5D) * 2.0D, -target.world.rand.nextDouble(), (target.world.rand.nextDouble() - 0.5D) * 2.0D);
+	           
+			coolDown = this.setCoolDown;
+		}
+		else
+		{
+			coolDown--;
+		}
+	}
+
+}

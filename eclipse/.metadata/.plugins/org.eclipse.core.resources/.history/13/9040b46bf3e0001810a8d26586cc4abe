@@ -1,0 +1,74 @@
+package net.theexceptionist.coherentvillages.main.entity.spells;
+
+import java.util.Collections;
+import java.util.List;
+
+import javax.annotation.Nullable;
+
+import com.google.common.base.Predicate;
+
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
+import net.minecraft.util.EntitySelectors;
+import net.theexceptionist.coherentvillages.main.entity.EntityHumanVillager;
+
+public class SpellTransformAura<T extends EntityLivingBase> extends Spell {
+
+	private int radius;
+	private Class<T> classTarget;
+	private Class<T> classChange;
+	private Predicate<T> targetEntitySelector;
+
+	public SpellTransformAura(String name, int type, int radius, Class<T> classTarget, Class<T> classChange) {
+		super(name, type);
+		this.radius = radius;
+		this.classTarget = classTarget;
+		this.classChange = classChange;
+		
+		this.targetEntitySelector = new Predicate<T>()
+        {
+            public boolean apply(@Nullable T p_apply_1_)
+            {
+                if (p_apply_1_ == null)
+                {
+                    return false;
+                }
+                else if(classChange.isInstance(p_apply_1_))
+                {
+                	return true;
+                }
+                else
+                {
+                	return false;
+                }
+            }
+        };
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public void execute(EntityLivingBase caster) {
+		// TODO Auto-generated method stub
+		if(caster instanceof EntityHumanVillager)
+		{
+			EntityHumanVillager villager = (EntityHumanVillager) caster;
+			
+			List<T> list = villager.world.<T>getEntitiesWithinAABB(this.classTarget, caster.getEntityBoundingBox().grow(radius).offset(-1, 0, -1), this.targetEntitySelector);
+
+            if (list.isEmpty())
+            {
+                return;
+            }
+            else
+            {
+            	for(T entity : list)
+            	{
+            		if(entity.getHealth() < entity.getMaxHealth() * 0.10) entity.setDead();
+            	}
+            }
+		}
+	}
+
+}

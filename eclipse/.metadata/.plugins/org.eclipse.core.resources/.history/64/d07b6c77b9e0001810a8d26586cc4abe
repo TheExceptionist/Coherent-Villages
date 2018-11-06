@@ -1,0 +1,33 @@
+package net.theexceptionist.coherentvillages.main.entity.spells;
+
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
+
+public class SpellEncase extends Spell {
+
+	private int coolDown, setCoolDown;
+
+	
+	public SpellEncase(String name, int type, int coolDown) {
+		super(name, type);
+		this.coolDown = coolDown;
+		this.setCoolDown = coolDown;
+	}
+
+	@Override
+	public void execute(EntityLivingBase caster) {
+		// TODO Auto-generated method stub
+		if(coolDown <= 0 && caster instanceof EntityLiving)
+		{
+			EntityLivingBase target = ((EntityLiving)caster).getAttackTarget();
+			
+			
+			coolDown = this.setCoolDown;
+		}
+		else
+		{
+			coolDown--;
+		}
+	}
+
+}

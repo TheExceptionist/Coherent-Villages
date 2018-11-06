@@ -4,12 +4,11 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityFireball;
-import net.minecraft.entity.projectile.EntityLargeFireball;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.theexceptionist.coherentvillages.main.entity.EntityHumanVillager;
 import net.theexceptionist.coherentvillages.main.entity.projectile.EntityModFireballSmall;
 import net.theexceptionist.coherentvillages.main.entity.projectile.EntityModLargeFireball;
 
@@ -56,7 +55,14 @@ public class SpellMeteor extends Spell{
 	        	if(largeFireball)
 	        	{
 	        		entitylargefireball = new EntityModLargeFireball(world, x, y, z, 0, -0.2, 0);
-	        		((EntityModLargeFireball)entitylargefireball).explosionPower = power;
+	        		
+	        		if(caster instanceof EntityHumanVillager)
+	        		{
+	        			int rank = ((EntityHumanVillager)caster).getVocation().getRank();
+	        			((EntityModLargeFireball)entitylargefireball).explosionPower = rank;
+	        		}
+	        		else ((EntityModLargeFireball)entitylargefireball).explosionPower = power;
+	        		
 	        		((EntityModLargeFireball)entitylargefireball).setShooter(caster);
 	        	}
 	        	else

@@ -7,6 +7,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.theexceptionist.coherentvillages.events.EventModTick;
 import net.theexceptionist.coherentvillages.events.EventOverrideVillages;
 import net.theexceptionist.coherentvillages.events.PlayerConnectionEvent;
+import net.theexceptionist.coherentvillages.gui.GuiSetup;
 import net.theexceptionist.coherentvillages.main.entity.EntityBjornserker;
 import net.theexceptionist.coherentvillages.main.entity.EntityBloodBat;
 import net.theexceptionist.coherentvillages.main.entity.EntityDrachen;
@@ -109,7 +110,14 @@ public class ClientProxy extends CommonProxy {
         //renderManager.entityRenderMap.put(EntityVillagerEvilMage.class, new RenderVillagerEvilMage(renderManager));*/
         
         //renderManager.entityRenderMap.put(EntityVillagerArrow.class, new RenderVillagerArrow(renderManager));
-}
+	}
+	
+	@Override
+	public void openGUI(int id)
+	{
+		//System.out.println("^%$%#@!#$%^&%$#%^&* Open");
+		if(id == GuiSetup.ID)Minecraft.getMinecraft().displayGuiScreen(new GuiSetup());
+	}
 	
 	public void initEvents(){
 		MinecraftForge.EVENT_BUS.register(new EventModTick());	

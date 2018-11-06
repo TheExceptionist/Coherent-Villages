@@ -1,0 +1,13 @@
+package net.theexceptionist.coherentvillages.gui;
+
+import net.minecraft.client.gui.GuiScreen;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
+@SideOnly(Side.CLIENT)
+public class GuiSetup extends GuiScreen
+{
+
+	public static int ID = 0;
+
+}

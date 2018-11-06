@@ -1,0 +1,67 @@
+package net.theexceptionist.coherentvillages.main.entity.spells;
+
+import java.util.List;
+
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.passive.AbstractHorse;
+import net.minecraft.potion.PotionEffect;
+import net.minecraft.potion.PotionType;
+import net.theexceptionist.coherentvillages.main.entity.EntityHumanVillager;
+
+public class SpellHarmingSkin extends Spell {
+
+	private int damageType = -1;
+
+	private PotionType potionType;
+	
+	private static final int FIRE = 0;
+	private static final int SPIKES = 1;
+
+	public SpellHarmingSkin(String name, int type, int damageType, PotionType potionType) {
+		super(name, type);
+		this.damageType = damageType;
+		this.potionType = potionType;
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public void execute(EntityLivingBase caster) {
+		// TODO Auto-generated method stub
+		if(caster instanceof EntityHumanVillager)
+		{
+			EntityHumanVillager villager = (EntityHumanVillager) caster;
+			
+			if(villager.inCombat())
+			{
+				List<Entity> entities = caster.world.getEntitiesWithinAABBExcludingEntity(caster, caster.getEntityBoundingBox());
+				
+				for(Entity entity : entities)
+				{
+					if(entity == villager) continue;
+					if(entity instanceof AbstractHorse) continue;
+					if(entity instanceof EntityHumanVillager)
+					{
+						if(villager.isHostileFaction((EntityHumanVillager)entity)) continue;
+					}
+					
+					if(damageType > 0)
+					{
+						switch(damageType)
+						{
+							
+						}
+					}
+					else if(potionType != null)
+					{
+						for (PotionEffect potioneffect : potionType.getEffects())
+				        {
+							entity.addPotionEffect(new PotionEffect(potioneffect));
+				        }
+					}
+				}
+			}
+		}
+	}
+
+}

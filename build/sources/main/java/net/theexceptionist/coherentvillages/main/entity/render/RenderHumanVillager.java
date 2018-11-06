@@ -1,10 +1,13 @@
 package net.theexceptionist.coherentvillages.main.entity.render;
 
 import net.minecraft.client.model.ModelBiped;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderBiped;
 import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.entity.layers.LayerArrow;
 import net.minecraft.client.renderer.entity.layers.LayerBipedArmor;
 import net.minecraft.client.renderer.entity.layers.LayerCustomHead;
+import net.minecraft.entity.monster.EntitySlime;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -55,6 +58,7 @@ public class RenderHumanVillager extends RenderBiped<EntityHumanVillager>
 	public RenderHumanVillager(RenderManager rendermanagerIn) {
 		super(rendermanagerIn, new ModelHumanVillager(), 0.5f);
         this.addLayer(new LayerBipedArmor(this));
+        this.addLayer(new LayerArrow(this));
         this.addLayer(new LayerCustomHead(this.getMainModel().bipedHead));
 	}
 	
@@ -118,6 +122,7 @@ public class RenderHumanVillager extends RenderBiped<EntityHumanVillager>
                 if (enumaction1 == EnumAction.BLOCK)
                 {
                     modelbiped$armpose1 = ModelBiped.ArmPose.BLOCK;
+                    //System.out.println("In use: "+villager.getItemInUseCount());
                 }
                 // FORGE: fix MC-88356 allow offhand to use bow and arrow animation
                 else if (enumaction1 == EnumAction.BOW)
