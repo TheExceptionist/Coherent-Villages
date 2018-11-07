@@ -13,13 +13,15 @@ public class SpellLaser extends Spell {
 	private int coolDown, setCoolDown;
 	private int damage;
 	private int explosion;
+	private int severity;
 	
-	public SpellLaser(String name, int type, int coolDown, int damage, int explosion) {
+	public SpellLaser(String name, int type, int coolDown, int damage, int explosion, int severity) {
 		super(name, type);
 		this.coolDown = coolDown;
 		this.setCoolDown = coolDown;
 		this.damage = damage;
 		this.explosion = explosion;
+		this.severity = severity;
 	}
 	
 	@Override
@@ -43,14 +45,14 @@ public class SpellLaser extends Spell {
             }
             else
             {
-    			target.attackEntityFrom(DamageSource.causeIndirectMagicDamage(caster, caster), damage);
-    			target.attackEntityFrom(DamageSource.MAGIC, damage);
-                target.addPotionEffect(new PotionEffect(MobEffects.WITHER, 300, 1));
+    			target.attackEntityFrom(DamageSource.causeIndirectMagicDamage(caster, caster), damage * severity);
+    			target.attackEntityFrom(DamageSource.MAGIC, damage * severity);
+                target.addPotionEffect(new PotionEffect(MobEffects.WITHER, 300 * severity, 1));
             }
 			
 			coolDown = this.setCoolDown;
 			
-			if(target instanceof EntityHumanVillager) ((EntityHumanVillager)target).spawnEndParticle();
+			if(target instanceof EntityHumanVillager) ((EntityHumanVillager)target).spawnExplosionParticle();
 
 		}
 		else

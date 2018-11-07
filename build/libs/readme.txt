@@ -661,6 +661,19 @@ Archer upgrades to LEgate
 **Noted these are all the spells that were added... And by no means a list of all the spells villagers can perform
 
 
+-Pre-Release Test v0.0.5.8
+=========================================
+*Added Sha'ir a new bandit for the Arabs
+*Added Master Healer and Master Alchemists to the Latins
+*Added additional spells slots for some villagers
+*Added additional potion slots for all alchemists
+*Added Poison Arrows to Slavs
+*Some Villagers spawn w
+ith enchantments
+*Arrows stick into npcs
+*Added some new spells
+**Added Troop Quality Attribute
+
 
 
 

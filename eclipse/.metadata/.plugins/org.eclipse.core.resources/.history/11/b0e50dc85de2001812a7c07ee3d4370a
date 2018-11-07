@@ -1,0 +1,19 @@
+package net.theexceptionist.coherentvillages.main.entity.spells;
+
+import net.minecraft.entity.EntityLivingBase;
+
+public class SpellDrainAura extends Spell{
+	private int radius;
+	private int amount;
+
+	public SpellDrainAura(String name, int type, int radius, int amount) {
+		super(name, type);
+	}
+
+	@Override
+	public void execute(EntityLivingBase caster) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

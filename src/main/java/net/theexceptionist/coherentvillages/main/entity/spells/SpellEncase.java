@@ -54,7 +54,7 @@ public class SpellEncase extends Spell {
 			duration = 0;
 			casted  = true;	
 			
-			if(target instanceof EntityHumanVillager) ((EntityHumanVillager)target).spawnBreakParticle();
+			if(target instanceof EntityHumanVillager) ((EntityHumanVillager)target).spawnExplosionParticle();
 		}
 		else
 		{

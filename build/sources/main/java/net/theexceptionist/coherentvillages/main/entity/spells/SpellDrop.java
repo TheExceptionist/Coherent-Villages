@@ -26,9 +26,9 @@ public class SpellDrop extends Spell {
 			{
 				EntityLivingBase entity = ((EntityLiving)caster).getAttackTarget();
 				
-				if(entity instanceof EntityHumanVillager) ((EntityHumanVillager)entity).spawnBreakParticle();
+				if(entity instanceof EntityHumanVillager) ((EntityHumanVillager)entity).spawnExplosionParticle();
 				entity.setPosition(entity.posX, entity.posY + height, entity.posZ);
-				if(entity instanceof EntityHumanVillager) ((EntityHumanVillager)entity).spawnDustParticle();
+				if(entity instanceof EntityHumanVillager) ((EntityHumanVillager)entity).spawnExplosionParticle();
 				
 				coolDown = coolDownSet;
 				

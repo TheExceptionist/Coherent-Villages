@@ -10,6 +10,8 @@ import net.minecraft.world.World;
 public abstract class Spell {
 	public static final SpellFireball fireball = new SpellFireball("Fireball", Spell.SPELL_TYPE_ATTACK, 1, 0, 5, 10,  false, false);
 	public static final SpellFireball fireball_volley = new SpellFireball("Fireball Volley", Spell.SPELL_TYPE_ATTACK, 5, 0, 1, 10, true, false);
+	public static final SpellFireball fireball_barrage = new SpellFireball("Fireball Barrage", Spell.SPELL_TYPE_ATTACK, 10, 0, 3, 10, true, false);
+
 	public static final SpellFireball greater_fireball = new SpellFireball("Greater Fireball", Spell.SPELL_TYPE_ATTACK, 1, 0, 2, 10, false, true);
 	public static final SpellFireball greater_fireball_volley = new SpellFireball("Greater Fireball Volley", Spell.SPELL_TYPE_ATTACK, 3, 0, 1, 20, true, true);
 	public static final SpellFireball firestorm = new SpellFireball("Firestorm", Spell.SPELL_TYPE_ATTACK, 3, 1, 1, 40, true, true);
@@ -25,6 +27,14 @@ public abstract class Spell {
 	public static final SpellArrow arrow_meteorball = new SpellArrow("Greater Arrow", Spell.SPELL_TYPE_ATTACK, 2, 0, 2, 10, false, true, SpellArrow.ATTACK_TYPE_DROP);
 	public static final SpellArrow arrow_meteorball_volley = new SpellArrow("Greater Arrow Volley", Spell.SPELL_TYPE_ATTACK, 5, 0, 1, 20, true, true, SpellArrow.ATTACK_TYPE_DROP);
 	public static final SpellArrow arrowstorm = new SpellArrow("Arrowstorm", Spell.SPELL_TYPE_ATTACK, 10, 1, 1, 40, true, true, SpellArrow.ATTACK_TYPE_CIRCLE);
+
+	public static final SpellPlatform small_platform = new SpellPlatform("Small Platform", Spell.SPELL_TYPE_TRANSMUTE, 1, 3, 1200, 0);
+	public static final SpellPlatform medium_platform = new SpellPlatform("Medium Platform", Spell.SPELL_TYPE_TRANSMUTE, 3, 6, 1600, 0);
+	public static final SpellPlatform large_platform = new SpellPlatform("Large Platform", Spell.SPELL_TYPE_TRANSMUTE, 5, 8, 2000, 0);
+
+	public static final SpellPlatform small_ditch = new SpellPlatform("Small Ditch", Spell.SPELL_TYPE_TRANSMUTE, 1, -4, 1200, 1);
+	public static final SpellPlatform medium_ditch = new SpellPlatform("Medium Ditch", Spell.SPELL_TYPE_TRANSMUTE, 3, -6, 1600, 1);
+	public static final SpellPlatform large_ditch = new SpellPlatform("Large Ditch", Spell.SPELL_TYPE_TRANSMUTE, 5, -8, 2000, 1);
 
 	public static final SpellSummonAncient summon_ancient_warror = new SpellSummonAncient("Summon Ancient Warrior", Spell.SPELL_TYPE_SUMMON, 40, 3, 1000);
 	
@@ -66,6 +76,10 @@ public abstract class Spell {
 	public static final SpellBanishTouch banish_aura = new SpellBanishTouch("Banish Slin", Spell.SPELL_TYPE_TRANSMUTE, 3);//, -1, -1, PotionTypes.LONG_POISON);
 	public static final SpellTransformAura raise_zombies = new SpellTransformAura("Zombie Skin", Spell.SPELL_TYPE_TRANSMUTE, 3, 0.10f, SpellTransformAura.ZOMBIE);//, -1, -1, PotionTypes.LONG_POISON);
 
+	public static final SpellDrainAura drain_life = new SpellDrainAura("Drain Aura", Spell.SPELL_TYPE_TRANSMUTE, 5, 1);
+	
+	public static final SpellIronFoot iron_foot = new SpellIronFoot("Iron Foot", Spell.SPELL_TYPE_TRANSMUTE);
+	
 	public static final SpellEncase web_encase = new SpellEncase("Web Encase", Spell.SPELL_TYPE_ATTACK, 10, 1000, 1, Blocks.WEB); //SpellHarmingSkin.FIRE, 6, null);//Blocks.WATER, Blocks.ICE, 1, false);
 	public static final SpellEncase ice_tomb = new SpellEncase("Ice Tomb", Spell.SPELL_TYPE_ATTACK, 10, 1000, 2, Blocks.GLASS); //SpellHarmingSkin.FIRE, 6, null);//Blocks.WATER, Blocks.ICE, 1, false);
 	public static final SpellEncase glass_tomb = new SpellEncase("Glass Tomb", Spell.SPELL_TYPE_ATTACK, 10, 1000, 2, Blocks.GLASS); //SpellHarmingSkin.FIRE, 6, null);//Blocks.WATER, Blocks.ICE, 1, false);
@@ -80,15 +94,17 @@ public abstract class Spell {
 	public static final SpellInflict greater_harm = new SpellInflict("Greater Harm", Spell.SPELL_TYPE_ATTACK, 5, PotionTypes.STRONG_HARMING);//1, Blocks.GLASS); //SpellHarmingSkin.FIRE, 6, null);//Blocks.WATER, Blocks.ICE, 1, false);
 	public static final SpellInflict greater_poison = new SpellInflict("Greater Poison", Spell.SPELL_TYPE_ATTACK, 3, PotionTypes.LONG_POISON);//1, Blocks.GLASS); //SpellHarmingSkin.FIRE, 6, null);//Blocks.WATER, Blocks.ICE, 1, false);
 
-	public static final SpellAfflict resistance = new SpellAfflict("Resistance", Spell.SPELL_TYPE_TRANSMUTE, 10, PotionTypes.REGENERATION);//1, Blocks.GLASS); //SpellHarmingSkin.FIRE, 6, null);//Blocks.WATER, Blocks.ICE, 1, false);
+	public static final SpellAfflict regeneration = new SpellAfflict("Resistance", Spell.SPELL_TYPE_TRANSMUTE, 10, PotionTypes.REGENERATION);//1, Blocks.GLASS); //SpellHarmingSkin.FIRE, 6, null);//Blocks.WATER, Blocks.ICE, 1, false);
 	public static final SpellAfflict fire_resistance = new SpellAfflict("Fire Resistance", Spell.SPELL_TYPE_TRANSMUTE, 10, PotionTypes.FIRE_RESISTANCE);//1, Blocks.GLASS); //SpellHarmingSkin.FIRE, 6, null);//Blocks.WATER, Blocks.ICE, 1, false);
-	public static final SpellAfflict strong_resistance = new SpellAfflict("Strong Resistance", Spell.SPELL_TYPE_TRANSMUTE, 10, PotionTypes.STRONG_REGENERATION);//1, Blocks.GLASS); //SpellHarmingSkin.FIRE, 6, null);//Blocks.WATER, Blocks.ICE, 1, false);
+	public static final SpellAfflict strong_regeneration = new SpellAfflict("Strong Resistance", Spell.SPELL_TYPE_TRANSMUTE, 10, PotionTypes.STRONG_REGENERATION);//1, Blocks.GLASS); //SpellHarmingSkin.FIRE, 6, null);//Blocks.WATER, Blocks.ICE, 1, false);
 
 	public static final SpellArrowProof arrow_proof = new SpellArrowProof("Arrow Proof", Spell.SPELL_TYPE_TRANSMUTE);//, 10, PotionTypes.STRONG_REGENERATION);//1, Blocks.GLASS); //SpellHarmingSkin.FIRE, 6, null);//Blocks.WATER, Blocks.ICE, 1, false);
 	public static final SpellTeleport teleport = new SpellTeleport("Teleport", Spell.SPELL_TYPE_TRANSMUTE, 40);//, 10, PotionTypes.STRONG_REGENERATION);//1, Blocks.GLASS); //SpellHarmingSkin.FIRE, 6, null);//Blocks.WATER, Blocks.ICE, 1, false);
 
-	public static final SpellLaser curse = new SpellLaser("Curse", Spell.SPELL_TYPE_ATTACK, 10, 5, -1);//PotionTypes.LONG_POISON);//1, Blocks.GLASS); //SpellHarmingSkin.FIRE, 6, null);//Blocks.WATER, Blocks.ICE, 1, false);
-	public static final SpellLaser implode = new SpellLaser("Implode", Spell.SPELL_TYPE_ATTACK, 10, 5, 0);//PotionTypes.LONG_POISON);//1, Blocks.GLASS); //SpellHarmingSkin.FIRE, 6, null);//Blocks.WATER, Blocks.ICE, 1, false);
+	public static final SpellLaser curse = new SpellLaser("Curse", Spell.SPELL_TYPE_ATTACK, 10, 5, -1, 1);//PotionTypes.LONG_POISON);//1, Blocks.GLASS); //SpellHarmingSkin.FIRE, 6, null);//Blocks.WATER, Blocks.ICE, 1, false);
+	public static final SpellLaser implode = new SpellLaser("Implode", Spell.SPELL_TYPE_ATTACK, 10, 5, 0, 1);//PotionTypes.LONG_POISON);//1, Blocks.GLASS); //SpellHarmingSkin.FIRE, 6, null);//Blocks.WATER, Blocks.ICE, 1, false);
+	public static final SpellLaser curse_greater = new SpellLaser("Greater Curse", Spell.SPELL_TYPE_ATTACK, 10, 5, -1, 3);//PotionTypes.LONG_POISON);//1, Blocks.GLASS); //SpellHarmingSkin.FIRE, 6, null);//Blocks.WATER, Blocks.ICE, 1, false);
+	public static final SpellLaser implode_greater = new SpellLaser("Greater Implode", Spell.SPELL_TYPE_ATTACK, 10, 5, 0, 3);//PotionTypes.LONG_POISON);//1, Blocks.GLASS); //SpellHarmingSkin.FIRE, 6, null);//Blocks.WATER, Blocks.ICE, 1, false);
 	
 	public static final SpellThrall thrall_lesser = new SpellThrall("Lesser Thrall", Spell.SPELL_TYPE_TRANSMUTE, 800, 2400);//, 0);//PotionTypes.LONG_POISON);//1, Blocks.GLASS); //SpellHarmingSkin.FIRE, 6, null);//Blocks.WATER, Blocks.ICE, 1, false);
 	public static final SpellThrall thrall = new SpellThrall("Lesser Thrall", Spell.SPELL_TYPE_TRANSMUTE, 1200, 2400);//, 0);//PotionTypes.LONG_POISON);//1, Blocks.GLASS); //SpellHarmingSkin.FIRE, 6, null);//Blocks.WATER, Blocks.ICE, 1, false);
@@ -102,7 +118,22 @@ public abstract class Spell {
 	public static final SpellDrop bury = new SpellDrop("Bury", Spell.SPELL_TYPE_ATTACK, 10, -10);//, -1);//PotionTypes.LONG_POISON);//1, Blocks.GLASS); //SpellHarmingSkin.FIRE, 6, null);//Blocks.WATER, Blocks.ICE, 1, false);
 	public static final SpellDrop greater_bury = new SpellDrop("Greater Bury", Spell.SPELL_TYPE_ATTACK, 10, -20);//, -1);//PotionTypes.LONG_POISON);//1, Blocks.GLASS); //SpellHarmingSkin.FIRE, 6, null);//Blocks.WATER, Blocks.ICE, 1, false);
 	public static final SpellDrop grave = new SpellDrop("Grave", Spell.SPELL_TYPE_ATTACK, 10, -30);//, -1);//PotionTypes.LONG_POISON);//1, Blocks.GLASS); //SpellHarmingSkin.FIRE, 6, null);//Blocks.WATER, Blocks.ICE, 1, false);
+	public static final Spell.NullSpell NULL_SPELL = new Spell.NullSpell("NULL SPELL", -1);
+	
+	static class NullSpell extends Spell
+	{
+		public NullSpell(String name, int type) {
+			super(name, type);
+			
+		}
 
+		@Override
+		public void execute(EntityLivingBase caster) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+	}
 	//Active
 	public static final int SPELL_TYPE_ATTACK = 0;
 	public static final int SPELL_TYPE_SUMMON = 1;

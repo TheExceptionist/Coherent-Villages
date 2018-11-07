@@ -1,0 +1,17 @@
+package net.theexceptionist.coherentvillages.main.entity.spells;
+
+import net.minecraft.entity.EntityLivingBase;
+
+public class SpellPlatform extends Spell{
+
+	public SpellPlatform(String name, int type) {
+		super(name, type);
+	}
+
+	@Override
+	public void execute(EntityLivingBase caster) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

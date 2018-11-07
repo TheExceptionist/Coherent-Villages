@@ -1,0 +1,71 @@
+package net.theexceptionist.coherentvillages.main.entity.spells;
+
+import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.util.math.BlockPos;
+import net.theexceptionist.coherentvillages.main.Main;
+
+public class SpellPlatform extends Spell{
+
+	private int radius;
+	private int height;
+	private int spellType;
+
+	public SpellPlatform(String name, int type, int radius, int height, int spellType) {
+		super(name, type);
+		this.radius = radius;
+		this.height = height;
+		this.spellType = spellType;
+		
+	}
+
+	@Override
+	public void execute(EntityLivingBase caster) {
+		// TODO Auto-generated method stub
+		
+		int yStart = height < 0 ? -height : 0;
+		int yEnd = height >= 0 ? height : 0;
+		
+		if(caster instanceof EntityLiving && Main.allDestructive)
+		{
+			EntityLivingBase target = spellType == 1 ? ((EntityLiving)caster).getAttackTarget() : caster;
+			BlockPos floor = target.getPosition().down();
+			BlockPos endLoc = target.getPosition();
+			
+			if(caster.hurtTime > 0)
+			{
+				for(int i = -radius; i < radius; i++)
+			     {
+			    	 for(int n = yStart; n < yEnd; n++)
+			    	 {
+			    		 for(int j = -radius; j < radius; j++)
+			    		 {
+			    	 
+					    	BlockPos blockpos = target.getPosition().add(n, i, j);
+				            IBlockState iblockstate = target.world.getBlockState(floor);
+				            Block block = iblockstate.getBlock();
+				
+				            if (yStart < 0 && !block.isAir(iblockstate, caster.world, blockpos) &&  net.minecraftforge.event.ForgeEventFactory.onEntityDestroyBlock(caster, blockpos, iblockstate))
+				            {
+				                caster.world.destroyBlock(blockpos, true);
+				            }
+				            else if(!block.isAir(iblockstate, caster.world, blockpos))
+				            {
+				            	caster.world.setBlockState(blockpos, iblockstate);
+				            }
+				            
+				            endLoc = blockpos.up();
+			    		 }
+			    	 }
+			     }
+				
+	            ((EntityLiving) caster).spawnExplosionParticle();
+	            target.setPosition(endLoc.getX(), endLoc.getY(), endLoc.getZ());
+				caster.hurtTime = 0;
+			}
+		}
+	}
+
+}

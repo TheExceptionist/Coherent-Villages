@@ -1,0 +1,16 @@
+package net.theexceptionist.coherentvillages.main.entity.attributes;
+
+public class AttributeQuality {
+	protected int healthBonus;// = race.getHealthBonus();
+	protected int attackBonus;// = race.getAttackBonus();
+	protected int magicBonus;// = race.getMagicBonus();
+	protected int detectBonus;// = race.getDetectBonus();
+	protected int speedBonus;// = race.getSpeedBonus();
+	protected int knockbackBonus;// = race.getKnockbackBonus();
+	protected int horseHealth;// = race.getHorseHealthBonus();
+	
+	public AttributeQuality()
+	{
+		
+	}
+}

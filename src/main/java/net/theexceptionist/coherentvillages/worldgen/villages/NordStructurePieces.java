@@ -312,6 +312,7 @@ public class NordStructurePieces
                 this.placeStructureBase(worldIn, structureBoundingBoxIn, randomIn, NordBuildingsArray.jarlhouse_1, NordBuildingsArray.JARLHOUSE_LENGTH, NordBuildingsArray.JARLHOUSE_HEIGHT, NordBuildingsArray.JARLHOUSE_WIDTH);
 
                 this.spawnVillagers(worldIn, structureBoundingBoxIn, 2, 1, 2, 1, AttributeVocation.CLASS_MERCENARY, 0, true);
+                this.spawnVillagers(worldIn, structureBoundingBoxIn, 2, 1, 3, 1, AttributeVocation.CLASS_ALCHEMIST, 0, true);
                 return true;
             }
 

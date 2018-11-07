@@ -1,0 +1,145 @@
+package net.theexceptionist.coherentvillages.main.entity.attributes;
+
+import java.util.ArrayList;
+import java.util.Random;
+
+public class AttributeQuality {
+	protected String name;
+	protected int healthBonus;// = race.getHealthBonus();
+	protected int attackBonus;// = race.getAttackBonus();
+	protected int magicBonus;// = race.getMagicBonus();
+	protected int detectBonus;// = race.getDetectBonus();
+	protected int speedBonus;// = race.getSpeedBonus();
+	protected int knockbackBonus;// = race.getKnockbackBonus();
+	protected int horseHealth;// = race.getHorseHealthBonus();
+	
+	public static ArrayList<AttributeQuality> qualities = new ArrayList<AttributeQuality>();
+	
+	protected static AttributeQuality recruit;
+	protected static AttributeQuality levy;
+	protected static AttributeQuality trainee;
+	protected static AttributeQuality apprentice;
+	protected static AttributeQuality young;
+	protected static AttributeQuality old;
+	
+	protected static AttributeQuality regular;
+	
+	protected static AttributeQuality trained;
+	protected static AttributeQuality experienced;
+	protected static AttributeQuality captain;
+	protected static AttributeQuality general;
+	protected static AttributeQuality veteran;
+	protected static AttributeQuality legend;
+	protected static AttributeQuality protege;
+
+
+
+	
+	public AttributeQuality(String name, final int health, final int attack, final int magic,
+			final int detect, final int speed, final int knockback, final int horseHealth)
+	{
+		this.name = name;
+		this.healthBonus = health;
+		this.attackBonus = attack;
+		this.magicBonus = magic;
+		this.detectBonus = detect;
+		this.speedBonus = speed;
+		this.knockbackBonus = knockback;
+		this.horseHealth = horseHealth;
+		qualities.add(this);
+	}
+	
+	public static void init()
+	{
+		recruit = new AttributeQuality("Recruit", -4, -4, -4, -4, -4, -4, -4);
+		levy = new AttributeQuality("Levy", -2, -2, -2, -2, -2, -2, -2);
+		trainee = new AttributeQuality("Trainee", -1, -1, -1, -1, -1, -1, -1);
+		apprentice = new AttributeQuality("Apprentice", -1, -1, -1, -1, -1, -1, -1);
+		young = new AttributeQuality("Young", 0, 0, -2, -6, 0, -3, -10);
+		old = new AttributeQuality("Old", -6, -5, 0, -3, -2, 0, 0);
+
+		regular = new AttributeQuality(" ", 0, 0, 0, 0, 0, 0, 0);
+		
+		trained = new AttributeQuality("Trained", 1, 1, 1, 1, 1, 1, 1);
+		experienced = new AttributeQuality("Eperienced", 2, 2, 2, 2, 2, 2, 2);
+		veteran = new AttributeQuality("Veteran", 4, 4, 4, 4, 4, 4, 4);
+		captain = new AttributeQuality("Captain", 2, 3, 0, 4, 0, 6, 10);
+		general = new AttributeQuality("General", 4, 6, 0, 0, 0, 0, 20);
+		protege = new AttributeQuality("Protégé", 8, 8, 8, 8, 8, 8, 8);
+		legend = new AttributeQuality("Legend", 8, 8, 8, 8, 8, 8, 8);
+
+	}
+
+	public static AttributeQuality getRandomQuality(Random rand) {
+		// TODO Auto-generated method stub
+		if(qualities.size() < 1) return null;
+		if(rand.nextInt(100) < 50) return qualities.get(rand.nextInt(qualities.size()));
+		else return regular;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public int getHealthBonus() {
+		return healthBonus;
+	}
+
+	public void setHealthBonus(int healthBonus) {
+		this.healthBonus = healthBonus;
+	}
+
+	public int getAttackBonus() {
+		return attackBonus;
+	}
+
+	public void setAttackBonus(int attackBonus) {
+		this.attackBonus = attackBonus;
+	}
+
+	public int getMagicBonus() {
+		return magicBonus;
+	}
+
+	public void setMagicBonus(int magicBonus) {
+		this.magicBonus = magicBonus;
+	}
+
+	public int getDetectBonus() {
+		return detectBonus;
+	}
+
+	public void setDetectBonus(int detectBonus) {
+		this.detectBonus = detectBonus;
+	}
+
+	public int getSpeedBonus() {
+		return speedBonus;
+	}
+
+	public void setSpeedBonus(int speedBonus) {
+		this.speedBonus = speedBonus;
+	}
+
+	public int getKnockbackBonus() {
+		return knockbackBonus;
+	}
+
+	public void setKnockbackBonus(int knockbackBonus) {
+		this.knockbackBonus = knockbackBonus;
+	}
+
+	public int getHorseHealth() {
+		return horseHealth;
+	}
+
+	public void setHorseHealth(int horseHealth) {
+		this.horseHealth = horseHealth;
+	}
+	
+	
+}

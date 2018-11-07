@@ -1,0 +1,15 @@
+package net.theexceptionist.coherentvillages.main.entity.attributes;
+
+public class EntityVillagerHistory {
+	public class HistoryEntry
+	{
+		protected int type;
+		protected String name;
+		
+		public HistoryEntry(String name, int type)
+		{
+			this.name = name;
+			this.type = type;
+		}
+	}
+}

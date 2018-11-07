@@ -46,7 +46,7 @@ public class SpellBanishTouch extends Spell {
 				}
 			}
 			
-			villager.spawnEndParticle();
+			villager.spawnExplosionParticle();
 			
 		}
 	}

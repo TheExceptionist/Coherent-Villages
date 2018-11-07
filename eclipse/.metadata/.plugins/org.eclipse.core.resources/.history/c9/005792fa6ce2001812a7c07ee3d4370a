@@ -1,0 +1,25 @@
+package net.theexceptionist.coherentvillages.main.entity.attributes;
+
+public class AttributeQuality {
+	protected String name;
+	protected int healthBonus;// = race.getHealthBonus();
+	protected int attackBonus;// = race.getAttackBonus();
+	protected int magicBonus;// = race.getMagicBonus();
+	protected int detectBonus;// = race.getDetectBonus();
+	protected int speedBonus;// = race.getSpeedBonus();
+	protected int knockbackBonus;// = race.getKnockbackBonus();
+	protected int horseHealth;// = race.getHorseHealthBonus();
+	
+	
+	
+	public AttributeQuality(String name, final int health, final int attack, final int magic,
+			final int detect, final int speed, final int knockback, final int horseHealth)
+	{
+		
+	}
+
+	public static AttributeQuality getRandomQuality() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+}

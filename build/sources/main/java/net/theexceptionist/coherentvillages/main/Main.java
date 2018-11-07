@@ -38,6 +38,7 @@ import net.theexceptionist.coherentvillages.main.entity.EntityLemure;
 import net.theexceptionist.coherentvillages.main.entity.EntitySkeletonSummon;
 import net.theexceptionist.coherentvillages.main.entity.EntityWarg;
 import net.theexceptionist.coherentvillages.main.entity.EntityWraith;
+import net.theexceptionist.coherentvillages.main.entity.attributes.AttributeQuality;
 import net.theexceptionist.coherentvillages.main.entity.attributes.AttributeRace;
 import net.theexceptionist.coherentvillages.main.entity.attributes.FactionManager;
 import net.theexceptionist.coherentvillages.main.items.EntityWeaponThrowable;
@@ -567,6 +568,8 @@ public class Main
     	instance = this;
     	
     	AttributeRace.init();
+       	FactionManager.init();
+       	AttributeQuality.init();
     	
     	List<Biome> villageBiomes = Arrays.<Biome>asList(new Biome[] {/*Biomes.PLAINS, Biomes.DESERT, Biomes.SAVANNA, Biomes.TAIGA, Biomes.BEACH, Biomes.BIRCH_FOREST, Biomes.BIRCH_FOREST_HILLS, Biomes.COLD_BEACH, Biomes.COLD_TAIGA, Biomes.COLD_TAIGA_HILLS, Biomes.DEEP_OCEAN,
     		Biomes.DESERT, Biomes.DESERT_HILLS, Biomes.EXTREME_HILLS, Biomes.EXTREME_HILLS_EDGE, Biomes.EXTREME_HILLS_WITH_TREES, Biomes.FOREST, Biomes.FOREST_HILLS, Biomes.FROZEN_RIVER, Biomes.FROZEN_OCEAN, Biomes.ICE_MOUNTAINS, Biomes.ICE_PLAINS,
@@ -859,8 +862,6 @@ public class Main
     	
     	//EntityRegistry.registerModEntity(new ResourceLocation(Resources.MODID, "villager_arrow"), EntityVillagerArrow.class, "entity_villager_arrow", 1, instance,1, 1, false);
        	EntityRegistry.registerModEntity(new ResourceLocation(Resources.MODID, "throwing_axe"), EntityWeaponThrowable.class, "throwing_axe", 1, instance, 64, 10, true);
-       	
-       	FactionManager.init();
 	}
 
 	@EventHandler
